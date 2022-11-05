@@ -72,7 +72,7 @@
 
     <div class="container py-4">
         <div class="copyright">
-            &copy; 2017-2020 <strong><span>BPKAD</span></strong>. All Rights Reserved
+            &copy; 2017-{{ date('Y') }} <strong><span>BPKAD</span></strong>. All Rights Reserved
         </div>
     </div>
     </div>
