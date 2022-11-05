@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../inges/.idea/ines.iml" filepath="$PROJECT_DIR$/../inges/.idea/ines.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../siakad/.idea/siakad.unizar.iml" filepath="$PROJECT_DIR$/../siakad/.idea/siakad.unizar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../siminventaris/.idea/siminventaris.unizar.iml" filepath="$PROJECT_DIR$/../siminventaris/.idea/siminventaris.unizar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../sisurat/.idea/sisurat.iml" filepath="$PROJECT_DIR$/../sisurat/.idea/sisurat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/web_bpkad.iml" filepath="$PROJECT_DIR$/.idea/web_bpkad.iml" />
+    </modules>
+  </component>
+</project>
