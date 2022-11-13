@@ -228,7 +228,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Avatar' => Laravolt\Avatar\Facade::class,
-
+        'Helpers' => App\Helpers\Helpers::class,
     ],
 
 ];

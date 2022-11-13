@@ -6,27 +6,27 @@
                 <li class="active"><a href="{{'/'}}">Home</a></li>
                 <li><a href="#news">Berita</a></li>
                 @php
-                $menus = App\Models\Menu::getAll();
+                $menus = Helpers::Menu();
                 @endphp
                 @foreach ($menus as $menu)
                     @php
-                        $sub_menu = App\Models\Pages::getById($menu->menu_id);
+                        $sub_menu = Helpers::Pages($menu->menu_id);
                     @endphp
                     @if (count($sub_menu) != 0)
                         <li class="drop-down"><a href="">{{ $menu->name }}</a>
                             <ul>
                                 @foreach ($sub_menu as $item)
-                                    @if ($item->sub_menu_id != "0")
+                                    @if ($item->sub_menu_id != 0)
                                         <li class="drop-down"><a href="#">{{ $item->title }}</a>
-                                        @php $sub_item = App\Models\SubPages::getSubMenu($item->sub_menu_id) @endphp
+                                        @php $sub_item = Helpers::SubPages($item->sub_menu_id) @endphp
                                         @foreach ($sub_item as $item2)
                                             <ul>
-                                                <li><a href="#">{{ $item2->title }}</a></li>
+                                                <li><a href="#">{{ $item2->title }}non</a></li>
                                             </ul>
                                         </li>
                                         @endforeach
-                                    @elseif ($item->sub_menu_id == "0")
-                                        <li><a href="#">{{ $item->title }}</a></li>
+                                    @elseif ($item->sub_menu_id == 0)
+                                        <li><a href="#">{{ $item->title }}sub</a></li>
                                     @endif
                                 @endforeach
                             </ul>

@@ -25,9 +25,4 @@ class SubPages extends Model
         return $this->belongsTo(Pages::class);
     }
 
-    public static function getSubMenu($param)
-    {
-        return SubPages::where('sub_pages_id', '=', $param)->select('sub_pages.title', 'sub_pages.id as sub_menu_id')->get();
-    }
-
 }

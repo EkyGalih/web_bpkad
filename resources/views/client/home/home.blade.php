@@ -11,7 +11,7 @@
         <div class="section-title">
             <h3>Informasi <span>COVID19 NTB</span></h3>
             <hr/>
-            Update Terakhir : {{ App\Helpers\Helpers::getDate($data_covid['update_terakhir']) }}
+            Update Terakhir : {{ Helpers::GetDate($data_covid['update_terakhir']) }}
         </div>
         <div class="row">
             @php
@@ -98,7 +98,7 @@
                                                 <!-- meta title -->
                                                 <div class="news-meta">
                                                     <span class="news-author">by <a class="text-white font-weight-bold" href="../category/author.html">{{ $carousel->users->nama }}</a></span>
-                                                    <span class="news-date">On {{ App\Helpers\Helpers::getDate($carousel->created_at) }}</span>
+                                                    <span class="news-date">On {{ Helpers::GetDate($carousel->created_at) }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -124,7 +124,7 @@
                                                     <!-- meta title -->
                                                     <div class="news-meta">
                                                         <span class="news-author">by <a class="text-white font-weight-bold" href="../category/author.html">{{ $news->users->nama }}</a></span>
-                                                        <span class="news-date"> On {{ App\Helpers\Helpers::getDate($news->created_at) }}</span>
+                                                        <span class="news-date"> On {{ Helpers::GetDate($news->created_at) }}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -187,7 +187,7 @@
         <section id="about" class="about section-bg">
             <div class="container">
                 <div class="section-title">
-                    <h3>Video Terbaru <span>Youtube</span></h3>
+                    <h3>Video <span>Terbaru</span></h3>
                     <hr/>
                 </div>
                 <div class="row">
@@ -257,7 +257,7 @@
                         <div class="info-box mb-4">
                             <i class="bx bx-map"></i>
                             <h3>Alamat Kantor</h3>
-                            <p>Jl. Pejanggik No. 12 Mataram</p>
+                            <p>Jl. Pejanggik No. 14 Mataram</p>
                         </div>
                     </div>
 
@@ -265,6 +265,7 @@
                         <div class="info-box  mb-4">
                             <i class="bx bx-envelope"></i>
                             <h3>Email</h3>
+                            <p>bpkad@ntbprov.go.id</p>
                             <p>prog.bpkad.ntb@gmail.com</p>
                         </div>
                     </div>
@@ -273,7 +274,7 @@
                         <div class="info-box  mb-4">
                             <i class="bx bx-phone-call"></i>
                             <h3>Telepon</h3>
-                            <p>(0370) 627689, 625345</p>
+                            <p>+62 819 1091 1912</p>
                         </div>
                     </div>
 

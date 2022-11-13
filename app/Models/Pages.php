@@ -25,9 +25,4 @@ class Pages extends Model
     {
         return $this->hasMany(SubPages::class);
     }
-
-    public static function getById($param)
-    {
-        return Pages::where('menu_id', '=', $param)->select('pages.title', 'pages.id as sub_menu_id')->get();
-    }
 }

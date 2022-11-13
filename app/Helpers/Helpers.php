@@ -2,9 +2,35 @@
 
 namespace App\Helpers;
 
+use App\Models\Menu;
+use App\Models\Pages;
+use App\Models\Rule;
+use App\Models\SubPages;
+use Illuminate\Support\Facades\Auth;
+
 class Helpers
 {
-    public static function getDate($param)
+    // Function For Menu
+
+    public static function Menu()
+    {
+        return Menu::select('menu.id as menu_id', 'menu.*')->orderBy('order_pos', 'ASC')->get();
+    }
+
+    public static function Pages($param)
+    {
+        return Pages::where('menu_id', '=', $param)->select('pages.title', 'pages.id as sub_menu_id')->get();
+    }
+
+    public static function SubPages($param)
+    {
+        return SubPages::where('sub_pages_id', '=', $param)->select('sub_pages.title', 'sub_pages.id as sub_menu_id')->get();
+    }
+
+
+    // Custom Function
+
+    public static function GetDate($param)
     {
         $explode    = explode(" ", $param);
         $date       = explode("-", $explode[0]);
@@ -35,5 +61,52 @@ class Helpers
             $date = 'Dec '.$date[2].", ".$date[0];
         }
         return $date;
+    }
+
+    public static function appConverter($param)
+    {
+        if ($param == 'website') {
+            $result = 'Website';
+        } else if ($param == 'ppid') {
+            $result = 'Ppid';
+        } else {
+            $result = 'Aplikasi Tidak Ditemukan!';
+        }
+
+        return $result;
+    }
+
+    public static function roleConverter($param)
+    {
+        if ($param == "superadmin") {
+            $result = 'Super Admin';
+        } else if ($param == "admin") {
+            $result = 'Admin';
+        } else {
+            $result = 'Rule tidak ditemukan!';
+        }
+
+        return $result;
+    }
+
+    public static function getRule()
+    {
+        $rule = Rule::where('user_id', '=', Auth::user()->id)
+            ->where('aplikasi', '=', 'website')
+            ->first();
+        if ($rule)
+            return $rule->nama_rule;
+    }
+
+    public static function getAplikasi()
+    {
+        return Rule::where('user_id', '=', Auth::user()->id)
+            ->where('aplikasi', '=', 'website')
+            ->first()->nama_rule;
+    }
+
+    public static function showAplikasi()
+    {
+        return Rule::where('user_id', '=', Auth::user()->id)->get();
     }
 }

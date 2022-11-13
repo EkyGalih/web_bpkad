@@ -20,9 +20,4 @@ class Menu extends Model
             $model->id = (string)Uuid::generate(4);
         });
     }
-
-    public static function getAll()
-    {
-        return Menu::select('menu.id as menu_id', 'menu.*')->orderBy('order_pos', 'ASC')->get();
-    }
 }
