@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\ContentType;
 use App\Models\Menu;
 use App\Models\Pages;
 use App\Models\SubPages;
@@ -27,6 +28,22 @@ class Helpers
         return SubPages::where('sub_pages_id', '=', $param)->select('sub_pages.title', 'sub_pages.id as sub_menu_id')->get();
     }
 
+
+    // post function
+
+    public static function GetTypeContent($param)
+    {
+        $type = ContentType::where('id', '=', $param)->select('name')->first();
+
+        return $type->name;
+    }
+
+    public static function GetUser($param)
+    {
+        $user = User::where('id', '=', $param)->select('nama')->first();
+
+        return $user->nama;
+    }
 
     // Custom Function
 

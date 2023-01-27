@@ -10,7 +10,6 @@ use App\Models\Posts;
 use App\Models\Slideitem;
 use App\Models\SubPages;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
@@ -142,5 +141,10 @@ class HomeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function _NotFound()
+    {
+        return view('client.not_found');
     }
 }

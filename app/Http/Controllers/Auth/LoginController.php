@@ -62,9 +62,9 @@ class LoginController extends Controller
         return redirect()->back()->with(['failed' => 'Login gagal, pastikan username dan password anda benar'])->withInput($request->all());
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
         Auth::logout();
-        return redirect()->route('login.form')->with(['success' => 'Anda telah logout!']);
+        return redirect()->route('login.index');
     }
 }

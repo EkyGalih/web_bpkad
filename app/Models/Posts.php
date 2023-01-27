@@ -32,4 +32,9 @@ class Posts extends Model
     {
         return $this->belongsTo(PostsCategory::class);
     }
+
+    public function TypeContent()
+    {
+        return $this->belongsTo(ContentType::class);
+    }
 }

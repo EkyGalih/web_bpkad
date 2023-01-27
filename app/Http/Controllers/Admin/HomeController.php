@@ -16,7 +16,7 @@ class HomeController extends Controller
     {
         return view('home');
     }
-    
+
     /**
     * Show the form for creating a new resource.
     *
@@ -26,7 +26,7 @@ class HomeController extends Controller
     {
         //
     }
-    
+
     /**
     * Store a newly created resource in storage.
     *
@@ -37,7 +37,7 @@ class HomeController extends Controller
     {
         //
     }
-    
+
     /**
     * Display the specified resource.
     *
@@ -48,7 +48,7 @@ class HomeController extends Controller
     {
         //
     }
-    
+
     /**
     * Show the form for editing the specified resource.
     *
@@ -59,7 +59,7 @@ class HomeController extends Controller
     {
         //
     }
-    
+
     /**
     * Update the specified resource in storage.
     *
@@ -71,7 +71,7 @@ class HomeController extends Controller
     {
         //
     }
-    
+
     /**
     * Remove the specified resource from storage.
     *

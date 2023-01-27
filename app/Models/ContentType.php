@@ -22,4 +22,9 @@ class ContentType extends Model
             $model->id = (string)Uuid::generate(4);
         });
     }
+
+    public function Post()
+    {
+        return $this->hasOne(Post::class);
+    }
 }

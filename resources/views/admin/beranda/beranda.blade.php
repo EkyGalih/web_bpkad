@@ -1,6 +1,8 @@
 @extends('admin.index')
 @section('title', 'Beranda')
+@section('menu-dashboard', 'active')
 @section('content')
+<main id="main" class="main">
     <div class="pagetitle">
         <h1>Dashboard</h1>
         <nav>
@@ -1102,4 +1104,5 @@
     </div>
     <!-- /col-lg-3 -->
     </div>
+</main>
 @endsection
