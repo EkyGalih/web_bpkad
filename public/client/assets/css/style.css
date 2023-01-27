@@ -451,6 +451,8 @@ h1, h2, h3, h4, h5, h6 {
   background: url("../img/hero-bg.jpg") top left;
   background-size: cover;
   position: relative;
+  border-bottom-left-radius: 100px;
+  border-bottom-right-radius: 100px;
 }
 
 #hero:before {

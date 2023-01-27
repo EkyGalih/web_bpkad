@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\DaftarApp;
 use App\Models\GaleryVideo;
+use App\Models\Pages;
 use App\Models\Posts;
+use App\Models\Slideitem;
+use App\Models\SubPages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -22,7 +25,8 @@ class HomeController extends Controller
                 'content_type.id as type_id',
             )
             ->orderBy('posts.created_at', 'desc')
-            ->first();
+            ->limit(4)
+            ->get();
         $new_posts = Posts::join('content_type', 'posts.content_type_id', '=', 'content_type.id')
             ->select(
                 'posts.*',
@@ -30,9 +34,12 @@ class HomeController extends Controller
                 'content_type.id as type_id',
             )
             ->orderBy('posts.created_at', 'desc')
-            ->limit(4)
+            ->limit(8)
             ->get();
         unset($new_posts[0]);
+        unset($new_posts[1]);
+        unset($new_posts[2]);
+        unset($new_posts[3]);
         $old_date   = date('m');
         $date       = $old_date-1;
         $new_date   = strlen($date) == 1 ? date('Y-0'.$date) : date('Y-'.$date);
@@ -53,7 +60,11 @@ class HomeController extends Controller
             ->get();
         $covid = Http::get('https://corona.ntbprov.go.id/api/data');
         $data_covid = $covid->json();
-        return view('client.home.home', compact('new_posts', 'carousel', 'old_posts', 'videos','apps','data_covid'));
+
+        // slider
+        $slides = Slideitem::where('slide_id', '=', 'd57047d6-9d3c-11ed-a403-244bfebc253d')->get();
+        $slidesInformasi = Slideitem::where('slide_id', '=', '3cb30611-9d46-11ed-a403-244bfebc253d')->get();
+        return view('client.home.home', compact('new_posts', 'carousel', 'old_posts', 'videos','apps','data_covid', 'slides', 'slidesInformasi'));
     }
 
     /**
@@ -61,9 +72,18 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function ShowPages($id)
     {
-        //
+        $pages = Pages::findOrFail($id);
+
+        return view('client.home.pages', compact('pages'));
+    }
+
+    public function ShowSubPages($id)
+    {
+        $subPages = SubPages::findOrFail($id);
+
+        return view('client.home.sub_pages', compact('subPages'));
     }
 
     /**

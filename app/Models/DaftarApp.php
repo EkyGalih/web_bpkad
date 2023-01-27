@@ -8,9 +8,11 @@ use Webpatser\Uuid\Uuid;
 
 class DaftarApp extends Model
 {
-    protected $table = 'daftar_app';
+    use HasFactory;
 
-    protected $guarded = ['create_at', 'update_at'];
+    public $incrementing = false;
+    protected $table = 'daftar_app';
+    protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
 
     public static function boot()
     {

@@ -8,7 +8,11 @@ use Webpatser\Uuid\Uuid;
 
 class Bender extends Model
 {
+    use HasFactory;
+
+    public $incrementing = false;
     protected $table = 'bender';
+    protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
 
     public static function boot()
     {

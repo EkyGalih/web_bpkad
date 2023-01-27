@@ -8,9 +8,11 @@ use Webpatser\Uuid\Uuid;
 
 class Menu extends Model
 {
-    protected $table = 'menu';
+    use HasFactory;
 
-    protected $guarded = ['create_at', 'update_at'];
+    public $incrementing = false;
+    protected $table = 'menu';
+    protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
 
     public static function boot()
     {

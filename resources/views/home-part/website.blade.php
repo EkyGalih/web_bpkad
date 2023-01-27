@@ -1,4 +1,4 @@
-@if ($app->aplikasi == 'website' && $app->nama_rule == 'superadmin')
+{{-- @if ($app->aplikasi == 'website' && $app->nama_rule == 'superadmin') --}}
 <div class="col-lg-3 col-sm-6">
     <div class="card hovercard">
         <div class="cardheader">
@@ -8,7 +8,7 @@
         </div>
         <div class="info">
             <div class="title">
-                <h4>{{ App\Helpers\Converter::appConverter($app->aplikasi) }}</h4>
+                <h4>Website</h4>
             </div>
             <div class="desc"><small class="badge badge-primary">ADMIN</small></div>
         </div>
@@ -19,9 +19,9 @@
         </div>
     </div>
 </div>
-@elseif($app->aplikasi == 'website' && $app->nama_rule == 'admin')
+{{-- @elseif($app->aplikasi == 'website' && $app->nama_rule == 'admin')
 <div class="col-lg-3 col-sm-6">
-    
+
     <div class="card hovercard">
         <div class="cardheader">
         </div>
@@ -41,4 +41,4 @@
         </div>
     </div>
 </div>
-@endif
+@endif --}}

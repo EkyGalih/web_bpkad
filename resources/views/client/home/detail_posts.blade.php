@@ -8,7 +8,7 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>{{ $posts->title }}</h2>
+            <h2>Detail Berita</h2>
         </div>
 
       </div>
@@ -21,16 +21,14 @@
           <div class="portfolio-details-container">
 
             <div class="owl-carousel portfolio-details-carousel">
-              <img src="{{ asset($posts->foto_berita) }}" class="img-fluid" alt="">
-              <img src="assets/img/portfolio/portfolio-details-2.jpg" class="img-fluid" alt="">
-              <img src="assets/img/portfolio/portfolio-details-3.jpg" class="img-fluid" alt="">
+              <img src="{{ asset($posts->foto_berita) }}" class="img-fluid" alt="{{ $posts->title }}">
             </div>
 
             <div class="portfolio-info">
               <h3>Informasi berita</h3>
               <ul>
-                <li><strong>Bidang</strong>: Web design</li>
-                <li><strong>Jenis Kegiatan</strong>: ASU Company</li>
+                <li><strong>Kategori</strong>: Lifestyle</li>
+                <li><strong>Uploaded</strong>: {{ $posts->users->nama }}</li>
                 <li><strong>Waktu Post</strong>: {{ $posts->created_at }}</li>
               </ul>
             </div>

@@ -21,32 +21,30 @@
                 <div class="col-lg-3 col-md-6 footer-contact">
                     <h3>ALAMAT<span> KAMI</span></h3>
                     <p>
-                        <i class="icofont-map-pins"></i> Jl. Pejanggik No. 12 Mataram <br><br>
-                        <strong><i class="icofont-phone"></i></strong> (0370) 627689, 625345<br>
+                        <i class="icofont-map-pins"></i> Jl. Pejanggik No. 14 Mataram <br><br>
                         <strong><i class="icofont-smart-phone"></i></strong> (+62) 081910911912<br>
                         <strong><i class="icofont-email"></i></strong> prog.bpkad.ntb@gmail.com<br>
+                        <strong><i class="icofont-email"></i></strong> bpkad@ntbprov.go.id<br>
                     </p>
                 </div>
 
                 <div class="col-lg-3 col-md-6 footer-links">
                     <h4>Useful Links</h4>
                     <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{ route('dashboard') }}">Home</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Laporan Masyarakat</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Permohonan & Pengaduan</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">PPID</a></li>
                     </ul>
                 </div>
 
                 <div class="col-lg-3 col-md-6 footer-links">
                     <h4>Our Services</h4>
                     <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">SIPD</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">PENCAIRAN SP2D</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">PENGELOLAAN & PEMANFAATAN ASET</a></li>
                     </ul>
                 </div>
 

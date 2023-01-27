@@ -1,3 +1,3 @@
-<section class="wrapper">
+<main id="main" class="main">
     @yield('content')
-</section>
+</main>

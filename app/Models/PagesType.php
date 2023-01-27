@@ -8,7 +8,11 @@ use Webpatser\Uuid\Uuid;
 
 class PagesType extends Model
 {
+    use HasFactory;
+
+    public $incrementing = false;
     protected $table = 'page_type';
+    protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
 
     public static function boot()
     {

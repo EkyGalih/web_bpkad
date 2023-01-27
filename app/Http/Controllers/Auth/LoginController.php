@@ -13,25 +13,26 @@ use Illuminate\Support\Facades\Hash;
 class LoginController extends Controller
 {
     use AuthenticatesUsers;
-    
+
     protected $redirectTo = '/home';
-    
+
     public function __construct()
     {
         $this->middleware('guest')->except(['logout', 'profile', 'resetPassword', 'doResetPassword', 'edit', 'update']);
     }
-    
+
     // tampilkan view login
-    
-    public function showLoginForm()
+
+    public function index()
     {
         return view('auth.login');
     }
-    
+
     public function login(LoginRequest $request)
     {
+        // dd(Hash::make('bpk4dntb'));
         $validation = $request->validated();
-        
+
         if(filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
             $credentials = [
                 'email' => $request->email,
@@ -43,7 +44,7 @@ class LoginController extends Controller
                 'password' => $request->password,
             ];
         }
-        
+
         $user = User::where('username', '=', $request->email)->orWhere('email', '=', $request->email)->first();
 
         if($user) {
@@ -53,11 +54,11 @@ class LoginController extends Controller
                 ->withInput($request->all());
             }
         }
-        
+
         if (Auth::attempt($credentials, $request->remember_me)) {
             return redirect()->route('sso.dashboard');
         }
-        
+
         return redirect()->back()->with(['failed' => 'Login gagal, pastikan username dan password anda benar'])->withInput($request->all());
     }
 

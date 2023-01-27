@@ -8,7 +8,11 @@ use Webpatser\Uuid\Uuid;
 
 class ContentType extends Model
 {
+    use HasFactory;
+
+    public $incrementing = false;
     protected $table = 'content_type';
+    protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
 
     public static function boot()
     {

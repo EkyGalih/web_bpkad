@@ -6,7 +6,7 @@
   .top {
     margin: 10px;
   }
-  
+
   .card {
     padding-top: 20px;
     margin: 10px 0 20px 0;
@@ -23,19 +23,19 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
-  
+
   .card .card-heading {
     padding: 0 20px;
     margin: 0;
   }
-  
+
   .card .card-heading.simple {
     font-size: 20px;
     font-weight: 300;
     color: #777;
     border-bottom: 1px solid #e5e5e5;
   }
-  
+
   .card .card-heading.image img {
     display: inline-block;
     width: 46px;
@@ -47,56 +47,56 @@
     -moz-border-radius: 50%;
     border-radius: 50%;
   }
-  
+
   .card .card-heading.image .card-heading-header {
     display: inline-block;
     vertical-align: top;
   }
-  
+
   .card .card-heading.image .card-heading-header h3 {
     margin: 0;
     font-size: 14px;
     line-height: 16px;
     color: #262626;
   }
-  
+
   .card .card-heading.image .card-heading-header span {
     font-size: 12px;
     color: #999999;
   }
-  
+
   .card .card-body {
     padding: 0 20px;
     margin-top: 20px;
   }
-  
+
   .card .card-media {
     padding: 0 20px;
     margin: 0 -14px;
   }
-  
+
   .card .card-media img {
     max-width: 100%;
     max-height: 100%;
   }
-  
+
   .card .card-actions {
     min-height: 30px;
     padding: 0 20px 20px 20px;
     margin: 20px 0 0 0;
   }
-  
+
   .card .card-comments {
     padding: 20px;
     margin: 0;
     background-color: #f8f8f8;
   }
-  
+
   .card .card-comments .comments-collapse-toggle {
     padding: 0;
     margin: 0 20px 12px 20px;
   }
-  
+
   .card .card-comments .comments-collapse-toggle a,
   .card .card-comments .comments-collapse-toggle span {
     padding-right: 5px;
@@ -106,12 +106,12 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  
+
   .card-comments .media-heading {
     font-size: 13px;
     font-weight: bold;
   }
-  
+
   .card.people {
     position: relative;
     display: inline-block;
@@ -122,11 +122,11 @@
     overflow: hidden;
     vertical-align: top;
   }
-  
+
   .card.people:first-child {
     margin-left: 0;
   }
-  
+
   .card.people .card-top {
     position: absolute;
     top: 0;
@@ -136,15 +136,15 @@
     height: 150px;
     background-color: #ffffff;
   }
-  
+
   .card.people .card-top.green {
     background-color: #53a93f;
   }
-  
+
   .card.people .card-top.blue {
     background-color: #427fed;
   }
-  
+
   .card.people .card-info {
     position: absolute;
     top: 150px;
@@ -157,7 +157,7 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
-  
+
   .card.people .card-info .title {
     display: block;
     margin: 8px 14px 0 14px;
@@ -167,7 +167,7 @@
     line-height: 18px;
     color: #404040;
   }
-  
+
   .card.people .card-info .desc {
     display: block;
     margin: 8px 14px 0 14px;
@@ -177,7 +177,7 @@
     color: #737373;
     text-overflow: ellipsis;
   }
-  
+
   .card.people .card-bottom {
     position: absolute;
     bottom: 0;
@@ -191,7 +191,7 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
-  
+
   .card.hovercard {
     position: relative;
     padding-top: 0;
@@ -199,7 +199,7 @@
     text-align: center;
     background-color: rgba(214, 224, 226, 0.2);
   }
-  
+
   .card.hovercard .cardheader {
     background: url("{{ asset('client/assets/img/hero-bg.jpg') }}");
     background-size: cover;
@@ -207,13 +207,13 @@
     -webkit-filter: blur(1px);
     height: 135px;
   }
-  
+
   .card.hovercard .avatar {
     position: relative;
     top: -50px;
     margin-bottom: -50px;
   }
-  
+
   .card.hovercard .avatar img {
     width: 100px;
     height: 100px;
@@ -224,11 +224,11 @@
     border-radius: 50%;
     border: 5px solid rgba(255,255,255,0.5);
   }
-  
+
   .card.hovercard .info {
     padding: 4px 8px 10px;
   }
-  
+
   .card.hovercard .info .title {
     margin-bottom: 4px;
     font-size: 24px;
@@ -236,7 +236,7 @@
     color: #262626;
     vertical-align: middle;
   }
-  
+
   .card.hovercard .info .desc {
     overflow: hidden;
     font-size: 12px;
@@ -244,14 +244,14 @@
     color: #737373;
     text-overflow: ellipsis;
   }
-  
+
   .card.hovercard .bottom {
     padding: 0 20px;
     margin-bottom: 17px;
   }
-  
+
   .btn{ border-radius: 0%; width:auto; height:32px; line-height:18px;  }
-  
+
 </style>
 @endsection
 @section('content')
@@ -260,13 +260,13 @@
 <section id="team" class="team section-bg">
   <div class="container">
     <div class="row">
-      @foreach (App\Helpers\UserAccess::showAplikasi() as $app)
-      @if ($app->aplikasi == 'website')
+      {{-- @foreach (App\Helpers\UserAccess::showAplikasi() as $app)
+      @if ($app->aplikasi == 'website') --}}
       @include('home-part.website')
-      @elseif($app->aplikasi == 'ppid')
+      {{-- @elseif($app->aplikasi == 'ppid')
       @include('home-part.ppid')
       @endif
-      @endforeach  
+      @endforeach --}}
     </div>
   </div>
 </section>

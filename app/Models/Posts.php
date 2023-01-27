@@ -8,9 +8,11 @@ use Webpatser\Uuid\Uuid;
 
 class Posts extends Model
 {
-    protected $table = 'posts';
+    use HasFactory;
 
-    protected $guarded = ['created_at', 'updated_at'];
+    public $incrementing = false;
+    protected $table = 'posts';
+    protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
 
     public static function boot()
     {

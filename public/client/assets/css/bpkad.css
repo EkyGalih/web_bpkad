@@ -233,3 +233,24 @@
         -webkit-transform: scale(1.1);
         transform: scale(1.1);
     }
+
+    .navigation-box {
+        top: .4rem;
+        right: .8rem;
+        width: 2rem;
+        position: absolute;
+        border-radius: 100px;
+    }
+    @media (min-width: 768px){
+        .breaking-caret:after {
+            content: "";
+            width: 0;
+            height: 0;
+            border-top: 20px solid transparent;
+            border-left: 15px solid #007bff;
+            border-bottom: 20px solid transparent;
+            position: absolute;
+            right: -15px;
+            top: 0;
+        }
+    }

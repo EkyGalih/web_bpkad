@@ -8,8 +8,10 @@ use Webpatser\Uuid\Uuid;
 
 class Assets extends Model
 {
-    protected $table = 'assets';
+    use HasFactory;
 
+    public $incrementing = false;
+    protected $table = 'assets';
     protected $guarded = ['create_at', 'update_at'];
 
     public static function boot()

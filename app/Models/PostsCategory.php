@@ -8,9 +8,11 @@ use Webpatser\Uuid\Uuid;
 
 class PostsCategory extends Model
 {
-    protected $table = 'posts_category';
+    use HasFactory;
 
-    protected $guarded = ['created_at', 'updated_at'];
+    public $incrementing = false;
+    protected $table = 'post_category';
+    protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
 
     public static function boot()
     {
@@ -21,7 +23,7 @@ class PostsCategory extends Model
         });
     }
 
-    public function posts()
+    public function Posts()
     {
         return $this->hasMany(Posts::class);
     }

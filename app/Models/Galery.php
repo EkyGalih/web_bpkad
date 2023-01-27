@@ -8,10 +8,11 @@ use Webpatser\Uuid\Uuid;
 
 class Galery extends Model
 {
+    use HasFactory;
+
+    public $incrementing = false;
     protected $table = 'galery';
-
-    protected $guarded = ['create_at', 'update_at'];
-
+    protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
     public static function boot()
     {
         parent::boot();

@@ -1,41 +1,46 @@
 <header id="header" class="fixed-top">
-    <h1 class="logo mr-auto"><a href="{{'/'}}"><img src="{{asset('uploads/profile/favicon.png')}}" alt="" style="margin-left: 10px;"> BPKAD<span> NTB</span></a></h1>
     <div class="container d-flex align-items-center">
+        <h1 class="logo mr-auto"><a href="{{ '/' }}">BPKAD<span> NTB</span></a></h1>
         <nav class="nav-menu d-none d-lg-block">
             <ul>
-                <li class="active"><a href="{{'/'}}">Home</a></li>
+                <li class="active"><a href="{{ '/' }}">Home</a></li>
                 <li><a href="#news">Berita</a></li>
                 @php
-                $menus = Helpers::Menu();
+                    $menus = Helpers::Menu();
                 @endphp
                 @foreach ($menus as $menu)
                     @php
                         $sub_menu = Helpers::Pages($menu->menu_id);
                     @endphp
                     @if (count($sub_menu) != 0)
-                        <li class="drop-down"><a href="">{{ $menu->name }}</a>
+                        <li class="drop-down"><a
+                                href="{{ route('client.show_pages', $menu->menu_id) }}">{{ $menu->name }}</a>
                             <ul>
                                 @foreach ($sub_menu as $item)
-                                    @if ($item->sub_menu_id != 0)
+                                    @php $sub_item = Helpers::SubPages($item->sub_menu_id) @endphp
+                                    @if (count($sub_item))
                                         <li class="drop-down"><a href="#">{{ $item->title }}</a>
-                                        @php $sub_item = Helpers::SubPages($item->sub_menu_id) @endphp
-                                        @foreach ($sub_item as $item2)
-                                            <ul>
-                                                <li><a href="#">{{ $item2->title }}non</a></li>
-                                            </ul>
+                                            @foreach ($sub_item as $item2)
+                                                <ul>
+                                                    <li><a
+                                                            href="{{ route('client.show_sub_pages', $item2->sub_menu_id) }}">{{ $item2->title }}</a>
+                                                    </li>
+                                                </ul>
                                         </li>
-                                        @endforeach
-                                    @elseif ($item->sub_menu_id == 0)
-                                        <li><a href="#">{{ $item->title }}sub</a></li>
-                                    @endif
-                                @endforeach
-                            </ul>
-                        </li>
-                    @elseif (count($sub_menu) == 0)
-                        <li><a href="{{ $menu->url }}">{{ $menu->name }}</a></li>
-                    @endif
-                @endforeach
-                <li><a href="#contact">Kontak</a></li>
+                                    @endforeach
+                                @elseif (count($sub_item) == 0)
+                                    <li><a
+                                            href="{{ route('client.show_pages', $item->sub_menu_id) }}">{{ $item->title }}</a>
+                                    </li>
+                                @endif
+                    @endforeach
+            </ul>
+            </li>
+        @elseif (count($sub_menu) == 0)
+            <li><a href="{{ $menu->url }}">{{ $menu->name }}</a></li>
+            @endif
+            @endforeach
+            <li><a href="#contact">Kontak</a></li>
             </ul>
         </nav>
 

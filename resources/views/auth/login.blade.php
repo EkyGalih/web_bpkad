@@ -1,111 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>BPKAD | LOGIN</title>
-  <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="{{ asset('login/assets/css/login.css') }}">
-  <style>
-    .has-error .form-control{
-      border-color: #F25961 !important;
-      color: #F25961 !important;
-    }
-    .has-error label {
-      color: #F25961 !important;
-    }
-    .has-feedback {
-      position: relative;
-    }
-    .text-muted {
-      color: #6c757d !important;
-    }
-    small, .small {
-      font-size: 13px;
-    }
-    .form-text {
-      display: block;
-      margin-top: .25rem;
-    }
-  </style>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Login - WEB BPKAD</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{{ asset('server/img/favicon.png') }}" rel="icon">
+    <link href="{{ asset('server/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{{ asset('server/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('server/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('server/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('server/vendor/quill/quill.snow.css') }}" rel="stylesheet">
+    <link href="{{ asset('server/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
+    <link href="{{ asset('server/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+    <link href="{{ asset('server/vendor/simple-datatables/style.css') }}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{{ asset('server/css/style.css') }}" rel="stylesheet">
+
+    <!-- =======================================================
+  * Template Name: NiceAdmin - v2.5.0
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
+
 <body>
-  <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
-    <div class="container">
-      <div class="card login-card">
-        <div class="row no-gutters">
-          <div class="col-md-5">
-            <img src="{{ asset('client/assets/img/hero-bg.jpg') }}" alt="login" class="login-card-img">
-          </div>
-          <div class="col-md-7">
-            <div class="card-body">
-              <div class="brand-wrapper">
-                <img src="{{ asset('client/assets/img/favicon.png') }}" alt="logo" class="logo"> BPKAD
-              </div>
-              <p class="login-card-description">Masuk</p>
-              @if(Session::has('failed'))
-              <div class="alert alert-danger" role="alert">
-                {{ Session::get('failed') }}
-              </div>
-              @endif
-              <form action="{{ route('login.submit') }}" method="POST">
-                @csrf
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <div class="form-group {{ $errors->first('email') ? 'has-error has-feedback':''}}">
-                  <label for="email">Email/Username</label>
-                  <input type="text" name="email" id="email" class="form-control" placeholder="Username atau Email address">
-                  <small id="emailHelp" class="form-text text-muted">{{ $errors->first('email') ? $errors->first('email'):''}}</small>
+
+    <main>
+        <div class="container">
+
+            <section
+                class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                            <div class="d-flex justify-content-center py-4">
+                                <a href="index.html" class="logo d-flex align-items-center w-auto">
+                                    <img src="assets/img/logo.png" alt="">
+                                    <span class="d-none d-lg-block">Form Login</span>
+                                </a>
+                            </div><!-- End Logo -->
+
+                            <div class="card mb-3">
+
+                                <div class="card-body">
+
+                                    <div class="pt-4 pb-2">
+                                        <h5 class="card-title text-center pb-0 fs-4">Masuk ke akun anda</h5>
+                                        <p class="text-center small">Masukkan username & password anda untuk login</p>
+                                    </div>
+                                    @if (Session::has('failed'))
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ Session::get('failed') }}
+                                        </div>
+                                    @endif
+                                    <form method="POST" action="{{ route('login.store') }}"
+                                        class="row g-3 needs-validation" novalidate>
+                                        @csrf
+                                        <div class="col-12">
+                                            <label for="yourUsername" class="form-label">Email or Username</label>
+                                            <div class="input-group has-validation">
+                                                <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                                <input type="text" name="email" class="form-control"
+                                                    id="email" required>
+                                                <div class="invalid-feedback">Silahkan masukkan username anda.</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="yourPassword" class="form-label">Password</label>
+                                            <input type="password" name="password" class="form-control"
+                                                id="password" required>
+                                            <div class="invalid-feedback">silahkan masukkan password anda!</div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="rememberme"
+                                                    value="true" id="rememberMe">
+                                                <label class="form-check-label" for="rememberMe">Remember me</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button class="btn btn-primary w-100" type="submit">Login</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+
+                            <div class="credits">
+                                <!-- All the links in the footer should remain intact. -->
+                                <!-- You can delete the links only if you purchased the pro version. -->
+                                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+                                Designed by <a href="https://instagram.com/EkyGalih_" target="_blank">ITeam BPKAD</a>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group mb-4 {{ $errors->first('password') ? 'has-error has-feedback':''}}">
-                  <label for="password">Password</label>
-                  <input type="password" name="password" id="password" class="form-control" placeholder="Password">
-                  <small id="emailHelp" class="form-text text-muted">{{ $errors->first('password') ? $errors->first('password'):''}}</small>
-                </div>
-                <input name="login" id="login" class="btn btn-block login-btn mb-4" type="submit" value="Masuk">
-              </form>
-              <a href="#!" class="forgot-password-link">Forgot password?</a>
-              <p class="login-card-footer-text">Don't have an account? <a href="#!" class="text-reset">Register here</a></p>
-              <nav class="login-card-footer-nav">
-                <a href="#!">Terms of use.</a>
-                <a href="#!">Privacy policy</a>
-              </nav>
-            </div>
-          </div>
+
+            </section>
+
         </div>
-      </div>
-      <!-- <div class="card login-card">
-        <img src="assets/images/login.jpg" alt="login" class="login-card-img">
-        <div class="card-body">
-          <h2 class="login-card-title">Login</h2>
-          <p class="login-card-description">Sign in to your account to continue.</p>
-          <form action="#!">
-            <div class="form-group">
-              <label for="email" class="sr-only">Email</label>
-              <input type="email" name="email" id="email" class="form-control" placeholder="Email">
-            </div>
-            <div class="form-group">
-              <label for="password" class="sr-only">Password</label>
-              <input type="password" name="password" id="password" class="form-control" placeholder="Password">
-            </div>
-            <div class="form-prompt-wrapper">
-              <div class="custom-control custom-checkbox login-card-check-box">
-                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                <label class="custom-control-label" for="customCheck1">Remember me</label>
-              </div>              
-              <a href="#!" class="text-reset">Forgot password?</a>
-            </div>
-            <input name="login" id="login" class="btn btn-block login-btn mb-4" type="button" value="Login">
-          </form>
-          <p class="login-card-footer-text">Don't have an account? <a href="#!" class="text-reset">Register here</a></p>
-        </div>
-      </div> -->
-    </div>
-  </main>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    </main><!-- End #main -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="{{ asset('server/vendor/apexcharts/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('server/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('server/vendor/chart.js/chart.umd.js') }}"></script>
+    <script src="{{ asset('server/vendor/echarts/echarts.min.js') }}"></script>
+    <script src="{{ asset('server/vendor/quill/quill.min.js') }}"></script>
+    <script src="{{ asset('server/vendor/simple-datatables/simple-datatables.js') }}"></script>
+    <script src="{{ asset('server/vendor/tinymce/tinymce.min.js') }}"></script>
+    <script src="{{ asset('server/vendor/php-email-form/validate.js') }}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{{ asset('server/js/main.js') }}"></script>
+
 </body>
+
 </html>

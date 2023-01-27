@@ -9,6 +9,8 @@ use Webpatser\Uuid\Uuid;
 
 class User extends Authenticatable
 {
+    use HasFactory;
+
     protected $table = 'users';
     public $incrementing = false;
     use Notifiable;

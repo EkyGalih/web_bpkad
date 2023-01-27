@@ -4,8 +4,8 @@ namespace App\Helpers;
 
 use App\Models\Menu;
 use App\Models\Pages;
-use App\Models\Rule;
 use App\Models\SubPages;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class Helpers
@@ -89,24 +89,11 @@ class Helpers
         return $result;
     }
 
-    public static function getRule()
+    public static function getRole()
     {
-        $rule = Rule::where('user_id', '=', Auth::user()->id)
-            ->where('aplikasi', '=', 'website')
+        $rule = User::where('id', '=', Auth::user()->id)
             ->first();
         if ($rule)
-            return $rule->nama_rule;
-    }
-
-    public static function getAplikasi()
-    {
-        return Rule::where('user_id', '=', Auth::user()->id)
-            ->where('aplikasi', '=', 'website')
-            ->first()->nama_rule;
-    }
-
-    public static function showAplikasi()
-    {
-        return Rule::where('user_id', '=', Auth::user()->id)->get();
+            return $rule->role;
     }
 }

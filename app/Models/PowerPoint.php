@@ -8,9 +8,11 @@ use Webpatser\Uuid\Uuid;
 
 class PowerPoint extends Model
 {
-    protected $table = 'power_point';
+    use HasFactory;
 
-    protected $guarded = ['create_at', 'update_at'];
+    public $incrementing = false;
+    protected $table = 'power_point';
+    protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
 
     public static function boot()
     {
