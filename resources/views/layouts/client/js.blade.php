@@ -46,4 +46,4 @@
     // event jendela di-load
     google.maps.event.addDomListener(window, 'load', initialize);
 </script>
-@yield('addtional-js')
+@yield('additional-js')

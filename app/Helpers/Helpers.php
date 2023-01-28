@@ -5,8 +5,10 @@ namespace App\Helpers;
 use App\Models\ContentType;
 use App\Models\Menu;
 use App\Models\Pages;
+use App\Models\PostComment;
 use App\Models\SubPages;
 use App\Models\User;
+use DateTime;
 use Illuminate\Support\Facades\Auth;
 
 class Helpers
@@ -45,39 +47,87 @@ class Helpers
         return $user->nama;
     }
 
+    public static function GetComment($param)
+    {
+        $comment = PostComment::where('post_id', '=', $param)->get();
+        return $comment;
+    }
+
+    public static function CountComment($param)
+    {
+        $comment = PostComment::where('post_id', '=', $param)->get();
+        return $comment->count();
+    }
+
+    public static function CountLike($param) {
+        $like = PostComment::where('post_id', '=', $param)->where('suka', '=', 'sudah')->get();
+        return $like->count();
+    }
+
     // Custom Function
+
+    public static function getUserIP()
+    {
+        // Get real visitor IP behind CloudFlare network
+        if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+            $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+            $_SERVER['HTTP_CLIENT_IP'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+        }
+        $client  = @$_SERVER['HTTP_CLIENT_IP'];
+        $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
+        $remote  = $_SERVER['REMOTE_ADDR'];
+
+        if (filter_var($client, FILTER_VALIDATE_IP)) {
+            $ip = $client;
+        } elseif (filter_var($forward, FILTER_VALIDATE_IP)) {
+            $ip = $forward;
+        } else {
+            $ip = $remote;
+        }
+
+        return $ip;
+    }
 
     public static function GetDate($param)
     {
         $explode    = explode(" ", $param);
         $date       = explode("-", $explode[0]);
-        $time       = explode(":", $explode[1]);
+
         if ($date[1] == '01') {
-            $date = 'Jan '.$date[2].", ".$date[0];
+            $date = 'Jan ' . $date[2] . ", " . $date[0];
         } elseif ($date[1] == '02') {
-            $date = 'Feb '.$date[2].", ".$date[0];
+            $date = 'Feb ' . $date[2] . ", " . $date[0];
         } elseif ($date[1] == '03') {
-            $date = 'Mar '.$date[2].", ".$date[0];
+            $date = 'Mar ' . $date[2] . ", " . $date[0];
         } elseif ($date[1] == '04') {
-            $date = 'Apr '.$date[2].", ".$date[0];
+            $date = 'Apr ' . $date[2] . ", " . $date[0];
         } elseif ($date[1] == '05') {
-            $date = 'Mei '.$date[2].", ".$date[0];
+            $date = 'Mei ' . $date[2] . ", " . $date[0];
         } elseif ($date[1] == '06') {
-            $date = 'Jun '.$date[2].", ".$date[0];
+            $date = 'Jun ' . $date[2] . ", " . $date[0];
         } elseif ($date[1] == '07') {
-            $date = 'Jul '.$date[2].", ".$date[0];
+            $date = 'Jul ' . $date[2] . ", " . $date[0];
         } elseif ($date[1] == '08') {
-            $date = 'Aug '.$date[2].", ".$date[0];
+            $date = 'Aug ' . $date[2] . ", " . $date[0];
         } elseif ($date[1] == '09') {
-            $date = 'Sep '.$date[2].", ".$date[0];
+            $date = 'Sep ' . $date[2] . ", " . $date[0];
         } elseif ($date[1] == '10') {
-            $date = 'Oct '.$date[2].", ".$date[0];
+            $date = 'Oct ' . $date[2] . ", " . $date[0];
         } elseif ($date[1] == '11') {
-            $date = 'Nov '.$date[2].", ".$date[0];
+            $date = 'Nov ' . $date[2] . ", " . $date[0];
         } elseif ($date[1] == '12') {
-            $date = 'Dec '.$date[2].", ".$date[0];
+            $date = 'Dec ' . $date[2] . ", " . $date[0];
         }
         return $date;
+    }
+
+    public static function GetTime($param)
+    {
+        $explode    = explode(" ", $param);
+        $times      = explode(":", $explode[1]);
+        $time       = implode(":", $times);
+
+        return date("g:i A", strtotime($time));
     }
 
     public static function appConverter($param)

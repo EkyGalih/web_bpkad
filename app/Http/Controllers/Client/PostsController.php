@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\PostComment;
+use App\Models\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -23,6 +25,26 @@ class PostsController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
         return view('client.posts.posts', compact('menu', 'posts'));
+    }
+
+    public function comment(Request $request, $id)
+    {
+        $post = Posts::findOrFail($id);
+
+        PostComment::create([
+            'post_id' => $post->id,
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'komentar' => $request->komentar,
+            'ip_addr' => $request->ip_addr
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function like($id)
+    {
+        $post = Posts::findOrFail($id);
     }
 
     /**

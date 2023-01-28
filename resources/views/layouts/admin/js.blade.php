@@ -7,6 +7,11 @@
  <script src="{{ asset('server/vendor/simple-datatables/simple-datatables.js') }}"></script>
  <script src="{{ asset('server/vendor/tinymce/tinymce.min.js') }}"></script>
  <script src="{{ asset('server/vendor/php-email-form/validate.js') }}"></script>
-
  <!-- Template Main JS File -->
  <script src="{{ asset('server/js/main.js') }}"></script>
+@yield('additional-js')
+<script>
+$(document).ready(function () {
+    $('.datatables').DataTable();
+});
+</script>

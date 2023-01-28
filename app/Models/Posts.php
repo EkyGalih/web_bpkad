@@ -37,4 +37,9 @@ class Posts extends Model
     {
         return $this->belongsTo(ContentType::class);
     }
+
+    public function Comment()
+    {
+        return $this->hasMany(PostComment::class);
+    }
 }
