@@ -19,7 +19,7 @@
         </li><!-- End Profile Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="users-profile.html">
+            <a class="nav-link collapsed" href="{{ route('pages-admin.index') }}">
                 <i class="bi bi-files"></i>
                 <span>Pages</span>
             </a>
@@ -79,7 +79,7 @@
             </a>
             <ul id="tools" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="components-alerts.html">
+                    <a href="{{ route('menu-admin.index') }}">
                         <i class="bi bi-circle"></i><span>Menu</span>
                     </a>
                 </li>

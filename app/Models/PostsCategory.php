@@ -11,7 +11,7 @@ class PostsCategory extends Model
     use HasFactory;
 
     public $incrementing = false;
-    protected $table = 'post_category';
+    protected $table = 'posts_category';
     protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
 
     public static function boot()

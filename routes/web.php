@@ -13,6 +13,9 @@ Route::post('login', [LoginController::class, 'login'])->name('login.store');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('404', [HomeController::class, '_NotFound'])->name('not_found.client');
 
+Route::get('/auth/redirect', 'Auth\LoginController@redirectToProvider');
+Route::get('/auth/callback', 'Auth\LoginController@handleProviderCallback');
+
 Route::group(['prefix' => 'bpkad', 'middleware' => 'auth'], function () {
     Route::get('/home', [AdminHomeController::class, 'dashboard'])->name('sso.dashboard');
 });

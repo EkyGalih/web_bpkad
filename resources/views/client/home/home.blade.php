@@ -116,7 +116,7 @@
                                                 <!--thumbnail img-->
                                                 <div class="ratio_left-cover-1 image-wrapper">
                                                     <a
-                                                        href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">
+                                                        href="{{ route('client.show', $carousel[0]->id) }}">
                                                         <img height="437" src="{{ asset($carousel[0]->foto_berita) }}"
                                                             alt="Bootstrap news template">
                                                     </a>
@@ -149,7 +149,7 @@
                                                 <!--thumbnail img-->
                                                 <div class="ratio_left-cover-1 image-wrapper">
                                                     <a
-                                                        href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">
+                                                        href="{{ route('client.show', $carousel[1]->id) }}">
                                                         <img height="437" src="{{ asset($carousel[1]->foto_berita) }}"
                                                             alt="Bootstrap news template">
                                                     </a>
@@ -182,7 +182,7 @@
                                                 <!--thumbnail img-->
                                                 <div class="ratio_left-cover-1 image-wrapper">
                                                     <a
-                                                        href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">
+                                                        href="{{ route('client.show', $carousel[2]->id) }}">
                                                         <img height="437" src="{{ asset($carousel[2]->foto_berita) }}"
                                                             alt="Bootstrap news template">
                                                     </a>
@@ -215,7 +215,7 @@
                                                 <!--thumbnail img-->
                                                 <div class="ratio_left-cover-1 image-wrapper">
                                                     <a
-                                                        href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">
+                                                        href="{{ route('client.show', $carousel[3]->id) }}">
                                                         <img height="437" src="{{ asset($carousel[3]->foto_berita) }}"
                                                             alt="Bootstrap news template">
                                                     </a>

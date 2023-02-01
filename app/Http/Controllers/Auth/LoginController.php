@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -33,12 +34,12 @@ class LoginController extends Controller
         // dd(Hash::make('bpk4dntb'));
         $validation = $request->validated();
 
-        if(filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
+        if (filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
             $credentials = [
                 'email' => $request->email,
                 'password' => $request->password,
             ];
-        }else{
+        } else {
             $credentials = [
                 'username' => $request->email,
                 'password' => $request->password,
@@ -47,11 +48,11 @@ class LoginController extends Controller
 
         $user = User::where('username', '=', $request->email)->orWhere('email', '=', $request->email)->first();
 
-        if($user) {
-            if($user->active == '0') {
+        if ($user) {
+            if ($user->active == '0') {
                 return redirect()->back()
-                ->with(['failed' => 'Mohon Maaf, akun anda telah di tangguhkan, silahkan menghubungi operator kami untuk pemulihan akun!'])
-                ->withInput($request->all());
+                    ->with(['failed' => 'Mohon Maaf, akun anda telah di tangguhkan, silahkan menghubungi operator kami untuk pemulihan akun!'])
+                    ->withInput($request->all());
             }
         }
 
@@ -60,6 +61,46 @@ class LoginController extends Controller
         }
 
         return redirect()->back()->with(['failed' => 'Login gagal, pastikan username dan password anda benar'])->withInput($request->all());
+    }
+
+    // login via google
+
+    public function redirectToProvider()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleProviderCallback(Request $request)
+    {
+        try {
+            $user_google    = Socialite::driver('google')->user();
+            $user           = User::where('email', '=', $user_google->getEmail())->first();
+
+            //jika user ada maka langsung di redirect ke halaman home
+            //jika user tidak ada maka simpan ke database
+            //$user_google menyimpan data google account seperti email, foto, dsb
+
+            if ($user != NULL) {
+                auth()->login($user, true);
+                return redirect()->route('dashboard');
+            } else {
+                $create = User::create([
+                    'email' => $user_google->getEmail(),
+                    'username' => $user_google->getEmail(),
+                    'nama' => $user_google->getName(),
+                    'password' => 0,
+                    'email_verified_at' => now(),
+                    'avatar' => $user_google->getAvatar(),
+                    'active' => '1',
+                    'role' => 'user'
+                ]);
+
+                auth()->login($create, true);
+                return redirect()->route('dashboard');
+            }
+        } catch (\Throwable $th) {
+            return redirect()->back();
+        }
     }
 
     public function logout()

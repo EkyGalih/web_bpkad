@@ -5,6 +5,7 @@ namespace App\Helpers;
 use App\Models\ContentType;
 use App\Models\Menu;
 use App\Models\Pages;
+use App\Models\PagesType;
 use App\Models\PostComment;
 use App\Models\SubPages;
 use App\Models\User;
@@ -59,9 +60,13 @@ class Helpers
         return $comment->count();
     }
 
-    public static function CountLike($param) {
-        $like = PostComment::where('post_id', '=', $param)->where('suka', '=', 'sudah')->get();
-        return $like->count();
+    // pages function
+
+    public static function GetTypePage($param)
+    {
+        $type = PagesType::where('id', '=', $param)->select('name')->first();
+
+        return $type->name;
     }
 
     // Custom Function
