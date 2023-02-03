@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Galery;
 
 use App\Http\Controllers\Controller;
-use App\Models\Menu;
-use App\Models\Pages;
+use App\Models\Galery;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Webpatser\Uuid\Uuid;
 
-class MenuController extends Controller
+class GaleryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +16,20 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menus = Menu::orderBy('created_at', 'DESC')->get();
-        $pages = Pages::orderBy('title', 'ASC')->get();
+        $fotos = Galery::where('galery_type_id', '=', '1')->get();
+        $videos = Galery::where('galery_type_id', '=', '2')->get();
 
-        return view('admin.menu.index', compact('menus','pages'));
+        return view('admin.galery.index', compact('fotos','videos'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('admin.galery.foto.add');
     }
 
     /**
@@ -31,14 +40,16 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        Menu::create([
+        $id = (string)Uuid::generate(4);
+        Galery::create([
+            'id' => $id,
             'name' => $request->name,
-            'order_pos' => $request->order_pos,
-            'url' => $request->url,
-            'create_by_id' => Auth::user()->id
+            'tanggal' => $request->tanggal,
+            'keterangan' => $request->keterangan,
+            'galery_type_id' => $request->galery_type_id
         ]);
 
-        return redirect()->route('menu-admin.index')->with(['success' => 'Menu berhasil ditambahkan!']);
+        return redirect()->route('Gfoto-admin.create', $id)->with(['success' => 'Galery berhasil ditambahkan!']);
     }
 
     /**
@@ -72,16 +83,7 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $menu = Menu::findOrFail($id);
-
-        $menu->update([
-            'name' => $request->name,
-            'order_pos' => $request->order_pos,
-            'url' => $request->url,
-            'create_by_id' => Auth::user()->id
-        ]);
-
-        return redirect()->route('menu-admin.index')->with(['success' => 'Menu berhasil diubah!']);
+        //
     }
 
     /**
@@ -92,10 +94,6 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        $menu = Menu::findOrFail($id);
-        $menu->delete();
-
-        return redirect()->route('menu-admin.index')->with(['success' => 'Menu berhasil dihapus!']);
-
+        //
     }
 }

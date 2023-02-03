@@ -22,4 +22,9 @@ class GaleryFoto extends Model
             $model->id = (string)Uuid::generate(4);
         });
     }
+
+    public function Galery()
+    {
+        return $this->belongsTo(Galery::class);
+    }
 }

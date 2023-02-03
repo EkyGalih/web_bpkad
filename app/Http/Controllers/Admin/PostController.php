@@ -49,7 +49,7 @@ class PostController extends Controller
         $filename   = 'eky-' . md5($foto->getClientOriginalName()) . '.' . $foto->getClientOriginalExtension();
 
         if (in_array($foto->getClientOriginalExtension(), $ext)) {
-            if ($foto->getSize() <= 200000) {
+            if ($foto->getSize() <= 5000000) {
                 $foto->move('uploads/berita/', $filename);
                 $request->foto_berita = 'uploads/berita/' . $filename;
             }
@@ -64,17 +64,6 @@ class PostController extends Controller
         ]);
 
         return redirect()->route('post-admin.index')->with(['success' => 'Posting berhasil diupload!']);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**

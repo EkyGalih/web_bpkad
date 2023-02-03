@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Webpatser\Uuid\Uuid;
 
-class GaleryVideo extends Model
+class Apps extends Model
 {
     use HasFactory;
 
     public $incrementing = false;
-    protected $table = 'galery_video';
-    protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
+    protected $table = 'daftar_app';
+    protected $guarded = ['created_at', 'updated_at'];
 
     public static function boot()
     {
@@ -23,8 +23,8 @@ class GaleryVideo extends Model
         });
     }
 
-    public function Galery()
+    public function User()
     {
-        return $this->belongsTo(Galery::class);
+        return $this->belongsTo(User::class);
     }
 }

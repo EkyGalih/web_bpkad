@@ -36,4 +36,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Rule::class);
     }
+
+    public function Apps()
+    {
+        return $this->hasMany(Apps::class);
+    }
 }
