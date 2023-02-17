@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\LaporanPermohonanMasyarakatController;
 use App\Http\Controllers\Client\PostsController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,4 +38,9 @@ Route::group(['prefix' => 'Pages'], function () {
 
 Route::group(['prefix' => 'SubPages'], function () {
     Route::get('show/{id?}', [HomeController::class, 'ShowSubPages'])->name('client.show_sub_pages');
+});
+
+Route::group(['prefix' => 'Permohonan_dan_Pengaduan'], function () {
+    Route::get('/', [LaporanPermohonanMasyarakatController::class, 'index'])->name('faq.index');
+    Route::post('store', [LaporanPermohonanMasyarakatController::class, 'store'])->name('faq.store');
 });

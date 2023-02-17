@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
-use App\Models\Menu;
-use App\Models\Pages;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class MenuController extends Controller
+class LaporanPermohonanMasyarakatController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +14,17 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menus = Menu::orderBy('created_at', 'DESC')->get();
-        $pages = Pages::orderBy('title', 'ASC')->get();
+        return view('client.faq.index');
+    }
 
-        return view('admin.menu.index', compact('menus','pages'));
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -31,14 +35,7 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        Menu::create([
-            'name' => $request->name,
-            'order_pos' => $request->order_pos,
-            'url' => $request->url,
-            'create_by_id' => Auth::user()->id
-        ]);
-
-        return redirect()->route('menu-admin.index')->with(['success' => 'Menu berhasil ditambahkan!']);
+        //
     }
 
     /**
@@ -72,16 +69,7 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $menu = Menu::findOrFail($id);
-
-        $menu->update([
-            'name' => $request->name,
-            'order_pos' => $request->order_pos ?? '0',
-            'url' => $request->url,
-            'create_by_id' => Auth::user()->id
-        ]);
-
-        return redirect()->route('menu-admin.index')->with(['success' => 'Menu berhasil diubah!']);
+        //
     }
 
     /**
@@ -92,10 +80,6 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        $menu = Menu::findOrFail($id);
-        $menu->delete();
-
-        return redirect()->route('menu-admin.index')->with(['success' => 'Menu berhasil dihapus!']);
-
+        //
     }
 }
