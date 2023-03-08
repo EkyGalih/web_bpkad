@@ -43,4 +43,5 @@ Route::group(['prefix' => 'SubPages'], function () {
 Route::group(['prefix' => 'Permohonan_dan_Pengaduan'], function () {
     Route::get('/', [LaporanPermohonanMasyarakatController::class, 'index'])->name('faq.index');
     Route::post('store', [LaporanPermohonanMasyarakatController::class, 'store'])->name('faq.store');
+    Route::put('update/{id}', [LaporanPermohonanMasyarakatController::class, 'update'])->name('faq.update');
 });

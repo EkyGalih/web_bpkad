@@ -14,4 +14,7 @@
 $(document).ready(function () {
     $('.datatables').DataTable();
 });
+$(function () {
+    $("[data-bs-tooltip='tooltip']").tooltip();
+});
 </script>

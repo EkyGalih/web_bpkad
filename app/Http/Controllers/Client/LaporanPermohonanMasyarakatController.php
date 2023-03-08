@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Laporan;
+use App\Models\Permohonan;
 use Illuminate\Http\Request;
 
 class LaporanPermohonanMasyarakatController extends Controller
@@ -14,7 +16,11 @@ class LaporanPermohonanMasyarakatController extends Controller
      */
     public function index()
     {
-        return view('client.faq.index');
+        $Pshow   = 'show';
+        $Lshow   = '';
+        $Pactive = 'active';
+        $Lactive = '';
+        return view('client.faq.index', compact('Pshow', 'Pactive', 'Lshow', 'Lactive'));
     }
 
     /**
@@ -35,29 +41,97 @@ class LaporanPermohonanMasyarakatController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $ext        = array('png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG');
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        if ($request->jenis == 'permohonan') {
+            $Pshow       = 'show';
+            $Lshow       = '';
+            $Pactive     = 'active';
+            $Lactive     = '';
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+            // validasi data
+            $request->validate([
+                'nama' => 'required',
+                'email' => 'required|email',
+                'telepon' => 'required|numeric|min:12',
+                'alamat' => 'required',
+                'ktp' => 'required',
+                'informasi_diminta' => 'required',
+                'tujuan_informasi' => 'required',
+                'pekerjaan' => 'required',
+                'asal_instansi' => 'required'
+            ]);
+
+            $ktp        = $request->file('ktp');
+            $filename   = md5($ktp->getClientOriginalName()) . '.' . $ktp->getClientOriginalExtension();
+
+            if (in_array($ktp->getClientOriginalExtension(), $ext)) {
+                if ($ktp->getSize() <= 5000000) {
+                    $ktp->move('uploads/permohonan/', $filename);
+                    $request->ktp = 'uploads/permohonan/' . $filename;
+                } else {
+                    return redirect()->back()->with(['warning_size' => 'Ukuran file KTP melebihi 5MB!']);
+                }
+            } else {
+                return redirect()->back()->with(['warning_ext' => 'Ektensi File KTP harus format JPG, JPEG atau PNG!']);
+            }
+
+            Permohonan::create([
+                'nama' => $request->nama,
+                'email' => $request->email,
+                'telepon' => $request->telepon,
+                'alamat' => $request->alamat,
+                'ktp' => $request->ktp,
+                'informasi_diminta' => $request->informasi_diminta,
+                'tujuan_informasi' => $request->tujuan_informasi,
+                'pekerjaan' => $request->pekerjaan,
+                'asal_instansi' => $request->asal_instansi
+            ]);
+
+            return redirect()->back()->with(['success' => 'Permohonan sudah masuk!'], 'Pshow', 'Pactive', 'Lshow', 'Lactive');
+        } elseif ($request->jenis == 'pelaporan') {
+            $Pshow       = '';
+            $Lshow       = 'show';
+            $Pactive     = '';
+            $Lactive     = 'active';
+
+            $request->validate([
+                'nama_pelapor' => 'required',
+                'judul_laporan' => 'required|max:100',
+                'no_pelapor' => 'required|numeric|min:12',
+                'isi_laporan' => 'required|max:500',
+                'lokasi_kejadian' => 'required',
+                'kategori_laporan' => 'required',
+                'berkas' => 'required'
+            ]);
+
+            $file       = $request->file('berkas');
+            $filename   = md5($file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension();
+
+            if (in_array($file->getClientOriginalExtension(), $ext)) {
+                if ($file->getSize() <= 5000000) {
+                    $file->move('uploads/laporan/', $filename);
+                    $request->berkas = 'uploads/laporan/' . $filename;
+                } else {
+                    return redirect()->back()->with(['warning_lap_size' => 'Ukuran file melebihi 5MB'], 'Pshow', 'Pactive', 'Lshow', 'Lactive');
+                }
+            } else {
+                return redirect()->back()->with(['warning_lap_ext' => 'Ektensi File harus format JPG, JPEG atau PNG'], 'Pshow', 'Pactive', 'Lshow', 'Lactive');
+            }
+
+            Laporan::create([
+                'nama_pelapor' => $request->nama_pelapor,
+                'judul_laporan' => $request->judul_laporan,
+                'tgl_laporan' => date('Y-m-d h:i:s'),
+                'no_pelapor' => $request->no_pelapor,
+                'isi_laporan' => $request->isi_laporan,
+                'lokasi_kejadian' => $request->lokasi_kejadian,
+                'kategori_laporan' => $request->kategori_laporan,
+                'berkas' => $request->berkas
+            ]);
+
+            return redirect()->back()->with(['lap_success' => 'Laporan sudah diterima!'], 'Pshow', 'Pactive', 'Lshow', 'Lactive');
+        }
     }
 
     /**
@@ -69,7 +143,30 @@ class LaporanPermohonanMasyarakatController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $laporan    = Laporan::findOrFail($id);
+        $berkas     = $request->file('berkas_jawaban');
+        $ext        = array('png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG', 'pdf', 'xls', 'xlsx');
+        $filename   = md5($berkas->getClientOriginalName()) . '.' . $berkas->getClientOriginalExtension();
+
+        if (in_array($berkas->getClientOriginalExtension(), $ext)) {
+            if ($berkas->getSize() <= 5000000) {
+                $berkas->move('uploads/laporan/jawaban/', $filename);
+                $request->berkas_jawaban = 'uploads/laporan/jawaban/' . $filename;
+            } else {
+                return redirect()->back()->with(['warning_size' => 'Ukuran file melebihi 5MB']);
+            }
+        } else {
+            return redirect()->back()->with(['warning_ext' => 'Ektensi File harus format JPG, JPEG, PNG, PDF, XLS, atau XLSX']);
+        }
+
+        $laporan->update([
+            'jawaban' => $request->jawaban,
+            'berkas_jawaban' => $request->berkas_jawaban,
+            'jawaban_dari' => 'langsung'
+        ]);
+
+        return redirect()->back()->with(['success' => 'Jawaban sudah dikirim!']);
+
     }
 
     /**

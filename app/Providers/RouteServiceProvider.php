@@ -90,14 +90,14 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware('web')
             ->namespace($this->namespace)
-            ->group(base_path('routes/Admin/user.php'));
+            ->group(base_path('routes/admin/user.php'));
     }
 
     public function mapFaqAdmin()
     {
         Route::middleware('web')
             ->namespace($this->namespace)
-            ->group(base_path('routes/Admin/faq.php'));
+            ->group(base_path('routes/admin/faq.php'));
     }
 
     public function mapWebRoutes()
