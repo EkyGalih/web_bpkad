@@ -3,9 +3,11 @@
 namespace App\Helpers;
 
 use App\Models\ContentType;
+use App\Models\Laporan;
 use App\Models\Menu;
 use App\Models\Pages;
 use App\Models\PagesType;
+use App\Models\Permohonan;
 use App\Models\PostComment;
 use App\Models\SubPages;
 use App\Models\User;
@@ -135,6 +137,35 @@ class Helpers
         return date("g:i A", strtotime($time));
     }
 
+    public static function RangeTime($param)
+    {
+        $param2 = new DateTime();
+        $param3 = $param->diff($param2);
+
+        if ($param3->h == 0 && $param3->i == 0) {
+            $param4 = $param3->s . ' sec ago';
+            return $param4;
+        } elseif($param3->i != 0) {
+            $param4 = $param3->i . ' min ago';
+            return $param4;
+        } elseif ($param3->h != 0) {
+            $param4 = $param3->h . ' hrs ago';
+            return $param4;
+        } elseif ($param3->d != 0) {
+            $param4 = $param3->d . ' day ago';
+            return $param4;
+        } elseif ($param3->m != 0) {
+            $param4 = $param3->m . ' mon ago';
+            return $param4;
+        } elseif ($param3->y != 0) {
+            $param4 = $param3->y . ' years ago';
+            return $param4;
+        } else {
+            $param4 = 0;
+            return $param4;
+        }
+    }
+
     public static function appConverter($param)
     {
         if ($param == 'website') {
@@ -167,5 +198,15 @@ class Helpers
             ->first();
         if ($rule)
             return $rule->role;
+    }
+
+    public static function _getLaporan()
+    {
+        return Laporan::where('jawaban', '=', NULL)->limit(4)->get();
+    }
+
+    public static function _getPermohonan()
+    {
+        return Permohonan::where('status', 'proses')->limit(4)->get();
     }
 }

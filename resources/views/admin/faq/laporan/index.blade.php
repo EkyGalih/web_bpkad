@@ -70,7 +70,7 @@
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#ShowLaporan{{ $loop->iteration }}"
                                                     data-bs-placement="top"
-                                                    title="Lihat Laporan">{{ $lap->judul_laporan }}</button></td>
+                                                    title="Lihat Laporan">{{ $lap->kode_laporan }}</button></td>
                                             @include('admin/faq/laporan/addons/_detail')
                                             <td>{{ $lap->no_pelapor }}</td>
                                             <td>{{ $lap->kategori_laporan }}</td>
