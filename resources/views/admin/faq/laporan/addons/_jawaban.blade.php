@@ -11,7 +11,7 @@
                     <legend>Jawaban</legend>
                     <p>{{ $lap->jawaban }}</p>
                 </fieldset>
-                <p><i class="bi bi-file-earmark-post"></i> <a href="#">Berkas Jawaban</a></p>
+                <p><i class="bi bi-file-earmark-post"></i> <a href="{{ asset($lap->berkas_jawaban) }}">Berkas Jawaban</a></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i>

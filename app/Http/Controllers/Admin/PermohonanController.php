@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Permohonan;
 use Illuminate\Http\Request;
 
 class PermohonanController extends Controller
@@ -14,50 +15,9 @@ class PermohonanController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $permohonan = Permohonan::orderBy('created_at', 'DESC')->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return view('admin.faq.permohonan.index', compact('permohonan'));
     }
 
     /**
@@ -69,7 +29,19 @@ class PermohonanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($request);
+    }
+
+    public function status($id)
+    {
+        $permohonan = Permohonan::findOrFail($id);
+
+        if ($permohonan->status == 'proses')
+        {
+            $permohonan->update(['status' => 'selesai']);
+        }
+
+        return redirect()->back()->with(['success' => 'Status Permohonan diubah!']);
     }
 
     /**
@@ -80,6 +52,10 @@ class PermohonanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $permohonan = Permohonan::findOrFail($id);
+        unlink($permohonan->ktp);
+        $permohonan->delete();
+
+        return redirect()->back()->with(['success' => 'Permohonan dihapus!']);
     }
 }

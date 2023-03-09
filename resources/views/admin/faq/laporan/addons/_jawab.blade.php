@@ -10,7 +10,7 @@
                 <form action="{{ route('faq.update', $lap->id) }}" method="POST" enctype="multipart/form-data" onsubmit="return formValidate()">
                     @csrf
                     @method('PUT')
-                    <textarea name="jawaban" class="form-control" cols="30" rows="10" placeholder="Tulis Jawaban" required></textarea>
+                    <textarea name="jawaban" class="form-control" cols="30" rows="10" placeholder="Tulis Jawaban" required>{{ $lap->jawaban }}</textarea>
                     <input type="file" name="berkas_jawaban" class="form-control">
             </div>
             <div class="modal-footer">

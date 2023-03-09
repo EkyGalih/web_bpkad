@@ -1,7 +1,7 @@
 @extends('admin.index')
 @section('title', 'Menu')
 @section('menu-faq', 'show')
-@section('faq-laporan', 'active')
+@section('faq-permohonan', 'active')
 @section('additional-css')
     <link rel="stylesheet" type="text/css"
         href="{{ asset('server/vendor/DataTables/DataTables-1.13.1/css/jquery.dataTables.min.css') }}" />
@@ -50,57 +50,48 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Nama Pelapor</th>
-                                        <th scope="col">Laporan</th>
-                                        <th scope="col">No.Hp Pelapor</th>
-                                        <th scope="col">Kategori</th>
-                                        <th scope="col">Bukti Laporan</th>
-                                        <th scope="col">Tanggal</th>
-                                        <th scope="col">Jawaban</th>
-                                        <th scope="col">Jawab Melalui</th>
+                                        <th scope="col">Kode Permohonan</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">No.Hp</th>
+                                        <th scope="col">Alamat</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($laporan as $lap)
+                                    @foreach ($permohonan as $item)
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
-                                            <td>{{ $lap->nama_pelapor }}</td>
                                             <td><button class="btn btn-link" data-bs-tooltip="tooltip"
                                                     data-bs-toggle="modal"
-                                                    data-bs-target="#ShowLaporan{{ $loop->iteration }}"
+                                                    data-bs-target="#ShowPermohonan{{ $loop->iteration }}"
                                                     data-bs-placement="top"
-                                                    title="Lihat Laporan">{{ $lap->judul_laporan }}</button></td>
-                                            @include('admin/faq/laporan/addons/_detail')
-                                            <td>{{ $lap->no_pelapor }}</td>
-                                            <td>{{ $lap->kategori_laporan }}</td>
-                                            <td><button class="btn btn-info btn-sm" data-bs-tooltip="tooltip"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#ShowBerkas{{ $loop->iteration }}"
-                                                    data-bs-placement="top" title="Lihat Berkas"><i class="bi bi-eye"></i>
-                                                    Bukti</button></td>
-                                            <td>{{ $lap->tgl_laporan == null ? 'None' : Helpers::GetDate($lap->tgl_laporan) }}
-                                                @include('admin/faq/laporan/addons/_bukti')
+                                                    title="Lihat Permohonan">{{ $item->kode_pemohon }}</button></td>
+                                            @include('admin/faq/permohonan/addons/_detail')
+                                            <td><a href="https://mail.google.com/mail/u/0/#inbox?compose=new"
+                                                    target="_blank" data-bs-tooltip="tooltip" data-bs-placement="top" title="Send Data via Email">{{ $item->email }}</a></td>
+                                            <td><a href="https://wa.me/{{ $item->telepon }}"
+                                                    target="_blank" data-bs-tooltip="tooltip" data-bs-placement="top" title="Send Data via Whatsapp">{{ $item->telepon }}</a></td>
+                                            <td>
+                                                <address>{{ $item->alamat }}</address>
                                             </td>
                                             <td>
-                                                <button class="btn btn-secondary btn-sm" data-bs-tooltip="tooltip"
-                                                    data-bs-toggle="modal" data-bs-tooltip="tooltip" data-bs-placement="top"
-                                                    title="Jawab" data-bs-target="#Jawab{{ $loop->iteration }}"><i
-                                                        class="bi bi-pencil"></i></button>
-                                                @include('admin/faq/laporan/addons/_jawab')
-                                                <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-tooltip="tooltip" data-bs-placement="top" title="Lihat Jawaban"
-                                                    data-bs-target="#ShowJawaban{{ $loop->iteration }}"><i
-                                                        class="bi bi-eye"></i></button>
-                                                @include('admin/faq/laporan/addons/_jawaban')
+                                                @if ($item->status == 'proses')
+                                                    <a href="{{ route('permohonan-admin.status', $item->id) }}"
+                                                        class="btn btn-warning btn-sm"><i class="bi bi-clock"></i>
+                                                        Proses</a>
+                                                @else
+                                                    <a href="#" class="btn btn-success btn-sm"><i
+                                                            class="bi bi-check"></i> Selesai</a>
+                                                @endif
                                             </td>
-                                            <td>{{ $lap->jawaban_dari }}</td>
                                             <td>
                                                 <button class="btn btn-danger btn-md" data-bs-toggle="modal"
-                                                    data-bs-target="#DeletePages{{ $loop->iteration }}">
+                                                    data-bs-target="#DeletePermohonan{{ $loop->iteration }}">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
 
-                                                @include('admin/faq/laporan/addons/_delete')
+                                                @include('admin/faq/permohonan/addons/_delete')
                                             </td>
                                         </tr>
                                     @endforeach

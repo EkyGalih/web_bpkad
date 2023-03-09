@@ -145,28 +145,44 @@ class LaporanPermohonanMasyarakatController extends Controller
     {
         $laporan    = Laporan::findOrFail($id);
         $berkas     = $request->file('berkas_jawaban');
-        $ext        = array('png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG', 'pdf', 'xls', 'xlsx');
-        $filename   = md5($berkas->getClientOriginalName()) . '.' . $berkas->getClientOriginalExtension();
 
-        if (in_array($berkas->getClientOriginalExtension(), $ext)) {
-            if ($berkas->getSize() <= 5000000) {
-                $berkas->move('uploads/laporan/jawaban/', $filename);
-                $request->berkas_jawaban = 'uploads/laporan/jawaban/' . $filename;
+        if ($berkas != null) {
+            $ext        = array('png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG', 'pdf', 'xls', 'xlsx');
+            $filename   = md5($berkas->getClientOriginalName()) . '.' . $berkas->getClientOriginalExtension();
+
+            if (in_array($berkas->getClientOriginalExtension(), $ext)) {
+                if ($berkas->getSize() <= 5000000) {
+                    if ($laporan->berkas_jawaban == null) {
+                        $berkas->move('uploads/laporan/jawaban/', $filename);
+                        $request->berkas_jawaban = 'uploads/laporan/jawaban/' . $filename;
+                    } else {
+                        unlink($laporan->berkas_jawaban);
+                        $berkas->move('uploads/laporan/jawaban/', $filename);
+                        $request->berkas_jawaban = 'uploads/laporan/jawaban/' . $filename;
+                    }
+                    $laporan->update([
+                        'jawaban' => $request->jawaban,
+                        'berkas_jawaban' => $request->berkas_jawaban,
+                        'jawaban_dari' => 'langsung'
+                    ]);
+
+                    return redirect()->back()->with(['success' => 'Jawaban sudah dikirim!']);
+                } else {
+                    return redirect()->back()->with(['warning_size' => 'Ukuran file melebihi 5MB']);
+                }
             } else {
-                return redirect()->back()->with(['warning_size' => 'Ukuran file melebihi 5MB']);
+                return redirect()->back()->with(['warning_ext' => 'Ektensi File harus format JPG, JPEG, PNG, PDF, XLS, atau XLSX']);
             }
         } else {
-            return redirect()->back()->with(['warning_ext' => 'Ektensi File harus format JPG, JPEG, PNG, PDF, XLS, atau XLSX']);
+
+            $laporan->update([
+                'jawaban' => $request->jawaban,
+                'berkas_jawaban' => $request->berkas_jawaban,
+                'jawaban_dari' => 'langsung'
+            ]);
+
+            return redirect()->back()->with(['success' => 'Jawaban sudah dikirim!']);
         }
-
-        $laporan->update([
-            'jawaban' => $request->jawaban,
-            'berkas_jawaban' => $request->berkas_jawaban,
-            'jawaban_dari' => 'langsung'
-        ]);
-
-        return redirect()->back()->with(['success' => 'Jawaban sudah dikirim!']);
-
     }
 
     /**
@@ -177,6 +193,11 @@ class LaporanPermohonanMasyarakatController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $laporan = Laporan::findOrFail($id);
+        unlink($laporan->berkas);
+        unlink($laporan->berkas_jawaban);
+        $laporan->delete();
+
+        return redirect()->back()->with(['success' => 'Laporan dihapus!']);
     }
 }
