@@ -40,8 +40,8 @@ class HomeController extends Controller
         unset($new_posts[2]);
         unset($new_posts[3]);
         $old_date   = date('m');
-        $date       = $old_date-1;
-        $new_date   = strlen($date) == 1 ? date('Y-0'.$date) : date('Y-'.$date);
+        $date       = $old_date - 1;
+        $new_date   = strlen($date) == 1 ? date('Y-0' . $date) : date('Y-' . $date);
         $old_posts = Posts::join('content_type', 'posts.content_type_id', '=', 'content_type.id')
             ->select(
                 'posts.*',
@@ -49,7 +49,7 @@ class HomeController extends Controller
                 'content_type.id as type_id',
             )
             ->orderBy('posts.created_at', 'desc')
-            ->where('posts.created_at', 'LIKE', $new_date.'%')
+            ->where('posts.created_at', 'LIKE', $new_date . '%')
             ->limit(4)
             ->get();
         $videos = GaleryVideo::join('galery', 'galery_video.galery_id', '=', 'galery.id')
@@ -63,7 +63,7 @@ class HomeController extends Controller
         // slider
         $slides = Slideitem::where('slide_id', '=', 'd57047d6-9d3c-11ed-a403-244bfebc253d')->get();
         $slidesInformasi = Slideitem::where('slide_id', '=', '3cb30611-9d46-11ed-a403-244bfebc253d')->get();
-        return view('client.home.home', compact('new_posts', 'carousel', 'old_posts', 'videos','apps','data_covid', 'slides', 'slidesInformasi'));
+        return view('client.home.home', compact('new_posts', 'carousel', 'old_posts', 'videos', 'apps', 'data_covid', 'slides', 'slidesInformasi'));
     }
 
     /**
@@ -81,6 +81,13 @@ class HomeController extends Controller
     public function ShowSubPages($id)
     {
         $subPages = SubPages::findOrFail($id);
+        $parser = new \Smalot\PdfParser\Parser();
+        $file = $subPages->pdf_file;
+
+        $pdf = $parser->parseFile($file);
+
+        $textContent = $pdf->getText();
+        dd($textContent);
 
         return view('client.home.sub_pages', compact('subPages'));
     }

@@ -38,6 +38,12 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
+                                <label for="inputtext" class="col-sm-2 col-form-label">File</label>
+                                <div class="col-sm-10">
+                                    <input type="file" class="form-control" name="pdf_file">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
                                 <label for="inputText" class="col-sm-2 col-form-label">Menu</label>
                                 <div class="col-sm-10">
                                     <select name="sub_pages_id" class="form-control">

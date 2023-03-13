@@ -42,15 +42,44 @@ class SubPagesController extends Controller
      */
     public function store(Request $request)
     {
-        SubPages::create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'pages_type_id' => '1',
-            'create_by_id' => Auth::user()->id,
-            'sub_pages_id' => $request->sub_pages_id
-        ]);
+        $ext = array('pdf', 'PDF');
+        $pdf = $request->file('pdf_file');
 
-        return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Pages berhasil ditambahkan!']);
+        if ($pdf != null) {
+            $filename = md5($pdf->getClientOriginalName()) . '.' . $pdf->getClientOriginalExtension();
+
+            if (in_array($pdf->getClientOriginalExtension(), $ext)) {
+                if ($pdf->getSize() <= 5000000) {
+                    $pdf->move('uploads/pages/subpage/', $filename);
+                    $request->pdf_file = 'uploads/pages/subpage/' . $filename;
+                } else {
+                    return redirect()->back()->with(['warning_size' => 'Ukuran file PDF melebihi 5MB!']);
+                }
+            } else {
+                return redirect()->back()->with(['warning_ext' => 'Ektensi File PDF harus format PDF!']);
+            }
+
+            SubPages::create([
+                'title' => $request->title,
+                'content' => $request->content,
+                'pages_type_id' => '1',
+                'pdf_file' => $request->pdf_file,
+                'create_by_id' => Auth::user()->id,
+                'sub_pages_id' => $request->sub_pages_id
+            ]);
+
+            return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Pages berhasil ditambahkan!']);
+        } else {
+            SubPages::create([
+                'title' => $request->title,
+                'content' => $request->content,
+                'pages_type_id' => '1',
+                'create_by_id' => Auth::user()->id,
+                'sub_pages_id' => $request->sub_pages_id
+            ]);
+
+            return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Pages berhasil ditambahkan!']);
+        }
     }
 
     /**
