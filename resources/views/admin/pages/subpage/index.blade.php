@@ -1,5 +1,7 @@
 @extends('admin.index')
 @section('title', 'Halaman')
+@section('pages-menu', 'show')
+@section('p-subpages', 'active')
 @section('additional-css')
     <link rel="stylesheet" type="text/css"
         href="{{ asset('server/vendor/DataTables/DataTables-1.13.1/css/jquery.dataTables.min.css') }}" />
@@ -7,12 +9,12 @@
 @section('content')
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Halaman</h1>
+            <h1>Sub Halaman</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('pages-admin.index') }}">Halaman</a></li>
-                    <li class="breadcrumb-item active">Data Halaman</li>
+                    <li class="breadcrumb-item"><a href="{{ route('pages-admin.index') }}">Sub Halaman</a></li>
+                    <li class="breadcrumb-item active">Data Sub Halaman</li>
                 </ol>
             </nav>
         </div>
@@ -29,12 +31,12 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-10">
-                                    <h5 class="card-title">Data Halaman</h5>
+                                    <h5 class="card-title">Data Sub Halaman</h5>
                                 </div>
                                 <div class="col-lg-2">
-                                    <a href="{{ route('pages-admin.create') }}" class="btn btn-outline-primary btn-md"
+                                    <a href="{{ route('subpages-admin.create') }}" class="btn btn-outline-primary btn-md"
                                         style="margin-top: 10px;">
-                                        <i class="bi bi-journal-plus"></i> Tambah Halaman
+                                        <i class="bi bi-journal-plus"></i> Tambah
                                     </a>
                                 </div>
                             </div>
@@ -51,7 +53,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($pages as $page)
+                                    @foreach ($subpages as $page)
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
                                             <td>{{ $page->title }}</td>
@@ -61,7 +63,7 @@
                                             <td>{{ $page->updated_at == null ? 'None' : Helpers::GetDate($page->updated_at) }}
                                             </td>
                                             <td>
-                                                <a href="{{ route('pages-admin.edit', $page->id) }}"
+                                                <a href="{{ route('subpages-admin.edit', $page->id) }}"
                                                     class="btn btn-warning btn-md">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
@@ -75,7 +77,9 @@
                                                     <div class="modal-dialog modal-dialog-centered">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title"><i class="bi bi-exclamation-octagon-fill"></i> Hapus Postingan</h5>
+                                                                <h5 class="modal-title"><i
+                                                                        class="bi bi-exclamation-octagon-fill"></i> Hapus
+                                                                    Postingan</h5>
                                                                 <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
@@ -84,11 +88,14 @@
                                                                     akan dihapus.<br /> Anda Yakin?</p>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i> Tidak</button>
-                                                                <a href="{{ route('pages-admin.destroy', $page->id) }}" class="btn btn-outline-danger">
+                                                                <button type="button" class="btn btn-outline-secondary"
+                                                                    data-bs-dismiss="modal"><i class="bi bi-x-circle"></i>
+                                                                    Tidak</button>
+                                                                <a href="{{ route('subpages-admin.destroy', $page->id) }}"
+                                                                    class="btn btn-outline-danger">
                                                                     <i class="bi bi-check-circle"></i> Ya
                                                                 </a>
-                                                              </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

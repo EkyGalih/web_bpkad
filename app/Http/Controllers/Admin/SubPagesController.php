@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Menu;
 use App\Models\Pages;
-use App\Models\PagesType;
+use App\Models\SubPages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PagesController extends Controller
+class SubPagesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +17,9 @@ class PagesController extends Controller
      */
     public function index()
     {
-        $pages = Pages::orderBy('created_at', 'DESC')->get();
+        $subpages = SubPages::orderBy('created_at', 'DESC')->get();
 
-        return view('admin.pages.page.index', compact('pages'));
+        return view('admin.pages.subpage.index', compact('subpages'));
     }
 
     /**
@@ -30,9 +29,9 @@ class PagesController extends Controller
      */
     public function create()
     {
-        $menus = Menu::orderBy('name', 'ASC')->get();
+        $pages = Pages::orderBy('title', 'ASC')->get();
 
-        return view('admin.pages.page.add', compact('menus'));
+        return view('admin.pages.subpage.add', compact('pages'));
     }
 
     /**
@@ -43,15 +42,15 @@ class PagesController extends Controller
      */
     public function store(Request $request)
     {
-        Pages::create([
+        SubPages::create([
             'title' => $request->title,
             'content' => $request->content,
             'pages_type_id' => '1',
             'create_by_id' => Auth::user()->id,
-            'menu_id' => $request->menu_id
+            'sub_pages_id' => $request->sub_pages_id
         ]);
 
-        return redirect()->route('pages-admin.index')->with(['success' => 'Pages berhasil ditambahkan!']);
+        return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Pages berhasil ditambahkan!']);
     }
 
     /**
@@ -73,10 +72,10 @@ class PagesController extends Controller
      */
     public function edit($id)
     {
-        $menus = Menu::orderBy('name', 'ASC')->get();
-        $pages = Pages::findOrFail($id);
+        $pages = Pages::orderBy('title', 'ASC')->get();
+        $subpages = SubPages::findOrFail($id);
 
-        return view('admin.pages.page.edit', compact('pages', 'menus'));
+        return view('admin.pages.subpage.edit', compact('pages', 'subpages'));
     }
 
     /**
@@ -88,17 +87,17 @@ class PagesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $pages = Pages::findOrFail($id);
+        $subpages = SubPages::findOrFail($id);
 
-        $pages->update([
+        $subpages->update([
             'title' => $request->title,
             'content' => $request->content,
             'pages_type_id' => '1',
             'create_by_id' => Auth::user()->id,
-            'menu_id' => $request->menu_id
+            'sub_pages_id' => $request->sub_pages_id
         ]);
 
-        return redirect()->route('pages-admin.index')->with(['success' => 'Pages berhasil diubah!']);
+        return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Pages berhasil diubah!']);
     }
 
     /**
@@ -109,9 +108,9 @@ class PagesController extends Controller
      */
     public function destroy($id)
     {
-        $pages = Pages::findOrFail($id);
-        $pages->delete();
+        $subpages = SubPages::findOrFail($id);
+        $subpages->delete();
 
-        return redirect()->route('pages-admin.index')->with(['success' => 'Pages berhasil dihapus!']);
+        return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Pages berhasil dihapus!']);
     }
 }
