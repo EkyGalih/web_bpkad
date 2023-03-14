@@ -81,13 +81,6 @@ class HomeController extends Controller
     public function ShowSubPages($id)
     {
         $subPages = SubPages::findOrFail($id);
-        $parser = new \Smalot\PdfParser\Parser();
-        $file = $subPages->pdf_file;
-
-        $pdf = $parser->parseFile($file);
-
-        $textContent = $pdf->getText();
-        dd($textContent);
 
         return view('client.home.sub_pages', compact('subPages'));
     }

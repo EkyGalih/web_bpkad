@@ -42,7 +42,7 @@ class SubPagesController extends Controller
      */
     public function store(Request $request)
     {
-        $ext = array('pdf', 'PDF');
+        $ext = array('png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG');
         $pdf = $request->file('pdf_file');
 
         if ($pdf != null) {
@@ -53,10 +53,10 @@ class SubPagesController extends Controller
                     $pdf->move('uploads/pages/subpage/', $filename);
                     $request->pdf_file = 'uploads/pages/subpage/' . $filename;
                 } else {
-                    return redirect()->back()->with(['warning_size' => 'Ukuran file PDF melebihi 5MB!']);
+                    return redirect()->back()->with(['warning_size' => 'Ukuran file melebihi 5MB!']);
                 }
             } else {
-                return redirect()->back()->with(['warning_ext' => 'Ektensi File PDF harus format PDF!']);
+                return redirect()->back()->with(['warning_ext' => 'Ektensi File harus format PNG, JPG atau JPEG!']);
             }
 
             SubPages::create([
@@ -138,6 +138,9 @@ class SubPagesController extends Controller
     public function destroy($id)
     {
         $subpages = SubPages::findOrFail($id);
+        if ($subpages->pdf_file != null) {
+            unlink($subpages->pdf_file);
+        }
         $subpages->delete();
 
         return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Pages berhasil dihapus!']);

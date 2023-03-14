@@ -23,7 +23,9 @@
                     <p>
                         {!! $subPages->content !!}
                     </p>
-                    
+                    @if ($subPages->pdf_file != null)
+                        <img src="{{ asset($subPages->pdf_file) }}" alt="" width="600" height="500">
+                    @endif
                 </div>
             </div>
         </section><!-- End Portfolio Details Section -->
