@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\Address;
 use App\Models\ContentType;
 use App\Models\Laporan;
 use App\Models\Menu;
@@ -71,28 +72,21 @@ class Helpers
         return $type->name;
     }
 
+    ### DATA FUNCTION ###
+
+    public static function __address(){
+        return Address::get()->last();
+    }
+
     // Custom Function
 
-    public static function getUserIP()
+    public static function __phone($param)
     {
-        // Get real visitor IP behind CloudFlare network
-        if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
-            $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
-            $_SERVER['HTTP_CLIENT_IP'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
-        }
-        $client  = @$_SERVER['HTTP_CLIENT_IP'];
-        $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
-        $remote  = $_SERVER['REMOTE_ADDR'];
-
-        if (filter_var($client, FILTER_VALIDATE_IP)) {
-            $ip = $client;
-        } elseif (filter_var($forward, FILTER_VALIDATE_IP)) {
-            $ip = $forward;
-        } else {
-            $ip = $remote;
-        }
-
-        return $ip;
+        $phone = ltrim($param, '0');
+        $phone1 = substr($phone, 0, 3);
+        $phone2 = substr($phone, 3, 4);
+        $phone3 = substr($phone, 7, 4);
+        return '(+62) '.$phone1.'-'.$phone2.'-'.$phone3;
     }
 
     public static function GetDate($param)

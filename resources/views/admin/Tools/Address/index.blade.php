@@ -20,13 +20,13 @@
         </div>
         <section class="section">
             <div class="row">
+                @if (Session::has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        {{ Session::get('success') }}
+                    </div>
+                @endif
                 <div class="col-lg-6">
-                    @if (Session::has('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            {{ Session::get('success') }}
-                        </div>
-                    @endif
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
@@ -35,8 +35,13 @@
                                             nomor telepon/fax, dan email)</span></h5>
                                 </div>
                             </div>
-                            <form action="#" method="POST">
+                            <form
+                                action="{{ $address == null ? route('tools-address.store') : route('tools-address.update', $address->id) }}"
+                                method="POST">
                                 @csrf
+                                @if (!empty($address))
+                                    @method('PUT')
+                                @endif
                                 <div class="row">
                                     <label for="inputtext">Alamat/Jalan</label>
                                     <div class="col-sm-12">

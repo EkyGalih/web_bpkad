@@ -115,8 +115,7 @@
                                             <div class="position-relative">
                                                 <!--thumbnail img-->
                                                 <div class="ratio_left-cover-1 image-wrapper">
-                                                    <a
-                                                        href="{{ route('client.show', $carousel[0]->id) }}">
+                                                    <a href="{{ route('client.show', $carousel[0]->id) }}">
                                                         <img height="437" src="{{ asset($carousel[0]->foto_berita) }}"
                                                             alt="Bootstrap news template">
                                                     </a>
@@ -148,8 +147,7 @@
                                             <div class="position-relative">
                                                 <!--thumbnail img-->
                                                 <div class="ratio_left-cover-1 image-wrapper">
-                                                    <a
-                                                        href="{{ route('client.show', $carousel[1]->id) }}">
+                                                    <a href="{{ route('client.show', $carousel[1]->id) }}">
                                                         <img height="437" src="{{ asset($carousel[1]->foto_berita) }}"
                                                             alt="Bootstrap news template">
                                                     </a>
@@ -181,8 +179,7 @@
                                             <div class="position-relative">
                                                 <!--thumbnail img-->
                                                 <div class="ratio_left-cover-1 image-wrapper">
-                                                    <a
-                                                        href="{{ route('client.show', $carousel[2]->id) }}">
+                                                    <a href="{{ route('client.show', $carousel[2]->id) }}">
                                                         <img height="437" src="{{ asset($carousel[2]->foto_berita) }}"
                                                             alt="Bootstrap news template">
                                                     </a>
@@ -214,8 +211,7 @@
                                             <div class="position-relative">
                                                 <!--thumbnail img-->
                                                 <div class="ratio_left-cover-1 image-wrapper">
-                                                    <a
-                                                        href="{{ route('client.show', $carousel[3]->id) }}">
+                                                    <a href="{{ route('client.show', $carousel[3]->id) }}">
                                                         <img height="437" src="{{ asset($carousel[3]->foto_berita) }}"
                                                             alt="Bootstrap news template">
                                                     </a>
@@ -368,12 +364,13 @@
                 <hr />
             </div>
 
+            @php $address = Helpers::__address() @endphp
             <div class="row" data-aos="fade-up" data-aos-delay="100">
                 <div class="col-lg-6">
                     <div class="info-box mb-4">
                         <i class="bx bx-map"></i>
                         <h3>Alamat Kantor</h3>
-                        <p>Jl. Pejanggik No. 14 Mataram</p>
+                        <p>{{ $address->address }}</p>
                     </div>
                 </div>
 
@@ -382,7 +379,7 @@
                         <i class="bx bx-envelope"></i>
                         <h3>Email</h3>
                         <p>bpkad@ntbprov.go.id</p>
-                        <p>prog.bpkad.ntb@gmail.com</p>
+                        <p>{{ $address->email }}</p>
                     </div>
                 </div>
 
@@ -390,7 +387,7 @@
                     <div class="info-box  mb-4">
                         <i class="bx bx-phone-call"></i>
                         <h3>Telepon</h3>
-                        <p>+62 819 1091 1912</p>
+                        <p>{{ Helpers::__phone($address->phone) }}</p>
                     </div>
                 </div>
 

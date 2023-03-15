@@ -11,8 +11,9 @@ class Address extends Model
     use HasFactory;
 
     public $incrementing = false;
+    public $timestamps = false;
     protected $table = 'office_address';
-    protected $fillable = [];
+    protected $guarded = [];
 
     public static function boot()
     {
