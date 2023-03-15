@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "alexpechkarev/google-maps": "^10.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -17,7 +18,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.1",
         "laravolt/avatar": "^4.0",
-        "webpatser/laravel-uuid": "^4.0"
+        "webpatser/laravel-uuid": "^4.0",
+        "cornford/googlmapper": "3.*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",

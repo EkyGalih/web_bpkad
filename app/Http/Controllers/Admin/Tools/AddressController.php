@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin\Tools;
 
 use App\Http\Controllers\Controller;
 use App\Models\Address;
+use Cornford\Googlmapper\Mapper;
+use GoogleMaps\GoogleMaps;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
@@ -16,6 +18,12 @@ class AddressController extends Controller
     public function index()
     {
         $address = Address::first();
+        // $config['center'] = $address->address;
+        // $config['zoom'] = '14';
+        // $config['map_height'] = '500px';
+        // $config['scrollwheel'] = false;
+
+        \Mapper::map($address->lat, $address->lng);
 
         return view('admin.Tools.Address.index', compact('address'));
     }

@@ -162,6 +162,8 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Laravolt\Avatar\ServiceProvider::class,
+        GoogleMaps\ServiceProvider\GoogleMapsServiceProvider::class,
+        Cornford\Googlmapper\MapperServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -229,6 +231,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Avatar' => Laravolt\Avatar\Facade::class,
         'Helpers' => App\Helpers\Helpers::class,
+        'GoogleMaps' => GoogleMaps\Facade\GoogleMapsFacade::class,
+        'Mapper'         => Cornford\Googlmapper\Facades\MapperFacade::class,
     ],
 
 ];
