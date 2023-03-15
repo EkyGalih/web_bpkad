@@ -101,7 +101,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="components-accordion.html">
+                    <a href="{{ route('tools-link') }}" class="@yield('tools-link')">
                         <i class="bi bi-circle"></i><span>Link</span>
                     </a>
                 </li>

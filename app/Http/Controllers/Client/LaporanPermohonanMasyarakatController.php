@@ -98,7 +98,7 @@ class LaporanPermohonanMasyarakatController extends Controller
 
             $request->validate([
                 'nama_pelapor' => 'required',
-                'kode_laporan' => strtoupper('Lap'.bin2hex(random_bytes(5))),
+                'kode_laporan' => strtoupper('Lap' . bin2hex(random_bytes(5))),
                 'judul_laporan' => 'required|max:100',
                 'no_pelapor' => 'required|numeric|min:12',
                 'isi_laporan' => 'required|max:500',
@@ -123,7 +123,7 @@ class LaporanPermohonanMasyarakatController extends Controller
 
             Laporan::create([
                 'nama_pelapor' => $request->nama_pelapor,
-                'kode_laporan' => strtoupper('Lap'.bin2hex(random_bytes(5))),
+                'kode_laporan' => strtoupper('Lap' . bin2hex(random_bytes(5))),
                 'judul_laporan' => $request->judul_laporan,
                 'tgl_laporan' => date('Y-m-d h:i:s'),
                 'no_pelapor' => $request->no_pelapor,
