@@ -96,7 +96,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="components-accordion.html">
+                    <a href="{{ route('tools-social') }}" class="@yield('tools-social')">
                         <i class="bi bi-circle"></i><span>Social Media</span>
                     </a>
                 </li>
