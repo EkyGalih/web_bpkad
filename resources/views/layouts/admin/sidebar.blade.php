@@ -61,6 +61,11 @@
             </a>
             <ul id="data-informasi" class="nav-content collapse @yield('di-menu')" data-bs-parent="#sidebar-nav">
                 <li>
+                    <a href="{{ route('ppid-kip.index') }}" class="@yield('di-ppid')">
+                        <i class="bi bi-circle"></i><span>KIP PPID</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('galery-admin.index') }}" class="@yield('di-galery')">
                         <i class="bi bi-circle"></i><span>Galery</span>
                     </a>
