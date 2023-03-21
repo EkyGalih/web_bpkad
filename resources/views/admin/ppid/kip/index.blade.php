@@ -1,5 +1,7 @@
 @extends('admin.index')
 @section('title', 'PPID | Klasifikasi Informasi Publik')
+@section('di-menu', 'show')
+@section('di-ppid', 'active')
 @section('additional-css')
     <link rel="stylesheet" type="text/css"
         href="{{ asset('server/vendor/DataTables/DataTables-1.13.1/css/jquery.dataTables.min.css') }}" />
@@ -45,6 +47,7 @@
                                         <th scope="col">Nama Data</th>
                                         <th scope="col">Jenis Informasi</th>
                                         <th scope="col">Jenis File</th>
+                                        <th scope="col">Files</th>
                                         <th scope="col">Diupload Oleh</th>
                                         <th scope="col">Buat Pada</th>
                                         <th scope="col">Aksi</th>
@@ -54,14 +57,19 @@
                                     @foreach ($kip as $item)
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
-                                            <td>{{ $item->title }}</td>
-                                            <td>{{ Helpers::GetTypeContent($item->content_type_id) }}</td>
-                                            <td>{{ Helpers::GetUser($item->users_id) }}</td>
-                                            <td>{{ Helpers::GetDate($item->created_at) }}</td>
-                                            <td>{{ $item->updated_at == null ? 'None' : Helpers::GetDate($item->updated_at) }}
+                                            <td>{{ $item->nama_informasi }}</td>
+                                            <td>Informasi {{ ucfirst($item->jenis_informasi) }}</td>
+                                            <td><span
+                                                    class="badge bg-{{ $item->jenis_file == 'link' ? 'secondary' : 'info' }}"><i
+                                                        class="bi bi-{{ $item->jenis_file == 'link' ? 'link' : 'upload' }}"></i>
+                                                    {{ $item->jenis_file }}</span></td>
+                                            <td><a href="#" class="btn btn-success btn-sm"><i
+                                                        class="bi bi-download"></i> Download</a></td>
+                                            <td>{{ Helpers::GetUser($item->upload_by) }}</td>
+                                            <td>{{ $item->created_at == null ? 'None' : Helpers::GetDate($item->created_at) }}
                                             </td>
                                             <td>
-                                                <a href="{{ route('post-admin.edit', $item->id) }}"
+                                                <a href="{{ route('ppid-kip.edit', $item->id) }}"
                                                     class="btn btn-warning btn-md">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
@@ -70,33 +78,7 @@
                                                     <i class="bi bi-trash"></i>
                                                 </button>
 
-                                                <div class="modal fade" id="DeletePost{{ $loop->iteration }}"
-                                                    tabindex="-1">
-                                                    <div class="modal-dialog modal-dialog-centered">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title"><i
-                                                                        class="bi bi-exclamation-octagon-fill"></i> Hapus
-                                                                    Postingan</h5>
-                                                                <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <p>Postingan <strong><u>{{ $item->title }}</u></strong>
-                                                                    akan dihapus.<br /> Anda Yakin?</p>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-outline-secondary"
-                                                                    data-bs-dismiss="modal"><i class="bi bi-x-circle"></i>
-                                                                    Tidak</button>
-                                                                <a href="{{ route('post-admin.destroy', $item->id) }}"
-                                                                    class="btn btn-outline-danger">
-                                                                    <i class="bi bi-check-circle"></i> Ya
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                @include('admin/ppid/kip/delete')
                                             </td>
                                         </tr>
                                     @endforeach

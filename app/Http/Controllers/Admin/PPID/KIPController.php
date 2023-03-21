@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\PPID;
 use App\Http\Controllers\Controller;
 use App\Models\KIP;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KIPController extends Controller
 {
@@ -15,7 +16,7 @@ class KIPController extends Controller
      */
     public function index()
     {
-        $kip = KIP::paginate(10);
+        $kip = KIP::get();
 
         return view('admin.ppid.kip.index', compact('kip'));
     }
@@ -42,19 +43,20 @@ class KIPController extends Controller
             'nama_informasi' => 'required',
             'jenis_informasi' => 'required',
             'jenis_file' => 'required',
-            'files' => 'required',
+            'upload_files' => 'required',
         ]);
-        
+
         if ($request->jenis_file == 'link') {
             KIP::create([
                 'nama_informasi' => $request->nama_informasi,
                 'jenis_informasi' => $request->jenis_informasi,
                 'jenis_file' => $request->jenis_file,
-                'files' => $request->files,
+                'upload_by' => Auth::user()->id,
+                'files' => $request->upload_files,
             ]);
         }
 
-        return redirect()->back()->with(['success' => 'Data informasi berhasil disimpan!']);
+        return redirect()->route('ppid-kip.index')->with(['success' => 'Data informasi berhasil disimpan!']);
     }
 
     /**
@@ -76,7 +78,9 @@ class KIPController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kip = KIP::findOrFail($id);
+
+        return view('admin.ppid.kip.edit', compact('kip'));
     }
 
     /**
@@ -88,7 +92,18 @@ class KIPController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $kip = KIP::findOrFail($id);
+
+        if ($kip->jenis_file == 'link') {
+            $kip->update([
+                'nama_informasi' => $request->nama_informasi,
+                'jenis_informasi' => $request->jenis_informasi,
+                'jenis_file' => $request->jenis_file,
+                'files' => $request->upload_files
+            ]);
+        }
+
+        return redirect()->route('ppid-kip.index')->with(['success' => 'Data informasi berhasil diubah!']);
     }
 
     /**
@@ -99,6 +114,12 @@ class KIPController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kip = KIP::findOrFail($id);
+
+        if ($kip->jenis_file == 'link') {
+            $kip->delete();
+        }
+
+        return redirect()->back()->with(['success' => 'Data berhasil dihapus!']);
     }
 }

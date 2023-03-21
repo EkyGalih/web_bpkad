@@ -1,5 +1,7 @@
 @extends('admin.index')
 @section('title', 'PPID | Tambah Klasifikasi Informasi Publik')
+@section('di-menu', 'show')
+@section('di-ppid', 'active')
 @section('content')
     <main id="main" class="main">
         <div class="pagetitle">
@@ -66,8 +68,8 @@
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Files</label>
                                     <div class="col-sm-10">
-                                        <input id="upload_file" type="text" name="files" class="form-control @error('files') is-invalid @enderror">
-                                        @error('files')
+                                        <input id="upload_file" type="text" name="upload_files" class="form-control @error('upload_files') is-invalid @enderror">
+                                        @error('upload_files')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>

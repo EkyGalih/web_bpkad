@@ -54,6 +54,26 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
+                                    <label for="inputText" class="col-sm-2 col-form-label">Jenis Link</label>
+                                    <div class="col-sm-10">
+                                        <select name="jenis_link" class="form-control" id="jenis_link">
+                                            <option value="non-link"
+                                                {{ $item->jenis_link == 'non-link' ? 'selected' : '' }}>Tanpa
+                                                Link</option>
+                                            <option value="link" {{ $item->jenis_link == 'link' ? 'selected' : '' }}>Link
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputText" class="col-sm-2 col-form-label" id="label-link"
+                                        hidden>Link</label>
+                                    <div class="col-sm-10">
+                                        <input type="{{ $item->link == null ? 'hidden' : '' }}" name="link"
+                                            class="form-control" id="link">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
                                     <div class="col-sm-12">
                                         <button class="btn btn-outline-warning btn-md" style="float: right;" type="reset">
                                             <i class="bi bi-arrow-clockwise"></i> Reset
@@ -71,4 +91,19 @@
             </div>
         </section>
     </main>
+@endsection
+@section('additional-js')
+    <script>
+        $('#jenis_link').change(function() {
+            var jenis_link = $('#jenis_link').val();
+
+            if (jenis_link == 'non-link') {
+                $('#label-link').attr('hidden', true);
+                $('#link').prop('type', 'hidden');
+            } else {
+                $('#link').prop('type', 'text');
+                $('#label-link').removeAttr('hidden');
+            }
+        })
+    </script>
 @endsection

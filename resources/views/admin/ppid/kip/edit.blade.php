@@ -1,73 +1,121 @@
 @extends('admin.index')
-@section('title', 'Edit Post')
+@section('title', 'PPID | Ubah Klasifikasi Informasi Publik')
+@section('di-menu', 'show')
+@section('di-ppid', 'active')
 @section('content')
-<main id="main" class="main">
-    <div class="pagetitle">
+    <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Post</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('post-admin.index') }}">Post</a></li>
-                    <li class="breadcrumb-item active">Edit Post {{ $posts->title }}</li>
-                </ol>
-            </nav>
+            <div class="pagetitle">
+                <h1>Klasifikasi Informasi Publik</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('post-admin.index') }}">PPID</a></li>
+                        <li class="breadcrumb-item active">Ubah Data Klasifikasi Informasi Publik</li>
+                    </ol>
+                </nav>
+            </div>
         </div>
-    </div>
-    <section class="section">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="card-title">Ubah Postingan</div>
-                        <hr/>
-                        <form action="{{ route('post-admin.update', $posts->id) }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
-                            <div class="row mb-3">
-                                <label for="inputText" class="col-sm-2 col-form-label">Judul</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="title" class="form-control" value="{{ $posts->title }}">
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">Ubah Data</div>
+                            <hr />
+                            <form action="{{ route('ppid-kip.update', $kip->id) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                <div class="row mb-3">
+                                    <label for="inputText" class="col-sm-2 col-form-label">Nama Data</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="nama_informasi"
+                                            class="form-control @error('nama_informasi') is-invalid @enderror"
+                                            value="{{ $kip->nama_informasi }}">
+                                        @error('nama_informasi')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputText" class="col-sm-2 col-form-label">Foto Berita</label>
-                                <div class="col-sm-10">
-                                    <input type="file" name="foto_berita" value="{{ $posts->foto_berita }}" class="form-control">
+                                <div class="row mb-3">
+                                    <label for="inputText" class="col-sm-2 col-form-label">Jenis Informasi</label>
+                                    <div class="col-sm-10">
+                                        <select name="jenis_informasi"
+                                            class="form-control @error('jenis_informasi') is-invalid @enderror">
+                                            <option value="">---Pilih---</option>
+                                            <option value="berkala"
+                                                {{ $kip->jenis_informasi == 'berkala' ? 'selected' : '' }}>Informasi Berkala
+                                            </option>
+                                            <option value="dikecualikan"
+                                                {{ $kip->jenis_informasi == 'dikecualikan' ? 'selected' : '' }}>Informasi
+                                                Dikecualikan</option>
+                                            <option value="serta merta"
+                                                {{ $kip->jenis_informasi == 'serta merta' ? 'selected' : '' }}>Informasi
+                                                Serta Merta</option>
+                                            <option value="setiap saat"
+                                                {{ $kip->jenis_informasi == 'setiap saat' ? 'selected' : '' }}>Informasi
+                                                Tersedia Setiap Saat</option>
+                                        </select>
+                                        @error('jenis_informasi')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputText" class="col-sm-2 col-form-label">Kontent</label>
-                                <div class="col-sm-10">
-                                    <textarea name="content" class="tinymce-editor">{{ $posts->content }}</textarea><!-- End TinyMCE Editor -->
+                                <div class="row mb-3">
+                                    <label for="inputText" class="col-sm-2 col-form-label">Jenis File</label>
+                                    <div class="col-sm-10">
+                                        <select name="jenis_file"
+                                            class="form-control @error('jenis_file') is-invalid @enderror" id="jenis_file">
+                                            <option value="">---Pilih---</option>
+                                            <option value="link" {{ $kip->jenis_file == 'link' ? 'selected' : '' }}>Link
+                                            </option>
+                                            <option value="upload" {{ $kip->jenis_file == 'upload' ? 'selected' : '' }}>
+                                                Upload</option>
+                                        </select>
+                                        @error('jenis_file')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputText" class="col-sm-2 col-form-label">Kategori</label>
-                                <div class="col-sm-10">
-                                    <select name="posts_category_id" class="form-control">
-                                        <option value="">-------</option>
-                                        @foreach ($PostCategory as $category)
-                                        <option value="{{ $category->id }}" {{ $posts->posts_category_id == $category->id ? 'selected' : '' }}>{{ $category->category }}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="row mb-3">
+                                    <label for="inputText" class="col-sm-2 col-form-label">Files</label>
+                                    <div class="col-sm-10">
+                                        <input id="upload_file" type="text" name="upload_files" value="{{ $kip->files }}"
+                                            class="form-control @error('files') is-invalid @enderror">
+                                        @error('files')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-sm-12">
-                                    <button class="btn btn-outline-warning btn-md" style="float: right;" type="reset">
-                                        <i class="bi bi-arrow-clockwise"></i> Reset
-                                    </button>
-                                    <button class="btn btn-outline-success btn-md" style="float: right; margin-right: 2px;" type="submit">
-                                        <i class="bi bi-save"></i> Simpan
-                                    </button>
+                                <div class="row mb-3">
+                                    <div class="col-sm-12">
+                                        <button class="btn btn-outline-warning btn-md" style="float: right;" type="reset">
+                                            <i class="bi bi-arrow-clockwise"></i> Reset
+                                        </button>
+                                        <button class="btn btn-outline-success btn-md"
+                                            style="float: right; margin-right: 2px;" type="submit">
+                                            <i class="bi bi-save"></i> Simpan
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-</main>
+        </section>
+    </main>
+@endsection
+@section('additional-js')
+    <script>
+        $('#jenis_file').change(function() {
+            var jenis_file = $('#jenis_file').val();
+
+            if (jenis_file == 'upload') {
+                $('#upload_file').prop('type', 'file');
+            } else {
+                $('#upload_file').prop('type', 'text');
+            }
+        })
+    </script>
 @endsection
