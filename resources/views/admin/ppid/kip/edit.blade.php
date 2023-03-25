@@ -10,7 +10,7 @@
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('post-admin.index') }}">PPID</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('ppid-kip.index') }}">PPID</a></li>
                         <li class="breadcrumb-item active">Ubah Data Klasifikasi Informasi Publik</li>
                     </ol>
                 </nav>
@@ -21,9 +21,10 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="card-title">Ubah Data</div>
+                            <div class="card-title"><i class="bi bi-pencil-square"></i> Ubah Data</div>
                             <hr />
-                            <form action="{{ route('ppid-kip.update', $kip->id) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('ppid-kip.update', $kip->id) }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="row mb-3">
@@ -80,7 +81,8 @@
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Files</label>
                                     <div class="col-sm-10">
-                                        <input id="upload_file" type="text" name="upload_files" value="{{ $kip->files }}"
+                                        <input id="upload_file" type="text" name="upload_files"
+                                            value="{{ $kip->files }}"
                                             class="form-control @error('files') is-invalid @enderror">
                                         @error('files')
                                             <span class="text-danger">{{ $message }}</span>
@@ -88,11 +90,29 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
+                                    @php $created_at = explode(" ", $kip->created_at) @endphp
+                                    <label for="inputText" class="col-sm-2 col-form-label">Waktu Upload</label>
+                                    <div class="col-sm-2">
+                                        <input id="date" type="date" name="date" value="{{ $created_at[0] }}"
+                                            class="form-control @error('date') is-invalid @enderror">
+                                        @error('date')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input id="time" type="time" name="time" value="{{ $created_at[1] }}"
+                                            class="form-control @error('time') is-invalid @enderror">
+                                        @error('time')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
                                     <div class="col-sm-12">
-                                        <button class="btn btn-outline-warning btn-md" style="float: right;" type="reset">
-                                            <i class="bi bi-arrow-clockwise"></i> Reset
-                                        </button>
-                                        <button class="btn btn-outline-success btn-md"
+                                        <a href="{{ route('ppid-kip.index') }}" class="btn btn-secondary btn-md" style="float: right;">
+                                            <i class="bi bi-backspace"></i> Kembali
+                                        </a>
+                                        <button class="btn btn-success btn-md"
                                             style="float: right; margin-right: 2px;" type="submit">
                                             <i class="bi bi-save"></i> Simpan
                                         </button>

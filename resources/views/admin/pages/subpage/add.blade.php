@@ -26,18 +26,27 @@
                             <form action="{{ route('subpages-admin.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row mb-3">
+                                    <label for="inputText" class="col-sm-2 col-form-label">Jenis Sub Pages</label>
+                                    <div class="col-sm-10">
+                                        <select name="jenis_link" class="form-control" id="jenis_link">
+                                            <option value="non-link">Tanpa Link</option>
+                                            <option value="link">Link</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Judul</label>
                                     <div class="col-sm-10">
                                         <input type="text" name="title" class="form-control">
                                     </div>
                                 </div>
-                                <div class="row mb-3">
+                                <div class="row mb-3" id="content">
                                     <label for="inputText" class="col-sm-2 col-form-label"></label>
                                     <div class="col-sm-10">
                                         <textarea name="content" class="tinymce-editor"></textarea><!-- End TinyMCE Editor -->
                                     </div>
                                 </div>
-                                <div class="row mb-3">
+                                <div class="row mb-3" id="pdf_file">
                                     <label for="inputtext" class="col-sm-2 col-form-label">File</label>
                                     <div class="col-sm-10">
                                         <input type="file" class="form-control" name="pdf_file">
@@ -55,16 +64,8 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Jenis Link</label>
-                                    <div class="col-sm-10">
-                                        <select name="jenis_link" class="form-control" id="jenis_link">
-                                            <option value="non-link">Tanpa Link</option>
-                                            <option value="link">Link</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label" id="label-link" hidden>Link</label>
+                                    <label for="inputText" class="col-sm-2 col-form-label" id="label-link"
+                                        hidden>Link</label>
                                     <div class="col-sm-10">
                                         <input type="hidden" name="link" class="form-control" id="link">
                                     </div>
@@ -96,8 +97,12 @@
             if (jenis_link == 'non-link') {
                 $('#label-link').attr('hidden', true);
                 $('#link').prop('type', 'hidden');
+                $('#content').attr('hidden', false);
+                $('#pdf_file').attr('hidden', false);
             } else {
                 $('#link').prop('type', 'text');
+                $('#content').attr('hidden', true);
+                $('#pdf_file').attr('hidden', true);
                 $('#label-link').removeAttr('hidden');
             }
         })

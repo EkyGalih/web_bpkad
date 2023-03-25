@@ -36,7 +36,7 @@
                                 <div class="col-lg-2">
                                     <a href="{{ route('ppid-kip.create') }}" class="btn btn-outline-primary btn-md"
                                         style="margin-top: 10px;">
-                                        <i class="bi bi-journal-plus"></i> Tambah Data
+                                        <i class="bi bi-plus-square"></i> Tambah Data
                                     </a>
                                 </div>
                             </div>
@@ -58,11 +58,26 @@
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
                                             <td>{{ $item->nama_informasi }}</td>
-                                            <td>Informasi {{ ucfirst($item->jenis_informasi) }}</td>
+                                            <td>
+                                                @if ($item->jenis_informasi == 'berkala')
+                                                    <span class="badge bg-info"><i class="bi bi-arrow-repeat"></i></span>
+                                                    {{ ucfirst($item->jenis_informasi) }}
+                                                @elseif ($item->jenis_informasi == 'dikecualikan')
+                                                    <span class="badge bg-danger"><i class="bi bi-eye-slash"></i></span>
+                                                    {{ ucfirst($item->jenis_informasi) }}
+                                                @elseif ($item->jenis_informasi == 'setiap saat')
+                                                    <span class="badge bg-warning"><i class="bi bi-stars"></i></span>
+                                                    {{ ucfirst($item->jenis_informasi) }}
+                                                @elseif ($item->jenis_informasi == 'serta merta')
+                                                    <span class="badge bg-secondary"><i
+                                                            class="bi bi-info-circle"></i></span>
+                                                    {{ ucfirst($item->jenis_informasi) }}
+                                                @endif
+                                            </td>
                                             <td><span
                                                     class="badge bg-{{ $item->jenis_file == 'link' ? 'secondary' : 'info' }}"><i
                                                         class="bi bi-{{ $item->jenis_file == 'link' ? 'link' : 'upload' }}"></i>
-                                                    {{ $item->jenis_file }}</span></td>
+                                                    {{ ucfirst($item->jenis_file) }}</span></td>
                                             <td><a href="#" class="btn btn-success btn-sm"><i
                                                         class="bi bi-download"></i> Download</a></td>
                                             <td>{{ Helpers::GetUser($item->upload_by) }}</td>

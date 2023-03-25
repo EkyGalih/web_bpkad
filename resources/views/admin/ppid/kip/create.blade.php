@@ -10,7 +10,7 @@
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('post-admin.index') }}">PPID</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('ppid-kip.index') }}">PPID</a></li>
                         <li class="breadcrumb-item active">Tambah Data Klasifikasi Informasi Publik</li>
                     </ol>
                 </nav>
@@ -21,7 +21,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="card-title">Tambah Data</div>
+                            <div class="card-title"><i class="bi bi-plus-square"></i> Tambah Data</div>
                             <hr />
                             <form action="{{ route('ppid-kip.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
@@ -68,8 +68,26 @@
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Files</label>
                                     <div class="col-sm-10">
-                                        <input id="upload_file" type="text" name="upload_files" class="form-control @error('upload_files') is-invalid @enderror">
+                                        <input id="upload_file" type="text" name="upload_files"
+                                            class="form-control @error('upload_files') is-invalid @enderror">
                                         @error('upload_files')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputText" class="col-sm-2 col-form-label">Waktu Upload</label>
+                                    <div class="col-sm-2">
+                                        <input id="date" type="date" name="date"
+                                            class="form-control @error('date') is-invalid @enderror">
+                                        @error('date')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input id="time" type="time" name="time"
+                                            class="form-control @error('time') is-invalid @enderror">
+                                        @error('time')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
@@ -79,7 +97,7 @@
                                         <button class="btn btn-outline-warning btn-md" style="float: right;" type="reset">
                                             <i class="bi bi-arrow-clockwise"></i> Reset
                                         </button>
-                                        <button class="btn btn-outline-success btn-md"
+                                        <button class="btn btn-success btn-md"
                                             style="float: right; margin-right: 2px;" type="submit">
                                             <i class="bi bi-save"></i> Simpan
                                         </button>

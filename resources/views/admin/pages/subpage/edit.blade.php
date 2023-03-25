@@ -28,13 +28,25 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="row mb-3">
+                                    <label for="inputText" class="col-sm-2 col-form-label">Jenis Link</label>
+                                    <div class="col-sm-10">
+                                        <select name="jenis_link" class="form-control" id="jenis_link">
+                                            <option value="non-link"
+                                                {{ $subpages->jenis_link == 'non-link' ? 'selected' : '' }}>Tanpa
+                                                Link</option>
+                                            <option value="link" {{ $subpages->jenis_link == 'link' ? 'selected' : '' }}>Link
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Judul</label>
                                     <div class="col-sm-10">
                                         <input type="text" name="title" class="form-control"
                                             value="{{ $subpages->title }}">
                                     </div>
                                 </div>
-                                <div class="row mb-3">
+                                <div class="row mb-3" id="content" {{ $subpages->jenis_link == 'link' ? 'hidden' : '' }}>
                                     <label for="inputText" class="col-sm-2 col-form-label"></label>
                                     <div class="col-sm-10">
                                         <textarea name="content" class="tinymce-editor">{{ $subpages->content }}</textarea><!-- End TinyMCE Editor -->
@@ -53,23 +65,10 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Jenis Link</label>
+                                <div class="row mb-3" id="link" {{ $subpages->jenis_link == 'link' ? '' : 'hidden' }}>
+                                    <label for="inputText" class="col-sm-2 col-form-label">Link</label>
                                     <div class="col-sm-10">
-                                        <select name="jenis_link" class="form-control" id="jenis_link">
-                                            <option value="non-link"
-                                                {{ $item->jenis_link == 'non-link' ? 'selected' : '' }}>Tanpa
-                                                Link</option>
-                                            <option value="link" {{ $item->jenis_link == 'link' ? 'selected' : '' }}>Link
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label" id="label-link"
-                                        hidden>Link</label>
-                                    <div class="col-sm-10">
-                                        <input type="{{ $item->link == null ? 'hidden' : '' }}" name="link"
+                                        <input type="text" name="link" value="{{ $subpages->link }}"
                                             class="form-control" id="link">
                                     </div>
                                 </div>
@@ -98,11 +97,11 @@
             var jenis_link = $('#jenis_link').val();
 
             if (jenis_link == 'non-link') {
-                $('#label-link').attr('hidden', true);
-                $('#link').prop('type', 'hidden');
+                $('#content').attr('hidden', false);
+                $('#link').attr('hidden', true);
             } else {
-                $('#link').prop('type', 'text');
-                $('#label-link').removeAttr('hidden');
+                $('#link').attr('hidden', false);
+                $('#content').attr('hidden', true);
             }
         })
     </script>

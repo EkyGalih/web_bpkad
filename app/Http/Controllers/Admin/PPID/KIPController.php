@@ -16,7 +16,7 @@ class KIPController extends Controller
      */
     public function index()
     {
-        $kip = KIP::get();
+        $kip = KIP::orderBy('created_at', 'DESC')->get();
 
         return view('admin.ppid.kip.index', compact('kip'));
     }
@@ -44,6 +44,8 @@ class KIPController extends Controller
             'jenis_informasi' => 'required',
             'jenis_file' => 'required',
             'upload_files' => 'required',
+            'date' => 'required',
+            'time' => 'required'
         ]);
 
         if ($request->jenis_file == 'link') {
@@ -53,6 +55,7 @@ class KIPController extends Controller
                 'jenis_file' => $request->jenis_file,
                 'upload_by' => Auth::user()->id,
                 'files' => $request->upload_files,
+                'created_at' => $request->date . ' ' . $request->time . ':' . date('s')
             ]);
         }
 
@@ -99,7 +102,8 @@ class KIPController extends Controller
                 'nama_informasi' => $request->nama_informasi,
                 'jenis_informasi' => $request->jenis_informasi,
                 'jenis_file' => $request->jenis_file,
-                'files' => $request->upload_files
+                'files' => $request->upload_files,
+                'created_at' => $request->date . ' ' . $request->time
             ]);
         }
 

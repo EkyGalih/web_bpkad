@@ -12,7 +12,7 @@ class KIP extends Model
 
     public $incrementing = false;
     protected $table = 'kip';
-    protected $guarded = ['created_at', 'updated_at'];
+    protected $guarded = ['updated_at'];
 
     public static function boot()
     {

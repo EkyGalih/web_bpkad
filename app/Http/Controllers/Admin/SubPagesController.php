@@ -42,42 +42,51 @@ class SubPagesController extends Controller
      */
     public function store(Request $request)
     {
-        $ext = array('png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG');
-        $pdf = $request->file('pdf_file');
+        if ($request->jenis_link == 'non-link') {
+            $ext = array('png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG');
+            $pdf = $request->file('pdf_file');
 
-        if ($pdf != null) {
-            $filename = md5($pdf->getClientOriginalName()) . '.' . $pdf->getClientOriginalExtension();
+            if ($pdf != null) {
+                $filename = md5($pdf->getClientOriginalName()) . '.' . $pdf->getClientOriginalExtension();
 
-            if (in_array($pdf->getClientOriginalExtension(), $ext)) {
-                if ($pdf->getSize() <= 5000000) {
-                    $pdf->move('uploads/pages/subpage/', $filename);
-                    $request->pdf_file = 'uploads/pages/subpage/' . $filename;
+                if (in_array($pdf->getClientOriginalExtension(), $ext)) {
+                    if ($pdf->getSize() <= 5000000) {
+                        $pdf->move('uploads/pages/subpage/', $filename);
+                        $request->pdf_file = 'uploads/pages/subpage/' . $filename;
+                    } else {
+                        return redirect()->back()->with(['warning_size' => 'Ukuran file melebihi 5MB!']);
+                    }
                 } else {
-                    return redirect()->back()->with(['warning_size' => 'Ukuran file melebihi 5MB!']);
+                    return redirect()->back()->with(['warning_ext' => 'Ektensi File harus format PNG, JPG atau JPEG!']);
                 }
+
+                SubPages::create([
+                    'title' => $request->title,
+                    'content' => $request->content,
+                    'pages_type_id' => '1',
+                    'pdf_file' => $request->pdf_file,
+                    'create_by_id' => Auth::user()->id,
+                    'sub_pages_id' => $request->sub_pages_id
+                ]);
             } else {
-                return redirect()->back()->with(['warning_ext' => 'Ektensi File harus format PNG, JPG atau JPEG!']);
+                SubPages::create([
+                    'title' => $request->title,
+                    'content' => $request->content,
+                    'pages_type_id' => '1',
+                    'create_by_id' => Auth::user()->id,
+                    'sub_pages_id' => $request->sub_pages_id
+                ]);
             }
-
-            SubPages::create([
-                'title' => $request->title,
-                'content' => $request->content,
-                'pages_type_id' => '1',
-                'pdf_file' => $request->pdf_file,
-                'create_by_id' => Auth::user()->id,
-                'sub_pages_id' => $request->sub_pages_id
-            ]);
-
             return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Pages berhasil ditambahkan!']);
-        } else {
+        } elseif ($request->jenis_link == 'link') {
             SubPages::create([
+                'jenis_link' => $request->jenis_link,
+                'link' => $request->link,
                 'title' => $request->title,
-                'content' => $request->content,
                 'pages_type_id' => '1',
                 'create_by_id' => Auth::user()->id,
                 'sub_pages_id' => $request->sub_pages_id
             ]);
-
             return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Pages berhasil ditambahkan!']);
         }
     }
