@@ -310,17 +310,20 @@
                             <h5 class="card-title">Recent Activity <span>| Today</span></h5>
 
                             <div class="activity">
+                                @foreach ($recents as $recent)
+                                    <div class="activity-item d-flex">
+                                        <div class="activite-label">{{ Helpers::RangeTime($recent->created_at) }}</div>
+                                        @if ($recent->jenis == 'post')
+                                            @php $badge = 'primary' @endphp
+                                        @endif
+                                        <i class='bi bi-circle-fill activity-badge text-{{ $badge }} align-self-start'></i>
+                                        <div class="activity-content">
+                                            {{ $recent->nama }} <strong>{{ $recent->activity }}</strong> <a href="#" class="fw-bold text-dark">{{ $recent->title }}</a>
+                                        </div>
+                                    </div><!-- End activity item-->
+                                @endforeach
 
-                                <div class="activity-item d-flex">
-                                    <div class="activite-label">32 min</div>
-                                    <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-                                    <div class="activity-content">
-                                        Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a>
-                                        beatae
-                                    </div>
-                                </div><!-- End activity item-->
-
-                                <div class="activity-item d-flex">
+                                {{-- <div class="activity-item d-flex">
                                     <div class="activite-label">56 min</div>
                                     <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
                                     <div class="activity-content">
@@ -359,7 +362,7 @@
                                     <div class="activity-content">
                                         Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
                                     </div>
-                                </div><!-- End activity item-->
+                                </div><!-- End activity item--> --}}
 
                             </div>
 

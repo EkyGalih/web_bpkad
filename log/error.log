@@ -65,3 +65,4 @@
 [Mon Mar 27 13:14:34.339241 2023] [php:error] [pid 1513] [client 127.0.0.1:37692] PHP Parse error:  syntax error, unexpected token "return" in /var/www/html/bpkad/app/Helpers/Helpers.php on line 220, referer: http://web.bpkad.test/admin
 [Mon Mar 27 13:14:37.365448 2023] [php:error] [pid 1515] [client 127.0.0.1:37708] PHP Parse error:  syntax error, unexpected token "return" in /var/www/html/bpkad/app/Helpers/Helpers.php on line 220, referer: http://web.bpkad.test/admin
 [Mon Mar 27 13:20:34.121346 2023] [php:error] [pid 7349] [client 127.0.0.1:44468] PHP Fatal error:  Cannot redeclare App\\Helpers\\Helpers::_reportYearsPost() in /var/www/html/bpkad/app/Helpers/Helpers.php on line 227, referer: http://web.bpkad.test/admin
+[Mon Mar 27 15:45:21.895112 2023] [php:error] [pid 1519] [client 127.0.0.1:59918] PHP Parse error:  syntax error, unexpected token "}", expecting "(" in /var/www/html/bpkad/app/Helpers/Helpers.php on line 264, referer: http://web.bpkad.test/admin

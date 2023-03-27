@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Posts;
 use App\Models\PostsCategory;
+use App\Models\Recent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Webpatser\Uuid\Uuid;
 
 class PostController extends Controller
 {
@@ -47,6 +50,7 @@ class PostController extends Controller
         $foto       = $request->file('foto_berita');
         $ext        = array('png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG');
         $filename   = 'eky-' . md5($foto->getClientOriginalName()) . '.' . $foto->getClientOriginalExtension();
+        $id         = (string)Uuid::generate(4);
 
         if (in_array($foto->getClientOriginalExtension(), $ext)) {
             if ($foto->getSize() <= 5000000) {
@@ -55,6 +59,7 @@ class PostController extends Controller
             }
         }
         Posts::create([
+            'id' => $id,
             'title' => $request->title,
             'content' => $request->content,
             'content_type_id' => '1',
@@ -62,6 +67,8 @@ class PostController extends Controller
             'users_id' => Auth::user()->id,
             'posts_category_id' => $request->posts_category_id
         ]);
+
+        Helpers::_recentAdd($id, 'membuat posting', 'post');
 
         return redirect()->route('post-admin.index')->with(['success' => 'Posting berhasil diupload!']);
     }
@@ -104,7 +111,7 @@ class PostController extends Controller
                     $request->foto_berita = 'uploads/berita/' . $filename;
                 }
             }
-           $posts->update([
+            $posts->update([
                 'title' => $request->title,
                 'content' => $request->content,
                 'content_type_id' => '1',

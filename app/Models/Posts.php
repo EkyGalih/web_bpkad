@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Webpatser\Uuid\Uuid;
+// use Webpatser\Uuid\Uuid;
 
 class Posts extends Model
 {
@@ -14,14 +14,14 @@ class Posts extends Model
     protected $table = 'posts';
     protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
 
-    public static function boot()
-    {
-        parent::boot();
+    // public static function boot()
+    // {
+    //     parent::boot();
 
-        static::creating(function ($model) {
-            $model->id = (string)Uuid::generate(4);
-        });
-    }
+    //     static::creating(function ($model) {
+    //         $model->id = (string)Uuid::generate(4);
+    //     });
+    // }
 
     public function users()
     {

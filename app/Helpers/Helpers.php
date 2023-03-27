@@ -11,6 +11,7 @@ use App\Models\PagesType;
 use App\Models\Permohonan;
 use App\Models\PostComment;
 use App\Models\Posts;
+use App\Models\Recent;
 use App\Models\SubPages;
 use App\Models\User;
 use DateTime;
@@ -258,5 +259,15 @@ class Helpers
         array_push($data, $count5);
 
         return $data;
+    }
+
+    public static function _recentAdd($param1, $param2, $param3)
+    {
+        Recent::create([
+            'user_id' => Auth::user()->id,
+            'uuid_activity' => $param1,
+            'activity' => $param2,
+            'jenis' => $param3
+        ]);
     }
 }
