@@ -96,7 +96,7 @@
                                 <div>
                                     <h4>{{ $item->nama }}</h4>
                                     <p>{{ $item->informasi_diminta }}</p>
-                                    <p>{{ Helpers::RangeTime($item->created_at) }}</p>
+                                    <p>{{ Helpers::RangeTime($item->created_at) }} </p>
                                 </div>
                             </a>
                         </li>

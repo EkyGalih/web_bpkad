@@ -10,6 +10,7 @@ use App\Models\Pages;
 use App\Models\PagesType;
 use App\Models\Permohonan;
 use App\Models\PostComment;
+use App\Models\Posts;
 use App\Models\SubPages;
 use App\Models\User;
 use DateTime;
@@ -74,7 +75,8 @@ class Helpers
 
     ### DATA FUNCTION ###
 
-    public static function __address(){
+    public static function __address()
+    {
         return Address::get()->last();
     }
 
@@ -86,7 +88,7 @@ class Helpers
         $phone1 = substr($phone, 0, 3);
         $phone2 = substr($phone, 3, 4);
         $phone3 = substr($phone, 7, 4);
-        return '(+62) '.$phone1.'-'.$phone2.'-'.$phone3;
+        return '(+62) ' . $phone1 . '-' . $phone2 . '-' . $phone3;
     }
 
     public static function GetDate($param)
@@ -133,32 +135,32 @@ class Helpers
 
     public static function RangeTime($param)
     {
-        $param2 = new DateTime();
-        $param3 = $param->diff($param2);
+        $param3 = date_diff(new DateTime($param), new DateTime());
 
-        if ($param3->h == 0 && $param3->i == 0) {
-            $param4 = $param3->s . ' sec ago';
+        if ($param3->i == 0) {
+            $param4 = $param3->s . 's ago';
             return $param4;
-        } elseif($param3->i != 0) {
-            $param4 = $param3->i . ' min ago';
+        } elseif ($param3->h == 0) {
+            $param4 = $param3->i . 'min ago';
             return $param4;
-        } elseif ($param3->h != 0) {
-            $param4 = $param3->h . ' hrs ago';
+        } elseif ($param3->days == 0) {
+            $param4 = $param3->h . 'h ago';
             return $param4;
-        } elseif ($param3->d != 0) {
-            $param4 = $param3->d . ' day ago';
+        } elseif ($param3->m == 0) {
+            $param4 = $param3->d . 'd ago';
             return $param4;
-        } elseif ($param3->m != 0) {
-            $param4 = $param3->m . ' mon ago';
+        } elseif ($param3->y == 0) {
+            $param4 = $param3->m . 'm ago';
             return $param4;
         } elseif ($param3->y != 0) {
-            $param4 = $param3->y . ' years ago';
+            $param4 = $param3->y . 'y ago';
             return $param4;
         } else {
             $param4 = 0;
             return $param4;
         }
     }
+
 
     public static function appConverter($param)
     {
@@ -202,5 +204,59 @@ class Helpers
     public static function _getPermohonan()
     {
         return Permohonan::where('status', 'proses')->limit(4)->get();
+    }
+
+    public static function _reportYearsPost($param)
+    {
+        $data = array();
+
+        $count1 = Posts::where('created_at', 'LIKE', $param.'%')->count();
+        array_push($data, $count1);
+        $count2 = Posts::where('created_at', 'LIKE', ($param-1).'%')->count();
+        array_push($data, $count2);
+        $count3 = Posts::where('created_at', 'LIKE', ($param-2).'%')->count();
+        array_push($data, $count3);
+        $count4 = Posts::where('created_at', 'LIKE', ($param-3).'%')->count();
+        array_push($data, $count4);
+        $count5 = Posts::where('created_at', 'LIKE', ($param-4).'%')->count();
+        array_push($data, $count5);
+
+        return $data;
+    }
+
+    public static function _reportYearsLaporan($param)
+    {
+        $data = array();
+
+        $count1 = Laporan::where('created_at', 'LIKE', $param.'%')->count();
+        array_push($data, $count1);
+        $count2 = Laporan::where('created_at', 'LIKE', ($param-1).'%')->count();
+        array_push($data, $count2);
+        $count3 = Laporan::where('created_at', 'LIKE', ($param-2).'%')->count();
+        array_push($data, $count3);
+        $count4 = Laporan::where('created_at', 'LIKE', ($param-3).'%')->count();
+        array_push($data, $count4);
+        $count5 = Laporan::where('created_at', 'LIKE', ($param-4).'%')->count();
+        array_push($data, $count5);
+
+        return $data;
+    }
+
+    public static function _reportYearsPermohonan($param)
+    {
+        $data = array();
+
+        $count1 = Permohonan::where('created_at', 'LIKE', $param.'%')->count();
+        array_push($data, $count1);
+        $count2 = Permohonan::where('created_at', 'LIKE', ($param-1).'%')->count();
+        array_push($data, $count2);
+        $count3 = Permohonan::where('created_at', 'LIKE', ($param-2).'%')->count();
+        array_push($data, $count3);
+        $count4 = Permohonan::where('created_at', 'LIKE', ($param-3).'%')->count();
+        array_push($data, $count4);
+        $count5 = Permohonan::where('created_at', 'LIKE', ($param-4).'%')->count();
+        array_push($data, $count5);
+
+        return $data;
     }
 }
