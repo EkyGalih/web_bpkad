@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Models\Address;
 use App\Models\ContentType;
+use App\Models\KIP;
 use App\Models\Laporan;
 use App\Models\Menu;
 use App\Models\Pages;
@@ -269,5 +270,36 @@ class Helpers
             'activity' => $param2,
             'jenis' => $param3
         ]);
+    }
+
+    public static function _KipPPID($param)
+    {
+        $KIP = KIP::where('jenis_informasi', '=', $param)->get();
+
+        $data = [
+            'tahun' => array(),
+            'data' => array()
+        ];
+        $tahun = [];
+
+        foreach($KIP as $k => $val) {
+            if (!isset($tahun[$val->created_at])) {
+                $tahun[$val->created_at] = [];
+            }
+        }
+        $c_sort = count($tahun);
+        $i = 0;
+        if (is_array($tahun) && ($c_sort > 0)) {
+            foreach ($tahun as $k => $v) {
+                array_push($data['tahun'], $k);
+                $data['data'][$k] = array(
+                    'tahun' => $k,
+                    'kip' => array()
+                );
+            }
+            foreach ($KIP as $key => $val) {
+                
+            }
+        }
     }
 }

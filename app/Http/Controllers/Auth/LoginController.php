@@ -31,7 +31,6 @@ class LoginController extends Controller
 
     public function login(LoginRequest $request)
     {
-        // dd(Hash::make('bpk4dntb'));
         $validation = $request->validated();
 
         if (filter_var($request->email, FILTER_VALIDATE_EMAIL)) {

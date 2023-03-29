@@ -78,16 +78,20 @@
                                             <div class="input-group has-validation">
                                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
                                                 <input type="text" name="email" class="form-control" id="email"
-                                                    required>
+                                                    required autofocus>
                                                 <div class="invalid-feedback">Silahkan masukkan username anda.</div>
                                             </div>
                                         </div>
 
                                         <div class="col-12">
                                             <label for="yourPassword" class="form-label">Password</label>
-                                            <input type="password" name="password" class="form-control" id="password"
-                                                required>
-                                            <div class="invalid-feedback">silahkan masukkan password anda!</div>
+                                            <div class="input-group has-validation">
+                                                <span class="input-group-text" id="inputGroupPrepend"><i
+                                                        class="bi bi-lock"></i></span>
+                                                <input type="password" name="password" class="form-control"
+                                                    id="password" required>
+                                                <div class="invalid-feedback">silahkan masukkan password anda!</div>
+                                            </div>
                                         </div>
 
                                         <div class="col-12">
@@ -98,7 +102,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                            <button class="btn btn-primary w-100" type="submit">Login</button>
+                                            <button class="btn btn-primary w-100" type="submit"><i class="bi bi-sign-in"></i> Login</button>
                                         </div>
                                     </form>
 
