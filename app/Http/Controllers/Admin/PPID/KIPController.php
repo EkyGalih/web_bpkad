@@ -45,7 +45,8 @@ class KIPController extends Controller
             'jenis_file' => 'required',
             'upload_files' => 'required',
             'date' => 'required',
-            'time' => 'required'
+            'time' => 'required',
+            'tahun' => 'required'
         ]);
 
         if ($request->jenis_file == 'link') {
@@ -55,11 +56,12 @@ class KIPController extends Controller
                 'jenis_file' => $request->jenis_file,
                 'upload_by' => Auth::user()->id,
                 'files' => $request->upload_files,
+                'tahun' => $request->tahun,
                 'created_at' => $request->date . ' ' . $request->time . ':' . date('s')
             ]);
         }
 
-        return redirect()->route('ppid-kip.index')->with(['success' => 'Data informasi berhasil disimpan!']);
+        return redirect()->route('ppid-kip')->with(['success' => 'Data informasi berhasil disimpan!']);
     }
 
     /**
@@ -103,6 +105,7 @@ class KIPController extends Controller
                 'jenis_informasi' => $request->jenis_informasi,
                 'jenis_file' => $request->jenis_file,
                 'files' => $request->upload_files,
+                'tahun' => $request->tahun,
                 'created_at' => $request->date . ' ' . $request->time
             ]);
         }

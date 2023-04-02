@@ -63,6 +63,27 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
+                                    <label for="inputText" class="col-sm-2 col-form-label">Tahun</label>
+                                    <div class="col-sm-10">
+                                        @php
+                                            $years = Helpers::_GetYears();
+                                        @endphp
+                                        <select name="tahun" class="form-control @error('tahun') is-invalid @enderror">
+                                            <option value="">--Pilih--</option>
+                                            @foreach ($years as $tahun)
+                                                <option value="{{ $tahun }}"
+                                                    {{ $kip->tahun == $tahun ? 'selected' : '' }}>{{ $tahun }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('tahun')
+                                            <div class="text-danger">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Jenis File</label>
                                     <div class="col-sm-10">
                                         <select name="jenis_file"
@@ -109,11 +130,12 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-sm-12">
-                                        <a href="{{ route('ppid-kip.index') }}" class="btn btn-secondary btn-md" style="float: right;">
+                                        <a href="{{ route('ppid-kip.index') }}" class="btn btn-secondary btn-md"
+                                            style="float: right;">
                                             <i class="bi bi-backspace"></i> Kembali
                                         </a>
-                                        <button class="btn btn-success btn-md"
-                                            style="float: right; margin-right: 2px;" type="submit">
+                                        <button class="btn btn-success btn-md" style="float: right; margin-right: 2px;"
+                                            type="submit">
                                             <i class="bi bi-save"></i> Simpan
                                         </button>
                                     </div>

@@ -39,7 +39,7 @@
                                 </div>
 
                                 <div class="card-body">
-                                    <h5 class="card-title">Post <span>| This Month</span></h5>
+                                    <h5 class="card-title">Post <span>| Bulan Ini</span></h5>
 
                                     <div class="d-flex align-items-center">
                                         <div
@@ -77,7 +77,7 @@
                                 </div>
 
                                 <div class="card-body">
-                                    <h5 class="card-title">Laporan <span>| This Month</span></h5>
+                                    <h5 class="card-title">Laporan <span>| Bulan Ini</span></h5>
 
                                     <div class="d-flex align-items-center">
                                         <div
@@ -116,7 +116,7 @@
                                 </div>
 
                                 <div class="card-body">
-                                    <h5 class="card-title">Permohonan <span>| This Month</span></h5>
+                                    <h5 class="card-title">Permohonan <span>| Bulan Ini</span></h5>
 
                                     <div class="d-flex align-items-center">
                                         <div
@@ -155,17 +155,16 @@
                                 </div>
 
                                 <div class="card-body">
-                                    <h5 class="card-title">Reports <span>/Years</span></h5>
+                                    <h5 class="card-title">Postingan <span>/Triwulan</span></h5>
 
                                     <!-- Line Chart -->
                                     <div id="reportsChart"></div>
                                     @php
-                                        $_pos = Helpers::_reportYearsPost(date('Y'));
-                                        $_lap = Helpers::_reportYearsLaporan(date('Y'));
-                                        $_pem = Helpers::_reportYearsPermohonan(date('Y'));
-                                        $data1 = implode(',', $_pos);
-                                        $data2 = implode(',', $_lap);
-                                        $data3 = implode(',', $_pem);
+                                        $_post = Helpers::_PostMonth(date('Y-m'));
+                                        $data = implode(',', $_post);
+                                        $month1 = Helpers::NameMonth(date('m'));
+                                        $month2 = Helpers::NameMonth(date('m') - 1);
+                                        $month3 = Helpers::NameMonth(date('m') - 2);
                                     @endphp
 
                                     <script>
@@ -174,18 +173,8 @@
                                                 series: [{
                                                     name: 'Postingan',
                                                     data: [
-                                                        {{ $data1 }}
+                                                        {{ $data }}
                                                     ],
-                                                }, {
-                                                    name: 'Permohonan',
-                                                    data: [
-                                                        {{ $data2 }}
-                                                    ]
-                                                }, {
-                                                    name: 'Laporan',
-                                                    data: [
-                                                        {{ $data3 }}
-                                                    ]
                                                 }],
                                                 chart: {
                                                     height: 350,
@@ -197,7 +186,7 @@
                                                 markers: {
                                                     size: 4
                                                 },
-                                                colors: ['#4154f1', '#2eca6a', '#ff771d'],
+                                                colors: ['#4154f1'],
                                                 fill: {
                                                     type: "gradient",
                                                     gradient: {
@@ -216,7 +205,7 @@
                                                 },
                                                 xaxis: {
                                                     type: 'years',
-                                                    categories: ["2019", "2020", "2021", "2022", "2023"]
+                                                    categories: ["{{ $month1 }}", "{{ $month2 }}", "{{ $month3 }}"]
                                                 },
                                                 tooltip: {
                                                     x: {
@@ -267,8 +256,8 @@
                                         <tbody>
                                             @foreach ($lap as $report)
                                                 <tr>
-                                                    <th scope="row"><a href="#">{{ $report->kode_laporan }}</a>
-                                                    </th>
+                                                    <td scope="row"><a href="#">{{ $report->kode_laporan }}</a>
+                                                    </td>
                                                     <td>{{ $report->judul_laporan }}</td>
                                                     <td>{{ $report->nama_pelapor }}</td>
                                                     <td class="fw-bold">
@@ -276,6 +265,11 @@
                                                     <td>{{ Helpers::GetDate($report->created_at) }}</td>
                                                 </tr>
                                             @endforeach
+                                            @if ($lap->isEmpty())
+                                                <tr>
+                                                    <td colspan="5" style="text-align: center;">Tidak Ada Aktivitas</td>
+                                                </tr>
+                                            @endif
                                         </tbody>
                                     </table>
 
@@ -307,7 +301,7 @@
                         </div>
 
                         <div class="card-body">
-                            <h5 class="card-title">Recent Activity <span>| Today</span></h5>
+                            <h5 class="card-title">Aktivitas <span>| Hari Ini</span></h5>
 
                             <div class="activity">
                                 @foreach ($recents as $recent)
@@ -316,12 +310,17 @@
                                         @if ($recent->jenis == 'post')
                                             @php $badge = 'primary' @endphp
                                         @endif
-                                        <i class='bi bi-circle-fill activity-badge text-{{ $badge }} align-self-start'></i>
+                                        <i
+                                            class='bi bi-circle-fill activity-badge text-{{ $badge }} align-self-start'></i>
                                         <div class="activity-content">
-                                            {{ $recent->nama }} <strong>{{ $recent->activity }}</strong> <a href="#" class="fw-bold text-dark">{{ $recent->title }}</a>
+                                            {{ $recent->nama }} <strong>{{ $recent->activity }}</strong> <a
+                                                href="#" class="fw-bold text-dark">{{ $recent->title }}</a>
                                         </div>
                                     </div><!-- End activity item-->
                                 @endforeach
+                                @if ($recents->isEmpty())
+                                    <p class="title" style="text-align:center;">Tidak Ada Aktivitas</p>
+                                @endif
 
                                 {{-- <div class="activity-item d-flex">
                                     <div class="activite-label">56 min</div>

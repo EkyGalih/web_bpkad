@@ -50,4 +50,5 @@ Route::group(['prefix' => 'Permohonan_dan_Pengaduan'], function () {
 
 Route::group(['prefix' => 'PPID'], function() {
     Route::get('/', [PpidKipController::class, 'index'])->name('ppid-kip');
+    Route::get('search/{query?}', [PpidKipController::class, 'search'])->name('ppid-kip.search');
 });

@@ -119,8 +119,8 @@ class PostController extends Controller
                 'users_id' => Auth::user()->id,
                 'posts_category_id' => $request->posts_category_id
             ]);
+            Helpers::_recentAdd($id, 'mengubah posting', 'post');
         } elseif ($foto == null) {
-            // dd('null');
             $posts->update([
                 'title' => $request->title,
                 'content' => $request->content,
@@ -129,6 +129,7 @@ class PostController extends Controller
                 'users_id' => Auth::user()->id,
                 'posts_category_id' => $request->posts_category_id
             ]);
+            Helpers::_recentAdd($id, 'mengubah posting', 'post');
         }
 
         return redirect()->route('post-admin.index')->with(['success' => 'Posting berhasil diupload!']);

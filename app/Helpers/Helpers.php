@@ -126,6 +126,18 @@ class Helpers
         return $date;
     }
 
+    public static function _GetYears()
+    {
+        $years = [];
+
+        for ($i=0; $i < 10; $i++) {
+            $year  = date('Y') - $i;
+            array_push($years, $year);
+        }
+
+        return $years;
+    }
+
     public static function GetTime($param)
     {
         $explode    = explode(" ", $param);
@@ -133,6 +145,52 @@ class Helpers
         $time       = implode(":", $times);
 
         return date("g:i A", strtotime($time));
+    }
+
+    public static function NameMonth($param)
+    {
+        switch ($param) {
+            case '01':
+                $month = 'Januari';
+                break;
+            case '02':
+                $month = 'Februari';
+                break;
+            case '03':
+                $month = 'Maret';
+                break;
+            case '04':
+                $month = 'April';
+                break;
+            case '05':
+                $month = 'Mei';
+                break;
+            case '06':
+                $month = 'Juni';
+                break;
+            case '07':
+                $month = 'Juli';
+                break;
+            case '08':
+                $month = 'Agustus';
+                break;
+            case '09':
+                $month = 'September';
+                break;
+            case '10':
+                $month = 'Oktober';
+                break;
+            case '11':
+                $month = 'November';
+                break;
+            case '11':
+                $month = 'Desember';
+                break;
+            default:
+                $month = '';
+        }
+
+        return $month;
     }
 
     public static function RangeTime($param)
@@ -208,56 +266,29 @@ class Helpers
         return Permohonan::where('status', 'proses')->limit(4)->get();
     }
 
-    public static function _reportYearsPost($param)
+    public static function _PostMonth($param)
     {
-        $data = array();
+        $data       = array();
+        $explode    = explode("-", $param);
+        $month1     = $explode[1]-1;
+        $month2     = $explode[1]-2;
+        if (strlen($month1) == 1) {
+            $query1 = $explode[0] .'-0'. $month1;
+        } elseif(strlen($month1) > 1) {
+            $query1 = $explode[0] .'-'. $month1;
+        }
+        if (strlen($month2) == 1) {
+            $query2 = $explode[0] .'-0'. $month2;
+        } elseif(strlen($month2) > 1) {
+            $query2 = $explode[0] .'-'. $month2;
+        }
 
-        $count1 = Posts::where('created_at', 'LIKE', $param.'%')->count();
+        $count1 = Posts::where('created_at', 'LIKE', $param . '%')->count();
         array_push($data, $count1);
-        $count2 = Posts::where('created_at', 'LIKE', ($param-1).'%')->count();
+        $count2 = Posts::where('created_at', 'LIKE', $query1 . '%')->count();
         array_push($data, $count2);
-        $count3 = Posts::where('created_at', 'LIKE', ($param-2).'%')->count();
+        $count3 = Posts::where('created_at', 'LIKE', $query2 . '%')->count();
         array_push($data, $count3);
-        $count4 = Posts::where('created_at', 'LIKE', ($param-3).'%')->count();
-        array_push($data, $count4);
-        $count5 = Posts::where('created_at', 'LIKE', ($param-4).'%')->count();
-        array_push($data, $count5);
-
-        return $data;
-    }
-
-    public static function _reportYearsLaporan($param)
-    {
-        $data = array();
-
-        $count1 = Laporan::where('created_at', 'LIKE', $param.'%')->count();
-        array_push($data, $count1);
-        $count2 = Laporan::where('created_at', 'LIKE', ($param-1).'%')->count();
-        array_push($data, $count2);
-        $count3 = Laporan::where('created_at', 'LIKE', ($param-2).'%')->count();
-        array_push($data, $count3);
-        $count4 = Laporan::where('created_at', 'LIKE', ($param-3).'%')->count();
-        array_push($data, $count4);
-        $count5 = Laporan::where('created_at', 'LIKE', ($param-4).'%')->count();
-        array_push($data, $count5);
-
-        return $data;
-    }
-
-    public static function _reportYearsPermohonan($param)
-    {
-        $data = array();
-
-        $count1 = Permohonan::where('created_at', 'LIKE', $param.'%')->count();
-        array_push($data, $count1);
-        $count2 = Permohonan::where('created_at', 'LIKE', ($param-1).'%')->count();
-        array_push($data, $count2);
-        $count3 = Permohonan::where('created_at', 'LIKE', ($param-2).'%')->count();
-        array_push($data, $count3);
-        $count4 = Permohonan::where('created_at', 'LIKE', ($param-3).'%')->count();
-        array_push($data, $count4);
-        $count5 = Permohonan::where('created_at', 'LIKE', ($param-4).'%')->count();
-        array_push($data, $count5);
 
         return $data;
     }
@@ -274,7 +305,7 @@ class Helpers
 
     public static function _KipPPID($param)
     {
-        $KIP = KIP::where('jenis_informasi', '=', $param)->get();
+        $KIP = KIP::where('jenis_informasi', '=', $param)->orderBy('tahun', 'DESC')->get();
 
         $data = [
             'tahun' => array(),
@@ -282,9 +313,9 @@ class Helpers
         ];
         $tahun = [];
 
-        foreach($KIP as $k => $val) {
-            if (!isset($tahun[$val->created_at])) {
-                $tahun[$val->created_at] = [];
+        foreach ($KIP as $k => $val) {
+            if (!isset($tahun[$val->tahun])) {
+                $tahun[$val->tahun] = [];
             }
         }
         $c_sort = count($tahun);
@@ -298,8 +329,28 @@ class Helpers
                 );
             }
             foreach ($KIP as $key => $val) {
-                
+                if (in_array($val->tahun, $data['tahun'])) {
+                    if (!isset($data['data'][$val->tahun]['kip'])) {
+                        $data['data'][$val->tahun]['kip'] = [
+                            'nama_informasi' => $val->nama_informasi,
+                            'jenis_informasi' => $val->jenis_informasi,
+                            'jenis_file' => $val->jenis_file,
+                            'files' => $val->files,
+                            'created_at' => $val->created_at
+                        ];
+                    } else {
+                        array_push($data['data'][$val->tahun]['kip'], [
+                            'nama_informasi' => $val->nama_informasi,
+                            'jenis_informasi' => $val->jenis_informasi,
+                            'jenis_file' => $val->jenis_file,
+                            'files' => $val->files,
+                            'created_at' => $val->created_at
+                        ]);
+                    }
+                }
             }
         }
+        $kip = $data['data'];
+        return $kip;
     }
 }

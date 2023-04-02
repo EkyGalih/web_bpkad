@@ -52,6 +52,25 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
+                                    <label for="inputText" class="col-sm-2 col-form-label">Tahun</label>
+                                    <div class="col-sm-10">
+                                        @php
+                                            $years = Helpers::_GetYears();
+                                        @endphp
+                                        <select name="tahun" class="form-control @error('tahun') is-invalid @enderror">
+                                            <option value="">--Pilih--</option>
+                                            @foreach ($years as $tahun)
+                                                <option value="{{ $tahun }}">{{ $tahun }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('tahun')
+                                            <div class="text-danger">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Jenis File</label>
                                     <div class="col-sm-10">
                                         <select name="jenis_file"
