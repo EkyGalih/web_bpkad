@@ -3,16 +3,24 @@
 namespace App\Helpers;
 
 use App\Models\Address;
+use App\Models\Apps;
+use App\Models\Assets;
+use App\Models\Bender;
 use App\Models\ContentType;
+use App\Models\Galery;
 use App\Models\KIP;
 use App\Models\Laporan;
+use App\Models\Links;
 use App\Models\Menu;
 use App\Models\Pages;
 use App\Models\PagesType;
 use App\Models\Permohonan;
 use App\Models\PostComment;
 use App\Models\Posts;
+use App\Models\PowerPoint;
 use App\Models\Recent;
+use App\Models\Slide;
+use App\Models\Social;
 use App\Models\SubPages;
 use App\Models\User;
 use DateTime;
@@ -130,7 +138,7 @@ class Helpers
     {
         $years = [];
 
-        for ($i=0; $i < 10; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $year  = date('Y') - $i;
             array_push($years, $year);
         }
@@ -270,17 +278,17 @@ class Helpers
     {
         $data       = array();
         $explode    = explode("-", $param);
-        $month1     = $explode[1]-1;
-        $month2     = $explode[1]-2;
+        $month1     = $explode[1] - 1;
+        $month2     = $explode[1] - 2;
         if (strlen($month1) == 1) {
-            $query1 = $explode[0] .'-0'. $month1;
-        } elseif(strlen($month1) > 1) {
-            $query1 = $explode[0] .'-'. $month1;
+            $query1 = $explode[0] . '-0' . $month1;
+        } elseif (strlen($month1) > 1) {
+            $query1 = $explode[0] . '-' . $month1;
         }
         if (strlen($month2) == 1) {
-            $query2 = $explode[0] .'-0'. $month2;
-        } elseif(strlen($month2) > 1) {
-            $query2 = $explode[0] .'-'. $month2;
+            $query2 = $explode[0] . '-0' . $month2;
+        } elseif (strlen($month2) > 1) {
+            $query2 = $explode[0] . '-' . $month2;
         }
 
         $count1 = Posts::where('created_at', 'LIKE', $param . '%')->count();
@@ -295,12 +303,77 @@ class Helpers
 
     public static function _recentAdd($param1, $param2, $param3)
     {
+
         Recent::create([
             'user_id' => Auth::user()->id,
             'uuid_activity' => $param1,
             'activity' => $param2,
             'jenis' => $param3
         ]);
+    }
+
+    public static function _recentShow($jenis, $uuid)
+    {
+        switch ($jenis) {
+            case 'post':
+                $data = Posts::where('id', '=', $uuid)->select('title')->first();
+                break;
+            case 'pages':
+                $data = Pages::where('id', '=', $uuid)->select('title')->first();
+                break;
+            case 'sub_pages':
+                $data = SubPages::where('id', '=', $uuid)->select('title')->first();
+                break;
+            case 'assets':
+                $data = Assets::where('id', '=', $uuid)->select('name')->first();
+                break;
+            case 'transparansi':
+                $data = User::where('id', '=', $uuid)->select('nama')->first();
+                break;
+            case 'kip':
+                $data = KIP::where('id', '=', $uuid)->select('nama_informasi')->first();
+                break;
+            case 'galery':
+                $data = Galery::where('id', '=', $uuid)->select('name')->first();
+                break;
+            case 'slider':
+                $data = Slide::where('id', '=', $uuid)->select('nama_slide')->first();
+                break;
+            case 'powerpoint':
+                $data = PowerPoint::where('id', '=', $uuid)->select('element')->first();
+                break;
+            case 'bender':
+                $data = Bender::where('id', '=', $uuid)->select('url')->first();
+                break;
+            case 'menu':
+                $data = Menu::where('id', '=', $uuid)->select('name')->first();
+                break;
+            case 'social':
+                $data = Social::where('id', '=', $uuid)->select('whatsapp', 'twitter', 'facebook', 'instagram', 'youtube')->first();
+                break;
+            case 'link':
+                $data = Links::where('id', '=', $uuid)->select('name')->first();
+                break;
+            case 'address':
+                $data = Address::where('id', '=', $uuid)->select('address')->first();
+                break;
+            case 'apps':
+                $data = Apps::where('id', '=', $uuid)->select('name')->first();
+                break;
+            case 'laporan':
+                $data = Laporan::where('id', '=', $uuid)->select('judul_laporan')->first();
+                break;
+            case 'permohonan':
+                $data = Permohonan::where('id', '=', $uuid)->select('kode_pemohon')->first();
+                break;
+            case 'users':
+                $data = User::where('id', '=', $uuid)->select('nama')->first();
+                break;
+            default:
+                $data = '';
+        }
+
+        return $data->nama;
     }
 
     public static function _KipPPID($param)

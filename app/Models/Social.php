@@ -22,4 +22,9 @@ class Social extends Model
             $model->id =  (string)Uuid::generate(4);
         });
     }
+
+    public function User()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

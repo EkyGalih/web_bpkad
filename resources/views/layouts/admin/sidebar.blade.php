@@ -141,6 +141,13 @@
                 </li>
             </ul>
         </li><!-- End F.A.Q Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('users') }}">
+                <i class="bi bi-people-fill"></i>
+                <span>Users</span>
+            </a>
+        </li>
     </ul>
 
 </aside><!-- End Sidebar-->

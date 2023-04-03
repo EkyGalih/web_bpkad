@@ -267,7 +267,8 @@
                                             @endforeach
                                             @if ($lap->isEmpty())
                                                 <tr>
-                                                    <td colspan="5" style="text-align: center;">Tidak Ada Aktivitas</td>
+                                                    <td colspan="5" style="text-align: center;">Tidak Ada Catatan
+                                                        Laporan</td>
                                                 </tr>
                                             @endif
                                         </tbody>
@@ -309,12 +310,14 @@
                                         <div class="activite-label">{{ Helpers::RangeTime($recent->created_at) }}</div>
                                         @if ($recent->jenis == 'post')
                                             @php $badge = 'primary' @endphp
+                                        @elseif ($recent->jenis == 'users')
+                                            @php $badge = 'info' @endphp
                                         @endif
                                         <i
                                             class='bi bi-circle-fill activity-badge text-{{ $badge }} align-self-start'></i>
                                         <div class="activity-content">
-                                            {{ $recent->nama }} <strong>{{ $recent->activity }}</strong> <a
-                                                href="#" class="fw-bold text-dark">{{ $recent->title }}</a>
+                                            {{ Helpers::GetUser($recent->user_id) }} <strong>{{ $recent->activity }}</strong> <a
+                                                href="#" class="fw-bold text-dark">{{ Helpers::_recentShow($recent->jenis, $recent->uuid_activity) }}</a>
                                         </div>
                                     </div><!-- End activity item-->
                                 @endforeach
