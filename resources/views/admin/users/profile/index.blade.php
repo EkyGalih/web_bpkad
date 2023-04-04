@@ -283,6 +283,7 @@
                                                 @error('renewpassword')
                                                     <div class="text-danger">{{ $message }}</div>
                                                 @enderror
+                                                <p class="text-danger" id="message"></p>
                                             </div>
                                         </div>
 
@@ -344,5 +345,14 @@
                 $('#labelrenewpassword').addClass('bi bi-eye');
             }
         }
+
+        // cek sandi baru sama atau tidak
+        $('#newpassword, #renewpassword').on('keyup', function() {
+            if ($('#newpassword').val() == $('#renewpassword').val()) {
+                $("#message").html('');
+            } else {
+                $("#message").html('Kata sandi tidak sama').css('color', 'red');
+            }
+        })
     </script>
 @endsection
