@@ -44,7 +44,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Nama</th>
+                                        <th scope="col">Nama/Katergori</th>
                                         <th scope="col">Keterangan</th>
                                         <th scope="col">Jenis Slide</th>
                                         <th scope="col">Buat Pada</th>
