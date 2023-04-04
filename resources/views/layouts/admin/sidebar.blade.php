@@ -77,6 +77,11 @@
                 </li>
                 <li>
                     <a href="components-accordion.html">
+                        <i class="bi bi-circle"></i><span>Video Banner</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="components-accordion.html">
                         <i class="bi bi-circle"></i><span>Powerpoint</span>
                     </a>
                 </li>

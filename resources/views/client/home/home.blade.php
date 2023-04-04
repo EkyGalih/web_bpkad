@@ -305,15 +305,22 @@
                 <hr />
             </div>
             <div class="row">
-                <div class="col-lg-12" data-aos="zoom-out" data-aos-delay="100">
+                <div class="col-lg-12">
                     @foreach ($videos as $video)
                         <center>
-                            <object width="1000" height="500" data="{{ $video->path }}">
-                            </object>
+                            <iframe width="820" height="445" src="https://www.youtube.com/embed/0k99VGaKa9c">
+                            </iframe>
                         </center>
                     @endforeach
                 </div>
             </div>
+            <center>
+                <iframe width="200" height="150" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
+                <iframe width="200" height="150" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
+                <iframe width="200" height="150" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
+                <iframe width="200" height="150" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
+                <iframe width="200" height="150" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
+            </center>
         </div>
     </section>
     <section id="team" class="team">
@@ -345,7 +352,7 @@
     <section id="faq" class="faq section-bg">
         <div class="container">
             <div class="section-title" data-aos="fade-up">
-                <h3>Informasi <span>APBD</span> Kabupaten/Kota Se-<span>NTB</span></h3>
+                <h3>Informasi <span>APBD</span> Kabupaten/Kota Se-<span>NTB</span> {{ date('Y') }}</h3>
                 <hr />
             </div>
             <center>
