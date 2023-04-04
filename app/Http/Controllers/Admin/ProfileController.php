@@ -8,6 +8,7 @@ use App\Models\Social;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -19,8 +20,10 @@ class ProfileController extends Controller
     public function index()
     {
         $user = User::findOrFail(Auth::user()->id);
+        $show = 'show';
+        $active = 'active';
 
-        return view('admin.users.profile.index', compact('user'));
+        return view('admin.users.profile.index', compact('user', 'show', 'active'));
     }
 
     /**
@@ -31,7 +34,17 @@ class ProfileController extends Controller
      */
     public function password(Request $request, $id)
     {
-        dd($request->currentPassword);
+        $password = User::findOrFail($id);
+
+        if (password_verify($request->password, $password->password)) {
+            $password->update([
+                'password' => Hash::make($request->newpassword)
+            ]);
+        } else {
+            return redirect()->back()->with(['fail' => 'Kata sandi sebelumnya tidak cocok dengan di database'])->withInput();
+        }
+
+        return redirect()->back()->with(['success' => 'Kata sandi berhasil diubah!']);
     }
 
     /**

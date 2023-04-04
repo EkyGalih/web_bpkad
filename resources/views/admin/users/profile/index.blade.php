@@ -1,15 +1,15 @@
 @extends('admin.index')
-@section('title', 'Profile')
+@section('title', 'Profil')
 @section('content')
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Profile</h1>
+            <h1>Profil</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
-                    <li class="breadcrumb-item">Users</li>
-                    <li class="breadcrumb-item active">Profile</li>
+                    <li class="breadcrumb-item">Pengguna</li>
+                    <li class="breadcrumb-item active">Profil</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -47,6 +47,11 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             {{ Session::get('success') }}
                         </div>
+                    @elseif (Session::has('fail'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            {{ Session::get('fail') }}
+                        </div>
                     @endif
                     <div class="card">
                         <div class="card-body pt-3">
@@ -54,7 +59,7 @@
                             <ul class="nav nav-tabs nav-tabs-bordered">
 
                                 <li class="nav-item">
-                                    <button class="nav-link active" data-bs-toggle="tab"
+                                    <button class="nav-link {{ $active }}" data-bs-toggle="tab"
                                         data-bs-target="#profile-overview">Ringkasan</button>
                                 </li>
 
@@ -76,7 +81,8 @@
                             </ul>
                             <div class="tab-content pt-2">
 
-                                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                                <div class="tab-pane fade {{ $show . ' ' . $active }} profile-overview"
+                                    id="profile-overview">
                                     {{-- <h5 class="card-title">About</h5>
                                     <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores
                                         cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure
@@ -216,55 +222,10 @@
 
                                 </div>
 
-                                {{-- <div class="tab-pane fade pt-3" id="profile-settings">
-
-                                    <!-- Settings Form -->
-                                    <form>
-
-                                        <div class="row mb-3">
-                                            <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email
-                                                Notifications</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="changesMade"
-                                                        checked>
-                                                    <label class="form-check-label" for="changesMade">
-                                                        Changes made to your account
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="newProducts"
-                                                        checked>
-                                                    <label class="form-check-label" for="newProducts">
-                                                        Information on new products and services
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="proOffers">
-                                                    <label class="form-check-label" for="proOffers">
-                                                        Marketing and promo offers
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="securityNotify"
-                                                        checked disabled>
-                                                    <label class="form-check-label" for="securityNotify">
-                                                        Security alerts
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="text-center">
-                                            <button type="submit" class="btn btn-primary">Save Changes</button>
-                                        </div>
-                                    </form><!-- End settings Form -->
-
-                                </div> --}}
-
                                 <div class="tab-pane fade pt-3" id="profile-change-password">
                                     <!-- Change Password Form -->
-                                    <form action="{{ route('profile.password', $user->id) }}" method="POST">
+                                    <form action="{{ route('profile.password', $user->id) }}" method="POST"
+                                        onsubmit="return validateForm()">
                                         @csrf
                                         @method('PUT')
 
@@ -272,8 +233,18 @@
                                             <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Password
                                                 Lama</label>
                                             <div class="col-md-8 col-lg-9">
-                                                <input name="password" type="password" class="form-control"
-                                                    id="currentPassword">
+                                                <div class="input-group">
+                                                    <input name="password" type="password" class="form-control"
+                                                        id="currentPassword" required value="{{ old('password') }}">
+                                                    <div class="input-group-prepend">
+                                                        <button type="button" onclick="btn1()" class="input-group-text">
+                                                            <i id="labelcurrentPassword" class="bi bi-eye"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                @error('password')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
 
@@ -281,8 +252,18 @@
                                             <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Password
                                                 Baru</label>
                                             <div class="col-md-8 col-lg-9">
-                                                <input name="newpassword" type="password" class="form-control"
-                                                    id="newPassword">
+                                                <div class="input-group">
+                                                    <input name="newpassword" type="password" class="form-control"
+                                                        required id="newpassword" value="{{ old('newpassword') }}">
+                                                    <div class="input-group-prepend">
+                                                        <button type="button" onclick="btn2()" class="input-group-text">
+                                                            <i id="labelnewpassword" class="bi bi-eye"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                @error('newpassword')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
 
@@ -290,8 +271,18 @@
                                             <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-Enter
                                                 Password Baru</label>
                                             <div class="col-md-8 col-lg-9">
-                                                <input name="renewpassword" type="password" class="form-control"
-                                                    id="renewPassword">
+                                                <div class="input-group">
+                                                    <input name="renewpassword" type="password" class="form-control"
+                                                        required id="renewpassword" value="{{ old('renewpassword') }}">
+                                                    <div class="input-group-prepend">
+                                                        <button type="button" onclick="btn3()" class="input-group-text">
+                                                            <i id="labelrenewpassword" class="bi bi-eye"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                @error('renewpassword')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
 
@@ -312,4 +303,46 @@
         </section>
 
     </main>
+@endsection
+@section('additional-js')
+    <script>
+        function btn1() {
+            let attr = $('#currentPassword').attr("type");
+            if (attr == 'password') {
+                $('#currentPassword').prop('type', 'text');
+                $('#labelcurrentPassword').removeClass('bi bi-eye');
+                $('#labelcurrentPassword').addClass('bi bi-eye-slash');
+            } else if (attr == 'text') {
+                $('#currentPassword').prop('type', 'password');
+                $('#labelcurrentPassword').removeClass('bi bi-eye-slash');
+                $('#labelcurrentPassword').addClass('bi bi-eye');
+            }
+        }
+
+        function btn2() {
+            let attr = $('#newpassword').attr("type");
+            if (attr == 'password') {
+                $('#newpassword').prop('type', 'text');
+                $('#labelnewpassword').removeClass('bi bi-eye');
+                $('#labelnewpassword').addClass('bi bi-eye-slash');
+            } else if (attr == 'text') {
+                $('#newpassword').prop('type', 'password');
+                $('#labelnewpassword').removeClass('bi bi-eye-slash');
+                $('#labelnewpassword').addClass('bi bi-eye');
+            }
+        }
+
+        function btn3() {
+            let attr = $('#renewpassword').attr("type");
+            if (attr == 'password') {
+                $('#renewpassword').prop('type', 'text');
+                $('#labelrenewpassword').removeClass('bi bi-eye');
+                $('#labelrenewpassword').addClass('bi bi-eye-slash');
+            } else if (attr == 'text') {
+                $('#renewpassword').prop('type', 'password');
+                $('#labelrenewpassword').removeClass('bi bi-eye-slash');
+                $('#labelrenewpassword').addClass('bi bi-eye');
+            }
+        }
+    </script>
 @endsection
