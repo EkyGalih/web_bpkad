@@ -311,12 +311,14 @@
                                         @if ($recent->jenis == 'post')
                                             @php $badge = 'primary' @endphp
                                         @elseif ($recent->jenis == 'users')
-                                            @php $badge = 'info' @endphp
+                                        @php $badge = 'info' @endphp
+                                        @elseif ($recent->jenis == 'slider')
+                                        @php $badge = 'dark' @endphp
                                         @endif
                                         <i
                                             class='bi bi-circle-fill activity-badge text-{{ $badge }} align-self-start'></i>
                                         <div class="activity-content">
-                                            {{ Helpers::GetUser($recent->user_id) }} <strong>{{ $recent->activity }}</strong> <a
+                                            <strong>{{ Helpers::GetUser($recent->user_id) }}</strong> {{ $recent->activity }} <a
                                                 href="#" class="fw-bold text-dark">{{ Helpers::_recentShow($recent->jenis, $recent->uuid_activity) }}</a>
                                         </div>
                                     </div><!-- End activity item-->

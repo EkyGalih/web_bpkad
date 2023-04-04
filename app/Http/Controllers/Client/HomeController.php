@@ -62,8 +62,8 @@ class HomeController extends Controller
         $data_covid = $covid->json();
 
         // slider
-        $slides = Slideitem::where('slide_id', '=', 'd57047d6-9d3c-11ed-a403-244bfebc253d')->get();
-        $slidesInformasi = Slideitem::where('slide_id', '=', '3cb30611-9d46-11ed-a403-244bfebc253d')->get();
+        $slides = Slideitem::where('slide_id', '=', '2')->get();
+        $slidesInformasi = Slideitem::where('slide_id', '=', '1')->where('deleted_at', '=', NULL)->get();
         return view('client.home.home', compact('new_posts', 'carousel', 'old_posts', 'videos', 'apps', 'data_covid', 'slides', 'slidesInformasi'));
     }
 

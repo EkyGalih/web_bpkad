@@ -71,7 +71,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="components-accordion.html">
+                    <a href="{{ route('slider.index') }}" class="@yield('di-slider')">
                         <i class="bi bi-circle"></i><span>Slider/Carousel</span>
                     </a>
                 </li>

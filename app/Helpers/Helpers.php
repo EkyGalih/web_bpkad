@@ -20,6 +20,7 @@ use App\Models\Posts;
 use App\Models\PowerPoint;
 use App\Models\Recent;
 use App\Models\Slide;
+use App\Models\Slideitem;
 use App\Models\Social;
 use App\Models\SubPages;
 use App\Models\User;
@@ -316,7 +317,7 @@ class Helpers
     {
         switch ($jenis) {
             case 'post':
-                $data = Posts::where('id', '=', $uuid)->select('title')->first();
+                $data = Posts::where('id', '=', $uuid)->select('title as nama')->first();
                 break;
             case 'pages':
                 $data = Pages::where('id', '=', $uuid)->select('title')->first();
@@ -337,7 +338,7 @@ class Helpers
                 $data = Galery::where('id', '=', $uuid)->select('name')->first();
                 break;
             case 'slider':
-                $data = Slide::where('id', '=', $uuid)->select('nama_slide')->first();
+                $data = Slideitem::where('id', '=', $uuid)->select('title as nama')->first();
                 break;
             case 'powerpoint':
                 $data = PowerPoint::where('id', '=', $uuid)->select('element')->first();
