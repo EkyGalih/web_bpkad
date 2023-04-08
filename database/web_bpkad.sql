@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1deb5ubuntu1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 02 Mar 2023 pada 17.31
--- Versi server: 5.7.33
--- Versi PHP: 8.1.7
+-- Waktu pembuatan: 08 Apr 2023 pada 09.07
+-- Versi server: 8.0.32-0ubuntu0.22.04.2
+-- Versi PHP: 8.1.2-1ubuntu2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_bpkad`
+-- Database: `web_bpkad`
 --
 
 -- --------------------------------------------------------
@@ -28,12 +28,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `assets` (
-  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `keterangan` text COLLATE utf8mb4_unicode_ci,
+  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `lat` double(8,2) DEFAULT NULL,
   `lang` double(8,2) DEFAULT NULL,
-  `alamat` text COLLATE utf8mb4_unicode_ci,
+  `alamat` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -53,9 +53,9 @@ INSERT INTO `assets` (`id`, `name`, `keterangan`, `lat`, `lang`, `alamat`, `crea
 --
 
 CREATE TABLE `bender` (
-  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -76,8 +76,8 @@ INSERT INTO `bender` (`id`, `path`, `url`, `created_at`, `updated_at`, `deleted_
 --
 
 CREATE TABLE `content_type` (
-  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -98,15 +98,15 @@ INSERT INTO `content_type` (`id`, `name`, `created_at`, `updated_at`, `deleted_a
 --
 
 CREATE TABLE `daftar_app` (
-  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `deskripsi` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `versi` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `icon` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `order_item` varchar(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `deskripsi` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `versi` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `order_item` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `create_by_id` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `create_by_id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -126,7 +126,7 @@ INSERT INTO `daftar_app` (`id`, `name`, `deskripsi`, `versi`, `icon`, `url`, `or
 --
 
 CREATE TABLE `ext_dashboard_data_posisi_kas` (
-  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `data` decimal(65,0) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -140,9 +140,9 @@ CREATE TABLE `ext_dashboard_data_posisi_kas` (
 --
 
 CREATE TABLE `files` (
-  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name_archive` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `filename` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_archive` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `filename` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `size` double(8,2) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -163,11 +163,11 @@ INSERT INTO `files` (`id`, `name_archive`, `filename`, `size`, `created_at`, `up
 --
 
 CREATE TABLE `galery` (
-  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tanggal` date DEFAULT NULL,
-  `keterangan` text COLLATE utf8mb4_unicode_ci,
-  `galery_type_id` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `galery_type_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -205,9 +205,9 @@ INSERT INTO `galery` (`id`, `name`, `tanggal`, `keterangan`, `galery_type_id`, `
 --
 
 CREATE TABLE `galery_foto` (
-  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `path` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `galery_id` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `path` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `galery_id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -321,8 +321,8 @@ INSERT INTO `galery_foto` (`id`, `path`, `galery_id`, `created_at`, `updated_at`
 --
 
 CREATE TABLE `galery_type` (
-  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -343,9 +343,9 @@ INSERT INTO `galery_type` (`id`, `name`, `created_at`, `updated_at`, `deleted_at
 --
 
 CREATE TABLE `galery_video` (
-  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `galery_id` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `galery_id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -367,22 +367,161 @@ INSERT INTO `galery_video` (`id`, `path`, `galery_id`, `created_at`, `updated_at
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `kip`
+--
+
+CREATE TABLE `kip` (
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_informasi` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jenis_informasi` enum('berkala','dikecualikan','setiap saat','serta merta') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tahun` int NOT NULL,
+  `jenis_file` enum('upload','link') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `files` text COLLATE utf8mb4_unicode_ci,
+  `upload_by` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `kip`
+--
+
+INSERT INTO `kip` (`id`, `nama_informasi`, `jenis_informasi`, `tahun`, `jenis_file`, `files`, `upload_by`, `created_at`, `updated_at`) VALUES
+('01e47445-6159-4575-a323-4241081ad352', 'LHP BPK RI 2020', 'berkala', 2020, 'link', 'https://drive.google.com/file/d/1k7s0Gw4hyjaZ7HlsRFWJTfl3LalHr9a-/view?usp=sharing', '1', '2021-07-16 02:25:43', '2023-03-23 18:57:43'),
+('04de4bcf-1d8f-4d09-9923-fec33dfef0fa', 'RENJA 2021', 'berkala', 2021, 'link', 'https://drive.google.com/file/d/1Txi_DazeaSlmqFbmNxPjjF-aFfeMtj-b/view?usp=sharing', '1', '2021-08-31 01:26:04', '2023-03-30 18:13:39'),
+('05ed33c7-1a4a-4747-b939-a35e5307b4e1', 'RENSTRA 2017 - 2018', 'setiap saat', 2018, 'link', 'https://firebasestorage.googleapis.com/v0/b/bpkad-awesome.appspot.com/o/RENSTRA%20BPKAD%202017%20REVISI%20NEW%2022%20MEI%202017%20FINAL.pdf?alt=media&token=79db1814-d7b1-4dcd-ba7d-11ffce333e86', '1', '2018-03-26 02:20:06', '2023-03-30 18:21:50'),
+('0dafa9c9-67c3-49ce-ba28-40e7eda25ec5', 'LKPD Audited 2020', 'berkala', 2020, 'link', 'https://drive.google.com/file/d/1iJKWWDtPwlr9wyet87Id1p-KySJe4r8Y/view', '1', '2020-06-09 02:05:44', '2023-03-30 18:17:10'),
+('10d00155-c7a0-4d45-9ec9-fe55513bcf1e', 'RINGKASAN RKA PERUBAHAN APBD TAHUN 2018', 'berkala', 2018, 'link', 'https://drive.google.com/file/d/1CzQZFBiV5GV_Br197KNOijR0SnsjdK2N/view?usp=sharing', '1', '2021-11-22 01:06:44', '2023-03-30 18:01:56'),
+('15205014-f56f-4a61-be4d-523a30e7ac5a', 'PERDA APBDP 2022', 'berkala', 2022, 'link', 'https://drive.google.com/drive/folders/1A7bM7wxNBJv34T1HE5mdEpuxAGlfIYsD?usp=share_link', '1', '2022-11-08 01:28:25', '2023-03-30 17:30:29'),
+('16666747-67c1-4eae-9880-40bd268ffac2', 'ANGGARAN PENGELOLAAN INFORMASI BPKAD 2020', 'berkala', 2020, 'link', 'https://drive.google.com/file/d/1RIIWixdc8tkKoVB8iwxjNIIpBQDOpOfs/view?usp=sharing', '1', '2021-06-30 09:26:37', '2023-03-30 18:16:35'),
+('185d2542-10f6-4a2a-8fe5-9b1803857bec', 'IKHTISAR LAPORAN KEUANGAN PERSUDA TAHUN 2018', 'berkala', 2018, 'link', 'IKHTISAR LAPORAN KEUANGANPERSUDAt TAHUN 2018', '1', '2021-11-17 03:53:15', '2023-03-30 18:05:23'),
+('187afbdc-e936-45ce-bbb6-7c34ab5dc41e', 'SSH PEMPROV NTB 2023', 'berkala', 2023, 'link', 'https://drive.google.com/file/d/101WzcyAUsXAkKuqmDqgmi9M8-8oQWN4g/view?usp=share_link', '1', '2022-11-04 10:10:50', '2023-03-30 17:41:23'),
+('1ad33f82-8b4c-4e4b-a2f3-a50b383d3650', 'OPINI WTP 2021', 'berkala', 2021, 'link', 'https://drive.google.com/file/d/1ImsJM1ZTm_IfHfUP3_1VODksxSgEnUYj/view?usp=sharing', '1', '2022-06-30 02:32:45', '2023-03-30 17:53:49'),
+('1eb2b836-5d38-409e-b59b-159fb2e4a65e', 'PK STAF BPKAD 2021', 'berkala', 2021, 'link', 'https://drive.google.com/drive/folders/1AYio-pqtlpJr06JjJ3du-4KSU500yt8a?usp=sharing', '1', '2021-08-31 03:13:51', '2023-03-30 18:12:50'),
+('21e74246-fd41-4569-8b8d-430b35e5ce2e', 'SK Kepala Daerah Tentang Pejabat Pengelolaan Keuangan   Daerah TA. 2021', 'dikecualikan', 2021, 'link', 'https://drive.google.com/file/d/1hAqvUr0zo9be0Yv0wfNMs-UeVVR4oBxf/view?usp=sharing', '1', '2022-06-30 03:22:32', '2023-03-30 17:53:43'),
+('24107a71-58cf-4bf6-afee-c62d336e5656', 'Ranperda Pertanggungjawaban 2021', 'berkala', 2021, 'link', 'https://docs.google.com/document/d/1gYO8hArN92JT6zFzhiOd5-irJvYQdIbs/edit?usp=sharing&ouid=104060825741893759268&rtpof=true&sd=true', '1', '2022-09-09 02:54:55', '2023-03-30 17:44:43'),
+('251d686a-e75f-45de-aa59-fca7e631ccc4', 'RKA APBD 2020', 'berkala', 2020, 'link', 'https://drive.google.com/file/d/10Eu2NKp7R94GkWk1hEowtieILzI5c-sL/view?usp=sharing', '1', '2021-11-22 01:07:17', '2023-03-30 18:01:43'),
+('277f6d1d-de96-4c23-aeab-eecabf1bb4cb', 'LKJIP 2020', 'berkala', 2020, 'link', 'https://drive.google.com/file/d/1XNFDc1_3y_vnc1ns_LlVlyUcQPwwKs8I/view?usp=sharing', '1', '2021-08-31 01:25:09', '2023-03-30 18:13:44'),
+('295683a5-b267-42e4-90a5-9665d8792181', 'KUA PPAS TAHUN 2019', 'berkala', 2019, 'link', 'https://drive.google.com/drive/folders/1-SP0qYnwrCLToqrVaLAYP9Xm5YWvXsyD?usp=sharing', '1', '2021-11-22 10:49:27', '2023-03-30 18:01:16'),
+('2a6149c8-c9a8-40ee-9e33-aa80cd146558', 'OPINI BPK-LKPD 2019', 'berkala', 2019, 'link', 'https://drive.google.com/file/d/1-Qd1YJqhqLYBOMsKZN4wqznKX7_DWAeG/view?usp=sharing', '1', '2021-11-12 06:50:42', '2023-03-30 18:11:18'),
+('2f966e86-05e5-4fac-9a3c-537d4edf969e', 'APBD MURNI TA.2023', 'berkala', 2023, 'link', 'https://drive.google.com/drive/folders/1z0IjLO1QAHJFlLkyU0PZSTdlgTKCR8Np?usp=sharing', '1', '2023-01-02 01:12:17', '2023-03-30 17:24:44'),
+('3775b6ed-d0bd-473a-be59-f3c896da6a32', 'Pohon Kinerja 2021', 'berkala', 2021, 'link', 'https://drive.google.com/file/d/1Ro3S2eInLlE1nJ-6UhIQirKX754fpR6U/view?usp=sharing', '1', '2021-08-31 01:24:08', '2023-03-30 18:13:58'),
+('3ac0c6f0-74ef-4c68-9572-9eaaa37968a1', 'LKPD Audited 2019', 'berkala', 2019, 'link', 'https://drive.google.com/file/d/1iJKWWDtPwlr9wyet87Id1p-KySJe4r8Y/view', '1', '2020-06-09 02:05:09', '2023-03-30 18:17:15'),
+('3c37370c-1196-41c7-ad30-54cfa1a8c146', 'DPA PERUBAHAN 2022', 'berkala', 2022, 'link', 'https://drive.google.com/file/d/1Zuw1yw0tpYmmXCjWqVadOrRj-Ec52wdA/view?usp=share_link', '1', '2022-11-15 02:29:45', '2023-03-30 17:29:58'),
+('3c8c4909-c1d2-4006-aa6b-ec7a7a9d4362', 'RENCANA KINERJA TAHUNAN (RKT) TAHUN 2018', 'setiap saat', 2018, 'link', 'https://drive.google.com/file/d/1FZoh92FYG-uXJl1-XcoC1jrjwjNYXpQD/view', '1', '2018-03-26 08:37:09', '2023-03-30 18:21:26'),
+('3de20719-0a42-4012-86f6-b9df82403ed1', 'LAPORAN KEUANGAN SKPD 2020', 'berkala', 2020, 'link', 'https://docs.google.com/document/d/15ETX1Q7t1eY9pFUAW2Kng32IoIJ5nXUT/edit?usp=sharing&ouid=104060825741893759268&rtpof=true&sd=true', '1', '2021-11-05 03:18:36', '2023-03-30 18:12:23'),
+('3e288be5-d7c4-4a38-a3cc-7c09f34230de', 'LHKPN Pimpinan 2020', 'berkala', 2020, 'link', 'https://drive.google.com/file/d/1RexRxCVfHYkEQ0ZeTs6bb1Sw_Lf8zCEQ/view', '1', '2020-10-21 03:55:15', '2023-03-30 18:16:50'),
+('431fb9ff-e143-44b5-bbef-fb6c8928f163', 'Kalendar Kegiatan Kerja 2020', 'berkala', 2020, 'link', 'https://drive.google.com/file/d/14fjAdiwGg7jVeYZU_WsqNPnbxsNu-wzx/view?usp=sharing', '1', '2021-06-30 09:54:56', '2023-03-30 18:16:24'),
+('43ffd29e-50a5-4bf8-b44e-4ee9e80bc3a3', 'LAKIP BPKAD 2021', 'berkala', 2021, 'link', 'https://drive.google.com/file/d/1R4GXCDSGqe-cGrhG7dRfXZ_QEm1LD68T/view?usp=sharing', '1', '2022-03-02 01:04:53', '2023-03-30 17:55:28'),
+('4458ea09-79bd-4b74-b009-7ee5792ca546', 'SK TAHUN 2020', 'berkala', 2020, 'link', 'https://drive.google.com/file/d/1bVuGHSR13BY6N_DFv0P-sMORhuFzlbRU/view?usp=sharing', '1', '2021-11-12 08:30:15', '2023-03-30 18:10:59'),
+('44bbf4b9-52c8-4561-87ba-1f5180a04bdf', 'DPA MURNI 2022', 'berkala', 2022, 'link', 'https://drive.google.com/file/d/1Udd1RrNEKkDwQ21BnmTmAuBQAKBGMMMe/view?usp=share_link', '1', '2022-02-08 01:00:57', '2023-03-30 17:55:40'),
+('48917561-ed76-4d69-a49c-0f158e4a3530', 'LKPD AUDITIED TA 2021', 'berkala', 2021, 'link', 'https://drive.google.com/drive/folders/1FezZSGCCf8qm3oljVihHCk2IRFGutHaY?usp=sharing', '1', '2022-06-21 03:28:58', '2023-03-30 17:54:30'),
+('48a60739-34da-4862-b619-cf8011df0533', 'PERDA APBDP 2021', 'berkala', 2021, 'link', 'https://drive.google.com/file/d/17kcdAxOl68wDcomodmcDtgiIdtaaeOV6/view?usp=sharing', '1', '2022-01-03 03:07:51', '2023-03-30 17:59:11'),
+('4f11f207-193d-4f97-af3c-752d3a1deac0', 'CAPAIAN PERJANJIAN KINERJA BPKAD 2021', 'berkala', 2021, 'link', 'https://drive.google.com/drive/folders/1LG1Je_seD4m9YiImMLSwEWRQZSL4DsaT?usp=sharing', '1', '2022-03-07 03:25:45', '2023-03-30 17:55:17'),
+('4f4b3e73-f63c-4aa0-a916-e51f9ac61f4d', 'IKHTISAR LAPORAN KEUANGAN BUMD TA.2019', 'dikecualikan', 2019, 'link', 'https://drive.google.com/file/d/1XCfxbVEcBS0yyWQUoTzahD2kwTuEjzmW/view?usp=sharing', '1', '2021-11-16 00:13:25', '2023-03-30 18:09:47'),
+('50ab900c-1b8e-4d66-a383-2bfefdb3584b', 'RENCANA KERJA BPKAD TAHUN 2020', 'setiap saat', 2020, 'link', 'https://drive.google.com/file/d/1_y8LE7t_yUDBaSI0U219f_FrN5dTHXZc/view', '1', '2020-08-06 01:43:44', '2023-03-30 18:17:04'),
+('50ae5a4d-4883-494e-b59a-7c583d4d68ab', 'REKAP BARANG KE NERACA per 31 DESEMBER 2020', 'berkala', 2020, 'link', 'https://drive.google.com/file/d/1B5LZtXoWpBWkYMGg_5D2DodHchnxipqE/view?usp=sharing', '1', '2021-07-30 02:38:54', '2023-03-30 18:14:32'),
+('56849377-08d1-4c7e-9d98-f53cf16005c5', 'RAPERDA APBDP 2022', 'berkala', 2022, 'link', 'https://drive.google.com/file/d/1W9FRDeG482pLGOwpUMBd9DsBOm6vTnQ4/view?usp=share_link', '1', '2022-11-08 01:28:54', '2023-03-30 17:30:16'),
+('5bff79de-94ab-480c-82bc-ee0f798e2556', 'PERDA PERTANGGUNGJAWABAN APBD TAHUN 2019', 'berkala', 2019, 'link', 'https://drive.google.com/file/d/1Om6szwJNlo2sN1ZQxEGFLl7R85wB3mKF/view?usp=sharing', '1', '2021-11-17 03:39:45', '2023-03-30 18:05:31'),
+('5fde599b-51ea-4203-ad38-90c11f65e494', 'LKPD 2020', 'berkala', 2020, 'link', 'https://drive.google.com/file/d/1-UJdNsRruS0wv45YcHTim0f07BGb7Fqv/view?usp=sharing', '1', '2021-07-15 07:38:14', '2023-03-30 18:14:37'),
+('608dd9c1-b50d-45e7-9cb6-cbeadc4fba34', 'PERDA APBDP TAHUN 2018', 'berkala', 2018, 'link', 'https://drive.google.com/file/d/1lQ1uoNTR-3avZyV4IOGX-6ecuIA3X6VU/view?usp=sharing', '1', '2021-11-22 09:51:41', '2023-03-30 18:01:30'),
+('612bda77-ea14-4af5-821f-d59fbd567c76', 'OPINI WTP 2016', 'berkala', 2016, 'link', 'https://drive.google.com/file/d/1p9rI5wmdTIY4ptVjSBHnyUQLMRRrfGzH/view?usp=sharing', '1', '2021-11-18 03:15:21', '2023-03-30 18:04:55'),
+('62e959fb-f140-4d73-92c8-f2b4622177ec', 'SSH PEMPROV NTB 2022', 'berkala', 2022, 'link', 'https://drive.google.com/file/d/1c-lHpTwVEnPuwthM5MsUFuUsXVF59qhS/view?usp=sharing', '1', '2022-01-03 02:31:30', '2023-03-30 17:59:28'),
+('66053912-3ec0-4370-8d67-6f6b9390e04d', 'PERGUB APBD 2021', 'berkala', 2021, 'link', 'https://drive.google.com/drive/folders/1Y67jkB-nSmHqBhmCut7LLa2-ld8cwGS5?usp=sharing', '1', '2022-02-07 03:19:39', '2023-03-30 17:56:06'),
+('674f6e45-ca59-4137-8594-90379f8f87af', 'RKA Murni 2021', 'berkala', 2021, 'link', 'https://drive.google.com/file/d/1d22BHMkLnoMTT3dl_-MFtpcAkJqvm_bv/view?usp=share_link', '1', '2022-08-29 09:06:20', '2023-03-30 17:45:19'),
+('6abcd3e6-0e6b-4981-b93c-164c35d209c8', 'Lamp.1.2 Ranperda Pertanggungjawaban APBD TA. 2021 (Realisasi BPKAD selaku PPKD)', 'berkala', 2021, 'link', 'https://docs.google.com/spreadsheets/d/1ezmU-3X81LMfHlKpxL1uUq3mN26cCxnN/edit?usp=sharing&ouid=104060825741893759268&rtpof=true&sd=true', '1', '2022-09-09 02:53:27', '2023-03-30 17:44:52'),
+('6aed9e3c-7628-4e25-8bb0-23bb952fcbd5', 'Realisasi Program dan Kegiatan Penanganan Covid 19 Tahun 2021', 'berkala', 2021, 'link', 'https://drive.google.com/file/d/1Q-hNic-YPGjv_ff49XCSIblGbMPcTGBe/view?usp=sharing', '1', '2022-09-14 01:13:54', '2023-03-30 17:52:21'),
+('6b88cc95-f738-4e38-ba87-7ebe0ef2430c', 'DPA 2021 MURNI', 'berkala', 2021, 'link', 'https://drive.google.com/drive/folders/1QB4PYMhjFnv7IWlEjHbacZ5zK_bX0jaV?usp=sharing', '1', '2022-08-30 01:59:26', '2023-03-30 17:45:10'),
+('6bef784e-9154-456b-9dc3-c59540744fe7', 'Ranerda Murni & Perubahan 2021', 'berkala', 2021, 'link', 'https://drive.google.com/drive/folders/1PmZqTLNk_MD5_1lixCOR7qNZhCX2lc50?usp=sharing', '1', '2022-08-29 01:08:54', '2023-03-30 17:45:25'),
+('6ce7b21f-7c77-4d25-a9fd-c8930641b207', 'LAPORAN ARUS KAS PEMPROV.NTB 2021', 'berkala', 2021, 'link', 'https://drive.google.com/file/d/1LCrDvZNjd4-ae5NGKmFIQ78WV6M-XFth/view?usp=sharing', '1', '2022-06-30 01:19:47', '2023-03-30 17:54:07'),
+('6d52edec-2031-4bdd-bd8c-6bef82629c99', 'LAPORAN REALISASI ANGGARAN KAB/KOTA SE-NTB TA. 2016-2020', 'berkala', 2020, 'link', 'https://docs.google.com/spreadsheets/d/1e_EbqeNlIvla0bwyAtKD0bAOKsFwLuXi/edit?usp=sharing&ouid=104060825741893759268&rtpof=true&sd=true', '1', '2021-11-09 01:30:08', '2023-03-30 18:12:16'),
+('6d566237-ead3-42e4-b1f1-4c6bda70093d', 'OPINI BPK-LKPD 2020', 'berkala', 2020, 'link', 'https://drive.google.com/drive/folders/1r25bZvRv7Nw8V6nUaWtZFmPFCAb7MEDQ?usp=sharing', '1', '2021-11-11 03:10:37', '2023-03-30 18:11:30'),
+('6dcbdf2c-fb6c-4f0f-ba0d-6bc80f9d3034', 'Lamp. 1.2  Ranperda Pertanggungjawaban APBD TA. 2021 (Realisasi Seluruh SKPD)', 'berkala', 2021, 'link', 'https://drive.google.com/drive/folders/1bRdIJjaozQlakSmm-DcWTJqCUTNBAUV7?usp=sharing', '1', '2022-09-09 02:53:00', '2023-03-30 17:45:02'),
+('7005b89a-7061-4060-be32-41fcb38430aa', 'LAPORAN TAHUNAN 2021', 'berkala', 2021, 'link', 'https://drive.google.com/file/d/1Lx86bQllM6Zvsj9eWZQL-TSMPVAfbVpi/view?usp=sharing', '1', '2022-03-02 01:05:19', '2023-03-30 17:55:23'),
+('7088f2de-b90a-4bd0-a908-320fc2464a9b', 'Statistik Kepegawaian BPKAD 2018 - 2020', 'berkala', 2020, 'link', 'https://drive.google.com/file/d/1HelHAXfwfvRTh5xsNdzwz6yg3JaK6VwG/view?usp=sharing', '1', '2021-06-30 10:30:47', '2023-03-30 18:15:00'),
+('736ede22-3914-43d8-b102-0413c818bd74', 'KUA PPAS TAHUN 2022', 'berkala', 2022, 'link', 'https://drive.google.com/drive/folders/1k1SkvmGWnxgNMlrNi9O4gFwe3NQmhL3g?usp=sharing', '1', '2021-11-25 03:30:29', '2023-03-30 18:00:25'),
+('74a89275-06fa-4684-b01c-31f03ae5c206', 'OPINI WTP 2015', 'berkala', 2015, 'link', 'asdasdasdasdasda', '1', '2016-03-20 17:45:29', '2023-03-30 18:54:53'),
+('75d75fc7-8266-4702-8bb0-ac8e93b9905d', 'DPA APBDP 2021', 'berkala', 2021, 'link', 'https://drive.google.com/drive/folders/1fKthpw8vP-8ie5NlFmW6B_v1jjroB0qS?usp=sharing', '1', '2022-02-07 03:20:21', '2023-03-30 17:55:58'),
+('7b8d2818-1b23-4c01-ac9c-3d4928edd62b', 'Buku Inventaris 2021', 'berkala', 2021, 'link', 'https://drive.google.com/drive/folders/1xALAgpTuo1-lqkmV6yQADp7UqNRGA9Rv?usp=sharing', '1', '2022-07-29 01:24:27', '2023-03-30 17:45:37'),
+('7d9aa66a-7563-4517-ae1a-99b931d20cef', 'SK TAHUN 2019', 'berkala', 2019, 'link', 'https://drive.google.com/file/d/1suUAUiNUnW9jVpvHXhG7G3UEdecvlxCk/view?usp=sharing', '1', '2021-11-12 08:30:09', '2023-03-30 18:11:06'),
+('80573785-c0e7-4696-bad8-6a71c4ab3857', 'SK TAHUN 2018', 'berkala', 2018, 'link', 'https://drive.google.com/file/d/19D9r_wmu1ArWGpXW6y9SERcSPntWGbJ5/view?usp=sharing', '1', '2021-11-12 08:29:04', '2023-03-30 18:11:11'),
+('82d741cc-4c1a-4405-8c4b-8a48ff2d30f0', 'IKHTISAR LAPORAN KEUANGAN BUMD TA.2020', 'dikecualikan', 2020, 'link', 'https://drive.google.com/file/d/1HiozRQ1jGRkaWBiwxFNITReID1bI24XJ/view?usp=sharing', '1', '2022-07-13 03:52:58', '2023-03-30 17:46:18'),
+('83e9d5a4-435a-4fe3-bf06-d6d1fd3edb50', 'Laporan PPID 2021', 'berkala', 2021, 'link', 'https://drive.google.com/file/d/1kH5HxHBAvGDQ0fJJ-ZJ-RbkVoFVrBpXI/view?usp=sharing', '1', '2022-07-29 02:13:22', '2023-03-30 17:45:31'),
+('86231f10-612a-457d-9ec2-037a2290034f', 'BATANG TUBUH PERDA APBD TAHUN 2019', 'berkala', 2019, 'link', 'https://drive.google.com/file/d/1Cpkkp8N5Ju9IClE4AqdAqHn3rsUSC2vG/view?usp=sharing', '1', '2021-11-19 01:55:56', '2023-03-30 18:02:20'),
+('87107860-859f-445e-94f0-1b822106259d', 'IKHTISAR LAPORAN KEUANGAN PERUSDA TAHUN 2019', 'berkala', 2019, 'link', 'https://drive.google.com/file/d/1XCfxbVEcBS0yyWQUoTzahD2kwTuEjzmW/view?usp=sharing', '1', '2021-11-16 00:13:10', '2023-03-30 18:09:36'),
+('8aa90b3a-757f-4b78-b489-f61b198d5caf', 'RINGKASAN RKA PERUBAHAN APBD TAHUN 2020', 'berkala', 2020, 'link', 'https://drive.google.com/file/d/1Z0HDswVE8IpV71bHt5yL2yPerSBcmsxo/view?usp=sharing', '1', '2021-11-22 01:06:17', '2023-03-30 18:02:12'),
+('8ec0c1f1-a6de-4708-9939-fa398aa61c4b', 'RENSTRA PERUBAHAN BPKAD 2019 - 2023', 'berkala', 2019, 'link', 'https://drive.google.com/drive/folders/1GoY-GMnwoVUHLmW284xkHerXZ5SI43wn?usp=sharing', '1', '2021-08-31 01:26:09', '2023-03-30 18:13:30'),
+('90cf7efa-0f28-4b7e-96b1-6b8fd4c03a7a', 'RENSTRA 2019 - 2023', 'setiap saat', 2019, 'link', 'https://drive.google.com/file/d/13FPko6bS9FkH1Jd7LZvxoOAtCpKJAKuc/view', '1', '2019-08-22 09:10:15', '2023-03-30 18:20:44'),
+('92529512-af4b-410a-834c-96b94339b8f9', 'RKA PERUBAHAN 2022', 'berkala', 2022, 'link', 'https://drive.google.com/file/d/1sPGughVBNFOmsJU4FYAlB7fvmTc5JWSo/view?usp=share_link', '1', '2022-11-15 02:28:15', '2023-03-30 17:30:08'),
+('94e427fe-e69b-45d9-b875-db8acf3f92da', 'OPINI WTP 2017', 'berkala', 2017, 'link', 'https://drive.google.com/file/d/1cvwSsN1ASe4-MsNtq7tgnSqGqIRl-NcW/view?usp=sharing', '1', '2023-03-23 17:43:04', '2023-03-30 17:17:12'),
+('974da46e-4c58-4cd8-9095-6260308e6a94', 'PERDA APBD 2021', 'berkala', 2021, 'link', 'https://drive.google.com/drive/folders/1Pd6BMi468MJpBqCAqJ1WZ5FuPVd2rC7e?usp=sharing', '1', '2022-02-07 03:18:39', '2023-03-30 17:56:12'),
+('9a33efcd-d1c9-43cc-bf01-07b52f20d4f3', 'KUA PPAS TAHUN 2018', 'berkala', 2018, 'link', 'https://drive.google.com/drive/folders/1CyPd8KQS-xMooz1q3uCZBvB--Ni4b9oo?usp=sharing', '1', '2021-11-22 10:49:12', '2023-03-30 18:01:22'),
+('9b44f169-4c96-426c-8fc7-343be77b8bf7', 'PERDA PERTANGGUNG JAWABAN 2020', 'berkala', 2020, 'link', 'https://drive.google.com/file/d/1cDQCD4p6J4FGO-fP6jOYTUPsigNT1W-k/view?usp=sharing', '1', '2021-11-16 08:59:50', '2023-03-30 18:06:49'),
+('9cc92532-2eed-4a7a-9cfb-15e2522a97aa', 'PERGUB APBDP 2022', 'berkala', 2022, 'link', 'https://drive.google.com/drive/folders/1ERz7CeMHWNfbCAoA68Thb2HONf-kzGX9?usp=share_link', '1', '2022-11-08 01:28:50', '2023-03-30 17:30:22'),
+('9eb20b10-7a9c-4be8-a9d1-4eca459d4b1e', 'PERDA ABPD Revisi 2 TA.2021', 'berkala', 2021, 'link', 'https://docs.google.com/spreadsheets/d/1BPhNT-5bzrLSxbMDl-r_X5jmf3VpuE4l/edit?usp=sharing&ouid=104060825741893759268&rtpof=true&sd=true', '1', '2021-10-03 02:43:15', '2023-03-30 18:12:38'),
+('9f79155c-e234-44b6-8868-242a80447e9b', 'DPA 2021 PERUBAHAN', 'berkala', 2021, 'link', 'https://drive.google.com/drive/folders/1xbHYaVk97XI_EUFKZet6IUI73MeAfkjG?usp=sharing', '1', '2022-02-07 03:20:53', '2023-03-30 17:55:46'),
+('a0a8918d-e4c8-4786-a5f1-d21128282e2e', 'LKPD Audited 2018', 'berkala', 2018, 'link', 'https://drive.google.com/file/d/1qZhfyQmBZgC24XVKLb1C96KX5i-_k87T/view', '1', '2019-09-07 03:17:20', '2023-03-30 18:17:22'),
+('a1607cd8-ccbc-4e47-a2b6-db1283dd3eb5', 'PK PERUBAHAN BPKAD TAHUN 2021', 'berkala', 2021, 'link', 'https://drive.google.com/file/d/1g4OJ4suygXnW8CiMl4phqu0Pc9nMhCJJ/view?usp=sharing', '1', '2021-11-29 03:50:38', '2023-03-30 18:00:19'),
+('a397404b-5518-4e85-a1b1-047ded62d385', 'Realisasi Program dan Kegiatan Penanganan Covid 19 Tahun 2020', 'berkala', 2020, 'link', 'https://drive.google.com/file/d/1iXoRBPrER1bUtgPIcCNDBOzdWSszo-QR/view?usp=sharing', '1', '2022-09-14 01:13:20', '2023-03-30 17:52:35'),
+('a4f2d003-f38c-4007-952f-537d6f9ccafe', 'Raperda APBDP 2018', 'serta merta', 2018, 'link', 'https://drive.google.com/file/d/1IUmToh4ey1-qBoN78L8DfFK6TbEZG3Ja/view', '1', '2019-03-14 03:43:52', '2023-03-30 18:20:59'),
+('a5e91237-e8e7-466f-a881-49bc78a37f20', 'PERDA DAN PERGUB APBD 2019', 'berkala', 2019, 'link', 'https://drive.google.com/file/d/1ScpUSqzahASMZZZWtZB6eQkAKtPC_LOy/view?usp=sharing', '1', '2021-11-17 01:38:36', '2023-03-30 18:05:46'),
+('a6492c4e-d8b5-4dd7-bf3b-acc75de426f7', 'RENCANA AKSI PK (Perjanjian Kinerja) 2022', 'berkala', 2022, 'link', 'https://drive.google.com/file/d/1pqMh7vuYOB_GLDBIsPmqdX1djMRDnrXm/view?usp=sharing', '1', '2022-02-15 03:39:22', '2023-03-30 17:55:35'),
+('a824b43f-ae7c-4822-88f7-a6fd6e302a33', 'PERDA PERTANGGUNG JAWABAN 2018', 'berkala', 2018, 'link', 'https://drive.google.com/file/d/1VfIqReNuJBxUzG2aVoLmmR8AXUdQOtdY/view?usp=sharing', '1', '2021-11-16 08:57:42', '2023-03-30 18:10:53'),
+('acbc76f6-3c5a-45b2-8eee-009df7aaea04', 'Laporan Layanan Informasi Publik 2020', 'berkala', 2020, 'link', 'https://drive.google.com/file/d/1F1eeYjqEuI13YA6bHPhq1itjz_wMsHob/view?usp=sharing', '1', '2021-06-30 09:50:27', '2023-03-30 18:16:29'),
+('ae5c0ceb-c732-457d-bb6c-f31f140241c2', 'IKHTISAR LAPORAN KEUANGAN BUMD TA.2018', 'dikecualikan', 2018, 'link', 'https://drive.google.com/file/d/10y0VZXQ_50M08aH24j-IMBsphuJq2hWJ/view?usp=sharing', '1', '2021-11-17 03:53:44', '2023-03-30 18:05:16'),
+('b30d52d4-ef88-4a97-aff5-f6950db36b8e', 'RKA MURNI 2022', 'berkala', 2022, 'link', 'https://drive.google.com/file/d/1uE4C-_x9_HrIinN-UEjMbc8pMUTbha1o/view?usp=share_link', '1', '2022-02-04 02:15:29', '2023-03-30 17:56:28'),
+('b75152e5-68a6-441d-846c-6ccae8288038', 'RKA MURNI 2023', 'berkala', 2023, 'link', 'https://drive.google.com/file/d/1nMVv7DhfREm6YTGrHDe8MUR7-5ERlR2B/view?usp=share_link', '1', '2023-01-12 02:05:53', '2023-03-30 17:20:34'),
+('b9baedfc-3c18-4b85-93bb-b3531b43b3ae', 'KUA PPAS 2023', 'berkala', 2023, 'link', 'https://drive.google.com/drive/folders/18TMhkq7GACQCrBDqu2j_q_ukbNGlAw_g?usp=share_link', '1', '2022-11-04 10:46:17', '2023-03-30 17:32:31'),
+('bb8df579-b20b-4807-94db-10f81b8a0a3a', 'LAPORAN REALISASI ANGGARAN PEMPROV.NTB 2021', 'berkala', 2021, 'link', 'https://drive.google.com/file/d/1lfenHFK5ls9O-gM9r0L3g_TJBxSJ65nO/view?usp=sharing', '1', '2022-06-28 07:47:22', '2023-03-30 17:54:19'),
+('bfa2a301-e70d-4df0-8be0-d87a21f2fcb2', 'PERGUB APBD 2021 (MURNI)', 'berkala', 2021, 'link', 'https://drive.google.com/drive/folders/1rRe-i0Y5foXhgKLpm359Wc_j14FE_0bW?usp=sharing', '1', '2022-02-07 03:18:35', '2023-03-30 17:56:21'),
+('c1da7489-9a02-4625-a162-98c63c615945', 'KUA PPAS 2021', 'berkala', 2021, 'link', 'https://drive.google.com/drive/folders/1errBBNWp74PIlbL6Ncf98guqQEsK4Joy?usp=sharing', '1', '2022-07-01 03:29:22', '2023-03-30 17:46:31'),
+('c1df866a-6d0e-41d8-a720-17e65552800e', 'SK Kepala Daerang Tentang Pejabat Pengelolaan keuangan Daerah TA. 2022', 'dikecualikan', 2022, 'link', 'https://drive.google.com/file/d/1cK9VTHuflsxNVAGURyzqT2g58J-Scjlb/view?usp=sharing', '1', '2022-06-30 03:30:47', '2023-03-30 17:53:26'),
+('c30a936f-be4a-44f9-bc82-001ec19ad210', 'LAPORAN OPERASIONAL PEMPROV.NTB 2021', 'berkala', 2021, 'link', 'https://drive.google.com/file/d/1EveJCnyyuLukRHTkDZv4mmVy9JlY4r3v/view?usp=sharing', '1', '2022-06-28 07:47:01', '2023-03-30 17:54:25'),
+('c3fc8189-4a0f-4429-8949-b5a650586abb', 'RAPERGUB APBD 2022', 'berkala', 2022, 'link', 'https://drive.google.com/file/d/1UviHlFNgIR_Mimoa49MDmBVvo9TqVir7/view?usp=sharing', '1', '2022-01-03 03:23:57', '2023-03-30 17:56:50'),
+('c61fcadb-d3f7-4a83-8f06-18d19564e405', 'LAPORAN TAHUNAN 2020', 'berkala', 2020, 'link', 'https://docs.google.com/document/d/1gdsOCAWNoic-RrqWqTCDYJwTIB09aRRW/edit?usp=sharing&ouid=104060825741893759268&rtpof=true&sd=true', '1', '2021-10-05 03:10:30', '2023-03-30 18:12:33'),
+('ca5d7e95-4738-49db-a89d-fd53febce572', 'RKA 2021', 'berkala', 2021, 'link', 'https://drive.google.com/file/d/1WbJ-1-pEryoSsBk900n4_p0DqF5BDyzc/view?usp=sharing', '1', '2022-07-13 05:01:52', '2023-03-30 17:46:10'),
+('cd4c13ba-c85e-448d-91b1-eb85512781bd', 'LRA BPKAD 2018', 'berkala', 2018, 'link', 'https://drive.google.com/file/d/1z8s0pFucjPOrazrewmcalG-9fosmtfN1/view', '1', '2019-07-09 03:26:34', '2023-03-30 18:20:51'),
+('cf610a7f-8799-4c84-80dc-702d93346aea', 'LHP BPK TERHADAP LKPD TA 2021', 'berkala', 2021, 'link', 'https://drive.google.com/drive/folders/173niSRtZSqgDKyFrv4f6gi39V6snP_is?usp=sharing', '1', '2022-06-21 03:26:31', '2023-03-30 17:54:37'),
+('d1addcbb-71b4-4072-96e1-883b0e1215bd', 'RENCANA KERJA BPKAD TAHUN 2019', 'setiap saat', 2019, 'link', 'https://drive.google.com/file/d/1FZoh92FYG-uXJl1-XcoC1jrjwjNYXpQD/view', '1', '2018-03-26 08:37:43', '2023-03-30 18:21:09'),
+('d65cad8b-4bed-40a9-9b52-e2fb2a40105f', 'CATATAN ATAS LAPORAN KEUANGAN PEMPROV.NTB 2021', 'berkala', 2021, 'link', 'https://drive.google.com/file/d/114cEse-8_PTvHS4sXyNOU15aP5QE9bhc/view?usp=sharing', '1', '2022-06-30 01:23:16', '2023-03-30 17:53:58'),
+('d73846f4-32c4-4594-9624-f1c157a1f762', 'RAPERDA APBD 2022', 'berkala', 2022, 'link', 'https://drive.google.com/file/d/1aov1N0htMcXflvVd0rfVRKUOz095oYUw/view?usp=sharing', '1', '2022-01-03 03:15:00', '2023-03-30 17:58:44'),
+('d77e04fc-6071-4588-bca4-cb839dd8cf9c', 'LAPORAN REALISASI SEMESTER I dan PROGNOSIS APBD TA.2021', 'berkala', 2021, 'link', 'https://drive.google.com/file/d/11CprfQO2ZOTU8e1GKj1MMZ4Gc2DH6xWq/view?usp=sharing', '1', '2021-12-28 08:25:00', '2023-03-30 17:59:35'),
+('de8ede2e-7415-4eae-93d0-921a2c8c7fde', 'PERDA PENGELOLAAN KEUANGAN DAERAH', 'setiap saat', 2022, 'link', 'https://drive.google.com/file/d/1NO12pjhlDov6nyumYMJCfiOu0KcUoRJr/view?usp=sharing', '1', '2022-06-06 02:08:20', '2023-03-30 17:55:54'),
+('e35e64a9-3358-41b7-9dc5-0e3662ac3b62', 'OPINI BPK TAHUN 2020', 'berkala', 2020, 'link', 'https://drive.google.com/file/d/18JpN8fhhz5qtRJVKXZ3otuELC7HhC-_P/view?usp=sharing', '1', '2021-11-25 03:00:45', '2023-03-30 18:00:32'),
+('e42cafb2-d476-4063-96f9-b1557df24b79', 'PERDA APBD 2022', 'berkala', 2022, 'link', 'https://drive.google.com/drive/folders/1PECisZ9qLK6gqdCG813mIMlLs8YDe7ne?usp=sharing', '1', '2022-03-08 03:32:56', '2023-03-30 17:54:55'),
+('e47dc535-e5bd-4a9e-864b-777a332d99b5', 'PK IKU RKT BPKAD 2021', 'berkala', 2021, 'link', 'https://drive.google.com/file/d/1iQxXtz12Qx4QhkBdym0mVwsUsQ_Sg6z2/view?usp=sharing', '1', '2021-08-31 01:24:17', '2023-03-30 18:13:50'),
+('e955a716-f0e7-4a52-b385-c9916c796e93', 'RKA APBD 2019', 'berkala', 2019, 'link', 'https://drive.google.com/file/d/1H1YTU75nfxiHYdstSl34Tl1Gnn8Kd7Hi/view?usp=sharing', '1', '2021-11-22 01:07:51', '2023-03-30 18:01:37'),
+('ee28193c-f2fa-4962-b4fa-95f151f275f5', 'OPINI BPK-LKPD 2018', 'berkala', 2018, 'link', 'https://drive.google.com/file/d/1pZgoxJf-9gua2f4_B6Fdr5NBFOTz54rS/view?usp=sharing', '1', '2021-11-12 06:50:22', '2023-03-30 18:11:24'),
+('ee616222-78b5-4787-a856-70cf9d07ffee', 'RKA APBD 2018', 'berkala', 2018, 'link', 'https://drive.google.com/file/d/1FfBrefB8IVD40QHMGDbinKu46CeUwXzm/view?usp=sharing', '1', '2021-11-22 01:07:10', '2023-03-30 18:01:49'),
+('f22721b3-0f42-4fa7-960d-4ba436b6a2a4', 'DPA MURNI 2023', 'berkala', 2023, 'link', 'https://drive.google.com/file/d/1Udd1RrNEKkDwQ21BnmTmAuBQAKBGMMMe/view?usp=share_link', '1', '2023-01-12 01:50:25', '2023-03-30 17:21:23'),
+('f4bc7765-c2a9-4720-b7a2-e3674f70a408', 'NERACA PEMPROV.NTB 2021', 'berkala', 2021, 'link', 'https://drive.google.com/file/d/1IFgo-4zaZaLrdhq3zBnnij8IQBvnNR-C/view?usp=sharing', '1', '2022-06-28 07:47:58', '2023-03-30 17:54:14'),
+('f4da49df-a334-4ef5-935d-7a13e063779b', 'LAPORAN KEUANGAN SKPKD 2020', 'berkala', 2020, 'link', 'https://docs.google.com/document/d/1LgEc_q3DuzckTM3x6XX1WakITjGeWylX/edit?usp=sharing&ouid=104060825741893759268&rtpof=true&sd=true', '1', '2021-10-05 03:14:58', '2023-03-30 18:12:28'),
+('fc50d6c4-8124-4593-94ab-c82c955d8b8c', 'RENCANA AKSI TAHUN 2018', 'setiap saat', 2018, 'link', 'https://drive.google.com/file/d/1GH6BOieM_FZnbHknNuH_1gC_9g1BlTdM/view', '1', '2018-03-26 08:43:40', '2023-03-30 18:21:04'),
+('fc93d99d-9e04-4939-af4d-a37ec675fabc', 'PERGUB APBD 2022', 'berkala', 2022, 'link', 'https://drive.google.com/drive/folders/1LiUgDt8v6aJwBxeEoeou8a2e4XIe8hUG?usp=sharing', '1', '2022-03-08 03:32:26', '2023-03-30 17:55:11'),
+('fd47f852-e478-4890-aeca-2fb598c035ec', 'SK PPID BPKAD 2020', 'berkala', 2020, 'link', 'https://drive.google.com/file/d/1krXKcbIY1S9phwrT2J-UjAP-vftxETI1/view?usp=sharing', '1', '2021-06-30 02:48:12', '2023-03-30 18:16:41'),
+('fde85686-7bd4-4c6b-948e-2c2b42d477f2', 'PERJANJIAN KINERJA BPKAD 2021', 'berkala', 2021, 'link', 'https://drive.google.com/drive/folders/1yn9PMheWuHH8OtMtIQDhNDzhDBcsdNQr?usp=sharing', '1', '2021-08-31 03:31:43', '2023-03-30 18:12:43');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `link_terkait`
 --
 
 CREATE TABLE `link_terkait` (
-  `id` varchar(40) NOT NULL,
-  `name` varchar(145) NOT NULL,
-  `link` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(145) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `link` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data untuk tabel `link_terkait`
 --
 
-INSERT INTO `link_terkait` (`id`, `name`, `link`) VALUES
-('1', 'PPID NTB', 'https://ppid.ntbprov.go.id/'),
-('2', 'PEMPROV NTB', 'https://www.ntbprov.go.id/');
+INSERT INTO `link_terkait` (`id`, `name`, `link`, `created_at`, `updated_at`) VALUES
+('1', 'PPID NTB', 'https://ppid.ntbprov.go.id/', NULL, NULL),
+('2', 'PEMPROV NTB', 'https://www.ntbprov.go.id/', NULL, '2023-03-14 23:05:21');
 
 -- --------------------------------------------------------
 
@@ -391,21 +530,21 @@ INSERT INTO `link_terkait` (`id`, `name`, `link`) VALUES
 --
 
 CREATE TABLE `menu` (
-  `id` varchar(40) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `order_pos` int(11) NOT NULL,
-  `url` varchar(355) NOT NULL,
-  `create_by_id` varchar(40) NOT NULL,
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `order_pos` int NOT NULL,
+  `url` varchar(355) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `create_by_id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data untuk tabel `menu`
 --
 
 INSERT INTO `menu` (`id`, `name`, `order_pos`, `url`, `create_by_id`, `created_at`, `updated_at`) VALUES
-('11', 'Permohonan & Pengaduan', 4, 'http://bpkad.suru.id/Permohonan_dan_Pengaduan', '1', '2020-10-21 07:00:54', '2023-02-09 19:00:02'),
+('11', 'Permohonan & Pengaduan', 4, 'http://web.bpkad.test/Permohonan_dan_Pengaduan', '1', '2020-10-21 07:00:54', '2023-03-05 17:05:36'),
 ('2', 'Profile', 2, '/pages/1', '1', '2017-05-16 21:35:21', '2017-05-31 04:04:02'),
 ('3', 'Peraturan', 3, '#', '1', '2017-05-16 21:35:25', '2017-05-16 21:35:25'),
 ('4', 'Informasi Publik', 4, '#', '1', '2017-05-16 21:35:28', '2017-05-16 21:35:28'),
@@ -418,9 +557,9 @@ INSERT INTO `menu` (`id`, `name`, `order_pos`, `url`, `create_by_id`, `created_a
 --
 
 CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL
+  `id` int UNSIGNED NOT NULL,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -452,21 +591,21 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `office_address` (
-  `id` varchar(40) NOT NULL,
-  `address` text NOT NULL,
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `lat` double NOT NULL,
   `lng` double NOT NULL,
-  `phone` varchar(45) NOT NULL,
-  `fax` varchar(45) NOT NULL,
-  `email` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `phone` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fax` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data untuk tabel `office_address`
 --
 
 INSERT INTO `office_address` (`id`, `address`, `lat`, `lng`, `phone`, `fax`, `email`) VALUES
-('1', '		Jalan Pejanggik No. 14 mataram											\r\n													\r\n													\r\n													\r\n													', -8.583092, 116.110404, '081910911912', '081910911912', 'prog.bpkad.ntb@gmail.com');
+('1', 'Jalan Pejanggik No. 14 mataram', -8.583092, 116.110404, '081910911912', '081910911912', 'prog.bpkad.ntb@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -475,16 +614,16 @@ INSERT INTO `office_address` (`id`, `address`, `lat`, `lng`, `phone`, `fax`, `em
 --
 
 CREATE TABLE `pages` (
-  `id` varchar(40) NOT NULL,
-  `title` varchar(50) NOT NULL,
-  `pages_type_id` varchar(40) NOT NULL,
-  `content` text NOT NULL,
-  `pdf_file` varchar(355) DEFAULT NULL,
-  `create_by_id` varchar(40) NOT NULL,
-  `menu_id` varchar(40) DEFAULT NULL,
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pages_type_id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pdf_file` varchar(355) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `create_by_id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `menu_id` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data untuk tabel `pages`
@@ -523,9 +662,9 @@ INSERT INTO `pages` (`id`, `title`, `pages_type_id`, `content`, `pdf_file`, `cre
 --
 
 CREATE TABLE `page_type` (
-  `id` varchar(40) NOT NULL,
-  `name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data untuk tabel `page_type`
@@ -533,7 +672,8 @@ CREATE TABLE `page_type` (
 
 INSERT INTO `page_type` (`id`, `name`) VALUES
 ('1', 'text'),
-('2', 'pdf');
+('2', 'pdf'),
+('3', 'link');
 
 -- --------------------------------------------------------
 
@@ -542,20 +682,30 @@ INSERT INTO `page_type` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `pelaporan` (
-  `id` varchar(40) NOT NULL,
-  `nama_pelapor` varchar(150) DEFAULT NULL,
-  `judul_laporan` varchar(100) NOT NULL,
-  `isi_laporan` text NOT NULL,
-  `no_pelapor` varchar(14) NOT NULL,
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_pelapor` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `judul_laporan` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kode_laporan` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `isi_laporan` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `no_pelapor` varchar(14) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tgl_laporan` timestamp NOT NULL,
-  `lokasi_kejadian` varchar(250) NOT NULL,
-  `kategori_laporan` varchar(200) NOT NULL,
-  `files` text NOT NULL,
-  `jawaban` text,
-  `jawaban_dari` enum('langsung','whatsapp','sms','text') NOT NULL,
+  `lokasi_kejadian` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kategori_laporan` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `berkas` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `berkas_jawaban` mediumtext COLLATE utf8mb4_unicode_ci,
+  `jawaban` mediumtext COLLATE utf8mb4_unicode_ci,
+  `jawaban_dari` enum('langsung','whatsapp','sms','text') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `pelaporan`
+--
+
+INSERT INTO `pelaporan` (`id`, `nama_pelapor`, `judul_laporan`, `kode_laporan`, `isi_laporan`, `no_pelapor`, `tgl_laporan`, `lokasi_kejadian`, `kategori_laporan`, `berkas`, `berkas_jawaban`, `jawaban`, `jawaban_dari`, `created_at`, `updated_at`) VALUES
+('8fc38d74-a84b-4d1e-b8c2-0a73646c1100', 'Eky Galih', 'mengadu', 'LAP20C0C9BB42', 'ahsjdhajshdjah', '087700991548', '2023-03-09 00:21:46', 'ajsdkasdk', 'keluhan', 'uploads/laporan/271184a1ea15bac34acb4c19f003d468.png', NULL, NULL, NULL, '2018-12-11 16:00:00', '2023-03-09 20:12:48'),
+('b340b772-5c50-45c2-989b-6dbe8f801fa5', 'fsdfsdfs', 'fsdfsd', 'LAP2D39DBCA5C', 'asdasdas', '3452352', '2023-03-26 17:19:37', 'dasdasd', 'keluhan', 'uploads/laporan/271184a1ea15bac34acb4c19f003d468.png', NULL, NULL, NULL, '2023-01-04 17:19:37', '2023-03-26 17:19:37');
 
 -- --------------------------------------------------------
 
@@ -564,19 +714,28 @@ CREATE TABLE `pelaporan` (
 --
 
 CREATE TABLE `permohonan` (
-  `id` varchar(40) NOT NULL,
-  `nama` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `telepon` varchar(14) NOT NULL,
-  `alamat` text NOT NULL,
-  `ktp` varchar(255) NOT NULL,
-  `informasi_diminta` text NOT NULL,
-  `tujuan_informasi` text NOT NULL,
-  `pekerjaan` varchar(100) NOT NULL,
-  `asal_instansi` varchar(255) DEFAULT NULL,
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kode_pemohon` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '-',
+  `nama` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `telepon` varchar(14) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alamat` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ktp` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `informasi_diminta` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tujuan_informasi` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pekerjaan` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `asal_instansi` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` enum('proses','selesai') COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `permohonan`
+--
+
+INSERT INTO `permohonan` (`id`, `kode_pemohon`, `nama`, `email`, `telepon`, `alamat`, `ktp`, `informasi_diminta`, `tujuan_informasi`, `pekerjaan`, `asal_instansi`, `status`, `created_at`, `updated_at`) VALUES
+('29dd4cb5-79a9-4a5e-9a92-033e9b867f81', '001', 'EKY GALIH GUNANDA', 'ekygalihgunandaa@gmail.com', '087700991538', 'Jln. Pejanggik No 10 Mataram', 'uploads/permohonan/271184a1ea15bac34acb4c19f003d468.png', 'Permintaan data APBD', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi laudantium optio, enim necessitatibus possimus ut deleniti quos, maiores nobis dicta aperiam, sint nostrum ipsa esse dolorum omnis perspiciatis ipsum corrupti.', 'pegawai swasta', 'Bappenda NTB', 'proses', '2023-03-07 18:21:01', '2023-03-09 20:08:54');
 
 -- --------------------------------------------------------
 
@@ -585,14 +744,14 @@ CREATE TABLE `permohonan` (
 --
 
 CREATE TABLE `posts` (
-  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pdf_file` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `foto_berita` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content_type_id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `users_id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `posts_category_id` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pdf_file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `foto_berita` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content_type_id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `users_id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `posts_category_id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -791,11 +950,11 @@ INSERT INTO `posts` (`id`, `title`, `content`, `pdf_file`, `foto_berita`, `conte
 --
 
 CREATE TABLE `posts_category` (
-  `id` varchar(40) NOT NULL,
-  `category` varchar(255) DEFAULT NULL,
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data untuk tabel `posts_category`
@@ -813,15 +972,15 @@ INSERT INTO `posts_category` (`id`, `category`, `created_at`, `updated_at`) VALU
 --
 
 CREATE TABLE `post_comment` (
-  `id` varchar(40) NOT NULL,
-  `post_id` varchar(40) NOT NULL,
-  `nama` varchar(150) NOT NULL,
-  `email` varchar(150) NOT NULL,
-  `komentar` text NOT NULL,
-  `ip_addr` varchar(20) NOT NULL,
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `post_id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `komentar` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ip_addr` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data untuk tabel `post_comment`
@@ -837,8 +996,8 @@ INSERT INTO `post_comment` (`id`, `post_id`, `nama`, `email`, `komentar`, `ip_ad
 --
 
 CREATE TABLE `power_point` (
-  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `element` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `element` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -858,11 +1017,11 @@ INSERT INTO `power_point` (`id`, `element`, `created_at`, `updated_at`, `deleted
 --
 
 CREATE TABLE `rating` (
-  `id` varchar(40) NOT NULL,
-  `ip_address` varchar(45) NOT NULL,
-  `rate` int(11) NOT NULL,
-  `user_agent` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rate` int NOT NULL,
+  `user_agent` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data untuk tabel `rating`
@@ -910,16 +1069,53 @@ INSERT INTO `rating` (`id`, `ip_address`, `rate`, `user_agent`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `recent_activity`
+--
+
+CREATE TABLE `recent_activity` (
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid_activity` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `jenis` enum('post','pages','sub_pages','assets','transparansi','kip','galery','slider','powerpoint','bender','menu','social','link','address','apps','laporan','permohonan','users') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `activity` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `recent_activity`
+--
+
+INSERT INTO `recent_activity` (`id`, `user_id`, `uuid_activity`, `jenis`, `activity`, `created_at`, `updated_at`, `deleted_at`) VALUES
+('04eb94b2-2ebb-4826-8fca-f0b1412c1df1', '1', '1', 'users', 'memperbaharui profilenya', '2023-04-02 16:39:18', '2023-04-02 16:39:18', NULL),
+('0e96958d-d933-40c0-99fe-35df0f58bf4b', '1', '54a1838b-8d2e-4425-b2c5-f566275158fa', 'slider', 'mengubah slide', '2023-04-03 22:55:07', '2023-04-03 22:55:07', NULL),
+('1cf665aa-d678-4810-a65e-85782699ea36', '1', '54a1838b-8d2e-4425-b2c5-f566275158fa', 'slider', 'menamahkan slide', '2023-04-03 19:19:57', '2023-04-03 19:19:57', NULL),
+('6370a9cf-b852-4458-85b0-c1d86ade5cd6', '1', '2976e77b-5ee3-47cd-80f2-a63a46f34aa2', 'slider', 'menamahkan slide', '2023-04-03 22:52:44', '2023-04-03 22:52:44', NULL),
+('6ac36e99-08e4-4df3-8776-4a394d2cf737', '1', '69b94c2e-60f0-4feb-9485-ebcbd098d33d', 'slider', 'menghapus slide', '2023-04-03 23:02:44', '2023-04-03 23:02:44', NULL),
+('74674d28-dc3f-40f4-8cf1-f8cd27260af1', '1', '69b94c2e-60f0-4feb-9485-ebcbd098d33d', 'slider', 'menghapus slide', '2023-04-03 23:04:53', '2023-04-03 23:04:53', NULL),
+('c5fbd5f3-1f9d-40b9-b1f3-0aac29a52eaa', '1', '69b94c2e-60f0-4feb-9485-ebcbd098d33d', 'slider', 'menamahkan slide', '2023-04-03 22:53:04', '2023-04-03 22:53:04', NULL),
+('c62b2ebd-1297-4634-b344-349e07c97b22', '1', '54a1838b-8d2e-4425-b2c5-f566275158fa', 'slider', 'menghapus slide', '2023-04-03 23:05:15', '2023-04-03 23:05:15', NULL),
+('cb5f1856-c79b-4b8d-a5bf-289da6efa059', '1', '55704ff3-6d59-4ebb-8091-ca202b980bed', 'post', 'mengubah posting', '2023-04-03 19:25:47', '2023-04-03 19:25:47', NULL),
+('d15a4075-c233-4033-bbc5-c76ef152377b', '1', '69b94c2e-60f0-4feb-9485-ebcbd098d33d', 'slider', 'menghapus slide', '2023-04-03 23:03:25', '2023-04-03 23:03:25', NULL),
+('dfbbba03-6c10-4ed5-a3b5-8686a56bdb12', '1', '03096791-7c23-4804-9f0e-65078d25abfd', 'users', 'mengubah user', '2023-04-02 05:51:16', '2023-04-02 05:51:16', NULL),
+('e4c0c221-8136-4327-9837-ccfffe1f8b39', '1', '1', 'users', 'memperbaharui profilenya', '2023-04-02 16:38:27', '2023-04-02 16:38:27', NULL),
+('ee5011de-f465-45ca-803a-e6e220fb4811', '1', '03096791-7c23-4804-9f0e-65078d25abfd', 'users', 'menghapus user', '2023-04-02 05:54:36', '2023-04-02 05:54:36', NULL),
+('ee65fda5-3dcd-4037-9a7e-393dd2e8e370', '1', '2976e77b-5ee3-47cd-80f2-a63a46f34aa2', 'slider', 'menghapus slide', '2023-04-03 23:05:12', '2023-04-03 23:05:12', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `sessions`
 --
 
 CREATE TABLE `sessions` (
-  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_id` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci,
-  `payload` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_activity` int(11) NOT NULL
+  `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ip_address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `payload` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_activity` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -927,9 +1123,11 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('4BVb1TIGYPbeS4Vl6Jf6pasKUSmj5w0HVu7hnpqN', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiUHRzSTZiUkpoTmFpaE1HSlVPMFZKS09QQzFMWkpwZURxVFY1RWx1YSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly9icGthZC5zdXJ1LmlkL1Blcm1vaG9uYW5fZGFuX1BlbmdhZHVhbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MzoidXJsIjthOjE6e3M6ODoiaW50ZW5kZWQiO3M6MjY6Imh0dHA6Ly9icGthZC5zdXJ1LmlkL2FkbWluIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO3M6MToiMSI7fQ==', 1676444646),
-('eiamtnPR5lgNCjgKs15gbIK5ZVxHNf7mFigdv6ws', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoieWxZWHhYWWdsdWtFNVAya21UTGZETGNWSVQ0c1ZPTmlzU2lYOWlZSiI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czoyNjoiaHR0cDovL2Jwa2FkLnN1cnUuaWQvYWRtaW4iO31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czoyNjoiaHR0cDovL2Jwa2FkLnN1cnUuaWQvYWRtaW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7czoxOiIxIjt9', 1676362240),
-('S3wzdhih80q9esGAzOOQ1Yl5vOQ8xHXAciZrKnQF', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiTU80MjFZdm11NWZBaWJ4TWVIUjVYaGVPOWdHNjBXMFY4UGtKWUtFUyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly9icGthZC5zdXJ1LmlkL2FkbWluIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czoyNjoiaHR0cDovL2Jwa2FkLnN1cnUuaWQvYWRtaW4iO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7czoxOiIxIjt9', 1676336056);
+('aYxqU2Fup5PK3cd9PBm2r6fxLuigqYhuIj1QALDU', NULL, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMml3MEw2b2IzSUdXcjA0M2dIV2tHWUhqNmxYSXJoelpDNG9KWVlwOCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly93ZWIuYnBrYWQudGVzdC9QYWdlcy9zaG93LzI0Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1680754585),
+('CRfZA8g8eaZrWibSRk1GwIMBM69RkDOSityZJDPw', '1', '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiS1U4TWE0dldzSUwzSHNTQnM0Wk4wWGlzc05Ob0lsMzJwbEV3Ulh1VyI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czoyNzoiaHR0cDovL3dlYi5icGthZC50ZXN0L2FkbWluIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly93ZWIuYnBrYWQudGVzdCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtzOjE6IjEiO30=', 1680659470),
+('Rnad1fdyoSlt3UQm6scsplfaXBIl5FaSnUGD21o4', NULL, '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/111.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMEV3dUFOZm0xVFk1cDRicjU0ZUNDSEJmRXprM09tT0c2eEg2aFJUTyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly93ZWIuYnBrYWQudGVzdCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1680654884),
+('U9ACGoVQ75RpwxK2qNNE93RRRt82f5IRUfpGCiS4', NULL, '192.168.140.122', 'Mozilla/5.0 (Linux; Android 12; CPH2209) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Mobile Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMWZybWZlUlRvdnBzS2RxOEVhN3BnR2NKQ1UyNXhOaEV0ekdReERxRSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xOTIuMTY4LjEyMS4yNTo4MDAwIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1680655079),
+('zrxhsdbuhBCgMxOaDX7eCU5HIW00hd0dTah2MoSO', NULL, '192.168.140.122', 'Mozilla/5.0 (Linux; Android 12; CPH2209) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Mobile Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQVhxV29MOENxdmVOUVprSGpyeWlucktwOEJxUWNpdDFZSmRLUjBOTiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xOTIuMTY4LjEyMS4yNTo4MDAwIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1680655014);
 
 -- --------------------------------------------------------
 
@@ -938,8 +1136,8 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 --
 
 CREATE TABLE `slide` (
-  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_slide` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_slide` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -950,8 +1148,8 @@ CREATE TABLE `slide` (
 --
 
 INSERT INTO `slide` (`id`, `nama_slide`, `created_at`, `updated_at`, `deleted_at`) VALUES
-('3cb30611-9d46-11ed-a403-244bfebc253d', 'Slide Informasi', NULL, NULL, NULL),
-('d57047d6-9d3c-11ed-a403-244bfebc253d', 'Slide Utama', NULL, NULL, NULL);
+('1', 'Slide Informasi', NULL, NULL, NULL),
+('2', 'Slide Utama', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -960,27 +1158,30 @@ INSERT INTO `slide` (`id`, `nama_slide`, `created_at`, `updated_at`, `deleted_at
 --
 
 CREATE TABLE `slide_item` (
-  `id` varchar(40) NOT NULL,
-  `title` varchar(50) NOT NULL,
-  `keterangan` varchar(100) NOT NULL,
-  `foto` varchar(100) NOT NULL,
-  `url` varchar(355) NOT NULL,
-  `slide_id` varchar(40) NOT NULL,
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keterangan` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `foto` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `url` varchar(355) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slide_id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data untuk tabel `slide_item`
 --
 
-INSERT INTO `slide_item` (`id`, `title`, `keterangan`, `foto`, `url`, `slide_id`, `created_at`, `updated_at`) VALUES
-('28bd7058-9d3d-11ed-a403-244bfebc253d', 'Pegawai Bpkad', 'Apel Pagi Pegawai Bpkad', '/uploads/pegawai_bpkad.jpg', '', 'd57047d6-9d3c-11ed-a403-244bfebc253d', NULL, NULL),
-('28bd7975-9d3d-11ed-a403-244bfebc253d', 'Pegawi Bpkad', 'apel pagi', '/uploads/IMG_20220307_075136.jpg', '', 'd57047d6-9d3c-11ed-a403-244bfebc253d', NULL, NULL),
-('28bd84de-9d3d-11ed-a403-244bfebc253d', 'NTB WTP ke-11', '', '/uploads/IMG_20220523_161100.jpg', 'http://bpkad.ntbprov.go.id/post/NTB%20Wajar%20Tanpa%20Pengecualian%20%28WTP%29%20ke%2011', 'd57047d6-9d3c-11ed-a403-244bfebc253d', NULL, NULL),
-('28bd8d16-9d3d-11ed-a403-244bfebc253d', 'Ruang Rapat', 'Ruang Rapat Utama BPKAD NTB', '/uploads/ruang_rapat.jpeg', '', 'd57047d6-9d3c-11ed-a403-244bfebc253d', NULL, NULL),
-('71aa755c-9d46-11ed-a403-244bfebc253d', 'Sport', 'Bpkad Provinsi Ntb menjuarai turnamen futsall', '', '', '3cb30611-9d46-11ed-a403-244bfebc253d', '2023-01-26 07:01:59', NULL),
-('892a6d53-9d46-11ed-a403-244bfebc253d', 'Pemerintahan', 'NTB Raih WTP ke -12', '', '', '3cb30611-9d46-11ed-a403-244bfebc253d', '2023-01-24 16:00:00', NULL);
+INSERT INTO `slide_item` (`id`, `title`, `keterangan`, `foto`, `url`, `slide_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+('28bd7058-9d3d-11ed-a403-244bfebc253d', 'Pegawai Bpkad', 'Apel Pagi Pegawai Bpkad', '/uploads/pegawai_bpkad.jpg', '', '2', '2022-04-13 02:23:45', NULL, NULL),
+('28bd7975-9d3d-11ed-a403-244bfebc253d', 'Pegawi Bpkad', 'apel pagi', '/uploads/IMG_20220307_075136.jpg', '', '2', '2023-10-11 02:30:36', NULL, NULL),
+('28bd84de-9d3d-11ed-a403-244bfebc253d', 'NTB WTP ke-11', '', '/uploads/IMG_20220523_161100.jpg', 'http://bpkad.ntbprov.go.id/post/NTB%20Wajar%20Tanpa%20Pengecualian%20%28WTP%29%20ke%2011', '2', '2023-06-07 02:30:48', NULL, NULL),
+('28bd8d16-9d3d-11ed-a403-244bfebc253d', 'Ruang Rapat', 'Ruang Rapat Utama BPKAD NTB', '/uploads/ruang_rapat.jpeg', '', '2', '2023-06-06 16:00:00', NULL, NULL),
+('2976e77b-5ee3-47cd-80f2-a63a46f34aa2', 'Pengumuman', 'Libur/cuti bersama akhir pekan akan di mulai dari tgl 19 maret s/d 29 maret 2021', '', '', '1', '2023-04-03 22:52:44', '2023-04-03 23:05:12', '2023-04-03 23:05:12'),
+('54a1838b-8d2e-4425-b2c5-f566275158fa', 'Pengumuman', 'Libur/cuti bersama Idul fitri akan di mulai dari tgl 19 maret s/d 29 maret 2021', '', '', '1', '2023-04-03 19:19:57', '2023-04-03 23:05:15', '2023-04-03 23:05:15'),
+('69b94c2e-60f0-4feb-9485-ebcbd098d33d', 'Pengumuman', 'Libur/cuti bersama akhir pekan akan di mulai dari tgl 19 maret s/d 29 maret 2021', '', '', '1', '2023-04-03 22:53:04', '2023-04-03 23:04:53', '2023-04-03 23:04:53'),
+('71aa755c-9d46-11ed-a403-244bfebc253d', 'Sport', 'Bpkad Provinsi Ntb menjuarai turnamen futsall', '', '', '1', '2023-01-26 07:01:59', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -989,13 +1190,23 @@ INSERT INTO `slide_item` (`id`, `title`, `keterangan`, `foto`, `url`, `slide_id`
 --
 
 CREATE TABLE `sosial_media` (
-  `id` varchar(40) NOT NULL,
-  `twitter` text NOT NULL,
-  `facebook` text NOT NULL,
-  `youtube` text NOT NULL,
-  `instagram` text NOT NULL,
-  `whatsapp` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `twitter` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `facebook` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `youtube` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `instagram` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `whatsapp` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `sosial_media`
+--
+
+INSERT INTO `sosial_media` (`id`, `user_id`, `twitter`, `facebook`, `youtube`, `instagram`, `whatsapp`, `created_at`, `updated_at`) VALUES
+('ddf9f743-2af2-40a8-baed-29cd70588410', '1', 'https://twitter.com/BpkadNtb', 'https://www.facebook.com/bpkadntbprov', NULL, 'https://www.instagram.com/ntbbpkad/', '081910911912', '2023-03-15 00:48:48', '2023-04-02 16:39:18');
 
 -- --------------------------------------------------------
 
@@ -1004,27 +1215,30 @@ CREATE TABLE `sosial_media` (
 --
 
 CREATE TABLE `sub_pages` (
-  `id` varchar(40) NOT NULL,
-  `title` varchar(50) NOT NULL,
-  `pages_type_id` varchar(40) NOT NULL,
-  `content` text NOT NULL,
-  `pdf_file` varchar(355) DEFAULT NULL,
-  `create_by_id` varchar(40) NOT NULL,
-  `sub_pages_id` varchar(40) DEFAULT NULL,
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pages_type_id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `pdf_file` varchar(355) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `create_by_id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jenis_link` enum('link','non-link') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `link` mediumtext COLLATE utf8mb4_unicode_ci,
+  `sub_pages_id` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data untuk tabel `sub_pages`
 --
 
-INSERT INTO `sub_pages` (`id`, `title`, `pages_type_id`, `content`, `pdf_file`, `create_by_id`, `sub_pages_id`, `created_at`, `updated_at`) VALUES
-('27', 'Profil Singkat PPID', '1', '<p style=\"text-align: center;\"><span style=\"font-size: 14pt;\"><strong>Profil Singkat PPID</strong></span></p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"font-size: 12pt;\">Pemerintah dan badan publik lainnya mempunyai kewajiban untuk menyampaikan informasi terkait penyelenggaraan negara dan pemerintahan. Mengingat informasi sebagai hak dasar manusia, pemerintah harus membuka layanan dan akses informasi bagi masyarakat yang ingin memperolehnya.Kewajiban pemerintah untuk menyediakan layanan informasi bagi masyarakat tertuang dengan jelas melalui Undang-Undang Nomor 14 Tahun 2008 tentang Keterbukaan Informasi Publik (KIP). UU tersebut mengatur dengan spesifik tentang kewajiban-kewajiban badan publik untuk menyampaikan informasi publik sesuai dengan klasifikasinya. Diantaranya, informasi serta merta, informasi reguler, serta informasi berkala. UU KIP membuka ruang bagi masyarakat untuk memperoleh informasi dengan hak-haknya. Dengan begitu, penyelenggaraan pemerintahan akan menjadi lebih terbuka karena informasi publik dapat diakses sesuai ketentuang UU.</span></p>\r\n<p><span style=\"font-size: 12pt;\">&nbsp;</span></p>\r\n<p><span style=\"font-size: 12pt;\">Era keterbukaan informasi sebagai tanda positif terhadap kemajuan bangsa. Pemerintah dalam menjalankan tugas dan fungsinya berkewajiban menyediakan layanan informasi bagi seluruh warga Negara.&nbsp; Badan publik juga berkewajiban mengumumkan informasi yang sifatnya serta merta, reguler dan berkala. Akan tetapi, sesuai dengan amanat UU KIP tersebut, tidak semua informasi dapat diakses oleh publik, mengingat terdapat macam-macam informasi yang menjadi rahasia negara atau jika informasi dimaksud mengandung pengaruh tidak baik bagi negara, maka hal tersebut tidak boleh diakses oleh masyarakat umum karena dikategorikan sebagai informasi yang dikecualikan.</span></p>\r\n<p><span style=\"font-size: 12pt;\">&nbsp;</span></p>\r\n<p><span style=\"font-size: 12pt;\">Pejabat Pengelola Informasi dan Dokumentasi (PPID) Pemerintah Provinsi NTB dibentuk dengan tujuan untuk meningkatkan layanan informasi publik di lingkungan Pemerintah Provinsi NTB sesuai dengan yang diamanatkan dalam Undang-Undang Nomor 14 Tahun 2008 tentang Keterbukaan Informasi Publik.</span></p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"font-size: 12pt;\">Sejalan dengan perintah UU KIP, Pemerintah Provinsi NTB membentuk PPID di tingkat Pemerintah Provinsi, yang disebut PPID Utama melalui Peraturan Gubernur Nusa Tenggara Barat Nomor 35 Tahun 2012 Tentang Pedoman Pengelolaan Informasi dan Dokumentasi di Lingkungan Pemerintah Provinsi Nusa Tenggara Barat yang mengatur tata kerja, tata cara pengelolaan dan pelayanan informasi dan dokumentasi oleh Pejabat Pengelola Informasi dan Dokumentasi Pemerintah Provinsi Nusa Tenggara Barat. Selanjutnya ditingkat perangkat daerah dibentuk PPID Pembantu. Sebagai tindak lanjut terhadap Peraturan Gubernur tersebut, BPKAD Provinsi NTB membentuk PPID Pembantu sejak tahun 2017 yang ditetapkan dengan SK Kepala BPKAD Provinsi NTB setiap tahunnya, terakhir pada tahun 2020 ditetapkan dengan SK No. 910/19/BPKAD/2020 tentang Petugas Pengumpul dan Pengolah Data Informasi dan Dokumentasi PPID Badan Pengelolaan Keuangan dan Aset Daerah Provinsi Nusa Tenggara Barat.</span></p>', NULL, '1', 'dfdcc248-b64f-40b0-8711-9c2a80fcb59d', '2020-10-21 07:00:34', '2021-06-30 00:49:16'),
-('28', 'VISI dan MISI PPID', '1', '<p><span style=\"font-size: 14pt;\">VISI</span></p>\r\n<ul>\r\n<li><span style=\"font-size: 12pt;\">Terwujudnya Pelayanan Informasi Publik yang Transparan dan Akuntabel</span></li>\r\n</ul>\r\n<p><span style=\"font-size: 12pt;\">MISI</span></p>\r\n<ul>\r\n<li><span style=\"font-size: 12pt;\">Meningkatkan keterbukaan dalam penyelenggaraan pemerintahan dan pembangunan</span></li>\r\n<li><span style=\"font-size: 12pt;\">Meningkatkan Aksebilitas masyarakat terhadap informasi publik</span></li>\r\n<li><span style=\"font-size: 12pt;\">Membangun dan Mengembangkan sistem pelayanan informasi publik</span></li>\r\n<li><span style=\"font-size: 12pt;\">Meningkatkan kualitas SDM pengelolaan dan pelayanan informasi publik</span></li>\r\n<li><span style=\"font-size: 12pt;\">Meningkatkan sinergitas dengan pemangku kepentingan dalam meningkatkan aksebilitas masyarakat terhadap informasi publik</span></li>\r\n</ul>', NULL, '1', 'dfdcc248-b64f-40b0-8711-9c2a80fcb59d', '2020-10-21 07:05:11', '2021-06-30 00:49:16'),
-('29', 'Struktur Organisasi PPID', '1', '<figure class=\"image align-center\"><img src=\"../../../static/uploads/c39f891e-b213-4614-ba07-b02d3568c3a0.png\" alt=\"\" width=\"868\" height=\"381\" />\r\n<figcaption>Struktur Kepengurusan PPID BPKAD NTB PROV</figcaption>\r\n</figure>\r\n<p>&nbsp;</p>', NULL, '1', 'dfdcc248-b64f-40b0-8711-9c2a80fcb59d', '2020-10-21 07:10:43', '2021-06-30 00:49:16'),
-('30', 'Tujuan PPID', '1', '<p style=\"text-align: center;\"><span style=\"font-size: 14pt;\"><strong>TUJUAN&nbsp;PPID</strong></span></p>\r\n<p style=\"text-align: center;\">&nbsp;</p>\r\n<ol>\r\n<li><span style=\"font-size: 12pt;\">Menjamin hak warga negara untuk mengetahui rencana pembuatan kebijakan publik, program kebijakan publik, dan proses pengambilan keputusan publik, serta alasan pengambilan suatu keputusan publik;</span></li>\r\n<li><span style=\"font-size: 12pt;\">Mendorong partisipasi masyarakat dalam proses pengambilan kebijakan publik;</span></li>\r\n<li><span style=\"font-size: 12pt;\">Meningkatkan peran aktif masyarakat dalam pengambilan kebijakan publik dan pengelolaan Pemerintah Provinsi NTB yang baik;</span></li>\r\n<li><span style=\"font-size: 12pt;\">Mewujudkan penyelenggaraan negara yang baik, yaitu yang transparan, efektif dan efisien, akuntabel serta dapat dipertanggungjawabkan;</span></li>\r\n<li><span style=\"font-size: 12pt;\">Mengetahui alasan kebijakan publik yang memengaruhi hajat hidup orang banyak;</span></li>\r\n<li><span style=\"font-size: 12pt;\">Mengembangkan ilmu pengetahuan dan mencerdaskan kehidupan bangsa; dan/atau</span></li>\r\n<li><span style=\"font-size: 12pt;\">Meningkatkan pengelolaan dan pelayanan informasi di lingkungan Pemerintah Provinsi&nbsp;NTB untuk menghasilkan layanan informasi yang berkualitas.</span></li>\r\n</ol>', NULL, '1', 'dfdcc248-b64f-40b0-8711-9c2a80fcb59d', '2020-10-21 07:15:36', '2021-06-30 00:49:16'),
-('31', 'Permohonan Penyelesaian Sengketa', '1', '<div class=\"flex_column av_one_full  flex_column_div av-zero-column-padding first  avia-builder-el-1  el_after_av_team_member  el_before_av_hr  \">\r\n<div class=\"av-special-heading av-special-heading-h3  blockquote modern-quote modern-centered  avia-builder-el-2  avia-builder-el-no-sibling  \">\r\n<h3 class=\"av-special-heading-tag \" style=\"text-align: center;\"><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">TATA CARA PENGAJUAN PERMOHONAN PENYELESAIAN SENGKETA KE KOMISI INFORMASI</span></h3>\r\n<div class=\"av-subheading av-subheading_below  \">\r\n<p style=\"text-align: center;\"><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">PENGELOLA LAYANAN INFORMASI DAN DOKUMENTASI (PLID)</span><br /><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">BADAN PENGELOLAAN KEUANGAN DAN ASET DAERAH PROVINSI NTB</span></p>\r\n</div>\r\n</div>\r\n</div>\r\n<div class=\"hr hr-short hr-center   avia-builder-el-3  el_after_av_one_full  el_before_av_iconlist \"><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">&nbsp;</span></div>\r\n<div class=\"avia-icon-list-container   avia-builder-el-4  el_after_av_hr  avia-builder-el-last \">\r\n<ul class=\"avia-icon-list avia-icon-list-left av-iconlist-small avia_animate_when_almost_visible avia-iconlist-animate avia_start_animation\">\r\n<li>\r\n<div class=\"iconlist_icon  avia-font-entypo-fontello\"><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Langkah 1</span></div>\r\n<article class=\"article-icon-entry \">\r\n<div class=\"iconlist_content_wrap\">\r\n<div class=\"iconlist_content  \">\r\n<p><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Permohonan Penyelesaian Sengketa Informasi dapat diajukan secara langsung (datang langsung), melalui permohonan secara tertulis (surat) dikirim melalui email atau surat tercatat dan secara online;</span></p>\r\n</div>\r\n</div>\r\n<footer class=\"entry-footer\"></footer></article>\r\n</li>\r\n<li>\r\n<article class=\"article-icon-entry \">\r\n<div class=\"iconlist_content_wrap\">\r\n<div class=\"iconlist_content  \">\r\n<p><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Permohonan Penyelesaian Sengketa Informasi Secara Langsung;</span></p>\r\n<ol>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Pemohon mengisi Form Permohonan Penyelesaian Sengketa Informasi yang telah disediakan petugas;</span></li>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Membawa bukti surat permohonan informasi kepada Badan Publik dan tanda terimanya;</span></li>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Membawa bukti jawaban permohonan informasi dari Badan Publik beserta tanda terimanya (jika ada);</span></li>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Membawa bukti pengajuan keberatan kepada Badan Publik dan tanda terimanya;</span></li>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Membawa bukti jawaban keberatan dari Badan Publik beserta tanda terimanya (jika ada);</span></li>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Membawa bukti identitas (jika individu maka dibuktikan dengan Kartu Tanda Penduduk dan jika Badan Hukum dibuktikan dengan Anggaran Dasar yang telah mendapat pengesahan sebagai Badan Hukum dan bila dikuasakan dibuktikan dengan surat kuasa);</span>\r\n<div class=\"iconlist_icon  avia-font-entypo-fontello\"><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">&nbsp;Langkah 2</span></div>\r\n</li>\r\n</ol>\r\n<p><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">&nbsp;</span></p>\r\n</div>\r\n</div>\r\n<footer class=\"entry-footer\"></footer></article>\r\n</li>\r\n<li>\r\n<div class=\"iconlist_icon  avia-font-entypo-fontello\"><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">&nbsp;Langkah 3</span></div>\r\n<article class=\"article-icon-entry \">\r\n<div class=\"iconlist_content_wrap\">\r\n<div class=\"iconlist_content  \">\r\n<p><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Permohonan Penyelesaian Sengketa Informasi Secara Tertulis;</span></p>\r\n<ol>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">&nbsp;Permohonan Penyelesaian Sengketa Informasi yang ditujukan ke Ketua Komisi Informasi Provinsi Jawa Barat dengan melampirkan;bukti surat permohonan informasi kepada Badan Publik dan tanda terimanya;</span></li>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Bukti jawaban permohonan informasi dari Badan Publik beserta tanda terimanya (jika ada);</span></li>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Bukti pengajuan Keberatan kepada Badan Publik dan tanda terimanya;</span></li>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Bukti jawaban keberatan dari Badan Publik beserta tanda terimanya (jika ada);</span></li>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Bukti identitas (jika individu maka dibuktikan dengan Kartu Tanda Penduduk dan jika Badan Hukum dibuktikan dengan Anggaran Dasar yang telah mendapat pengesahan sebagai Badan Hukum dan bila dikuasakan dibuktikan dengan surat kuasa);</span></li>\r\n</ol>\r\n<p><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">&nbsp;</span></p>\r\n</div>\r\n</div>\r\n<footer class=\"entry-footer\"></footer></article>\r\n</li>\r\n<li>\r\n<div class=\"iconlist_icon  avia-font-entypo-fontello\"><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">&nbsp;Langkah 4</span></div>\r\n<article class=\"article-icon-entry \">\r\n<div class=\"iconlist_content_wrap\">\r\n<div class=\"iconlist_content  \">\r\n<p><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Permohon Penyelesaian Sengketa Informasi Secara Online</span></p>\r\n<ol>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Permohonan Penyelesaian Sengketa Informasi Secara Online dapat dikirim ke <a style=\"color: #000000;\" href=\"https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcRwQLxvRBdpvJFHQKctnHLZGCZqdTvDNgdFxfpGkDDbMnMrMKWgkjhDMTQLQgSfSfmpmnhJJ\">program.bpkad.nt@gmail.com</a></span></li>\r\n</ol>\r\n<p>&nbsp;</p>\r\n<table style=\"height: 7px; width: 639px;\" border=\"2\">\r\n<tbody>\r\n<tr>\r\n<td style=\"width: 103px;\">&nbsp;<img src=\"../../../static/uploads/d03dd1a7-712b-432f-bc51-5dfa6e8ed22f.png\" width=\"100\" height=\"123\" /></td>\r\n<td style=\"width: 285px;\">&nbsp;FORM PENYELESAIAN SENGKETA</td>\r\n<td style=\"width: 229px; text-align: center;\"><a href=\"https://drive.google.com/file/d/1-bGZVjus91vA4gdBC2Vjz7vb4nZXHk63/view?usp=sharing\">DOWNLOAD</a></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p>&nbsp;</p>\r\n<p><img src=\"../../../static/uploads/004c0318-160a-4aba-aedf-6137328d3622.jpeg\" alt=\"\" width=\"768\" height=\"611\" /></p>\r\n</div>\r\n</div>\r\n</article>\r\n</li>\r\n</ul>\r\n</div>', NULL, '1', '2508745f-73c8-47bd-a07b-6a90082bacfa', '2021-06-30 01:13:18', '2021-06-30 02:18:56');
+INSERT INTO `sub_pages` (`id`, `title`, `pages_type_id`, `content`, `pdf_file`, `create_by_id`, `jenis_link`, `link`, `sub_pages_id`, `created_at`, `updated_at`) VALUES
+('27', 'Profil Singkat PPID', '1', '<p style=\"text-align: center;\"><span style=\"font-size: 14pt;\"><strong>Profil Singkat PPID</strong></span></p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"font-size: 12pt;\">Pemerintah dan badan publik lainnya mempunyai kewajiban untuk menyampaikan informasi terkait penyelenggaraan negara dan pemerintahan. Mengingat informasi sebagai hak dasar manusia, pemerintah harus membuka layanan dan akses informasi bagi masyarakat yang ingin memperolehnya.Kewajiban pemerintah untuk menyediakan layanan informasi bagi masyarakat tertuang dengan jelas melalui Undang-Undang Nomor 14 Tahun 2008 tentang Keterbukaan Informasi Publik (KIP). UU tersebut mengatur dengan spesifik tentang kewajiban-kewajiban badan publik untuk menyampaikan informasi publik sesuai dengan klasifikasinya. Diantaranya, informasi serta merta, informasi reguler, serta informasi berkala. UU KIP membuka ruang bagi masyarakat untuk memperoleh informasi dengan hak-haknya. Dengan begitu, penyelenggaraan pemerintahan akan menjadi lebih terbuka karena informasi publik dapat diakses sesuai ketentuang UU.</span></p>\r\n<p><span style=\"font-size: 12pt;\">&nbsp;</span></p>\r\n<p><span style=\"font-size: 12pt;\">Era keterbukaan informasi sebagai tanda positif terhadap kemajuan bangsa. Pemerintah dalam menjalankan tugas dan fungsinya berkewajiban menyediakan layanan informasi bagi seluruh warga Negara.&nbsp; Badan publik juga berkewajiban mengumumkan informasi yang sifatnya serta merta, reguler dan berkala. Akan tetapi, sesuai dengan amanat UU KIP tersebut, tidak semua informasi dapat diakses oleh publik, mengingat terdapat macam-macam informasi yang menjadi rahasia negara atau jika informasi dimaksud mengandung pengaruh tidak baik bagi negara, maka hal tersebut tidak boleh diakses oleh masyarakat umum karena dikategorikan sebagai informasi yang dikecualikan.</span></p>\r\n<p><span style=\"font-size: 12pt;\">&nbsp;</span></p>\r\n<p><span style=\"font-size: 12pt;\">Pejabat Pengelola Informasi dan Dokumentasi (PPID) Pemerintah Provinsi NTB dibentuk dengan tujuan untuk meningkatkan layanan informasi publik di lingkungan Pemerintah Provinsi NTB sesuai dengan yang diamanatkan dalam Undang-Undang Nomor 14 Tahun 2008 tentang Keterbukaan Informasi Publik.</span></p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"font-size: 12pt;\">Sejalan dengan perintah UU KIP, Pemerintah Provinsi NTB membentuk PPID di tingkat Pemerintah Provinsi, yang disebut PPID Utama melalui Peraturan Gubernur Nusa Tenggara Barat Nomor 35 Tahun 2012 Tentang Pedoman Pengelolaan Informasi dan Dokumentasi di Lingkungan Pemerintah Provinsi Nusa Tenggara Barat yang mengatur tata kerja, tata cara pengelolaan dan pelayanan informasi dan dokumentasi oleh Pejabat Pengelola Informasi dan Dokumentasi Pemerintah Provinsi Nusa Tenggara Barat. Selanjutnya ditingkat perangkat daerah dibentuk PPID Pembantu. Sebagai tindak lanjut terhadap Peraturan Gubernur tersebut, BPKAD Provinsi NTB membentuk PPID Pembantu sejak tahun 2017 yang ditetapkan dengan SK Kepala BPKAD Provinsi NTB setiap tahunnya, terakhir pada tahun 2020 ditetapkan dengan SK No. 910/19/BPKAD/2020 tentang Petugas Pengumpul dan Pengolah Data Informasi dan Dokumentasi PPID Badan Pengelolaan Keuangan dan Aset Daerah Provinsi Nusa Tenggara Barat.</span></p>', NULL, '1', 'non-link', NULL, 'dfdcc248-b64f-40b0-8711-9c2a80fcb59d', '2020-10-21 07:00:34', '2021-06-30 00:49:16'),
+('28', 'VISI dan MISI PPID', '1', '<p><span style=\"font-size: 14pt;\">VISI</span></p>\r\n<ul>\r\n<li><span style=\"font-size: 12pt;\">Terwujudnya Pelayanan Informasi Publik yang Transparan dan Akuntabel</span></li>\r\n</ul>\r\n<p><span style=\"font-size: 12pt;\">MISI</span></p>\r\n<ul>\r\n<li><span style=\"font-size: 12pt;\">Meningkatkan keterbukaan dalam penyelenggaraan pemerintahan dan pembangunan</span></li>\r\n<li><span style=\"font-size: 12pt;\">Meningkatkan Aksebilitas masyarakat terhadap informasi publik</span></li>\r\n<li><span style=\"font-size: 12pt;\">Membangun dan Mengembangkan sistem pelayanan informasi publik</span></li>\r\n<li><span style=\"font-size: 12pt;\">Meningkatkan kualitas SDM pengelolaan dan pelayanan informasi publik</span></li>\r\n<li><span style=\"font-size: 12pt;\">Meningkatkan sinergitas dengan pemangku kepentingan dalam meningkatkan aksebilitas masyarakat terhadap informasi publik</span></li>\r\n</ul>', NULL, '1', 'non-link', NULL, 'dfdcc248-b64f-40b0-8711-9c2a80fcb59d', '2020-10-21 07:05:11', '2021-06-30 00:49:16'),
+('29', 'Struktur Organisasi PPID', '1', '<figure class=\"image align-center\"><img src=\"../../../static/uploads/c39f891e-b213-4614-ba07-b02d3568c3a0.png\" alt=\"\" width=\"868\" height=\"381\" />\r\n<figcaption>Struktur Kepengurusan PPID BPKAD NTB PROV</figcaption>\r\n</figure>\r\n<p>&nbsp;</p>', NULL, '1', 'non-link', NULL, 'dfdcc248-b64f-40b0-8711-9c2a80fcb59d', '2020-10-21 07:10:43', '2021-06-30 00:49:16'),
+('30', 'Tujuan PPID', '1', '<p style=\"text-align: center;\"><span style=\"font-size: 14pt;\"><strong>TUJUAN&nbsp;PPID</strong></span></p>\r\n<p style=\"text-align: center;\">&nbsp;</p>\r\n<ol>\r\n<li><span style=\"font-size: 12pt;\">Menjamin hak warga negara untuk mengetahui rencana pembuatan kebijakan publik, program kebijakan publik, dan proses pengambilan keputusan publik, serta alasan pengambilan suatu keputusan publik;</span></li>\r\n<li><span style=\"font-size: 12pt;\">Mendorong partisipasi masyarakat dalam proses pengambilan kebijakan publik;</span></li>\r\n<li><span style=\"font-size: 12pt;\">Meningkatkan peran aktif masyarakat dalam pengambilan kebijakan publik dan pengelolaan Pemerintah Provinsi NTB yang baik;</span></li>\r\n<li><span style=\"font-size: 12pt;\">Mewujudkan penyelenggaraan negara yang baik, yaitu yang transparan, efektif dan efisien, akuntabel serta dapat dipertanggungjawabkan;</span></li>\r\n<li><span style=\"font-size: 12pt;\">Mengetahui alasan kebijakan publik yang memengaruhi hajat hidup orang banyak;</span></li>\r\n<li><span style=\"font-size: 12pt;\">Mengembangkan ilmu pengetahuan dan mencerdaskan kehidupan bangsa; dan/atau</span></li>\r\n<li><span style=\"font-size: 12pt;\">Meningkatkan pengelolaan dan pelayanan informasi di lingkungan Pemerintah Provinsi&nbsp;NTB untuk menghasilkan layanan informasi yang berkualitas.</span></li>\r\n</ol>', NULL, '1', 'non-link', NULL, 'dfdcc248-b64f-40b0-8711-9c2a80fcb59d', '2020-10-21 07:15:36', '2021-06-30 00:49:16'),
+('31', 'Penyelesaian Sengketa', '1', '<div class=\"flex_column av_one_full  flex_column_div av-zero-column-padding first  avia-builder-el-1  el_after_av_team_member  el_before_av_hr  \">\r\n<div class=\"av-special-heading av-special-heading-h3  blockquote modern-quote modern-centered  avia-builder-el-2  avia-builder-el-no-sibling  \">\r\n<h3 class=\"av-special-heading-tag \" style=\"text-align: center;\"><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">TATA CARA PENGAJUAN PERMOHONAN PENYELESAIAN SENGKETA KE KOMISI INFORMASI</span></h3>\r\n<div class=\"av-subheading av-subheading_below  \">\r\n<p style=\"text-align: center;\"><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">PENGELOLA LAYANAN INFORMASI DAN DOKUMENTASI (PLID)</span><br><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">BADAN PENGELOLAAN KEUANGAN DAN ASET DAERAH PROVINSI NTB</span></p>\r\n</div>\r\n</div>\r\n</div>\r\n<div class=\"hr hr-short hr-center   avia-builder-el-3  el_after_av_one_full  el_before_av_iconlist \"><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">&nbsp;</span></div>\r\n<div class=\"avia-icon-list-container   avia-builder-el-4  el_after_av_hr  avia-builder-el-last \">\r\n<ul class=\"avia-icon-list avia-icon-list-left av-iconlist-small avia_animate_when_almost_visible avia-iconlist-animate avia_start_animation\">\r\n<li>\r\n<div class=\"iconlist_icon  avia-font-entypo-fontello\"><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Langkah 1</span></div>\r\n<article class=\"article-icon-entry \">\r\n<div class=\"iconlist_content_wrap\">\r\n<div class=\"iconlist_content  \">\r\n<p><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Permohonan Penyelesaian Sengketa Informasi dapat diajukan secara langsung (datang langsung), melalui permohonan secara tertulis (surat) dikirim melalui email atau surat tercatat dan secara online;</span></p>\r\n</div>\r\n</div>\r\n<footer class=\"entry-footer\"></footer></article>\r\n</li>\r\n<li>\r\n<article class=\"article-icon-entry \">\r\n<div class=\"iconlist_content_wrap\">\r\n<div class=\"iconlist_content  \">\r\n<p><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Permohonan Penyelesaian Sengketa Informasi Secara Langsung;</span></p>\r\n<ol>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Pemohon mengisi Form Permohonan Penyelesaian Sengketa Informasi yang telah disediakan petugas;</span></li>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Membawa bukti surat permohonan informasi kepada Badan Publik dan tanda terimanya;</span></li>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Membawa bukti jawaban permohonan informasi dari Badan Publik beserta tanda terimanya (jika ada);</span></li>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Membawa bukti pengajuan keberatan kepada Badan Publik dan tanda terimanya;</span></li>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Membawa bukti jawaban keberatan dari Badan Publik beserta tanda terimanya (jika ada);</span></li>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Membawa bukti identitas (jika individu maka dibuktikan dengan Kartu Tanda Penduduk dan jika Badan Hukum dibuktikan dengan Anggaran Dasar yang telah mendapat pengesahan sebagai Badan Hukum dan bila dikuasakan dibuktikan dengan surat kuasa);</span>\r\n<div class=\"iconlist_icon  avia-font-entypo-fontello\"><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">&nbsp;Langkah 2</span></div>\r\n</li>\r\n</ol>\r\n<p><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">&nbsp;</span></p>\r\n</div>\r\n</div>\r\n<footer class=\"entry-footer\"></footer></article>\r\n</li>\r\n<li>\r\n<div class=\"iconlist_icon  avia-font-entypo-fontello\"><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">&nbsp;Langkah 3</span></div>\r\n<article class=\"article-icon-entry \">\r\n<div class=\"iconlist_content_wrap\">\r\n<div class=\"iconlist_content  \">\r\n<p><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Permohonan Penyelesaian Sengketa Informasi Secara Tertulis;</span></p>\r\n<ol>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">&nbsp;Permohonan Penyelesaian Sengketa Informasi yang ditujukan ke Ketua Komisi Informasi Provinsi Jawa Barat dengan melampirkan;bukti surat permohonan informasi kepada Badan Publik dan tanda terimanya;</span></li>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Bukti jawaban permohonan informasi dari Badan Publik beserta tanda terimanya (jika ada);</span></li>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Bukti pengajuan Keberatan kepada Badan Publik dan tanda terimanya;</span></li>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Bukti jawaban keberatan dari Badan Publik beserta tanda terimanya (jika ada);</span></li>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Bukti identitas (jika individu maka dibuktikan dengan Kartu Tanda Penduduk dan jika Badan Hukum dibuktikan dengan Anggaran Dasar yang telah mendapat pengesahan sebagai Badan Hukum dan bila dikuasakan dibuktikan dengan surat kuasa);</span></li>\r\n</ol>\r\n<p><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">&nbsp;</span></p>\r\n</div>\r\n</div>\r\n<footer class=\"entry-footer\"></footer></article>\r\n</li>\r\n<li>\r\n<div class=\"iconlist_icon  avia-font-entypo-fontello\"><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">&nbsp;Langkah 4</span></div>\r\n<article class=\"article-icon-entry \">\r\n<div class=\"iconlist_content_wrap\">\r\n<div class=\"iconlist_content  \">\r\n<p><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Permohon Penyelesaian Sengketa Informasi Secara Online</span></p>\r\n<ol>\r\n<li><span style=\"font-family: verdana, geneva, sans-serif; color: #000000;\">Permohonan Penyelesaian Sengketa Informasi Secara Online dapat dikirim ke <a style=\"color: #000000;\" href=\"https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcRwQLxvRBdpvJFHQKctnHLZGCZqdTvDNgdFxfpGkDDbMnMrMKWgkjhDMTQLQgSfSfmpmnhJJ\">program.bpkad.nt@gmail.com</a></span></li>\r\n</ol>\r\n<p>&nbsp;</p>\r\n<table style=\"height: 7px; width: 639px;\" border=\"2\">\r\n<tbody>\r\n<tr>\r\n<td style=\"width: 103px;\">&nbsp;<img src=\"../../../static/uploads/d03dd1a7-712b-432f-bc51-5dfa6e8ed22f.png\" width=\"100\" height=\"123\"></td>\r\n<td style=\"width: 285px;\">&nbsp;FORM PENYELESAIAN SENGKETA</td>\r\n<td style=\"width: 229px; text-align: center;\"><a href=\"https://drive.google.com/file/d/1-bGZVjus91vA4gdBC2Vjz7vb4nZXHk63/view?usp=sharing\">DOWNLOAD</a></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p>&nbsp;</p>\r\n<p><img src=\"../../../static/uploads/004c0318-160a-4aba-aedf-6137328d3622.jpeg\" alt=\"\" width=\"768\" height=\"611\"></p>\r\n</div>\r\n</div>\r\n</article>\r\n</li>\r\n</ul>\r\n</div>', NULL, '1', 'non-link', NULL, '2508745f-73c8-47bd-a07b-6a90082bacfa', '2021-06-30 01:13:18', '2023-03-12 23:48:03'),
+('7cc3ed12-0a80-41f2-a580-5a833b13eaf3', 'Klasifikasi Informasi Publik', '1', NULL, NULL, '1', 'link', 'PPID', '2508745f-73c8-47bd-a07b-6a90082bacfa', '2023-03-24 22:31:02', '2023-03-24 22:31:02');
 
 -- --------------------------------------------------------
 
@@ -1033,16 +1247,17 @@ INSERT INTO `sub_pages` (`id`, `title`, `pages_type_id`, `content`, `pdf_file`, 
 --
 
 CREATE TABLE `users` (
-  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(12) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `avatar` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `role` enum('admin','user') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `avatar` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `active` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `role` enum('admin','user','operator') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1052,8 +1267,9 @@ CREATE TABLE `users` (
 -- Dumping data untuk tabel `users`
 --
 
-INSERT INTO `users` (`id`, `nama`, `email`, `username`, `email_verified_at`, `password`, `avatar`, `active`, `role`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-('1', 'Admin Bpkad', 'prog.bpkad.ntb@gmail.com', 'ntbprovadmin', NULL, '$2y$10$F0UdCa1OIlS6codPTvMVqeY080wkgsA4CcyfW/0m2OkRtF9349Bdm', '/static/uploads/profile/favicon.png', '1', 'admin', NULL, '2017-05-19 17:15:27', '2021-06-21 11:46:28', NULL);
+INSERT INTO `users` (`id`, `nama`, `email`, `phone`, `username`, `email_verified_at`, `password`, `avatar`, `active`, `role`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
+('03096791-7c23-4804-9f0e-65078d25abfd', 'Eky Galihs', 'ekkygalih8@gmail.com', '087700991538', 'ekygalih', NULL, '$2y$10$dv1O4BrsQPF5EwsCrcVAWu7Puqz7GVE1hUUbRo2tKYobtX/cLANHe', '/uploads/profile/favicon.png', '0', 'operator', NULL, '2023-04-02 03:23:08', '2023-04-02 05:54:36', '2023-04-02 05:54:36'),
+('1', 'Admin Bpkad Ntb', 'prog.bpkad.ntb@gmail.com', '081910911912', 'ntbprovadmin', NULL, '$2y$10$2er3d5w8vnVir/8mlMrsnuh1j/IHc6kzpQ3VokKasiUkeCkeo/3Q6', '/uploads/profile/favicon.png', '1', 'admin', NULL, '2017-05-19 17:15:27', '2023-04-03 17:13:01', NULL);
 
 --
 -- Indexes for dumped tables
@@ -1114,6 +1330,12 @@ ALTER TABLE `galery_video`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `kip`
+--
+ALTER TABLE `kip`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `link_terkait`
 --
 ALTER TABLE `link_terkait`
@@ -1147,13 +1369,15 @@ ALTER TABLE `pages`
 -- Indeks untuk tabel `pelaporan`
 --
 ALTER TABLE `pelaporan`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `kode_laporan` (`kode_laporan`);
 
 --
 -- Indeks untuk tabel `permohonan`
 --
 ALTER TABLE `permohonan`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `kode_pemohon` (`kode_pemohon`);
 
 --
 -- Indeks untuk tabel `posts`
@@ -1183,6 +1407,12 @@ ALTER TABLE `power_point`
 -- Indeks untuk tabel `rating`
 --
 ALTER TABLE `rating`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `recent_activity`
+--
+ALTER TABLE `recent_activity`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1231,7 +1461,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
