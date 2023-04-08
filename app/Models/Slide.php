@@ -25,6 +25,6 @@ class Slide extends Model
 
     public function SlideItem()
     {
-        return $this->hasOne(SlideItem::class);
+        return $this->hasOne(Slideitem::class);
     }
 }

@@ -19,17 +19,29 @@
         </li><!-- End Profile Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ route('pages-admin.index') }}">
+            <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#pages" href="#">
                 <i class="bi bi-files"></i>
-                <span>Pages</span>
+                <span>Pages</span> <i class="bi bi-chevron-down ms-auto"></i>
             </a>
+            <ul id="pages" class="nav-content collapse @yield('pages-menu')" data-bs-parent="#pages">
+                <li>
+                    <a href="{{ route('pages-admin.index') }}" class="@yield('p-pages')">
+                        <i class="bi bi-circle"></i> <span>Page</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('subpages-admin.index') }}" class="@yield('p-subpages')">
+                        <i class="bi bi-circle"></i> <span>Sub Page</span>
+                    </a>
+                </li>
+            </ul>
         </li><!-- End Profile Page Nav -->
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#data-bpkad" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-menu-button"></i><span>Data Bpakd</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="data-bpkad" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <ul id="data-bpkad" class="nav-content collapse " data-bs-parent="#data-bpkad">
                 <li>
                     <a href="components-alerts.html">
                         <i class="bi bi-circle"></i><span>Data Aset</span>
@@ -49,13 +61,23 @@
             </a>
             <ul id="data-informasi" class="nav-content collapse @yield('di-menu')" data-bs-parent="#sidebar-nav">
                 <li>
+                    <a href="{{ route('ppid-kip.index') }}" class="@yield('di-ppid')">
+                        <i class="bi bi-circle"></i><span>KIP PPID</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('galery-admin.index') }}" class="@yield('di-galery')">
                         <i class="bi bi-circle"></i><span>Galery</span>
                     </a>
                 </li>
                 <li>
-                    <a href="components-accordion.html">
+                    <a href="{{ route('slider.index') }}" class="@yield('di-slider')">
                         <i class="bi bi-circle"></i><span>Slider/Carousel</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="components-accordion.html">
+                        <i class="bi bi-circle"></i><span>Video Banner</span>
                     </a>
                 </li>
                 <li>
@@ -84,17 +106,17 @@
                     </a>
                 </li>
                 <li>
-                    <a href="components-accordion.html">
+                    <a href="{{ route('tools-social') }}" class="@yield('tools-social')">
                         <i class="bi bi-circle"></i><span>Social Media</span>
                     </a>
                 </li>
                 <li>
-                    <a href="components-accordion.html">
+                    <a href="{{ route('tools-link') }}" class="@yield('tools-link')">
                         <i class="bi bi-circle"></i><span>Link</span>
                     </a>
                 </li>
                 <li>
-                    <a href="components-accordion.html">
+                    <a href="{{ route('tools-address') }}" class="@yield('tools-address')">
                         <i class="bi bi-circle"></i><span>Address Office</span>
                     </a>
                 </li>
@@ -124,6 +146,13 @@
                 </li>
             </ul>
         </li><!-- End F.A.Q Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('users') }}">
+                <i class="bi bi-people-fill"></i>
+                <span>Users</span>
+            </a>
+        </li>
     </ul>
 
 </aside><!-- End Sidebar-->

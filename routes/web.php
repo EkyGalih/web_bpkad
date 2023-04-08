@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\LaporanPermohonanMasyarakatController;
 use App\Http\Controllers\Client\PostsController;
+use App\Http\Controllers\Client\PpidKipController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('dashboard');
@@ -43,4 +44,11 @@ Route::group(['prefix' => 'SubPages'], function () {
 Route::group(['prefix' => 'Permohonan_dan_Pengaduan'], function () {
     Route::get('/', [LaporanPermohonanMasyarakatController::class, 'index'])->name('faq.index');
     Route::post('store', [LaporanPermohonanMasyarakatController::class, 'store'])->name('faq.store');
+    Route::put('update/{id}', [LaporanPermohonanMasyarakatController::class, 'update'])->name('faq.update');
+    Route::get('destroy/{id}', [LaporanPermohonanMasyarakatController::class, 'destroy'])->name('faq.destroy');
+});
+
+Route::group(['prefix' => 'PPID'], function() {
+    Route::get('/', [PpidKipController::class, 'index'])->name('ppid-kip');
+    Route::get('search/{query?}', [PpidKipController::class, 'search'])->name('ppid-kip.search');
 });

@@ -12,5 +12,4 @@
 <link href="{{asset('client/assets/vendor/aos/aos.css')}}" rel="stylesheet">
 <link href="{{asset('client/assets/css/style.css')}}" rel="stylesheet">
 <link href="{{ asset('client/assets/css/bpkad.css') }}" rel="stylesheet">
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCv1dP8ox9_2aFGCn_7jGO1WLmrrxbpHwY"></script>
 @yield('additional-css')

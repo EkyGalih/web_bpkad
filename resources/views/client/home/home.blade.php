@@ -34,55 +34,6 @@
     </div>
 @endsection
 @section('content')
-    {{-- <section id="counts" class="counts">
-        <div class="container" data-aos="fade-up">
-            <div class="section-title">
-                <h3>Informasi <span>COVID19 NTB</span></h3>
-                <hr />
-                Update Terakhir : {{ Helpers::GetDate($data_covid['update_terakhir']) }}
-            </div>
-            <div class="row">
-                @php
-                    $isolasi = $data_covid['total']['konfirmasi']['masih_isolasi'];
-                    $sembuh = $data_covid['total']['konfirmasi']['sembuh'];
-                    $meninggal = $data_covid['total']['konfirmasi']['meninggal'];
-                    $total = $isolasi + $sembuh + $meninggal;
-                @endphp
-                <div class="col-lg-3 col-md-6">
-                    <div class="count-box">
-                        <i class="icofont-bed"></i>
-                        <span data-toggle="counter-up">{{ number_format($isolasi) }}</span>
-                        <p>Pasien Rawat</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="count-box">
-                        <i class="icofont-simple-smile"></i>
-                        <span data-toggle="counter-up">{{ number_format($sembuh) }}</span>
-                        <p>Pasien Sembuh</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="count-box">
-                        <i class="icofont-sad"></i>
-                        <span data-toggle="counter-up">{{ number_format($meninggal) }}</span>
-                        <p>Pasien Meninggal</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="count-box">
-                        <i class="icofont-address-book"></i>
-                        <span data-toggle="counter-up">{{ number_format($total) }}</span>
-                        <p>Total Kasus</p>
-                    </div>
-                </div>
-            </div>
-            <br />
-            <center>
-                <a href="https://corona.ntbprov.go.id/" target="_blank" class="btn-facebook">Selengkapnya</a>
-            </center>
-        </div>
-    </section> --}}
     <section id="news" class="news">
         <div class="container" data-aos="fade-up">
 
@@ -115,15 +66,13 @@
                                             <div class="position-relative">
                                                 <!--thumbnail img-->
                                                 <div class="ratio_left-cover-1 image-wrapper">
-                                                    <a
-                                                        href="{{ route('client.show', $carousel[0]->id) }}">
+                                                    <a href="{{ route('client.show', $carousel[0]->id) }}">
                                                         <img height="437" src="{{ asset($carousel[0]->foto_berita) }}"
                                                             alt="Bootstrap news template">
                                                     </a>
                                                 </div>
                                                 <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
-                                                    <a class="p-1 badge badge-info rounded-0"
-                                                        href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">Terbaru</a>
+                                                    <a class="p-1 badge badge-info rounded-0" href="#">Terbaru</a>
                                                     <!--title-->
                                                     <a href="{{ route('client.show', $carousel[0]->id) }}">
                                                         <h2 class="h3 post-title text-white my-1">
@@ -134,7 +83,7 @@
                                                     <div class="news-meta">by
                                                         <span class="news-author badge badge-success"><a
                                                                 class="text-white font-weight-bold"
-                                                                href="../category/author.html">{{ $carousel[0]->users->nama }}</a></span>
+                                                                href="#">{{ $carousel[0]->users->nama }}</a></span>
                                                         <span
                                                             class="news-date">{{ Helpers::GetDate($carousel[0]->created_at) }}</span>
                                                     </div>
@@ -148,15 +97,13 @@
                                             <div class="position-relative">
                                                 <!--thumbnail img-->
                                                 <div class="ratio_left-cover-1 image-wrapper">
-                                                    <a
-                                                        href="{{ route('client.show', $carousel[1]->id) }}">
+                                                    <a href="{{ route('client.show', $carousel[1]->id) }}">
                                                         <img height="437" src="{{ asset($carousel[1]->foto_berita) }}"
                                                             alt="Bootstrap news template">
                                                     </a>
                                                 </div>
                                                 <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
-                                                    <a class="p-1 badge badge-info rounded-0"
-                                                        href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">Terbaru</a>
+                                                    <a class="p-1 badge badge-info rounded-0" href="#">Terbaru</a>
                                                     <!--title-->
                                                     <a href="{{ route('client.show', $carousel[1]->id) }}">
                                                         <h2 class="h3 post-title text-white my-1">
@@ -167,7 +114,7 @@
                                                     <div class="news-meta">by
                                                         <span class="news-author badge badge-success"><a
                                                                 class="text-white font-weight-bold"
-                                                                href="../category/author.html">{{ $carousel[1]->users->nama }}</a></span>
+                                                                href="#">{{ $carousel[1]->users->nama }}</a></span>
                                                         <span
                                                             class="news-date">{{ Helpers::GetDate($carousel[1]->created_at) }}</span>
                                                     </div>
@@ -181,15 +128,13 @@
                                             <div class="position-relative">
                                                 <!--thumbnail img-->
                                                 <div class="ratio_left-cover-1 image-wrapper">
-                                                    <a
-                                                        href="{{ route('client.show', $carousel[2]->id) }}">
+                                                    <a href="{{ route('client.show', $carousel[2]->id) }}">
                                                         <img height="437" src="{{ asset($carousel[2]->foto_berita) }}"
                                                             alt="Bootstrap news template">
                                                     </a>
                                                 </div>
                                                 <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
-                                                    <a class="p-1 badge badge-info rounded-0"
-                                                        href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">Terbaru</a>
+                                                    <a class="p-1 badge badge-info rounded-0" href="#">Terbaru</a>
                                                     <!--title-->
                                                     <a href="{{ route('client.show', $carousel[2]->id) }}">
                                                         <h2 class="h3 post-title text-white my-1">
@@ -200,7 +145,7 @@
                                                     <div class="news-meta">by
                                                         <span class="news-author badge badge-success"><a
                                                                 class="text-white font-weight-bold"
-                                                                href="../category/author.html">{{ $carousel[2]->users->nama }}</a></span>
+                                                                href="#">{{ $carousel[2]->users->nama }}</a></span>
                                                         <span
                                                             class="news-date">{{ Helpers::GetDate($carousel[2]->created_at) }}</span>
                                                     </div>
@@ -214,15 +159,13 @@
                                             <div class="position-relative">
                                                 <!--thumbnail img-->
                                                 <div class="ratio_left-cover-1 image-wrapper">
-                                                    <a
-                                                        href="{{ route('client.show', $carousel[3]->id) }}">
+                                                    <a href="{{ route('client.show', $carousel[3]->id) }}">
                                                         <img height="437" src="{{ asset($carousel[3]->foto_berita) }}"
                                                             alt="Bootstrap news template">
                                                     </a>
                                                 </div>
                                                 <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
-                                                    <a class="p-1 badge badge-info rounded-0"
-                                                        href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">Terbaru</a>
+                                                    <a class="p-1 badge badge-info rounded-0" href="#">Terbaru</a>
                                                     <!--title-->
                                                     <a href="{{ route('client.show', $carousel[3]->id) }}">
                                                         <h2 class="h3 post-title text-white my-1">
@@ -233,7 +176,7 @@
                                                     <div class="news-meta">by
                                                         <span class="news-author badge badge-success"><a
                                                                 class="text-white font-weight-bold"
-                                                                href="../category/author.html">{{ $carousel[3]->users->nama }}</a></span>
+                                                                href="#">{{ $carousel[3]->users->nama }}</a></span>
                                                         <span
                                                             class="news-date">{{ Helpers::GetDate($carousel[3]->created_at) }}</span>
                                                     </div>
@@ -268,8 +211,7 @@
                                             <div class="position-relative">
                                                 <!--thumbnail img-->
                                                 <div class="ratio_right-cover-2 image-wrapper">
-                                                    <a
-                                                        href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">
+                                                    <a href="#">
                                                         <img height="200" src="{{ asset($post->foto_berita) }}"
                                                             alt="simple blog template bootstrap">
                                                     </a>
@@ -277,7 +219,7 @@
                                                 <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
                                                     <!-- category -->
                                                     <a class="p-1 badge badge-primary rounded-0"
-                                                        href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">Lifestyle</a>
+                                                        href="#">Lifestyle</a>
 
                                                     <!--title-->
                                                     <a href="{{ route('client.show', $post->id) }}">
@@ -309,15 +251,22 @@
                 <hr />
             </div>
             <div class="row">
-                <div class="col-lg-12" data-aos="zoom-out" data-aos-delay="100">
+                <div class="col-lg-12">
                     @foreach ($videos as $video)
                         <center>
-                            <object width="1000" height="500" data="{{ $video->path }}">
-                            </object>
+                            <iframe width="820" height="445" src="https://www.youtube.com/embed/0k99VGaKa9c">
+                            </iframe>
                         </center>
                     @endforeach
                 </div>
             </div>
+            <center>
+                <iframe width="200" height="150" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
+                <iframe width="200" height="150" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
+                <iframe width="200" height="150" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
+                <iframe width="200" height="150" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
+                <iframe width="200" height="150" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
+            </center>
         </div>
     </section>
     <section id="team" class="team">
@@ -349,14 +298,11 @@
     <section id="faq" class="faq section-bg">
         <div class="container">
             <div class="section-title" data-aos="fade-up">
-                <h3>Informasi <span>APBD</span> Kabupaten/Kota Se-<span>NTB</span></h3>
+                <h3>Informasi <span>APBD</span> Kabupaten/Kota Se-<span>NTB</span> {{ date('Y') }}</h3>
                 <hr />
             </div>
             <center>
-                <iframe
-                    src="https://docs.google.com/presentation/d/1-kognj_-f8-UxEvn0J38e5bADXpbIyE9Bfv7RfmbFTQ/embed?start=true&loop=true&delayms=3000"
-                    frameborder="0" width="1000" height="450" allowfullscreen="true" mozallowfullscreen="true"
-                    webkitallowfullscreen="true"></iframe>
+
             </center>
         </div>
     </section>
@@ -368,12 +314,13 @@
                 <hr />
             </div>
 
+            @php $address = Helpers::__address() @endphp
             <div class="row" data-aos="fade-up" data-aos-delay="100">
                 <div class="col-lg-6">
                     <div class="info-box mb-4">
                         <i class="bx bx-map"></i>
                         <h3>Alamat Kantor</h3>
-                        <p>Jl. Pejanggik No. 14 Mataram</p>
+                        <p>{{ $address->address }}</p>
                     </div>
                 </div>
 
@@ -382,7 +329,7 @@
                         <i class="bx bx-envelope"></i>
                         <h3>Email</h3>
                         <p>bpkad@ntbprov.go.id</p>
-                        <p>prog.bpkad.ntb@gmail.com</p>
+                        <p>{{ $address->email }}</p>
                     </div>
                 </div>
 
@@ -390,7 +337,7 @@
                     <div class="info-box  mb-4">
                         <i class="bx bx-phone-call"></i>
                         <h3>Telepon</h3>
-                        <p>+62 819 1091 1912</p>
+                        <p>{{ Helpers::__phone($address->phone) }}</p>
                     </div>
                 </div>
 

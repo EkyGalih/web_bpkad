@@ -18,14 +18,14 @@ class User extends Authenticatable
     protected $guarded = ['create_at', 'update_at'];
     protected $hidden = ['password', 'remember_token'];
 
-    public static function boot()
-    {
-        parent::boot();
+    // public static function boot()
+    // {
+    //     parent::boot();
 
-        static::creating(function ($model) {
-            $model->id = (string)Uuid::generate(4);
-        });
-    }
+    //     static::creating(function ($model) {
+    //         $model->id = (string)Uuid::generate(4);
+    //     });
+    // }
 
     public function posts()
     {
@@ -40,5 +40,10 @@ class User extends Authenticatable
     public function Apps()
     {
         return $this->hasMany(Apps::class);
+    }
+
+    public function Social()
+    {
+        return $this->hasOne(Social::class);
     }
 }

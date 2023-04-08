@@ -20,7 +20,7 @@ class PagesController extends Controller
     {
         $pages = Pages::orderBy('created_at', 'DESC')->get();
 
-        return view('admin.pages.index', compact('pages'));
+        return view('admin.pages.page.index', compact('pages'));
     }
 
     /**
@@ -32,7 +32,7 @@ class PagesController extends Controller
     {
         $menus = Menu::orderBy('name', 'ASC')->get();
 
-        return view('admin.pages.add', compact('menus'));
+        return view('admin.pages.page.add', compact('menus'));
     }
 
     /**
@@ -76,7 +76,7 @@ class PagesController extends Controller
         $menus = Menu::orderBy('name', 'ASC')->get();
         $pages = Pages::findOrFail($id);
 
-        return view('admin.pages.edit', compact('pages', 'menus'));
+        return view('admin.pages.page.edit', compact('pages', 'menus'));
     }
 
     /**

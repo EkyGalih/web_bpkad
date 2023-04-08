@@ -2,11 +2,26 @@
 
 namespace App\Helpers;
 
+use App\Models\Address;
+use App\Models\Apps;
+use App\Models\Assets;
+use App\Models\Bender;
 use App\Models\ContentType;
+use App\Models\Galery;
+use App\Models\KIP;
+use App\Models\Laporan;
+use App\Models\Links;
 use App\Models\Menu;
 use App\Models\Pages;
 use App\Models\PagesType;
+use App\Models\Permohonan;
 use App\Models\PostComment;
+use App\Models\Posts;
+use App\Models\PowerPoint;
+use App\Models\Recent;
+use App\Models\Slide;
+use App\Models\Slideitem;
+use App\Models\Social;
 use App\Models\SubPages;
 use App\Models\User;
 use DateTime;
@@ -28,7 +43,7 @@ class Helpers
 
     public static function SubPages($param)
     {
-        return SubPages::where('sub_pages_id', '=', $param)->select('sub_pages.title', 'sub_pages.id as sub_menu_id')->get();
+        return SubPages::where('sub_pages_id', '=', $param)->select('sub_pages.title', 'sub_pages.id as sub_menu_id', 'sub_pages.jenis_link', 'sub_pages.link')->get();
     }
 
 
@@ -69,28 +84,22 @@ class Helpers
         return $type->name;
     }
 
+    ### DATA FUNCTION ###
+
+    public static function __address()
+    {
+        return Address::get()->last();
+    }
+
     // Custom Function
 
-    public static function getUserIP()
+    public static function __phone($param)
     {
-        // Get real visitor IP behind CloudFlare network
-        if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
-            $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
-            $_SERVER['HTTP_CLIENT_IP'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
-        }
-        $client  = @$_SERVER['HTTP_CLIENT_IP'];
-        $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
-        $remote  = $_SERVER['REMOTE_ADDR'];
-
-        if (filter_var($client, FILTER_VALIDATE_IP)) {
-            $ip = $client;
-        } elseif (filter_var($forward, FILTER_VALIDATE_IP)) {
-            $ip = $forward;
-        } else {
-            $ip = $remote;
-        }
-
-        return $ip;
+        $phone = ltrim($param, '0');
+        $phone1 = substr($phone, 0, 3);
+        $phone2 = substr($phone, 3, 4);
+        $phone3 = substr($phone, 7, 4);
+        return '(+62) ' . $phone1 . '-' . $phone2 . '-' . $phone3;
     }
 
     public static function GetDate($param)
@@ -126,6 +135,18 @@ class Helpers
         return $date;
     }
 
+    public static function _GetYears()
+    {
+        $years = [];
+
+        for ($i = 0; $i < 10; $i++) {
+            $year  = date('Y') - $i;
+            array_push($years, $year);
+        }
+
+        return $years;
+    }
+
     public static function GetTime($param)
     {
         $explode    = explode(" ", $param);
@@ -134,6 +155,81 @@ class Helpers
 
         return date("g:i A", strtotime($time));
     }
+
+    public static function NameMonth($param)
+    {
+        switch ($param) {
+            case '01':
+                $month = 'Januari';
+                break;
+            case '02':
+                $month = 'Februari';
+                break;
+            case '03':
+                $month = 'Maret';
+                break;
+            case '04':
+                $month = 'April';
+                break;
+            case '05':
+                $month = 'Mei';
+                break;
+            case '06':
+                $month = 'Juni';
+                break;
+            case '07':
+                $month = 'Juli';
+                break;
+            case '08':
+                $month = 'Agustus';
+                break;
+            case '09':
+                $month = 'September';
+                break;
+            case '10':
+                $month = 'Oktober';
+                break;
+            case '11':
+                $month = 'November';
+                break;
+            case '11':
+                $month = 'Desember';
+                break;
+            default:
+                $month = '';
+        }
+
+        return $month;
+    }
+
+    public static function RangeTime($param)
+    {
+        $param3 = date_diff(new DateTime($param), new DateTime());
+
+        if ($param3->i == 0) {
+            $param4 = $param3->s . 's ago';
+            return $param4;
+        } elseif ($param3->h == 0) {
+            $param4 = $param3->i . 'min ago';
+            return $param4;
+        } elseif ($param3->days == 0) {
+            $param4 = $param3->h . 'h ago';
+            return $param4;
+        } elseif ($param3->m == 0) {
+            $param4 = $param3->d . 'd ago';
+            return $param4;
+        } elseif ($param3->y == 0) {
+            $param4 = $param3->m . 'm ago';
+            return $param4;
+        } elseif ($param3->y != 0) {
+            $param4 = $param3->y . 'y ago';
+            return $param4;
+        } else {
+            $param4 = 0;
+            return $param4;
+        }
+    }
+
 
     public static function appConverter($param)
     {
@@ -167,5 +263,168 @@ class Helpers
             ->first();
         if ($rule)
             return $rule->role;
+    }
+
+    public static function _getLaporan()
+    {
+        return Laporan::where('jawaban', '=', NULL)->limit(4)->get();
+    }
+
+    public static function _getPermohonan()
+    {
+        return Permohonan::where('status', 'proses')->limit(4)->get();
+    }
+
+    public static function _PostMonth($param)
+    {
+        $data       = array();
+        $explode    = explode("-", $param);
+        $month1     = $explode[1] - 1;
+        $month2     = $explode[1] - 2;
+        if (strlen($month1) == 1) {
+            $query1 = $explode[0] . '-0' . $month1;
+        } elseif (strlen($month1) > 1) {
+            $query1 = $explode[0] . '-' . $month1;
+        }
+        if (strlen($month2) == 1) {
+            $query2 = $explode[0] . '-0' . $month2;
+        } elseif (strlen($month2) > 1) {
+            $query2 = $explode[0] . '-' . $month2;
+        }
+
+        $count1 = Posts::where('created_at', 'LIKE', $param . '%')->count();
+        array_push($data, $count1);
+        $count2 = Posts::where('created_at', 'LIKE', $query1 . '%')->count();
+        array_push($data, $count2);
+        $count3 = Posts::where('created_at', 'LIKE', $query2 . '%')->count();
+        array_push($data, $count3);
+
+        return $data;
+    }
+
+    public static function _recentAdd($param1, $param2, $param3)
+    {
+
+        Recent::create([
+            'user_id' => Auth::user()->id,
+            'uuid_activity' => $param1,
+            'activity' => $param2,
+            'jenis' => $param3
+        ]);
+    }
+
+    public static function _recentShow($jenis, $uuid)
+    {
+        switch ($jenis) {
+            case 'post':
+                $data = Posts::where('id', '=', $uuid)->select('title as nama')->first();
+                break;
+            case 'pages':
+                $data = Pages::where('id', '=', $uuid)->select('title')->first();
+                break;
+            case 'sub_pages':
+                $data = SubPages::where('id', '=', $uuid)->select('title')->first();
+                break;
+            case 'assets':
+                $data = Assets::where('id', '=', $uuid)->select('name')->first();
+                break;
+            case 'transparansi':
+                $data = User::where('id', '=', $uuid)->select('nama')->first();
+                break;
+            case 'kip':
+                $data = KIP::where('id', '=', $uuid)->select('nama_informasi')->first();
+                break;
+            case 'galery':
+                $data = Galery::where('id', '=', $uuid)->select('name')->first();
+                break;
+            case 'slider':
+                $data = Slideitem::where('id', '=', $uuid)->select('title as nama')->first();
+                break;
+            case 'powerpoint':
+                $data = PowerPoint::where('id', '=', $uuid)->select('element')->first();
+                break;
+            case 'bender':
+                $data = Bender::where('id', '=', $uuid)->select('url')->first();
+                break;
+            case 'menu':
+                $data = Menu::where('id', '=', $uuid)->select('name')->first();
+                break;
+            case 'social':
+                $data = Social::where('id', '=', $uuid)->select('whatsapp', 'twitter', 'facebook', 'instagram', 'youtube')->first();
+                break;
+            case 'link':
+                $data = Links::where('id', '=', $uuid)->select('name')->first();
+                break;
+            case 'address':
+                $data = Address::where('id', '=', $uuid)->select('address')->first();
+                break;
+            case 'apps':
+                $data = Apps::where('id', '=', $uuid)->select('name')->first();
+                break;
+            case 'laporan':
+                $data = Laporan::where('id', '=', $uuid)->select('judul_laporan')->first();
+                break;
+            case 'permohonan':
+                $data = Permohonan::where('id', '=', $uuid)->select('kode_pemohon')->first();
+                break;
+            case 'users':
+                $data = User::where('id', '=', $uuid)->select('nama')->first();
+                break;
+            default:
+                $data = '';
+        }
+
+        return $data->nama;
+    }
+
+    public static function _KipPPID($param)
+    {
+        $KIP = KIP::where('jenis_informasi', '=', $param)->orderBy('tahun', 'DESC')->get();
+
+        $data = [
+            'tahun' => array(),
+            'data' => array()
+        ];
+        $tahun = [];
+
+        foreach ($KIP as $k => $val) {
+            if (!isset($tahun[$val->tahun])) {
+                $tahun[$val->tahun] = [];
+            }
+        }
+        $c_sort = count($tahun);
+        $i = 0;
+        if (is_array($tahun) && ($c_sort > 0)) {
+            foreach ($tahun as $k => $v) {
+                array_push($data['tahun'], $k);
+                $data['data'][$k] = array(
+                    'tahun' => $k,
+                    'kip' => array()
+                );
+            }
+            foreach ($KIP as $key => $val) {
+                if (in_array($val->tahun, $data['tahun'])) {
+                    if (!isset($data['data'][$val->tahun]['kip'])) {
+                        $data['data'][$val->tahun]['kip'] = [
+                            'nama_informasi' => $val->nama_informasi,
+                            'jenis_informasi' => $val->jenis_informasi,
+                            'jenis_file' => $val->jenis_file,
+                            'files' => $val->files,
+                            'created_at' => $val->created_at
+                        ];
+                    } else {
+                        array_push($data['data'][$val->tahun]['kip'], [
+                            'nama_informasi' => $val->nama_informasi,
+                            'jenis_informasi' => $val->jenis_informasi,
+                            'jenis_file' => $val->jenis_file,
+                            'files' => $val->files,
+                            'created_at' => $val->created_at
+                        ]);
+                    }
+                }
+            }
+        }
+        $kip = $data['data'];
+        return $kip;
     }
 }

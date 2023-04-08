@@ -20,27 +20,28 @@
                                     @php $sub_item = Helpers::SubPages($item->sub_menu_id) @endphp
                                     @if (count($sub_item))
                                         <li class="drop-down"><a href="#">{{ $item->title }}</a>
-                                            @foreach ($sub_item as $item2)
-                                                <ul>
-                                                    <li><a
-                                                            href="{{ route('client.show_sub_pages', $item2->sub_menu_id) }}">{{ $item2->title }}</a>
+                                            <ul>
+                                                @foreach ($sub_item as $item2)
+                                                    <li>
+                                                        <a href="{{ $item2->jenis_link == 'non-link' ? route('client.show_sub_pages', $item2->sub_menu_id) : '/'.$item2->link }}">
+                                                            {{ $item2->title }}</a>
                                                     </li>
-                                                </ul>
+                                                @endforeach
+                                            </ul>
                                         </li>
-                                    @endforeach
-                                @elseif (count($sub_item) == 0)
-                                    <li><a
-                                            href="{{ route('client.show_pages', $item->sub_menu_id) }}">{{ $item->title }}</a>
-                                    </li>
-                                @endif
-                    @endforeach
-            </ul>
-            </li>
-        @elseif (count($sub_menu) == 0)
-            <li><a href="{{ $menu->url }}">{{ $menu->name }}</a></li>
-            @endif
-            @endforeach
-            <li><a href="#contact">Kontak</a></li>
+                                    @elseif (count($sub_item) == 0)
+                                        <li><a
+                                                href="{{ route('client.show_pages', $item->sub_menu_id) }}">{{ $item->title }}</a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </li>
+                    @elseif (count($sub_menu) == 0)
+                        <li><a href="{{ $menu->url }}">{{ $menu->name }}</a></li>
+                    @endif
+                @endforeach
+                <li><a href="#contact">Kontak</a></li>
             </ul>
         </nav>
 
