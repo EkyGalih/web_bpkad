@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Galery\BannerVideoController;
 use App\Http\Controllers\Admin\Galery\GaleryController;
 use App\Http\Controllers\Admin\Galery\GaleryFotoController;
 use App\Http\Controllers\Admin\Galery\GaleryVideoController;
@@ -31,5 +32,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         Route::get('edit/{id}', [GaleryVideoController::class, 'edit'])->name('Gvideo-admin.edit');
         Route::put('update/{id}', [GaleryVideoController::class, 'update'])->name('Gvideo-admin.update');
         Route::get('destroy/{id}', [GaleryVideoController::class, 'destroy'])->name('Gvideo-admin.destroy');
+    });
+
+    Route::group(['prefix' => 'banner-video'], function () {
+        Route::get('/', [BannerVideoController::class, 'index'])->name('banner-video.index');
+        Route::get('create', [BannerVideoController::class, 'create'])->name('banner-video.create');
+        Route::post('store', [BannerVideoController::class, 'store'])->name('banner-video.store');
+        Route::get('edit/{id}', [BannerVideoController::class, 'edit'])->name('banner-video.edit');
+        Route::put('update/{id}', [BannerVideoController::class, 'update'])->name('banner-video.update');
+        Route::get('destroy/{id}', [BannerVideoController::class, 'destroy'])->name('banner-video.destroy');
     });
 });

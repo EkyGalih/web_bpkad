@@ -76,7 +76,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="components-accordion.html">
+                    <a href="{{ route('banner-video.index') }}" class="@yield('di-video')">
                         <i class="bi bi-circle"></i><span>Video Banner</span>
                     </a>
                 </li>

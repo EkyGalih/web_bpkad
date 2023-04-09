@@ -1,5 +1,23 @@
 @extends('client.index')
 @section('title', 'Home')
+@section('additional-css')
+    <!-- Basic stylesheet -->
+    <link rel="stylesheet" href="{{ asset('client/plugins/owl-carousel/owl.carousel.css') }}">
+
+    <!-- Default Theme -->
+    <link rel="stylesheet" href="{{ asset('client/plugins/owl-carousel/owl.theme.css') }}">
+    <style>
+        #owl-video .item {
+            margin: 3px;
+        }
+
+        #owl-video .item img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+    </style>
+@endsection
 @section('content_home')
     <section id="hero" class="d-flex align-items-center">
         <div class="portfolio-details-container">
@@ -247,7 +265,7 @@
     <section id="about" class="about section-bg">
         <div class="container">
             <div class="section-title">
-                <h3>Video <span>Terbaru</span></h3>
+                <h3>Video <span>BPKAD</span></h3>
                 <hr />
             </div>
             <div class="row">
@@ -260,20 +278,23 @@
                     @endforeach
                 </div>
             </div>
-            <center>
-                <iframe width="200" height="150" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
-                <iframe width="200" height="150" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
-                <iframe width="200" height="150" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
-                <iframe width="200" height="150" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
-                <iframe width="200" height="150" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
-            </center>
+            <div class="owl-carousel owl-theme" id="owl-video">
+                <iframe width="350" height="250" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
+                <iframe width="350" height="250" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
+                <iframe width="350" height="250" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
+                <iframe width="350" height="250" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
+                <iframe width="350" height="250" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
+                <iframe width="350" height="250" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
+                <iframe width="350" height="250" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
+                <iframe width="350" height="250" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
+            </div>
         </div>
     </section>
     <section id="team" class="team">
         <div class="container">
 
             <div class="section-title" data-aos="fade-up">
-                <h3>Aplikasi <span>Pelayanan Lainnya</span></h3>
+                <h3>Layanan <span>BPKAD</span></h3>
             </div>
             <div class="row">
                 @foreach ($apps as $app)
@@ -295,15 +316,23 @@
             </div>
         </div>
     </section>
-    <section id="faq" class="faq section-bg">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <h3>Informasi <span>APBD</span> Kabupaten/Kota Se-<span>NTB</span> {{ date('Y') }}</h3>
-                <hr />
-            </div>
-            <center>
+    <section id="testimonials" class="testimonials">
+        <div class="container" data-aos="zoom-in">
 
-            </center>
+            <div class="owl-carousel testimonials-carousel">
+                @foreach ($apps as $app)
+                    <div class="testimonial-item">
+                        <a href="{{ $app->url }}"><img src="{{ $app->icon }}" class="testimonial-img"
+                                alt=""></a>
+                        <h3>{{ $app->name }}</h3>
+                        <p>
+                            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                            {{ $app->deskripsi }}
+                            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                        </p>
+                    </div>
+                @endforeach
+            </div>
         </div>
     </section>
     <section id="contact" class="contact">
@@ -392,27 +421,9 @@
 
         </div>
     </section>
-    <section id="testimonials" class="testimonials">
-        <div class="container" data-aos="zoom-in">
-
-            <div class="owl-carousel testimonials-carousel">
-                @foreach ($apps as $app)
-                    <div class="testimonial-item">
-                        <a href="{{ $app->url }}"><img src="{{ $app->icon }}" class="testimonial-img"
-                                alt=""></a>
-                        <h3>{{ $app->name }}</h3>
-                        <p>
-                            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                            {{ $app->deskripsi }}
-                            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                        </p>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
 @endsection
-@section('js-additional')
+@section('additional-js')
+    <script src="{{ asset('client/plugins/owl-carousel/owl.carousel.js') }}"></script>
     <script>
         //FEATURED HOVER
         $(document).ready(function() {
@@ -424,6 +435,16 @@
                     $(".textfeat").hide(500);
                 }
             );
+
+            $("#owl-video").owlCarousel({
+
+                autoPlay: 3000, //Set AutoPlay to 3 seconds
+
+                items: 3,
+                itemsDesktop: [1199, 3],
+                itemsDesktopSmall: [979, 3]
+
+            });
         });
     </script>
 @endsection

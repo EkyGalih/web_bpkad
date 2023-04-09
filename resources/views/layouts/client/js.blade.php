@@ -9,6 +9,7 @@
 <script src="{{asset('client/assets/vendor/venobox/venobox.min.js')}}"></script>
 <script src="{{asset('client/assets/vendor/aos/aos.js')}}"></script>
 <script src="{{asset('client/assets/js/main.js')}}"></script>
+@yield('additional-js')
 <script>
     // fungsi initialize untuk mempersiapkan peta
     function initialize() {
@@ -46,4 +47,3 @@
     // event jendela di-load
     google.maps.event.addDomListener(window, 'load', initialize);
 </script>
-@yield('additional-js')
