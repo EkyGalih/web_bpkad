@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1deb5ubuntu1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 08 Apr 2023 pada 09.10
--- Versi server: 8.0.32-0ubuntu0.22.04.2
--- Versi PHP: 8.1.2-1ubuntu2.11
+-- Waktu pembuatan: 09 Apr 2023 pada 00.31
+-- Versi server: 5.7.33
+-- Versi PHP: 8.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `web_bpkad`
+-- Database: `db_bpkad`
 --
 
 -- --------------------------------------------------------
@@ -28,12 +28,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `assets` (
-  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `keterangan` text COLLATE utf8mb4_unicode_ci,
   `lat` double(8,2) DEFAULT NULL,
   `lang` double(8,2) DEFAULT NULL,
-  `alamat` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `alamat` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -53,9 +53,9 @@ INSERT INTO `assets` (`id`, `name`, `keterangan`, `lat`, `lang`, `alamat`, `crea
 --
 
 CREATE TABLE `bender` (
-  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -76,8 +76,8 @@ INSERT INTO `bender` (`id`, `path`, `url`, `created_at`, `updated_at`, `deleted_
 --
 
 CREATE TABLE `content_type` (
-  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -98,15 +98,15 @@ INSERT INTO `content_type` (`id`, `name`, `created_at`, `updated_at`, `deleted_a
 --
 
 CREATE TABLE `daftar_app` (
-  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `deskripsi` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `versi` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `order_item` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `deskripsi` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `versi` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `icon` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `order_item` varchar(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `create_by_id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `create_by_id` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -126,7 +126,7 @@ INSERT INTO `daftar_app` (`id`, `name`, `deskripsi`, `versi`, `icon`, `url`, `or
 --
 
 CREATE TABLE `ext_dashboard_data_posisi_kas` (
-  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
   `data` decimal(65,0) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -140,9 +140,9 @@ CREATE TABLE `ext_dashboard_data_posisi_kas` (
 --
 
 CREATE TABLE `files` (
-  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name_archive` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `filename` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_archive` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `filename` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `size` double(8,2) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -163,11 +163,11 @@ INSERT INTO `files` (`id`, `name_archive`, `filename`, `size`, `created_at`, `up
 --
 
 CREATE TABLE `galery` (
-  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `tanggal` date DEFAULT NULL,
-  `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `galery_type_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keterangan` text COLLATE utf8mb4_unicode_ci,
+  `galery_type_id` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -205,9 +205,9 @@ INSERT INTO `galery` (`id`, `name`, `tanggal`, `keterangan`, `galery_type_id`, `
 --
 
 CREATE TABLE `galery_foto` (
-  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `path` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `galery_id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `path` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `galery_id` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -321,8 +321,8 @@ INSERT INTO `galery_foto` (`id`, `path`, `galery_id`, `created_at`, `updated_at`
 --
 
 CREATE TABLE `galery_type` (
-  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -343,9 +343,10 @@ INSERT INTO `galery_type` (`id`, `name`, `created_at`, `updated_at`, `deleted_at
 --
 
 CREATE TABLE `galery_video` (
-  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `galery_id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jenis_video` enum('upload','non-upload') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `galery_id` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -355,14 +356,14 @@ CREATE TABLE `galery_video` (
 -- Dumping data untuk tabel `galery_video`
 --
 
-INSERT INTO `galery_video` (`id`, `path`, `galery_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-('1', '0k99VGaKa9c', '27', '2022-03-10 07:23:36', '2022-03-10 07:24:44', NULL),
-('2', 'vJ92VmBzhlM', '28', '2022-03-10 07:31:23', NULL, NULL),
-('3', 'OTQ9AFNBXQI', '29', '2022-03-10 07:32:21', NULL, NULL),
-('4', 'qfbmFgA1uiQ', '30', '2022-03-10 07:33:10', NULL, NULL),
-('5', 'KFp-DnQq87k', '31', '2022-03-10 07:33:57', NULL, NULL),
-('6', 'BlF-t6EXhd0', '32', '2022-03-10 07:34:28', NULL, NULL),
-('7', '_dqlTVICJp4', '33', '2022-03-10 07:35:00', NULL, NULL);
+INSERT INTO `galery_video` (`id`, `jenis_video`, `path`, `galery_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+('1', 'upload', '0k99VGaKa9c', '27', '2022-03-10 07:23:36', '2022-03-10 07:24:44', NULL),
+('2', 'upload', 'vJ92VmBzhlM', '28', '2022-03-10 07:31:23', NULL, NULL),
+('3', 'upload', 'OTQ9AFNBXQI', '29', '2022-03-10 07:32:21', NULL, NULL),
+('4', 'upload', 'qfbmFgA1uiQ', '30', '2022-03-10 07:33:10', NULL, NULL),
+('5', 'upload', 'KFp-DnQq87k', '31', '2022-03-10 07:33:57', NULL, NULL),
+('6', 'upload', 'BlF-t6EXhd0', '32', '2022-03-10 07:34:28', NULL, NULL),
+('7', 'upload', '_dqlTVICJp4', '33', '2022-03-10 07:35:00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -374,7 +375,7 @@ CREATE TABLE `kip` (
   `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nama_informasi` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `jenis_informasi` enum('berkala','dikecualikan','setiap saat','serta merta') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tahun` int NOT NULL,
+  `tahun` int(11) NOT NULL,
   `jenis_file` enum('upload','link') COLLATE utf8mb4_unicode_ci NOT NULL,
   `files` text COLLATE utf8mb4_unicode_ci,
   `upload_by` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -532,7 +533,7 @@ INSERT INTO `link_terkait` (`id`, `name`, `link`, `created_at`, `updated_at`) VA
 CREATE TABLE `menu` (
   `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `order_pos` int NOT NULL,
+  `order_pos` int(11) NOT NULL,
   `url` varchar(355) COLLATE utf8mb4_unicode_ci NOT NULL,
   `create_by_id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -557,9 +558,9 @@ INSERT INTO `menu` (`id`, `name`, `order_pos`, `url`, `create_by_id`, `created_a
 --
 
 CREATE TABLE `migrations` (
-  `id` int UNSIGNED NOT NULL,
-  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int NOT NULL
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -691,10 +692,10 @@ CREATE TABLE `pelaporan` (
   `tgl_laporan` timestamp NOT NULL,
   `lokasi_kejadian` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
   `kategori_laporan` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `berkas` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `berkas` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `berkas_jawaban` mediumtext COLLATE utf8mb4_unicode_ci,
   `jawaban` mediumtext COLLATE utf8mb4_unicode_ci,
-  `jawaban_dari` enum('langsung','whatsapp','sms','text') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `jawaban_dari` enum('langsung','whatsapp','sms','text') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -744,14 +745,14 @@ INSERT INTO `permohonan` (`id`, `kode_pemohon`, `nama`, `email`, `telepon`, `ala
 --
 
 CREATE TABLE `posts` (
-  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pdf_file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `foto_berita` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content_type_id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `users_id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `posts_category_id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pdf_file` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `foto_berita` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content_type_id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `users_id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `posts_category_id` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -996,8 +997,8 @@ INSERT INTO `post_comment` (`id`, `post_id`, `nama`, `email`, `komentar`, `ip_ad
 --
 
 CREATE TABLE `power_point` (
-  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `element` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `element` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1019,7 +1020,7 @@ INSERT INTO `power_point` (`id`, `element`, `created_at`, `updated_at`, `deleted
 CREATE TABLE `rating` (
   `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rate` int NOT NULL,
+  `rate` int(11) NOT NULL,
   `user_agent` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -1075,8 +1076,8 @@ INSERT INTO `rating` (`id`, `ip_address`, `rate`, `user_agent`) VALUES
 CREATE TABLE `recent_activity` (
   `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `uuid_activity` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `jenis` enum('post','pages','sub_pages','assets','transparansi','kip','galery','slider','powerpoint','bender','menu','social','link','address','apps','laporan','permohonan','users') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid_activity` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `jenis` enum('post','pages','sub_pages','assets','transparansi','kip','galery','slider','powerpoint','bender','menu','social','link','address','apps','laporan','permohonan','users') COLLATE utf8mb4_unicode_ci NOT NULL,
   `activity` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -1110,12 +1111,12 @@ INSERT INTO `recent_activity` (`id`, `user_id`, `uuid_activity`, `jenis`, `activ
 --
 
 CREATE TABLE `sessions` (
-  `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ip_address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `payload` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_activity` int NOT NULL
+  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text COLLATE utf8mb4_unicode_ci,
+  `payload` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_activity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1125,6 +1126,7 @@ CREATE TABLE `sessions` (
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
 ('aYxqU2Fup5PK3cd9PBm2r6fxLuigqYhuIj1QALDU', NULL, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMml3MEw2b2IzSUdXcjA0M2dIV2tHWUhqNmxYSXJoelpDNG9KWVlwOCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly93ZWIuYnBrYWQudGVzdC9QYWdlcy9zaG93LzI0Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1680754585),
 ('CRfZA8g8eaZrWibSRk1GwIMBM69RkDOSityZJDPw', '1', '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiS1U4TWE0dldzSUwzSHNTQnM0Wk4wWGlzc05Ob0lsMzJwbEV3Ulh1VyI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czoyNzoiaHR0cDovL3dlYi5icGthZC50ZXN0L2FkbWluIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly93ZWIuYnBrYWQudGVzdCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtzOjE6IjEiO30=', 1680659470),
+('QduSfWeyDgAEN4PZDuDilnA8TgnqAn3SLGXTH0P7', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoick9wWElKVjVsakJDam5EMnpYV1VlVVdhc0lWNXlhNDFHbzlEZGpacyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9icGthZC5zdXJ1LmlkL2FkbWluL2Jhbm5lci12aWRlby9jcmVhdGUiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjM6InVybCI7YToxOntzOjg6ImludGVuZGVkIjtzOjI2OiJodHRwOi8vYnBrYWQuc3VydS5pZC9hZG1pbiI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtzOjE6IjEiO30=', 1680893104),
 ('Rnad1fdyoSlt3UQm6scsplfaXBIl5FaSnUGD21o4', NULL, '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/111.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMEV3dUFOZm0xVFk1cDRicjU0ZUNDSEJmRXprM09tT0c2eEg2aFJUTyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly93ZWIuYnBrYWQudGVzdCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1680654884),
 ('U9ACGoVQ75RpwxK2qNNE93RRRt82f5IRUfpGCiS4', NULL, '192.168.140.122', 'Mozilla/5.0 (Linux; Android 12; CPH2209) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Mobile Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMWZybWZlUlRvdnBzS2RxOEVhN3BnR2NKQ1UyNXhOaEV0ekdReERxRSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xOTIuMTY4LjEyMS4yNTo4MDAwIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1680655079),
 ('zrxhsdbuhBCgMxOaDX7eCU5HIW00hd0dTah2MoSO', NULL, '192.168.140.122', 'Mozilla/5.0 (Linux; Android 12; CPH2209) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Mobile Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQVhxV29MOENxdmVOUVprSGpyeWlucktwOEJxUWNpdDFZSmRLUjBOTiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xOTIuMTY4LjEyMS4yNTo4MDAwIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1680655014);
@@ -1136,8 +1138,8 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 --
 
 CREATE TABLE `slide` (
-  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_slide` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_slide` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1192,11 +1194,11 @@ INSERT INTO `slide_item` (`id`, `title`, `keterangan`, `foto`, `url`, `slide_id`
 CREATE TABLE `sosial_media` (
   `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `twitter` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `facebook` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `youtube` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `instagram` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `whatsapp` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `twitter` mediumtext COLLATE utf8mb4_unicode_ci,
+  `facebook` mediumtext COLLATE utf8mb4_unicode_ci,
+  `youtube` mediumtext COLLATE utf8mb4_unicode_ci,
+  `instagram` mediumtext COLLATE utf8mb4_unicode_ci,
+  `whatsapp` mediumtext COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1218,7 +1220,7 @@ CREATE TABLE `sub_pages` (
   `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
   `title` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `pages_type_id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `content` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `content` mediumtext COLLATE utf8mb4_unicode_ci,
   `pdf_file` varchar(355) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `create_by_id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
   `jenis_link` enum('link','non-link') COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1247,17 +1249,17 @@ INSERT INTO `sub_pages` (`id`, `title`, `pages_type_id`, `content`, `pdf_file`, 
 --
 
 CREATE TABLE `users` (
-  `id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(12) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `avatar` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `role` enum('admin','user','operator') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `avatar` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `active` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `role` enum('admin','user','operator') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1461,7 +1463,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
