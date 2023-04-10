@@ -1,5 +1,6 @@
 @extends('admin.index')
 @section('title', 'Halaman')
+@section('menu-pages', 'active')
 @section('pages-menu', 'show')
 @section('p-pages', 'active')
 @section('additional-css')

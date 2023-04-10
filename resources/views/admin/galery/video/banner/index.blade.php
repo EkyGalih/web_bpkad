@@ -36,7 +36,7 @@
                                 <div class="col-lg-2">
                                     <a href="{{ route('banner-video.create') }}" class="btn btn-outline-primary btn-md"
                                         style="float: right; margin-top: 5px;">
-                                        <i class="bi bi-plus"></i> Tambah Video
+                                        <i class="bi bi-plus"></i> Tambah Banner
                                     </a>
                                 </div>
                             </div>
@@ -57,15 +57,18 @@
                                     @foreach ($video as $foto)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $foto->name }}</td>
-                                            <td>{{ $foto->keterangan }}</td>
-                                            <td>{{ $foto->tanggal }}</td>
+                                            <td>{{ $foto->Galery->name }}</td>
+                                            <td>{{ $foto->Galery->keterangan }}</td>
+                                            <td>{{ $foto->Galery->tanggal }}</td>
                                             <td>{{ Helpers::GetDate($foto->created_at) }}</td>
                                             <td>{{ $foto->updated_at == null ? 'None' : Helpers::GetDate($foto->updated_at) }}
                                             <td>
                                                 <a href="{{ route('galery-admin.edit', $foto->id) }}"
                                                     class="btn btn-warning btn-md">
                                                     <i class="bi bi-pencil-square"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-info btn-md">
+                                                    <i class="bi bi-eye"></i>
                                                 </a>
                                                 <button class="btn btn-danger btn-md" data-bs-toggle="modal"
                                                     data-bs-target="#DeletePages{{ $loop->iteration }}">

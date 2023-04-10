@@ -14,7 +14,7 @@ class BannerVideoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   $video = GaleryVideo::where('jenis_video', '=', 'non-upload')->get();
+    {   $video = GaleryVideo::where('jenis_video', '=', 'non-upload')->groupBy('galery_id')->get();
         return view('admin.galery.video.banner.index', compact('video'));
     }
 

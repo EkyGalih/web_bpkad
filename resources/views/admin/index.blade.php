@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>@yield('title') - Admin</title>
+    <title>@yield('title') - Admin Website BPKAD</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
