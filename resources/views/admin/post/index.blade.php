@@ -1,6 +1,5 @@
 @extends('admin.index')
 @section('title', 'Post')
-@section('menu-post', 'active')
 @section('additional-css')
     <link rel="stylesheet" type="text/css"
         href="{{ asset('server/vendor/DataTables/DataTables-1.13.1/css/jquery.dataTables.min.css') }}" />

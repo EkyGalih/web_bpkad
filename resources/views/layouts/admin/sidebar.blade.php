@@ -3,7 +3,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-            <a class="nav-link @yield('menu-dash')" href="{{ route('admin') }}">
+            <a class="nav-link collapsed" href="{{ route('admin') }}">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
@@ -12,7 +12,7 @@
         <li class="nav-heading">Menu</li>
 
         <li class="nav-item">
-            <a class="nav-link @yield('menu-post')" href="{{ route('post-admin.index') }}">
+            <a class="nav-link collapsed" href="{{ route('post-admin.index') }}">
                 <i class="bi bi-file-earmark-post"></i>
                 <span>Post</span>
             </a>

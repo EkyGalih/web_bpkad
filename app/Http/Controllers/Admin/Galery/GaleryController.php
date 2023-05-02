@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Galery;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Galery;
+use App\Models\GaleryVideo;
 use Illuminate\Http\Request;
 use Webpatser\Uuid\Uuid;
 
@@ -19,7 +21,7 @@ class GaleryController extends Controller
         $fotos = Galery::where('galery_type_id', '=', '1')->get();
         $videos = Galery::where('galery_type_id', '=', '2')->get();
 
-        return view('admin.galery.index', compact('fotos','videos'));
+        return view('admin.galery.index', compact('fotos', 'videos'));
     }
 
     /**
@@ -41,15 +43,54 @@ class GaleryController extends Controller
     public function store(Request $request)
     {
         $id = (string)Uuid::generate(4);
-        Galery::create([
-            'id' => $id,
-            'name' => $request->name,
-            'tanggal' => $request->tanggal,
-            'keterangan' => $request->keterangan,
-            'galery_type_id' => $request->galery_type_id
-        ]);
+        if ($request->jenis_video == 'non-upload') {
+            Galery::create([
+                'id' => $id,
+                'name' => $request->name,
+                'tanggal' => $request->tanggal,
+                'keterangan' => $request->keterangan,
+                'galery_type_id' => $request->galery_type_id
+            ]);
 
-        return redirect()->route('Gfoto-admin.create', $id)->with(['success' => 'Galery berhasil ditambahkan!']);
+            GaleryVideo::create([
+                'id' => (string)Uuid::generate(4),
+                'jenis_video' => $request->jenis_video,
+                'path' => $request->path,
+                'galery_id' => $id
+            ]);
+
+            Helpers::_recentAdd($id, 'membuat galery', 'galery');
+            return redirect()->route('banner-video.index')->with(['success' => 'Galery berhasil ditambahkan!']);
+        } elseif ($request->jenis_video == 'upload') {
+            Galery::create([
+                'id' => $id,
+                'name' => $request->name,
+                'tanggal' => $request->tanggal,
+                'keterangan' => $request->keterangan,
+                'galery_type_id' => $request->galery_type_id
+            ]);
+
+            GaleryVideo::create([
+                'id' => (string)Uuid::generate(4),
+                'jenis_video' => $request->jenis_video,
+                'path' => $request->path,
+                'galery_id' => $id
+            ]);
+
+            Helpers::_recentAdd($id, 'membuat galery', 'galery');
+            return redirect()->route('banner-video.index')->with(['success' => 'Galery berhasil ditambahkan!']);
+        } else {
+            Galery::create([
+                'id' => $id,
+                'name' => $request->name,
+                'tanggal' => $request->tanggal,
+                'keterangan' => $request->keterangan,
+                'galery_type_id' => $request->galery_type_id
+            ]);
+
+            Helpers::_recentAdd($id, 'membuat galery', 'galery');
+            return redirect()->route('Gfoto-admin.create', $id)->with(['success' => 'Galery berhasil ditambahkan!']);
+        }
     }
 
     /**

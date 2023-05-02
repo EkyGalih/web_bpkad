@@ -314,6 +314,10 @@
                                         @php $badge = 'info' @endphp
                                         @elseif ($recent->jenis == 'slider')
                                         @php $badge = 'dark' @endphp
+                                        @elseif ($recent->jenis == 'slider')
+                                        @php $badge = 'warning' @endphp
+                                        @elseif ($recent->jenis == 'galery')
+                                        @php $badge = 'secondary' @endphp
                                         @endif
                                         <i
                                             class='bi bi-circle-fill activity-badge text-{{ $badge }} align-self-start'></i>

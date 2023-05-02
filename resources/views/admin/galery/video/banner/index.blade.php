@@ -54,20 +54,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($video as $foto)
+                                    @foreach ($videos as $video)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $foto->Galery->name }}</td>
-                                            <td>{{ $foto->Galery->keterangan }}</td>
-                                            <td>{{ $foto->Galery->tanggal }}</td>
-                                            <td>{{ Helpers::GetDate($foto->created_at) }}</td>
-                                            <td>{{ $foto->updated_at == null ? 'None' : Helpers::GetDate($foto->updated_at) }}
+                                            <td>{{ $video->Galery->name }}</td>
+                                            <td>{{ $video->Galery->keterangan }}</td>
+                                            <td>{{ $video->Galery->tanggal }}</td>
+                                            <td>{{ Helpers::GetDate($video->created_at) }}</td>
+                                            <td>{{ $video->updated_at == null ? 'None' : Helpers::GetDate($video->updated_at) }}
                                             <td>
-                                                <a href="{{ route('galery-admin.edit', $foto->id) }}"
+                                                <a href="{{ route('banner-video.edit', $video->id) }}"
                                                     class="btn btn-warning btn-md">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
-                                                <a href="#" class="btn btn-info btn-md">
+                                                <a href="{{ route('banner-video.show', $video->Galery->id) }}" class="btn btn-info btn-md">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
                                                 <button class="btn btn-danger btn-md" data-bs-toggle="modal"
@@ -88,7 +88,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <p>Galery Foto
-                                                                    <strong><u>{{ $foto->name }}</u></strong>
+                                                                    <strong><u>{{ $video->name }}</u></strong>
                                                                     akan dihapus.<br /> Anda Yakin?
                                                                 </p>
                                                             </div>
@@ -96,7 +96,7 @@
                                                                 <button type="button" class="btn btn-outline-secondary"
                                                                     data-bs-dismiss="modal"><i class="bi bi-x-circle"></i>
                                                                     Tidak</button>
-                                                                <a href="{{ route('galery-admin.destroy', $foto->id) }}"
+                                                                <a href="{{ route('banner-video.destroy', $video->id) }}"
                                                                     class="btn btn-outline-danger">
                                                                     <i class="bi bi-check-circle"></i> Ya
                                                                 </a>

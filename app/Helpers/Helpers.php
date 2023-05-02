@@ -320,52 +320,52 @@ class Helpers
                 $data = Posts::where('id', '=', $uuid)->select('title as nama')->first();
                 break;
             case 'pages':
-                $data = Pages::where('id', '=', $uuid)->select('title')->first();
+                $data = Pages::where('id', '=', $uuid)->select('title as nama')->first();
                 break;
             case 'sub_pages':
-                $data = SubPages::where('id', '=', $uuid)->select('title')->first();
+                $data = SubPages::where('id', '=', $uuid)->select('title as nama')->first();
                 break;
             case 'assets':
-                $data = Assets::where('id', '=', $uuid)->select('name')->first();
+                $data = Assets::where('id', '=', $uuid)->select('name as nama')->first();
                 break;
             case 'transparansi':
                 $data = User::where('id', '=', $uuid)->select('nama')->first();
                 break;
             case 'kip':
-                $data = KIP::where('id', '=', $uuid)->select('nama_informasi')->first();
+                $data = KIP::where('id', '=', $uuid)->select('nama_informasi as nama')->first();
                 break;
             case 'galery':
-                $data = Galery::where('id', '=', $uuid)->select('name')->first();
+                $data = Galery::where('id', '=', $uuid)->select('name as nama')->first();
                 break;
             case 'slider':
                 $data = Slideitem::where('id', '=', $uuid)->select('title as nama')->first();
                 break;
             case 'powerpoint':
-                $data = PowerPoint::where('id', '=', $uuid)->select('element')->first();
+                $data = PowerPoint::where('id', '=', $uuid)->select('element as nama')->first();
                 break;
             case 'bender':
-                $data = Bender::where('id', '=', $uuid)->select('url')->first();
+                $data = Bender::where('id', '=', $uuid)->select('url as nama')->first();
                 break;
             case 'menu':
-                $data = Menu::where('id', '=', $uuid)->select('name')->first();
+                $data = Menu::where('id', '=', $uuid)->select('name as nama')->first();
                 break;
             case 'social':
                 $data = Social::where('id', '=', $uuid)->select('whatsapp', 'twitter', 'facebook', 'instagram', 'youtube')->first();
                 break;
             case 'link':
-                $data = Links::where('id', '=', $uuid)->select('name')->first();
+                $data = Links::where('id', '=', $uuid)->select('name as nama')->first();
                 break;
             case 'address':
-                $data = Address::where('id', '=', $uuid)->select('address')->first();
+                $data = Address::where('id', '=', $uuid)->select('address as nama')->first();
                 break;
             case 'apps':
-                $data = Apps::where('id', '=', $uuid)->select('name')->first();
+                $data = Apps::where('id', '=', $uuid)->select('name as nama')->first();
                 break;
             case 'laporan':
-                $data = Laporan::where('id', '=', $uuid)->select('judul_laporan')->first();
+                $data = Laporan::where('id', '=', $uuid)->select('judul_laporan as nama')->first();
                 break;
             case 'permohonan':
-                $data = Permohonan::where('id', '=', $uuid)->select('kode_pemohon')->first();
+                $data = Permohonan::where('id', '=', $uuid)->select('kode_pemohon as nama')->first();
                 break;
             case 'users':
                 $data = User::where('id', '=', $uuid)->select('nama')->first();

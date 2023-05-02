@@ -39,6 +39,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         Route::get('create', [BannerVideoController::class, 'create'])->name('banner-video.create');
         Route::post('store', [BannerVideoController::class, 'store'])->name('banner-video.store');
         Route::get('edit/{id}', [BannerVideoController::class, 'edit'])->name('banner-video.edit');
+        Route::get('show/{id}', [BannerVideoController::class, 'show'])->name('banner-video.show');
         Route::put('update/{id}', [BannerVideoController::class, 'update'])->name('banner-video.update');
         Route::get('destroy/{id}', [BannerVideoController::class, 'destroy'])->name('banner-video.destroy');
     });

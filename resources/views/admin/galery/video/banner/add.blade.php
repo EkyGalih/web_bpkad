@@ -28,46 +28,66 @@
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Jenis Video</label>
                                     <div class="col-sm-10">
-                                        <select name="jenis_video" id="jenis_video" class="form-control">
+                                        <select name="jenis_video" id="jenis_video"
+                                            class="form-control @error('jenis_video') is-invalid @enderror">
                                             <option value="">--Pilih--</option>
                                             <option value="upload">Upload</option>
                                             <option value="non-upload">Non Upload</option>
                                         </select>
+                                        @error('jenis_video')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Nama Galery</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="name" class="form-control">
+                                        <input type="text" name="name"
+                                            class="form-control @error('name') is-invalid @enderror">
+                                        @error('name')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Tanggal</label>
                                     <div class="col-sm-10">
-                                        <input type="date" name="tanggal" class="form-control">
+                                        <input type="date" name="tanggal"
+                                            class="form-control @error('tanggal') is-invalid @enderror">
+                                        @error('tanggal')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Keterangan</label>
                                     <div class="col-sm-10">
-                                        <textarea name="keterangan" class="form-control"></textarea>
+                                        <textarea name="keterangan" class="form-control @error('keterangan') is-invalid @enderror"></textarea>
+                                        @error('keterangan')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="hidden" name="galery_type_id" value="1">
                                     </div>
                                 </div>
                                 <div class="row mb-3" id="video">
                                     <label for="inputText" class="col-sm-2 col-form-label">Video</label>
                                     <div class="col-sm-10">
-                                        <input type="file" name="path" id="video_input" class="form-control">
+                                        <input type="file" name="path" id="video_input"
+                                            class="form-control @error('path') is-invalid @enderror">
+                                        @error('path')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-sm-12">
-                                        <button class="btn btn-outline-warning btn-md" style="float: right;" type="reset">
-                                            <i class="bi bi-arrow-clockwise"></i> Reset
-                                        </button>
+                                        <a href="{{ route('banner-video.index') }}" class="btn btn-secondary btn-md"
+                                            style="float: right;">
+                                            <i class="bi bi-backspace"></i> Kembali
+                                        </a>
                                         <button class="btn btn-outline-success btn-md"
                                             style="float: right; margin-right: 2px;" type="submit">
-                                            <i class="bi bi-plus"></i> Tambah
+                                            <i class="bi bi-plus-square"></i> Tambah
                                         </button>
                                     </div>
                                 </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 09 Apr 2023 pada 00.31
+-- Waktu pembuatan: 02 Bulan Mei 2023 pada 17.14
 -- Versi server: 5.7.33
 -- Versi PHP: 8.1.7
 
@@ -195,8 +195,7 @@ INSERT INTO `galery` (`id`, `name`, `tanggal`, `keterangan`, `galery_type_id`, `
 ('30', 'Penjelasan Teknis Terkait Pelaksanaan APBD Tahun Anggaran 2021 ➜ BPKAD NTB', '2021-02-16', 'Penjelasan Teknis Terkait Pelaksanaan APBD Tahun Anggaran 2021 ➜ BPKAD NTB', '2', '2022-03-10 07:33:10', NULL, NULL),
 ('31', 'Update Database Simda 2021 (v9.2.0.4) ', '2021-02-15', 'Update Database Simda 2021 (v9.2.0.4) ', '2', '2022-03-10 07:33:57', NULL, NULL),
 ('32', 'Mengubah Koefisien Rincian Belanja Pada SIPD', '2021-02-12', 'Mengubah Koefisien Rincian Belanja Pada SIPD', '2', '2022-03-10 07:34:28', NULL, NULL),
-('33', 'Penjelasan Teknis Terkait Revisi Perkada APBD 2021', '2021-02-07', 'Penjelasan Teknis Terkait Revisi Perkada APBD 2021', '2', '2022-03-10 07:35:00', NULL, NULL),
-('3b4f5fcf-d144-4a95-96cf-f7a05f04282f', 'tes', '2023-02-03', 'sasdasdasd', '1', '2023-02-02 17:25:48', '2023-02-02 17:25:48', NULL);
+('33', 'Penjelasan Teknis Terkait Revisi Perkada APBD 2021', '2021-02-07', 'Penjelasan Teknis Terkait Revisi Perkada APBD 2021', '2', '2022-03-10 07:35:00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1124,12 +1123,13 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('aYxqU2Fup5PK3cd9PBm2r6fxLuigqYhuIj1QALDU', NULL, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMml3MEw2b2IzSUdXcjA0M2dIV2tHWUhqNmxYSXJoelpDNG9KWVlwOCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly93ZWIuYnBrYWQudGVzdC9QYWdlcy9zaG93LzI0Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1680754585),
-('CRfZA8g8eaZrWibSRk1GwIMBM69RkDOSityZJDPw', '1', '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiS1U4TWE0dldzSUwzSHNTQnM0Wk4wWGlzc05Ob0lsMzJwbEV3Ulh1VyI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czoyNzoiaHR0cDovL3dlYi5icGthZC50ZXN0L2FkbWluIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly93ZWIuYnBrYWQudGVzdCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtzOjE6IjEiO30=', 1680659470),
-('QduSfWeyDgAEN4PZDuDilnA8TgnqAn3SLGXTH0P7', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoick9wWElKVjVsakJDam5EMnpYV1VlVVdhc0lWNXlhNDFHbzlEZGpacyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9icGthZC5zdXJ1LmlkL2FkbWluL2Jhbm5lci12aWRlby9jcmVhdGUiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjM6InVybCI7YToxOntzOjg6ImludGVuZGVkIjtzOjI2OiJodHRwOi8vYnBrYWQuc3VydS5pZC9hZG1pbiI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtzOjE6IjEiO30=', 1680893104),
-('Rnad1fdyoSlt3UQm6scsplfaXBIl5FaSnUGD21o4', NULL, '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/111.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMEV3dUFOZm0xVFk1cDRicjU0ZUNDSEJmRXprM09tT0c2eEg2aFJUTyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly93ZWIuYnBrYWQudGVzdCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1680654884),
-('U9ACGoVQ75RpwxK2qNNE93RRRt82f5IRUfpGCiS4', NULL, '192.168.140.122', 'Mozilla/5.0 (Linux; Android 12; CPH2209) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Mobile Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMWZybWZlUlRvdnBzS2RxOEVhN3BnR2NKQ1UyNXhOaEV0ekdReERxRSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xOTIuMTY4LjEyMS4yNTo4MDAwIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1680655079),
-('zrxhsdbuhBCgMxOaDX7eCU5HIW00hd0dTah2MoSO', NULL, '192.168.140.122', 'Mozilla/5.0 (Linux; Android 12; CPH2209) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Mobile Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQVhxV29MOENxdmVOUVprSGpyeWlucktwOEJxUWNpdDFZSmRLUjBOTiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xOTIuMTY4LjEyMS4yNTo4MDAwIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1680655014);
+('MesZppCh5vuYKJATLEQVl95lUFpY0JL2cQp2eMh9', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQWxaclc5UGRhYUFhNXdXZGhlVVV1SlE3R1dPWWp3bWpyTGdtUmZhNiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjA6Imh0dHA6Ly9icGthZC5zdXJ1LmlkIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1682992131),
+('mgCdKpmhJZ3OeGPMqu2sb5Unb2x8mPtkJszGZ5Zc', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoicUtpYTd5d05YMFlOMFZ2UmVrTnVHZWdSYlRjVGlVdkVRbnR3ZWpjWCI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czoyNjoiaHR0cDovL2Jwa2FkLnN1cnUuaWQvYWRtaW4iO31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czoyNjoiaHR0cDovL2Jwa2FkLnN1cnUuaWQvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1682992130),
+('rQfGDsXonxbGeIcoU4gDOhYefL3KpxDChyKeWIFJ', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiWWJ4YkJLdTY1MHI1OWwwcVhOYkN3Z3BUYWtnQnZYS0VMMXVBV1I3biI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czoyNjoiaHR0cDovL2Jwa2FkLnN1cnUuaWQvYWRtaW4iO31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czoyNjoiaHR0cDovL2Jwa2FkLnN1cnUuaWQvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1682647141),
+('VoxcIpfzHzWQhnfyJe5wUty9M6ZKXxvfLsqHqdLT', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiTmx1QmVSd1ZnY3pyTU56NjJpUHU2ZGRod1VpVHlZZndjclJjNmljdiI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czoyNjoiaHR0cDovL2Jwa2FkLnN1cnUuaWQvYWRtaW4iO31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozOToiaHR0cDovL2Jwa2FkLnN1cnUuaWQvYWRtaW4vYmFubmVyLXZpZGVvIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO3M6MToiMSI7fQ==', 1681439450),
+('xQROfzM2y8DGpbMTnmybJbftSC0bBnQyG9IO7RdA', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiTjBsQVJNUDBWUG5uU3VYYU1yRDNndkc2OG1BTWdGNEtIeVhPZFFhOCI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czoyNjoiaHR0cDovL2Jwa2FkLnN1cnUuaWQvYWRtaW4iO31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo4MToiaHR0cDovL2Jwa2FkLnN1cnUuaWQvYWRtaW4vYmFubmVyLXZpZGVvL3Nob3cvZWEzY2E5N2UtNGRhYS00MzIzLTgxYjktMzkxOWVmMjdhODVjIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO3M6MToiMSI7fQ==', 1681349589),
+('yAsExDvPI07RrGJ0UHdWBnSrCAidQgTy5Gys4cJG', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiUUJFdG9SM29FUlV4bkF2UkEzU0pBWVBGWENoR1k1TkdwS0NqdTdwcyI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo4MToiaHR0cDovL2Jwa2FkLnN1cnUuaWQvYWRtaW4vYmFubmVyLXZpZGVvL3Nob3cvZWEzY2E5N2UtNGRhYS00MzIzLTgxYjktMzkxOWVmMjdhODVjIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly9icGthZC5zdXJ1LmlkL2FkbWluL2Jhbm5lci12aWRlbyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtzOjE6IjEiO30=', 1681361165),
+('yoWGq318ZBZqsIEmOLMWXfrpjvB36CEJ7fLWZkDi', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiU1ZuenYzaXBHdDBRcWJ4bEI5ZWZ5ZEoxOWs0d0ZUUng4aVJmQWdCQyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjA6Imh0dHA6Ly9icGthZC5zdXJ1LmlkIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1682647142);
 
 -- --------------------------------------------------------
 
@@ -1311,13 +1311,15 @@ ALTER TABLE `files`
 -- Indeks untuk tabel `galery`
 --
 ALTER TABLE `galery`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `galery_type_id` (`galery_type_id`);
 
 --
 -- Indeks untuk tabel `galery_foto`
 --
 ALTER TABLE `galery_foto`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `galery_id` (`galery_id`);
 
 --
 -- Indeks untuk tabel `galery_type`
@@ -1329,7 +1331,8 @@ ALTER TABLE `galery_type`
 -- Indeks untuk tabel `galery_video`
 --
 ALTER TABLE `galery_video`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `galery_id` (`galery_id`);
 
 --
 -- Indeks untuk tabel `kip`
@@ -1347,7 +1350,8 @@ ALTER TABLE `link_terkait`
 -- Indeks untuk tabel `menu`
 --
 ALTER TABLE `menu`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `create_by_id` (`create_by_id`);
 
 --
 -- Indeks untuk tabel `migrations`
@@ -1365,7 +1369,10 @@ ALTER TABLE `office_address`
 -- Indeks untuk tabel `pages`
 --
 ALTER TABLE `pages`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pages_type_id` (`pages_type_id`),
+  ADD KEY `create_by_id` (`create_by_id`),
+  ADD KEY `menu_id` (`menu_id`);
 
 --
 -- Indeks untuk tabel `pelaporan`
@@ -1385,7 +1392,10 @@ ALTER TABLE `permohonan`
 -- Indeks untuk tabel `posts`
 --
 ALTER TABLE `posts`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `content_type_id` (`content_type_id`),
+  ADD KEY `users_id` (`users_id`),
+  ADD KEY `posts_category_id` (`posts_category_id`);
 
 --
 -- Indeks untuk tabel `posts_category`
@@ -1464,6 +1474,42 @@ ALTER TABLE `users`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `galery`
+--
+ALTER TABLE `galery`
+  ADD CONSTRAINT `galery_ibfk_1` FOREIGN KEY (`galery_type_id`) REFERENCES `galery_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `galery_foto`
+--
+ALTER TABLE `galery_foto`
+  ADD CONSTRAINT `galery_foto_ibfk_1` FOREIGN KEY (`galery_id`) REFERENCES `galery` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `galery_video`
+--
+ALTER TABLE `galery_video`
+  ADD CONSTRAINT `galery_video_ibfk_1` FOREIGN KEY (`galery_id`) REFERENCES `galery` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `menu`
+--
+ALTER TABLE `menu`
+  ADD CONSTRAINT `menu_ibfk_1` FOREIGN KEY (`create_by_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `posts`
+--
+ALTER TABLE `posts`
+  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `posts_ibfk_2` FOREIGN KEY (`content_type_id`) REFERENCES `content_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `posts_ibfk_3` FOREIGN KEY (`posts_category_id`) REFERENCES `posts_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
