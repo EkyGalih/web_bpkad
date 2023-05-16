@@ -41,10 +41,15 @@
             <a class="nav-link collapsed" data-bs-target="#data-bpkad" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-menu-button"></i><span>Data Bpakd</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="data-bpkad" class="nav-content collapse " data-bs-parent="#data-bpkad">
+            <ul id="data-bpkad" class="nav-content collapse @yield('db-menu')" data-bs-parent="#data-bpkad">
                 <li>
                     <a href="components-alerts.html">
                         <i class="bi bi-circle"></i><span>Data Aset</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin-pegawai.index') }}" class="@yield('db-pegawai')">
+                        <i class="bi bi-circle"></i><span>Data Pegawai</span>
                     </a>
                 </li>
                 <li>
