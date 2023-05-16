@@ -14,14 +14,14 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('banner-video.index') }}">Banner Video</a></li>
-                    <li class="breadcrumb-item active">Galery Video</li>
+                    <li class="breadcrumb-item active">Daftar Video Banner</li>
                 </ol>
             </nav>
         </div>
         <section class="section">
             <div class="col-lg-2" style="float: right;">
-                <button type="button" class="btn btn-outline-primary btn-md" data-bs-toggle="modal" data-bs-target="#AddVideo"
-                    style="float: right; margin-top: 5px;">
+                <button type="button" class="btn btn-outline-primary btn-md" data-bs-toggle="modal"
+                    data-bs-target="#AddVideo" style="float: right; margin-top: 5px;">
                     <i class="bi bi-plus"></i> Tambah Video
                 </button>
                 @include('admin/galery/video/banner/addons/_upload')
@@ -42,6 +42,11 @@
                         <div class="card">
                             <iframe src="{{ $item->path }}"></iframe>
                         </div>
+                        <div class="card-body">
+                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#DeleteVideo{{ $loop->iteration }}"><i class="bi bi-trash"></i>Hapus</button>
+
+                            @include('admin/galery/video/banner/addons/_delete')
+                        </div>
                     </div>
                 @endforeach
             </div>
@@ -56,5 +61,16 @@
             $('#foto').DataTable();
             $('#video').DataTable();
         });
+
+        $('#jenis_video').change(function() {
+            var jenis_video = $('#jenis_video').val();
+
+            if (jenis_video == 'non-upload') {
+                $('#video_input').prop('type', 'text');
+                $('#video_input').attr('placeholder', 'input link video');
+            } else {
+                $('#video_input').prop('type', 'file');
+            }
+        })
     </script>
 @endsection

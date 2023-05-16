@@ -279,14 +279,9 @@
                 </div>
             </div>
             <div class="owl-carousel owl-theme" id="owl-video">
-                <iframe width="350" height="250" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
-                <iframe width="350" height="250" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
-                <iframe width="350" height="250" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
-                <iframe width="350" height="250" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
-                <iframe width="350" height="250" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
-                <iframe width="350" height="250" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
-                <iframe width="350" height="250" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
-                <iframe width="350" height="250" src="https://www.youtube.com/embed/n9rMndgZmI0"></iframe>
+                @foreach ($banners as $banner)
+                    <iframe width="350" height="250" src="{{ $banner->path }}"></iframe>
+                @endforeach
             </div>
         </div>
     </section>

@@ -63,15 +63,19 @@
                                             <td>{{ Helpers::GetDate($video->created_at) }}</td>
                                             <td>{{ $video->updated_at == null ? 'None' : Helpers::GetDate($video->updated_at) }}
                                             <td>
-                                                <a href="{{ route('banner-video.edit', $video->id) }}"
-                                                    class="btn btn-warning btn-md">
+                                                <a href="{{ route('banner-video.edit', $video->Galery->id) }}"
+                                                    class="btn btn-warning btn-md" data-bs-tooltip="tooltip"
+                                                    data-bs-placement="top" title="Ubah Data">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
-                                                <a href="{{ route('banner-video.show', $video->Galery->id) }}" class="btn btn-info btn-md">
+                                                <a href="{{ route('banner-video.show', $video->Galery->id) }}"
+                                                    class="btn btn-info btn-md" data-bs-tooltip="tooltip"
+                                                    data-bs-placement="top" title="Lihat Data">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
                                                 <button class="btn btn-danger btn-md" data-bs-toggle="modal"
-                                                    data-bs-target="#DeletePages{{ $loop->iteration }}">
+                                                    data-bs-target="#DeletePages{{ $loop->iteration }}" data-bs-tooltip="tooltip"
+                                                    data-bs-placement="top" title="Hapus Data">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
 

@@ -86,6 +86,20 @@ class BannerVideoController extends Controller
         return view('admin.galery.video.banner.show', compact('banner', 'video'));
     }
 
+    public function addVideo(Request $request)
+    {
+        GaleryVideo::create([
+            'id' => (string)Uuid::generate(4),
+            'jenis_video' => $request->jenis_video,
+            'path' => $request->path,
+            'galery_id' => $request->galery_id
+        ]);
+
+        Helpers::_recentAdd($request->galery_id, 'menambahkan video ke galery '. $request->name, 'galery');
+
+        return redirect()->back()->with(['success' => 'video berhasil ditambahkan!']);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -94,7 +108,9 @@ class BannerVideoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $banner = Galery::where('id', '=', $id)->first();
+      
+        return view('admin.galery.video.banner.edit', compact('banner'));
     }
 
     /**
@@ -117,6 +133,13 @@ class BannerVideoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $video = GaleryVideo::findOrFail($id);
+
+        $video->delete();
+
+        Helpers::_recentAdd($id, 'menghapus video dari galery', 'galery');
+
+        return redirect()->back()->with(['success' => 'Video Banner berhasil dihapus!']);
+
     }
 }

@@ -49,10 +49,12 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="btn-group container" role="group">
-                                                        <a href="{{ route('galery-admin.create') }}" class="btn btn-outline-primary btn-md">
+                                                        <a href="{{ route('galery-admin.create') }}"
+                                                            class="btn btn-outline-primary btn-md">
                                                             <i class="bi bi-card-image"></i> Foto
                                                         </a>
-                                                        <a href="{{ route('galery-admin.create') }}" class="btn btn-outline-primary btn-md">
+                                                        <a href="{{ route('galery-admin.create') }}"
+                                                            class="btn btn-outline-primary btn-md">
                                                             <i class="bi bi-camera-video-fill"></i> video
                                                         </a>
                                                     </div>

@@ -55,6 +55,9 @@ class HomeController extends Controller
         $videos = GaleryVideo::join('galery', 'galery_video.galery_id', '=', 'galery.id')
             ->limit(1)
             ->get();
+        $banners = GaleryVideo::where('jenis_video', '=', 'non-upload')
+            ->limit(9)
+            ->get();
         $apps = DaftarApp::where('versi', '=', 'Web')
             ->get();
         $covid = Http::get('https://corona.ntbprov.go.id/api/data');
@@ -63,7 +66,7 @@ class HomeController extends Controller
         // slider
         $slides = Slideitem::where('slide_id', '=', '2')->get();
         $slidesInformasi = Slideitem::where('slide_id', '=', '1')->where('deleted_at', '=', NULL)->get();
-        return view('client.home.home', compact('new_posts', 'carousel', 'old_posts', 'videos', 'apps', 'data_covid', 'slides', 'slidesInformasi'));
+        return view('client.home.home', compact('new_posts', 'carousel', 'old_posts', 'videos', 'apps', 'data_covid', 'slides', 'slidesInformasi', 'banners'));
     }
 
     /**
