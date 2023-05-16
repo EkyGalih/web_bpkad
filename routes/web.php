@@ -48,7 +48,7 @@ Route::group(['prefix' => 'Permohonan_dan_Pengaduan'], function () {
     Route::get('destroy/{id}', [LaporanPermohonanMasyarakatController::class, 'destroy'])->name('faq.destroy');
 });
 
-Route::group(['prefix' => 'PPID'], function() {
+Route::group(['prefix' => 'PPID/Klasifikasi-Informasi-Publik'], function() {
     Route::get('/', [PpidKipController::class, 'index'])->name('ppid-kip');
     Route::get('search/{query?}', [PpidKipController::class, 'search'])->name('ppid-kip.search');
 });

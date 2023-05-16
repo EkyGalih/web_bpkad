@@ -130,6 +130,7 @@ class SubPagesController extends Controller
         $subpages->update([
             'title' => $request->title,
             'content' => $request->content,
+            'link' => $request->link,
             'pages_type_id' => '1',
             'create_by_id' => Auth::user()->id,
             'sub_pages_id' => $request->sub_pages_id
