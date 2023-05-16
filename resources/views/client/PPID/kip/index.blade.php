@@ -44,21 +44,7 @@
                 <div class="tab-pane fade show active" id="berkala" role="tabpanel" aria-labelledby="berkala-tab">
                     <h2 class="title" style="margin: 20px; font-size: 30px;"><strong>INFORMASI BERKALA</strong></h2>
                     <div class="table-responsive">
-                        <form action="#" method="POST">
-                            <div class="row">
-                                <div class="col-lg-7"></div>
-                                <div class="input-group col-lg-5" style="margin-bottom: 10px;">
-                                    @csrf
-                                    <input type="text" id="search_berkala" name="search_berkala" class="form-control"
-                                        placeholder="Cari">
-                                    <div class="input-group-prepend">
-                                        <button type="submit" class="btn btn-primary btn-sm">
-                                            <i class="bx bx-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+
                         <table class="table table-hover table-bordered">
                             @foreach ($KipBerkala as $val => $berkala1)
                                 <thead>
@@ -76,12 +62,12 @@
                                             </td>
                                             <td>
                                                 @if ($berkala2['jenis_file'] == 'link')
-                                                    <a href="#" class="btn btn-success btn-sm">
-                                                        <i class="bi bi-download"></i> Download
+                                                    <a href="{{ $berkala2['files'] }}" class="btn btn-success btn-sm" target="_blank">
+                                                        <i class="bx bx-download"></i> Download
                                                     </a>
                                                 @else
-                                                    <a href="#" class="btn btn-info btn-sm">
-                                                        <i class="bi bi-eye"></i> Lihat
+                                                    <a href="{{ $berkala2['files'] }}" class="btn btn-info btn-sm" target="_blank">
+                                                        <i class="bx bx-show"></i> Lihat
                                                     </a>
                                                 @endif
                                             </td>
