@@ -43,13 +43,27 @@ class PagesController extends Controller
      */
     public function store(Request $request)
     {
-        Pages::create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'pages_type_id' => '1',
-            'create_by_id' => Auth::user()->id,
-            'menu_id' => $request->menu_id
-        ]);
+        if ($request->jenis_link == 'non-link') {
+            Pages::create([
+                'jenis_link' => $request->jenis_link,
+                'title' => $request->title,
+                'content' => $request->content,
+                'pages_type_id' => '1',
+                'create_by_id' => Auth::user()->id,
+                'menu_id' => $request->menu_id
+            ]);
+        } elseif ($request->jenis_link == 'link') {
+            Pages::create([
+                'jenis_link' => $request->jenis_link,
+                'link' => $request->link,
+                'title' => $request->title,
+                'content' => $request->content,
+                'pages_type_id' => '1',
+                'create_by_id' => Auth::user()->id,
+                'menu_id' => $request->menu_id
+            ]);
+
+        }
 
         return redirect()->route('pages-admin.index')->with(['success' => 'Pages berhasil ditambahkan!']);
     }

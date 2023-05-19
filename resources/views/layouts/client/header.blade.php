@@ -32,7 +32,7 @@
                                         </li>
                                     @elseif (count($sub_item) == 0)
                                         <li><a
-                                                href="{{ route('client.show_pages', $item->sub_menu_id) }}">{{ $item->title }}</a>
+                                                href="{{ $item->jenis_link == 'non-link' ? route('client.show_pages', $item->sub_menu_id) : '/' . $item->link }}">{{ $item->title }}</a>
                                         </li>
                                     @endif
                                 @endforeach

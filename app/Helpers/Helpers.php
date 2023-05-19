@@ -14,12 +14,12 @@ use App\Models\Links;
 use App\Models\Menu;
 use App\Models\Pages;
 use App\Models\PagesType;
+use App\Models\Pegawai;
 use App\Models\Permohonan;
 use App\Models\PostComment;
 use App\Models\Posts;
 use App\Models\PowerPoint;
 use App\Models\Recent;
-use App\Models\Slide;
 use App\Models\Slideitem;
 use App\Models\Social;
 use App\Models\SubPages;
@@ -38,7 +38,7 @@ class Helpers
 
     public static function Pages($param)
     {
-        return Pages::where('menu_id', '=', $param)->select('pages.title', 'pages.id as sub_menu_id')->get();
+        return Pages::where('menu_id', '=', $param)->select('pages.title', 'pages.id as sub_menu_id', 'pages.jenis_link', 'pages.link')->get();
     }
 
     public static function SubPages($param)
@@ -426,5 +426,22 @@ class Helpers
         }
         $kip = $data['data'];
         return $kip;
+    }
+
+    // Pegawai Function
+
+    public static function getPimpinan($param)
+    {
+        return Pegawai::where('nama_jabatan', '=', $param)->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')->first();
+    }
+
+    public static function getKabag($param)
+    {
+        return Pegawai::where('nama_jabatan', '=', $param)->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')->get();
+    }
+
+    public static function getKasubag($param, $param2)
+    {
+        return Pegawai::where('nama_jabatan', '=', $param)->where('jabatan', 'LIKE', '%' . $param2 . '%')->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')->get();
     }
 }

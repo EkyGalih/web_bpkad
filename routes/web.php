@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\LaporanPermohonanMasyarakatController;
+use App\Http\Controllers\Client\PegawaiController;
 use App\Http\Controllers\Client\PostsController;
 use App\Http\Controllers\Client\PpidKipController;
 use Illuminate\Support\Facades\Route;
@@ -48,7 +49,11 @@ Route::group(['prefix' => 'Permohonan_dan_Pengaduan'], function () {
     Route::get('destroy/{id}', [LaporanPermohonanMasyarakatController::class, 'destroy'])->name('faq.destroy');
 });
 
-Route::group(['prefix' => 'PPID/Klasifikasi-Informasi-Publik'], function() {
+Route::group(['prefix' => 'PPID/Klasifikasi-Informasi-Publik'], function () {
     Route::get('/', [PpidKipController::class, 'index'])->name('ppid-kip');
     Route::get('search/{query?}', [PpidKipController::class, 'search'])->name('ppid-kip.search');
+});
+
+Route::group(['prefix' => 'Profile/Profile-Pejabat'], function () {
+    Route::get('/', [PegawaiController::class, 'ProfilePejabat'])->name('profile.profile-pejabat');
 });
