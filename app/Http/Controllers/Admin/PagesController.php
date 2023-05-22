@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use App\Models\Pages;
 use App\Models\PagesType;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +20,7 @@ class PagesController extends Controller
      */
     public function index()
     {
-        $pages = Pages::orderBy('created_at', 'DESC')->get();
+        $pages = Pages::where('deleted_at', '=', NULL)->orderBy('created_at', 'DESC')->get();
 
         return view('admin.pages.page.index', compact('pages'));
     }
@@ -62,7 +64,6 @@ class PagesController extends Controller
                 'create_by_id' => Auth::user()->id,
                 'menu_id' => $request->menu_id
             ]);
-
         }
 
         return redirect()->route('pages-admin.index')->with(['success' => 'Pages berhasil ditambahkan!']);
@@ -124,7 +125,11 @@ class PagesController extends Controller
     public function destroy($id)
     {
         $pages = Pages::findOrFail($id);
-        $pages->delete();
+        $pages->update([
+            'deleted_at' => new DateTime()
+        ]);
+
+        Helpers::_recentAdd($id, 'menghapus halaman', 'pages');
 
         return redirect()->route('pages-admin.index')->with(['success' => 'Pages berhasil dihapus!']);
     }

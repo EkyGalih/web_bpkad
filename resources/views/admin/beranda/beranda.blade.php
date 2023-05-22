@@ -318,6 +318,8 @@
                                             @php $badge = 'warning' @endphp
                                         @elseif ($recent->jenis == 'galery')
                                             @php $badge = 'secondary' @endphp
+                                        @elseif ($recent->jenis == 'pages')
+                                            @php $badge = 'success' @endphp
                                         @endif
                                         <i
                                             class='bi bi-circle-fill activity-badge text-{{ $badge }} align-self-start'></i>

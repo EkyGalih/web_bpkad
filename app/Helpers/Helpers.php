@@ -33,17 +33,25 @@ class Helpers
 
     public static function Menu()
     {
-        return Menu::select('menu.id as menu_id', 'menu.*')->orderBy('order_pos', 'ASC')->get();
+        return Menu::select('menu.id as menu_id', 'menu.*')
+            ->orderBy('order_pos', 'ASC')
+            ->get();
     }
 
     public static function Pages($param)
     {
-        return Pages::where('menu_id', '=', $param)->select('pages.title', 'pages.id as sub_menu_id', 'pages.jenis_link', 'pages.link')->get();
+        return Pages::where('menu_id', '=', $param)
+            ->select('pages.title', 'pages.id as sub_menu_id', 'pages.jenis_link', 'pages.link')
+            ->where('deleted_at', '=', NULL)
+            ->orderBy('title', 'ASC')
+            ->get();
     }
 
     public static function SubPages($param)
     {
-        return SubPages::where('sub_pages_id', '=', $param)->select('sub_pages.title', 'sub_pages.id as sub_menu_id', 'sub_pages.jenis_link', 'sub_pages.link')->get();
+        return SubPages::where('sub_pages_id', '=', $param)
+            ->select('sub_pages.title', 'sub_pages.id as sub_menu_id', 'sub_pages.jenis_link', 'sub_pages.link')
+            ->get();
     }
 
 
@@ -432,16 +440,23 @@ class Helpers
 
     public static function getPimpinan($param)
     {
-        return Pegawai::where('nama_jabatan', '=', $param)->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')->first();
+        return Pegawai::where('nama_jabatan', '=', $param)
+            ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+            ->first();
     }
 
     public static function getKabag($param)
     {
-        return Pegawai::where('nama_jabatan', '=', $param)->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')->get();
+        return Pegawai::where('nama_jabatan', '=', $param)
+            ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+            ->get();
     }
 
     public static function getKasubag($param, $param2)
     {
-        return Pegawai::where('nama_jabatan', '=', $param)->where('jabatan', 'LIKE', '%' . $param2 . '%')->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')->get();
+        return Pegawai::where('nama_jabatan', '=', $param)
+            ->where('initial_jabatan', 'LIKE', $param2 . '%')
+            ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+            ->get();
     }
 }

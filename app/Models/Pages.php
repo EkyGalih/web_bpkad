@@ -12,7 +12,7 @@ class Pages extends Model
 
     public $incrementing = false;
     protected $table = 'pages';
-    protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
+    protected $guarded = ['created_at', 'updated_at'];
 
     public static function boot()
     {
