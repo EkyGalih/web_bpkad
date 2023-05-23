@@ -10,6 +10,7 @@ use App\Models\PagesType;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Webpatser\Uuid\Uuid;
 
 class PagesController extends Controller
 {
@@ -45,8 +46,11 @@ class PagesController extends Controller
      */
     public function store(Request $request)
     {
+        $id = (string)Uuid::generate(4);
+
         if ($request->jenis_link == 'non-link') {
             Pages::create([
+                'id' => $id,
                 'jenis_link' => $request->jenis_link,
                 'title' => $request->title,
                 'content' => $request->content,
@@ -56,6 +60,7 @@ class PagesController extends Controller
             ]);
         } elseif ($request->jenis_link == 'link') {
             Pages::create([
+                'id' => $id,
                 'jenis_link' => $request->jenis_link,
                 'link' => $request->link,
                 'title' => $request->title,
@@ -65,6 +70,7 @@ class PagesController extends Controller
                 'menu_id' => $request->menu_id
             ]);
         }
+        Helpers::_recentAdd($id, 'membuat halaman', 'pages');
 
         return redirect()->route('pages-admin.index')->with(['success' => 'Pages berhasil ditambahkan!']);
     }

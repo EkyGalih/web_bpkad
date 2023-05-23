@@ -22,9 +22,9 @@ class PegawaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function pegawai()
     {
-        //
+        return view('client.profile.pegawai.index');
     }
 
     /**

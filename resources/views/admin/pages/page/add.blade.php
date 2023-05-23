@@ -1,5 +1,7 @@
 @extends('admin.index')
 @section('title', 'Tambah Halaman')
+@section('pages-menu', 'show')
+@section('p-pages', 'active')
 @section('content')
     <main id="main" class="main">
         <div class="pagetitle">

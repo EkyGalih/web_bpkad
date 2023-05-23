@@ -12,16 +12,16 @@
     <!-- ======= Breadcrumbs Section ======= -->
     <section class="breadcrumbs">
         <div class="container">
-            <input type="hidden" id="kepala" value="{{ Helpers::getPimpinan('kaban') }}">
-            <input type="hidden" id="sekban" value="{{ Helpers::getPimpinan('sekban') }}">
-            <input type="hidden" id="kabag" value="{{ Helpers::getKabag('kabag') }}">
-            <input type="hidden" id="kasubag_anggaran" value="{{ Helpers::getKasubag('kasubag', 'Anggaran') }}">
-            <input type="hidden" id="kasubag_bmd" value="{{ Helpers::getKasubag('kasubag', 'BMD') }}">
-            <input type="hidden" id="kasubag_sek" value="{{ Helpers::getKasubag('kasubag', 'Sekretariat') }}">
-            <input type="hidden" id="kasubag_bekk" value="{{ Helpers::getKasubag('kasubag', 'BEKK') }}">
-            <input type="hidden" id="kasubag_akt" value="{{ Helpers::getKasubag('kasubag', 'Akuntansi') }}">
-            <input type="hidden" id="kasubag_uptb1" value="{{ Helpers::getKasubag('kasubag', 'UPTB Perbend') }}">
-            <input type="hidden" id="kasubag_uptb2" value="{{ Helpers::getKasubag('kasubag', 'UPTB Aset') }}">
+            <input type="hidden" id="kepala" value="{{ Helpers::getPimpinan('select', 'kaban') }}">
+            <input type="hidden" id="sekban" value="{{ Helpers::getPimpinan('select', 'sekban') }}">
+            <input type="hidden" id="kabag" value="{{ Helpers::getKabag('select', 'kabag') }}">
+            <input type="hidden" id="kasubag_anggaran" value="{{ Helpers::getKasubag('select', 'kasubag', 'Anggaran') }}">
+            <input type="hidden" id="kasubag_bmd" value="{{ Helpers::getKasubag('select', 'kasubag', 'BMD') }}">
+            <input type="hidden" id="kasubag_sek" value="{{ Helpers::getKasubag('select', 'kasubag', 'Sekretariat') }}">
+            <input type="hidden" id="kasubag_bekk" value="{{ Helpers::getKasubag('select', 'kasubag', 'BEKK') }}">
+            <input type="hidden" id="kasubag_akt" value="{{ Helpers::getKasubag('select', 'kasubag', 'Akuntansi') }}">
+            <input type="hidden" id="kasubag_uptb1" value="{{ Helpers::getKasubag('select', 'kasubag', 'UPTB Perbend') }}">
+            <input type="hidden" id="kasubag_uptb2" value="{{ Helpers::getKasubag('select', 'kasubag', 'UPTB Aset') }}">
             <div id="tree"></div>
         </div>
     </section>

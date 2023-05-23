@@ -438,25 +438,84 @@ class Helpers
 
     // Pegawai Function
 
-    public static function getPimpinan($param)
+    public static function getPimpinan($cat, $param)
     {
-        return Pegawai::where('nama_jabatan', '=', $param)
-            ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
-            ->first();
+        if ($cat == 'select') {
+            return Pegawai::where('nama_jabatan', '=', $param)
+                ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+                ->first();
+        } elseif ($cat == 'count') {
+            return Pegawai::where('nama_jabatan', '=', $param)
+                ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+                ->count();
+        }
     }
 
-    public static function getKabag($param)
+    public static function getKabag($cat, $param)
     {
-        return Pegawai::where('nama_jabatan', '=', $param)
-            ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
-            ->get();
+        if ($cat == 'select') {
+            return Pegawai::where('nama_jabatan', '=', $param)
+                ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+                ->get();
+        } elseif ($cat == 'count') {
+            return Pegawai::where('nama_jabatan', '=', $param)
+                ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+                ->count();
+        }
     }
 
-    public static function getKasubag($param, $param2)
+    public static function getKasubag($cat, $param, $param2)
     {
-        return Pegawai::where('nama_jabatan', '=', $param)
-            ->where('initial_jabatan', 'LIKE', $param2 . '%')
-            ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
-            ->get();
+        if ($cat == 'select') {
+            return Pegawai::where('nama_jabatan', '=', $param)
+                ->where('initial_jabatan', 'LIKE', $param2 . '%')
+                ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+                ->get();
+        } elseif ($cat == 'count') {
+            return Pegawai::where('nama_jabatan', '=', $param)
+                ->where('initial_jabatan', 'LIKE', $param2 . '%')
+                ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+                ->count();
+        }
+    }
+
+    public static function getPegawai($cat, $act, $param, $param2)
+    {
+        if ($cat == 'select') {
+            return Pegawai::where('nama_jabatan', '=', $param)
+                ->where('jabatan', 'LIKE', '%' . $param2 . '%')
+                ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+                ->get();
+        } elseif ($cat == 'count') {
+            if ($act == 'not') {
+                return Pegawai::where('nama_jabatan', '=', $param)
+                    ->where('jabatan', 'NOT LIKE', '%' . $param2 . '%')
+                    ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+                    ->count();
+            } elseif ($act == 'like') {
+                return Pegawai::where('nama_jabatan', '=', $param)
+                    ->where('jabatan', 'LIKE', '%' . $param2 . '%')
+                    ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+                    ->count();
+            }
+        }
+    }
+
+    public static function getPegawais($param, $act)
+    {
+        if ($act == 'pendidikan') {
+            return Pegawai::where('pendidikan', 'LIKE', '%' . $param . '%')->count();
+        } elseif ($act == 'golongan') {
+            return Pegawai::join('pangkat', 'pegawai.pangkatUuid', '=', 'pangkat.uuid')
+                ->where('nama_pangkat', 'LIKE', $param.'%')
+                ->count();
+        }
+    }
+
+    public static function getPegawaiKontrak($param)
+    {
+        if ($param == 'count') {
+            return Pegawai::where('pangkatUuid', '=', NULL)->count();
+        }
     }
 }

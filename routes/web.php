@@ -57,3 +57,6 @@ Route::group(['prefix' => 'PPID/Klasifikasi-Informasi-Publik'], function () {
 Route::group(['prefix' => 'Profile/Profile-Pejabat'], function () {
     Route::get('/', [PegawaiController::class, 'ProfilePejabat'])->name('profile.profile-pejabat');
 });
+Route::group(['prefix' => 'Profile/Data-Pegawai-Bpkad'], function () {
+    Route::get('/', [PegawaiController::class, 'pegawai'])->name('profile.data-pegawai');
+});
