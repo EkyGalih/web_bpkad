@@ -2,6 +2,9 @@
 @section('title', 'PPID | Tambah Struktur Organisasi PPID')
 @section('di-menu', 'show')
 @section('di-ppid', 'active')
+@section('additional-css')
+<link rel="stylesheet" href="{{ asset('server/vendor/tom-select/tom-select.css') }}">
+@endsection
 @section('content')
     <main id="main" class="main">
         <div class="pagetitle">
@@ -23,12 +26,12 @@
                         <div class="card-body">
                             <div class="card-title"><i class="bi bi-plus-square"></i> Tambah Data</div>
                             <hr />
-                            <form action="{{ route('ppid-kip.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('ppid-struktur.store') }}" method="POST">
                                 @csrf
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Nama Pegawai</label>
                                     <div class="col-sm-10">
-                                        <select name="pegawai_id" class="form-control">
+                                        <select name="pegawai_id" id="select-pegawai" autocomplete="off" placeholder="--Pilih--">
                                             <option value="">--Pilih---</option>
                                             @foreach ($pegawais as $pegawai)
                                             <option value="{{ $pegawai->id }}">{{ $pegawai->name }}</option>
@@ -42,7 +45,7 @@
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Jabatan</label>
                                     <div class="col-sm-10">
-                                        <select name="jabatan" class="form-control">
+                                        <select name="jabatan" id="select-jabatan" autocomplete="off" placeholder="--Pilih--">
                                             <option value="">--Pilih--</option>
                                             <option value="atasan">Atasan PPID</option>
                                             <option value="ketua">Ketua PPID</option>
@@ -61,6 +64,17 @@
                                         <input type="text" name="nama_jabatan" class="form-control">
                                     </div>
                                 </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-12">
+                                        <button class="btn btn-outline-warning btn-md" style="float: right;" type="reset">
+                                            <i class="bi bi-arrow-clockwise"></i> Reset
+                                        </button>
+                                        <button class="btn btn-success btn-md"
+                                            style="float: right; margin-right: 2px;" type="submit">
+                                            <i class="bi bi-save"></i> Simpan
+                                        </button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -70,7 +84,23 @@
     </main>
 @endsection
 @section('additional-js')
+<script src="{{ asset('server/vendor/tom-select/tom-select.js') }}"></script>
     <script>
+        new TomSelect("#select-pegawai", {
+            create: true,
+            sortField: {
+                field: "text",
+                direction: "asc"
+            }
+        });
+        new TomSelect("#select-jabatan", {
+            create: true,
+            sortField: {
+                field: "text",
+                direction: "asc"
+            }
+        });
+
         $('#jenis_file').change(function() {
             var jenis_file = $('#jenis_file').val();
 

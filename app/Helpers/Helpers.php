@@ -19,6 +19,7 @@ use App\Models\Permohonan;
 use App\Models\PostComment;
 use App\Models\Posts;
 use App\Models\PowerPoint;
+use App\Models\PPIDStruktur;
 use App\Models\Recent;
 use App\Models\Slideitem;
 use App\Models\Social;
@@ -377,6 +378,11 @@ class Helpers
                 break;
             case 'users':
                 $data = User::where('id', '=', $uuid)->select('nama')->first();
+                break;
+            case 'ppid_struktur':
+                $data = PPIDStruktur::join('pegawai', 'ppid_struktur.pegawai_id', '=', 'pegawai.id')
+                    ->where('ppid_struktur.id', '=', $uuid)->select('pegawai.name as nama')
+                    ->first();
                 break;
             default:
                 $data = '';

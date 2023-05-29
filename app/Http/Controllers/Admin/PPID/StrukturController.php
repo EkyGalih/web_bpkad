@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin\PPID;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Pegawai;
 use App\Models\PPIDStruktur;
 use Illuminate\Http\Request;
+use Webpatser\Uuid\Uuid;
 
 class StrukturController extends Controller
 {
@@ -40,7 +42,18 @@ class StrukturController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $id = (string)Uuid::generate(4);
+
+        PPIDStruktur::create([
+            'id' => $id,
+            'pegawai_id' => $request->pegawai_id,
+            'jabatan' => $request->jabatan,
+            'nama_jabatan' => $request->nama_jabatan
+        ]);
+
+        Helpers::_recentAdd($id, 'menambahkan pejabat ppid', 'ppid_struktur');
+
+        return redirect()->route('ppid-struktur.index')->with(['success' => 'Pejabat berhasil ditambah!']);
     }
 
     /**
