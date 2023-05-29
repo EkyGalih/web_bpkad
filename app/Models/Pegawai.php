@@ -12,4 +12,9 @@ class Pegawai extends Model
     public $incrementing = false;
     protected $table = 'pegawai';
     protected $guarded = ['createdAt', 'updatedAt'];
+
+    public function PPIDStruktur()
+    {
+        return $this->hasOne(PPIDStruktur::class);
+    }
 }

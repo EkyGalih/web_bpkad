@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Pages;
 use App\Models\SubPages;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Webpatser\Uuid\Uuid;
 
 class SubPagesController extends Controller
 {
@@ -17,7 +20,7 @@ class SubPagesController extends Controller
      */
     public function index()
     {
-        $subpages = SubPages::orderBy('created_at', 'DESC')->get();
+        $subpages = SubPages::where('deleted_at', '=', NULL)->orderBy('created_at', 'DESC')->get();
 
         return view('admin.pages.subpage.index', compact('subpages'));
     }
@@ -42,6 +45,8 @@ class SubPagesController extends Controller
      */
     public function store(Request $request)
     {
+        $id = (string)Uuid::generate(4);
+
         if ($request->jenis_link == 'non-link') {
             $ext = array('png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG');
             $pdf = $request->file('pdf_file');
@@ -61,6 +66,7 @@ class SubPagesController extends Controller
                 }
 
                 SubPages::create([
+                    'id' => $id,
                     'title' => $request->title,
                     'content' => $request->content,
                     'pages_type_id' => '1',
@@ -70,6 +76,7 @@ class SubPagesController extends Controller
                 ]);
             } else {
                 SubPages::create([
+                    'id' => $id,
                     'title' => $request->title,
                     'content' => $request->content,
                     'pages_type_id' => '1',
@@ -80,6 +87,7 @@ class SubPagesController extends Controller
             return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Pages berhasil ditambahkan!']);
         } elseif ($request->jenis_link == 'link') {
             SubPages::create([
+                'id' => $id,
                 'jenis_link' => $request->jenis_link,
                 'link' => $request->link,
                 'title' => $request->title,
@@ -89,6 +97,8 @@ class SubPagesController extends Controller
             ]);
             return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Pages berhasil ditambahkan!']);
         }
+
+        Helpers::_recentAdd($id, 'menambahkan sub halaman', 'sub_pages');
     }
 
     /**
@@ -135,6 +145,7 @@ class SubPagesController extends Controller
             'create_by_id' => Auth::user()->id,
             'sub_pages_id' => $request->sub_pages_id
         ]);
+        Helpers::_recentAdd($id, 'mengubah halaman', 'sub_pages');
 
         return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Pages berhasil diubah!']);
     }
@@ -148,10 +159,14 @@ class SubPagesController extends Controller
     public function destroy($id)
     {
         $subpages = SubPages::findOrFail($id);
-        if ($subpages->pdf_file != null) {
-            unlink($subpages->pdf_file);
-        }
-        $subpages->delete();
+        $subpages->update([
+            'deleted_at' => new DateTime()
+        ]);
+        // if ($subpages->pdf_file != null) {
+        //     unlink($subpages->pdf_file);
+        // }
+        // $subpages->delete();
+        Helpers::_recentAdd($id, 'menghapus halaman', 'sub_pages');
 
         return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Pages berhasil dihapus!']);
     }

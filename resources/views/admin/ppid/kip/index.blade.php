@@ -1,7 +1,7 @@
 @extends('admin.index')
 @section('title', 'PPID | Klasifikasi Informasi Publik')
-@section('di-menu', 'show')
-@section('di-ppid', 'active')
+@section('ppid-menu', 'show')
+@section('ppid-ki', 'active')
 @section('additional-css')
     <link rel="stylesheet" type="text/css"
         href="{{ asset('server/vendor/DataTables/DataTables-1.13.1/css/jquery.dataTables.min.css') }}" />

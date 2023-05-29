@@ -66,11 +66,6 @@
             </a>
             <ul id="data-informasi" class="nav-content collapse @yield('di-menu')" data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{ route('ppid-kip.index') }}" class="@yield('di-ppid')">
-                        <i class="bi bi-circle"></i><span>KIP PPID</span>
-                    </a>
-                </li>
-                <li>
                     <a href="{{ route('galery-admin.index') }}" class="@yield('di-galery')">
                         <i class="bi bi-circle"></i><span>Galery</span>
                     </a>
@@ -85,11 +80,11 @@
                         <i class="bi bi-circle"></i><span>Video Banner</span>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="components-accordion.html">
                         <i class="bi bi-circle"></i><span>Powerpoint</span>
                     </a>
-                </li>
+                </li> --}}
                 <li>
                     <a href="components-accordion.html">
                         <i class="bi bi-circle"></i><span>Bender</span>
@@ -97,6 +92,25 @@
                 </li>
             </ul>
         </li><!-- End Components Nav -->
+
+        {{-- MENU PPID --}}
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#ppid" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-journal-text"></i><span>PPID</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="ppid" class="nav-content collapse @yield('ppid-menu')" data-bs-parent="#sidebar-mav">
+                <li>
+                    <a href="{{ route('ppid-kip.index') }}" class="@yield('ppid-ki')">
+                        <i class="bi bi-circle"></i><span>Klasifikasi Informasi</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('ppid-struktur.index') }}" class="@yield('ppid-struktur')">
+                        <i class="bi bi-circle"></i><span>Struktur Organisasi PPID</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
         <li class="nav-heading">Addon</li>
 

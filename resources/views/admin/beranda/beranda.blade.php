@@ -320,6 +320,8 @@
                                             @php $badge = 'secondary' @endphp
                                         @elseif ($recent->jenis == 'pages')
                                             @php $badge = 'success' @endphp
+                                        @elseif ($recent->jenis == 'sub_pages')
+                                            @php $badge = 'secondary' @endphp
                                         @endif
                                         <i
                                             class='bi bi-circle-fill activity-badge text-{{ $badge }} align-self-start'></i>

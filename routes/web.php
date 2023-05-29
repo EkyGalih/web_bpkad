@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\Admin\PPID\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\LaporanPermohonanMasyarakatController;
@@ -57,6 +58,11 @@ Route::group(['prefix' => 'PPID/Klasifikasi-Informasi-Publik'], function () {
 Route::group(['prefix' => 'Profile/Profile-Pejabat'], function () {
     Route::get('/', [PegawaiController::class, 'ProfilePejabat'])->name('profile.profile-pejabat');
 });
+
 Route::group(['prefix' => 'Profile/Data-Pegawai-Bpkad'], function () {
     Route::get('/', [PegawaiController::class, 'pegawai'])->name('profile.data-pegawai');
+});
+
+Route::group(['prefix' => 'PPID/Profile-PPID/Struktur-Organisasi-PPID'], function () {
+    Route::get('/', [ProfileController::class, 'profile'])->name('profile.struktur-organisasi');
 });
