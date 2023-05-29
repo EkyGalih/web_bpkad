@@ -6,6 +6,7 @@ use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Pegawai;
 use App\Models\PPIDStruktur;
+use DateTime;
 use Illuminate\Http\Request;
 use Webpatser\Uuid\Uuid;
 
@@ -19,7 +20,10 @@ class StrukturController extends Controller
     public function index()
     {
         $struktural = PPIDStruktur::join('pegawai', 'ppid_struktur.pegawai_id', '=', 'pegawai.id')
-        ->get();
+            ->select('pegawai.id as uuid', 'pegawai.*', 'ppid_struktur.id as ppid_id', 'ppid_struktur.*')
+            ->where('ppid_struktur.deleted_at', '=', NULL)
+            ->get();
+
         return view('admin.ppid.struktural.index', compact('struktural'));
     }
 
@@ -31,7 +35,9 @@ class StrukturController extends Controller
     public function create()
     {
         $pegawais = Pegawai::get();
-        return view('admin.ppid.struktural.create', compact('pegawais'));
+        $jabatan = Helpers::_jsonDecode(asset('server/data/ppid/jabatan.json'));
+
+        return view('admin.ppid.struktural.components.create', compact('pegawais', 'jabatan'));
     }
 
     /**
@@ -75,7 +81,11 @@ class StrukturController extends Controller
      */
     public function edit($id)
     {
-        //
+        $struktur = PPIDStruktur::findOrFail($id);
+        $pegawais = Pegawai::get();
+        $jabatan = Helpers::_jsonDecode(asset('server/data/ppid/jabatan.json'));
+
+        return view('admin.ppid.struktural.components.edit', compact('pegawais', 'struktur', 'jabatan'));
     }
 
     /**
@@ -87,7 +97,17 @@ class StrukturController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $struktural = PPIDStruktur::findOrFail($id);
+
+        $struktural->update([
+            'pegawai_id' => $request->pegawai_id,
+            'jabatan' => $request->jabatan,
+            'nama_jabatan' => $request->nama_jabatan
+        ]);
+
+        Helpers::_recentAdd($id, 'mengubah pejabat ppid', 'ppid_struktur');
+
+        return redirect()->route('ppid-struktur.index')->with(['success' => 'Pejabat berhasil diubah!']);
     }
 
     /**
@@ -98,6 +118,13 @@ class StrukturController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $struktural = PPIDStruktur::findOrFail($id);
+        $struktural->update([
+            'deleted_at' => new DateTime()
+        ]);
+
+        Helpers::_recentAdd($id, 'menghapus pejabat ppid', 'ppid_struktur');
+
+        return redirect()->route('ppid-struktur.index')->with(['success' => 'Pejabat berhasil dihapus!']);
     }
 }

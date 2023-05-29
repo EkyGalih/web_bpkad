@@ -102,6 +102,13 @@ class Helpers
 
     // Custom Function
 
+    public static function _jsonDecode($param)
+    {
+        $files = file_get_contents($param);
+        $data = json_decode($files, true);
+        return $data;
+    }
+
     public static function __phone($param)
     {
         $phone = ltrim($param, '0');
@@ -380,9 +387,7 @@ class Helpers
                 $data = User::where('id', '=', $uuid)->select('nama')->first();
                 break;
             case 'ppid_struktur':
-                $data = PPIDStruktur::join('pegawai', 'ppid_struktur.pegawai_id', '=', 'pegawai.id')
-                    ->where('ppid_struktur.id', '=', $uuid)->select('pegawai.name as nama')
-                    ->first();
+                $data = PPIDStruktur::where('id', '=', $uuid)->select('nama_jabatan as nama')->first();
                 break;
             default:
                 $data = '';
@@ -513,7 +518,7 @@ class Helpers
             return Pegawai::where('pendidikan', 'LIKE', '%' . $param . '%')->count();
         } elseif ($act == 'golongan') {
             return Pegawai::join('pangkat', 'pegawai.pangkatUuid', '=', 'pangkat.uuid')
-                ->where('nama_pangkat', 'LIKE', $param.'%')
+                ->where('nama_pangkat', 'LIKE', $param . '%')
                 ->count();
         }
     }

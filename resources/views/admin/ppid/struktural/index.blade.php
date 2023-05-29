@@ -57,7 +57,19 @@
                                             <td>{{ $item->Pegawai->name }}</td>
                                             <td>{{ $item->jabatan }}</td>
                                             <td>{{ $item->nama_jabatan }}</td>
-                                            <td></td>
+                                            <td>
+                                                <a href="{{ route('ppid-struktur.edit', $item->ppid_id) }}"
+                                                    class="btn btn-warning btn-md">
+                                                    <i class="bi bi-pencil-square"></i>
+                                                </a>
+
+                                                <button class="btn btn-danger btn-md" data-bs-toggle="modal"
+                                                    data-bs-target="#DeletePejabat{{ $loop->iteration }}">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+
+                                                @include('admin/ppid/struktural/addons/delete')
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
