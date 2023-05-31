@@ -50,11 +50,6 @@ Route::group(['prefix' => 'Permohonan_dan_Pengaduan'], function () {
     Route::get('destroy/{id}', [LaporanPermohonanMasyarakatController::class, 'destroy'])->name('faq.destroy');
 });
 
-Route::group(['prefix' => 'PPID/Klasifikasi-Informasi-Publik'], function () {
-    Route::get('/', [PpidKipController::class, 'index'])->name('ppid-kip');
-    Route::get('search/{query?}', [PpidKipController::class, 'search'])->name('ppid-kip.search');
-});
-
 Route::group(['prefix' => 'Profile/Profile-Pejabat'], function () {
     Route::get('/', [PegawaiController::class, 'ProfilePejabat'])->name('profile.profile-pejabat');
 });
@@ -63,6 +58,15 @@ Route::group(['prefix' => 'Profile/Data-Pegawai-Bpkad'], function () {
     Route::get('/', [PegawaiController::class, 'pegawai'])->name('profile.data-pegawai');
 });
 
-Route::group(['prefix' => 'PPID/Profile-PPID/Struktur-Organisasi-PPID'], function () {
-    Route::get('/', [ProfileController::class, 'profile'])->name('profile.struktur-organisasi');
+Route::group(['prefix' => 'PPID'], function () {
+    Route::group(['prefix' => 'Klasifikasi-Informasi-Publik'], function () {
+        Route::get('/', [PpidKipController::class, 'index'])->name('ppid-kip');
+        Route::get('search/{query?}', [PpidKipController::class, 'search'])->name('ppid-kip.search');
+    });
+
+    Route::group(['prefix' => 'Profile-PPID'], function () {
+        Route::group(['prefix' => 'Struktur-Organisasi-PPID'], function () {
+            Route::get('/', [ProfileController::class, 'struktur'])->name('profile.struktur-organisasi');
+        });
+    });
 });

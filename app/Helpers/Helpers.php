@@ -52,6 +52,8 @@ class Helpers
     {
         return SubPages::where('sub_pages_id', '=', $param)
             ->select('sub_pages.title', 'sub_pages.id as sub_menu_id', 'sub_pages.jenis_link', 'sub_pages.link')
+            ->where('deleted_at', '=', NULL)
+            ->orderBy('title', 'ASC')
             ->get();
     }
 
@@ -528,5 +530,23 @@ class Helpers
         if ($param == 'count') {
             return Pegawai::where('pangkatUuid', '=', NULL)->count();
         }
+    }
+
+    public static function getPejabatPPID($jabatan)
+    {
+        return PPIDStruktur::join('pegawai', 'ppid_struktur.pegawai_id', '=', 'pegawai.id')
+            ->where('ppid_struktur.jabatan', '=', $jabatan)
+            ->where('ppid_struktur.deleted_at', '=', NULL)
+            ->select('ppid_struktur.jabatan', 'ppid_struktur.nama_jabatan', 'pegawai.name', 'pegawai.foto')
+            ->first();
+    }
+
+    public static function getAnggotaPPID($jabatan)
+    {
+        return PPIDStruktur::join('pegawai', 'ppid_struktur.pegawai_id', '=', 'pegawai.id')
+            ->where('ppid_struktur.jabatan', '=', $jabatan)
+            ->where('ppid_struktur.deleted_at', '=', NULL)
+            ->select('ppid_struktur.jabatan', 'ppid_struktur.nama_jabatan', 'pegawai.name', 'pegawai.foto')
+            ->get();
     }
 }

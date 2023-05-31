@@ -12,9 +12,9 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function profile()
+    public function struktur()
     {
-        //
+        return view('client.PPID.struktur.index');
     }
 
     /**
