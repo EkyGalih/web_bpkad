@@ -112,14 +112,16 @@
 
 
         .label-title {
-            background-color: #ffffff;
-            border-radius: 10%;
-            margin-left: 10%;
-            margin-right: 10%;
+            background-color: #e4e4e0;
+            border-radius: 0%;
+            margin-left: 2%;
+            margin-right: 2%;
         }
 
         .name {
-            font-size: 16px;
+            font-size: 14px;
+            color: #fff;
+            font-weight: bold;
             font-family: 'Times New Roman';
             -webkit-animation: name 2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
             animation: name 2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;

@@ -113,13 +113,14 @@
 
         .label-title {
             background-color: #ffffff;
-            border-radius: 10%;
-            margin-left: 15%;
-            margin-right: 15%;
+            margin-left: 1.5%;
+            margin-right: 1.5%;
         }
 
         .name {
             font-size: 14px;
+            color: #fff;
+            font-weight: bold;
             font-family: 'Times New Roman';
             -webkit-animation: name 2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
             animation: name 2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
