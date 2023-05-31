@@ -65,7 +65,7 @@ class HomeController extends Controller
 
         // slider
         $slides = Slideitem::where('slide_id', '=', '2')->get();
-        $slidesInformasi = Slideitem::where('slide_id', '=', '1')->where('deleted_at', '=', NULL)->get();
+        $slidesInformasi = Slideitem::where('slide_id', '=', '1')->where('deleted_at', '=', NULL)->orderBy('created_at', 'DESC')->get();
         return view('client.home.home', compact('new_posts', 'carousel', 'old_posts', 'videos', 'apps', 'data_covid', 'slides', 'slidesInformasi', 'banners'));
     }
 

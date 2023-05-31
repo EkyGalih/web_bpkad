@@ -50,6 +50,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapPpidKipAdmin();
         $this->mapSliderAdmin();
         $this->mapPegawaiAdmin();
+        $this->mapBannerAdmin();
 
        // ROUTE CLIENT
         $this->mapWebRoutes();
@@ -130,6 +131,13 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/admin/pegawai.php'));
+    }
+
+    public function mapBannerAdmin()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/admin/banner.php'));
     }
 
     public function mapWebRoutes()

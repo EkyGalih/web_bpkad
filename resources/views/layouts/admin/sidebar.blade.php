@@ -80,14 +80,9 @@
                         <i class="bi bi-circle"></i><span>Video Banner</span>
                     </a>
                 </li>
-                {{-- <li>
-                    <a href="components-accordion.html">
-                        <i class="bi bi-circle"></i><span>Powerpoint</span>
-                    </a>
-                </li> --}}
                 <li>
-                    <a href="components-accordion.html">
-                        <i class="bi bi-circle"></i><span>Bender</span>
+                    <a href="{{ route('banner.index') }}" class="@yield('di-banner')">
+                        <i class="bi bi-circle"></i><span>Banner Informasi</span>
                     </a>
                 </li>
             </ul>

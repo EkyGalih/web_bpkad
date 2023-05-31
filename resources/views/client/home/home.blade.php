@@ -293,9 +293,6 @@
     <section id="team" class="team">
         <div class="container">
 
-            <div class="section-title" data-aos="fade-up">
-                <h3>Layanan <span>BPKAD</span></h3>
-            </div>
             <div class="row">
                 @foreach ($apps as $app)
                     <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
