@@ -290,12 +290,19 @@
             </div>
         </div>
     </section>
-    <section id="team" class="team">
+    {{-- <section id="team" class="team">
         <div class="container">
-
+            <div class="section-title">
+                <h3>Layanan <span>BPKAD</span></h3>
+                <hr />
+            </div>
             <div class="row">
                 @foreach ($apps as $app)
-                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+                    <a href="{{ $app->url }}" class="box-apps col-lg-3 col-md-6 d-flex align-item-stretch"
+                        data-aos="fade-up" data-aos-delay="100">
+                        <img src="{{ asset($app->icon) }}" alt="{{ $app->name }}">
+                    </a>
+                    {{-- <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
                         <div class="member">
                             <div class="member-img">
                                 <img src="{{ asset($app->icon) }}" class="img-fluid" alt="{{ $app->name }}}">
@@ -308,14 +315,13 @@
                                 <span>{{ $app->deskripsi }}</span>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    </div> --}}
+                {{-- @endforeach --}}
             </div>
         </div>
-    </section>
+    </section> --}}
     <section id="testimonials" class="testimonials">
         <div class="container" data-aos="zoom-in">
-
             <div class="owl-carousel testimonials-carousel">
                 @foreach ($apps as $app)
                     <div class="testimonial-item">
