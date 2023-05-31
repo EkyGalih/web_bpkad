@@ -25,6 +25,7 @@ use App\Models\Slideitem;
 use App\Models\Social;
 use App\Models\SubPages;
 use App\Models\User;
+use App\Models\PostsCategory;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 
@@ -86,6 +87,42 @@ class Helpers
         return $comment->count();
     }
 
+    public static function PostCategory($id)
+    {
+        $cat = PostsCategory::where('id', '=', $id)
+            ->select('category')
+            ->first();
+        return $cat->category ?? '-';
+    }
+
+    public static function Tags($tags)
+    {
+        $explode = explode(",", $tags);
+        return $explode;
+    }
+
+    public static function getPostCategory()
+    {
+        return Posts::join('posts_category', 'posts.posts_category_id', '=', 'posts_category.id')
+            ->groupBy('posts_category.category')
+            ->select('posts_category.category', 'posts_category.id')
+            ->get();
+    }
+
+    public static function countCategoryPost($cat_id)
+    {
+        return Posts::where('posts_category_id', '=', $cat_id)
+            ->count();
+    }
+
+    public static function getPostTag($tags)
+    {
+        return Posts::where('tags', 'LIKE', '%' . $tags . '%')
+            ->orderBy('created_at', 'DESC')
+            ->limit(5)
+            ->get();
+    }
+
     // pages function
 
     public static function GetTypePage($param)
@@ -103,6 +140,16 @@ class Helpers
     }
 
     // Custom Function
+
+    public static function randomColor()
+    {
+        $chars = 'ABCDEF0123456789';
+        $color = '#';
+        for ($i = 0; $i < 6; $i++) {
+            $color .= $chars[rand(0, strlen($chars) - 1)];
+        }
+        return $color;
+    }
 
     public static function _jsonDecode($param)
     {

@@ -25,6 +25,6 @@ class PostsCategory extends Model
 
     public function Posts()
     {
-        return $this->hasMany(Posts::class);
+        return $this->hasOne(Posts::class);
     }
 }

@@ -94,9 +94,20 @@ class HomeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function post()
     {
-        //
+        $posts = Posts::orderBy('created_at', 'DESC')->paginate(12);
+
+        return view('client.home.posts', compact('posts'));
+    }
+
+    public function PostCat($id)
+    {
+        $posts = Posts::where('posts_category_id', '=', $id)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(12);
+
+        return view('client.home.posts', compact('posts'));
     }
 
     /**

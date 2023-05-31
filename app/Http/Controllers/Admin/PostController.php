@@ -45,7 +45,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+        dd($request);
 
         $foto       = $request->file('foto_berita');
         $ext        = array('png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG');
@@ -65,7 +65,8 @@ class PostController extends Controller
             'content_type_id' => '1',
             'foto_berita' => $request->foto_berita,
             'users_id' => Auth::user()->id,
-            'posts_category_id' => $request->posts_category_id
+            'posts_category_id' => $request->posts_category_id,
+            'tags' => $request->tags
         ]);
 
         Helpers::_recentAdd($id, 'membuat posting', 'post');
@@ -117,7 +118,8 @@ class PostController extends Controller
                 'content_type_id' => '1',
                 'foto_berita' => $request->foto_berita,
                 'users_id' => Auth::user()->id,
-                'posts_category_id' => $request->posts_category_id
+                'posts_category_id' => $request->posts_category_id,
+                'tags' => $request->tags
             ]);
             Helpers::_recentAdd($id, 'mengubah posting', 'post');
         } elseif ($foto == null) {
@@ -127,7 +129,8 @@ class PostController extends Controller
                 'content_type_id' => '1',
                 'foto_berita' => $posts->foto_berita,
                 'users_id' => Auth::user()->id,
-                'posts_category_id' => $request->posts_category_id
+                'posts_category_id' => $request->posts_category_id,
+                'tags' => $request->tags
             ]);
             Helpers::_recentAdd($id, 'mengubah posting', 'post');
         }

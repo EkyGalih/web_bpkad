@@ -19,10 +19,10 @@
             <div class="row">
 
                 <div class="col-lg-3 col-md-6 footer-contact">
-                    <h3>KONTAK<span>& ALAMAT</span></h3>
+                    <h3>KONTAK<span> & ALAMAT</span></h3>
                     <p>
                         @php $address = Helpers::__address() @endphp
-                        <i class="icofont-map-pins"></i> {{ $address->address }}<br><br>
+                        <i class="icofont-map-pins"></i> {{ $address->address }}<br/>
                         <strong><i class="icofont-smart-phone"></i></strong> {{ Helpers::__phone($address->phone) }}<br>
                         <strong><i class="icofont-email"></i></strong> {{ $address->email }}<br>
                         <strong><i class="icofont-email"></i></strong> bpkad@ntbprov.go.id<br>
@@ -30,22 +30,22 @@
                 </div>
 
                 <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Useful Links</h4>
+                    <h4>Halaman Populer</h4>
                     <ul>
                         <li><i class="bx bx-chevron-right"></i> <a href="{{ route('dashboard') }}">Home</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{ route('dashboard') }}/#contact">About us</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a href="#">Laporan Masyarakat</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Permohonan & Pengaduan</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">PPID</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{ route('faq.index') }}">Permohonan & Pengaduan</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{ route('ppid-kip') }}">Klasifiksi Informasi Publik</a></li>
                     </ul>
                 </div>
 
                 <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Our Services</h4>
+                    <h4>Pelayanan Kami</h4>
                     <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">SIPD</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">PENCAIRAN SP2D</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">PENGELOLAAN & PEMANFAATAN ASET</a>
+                        <li><i class="bx bx-chevron-right"></i> <a href="https://lapakaset.ntbprov.go.id" target="_blank">Lapak Aset</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="https://arsip.bpkad.ntbprov.go.id" target="_blank">Arsip</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="https://silamo.ntbprov.go.id" target="_blank">Silamo</a>
                         </li>
                     </ul>
                 </div>
