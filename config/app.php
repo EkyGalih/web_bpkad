@@ -168,7 +168,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Jorenvh\Share\Providers\ShareServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -233,6 +233,7 @@ return [
         'Helpers' => App\Helpers\Helpers::class,
         'GoogleMaps' => GoogleMaps\Facade\GoogleMapsFacade::class,
         'Mapper'         => Cornford\Googlmapper\Facades\MapperFacade::class,
+        'Share' => Jorenvh\Share\ShareFacade::class,
     ],
 
 ];

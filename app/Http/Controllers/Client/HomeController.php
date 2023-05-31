@@ -11,6 +11,7 @@ use App\Models\Slideitem;
 use App\Models\SubPages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Jorenvh\Share\Share;
 
 class HomeController extends Controller
 {
@@ -119,8 +120,18 @@ class HomeController extends Controller
     public function show($id)
     {
         $posts = Posts::where('id', '=', $id)->first();
+        $share = \Share::page(
+            'https://www.positronx.io/create-autocomplete-search-in-laravel-with-typeahead-js/',
+            'Your share text comes here',
+        )
+            ->facebook()
+            ->twitter()
+            ->linkedin()
+            ->telegram()
+            ->whatsapp()
+            ->reddit();
 
-        return view('client.home.detail_posts', compact('posts'));
+        return view('client.home.detail_posts', compact('posts', 'share'));
     }
 
     /**

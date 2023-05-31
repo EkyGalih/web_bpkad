@@ -126,6 +126,10 @@ class ComposerStaticInitdfd2d5dfba2e2f27e983f5c979903648
             'Laravel\\SerializableClosure\\' => 28,
             'Laravel\\Sail\\' => 13,
         ),
+        'J' => 
+        array (
+            'Jorenvh\\Share\\' => 14,
+        ),
         'I' => 
         array (
             'Intervention\\Image\\' => 19,
@@ -412,6 +416,10 @@ class ComposerStaticInitdfd2d5dfba2e2f27e983f5c979903648
         array (
             0 => __DIR__ . '/..' . '/laravel/sail/src',
         ),
+        'Jorenvh\\Share\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jorenvanhocht/laravel-share/src',
+        ),
         'Intervention\\Image\\' => 
         array (
             0 => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image',
@@ -570,6 +578,8 @@ class ComposerStaticInitdfd2d5dfba2e2f27e983f5c979903648
         'App\\Helpers\\Helpers' => __DIR__ . '/../..' . '/app/Helpers/Helpers.php',
         'App\\Http\\Controllers\\Admin\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AdminController.php',
         'App\\Http\\Controllers\\Admin\\AppsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AppsController.php',
+        'App\\Http\\Controllers\\Admin\\BannerInformasiController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/BannerInformasiController.php',
+        'App\\Http\\Controllers\\Admin\\Galery\\BannerVideoController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/Galery/BannerVideoController.php',
         'App\\Http\\Controllers\\Admin\\Galery\\GaleryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/Galery/GaleryController.php',
         'App\\Http\\Controllers\\Admin\\Galery\\GaleryFotoController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/Galery/GaleryFotoController.php',
         'App\\Http\\Controllers\\Admin\\Galery\\GaleryVideoController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/Galery/GaleryVideoController.php',
@@ -577,7 +587,10 @@ class ComposerStaticInitdfd2d5dfba2e2f27e983f5c979903648
         'App\\Http\\Controllers\\Admin\\LaporanMasyarakatController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/LaporanMasyarakatController.php',
         'App\\Http\\Controllers\\Admin\\MenuController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/MenuController.php',
         'App\\Http\\Controllers\\Admin\\PPID\\KIPController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/PPID/KIPController.php',
+        'App\\Http\\Controllers\\Admin\\PPID\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/PPID/ProfileController.php',
+        'App\\Http\\Controllers\\Admin\\PPID\\StrukturController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/PPID/StrukturController.php',
         'App\\Http\\Controllers\\Admin\\PagesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/PagesController.php',
+        'App\\Http\\Controllers\\Admin\\PegawaiController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/PegawaiController.php',
         'App\\Http\\Controllers\\Admin\\PermohonanController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/PermohonanController.php',
         'App\\Http\\Controllers\\Admin\\PostController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/PostController.php',
         'App\\Http\\Controllers\\Admin\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ProfileController.php',
@@ -591,6 +604,7 @@ class ComposerStaticInitdfd2d5dfba2e2f27e983f5c979903648
         'App\\Http\\Controllers\\Auth\\ManajemenUserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ManajemenUserController.php',
         'App\\Http\\Controllers\\Client\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Client/HomeController.php',
         'App\\Http\\Controllers\\Client\\LaporanPermohonanMasyarakatController' => __DIR__ . '/../..' . '/app/Http/Controllers/Client/LaporanPermohonanMasyarakatController.php',
+        'App\\Http\\Controllers\\Client\\PegawaiController' => __DIR__ . '/../..' . '/app/Http/Controllers/Client/PegawaiController.php',
         'App\\Http\\Controllers\\Client\\PostsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Client/PostsController.php',
         'App\\Http\\Controllers\\Client\\PpidKipController' => __DIR__ . '/../..' . '/app/Http/Controllers/Client/PpidKipController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
@@ -610,7 +624,9 @@ class ComposerStaticInitdfd2d5dfba2e2f27e983f5c979903648
         'App\\Models\\Address' => __DIR__ . '/../..' . '/app/Models/Address.php',
         'App\\Models\\Apps' => __DIR__ . '/../..' . '/app/Models/Apps.php',
         'App\\Models\\Assets' => __DIR__ . '/../..' . '/app/Models/Assets.php',
+        'App\\Models\\Banner' => __DIR__ . '/../..' . '/app/Models/Banner.php',
         'App\\Models\\Bender' => __DIR__ . '/../..' . '/app/Models/Bender.php',
+        'App\\Models\\Bidang' => __DIR__ . '/../..' . '/app/Models/Bidang.php',
         'App\\Models\\ContentType' => __DIR__ . '/../..' . '/app/Models/ContentType.php',
         'App\\Models\\DaftarApp' => __DIR__ . '/../..' . '/app/Models/DaftarApp.php',
         'App\\Models\\Files' => __DIR__ . '/../..' . '/app/Models/Files.php',
@@ -618,12 +634,16 @@ class ComposerStaticInitdfd2d5dfba2e2f27e983f5c979903648
         'App\\Models\\GaleryFoto' => __DIR__ . '/../..' . '/app/Models/GaleryFoto.php',
         'App\\Models\\GaleryType' => __DIR__ . '/../..' . '/app/Models/GaleryType.php',
         'App\\Models\\GaleryVideo' => __DIR__ . '/../..' . '/app/Models/GaleryVideo.php',
+        'App\\Models\\Golongan' => __DIR__ . '/../..' . '/app/Models/Golongan.php',
         'App\\Models\\KIP' => __DIR__ . '/../..' . '/app/Models/KIP.php',
         'App\\Models\\Laporan' => __DIR__ . '/../..' . '/app/Models/Laporan.php',
         'App\\Models\\Links' => __DIR__ . '/../..' . '/app/Models/Links.php',
         'App\\Models\\Menu' => __DIR__ . '/../..' . '/app/Models/Menu.php',
+        'App\\Models\\PPIDStruktur' => __DIR__ . '/../..' . '/app/Models/PPIDStruktur.php',
         'App\\Models\\Pages' => __DIR__ . '/../..' . '/app/Models/Pages.php',
         'App\\Models\\PagesType' => __DIR__ . '/../..' . '/app/Models/PagesType.php',
+        'App\\Models\\Pangkat' => __DIR__ . '/../..' . '/app/Models/Pangkat.php',
+        'App\\Models\\Pegawai' => __DIR__ . '/../..' . '/app/Models/Pegawai.php',
         'App\\Models\\Permohonan' => __DIR__ . '/../..' . '/app/Models/Permohonan.php',
         'App\\Models\\PostComment' => __DIR__ . '/../..' . '/app/Models/PostComment.php',
         'App\\Models\\Posts' => __DIR__ . '/../..' . '/app/Models/Posts.php',
@@ -3054,6 +3074,9 @@ class ComposerStaticInitdfd2d5dfba2e2f27e983f5c979903648
         'Intervention\\Image\\Point' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Point.php',
         'Intervention\\Image\\Response' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Response.php',
         'Intervention\\Image\\Size' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Size.php',
+        'Jorenvh\\Share\\Providers\\ShareServiceProvider' => __DIR__ . '/..' . '/jorenvanhocht/laravel-share/src/Providers/ShareServiceProvider.php',
+        'Jorenvh\\Share\\Share' => __DIR__ . '/..' . '/jorenvanhocht/laravel-share/src/Share.php',
+        'Jorenvh\\Share\\ShareFacade' => __DIR__ . '/..' . '/jorenvanhocht/laravel-share/src/ShareFacade.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
         'Laravel\\Sail\\SailServiceProvider' => __DIR__ . '/..' . '/laravel/sail/src/SailServiceProvider.php',
         'Laravel\\SerializableClosure\\Contracts\\Serializable' => __DIR__ . '/..' . '/laravel/serializable-closure/src/Contracts/Serializable.php',

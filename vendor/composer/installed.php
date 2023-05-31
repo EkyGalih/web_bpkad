@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '51417649c8de2a85ec109375b454e138a6f3e957',
+        'reference' => 'e68c9b43714e22b0837dcc6699374a3321aaf07c',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -442,6 +442,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'jorenvanhocht/laravel-share' => array(
+            'pretty_version' => '4.2.0',
+            'version' => '4.2.0.0',
+            'reference' => '86af334068038a840567ed62f2082fe3ac981476',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../jorenvanhocht/laravel-share',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'kodova/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -460,7 +469,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '51417649c8de2a85ec109375b454e138a6f3e957',
+            'reference' => 'e68c9b43714e22b0837dcc6699374a3321aaf07c',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -1,6 +1,7 @@
 @extends('client.index')
 @section('title', 'Detail Berita')
 @section('additional-css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <style>
         .tags {
             font-weight: bold;
@@ -10,6 +11,24 @@
             padding: 4px;
             margin-right: 4px;
             background-color: #3f8bee;
+        }
+
+        div#social-links {
+            margin: 0 auto;
+            max-width: 500px;
+        }
+
+        div#social-links ul li {
+            display: inline-block;
+        }
+
+        div#social-links ul li a {
+            padding: 20px;
+            border: 1px solid #0844c5;
+            margin: 1px;
+            font-size: 30px;
+            color: #fff;
+            background-color: #0844c5;
         }
     </style>
 @endsection
@@ -36,9 +55,7 @@
                                     {{ Helpers::getDate($posts->created_at) . ',' . Helpers::getTime($posts->created_at) }}
                                 </li>
                             </ul>
-                            <button type="button" class="btn btn-info btn-sm pull-right">
-                                <i class="bx bx-share-alt"></i> Bagikan
-                            </button>
+                            {!! $share !!}
                         </div>
                     </div>
 
