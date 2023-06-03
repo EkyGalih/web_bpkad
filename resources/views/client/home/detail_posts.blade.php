@@ -23,10 +23,10 @@
         }
 
         div#social-links ul li a {
-            padding: 20px;
+            padding: 5px;
             border: 1px solid #0844c5;
-            margin: 1px;
-            font-size: 30px;
+            margin: 2px;
+            font-size: 15px;
             color: #fff;
             background-color: #0844c5;
         }
@@ -54,8 +54,10 @@
                                 <li><strong>Waktu Post</strong>:
                                     {{ Helpers::getDate($posts->created_at) . ',' . Helpers::getTime($posts->created_at) }}
                                 </li>
+                                <li>
+                                    {!! $share !!}
+                                </li>
                             </ul>
-                            {!! $share !!}
                         </div>
                     </div>
 

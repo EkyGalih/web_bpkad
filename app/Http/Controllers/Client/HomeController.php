@@ -12,6 +12,7 @@ use App\Models\SubPages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Jorenvh\Share\Share;
+use Webpatser\Uuid\Uuid;
 
 class HomeController extends Controller
 {
@@ -121,8 +122,8 @@ class HomeController extends Controller
     {
         $posts = Posts::where('id', '=', $id)->first();
         $share = \Share::page(
-            'https://www.positronx.io/create-autocomplete-search-in-laravel-with-typeahead-js/',
-            'Your share text comes here',
+            url()->full(),
+            $posts->title,
         )
             ->facebook()
             ->twitter()
