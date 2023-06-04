@@ -151,6 +151,18 @@ class Helpers
         return $color;
     }
 
+    public static function randomString($panjang)
+    {
+        $karakter = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $input_length = strlen($karakter);
+        $random_string = '';
+        for ($i = 0; $i < $panjang; $i++) {
+            $random_character = $karakter[mt_rand(0, $input_length - 1)];
+            $random_string .= $random_character;
+        }
+        return $random_string;
+    }
+
     public static function _jsonDecode($param)
     {
         $files = file_get_contents($param);

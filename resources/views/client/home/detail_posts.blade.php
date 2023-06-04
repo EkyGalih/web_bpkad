@@ -83,7 +83,7 @@
                         </button>
                         @foreach ($cat as $cat)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <a href="{{ route('post.post_cat', $cat->id) }}">{{ $cat->category }}
+                                <a href="{{ route('post.post_cat', Helpers::randomString(120).'/'.Helpers::randomString(100).'/'.$cat->id) }}">{{ $cat->category }}
                                 </a>
                                 <span
                                     class="badge badge-primary badge-pill">({{ Helpers::countCategoryPost($cat->id) }})</span>
@@ -99,7 +99,7 @@
                             <i class="bx bx-news"></i> Berita Serupa
                         </button>
                         @foreach ($posting as $post)
-                            <a href="{{ route('client.show', $post->id) }}" type="button"
+                            <a href="{{ route('client.show', Helpers::randomString(120).'/'.$post->id.'/'.Helpers::randomString(100)) }}" type="button"
                                 class="list-group-item list-group-item-action">{{ $post->title }}</a>
                         @endforeach
                     </div>

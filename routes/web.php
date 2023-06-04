@@ -31,8 +31,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
 
 Route::group(['prefix' => 'posts'], function () {
     Route::get('/', [HomeController::class, 'post'])->name('post.index');
-    Route::get('category/{id}', [HomeController::class, 'PostCat'])->name('post.post_cat');
-    Route::get('detail/{id?}', [HomeController::class, 'show'])->name('client.show');
+    Route::get('category/{token1?}/{token2?}/{id?}', [HomeController::class, 'PostCat'])->name('post.post_cat');
+    Route::get('detail/{token1?}/{id?}/{token2?}', [HomeController::class, 'show'])->name('client.show');
     Route::get('like/{id}', [PostsController::class, 'like'])->name('post.like');
     Route::post('comment/{id}', [PostsController::class, 'comment'])->name('post.comment');
 });

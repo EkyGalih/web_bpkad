@@ -103,7 +103,7 @@ class HomeController extends Controller
         return view('client.home.posts', compact('posts'));
     }
 
-    public function PostCat($id)
+    public function PostCat($token1, $token2, $id)
     {
         $posts = Posts::where('posts_category_id', '=', $id)
             ->orderBy('created_at', 'DESC')
@@ -118,7 +118,7 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($token1, $id, $token2)
     {
         $posts = Posts::where('id', '=', $id)->first();
         $share = \Share::page(
