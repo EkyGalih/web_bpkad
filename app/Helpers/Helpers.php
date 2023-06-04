@@ -123,6 +123,22 @@ class Helpers
             ->get();
     }
 
+    public static function countTag()
+    {
+        $posts = Posts::select('tags')->groupBy('tags')->get();
+        $tags = array();
+        foreach ($posts as $post) {
+            if ($post->tags != null) {
+                $exp = explode(",", $post->tags);
+                foreach ($exp as $item) {
+                    array_push($tags, $item);
+                }
+            }
+        }
+        dd($tags);
+        return $post;
+    }
+
     // pages function
 
     public static function GetTypePage($param)

@@ -3,8 +3,8 @@
         <h1 class="logo mr-auto"><a href="{{ '/' }}">BPKAD<span> NTB</span></a></h1>
         <nav class="nav-menu d-none d-lg-block">
             <ul>
-                <li class="active"><a href="{{ '/' }}">Home</a></li>
-                <li><a href="#news">Berita</a></li>
+                <li class="@yield('menu-home')"><a href="{{ '/' }}">Home</a></li>
+                <li class="@yield('menu-berita')"><a href="#news">Berita</a></li>
                 @php
                     $menus = Helpers::Menu();
                 @endphp
@@ -42,7 +42,7 @@
                         <li><a href="{{ $menu->url }}">{{ $menu->name }}</a></li>
                     @endif
                 @endforeach
-                <li><a href="#contact">Kontak</a></li>
+                <li class="@yield('menu-kontak')"><a href="#contact">Kontak</a></li>
             </ul>
         </nav>
 

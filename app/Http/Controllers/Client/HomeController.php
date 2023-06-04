@@ -98,7 +98,7 @@ class HomeController extends Controller
      */
     public function post()
     {
-        $posts = Posts::orderBy('created_at', 'DESC')->paginate(12);
+        $posts = Posts::orderBy('created_at', 'DESC')->paginate(16);
 
         return view('client.home.posts', compact('posts'));
     }
