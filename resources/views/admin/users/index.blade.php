@@ -65,6 +65,13 @@
                                                     class="btn btn-warning btn-md">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
+                                                <a href="#" class="btn btn-secondary btn-md">
+                                                    <i class="bi bi-x-square"></i>
+                                                </a>
+                                                <button class="btn btn-info btn-md" data-bs-toggle="modal"
+                                                    data-bs-target="#UbahSandi{{ $loop->iteration }}">
+                                                    <i class="bi bi-lock"></i>
+                                                </button>
                                                 <button class="btn btn-danger btn-md" data-bs-toggle="modal"
                                                     data-bs-target="#DeleteUser{{ $loop->iteration }}">
                                                     <i class="bi bi-trash"></i>
