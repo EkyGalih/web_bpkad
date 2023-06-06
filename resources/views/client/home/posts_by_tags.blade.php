@@ -1,5 +1,5 @@
 @extends('client.index')
-@section('title', 'Semua Berita')
+@section('title', 'Tags')
 @section('menu-berita', 'active')
 @section('additional-css')
     <style>
@@ -17,7 +17,7 @@
 @section('content_home')
     <main id="main" data-aos="fade-up">
         <!-- ======= Berita ======= -->
-        <section class="portfolio-details" style="margin-top: 5%;">
+        <section class="portfolio-details" style="margin-top: 6%;">
 
             <div class="portfolio-details" style="margin: 2%;">
                 <div class="row">

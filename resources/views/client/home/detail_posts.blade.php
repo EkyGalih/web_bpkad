@@ -80,7 +80,7 @@
                     @endphp
                     <ul class="list-group">
                         <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-                            <i class="bx bx-purchase-tag-alt"></i> Kategori
+                            <i class="bx bx-border-all"></i> Kategori
                         </button>
                         @foreach ($cat as $cat)
                             <li class="list-group-item d-flex justify-content-between align-items-center">

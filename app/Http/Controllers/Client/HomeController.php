@@ -112,6 +112,15 @@ class HomeController extends Controller
         return view('client.home.posts', compact('posts'));
     }
 
+    public function PostTag($tags)
+    {
+        $posts = Posts::where('tags', 'LIKE', '%'.$tags.'%')
+        ->orderBy('created_at', 'DESC')
+        ->paginate(12);
+
+        return view('client.home.posts_by_tags', compact('posts'));
+    }
+
     /**
      * Display the specified resource.
      *

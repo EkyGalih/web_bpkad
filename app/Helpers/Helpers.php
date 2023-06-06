@@ -135,8 +135,7 @@ class Helpers
                 }
             }
         }
-        dd($tags);
-        return $post;
+        return $tags;
     }
 
     // pages function
