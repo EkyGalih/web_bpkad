@@ -44,7 +44,6 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-
                                     <label for="inputText" class="col-sm-2 col-form-label">Jabatan</label>
                                     <div class="col-sm-10">
                                         <select name="jabatan" id="select-jabatan" autocomplete="off"

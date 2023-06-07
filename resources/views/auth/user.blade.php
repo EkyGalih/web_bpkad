@@ -4,21 +4,21 @@
 @section('content')
 <section class="breadcrumbs">
     <div class="container">
-        
+
         <div class="d-flex justify-content-between align-items-center">
-            <h2>Tabel Manajemen User</h2>
+            <h2><i class="bx bx-user"></i> Tabel Manajemen User</h2>
             <ol>
                 <a href="{{ route('pengguna.tambah') }}" class="btn btn-outline-primary btn-block btn-sm">
-                    <i class="icofont-plus"></i> Tambah User
+                    <i class="bx bx-user-plus"></i> Tambah User
                 </a>
             </ol>
         </div>
-        
+
     </div>
 </section>
 <section class="portfolio-details">
     <div class="container">
-        
+
         <div class="portfolio-details-container">
             <div class="row">
                 <div class="col-lg-8"></div>
@@ -29,17 +29,17 @@
                             <input type="text" class="form-control" id="search" name="search" value="{{ $search }}">
                             <div class="input-group-append">
                                 <a href="{{ route('pengguna') }}" class="btn btn-outline-danger btn-xs" title="Bersihkan Pencarian..">
-                                    <i class="icofont-undo"></i>
+                                    <i class="bx bx-undo"></i>
                                 </a>
                                 <button type="submit" class="btn btn-outline-primary btn-xs" title="cari..">
-                                    <i class="icofont-search"></i>
+                                    <i class="bx bx-search"></i>
                                 </button>
                             </div>
                             @else
                             <input type="text" class="form-control" id="search" name="search" placeholder="Ketikkan username atau email">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-outline-primary btn-xs" title="cari..">
-                                    <i class="icofont-search"></i>
+                                    <i class="bx bx-search"></i>
                                 </button>
                             </div>
                             @endif
@@ -78,13 +78,13 @@
                             <td>
                                 <div class="btn-group">
                                     <a href="{{ route('pengguna.ubah', $user->id) }}" class="btn btn-outline-warning btn-sm" title="Edit User {{ $user->username }}">
-                                        <i class="icofont-edit"></i>
+                                        <i class="bx bx-pencil"></i>
                                     </a>
                                     <a href="#" class="btn btn-outline-danger btn-sm" title="Hapus User {{ $user->username }}">
-                                        <i class="icofont-trash"></i>
+                                        <i class="bx bx-user-minus"></i>
                                     </a>
                                     <a href="{{ route('pengguna.show', $user->id) }}" class="btn btn-outline-info btn-sm" title="Show Detail {{ $user->username }}">
-                                        <i class="icofont-eye"></i>
+                                        <i class="bx bx-show"></i>
                                     </a>
                                 </div>
                             </td>

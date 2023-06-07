@@ -32,7 +32,7 @@ class User extends Authenticatable
         return $this->hasMany(Posts::class);
     }
 
-    public function rule()
+    public function Rule()
     {
         return $this->hasMany(Rule::class);
     }

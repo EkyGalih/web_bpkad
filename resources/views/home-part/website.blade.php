@@ -16,7 +16,7 @@
         </div>
         <div class="bottom">
             <a class="btn btn-primary btn-block btn-sm" href="{{ env('WEB_BPKAD_ADMIN') }}">
-                <i class="icofont-sign-in"></i> Ke Aplikasi
+                <i class="bx bx-log-in-circle"></i> Ke Aplikasi
             </a>
         </div>
     </div>

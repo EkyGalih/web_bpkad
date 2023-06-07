@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User as RequestsUser;
+use App\Models\Apps;
 use App\Models\Rule;
 use App\Models\User as Users;
 use Laravolt\Avatar\Facade as Avatar;
@@ -14,7 +16,7 @@ use Webpatser\Uuid\Uuid;
 
 class ManajemenUserController extends Controller
 {
-    
+
     public function index(Request $request)
     {
         if ($request->all()) {
@@ -26,13 +28,14 @@ class ManajemenUserController extends Controller
         return view('auth.user', compact('users'));
     }
 
-    
+
     public function create()
     {
-        return view('auth.tambah');
+        $apps = Apps::get();
+        return view('auth.tambah', compact('apps'));
     }
 
-    
+
     public function store(RequestsUser $request)
     {
         $uuid = (string)Uuid::generate(4);
@@ -45,11 +48,17 @@ class ManajemenUserController extends Controller
             'avatar' => Avatar::create($request->nama),
             'active' => '1',
         ]);
-        Rule::create([
-            'nama_rule' => $request->nama_rule,
-            'aplikasi' => $request->aplikasi,
-            'user_id' => $uuid,
-        ]);
+
+        foreach ($request->aplikasi as $value) {
+            Rule::create([
+                'user_id' => $uuid,
+                'apps_id' => $value,
+                'rule' => $request->nama_rule,
+            ]);
+        }
+
+        Helpers::_recentAdd($uuid, 'menambahkan user', 'users');
+
         return redirect()->route('pengguna')->with(['success' => 'Pengguna berhasil ditambahkan!']);
     }
 
@@ -68,14 +77,16 @@ class ManajemenUserController extends Controller
         return view('auth.user-detail', compact('users', 'rules'));
     }
 
-    
+
     public function edit($id)
     {
         $users = Users::findOrFail($id);
-        return view('auth.tambah', compact('users'));
+        $apps = Apps::get();
+
+        return view('auth.ubah', compact('users','apps'));
     }
 
-    
+
     public function update(Request $request, $id)
     {
         $users = Users::findOrFail($id);
