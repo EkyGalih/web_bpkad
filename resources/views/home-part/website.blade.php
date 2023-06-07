@@ -8,9 +8,11 @@
         </div>
         <div class="info">
             <div class="title">
-                <h4>Website</h4>
+                <h4>WEBSITE</h4>
             </div>
-            <div class="desc"><small class="badge badge-primary">ADMIN</small></div>
+            <div class="desc">
+                <h4 class="badge badge-primary">{{ Auth::user()->role }}</h4>
+            </div>
         </div>
         <div class="bottom">
             <a class="btn btn-primary btn-block btn-sm" href="{{ env('WEB_BPKAD_ADMIN') }}">
