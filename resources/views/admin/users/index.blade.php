@@ -72,6 +72,8 @@
                                                     data-bs-target="#UbahSandi{{ $loop->iteration }}">
                                                     <i class="bi bi-lock"></i>
                                                 </button>
+                                                @include('admin/users/addons/password')
+
                                                 <button class="btn btn-danger btn-md" data-bs-toggle="modal"
                                                     data-bs-target="#DeleteUser{{ $loop->iteration }}">
                                                     <i class="bi bi-trash"></i>

@@ -71,8 +71,7 @@ class ManajemenUserController extends Controller
     public function show($id)
     {
         $users = Users::findOrFail($id);
-        $rules = DB::table('rule')
-            ->where('user_id', '=', $id)
+        $rules = Rule::where('user_id', '=', $id)
             ->get();
         return view('auth.user-detail', compact('users', 'rules'));
     }

@@ -103,6 +103,18 @@ class UsersController extends Controller
         return redirect()->route('users')->with(['success' => 'Perubahan User Berhasil Disimpan']);
     }
 
+    public function password(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->update([
+            'password' => Hash::make($request->password)
+        ]);
+
+        Helpers::_recentAdd($id, 'mengubah password', 'users');
+
+        return redirect()->route('users')->with(['success' => 'Password berhasil diubah!']);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

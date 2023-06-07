@@ -7,16 +7,16 @@
 @section('content')
 <section class="breadcrumbs">
     <div class="container">
-        
+
         <div class="d-flex justify-content-between align-items-center">
             <h2>Detail Manajemen User</h2>
             <ol>
                 <a href="{{ route('pengguna') }}" class="btn btn-outline-dark btn-block btn-sm">
-                    <i class="icofont-reply"></i> Kembali
+                    <i class="bx bx-arrow-back"></i> Kembali
                 </a>
             </ol>
         </div>
-        
+
     </div>
 </section>
 <section class="team section-bg">
@@ -25,7 +25,7 @@
             <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
                 <div class="member">
                     <div class="member-img">
-                        <img src="{{ asset('client/assets/img/team/team-1.jpg')}}" class="img-fluid" alt="">
+                        <img src="{{ asset($users->avatar)}}" class="img-fluid" alt="">
                     </div>
                     <div class="member-info" style="text-align: center;">
                         <h4>{{ $users->nama }}</h4>
@@ -60,8 +60,8 @@
                                     <span class="avatar-title rounded-circle border border-white">{{ $loop->iteration }}</span>
                                 </div>
                                 <div class="info-user ml-3">
-                                    <div class="username">{{ $rule->aplikasi }}</div>
-                                    <div class="status">{{ $rule->nama_rule }}</div>
+                                    <div class="username">{{ $rule->Apps->name }}</div>
+                                    <div class="status">{{ $rule->rule }}</div>
                                 </div>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-outline-dark btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -69,12 +69,12 @@
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right">
                                         <a href="#" class="dropdown-item">
-                                            <i class="icofont-edit"></i>
+                                            <i class="bx bx-edit"></i>
                                             Edit Role dan Aplikasi
                                         </a>
                                         <div class="dropdown-divider"></div>
                                         <button class="dropdown-item" onclick="deleteRole('1')">
-                                            <i class="icofont-trash"></i>
+                                            <i class="bx bx-trash"></i>
                                             Hapus Role dan Aplikasi
                                         </button>
                                     </div>
@@ -85,7 +85,7 @@
                     </div>
                     <div class="card-footer">
                         <a href="#" class="btn btn-outline-primary btn-sm pull-right">
-                            <i class="icofont-plus"></i> Tambah Rule
+                            <i class="bx bx-plus"></i> Tambah Rule
                         </a>
                     </div>
                 </div>

@@ -21,6 +21,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         Route::get('edit/{id}', [UsersController::class, 'edit'])->name('users.edit');
         Route::get('show/{id}', [UsersController::class, 'show'])->name('users.show');
         Route::put('update/{id}', [UsersController::class, 'update'])->name('users.update');
+        Route::put('password/{id}', [UsersController::class, 'password'])->name('users.password');
         Route::get('destroy/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
     });
 });

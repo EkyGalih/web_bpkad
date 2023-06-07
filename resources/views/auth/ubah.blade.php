@@ -56,7 +56,7 @@
                                 <div class="form-group">
                                     <label for="aplikasi">Aplikasi <span class="text-danger">*</span></label><br/>
                                     @foreach ($apps as $key => $app)
-                                        <input type="checkbox" name="aplikasi[]" value="{{ $app->id }}" {{ $users->Rule[$key]->apps_id == $app{$key}->id ? 'checked' : '' }}>
+                                        <input type="checkbox" name="aplikasi[]" value="{{ $app->id }}" {{ $app->id == $users->Rule[$key]->apps_id ? 'checked' : '' }}>
                                         {{ $app->name }} <br />
                                     @endforeach
                                 </div>

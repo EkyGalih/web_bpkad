@@ -27,4 +27,9 @@ class Apps extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function Rule()
+    {
+        return $this->hasOne(Rule::class);
+    }
 }
