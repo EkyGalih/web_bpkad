@@ -97,6 +97,8 @@ class PagesController extends Controller
         $menus = Menu::orderBy('name', 'ASC')->get();
         $pages = Pages::findOrFail($id);
 
+        Helpers::_recentAdd($id, 'memperbaharui halaman', 'pages');
+
         return view('admin.pages.page.edit', compact('pages', 'menus'));
     }
 

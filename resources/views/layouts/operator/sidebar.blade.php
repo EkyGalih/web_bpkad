@@ -25,12 +25,12 @@
             </a>
             <ul id="pages" class="nav-content collapse @yield('pages-menu')" data-bs-parent="#pages">
                 <li>
-                    <a href="{{ route('pages-admin.index') }}" class="@yield('p-pages')">
+                    <a href="{{ route('pages-op.index') }}" class="@yield('p-pages')">
                         <i class="bi bi-circle"></i> <span>Page</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('subpages-admin.index') }}" class="@yield('p-subpages')">
+                    <a href="{{ route('subpages-op.index') }}" class="@yield('p-subpages')">
                         <i class="bi bi-circle"></i> <span>Sub Page</span>
                     </a>
                 </li>
