@@ -43,12 +43,12 @@
             </a>
             <ul id="data-informasi" class="nav-content collapse @yield('di-menu')" data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{ route('galery-admin.index') }}" class="@yield('di-galery')">
+                    <a href="{{ route('galery-op.index') }}" class="@yield('di-galery')">
                         <i class="bi bi-circle"></i><span>Galery</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('slider.index') }}" class="@yield('di-slider')">
+                    <a href="{{ route('slider-op.index') }}" class="@yield('di-slider')">
                         <i class="bi bi-circle"></i><span>Slider/Carousel</span>
                     </a>
                 </li>

@@ -55,6 +55,8 @@ class RouteServiceProvider extends ServiceProvider
         // ROUTE OPERATOR
         $this->mapPostOperator();
         $this->mapPagesOperator();
+        $this->mapGaleryOperator();
+        $this->mapSliderOperator();
 
         // ROUTE CLIENT
         $this->mapWebRoutes();
@@ -102,6 +104,13 @@ class RouteServiceProvider extends ServiceProvider
             ->group(base_path('routes/admin/galery.php'));
     }
 
+    public function mapGaleryOperator()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/operator/galery.php'));
+    }
+
     public function mapAppsAdmin()
     {
         Route::middleware('web')
@@ -142,6 +151,13 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/admin/slider.php'));
+    }
+
+    public function mapSliderOperator()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/operator/slider.php'));
     }
 
     public function mapPegawaiAdmin()
