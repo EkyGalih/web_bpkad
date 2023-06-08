@@ -52,6 +52,9 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapPegawaiAdmin();
         $this->mapBannerAdmin();
 
+        // ROUTE OPERATOR
+        $this->mapPostOperator();
+
        // ROUTE CLIENT
         $this->mapWebRoutes();
     }
@@ -61,6 +64,13 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/admin/post.php'));
+    }
+
+    public function mapPostOperator()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/operator/post.php'));
     }
 
     public function mapPagesAdmin()

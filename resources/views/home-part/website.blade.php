@@ -15,9 +15,15 @@
             </div>
         </div>
         <div class="bottom">
+            @if (Auth::user()->role == 'superadmin')
             <a class="btn btn-primary btn-block btn-sm" href="{{ env('WEB_BPKAD_ADMIN') }}">
                 <i class="bx bx-log-in-circle"></i> Ke Aplikasi
             </a>
+            @elseif (Auth::user()->role == 'operator')
+            <a class="btn btn-primary btn-block btn-sm" href="{{ env('WEB_BPKAD_OPERATOR') }}">
+                <i class="bx bx-log-in-circle"></i> Ke Aplikasi
+            </a>
+            @endif
         </div>
     </div>
 </div>

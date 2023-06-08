@@ -45,8 +45,6 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
-
         $foto       = $request->file('foto_berita');
         $ext        = array('png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG');
         $filename   = 'eky-' . md5($foto->getClientOriginalName()) . '.' . $foto->getClientOriginalExtension();

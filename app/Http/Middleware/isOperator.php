@@ -24,6 +24,6 @@ class isOperator
             }
         }
 
-        return redirect()->route('not_found.client');
+        return redirect()->route('not_found.operator');
     }
 }
