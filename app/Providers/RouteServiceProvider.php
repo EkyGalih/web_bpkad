@@ -43,7 +43,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapPostAdmin();
         $this->mapPagesAdmin();
         $this->mapMenuAdmin();
-        $this->mapAppsAdmin();
         $this->mapGaleryAdmin();
         $this->mapFaqAdmin();
         $this->mapToolsAdmin();
@@ -59,7 +58,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapSliderOperator();
         $this->mapBannerOperator();
         $this->mapPpidKipOperator();
-
+        $this->mapToolsOperator();
 
         // ROUTE CLIENT
         $this->mapWebRoutes();
@@ -140,6 +139,13 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/admin/tools.php'));
+    }
+
+    public function mapToolsOperator()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/operator/tools.php'));
     }
 
     public function mapPpidKipAdmin()

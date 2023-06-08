@@ -107,7 +107,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('apps-admin.index') }}" class="@yield('tools-apps')">
+                    <a href="{{ route('apps-op.index') }}" class="@yield('tools-apps')">
                         <i class="bi bi-circle"></i><span>Apps</span>
                     </a>
                 </li>
