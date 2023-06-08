@@ -2,7 +2,7 @@
 @section('title', 'Halaman')
 @section('content')
     <!-- ======= Breadcrumbs Section ======= -->
-    <section class="breadcrumbs">
+    <section class="breadcrumbs" style="margin-top: 9%;">
         <div class="container">
 
             <div class="d-flex justify-content-between align-items-center">
