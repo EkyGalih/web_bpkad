@@ -57,6 +57,9 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapPagesOperator();
         $this->mapGaleryOperator();
         $this->mapSliderOperator();
+        $this->mapBannerOperator();
+        $this->mapPpidKipOperator();
+
 
         // ROUTE CLIENT
         $this->mapWebRoutes();
@@ -146,6 +149,13 @@ class RouteServiceProvider extends ServiceProvider
             ->group(base_path('routes/admin/ppid.php'));
     }
 
+    public function mapPpidKipOperator()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/operator/ppid.php'));
+    }
+
     public function mapSliderAdmin()
     {
         Route::middleware('web')
@@ -172,6 +182,13 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/admin/banner.php'));
+    }
+
+    public function mapBannerOperator()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/operator/banner.php'));
     }
 
     public function mapWebRoutes()

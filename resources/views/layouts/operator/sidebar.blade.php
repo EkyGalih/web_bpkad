@@ -58,7 +58,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('banner.index') }}" class="@yield('di-banner')">
+                    <a href="{{ route('banner-op.index') }}" class="@yield('di-banner')">
                         <i class="bi bi-circle"></i><span>Banner Informasi</span>
                     </a>
                 </li>
@@ -72,12 +72,12 @@
             </a>
             <ul id="ppid" class="nav-content collapse @yield('ppid-menu')" data-bs-parent="#sidebar-mav">
                 <li>
-                    <a href="{{ route('ppid-kip.index') }}" class="@yield('ppid-ki')">
+                    <a href="{{ route('ppid-op-kip.index') }}" class="@yield('ppid-ki')">
                         <i class="bi bi-circle"></i><span>Klasifikasi Informasi</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('ppid-struktur.index') }}" class="@yield('ppid-struktur')">
+                    <a href="{{ route('ppid-op-struktur.index') }}" class="@yield('ppid-struktur')">
                         <i class="bi bi-circle"></i><span>Struktur Organisasi PPID</span>
                     </a>
                 </li>
