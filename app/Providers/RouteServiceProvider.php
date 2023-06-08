@@ -59,6 +59,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapBannerOperator();
         $this->mapPpidKipOperator();
         $this->mapToolsOperator();
+        $this->mapProfileOperator();
 
         // ROUTE CLIENT
         $this->mapWebRoutes();
@@ -195,6 +196,13 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/operator/banner.php'));
+    }
+
+    public function mapProfileOperator()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/operator/profile.php'));
     }
 
     public function mapWebRoutes()

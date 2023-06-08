@@ -113,25 +113,6 @@
                 </li>
             </ul>
         </li><!-- End Components Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#faq" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-question-circle"></i>
-                <span>F.A.Q</span> <i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="faq" class="nav-content collapse @yield('menu-faq')" data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="{{ route('laporan-admin.index') }}" class="@yield('faq-laporan')">
-                        <i class="bi bi-circle"></i><span>Laporan</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('permohonan-admin.index') }}" class="@yield('faq-permohonan')">
-                        <i class="bi bi-circle"></i><span>Permohonan</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End F.A.Q Page Nav -->
     </ul>
 
 </aside><!-- End Sidebar-->

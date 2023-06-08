@@ -274,16 +274,16 @@
                 <h3>Video <span>BPKAD</span></h3>
                 <hr />
             </div>
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-lg-12">
                     @foreach ($videos as $video)
                         <center>
-                            <iframe width="820" height="445" src="https://www.youtube.com/embed/0k99VGaKa9c">
+                            <iframe width="350" height="250" src="https://www.youtube.com/embed/0k99VGaKa9c">
                             </iframe>
                         </center>
                     @endforeach
                 </div>
-            </div>
+            </div> --}}
             <div class="owl-carousel owl-theme" id="owl-video">
                 @foreach ($banners as $banner)
                     <iframe width="350" height="250" src="{{ $banner->path }}"></iframe>
@@ -320,7 +320,7 @@
                 {{-- @endforeach --}}
             </div>
         </div>
-    </section> --}}
+    </section>
     <section id="testimonials" class="testimonials">
         <div class="container" data-aos="zoom-in">
             <div class="owl-carousel testimonials-carousel">
@@ -385,7 +385,7 @@
                 </div>
 
                 <div class="col-lg-6">
-                    <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                    <form action="#" method="post" role="form" class="php-email-form">
                         <div class="form-row">
                             <div class="col form-group">
                                 <input type="text" name="name" class="form-control" id="name"
@@ -416,7 +416,7 @@
                             <div class="sent-message">Your message has been sent. Thank you!</div>
                         </div>
                         <div class="text-center">
-                            <button type="submit">Kirim Pesan</button>
+                            <button type="button" class="btn btn-primary btn-md">Kirim Pesan</button>
                         </div>
                     </form>
                 </div>

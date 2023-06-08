@@ -27,9 +27,4 @@ class OperatorController extends Controller
 
         return view('operator.beranda.beranda', compact('post', 'laporan', 'permohonan', 'posts', 'lap', 'recents'));
     }
-
-    public function _NotFound()
-    {
-        return view('operator.not_found');
-    }
 }

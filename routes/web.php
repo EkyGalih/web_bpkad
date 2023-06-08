@@ -27,12 +27,10 @@ Route::group(['prefix' => 'bpkad', 'middleware' => 'auth'], function () {
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin');
-    Route::get('404', [AdminController::class, '_NotFound'])->name('not_found.server');
 });
 
 Route::group(['prefix' => 'operator', 'middleware' => ['auth', 'operator']], function () {
     Route::get('/', [OperatorController::class, 'index'])->name('operator');
-    Route::get('404', [OperatorController::class, '_NotFound'])->name('not_found.operator');
 });
 
 Route::group(['prefix' => 'posts'], function () {

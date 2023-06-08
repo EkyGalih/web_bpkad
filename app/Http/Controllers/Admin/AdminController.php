@@ -27,9 +27,4 @@ class AdminController extends Controller
 
         return view('admin.beranda.beranda', compact('post', 'laporan', 'permohonan', 'posts', 'lap', 'recents'));
     }
-
-    public function _NotFound()
-    {
-        return view('admin.not_found');
-    }
 }

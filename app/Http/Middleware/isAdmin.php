@@ -22,6 +22,6 @@ class isAdmin
                 return $next($request);
             }
         }
-        return redirect()->route('not_found.server');
+        return redirect()->route('not_found.client');
     }
 }
