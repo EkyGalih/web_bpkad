@@ -23,7 +23,12 @@
 
                             </div>
                         </div>
-                        <li><a href="{{ route('profile', Auth::user()->id) }}"><i class="bx bx-user"></i> Profile</a>
+                        <li>
+                            @if (Auth::user()->role == 'superadmin' || Auth::user()->role == 'admin')
+                            <a href="{{ route('profile', Auth::user()->id) }}"><i class="bx bx-user"></i> Profile</a>
+                            @elseif (Auth::user()->role == 'operator')
+                            <a href="{{ route('profile-op', Auth::user()->id) }}"><i class="bx bx-user"></i> Profile</a>
+                            @endif
                         </li>
                         <li><a href="{{ route('logout') }}"><i class="bx bx-log-out"></i> keluar</a></li>
                     </ul>
