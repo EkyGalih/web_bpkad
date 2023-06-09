@@ -2,6 +2,16 @@
 @section('title', 'Edit Post')
 @section('additional-css')
     <link rel="stylesheet" href="{{ asset('server/vendor/tom-select/tom-select.css') }}">
+    <style>
+        .image_upload>input {
+            display: none;
+        }
+
+        .images {
+            max-width: 100%;
+            max-height: auto;
+        }
+    </style>
 @endsection
 @section('content')
     <main id="main" class="main">
@@ -38,8 +48,15 @@
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Foto Berita</label>
                                     <div class="col-sm-10">
-                                        <input type="file" name="foto_berita" value="{{ $posts->foto_berita }}"
-                                            class="form-control">
+                                        <p class="image_upload">
+                                            <label for="userImage">
+                                                <a class="btn btn-primary btn-sm" rel="nofollow"><span
+                                                        class='bi bi-upload'></span> Upload Foto</a>
+                                            </label>
+                                            <input type="file" name="foto_berita" id="userImage" accept="image/*"
+                                                onchange="loadFile(event)">
+                                        </p>
+                                        <img src="{{ asset($posts->foto_berita) }}" class="images" id="post">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -64,7 +81,8 @@
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Tags</label>
                                     <div class="col-sm-10">
-                                        <input id="input-tags" autocomplete="off" placeholder="Tags" name="tags" value="{{ $posts->tags }}">
+                                        <input id="input-tags" autocomplete="off" placeholder="Tags" name="tags"
+                                            value="{{ $posts->tags }}">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -94,5 +112,14 @@
             createOnBlur: true,
             create: true
         });
+
+        // preview image
+        var loadFile = function(event) {
+            var output = document.getElementById('post');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src) // free memory
+            }
+        };
     </script>
 @endsection
