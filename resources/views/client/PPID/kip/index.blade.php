@@ -3,9 +3,8 @@
 @section('content')
     <!-- ======= Breadcrumbs Section ======= -->
     <section class="breadcrumbs">
-        <div class="container">
-
-            <div class="d-flex justify-content-between align-items-center" style="margin-top: 25px">
+        <div class="card" style="padding: 3%; margin-right: 5%; margin-left: 5%;">
+            <div class="d-flex justify-content-between align-items-center">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="berkala-tab" data-toggle="tab" data-target="#berkala"
@@ -62,11 +61,13 @@
                                             </td>
                                             <td>
                                                 @if ($berkala2['jenis_file'] == 'link')
-                                                    <a href="{{ $berkala2['files'] }}" class="btn btn-success btn-sm" target="_blank">
+                                                    <a href="{{ $berkala2['files'] }}" class="btn btn-success btn-sm"
+                                                        target="_blank">
                                                         <i class="bx bx-download"></i> Download
                                                     </a>
                                                 @else
-                                                    <a href="{{ $berkala2['files'] }}" class="btn btn-info btn-sm" target="_blank">
+                                                    <a href="{{ $berkala2['files'] }}" class="btn btn-info btn-sm"
+                                                        target="_blank">
                                                         <i class="bx bx-show"></i> Lihat
                                                     </a>
                                                 @endif
@@ -79,7 +80,8 @@
                     </div>
                 </div>
                 <div class="tab-pane fade " id="dikecualikan" role="tabpanel" aria-labelledby="dikecualikan-tab">
-                    <h2 class="title" style="margin: 20px; font-size: 30px;"><strong>INFORMASI DIKECUALIKAN</strong></h2>
+                    <h2 class="title" style="margin: 20px; font-size: 30px;"><strong>INFORMASI DIKECUALIKAN</strong>
+                    </h2>
                     <table class="table table-hover table-bordered">
                         @foreach ($KipDikecualikan as $val => $dikecualikan1)
                             <thead>
@@ -113,7 +115,8 @@
                     </table>
                 </div>
                 <div class="tab-pane fade " id="serta-merta" role="tabpanel" aria-labelledby="serta-merta-tab">
-                    <h2 class="title" style="margin: 20px; font-size: 30px;"><strong>INFORMASI SERTA MERTA</strong></h2>
+                    <h2 class="title" style="margin: 20px; font-size: 30px;"><strong>INFORMASI SERTA MERTA</strong>
+                    </h2>
                     <table class="table table-hover table-bordered">
                         @foreach ($KipSertaMerta as $val => $sertamerta1)
                             <thead>
@@ -147,7 +150,8 @@
                     </table>
                 </div>
                 <div class="tab-pane fade " id="setiap-saat" role="tabpanel" aria-labelledby="setiap-saat-tab">
-                    <h2 class="title" style="margin: 20px; font-size: 30px;"><strong>INFORMASI SETIAP SAAT</strong></h2>
+                    <h2 class="title" style="margin: 20px; font-size: 30px;"><strong>INFORMASI SETIAP SAAT</strong>
+                    </h2>
                     <table class="table table-hover table-bordered">
                         @foreach ($KipSetiapSaat as $val => $setiapsaat1)
                             <thead>
