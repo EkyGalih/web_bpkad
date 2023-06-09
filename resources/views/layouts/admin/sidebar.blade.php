@@ -43,7 +43,7 @@
             </a>
             <ul id="data-bpkad" class="nav-content collapse @yield('db-menu')" data-bs-parent="#data-bpkad">
                 <li>
-                    <a href="components-alerts.html">
+                    <a href="#">
                         <i class="bi bi-circle"></i><span>Data Aset</span>
                     </a>
                 </li>
@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="components-accordion.html">
+                    <a href="#">
                         <i class="bi bi-circle"></i><span>Data Transparansi</span>
                     </a>
                 </li>
