@@ -13,7 +13,7 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('operator') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('banner-video.index') }}">Banner Video</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('banner-op-video.index') }}">Banner Video</a></li>
                     <li class="breadcrumb-item active">Daftar Video Banner</li>
                 </ol>
             </nav>

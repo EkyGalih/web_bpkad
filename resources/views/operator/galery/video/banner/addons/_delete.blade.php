@@ -19,7 +19,7 @@
                     class="btn btn-outline-secondary"
                     data-bs-dismiss="modal"><i
                         class="bi bi-x-circle"></i> Tidak</button>
-                <a href="{{ route('banner-video.destroy', $item->id) }}"
+                <a href="{{ route('banner-op-video.destroy', $item->id) }}"
                     class="btn btn-outline-danger">
                     <i class="bi bi-check-circle"></i> Ya
                 </a>

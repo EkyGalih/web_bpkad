@@ -13,7 +13,7 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('operator') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('banner-video.index') }}">Banner Video</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('banner-op-video.index') }}">Banner Video</a></li>
                     <li class="breadcrumb-item active">Banner Video</li>
                 </ol>
             </nav>
@@ -34,7 +34,7 @@
                                     <h5 class="card-title">Banner Video</h5>
                                 </div>
                                 <div class="col-lg-2">
-                                    <a href="{{ route('banner-video.create') }}" class="btn btn-outline-primary btn-md"
+                                    <a href="{{ route('banner-op-video.create') }}" class="btn btn-outline-primary btn-md"
                                         style="float: right; margin-top: 5px;">
                                         <i class="bi bi-plus"></i> Tambah Banner
                                     </a>
@@ -63,12 +63,12 @@
                                             <td>{{ Helpers::GetDate($video->created_at) }}</td>
                                             <td>{{ $video->updated_at == null ? 'None' : Helpers::GetDate($video->updated_at) }}
                                             <td>
-                                                <a href="{{ route('banner-video.edit', $video->Galery->id) }}"
+                                                <a href="{{ route('banner-op-video.edit', $video->Galery->id) }}"
                                                     class="btn btn-warning btn-md" data-bs-tooltip="tooltip"
                                                     data-bs-placement="top" title="Ubah Data">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
-                                                <a href="{{ route('banner-video.show', $video->Galery->id) }}"
+                                                <a href="{{ route('banner-op-video.show', $video->Galery->id) }}"
                                                     class="btn btn-info btn-md" data-bs-tooltip="tooltip"
                                                     data-bs-placement="top" title="Lihat Data">
                                                     <i class="bi bi-eye"></i>
@@ -100,7 +100,7 @@
                                                                 <button type="button" class="btn btn-outline-secondary"
                                                                     data-bs-dismiss="modal"><i class="bi bi-x-circle"></i>
                                                                     Tidak</button>
-                                                                <a href="{{ route('banner-video.destroy', $video->id) }}"
+                                                                <a href="{{ route('banner-op-video.destroy', $video->id) }}"
                                                                     class="btn btn-outline-danger">
                                                                     <i class="bi bi-check-circle"></i> Ya
                                                                 </a>

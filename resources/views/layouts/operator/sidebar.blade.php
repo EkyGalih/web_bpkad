@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('banner-video.index') }}" class="@yield('di-video')">
+                    <a href="{{ route('banner-op-video.index') }}" class="@yield('di-video')">
                         <i class="bi bi-circle"></i><span>Video Banner</span>
                     </a>
                 </li>

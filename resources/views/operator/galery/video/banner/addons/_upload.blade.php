@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('banner-video.addVideo') }}" method="POST"
+                <form action="{{ route('banner-op-video.addVideo') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="galery_id" value="{{ $banner->id }}">

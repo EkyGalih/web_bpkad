@@ -35,13 +35,13 @@ Route::group(['prefix' => 'operator', 'middleware' => ['auth', 'operator']], fun
     });
 
     Route::group(['prefix' => 'banner-video'], function () {
-        Route::get('/', [BannerVideoController::class, 'index'])->name('banner-video.index');
-        Route::get('create', [BannerVideoController::class, 'create'])->name('banner-video.create');
-        Route::post('store', [BannerVideoController::class, 'store'])->name('banner-video.store');
-        Route::post('addVideo}', [BannerVideoController::class, 'addVideo'])->name('banner-video.addVideo');
-        Route::get('edit/{id}', [BannerVideoController::class, 'edit'])->name('banner-video.edit');
-        Route::get('show/{id}', [BannerVideoController::class, 'show'])->name('banner-video.show');
-        Route::put('update/{id}', [BannerVideoController::class, 'update'])->name('banner-video.update');
-        Route::get('destroy/{id}', [BannerVideoController::class, 'destroy'])->name('banner-video.destroy');
+        Route::get('/', [BannerVideoController::class, 'index'])->name('banner-op-video.index');
+        Route::get('create', [BannerVideoController::class, 'create'])->name('banner-op-video.create');
+        Route::post('store', [BannerVideoController::class, 'store'])->name('banner-op-video.store');
+        Route::post('addVideo}', [BannerVideoController::class, 'addVideo'])->name('banner-op-video.addVideo');
+        Route::get('edit/{id}', [BannerVideoController::class, 'edit'])->name('banner-op-video.edit');
+        Route::get('show/{id}', [BannerVideoController::class, 'show'])->name('banner-op-video.show');
+        Route::put('update/{id}', [BannerVideoController::class, 'update'])->name('banner-op-video.update');
+        Route::get('destroy/{id}', [BannerVideoController::class, 'destroy'])->name('banner-op-video.destroy');
     });
 });

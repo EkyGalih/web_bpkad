@@ -10,7 +10,7 @@
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('operator') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('banner-video.index') }}">Banner</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('banner-op-video.index') }}">Banner</a></li>
                         <li class="breadcrumb-item active">Tambah Banner Video</li>
                     </ol>
                 </nav>
@@ -81,7 +81,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-sm-12">
-                                        <a href="{{ route('banner-video.index') }}" class="btn btn-secondary btn-md"
+                                        <a href="{{ route('banner-op-video.index') }}" class="btn btn-secondary btn-md"
                                             style="float: right;">
                                             <i class="bi bi-backspace"></i> Kembali
                                         </a>
