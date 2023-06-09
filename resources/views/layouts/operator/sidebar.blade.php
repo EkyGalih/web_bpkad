@@ -92,17 +92,17 @@
             </a>
             <ul id="tools" class="nav-content collapse @yield('menu-tools')" data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{ route('tools-social') }}" class="@yield('tools-social')">
+                    <a href="{{ route('tools-op-social') }}" class="@yield('tools-social')">
                         <i class="bi bi-circle"></i><span>Social Media</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('tools-link') }}" class="@yield('tools-link')">
+                    <a href="{{ route('tools-op-link') }}" class="@yield('tools-link')">
                         <i class="bi bi-circle"></i><span>Link</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('tools-address') }}" class="@yield('tools-address')">
+                    <a href="{{ route('tools-op-address') }}" class="@yield('tools-address')">
                         <i class="bi bi-circle"></i><span>Address Office</span>
                     </a>
                 </li>

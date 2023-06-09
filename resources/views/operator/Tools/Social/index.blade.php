@@ -13,7 +13,7 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('operator') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('tools-social') }}">Tools</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('tools-op-social') }}">Tools</a></li>
                     <li class="breadcrumb-item active">Sosial Media</li>
                 </ol>
             </nav>
@@ -37,7 +37,7 @@
                                 </div>
                                 <hr />
                             </div>
-                            <form action="{{ route('tools-social.store') }}" method="POST">
+                            <form action="{{ route('tools-op-social.store') }}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <label for="inputtext"><i class="bi bi-instagram"></i> Social</label>

@@ -14,7 +14,7 @@
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i
                         class="bi bi-x-circle"></i>
                     Tidak</button>
-                <a href="{{ route('tools-social.destroy', $link->id) }}" class="btn btn-outline-danger">
+                <a href="{{ route('tools-op-social.destroy', $link->id) }}" class="btn btn-outline-danger">
                     <i class="bi bi-check-circle"></i> Ya
                 </a>
             </div>

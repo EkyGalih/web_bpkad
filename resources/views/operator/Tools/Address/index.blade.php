@@ -13,7 +13,7 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('operator') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('tools-address') }}">Tools</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('tools-op-address') }}">Tools</a></li>
                     <li class="breadcrumb-item active">Alamat Kantor</li>
                 </ol>
             </nav>
@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                             <form
-                                action="{{ $address == null ? route('tools-address.store') : route('tools-address.update', $address->id) }}"
+                                action="{{ $address == null ? route('tools-op-address.store') : route('tools-op-address.update', $address->id) }}"
                                 method="POST">
                                 @csrf
                                 @if (!empty($address))

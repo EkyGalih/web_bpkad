@@ -13,7 +13,7 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('operator') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('tools-link') }}">Tools</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('tools-op-link') }}">Tools</a></li>
                     <li class="breadcrumb-item active">Link Terkait</li>
                 </ol>
             </nav>
@@ -38,7 +38,7 @@
                                 <hr />
                             </div>
                             <form
-                                action="{{ $link == null ? route('tools-link.store') : route('tools-link.update', $link->id) }}"
+                                action="{{ $link == null ? route('tools-op-link.store') : route('tools-op-link.update', $link->id) }}"
                                 method="POST">
                                 @csrf
                                 @if ($link != null)
@@ -70,7 +70,7 @@
                                             <i class="bi bi-save"></i> Simpan
                                         </button>
                                         @if ($link != null)
-                                            <a href="{{ route('tools-link') }}" class="btn btn-primary btn-md">
+                                            <a href="{{ route('tools-op-link') }}" class="btn btn-primary btn-md">
                                                 <i class="bi bi-plus"></i> Tambah
                                             </a>
                                         @endif
@@ -105,7 +105,7 @@
                                             <td>{{ $link->name }}</td>
                                             <td>{{ $link->link }}</td>
                                             <td>
-                                                <a href="{{ route('tools-link', $link->id) }}"
+                                                <a href="{{ route('tools-op-link', $link->id) }}"
                                                     class="btn btn-warning btn-md">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
