@@ -115,6 +115,22 @@ class UsersController extends Controller
         return redirect()->route('users')->with(['success' => 'Password berhasil diubah!']);
     }
 
+    public function activated(Request $request, $id)
+    {
+        $users = User::findOrFail($id);
+        if ($users->active == "0") {
+            $users->update([
+                'active' => "1"
+            ]);
+            return redirect()->route('users')->with(['success' => 'User di aktifkan!']);
+        } else {
+            $users->update([
+                'active' => "0"
+            ]);
+            return redirect()->route('users')->with(['success' => 'User di nonaktifkan!']);
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *

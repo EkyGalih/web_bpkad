@@ -65,9 +65,13 @@
                                                     class="btn btn-warning btn-md">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
-                                                <a href="#" class="btn btn-secondary btn-md">
-                                                    <i class="bi bi-x-square"></i>
-                                                </a>
+                                                @if ($user->role == 'operator')
+                                                    <button class="btn btn-{{ $user->active == '1' ? 'secondary' : 'success' }} btn-md" data-bs-toggle="modal"
+                                                        data-bs-target="#ActiveModal{{ $loop->iteration }}">
+                                                        <i class="bi bi-{{ $user->active == '1' ? 'x-square' : 'check-square' }}"></i>
+                                                    </button>
+                                                    @include('admin/users/addons/activated')
+                                                @endif
                                                 <button class="btn btn-info btn-md" data-bs-toggle="modal"
                                                     data-bs-target="#UbahSandi{{ $loop->iteration }}">
                                                     <i class="bi bi-lock"></i>
