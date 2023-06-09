@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="bottom">
-            @if (Auth::user()->role == 'superadmin')
+            @if (Auth::user()->role == 'superadmin' || Auth::user()->role == 'admin')
             <a class="btn btn-primary btn-block btn-sm" href="{{ env('WEB_BPKAD_ADMIN') }}">
                 <i class="bx bx-log-in-circle"></i> Ke Aplikasi
             </a>
