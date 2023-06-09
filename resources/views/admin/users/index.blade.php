@@ -61,24 +61,32 @@
                                             <td>{{ $user->updated_at == null ? 'None' : Helpers::GetDate($user->updated_at) }}
                                             </td>
                                             <td>
-                                                <a href="{{ route('users.edit', $user->id) }}"
-                                                    class="btn btn-warning btn-md">
+                                                <a href="{{ route('users.edit', $user->id) }}" data-bs-tooltip="tooltip"
+                                                    data-placement="top" title="Edit User" class="btn btn-warning btn-md">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
                                                 @if ($user->role == 'operator')
-                                                    <button class="btn btn-{{ $user->active == '1' ? 'secondary' : 'success' }} btn-md" data-bs-toggle="modal"
-                                                        data-bs-target="#ActiveModal{{ $loop->iteration }}">
-                                                        <i class="bi bi-{{ $user->active == '1' ? 'x-square' : 'check-square' }}"></i>
+                                                    <button
+                                                        class="btn btn-{{ $user->active == '1' ? 'secondary' : 'success' }} btn-md"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#ActiveModal{{ $loop->iteration }}"
+                                                        data-bs-tooltip="tooltip" data-bs-placement="top"
+                                                        title="{{ $user->active == '1' ? 'NonAktifkan' : 'Aktifkan' }} User">
+                                                        <i
+                                                            class="bi bi-{{ $user->active == '1' ? 'x-square' : 'check-square' }}"></i>
                                                     </button>
                                                     @include('admin/users/addons/activated')
                                                 @endif
                                                 <button class="btn btn-info btn-md" data-bs-toggle="modal"
+                                                    data-bs-tooltip="tooltip" data-bs-placement="top"
+                                                    title="Update Password"
                                                     data-bs-target="#UbahSandi{{ $loop->iteration }}">
                                                     <i class="bi bi-lock"></i>
                                                 </button>
                                                 @include('admin/users/addons/password')
 
                                                 <button class="btn btn-danger btn-md" data-bs-toggle="modal"
+                                                    data-bs-tooltip="tooltip" data-bs-placement="top" title="Delete User"
                                                     data-bs-target="#DeleteUser{{ $loop->iteration }}">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
