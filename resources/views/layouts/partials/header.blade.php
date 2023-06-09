@@ -15,13 +15,14 @@
                     <ul>
                         <div class="user-box">
                             <div>
-                                <img class="img-avatar" src="{{ asset(Auth::user()->avatar) }}">
+                                <img style="width: 50%; height: 65%; padding: 1%; border-radius: 15%; margin-left: 22%; border-style: solid; border-color: #106eea;" class="img-avatar" src="{{ asset(Auth::user()->avatar) }}">
                             </div>
+                            <hr/>
                             <div class="u-text">
-                                <h4><i class="bx bx-user-pin"></i> {{ Auth::user()->nama }}</h4>
-                                <p class="text-muted"><i class="bx bx-envelope"></i> {{ Auth::user()->email }}</p>
-
+                                <h5>{{ Auth::user()->nama }}</h5>
+                                <h6 class="text-muted"><i class="bx bx-envelope"></i> {{ Auth::user()->email }}</h6>
                             </div>
+                            <hr/>
                         </div>
                         <li>
                             @if (Auth::user()->role == 'superadmin' || Auth::user()->role == 'admin')
