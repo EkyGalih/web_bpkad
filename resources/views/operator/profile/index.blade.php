@@ -142,7 +142,8 @@
                                             <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Foto
                                                 Profile</label>
                                             <div class="col-md-8 col-lg-9">
-                                                <img src="{{ asset($user->avatar) }}" alt="Profile" id="profile" style="max-width: 40%; height: 120px;">
+                                                <img src="{{ asset($user->avatar) }}" alt="Profile" id="profile"
+                                                    style="max-width: 40%; height: 120px;">
                                                 <div class="pt-2">
                                                     <p class="image_upload">
                                                         <label for="userImage">

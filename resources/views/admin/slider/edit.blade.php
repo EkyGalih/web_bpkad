@@ -2,6 +2,17 @@
 @section('title', 'Slider&Carousel | Edit')
 @section('di-menu', 'show')
 @section('di-slider', 'active')
+@section('additional-css')
+    <style>
+        .image_upload>input {
+            display: none;
+        }
+        .images {
+            max-width: 100%;
+            max-height: auto;
+        }
+    </style>
+@endsection
 @section('content')
     <main id="main" class="main">
         <div class="pagetitle">
@@ -23,23 +34,26 @@
                         <div class="card-body">
                             <div class="card-title"><i class="bi bi-pencil-square"></i> Ubah Data</div>
                             <hr />
-                            <form action="{{ route('slider.update', $slider->id) }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                            <form action="{{ route('slider.update', $slider->id) }}" method="POST"
+                                enctype="multipart/form-data" onsubmit="return validateForm()">
                                 @csrf
                                 @method('PUT')
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Jenis Slide</label>
                                     <div class="col-sm-10">
-                                        <select name="slide_id" id="slide_id"
-                                            class="form-control" required>
+                                        <select name="slide_id" id="slide_id" class="form-control" required>
                                             <option value="">---Pilih---</option>
                                             @foreach ($slide as $item)
-                                            <option value="{{ $item->id }}" {{ $item->id == $slider->slide_id ? 'selected' : '' }}>{{ $item->nama_slide }}</option>
+                                                <option value="{{ $item->id }}"
+                                                    {{ $item->id == $slider->slide_id ? 'selected' : '' }}>
+                                                    {{ $item->nama_slide }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label id="judul_slide" for="inputText" class="col-sm-2 col-form-label">Judul Slide</label>
+                                    <label id="judul_slide" for="inputText" class="col-sm-2 col-form-label">Judul
+                                        Slide</label>
                                     <div class="col-sm-10">
                                         <input type="text" id="title" name="title" value="{{ $slider->title }}"
                                             class="form-control" required>
@@ -48,19 +62,27 @@
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Keterangan</label>
                                     <div class="col-sm-10">
-                                        <textarea name="keterangan"
-                                            class="form-control" required>{{ $slider->keterangan }}</textarea>
+                                        <textarea name="keterangan" class="form-control" required>{{ $slider->keterangan }}</textarea>
                                     </div>
                                 </div>
                                 <div class="row mb-3" id="foto" {{ $slider->slide_id == '1' ? 'hidden' : '' }}>
                                     <label for="inputText" class="col-sm-2 col-form-label">Foto</label>
                                     <div class="col-sm-10">
-                                        <input type="file" name="foto" class="form-control">
+                                        <p class="image_upload">
+                                            <label for="userImage">
+                                                <a class="btn btn-primary btn-sm" rel="nofollow"><span
+                                                        class='bi bi-upload'></span> Upload Foto</a>
+                                            </label>
+                                            <input type="file" name="foto" id="userImage" accept="image/*"
+                                                onchange="loadFile(event)">
+                                        </p>
+                                        <img class="images" src="{{ asset($slider->foto) }}" alt="{{ $slider->keterangan }}" id="profile">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-sm-12">
-                                        <a href="{{ route('slider.index') }}" class="btn btn-outline-secondary btn-md" style="float: right;" type="reset">
+                                        <a href="{{ route('slider.index') }}" class="btn btn-outline-secondary btn-md"
+                                            style="float: right;" type="reset">
                                             <i class="bi bi-backspace-fill"></i> Kembali
                                         </a>
                                         <button class="btn btn-success btn-md" style="float: right; margin-right: 2px;"
@@ -90,6 +112,15 @@
                 $('#judul_slide').text('Kategori Slide');
                 $('#title').attr('placeholder', 'contoh: pengumuman, sport, informasi');
             }
-        })
+        });
+
+        // preview image
+        var loadFile = function(event) {
+            var output = document.getElementById('profile');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src) // free memory
+            }
+        };
     </script>
 @endsection
