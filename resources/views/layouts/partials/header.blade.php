@@ -25,7 +25,7 @@
                         </div>
                         <li><a href="{{ route('profile', Auth::user()->id) }}"><i class="bx bx-user"></i> Profile</a>
                         </li>
-                        <li><a href="{{ env('WEB_BPKAD_LOGOUT') }}"><i class="bx bx-log-out"></i> keluar</a></li>
+                        <li><a href="{{ route('logout') }}"><i class="bx bx-log-out"></i> keluar</a></li>
                     </ul>
                 </li>
             </ul>
