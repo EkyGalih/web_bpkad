@@ -1,5 +1,12 @@
 @extends('admin.index')
 @section('title', 'Profil')
+@section('additional-css')
+    <style>
+        .image_upload>input {
+            display: none;
+        }
+    </style>
+@endsection
 @section('content')
     <main id="main" class="main">
 
@@ -135,12 +142,17 @@
                                             <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Foto
                                                 Profile</label>
                                             <div class="col-md-8 col-lg-9">
-                                                <img src="{{ asset($user->avatar) }}" alt="Profile">
+                                                <img src="{{ asset($user->avatar) }}" alt="Profile" id="profile"
+                                                    style="max-width: 40%; height: 120px;">
                                                 <div class="pt-2">
-                                                    <a href="#" class="btn btn-primary btn-sm"
-                                                        title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                                                    <a href="#" class="btn btn-danger btn-sm"
-                                                        title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                                                    <p class="image_upload">
+                                                        <label for="userImage">
+                                                            <a class="btn btn-primary btn-sm" rel="nofollow"><span
+                                                                    class='bi bi-upload'></span></a>
+                                                        </label>
+                                                        <input type="file" name="foto" id="userImage"
+                                                            accept="image/*" onchange="loadFile(event)">
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -353,6 +365,16 @@
             } else {
                 $("#message").html('Kata sandi tidak sama').css('color', 'red');
             }
-        })
+        });
+
+
+        // preview image
+        var loadFile = function(event) {
+            var output = document.getElementById('profile');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src) // free memory
+            }
+        };
     </script>
 @endsection
