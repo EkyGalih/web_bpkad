@@ -62,13 +62,11 @@ class HomeController extends Controller
             ->get();
         $apps = DaftarApp::where('versi', '=', 'Web')
             ->get();
-        $covid = Http::get('https://corona.ntbprov.go.id/api/data');
-        $data_covid = $covid->json();
 
         // slider
         $slides = Slideitem::where('slide_id', '=', '2')->get();
         $slidesInformasi = Slideitem::where('slide_id', '=', '1')->where('deleted_at', '=', NULL)->orderBy('created_at', 'DESC')->get();
-        return view('client.home.home', compact('new_posts', 'carousel', 'old_posts', 'videos', 'apps', 'data_covid', 'slides', 'slidesInformasi', 'banners'));
+        return view('client.home.home', compact('new_posts', 'carousel', 'old_posts', 'videos', 'apps', 'slides', 'slidesInformasi', 'banners'));
     }
 
     /**
