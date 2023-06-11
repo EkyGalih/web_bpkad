@@ -1,0 +1,18 @@
+[
+    {
+        "id" : 1,
+        "initial_jabatan" : "Kepala Badan"
+    },
+    {
+        "id" : 2,
+        "initial_jabatan" : "Sekretariat - Umum"
+    },
+    {
+        "id" : 3,
+        "initial_jabatan" : "Sekretariat - Keuangan"
+    },
+    {
+        "id" : 4,
+        "initial_jabatan" : "Sekretariat - Program"
+    }
+]

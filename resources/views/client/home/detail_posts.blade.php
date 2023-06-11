@@ -37,7 +37,7 @@
     <main id="main" data-aos="fade-up">
 
         <!-- ======= Berita ======= -->
-        <section class="portfolio-details" style="margin-top: 8%;">
+        <section class="portfolio-details" style="margin-top: 8%; padding: 5%;">
             <div class="row">
                 <div class="col-lg-1"></div>
                 <div class="col-lg-8">

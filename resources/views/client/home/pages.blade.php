@@ -3,16 +3,14 @@
 @section('content_home')
     <main id="main" data-aos="fade-up">
         <!-- ======= Berita ======= -->
-        <section class="portfolio-details" style="margin-top: 8%;">
-            <div class="container">
+        <section class="breadcrumbs">
+            <div class="card" style="padding: 5%; margin-right: 5%; margin-left: 5%; margin-top: 1%;">
 
-                <div class="card" style="padding: 3%;">
-                    <div class="portfolio-description">
-                        <h2>{{ $pages->title }}</h2>
-                        <p>
-                            {!! $pages->content !!}
-                        </p>
-                    </div>
+                <div class="portfolio-description">
+                    <h2>{{ $pages->title }}</h2>
+                    <p>
+                        {!! $pages->content !!}
+                    </p>
                 </div>
             </div>
         </section><!-- End Portfolio Details Section -->

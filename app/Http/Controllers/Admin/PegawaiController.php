@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
+use App\Models\Bidang;
+use App\Models\Golongan;
+use App\Models\Pangkat;
 use App\Models\Pegawai;
 use Illuminate\Http\Request;
 
@@ -15,7 +19,7 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        $pegawais = Pegawai::orderBy('name', 'ASC')->paginate(9);
+        $pegawais = Pegawai::orderBy('name', 'ASC')->paginate(12);
 
         return view('admin/pegawai/index', compact('pegawais'));
     }
@@ -27,7 +31,13 @@ class PegawaiController extends Controller
      */
     public function create()
     {
-        //
+        $bidang = Bidang::get();
+        $pangkat = Pangkat::get();
+        $golongan = Golongan::get();
+        $NamaJabatan = Helpers::_jsonDecode(asset('server/data/umum/NamaJabatan.json'));
+        $InitialJabatan = Helpers::_jsonDecode(asset('server/data/umum/InitialJabatan.json'));
+
+        return view('admin.pegawai.components.add', compact('bidang', 'pangkat', 'golongan', 'NamaJabatan', 'InitialJabatan'));
     }
 
     /**

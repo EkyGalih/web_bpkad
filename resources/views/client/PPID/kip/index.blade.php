@@ -3,7 +3,7 @@
 @section('content')
     <!-- ======= Breadcrumbs Section ======= -->
     <section class="breadcrumbs">
-        <div class="card" style="padding: 3%; margin-right: 5%; margin-left: 5%;">
+        <div class="card" style="padding: 1%; margin-right: 5%; margin-left: 5%; margin-top: 1%;">
             <div class="d-flex justify-content-between align-items-center">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">

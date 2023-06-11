@@ -18,40 +18,45 @@
                 </ol>
             </nav>
         </div>
-        <section class="section">
-            <div class="col-lg-2" style="float: right;">
-                <button type="button" class="btn btn-outline-primary btn-md" data-bs-toggle="modal"
-                    data-bs-target="#AddVideo" style="float: right; margin-top: 5px;">
+        <div class="row">
+            <div class="col-lg-12" style="float: right; margin-bottom: 2%;">
+                <a href="{{ route('admin-pegawai.create') }}" class="btn btn-outline-primary btn-md" style="float: right; margin-top: 5px;">
                     <i class="bi bi-person-add"></i> Tambah Pegawai
-                </button>
+                </a>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    @if (Session::has('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            {{ Session::get('success') }}
-                        </div>
-                    @endif
+        </div>
+        <section class="section">
+            <div class="card" style="padding: 2%;">
+                <div class="row">
+                    <div class="col-lg-12">
+                        @if (Session::has('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                                {{ Session::get('success') }}
+                            </div>
+                        @endif
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                @foreach ($pegawais as $pegawai)
-                    <div class="col-lg-4">
-                        <div class="card" style="width: 18rem;">
-                            <img src="{{ asset('uploads/pegawai/' . $pegawai->foto) }}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $pegawai->name }}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">{{ $pegawai->nip }}</h6>
-                                <p class="card-text">{{ $pegawai->jabatan }}</p>
-                                <a href="#" class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i> Ubah</a>
-                                <a href="#" class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detail</a>
-                                <a href="#" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Hapus</a>
+                <div class="row">
+                    @foreach ($pegawais as $pegawai)
+                        <div class="col-lg-3">
+                            <div class="card" style="width: 18rem;">
+                                <img src="{{ asset('uploads/pegawai/' . $pegawai->foto) }}" class="card-img-top"
+                                    alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $pegawai->name }}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{ $pegawai->nip }}</h6>
+                                    <p class="card-text">{{ $pegawai->jabatan }}</p>
+                                    <a href="#" class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i> Ubah</a>
+                                    <a href="#" class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detail</a>
+                                    <a href="#" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Hapus</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
-                {{ $pegawais->links() }}
+                    @endforeach
+                    {{ $pegawais->links() }}
+                </div>
             </div>
         </section>
     </main>
