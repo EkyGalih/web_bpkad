@@ -45,14 +45,16 @@
                                         <div class="row mb-3">
                                             <label for="inputText" class="col-sm-3 col-form-label">Tgl/Tempat Lahir</label>
                                             <div class="col-sm-4">
-                                                <input type="date" name="tanggal_lahir" class="form-control">
+                                                <input type="date" name="tanggal_lahir" id="birthday"
+                                                    class="form-control">
                                             </div>
                                             <div class="col-sm-5">
                                                 <input type="text" name="tempat_lahir" class="form-control">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label for="inputText" class="col-sm-3 col-form-label">Jabatan/Inisial Jabatan</label>
+                                            <label for="inputText" class="col-sm-3 col-form-label">Jabatan/Inisial
+                                                Jabatan</label>
                                             <select class="col-sm-4" name="nama_jabatan" id="jabatan" autocomplete="off"
                                                 placeholder="Cari..">
                                                 <option value="#">Cari..</option>
@@ -75,6 +77,48 @@
                                             <div class="col-sm-9">
                                                 <input type="text" name="jabatan" class="form-control"
                                                     placeholder="Contoh: Peng administrasi [Fungsional Umum]">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="inputText" class="col-sm-3 col-form-label">Tahun/Bulan
+                                                Pengangkatan</label>
+                                            <div class="col-sm-4">
+                                                <input type="date" id="masa-kerja" class="form-control"
+                                                    placeholder="Contoh: Jan, 2000">
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <input type="text" name="masa_kerja_golongan" class="form-control"
+                                                    id="masa_kerja_golongan" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="inputText" class="col-sm-3 col-form-label">Diklat</label>
+                                            <div class="col-sm-9">
+                                                <textarea name="diklat" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="inputText" class="col-sm-3 col-form-label">Pendidikan</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="pendidikan" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="inputText" class="col-sm-3 col-form-label">Rekening</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" name="nama_rekening" class="form-control"
+                                                    placeholder="Nama Bank">
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <input type="text" name="no_rekening" class="form-control"
+                                                    placeholder="Nomor Rekening">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="inputText" class="col-sm-3 col-form-label">Usia</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" id="umur" name="umur" class="form-control"
+                                                    disabled>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -112,5 +156,40 @@
             createOnBlur: true,
             create: true
         });
+
+        function monthDiff(dateFrom, dateTo) {
+            if (dateFrom.getMonth() == dateTo.getMonth()) {
+                result = 0;
+            } else if (dateFrom.getMonth() < dateTo.getMonth()) {
+                var count = (dateTo.getMonth()+1) - (dateFrom.getMonth()+1);
+                var math1 = 12 - count;
+                var result = 12 - math1
+            } else {
+                var math1 = 12 - (dateTo.getMonth() + 1);
+                var math2 = 12 - (dateFrom.getMonth() + 1);
+                var result = math1 + math2;
+            }
+            return result;
+        }
+
+        window.onload = function() {
+            // menghtiung usia
+            $('#birthday').on('change', function() {
+                var dob = new Date(this.value);
+                var today = new Date();
+                var age = Math.floor((today - dob) / (365.25 * 24 * 60 * 60 * 1000));
+                $('#umur').val(age + " Tahun");
+            });
+
+            // menghitung masa jabatan
+            $('#masa-kerja').on('change', function() {
+                var dob = new Date(this.value);
+                var today = new Date();
+                var years = Math.floor((today - dob) / (365.25 * 24 * 60 * 60 * 1000));
+                var month = monthDiff(dob, today);
+                // console.log(monthDiff(dob, today));
+                $('#masa_kerja_golongan').val(years + " Tahun, " + month + " Bulan");
+            });
+        }
     </script>
 @endsection
