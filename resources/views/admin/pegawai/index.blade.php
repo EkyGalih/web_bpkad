@@ -20,7 +20,8 @@
         </div>
         <div class="row">
             <div class="col-lg-12" style="float: right; margin-bottom: 2%;">
-                <a href="{{ route('admin-pegawai.create') }}" class="btn btn-outline-primary btn-md" style="float: right; margin-top: 5px;">
+                <a href="{{ route('admin-pegawai.create') }}" class="btn btn-outline-primary btn-md"
+                    style="float: right; margin-top: 5px;">
                     <i class="bi bi-person-add"></i> Tambah Pegawai
                 </a>
             </div>
@@ -50,7 +51,10 @@
                                     <p class="card-text">{{ $pegawai->jabatan }}</p>
                                     <a href="#" class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i> Ubah</a>
                                     <a href="#" class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detail</a>
-                                    <a href="#" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Hapus</a>
+                                    <button type="button" data-bs-toggle="modal"
+                                        data-bs-target="#HapusPegawai{{ $loop->iteration }}"
+                                        class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Hapus</button>
+                                    @include('admin/pegawai/addons/_delete')
                                 </div>
                             </div>
                         </div>

@@ -36,7 +36,7 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <h4 style="text-align: center; font-weight: bold; color: #726e6e">DATA PRIBADI</h4>
-                                        <hr/>
+                                        <hr />
                                         <div class="row mb-3">
                                             <label for="inputText" class="col-sm-3 col-form-label">NIP</label>
                                             <div class="col-sm-9">
@@ -57,12 +57,12 @@
                                         </div>
                                         <div class="row mb-3">
                                             <label for="inputText" class="col-sm-3 col-form-label">Tgl/Tempat Lahir</label>
+                                            <div class="col-sm-5">
+                                                <input type="text" name="tempat_lahir" class="form-control">
+                                            </div>
                                             <div class="col-sm-4">
                                                 <input type="date" name="tanggal_lahir" id="birthday"
                                                     class="form-control">
-                                            </div>
-                                            <div class="col-sm-5">
-                                                <input type="text" name="tempat_lahir" class="form-control">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -108,8 +108,8 @@
                                                 </p>
                                             </div>
                                             <div class="col-sm-8">
-                                                <img src="{{ asset('uploads/profile/male.jpg') }}" alt="Profile" id="foto"
-                                                    style="max-width: 100%; height: 120px;">
+                                                <img src="{{ asset('uploads/profile/male.jpg') }}" alt="Profile"
+                                                    id="foto" style="max-width: 100%; height: 120px;">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -128,7 +128,7 @@
 
                                     <div class="col-lg-6">
                                         <h4 style="text-align: center; font-weight: bold; color: #726e6e">DATA PEGAWAI</h4>
-                                        <hr/>
+                                        <hr />
                                         <div class="row mb-3">
                                             <label for="inputText"
                                                 class="col-sm-3 col-form-label">Pangkat/Golongan</label>
@@ -156,8 +156,8 @@
                                         <div class="row mb-3">
                                             <label for="inputText" class="col-sm-3 col-form-label">Jabatan/Inisial
                                                 Jabatan</label>
-                                            <select class="col-sm-4" name="nama_jabatan" id="jabatan" autocomplete="off"
-                                                placeholder="Cari..">
+                                            <select class="col-sm-4" name="nama_jabatan" id="jabatan"
+                                                autocomplete="off" placeholder="Cari..">
                                                 <option value="#">Cari..</option>
                                                 @foreach ($NamaJabatan as $nj)
                                                     <option value="{{ $nj['nama_jabatan'] }}">{{ $nj['nama_jabatan'] }}
@@ -199,17 +199,22 @@
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label for="inputText" class="col-sm-3 col-form-label">Kenaikan
-                                                Pangkat</label>
+                                            <label for="inputText" class="col-sm-3 col-form-label">Promosi <sup data-bs-tooltip="tooltip" data-bs-placement="top"
+                                                    title="Tahun Kenaikan pangkat hanya perkiraan berdasarkan tahun pengangkatan, tahun promosi bisa berubah tergantung jabatan yang diduduki"><i
+                                                        class="bi bi-info-circle"></i></sup></label>
                                             <div class="col-sm-9">
                                                 <input type="text" name="kenaikan_pangkat" class="form-control"
                                                     disabled>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label for="inputText" class="col-sm-3 col-form-label">Pensiun</label>
+                                            <label for="inputText" class="col-sm-3 col-form-label">Pensiun <sup
+                                                    data-bs-tooltip="tooltip" data-bs-placement="top"
+                                                    title="Tahun pensiun hanya perkiraan berdasarkan tahun lahir, tahun pensiun bisa berubah berdasarkan jabatan terakhir yang diduduki"><i
+                                                        class="bi bi-info-circle"></i></sup></label>
                                             <div class="col-sm-9">
-                                                <input type="text" name="pensiun" class="form-control" disabled>
+                                                <input type="text" id="pensiun" name="pensiun" class="form-control"
+                                                    disabled>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -307,7 +312,9 @@
                 var dob = new Date(this.value);
                 var today = new Date();
                 var age = Math.floor((today - dob) / (365.25 * 24 * 60 * 60 * 1000));
+                var pensiun = today.getFullYear() + (58 - age);
                 $('#umur').val(age + " Tahun");
+                $('#pensiun').val("Tahun " + pensiun);
             });
 
             // menghitung masa jabatan

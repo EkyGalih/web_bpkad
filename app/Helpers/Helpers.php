@@ -465,6 +465,9 @@ class Helpers
             case 'ppid_struktur':
                 $data = PPIDStruktur::where('id', '=', $uuid)->select('nama_jabatan as nama')->first();
                 break;
+            case 'pegawai':
+                $data = Pegawai::where('id', '=', $uuid)->select('name as nama')->first();
+                break;
             default:
                 $data = '';
         }

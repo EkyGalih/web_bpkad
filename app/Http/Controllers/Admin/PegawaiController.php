@@ -8,6 +8,7 @@ use App\Models\Bidang;
 use App\Models\Golongan;
 use App\Models\Pangkat;
 use App\Models\Pegawai;
+use DateTime;
 use Illuminate\Http\Request;
 
 class PegawaiController extends Controller
@@ -19,7 +20,7 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        $pegawais = Pegawai::orderBy('name', 'ASC')->paginate(12);
+        $pegawais = Pegawai::where('deleted_at', '=', NULL)->orderBy('name', 'ASC')->paginate(12);
 
         return view('admin/pegawai/index', compact('pegawais'));
     }
@@ -93,6 +94,14 @@ class PegawaiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pegawai = Pegawai::findOrFail($id);
+        // unlink(asset($pegawai->foto);
+        $pegawai->update([
+            'deleted_at' => new DateTime()
+        ]);
+
+        Helpers::_recentAdd($id, 'menghapus pegawai', 'pegawai');
+
+        return redirect()->route('admin-pegawai.index')->with(['success' => 'Pegawai Berhasil dihapus!']);
     }
 }
