@@ -119,10 +119,12 @@ class PostController extends Controller
                 'foto_berita' => $request->foto_berita,
                 'users_id' => Auth::user()->id,
                 'posts_category_id' => $request->posts_category_id,
-                'tags' => $request->tags
+                'tags' => $request->tags,
+                'created_at' => $request->date . ' ' . $request->time
             ]);
             Helpers::_recentAdd($id, 'mengubah posting', 'post');
         } elseif ($foto == null) {
+            // dd($request->date . ' ' . $request->time);
             $posts->update([
                 'title' => $request->title,
                 'content' => $request->content,
@@ -130,7 +132,8 @@ class PostController extends Controller
                 'foto_berita' => $posts->foto_berita,
                 'users_id' => Auth::user()->id,
                 'posts_category_id' => $request->posts_category_id,
-                'tags' => $request->tags
+                'tags' => $request->tags,
+                'created_at' => $request->date . ' ' . $request->time
             ]);
             Helpers::_recentAdd($id, 'mengubah posting', 'post');
         }

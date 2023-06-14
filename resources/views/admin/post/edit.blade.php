@@ -86,6 +86,24 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
+                                    @php $created_at = explode(" ", $posts->created_at) @endphp
+                                    <label for="inputText" class="col-sm-2 col-form-label">Waktu Upload</label>
+                                    <div class="col-sm-2">
+                                        <input id="date" type="date" name="date" value="{{ $created_at[0] }}"
+                                            class="form-control @error('date') is-invalid @enderror">
+                                        @error('date')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input id="time" type="time" name="time" value="{{ $created_at[1] }}"
+                                            class="form-control @error('time') is-invalid @enderror">
+                                        @error('time')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
                                     <div class="col-sm-12">
                                         <button class="btn btn-outline-warning btn-md" style="float: right;" type="reset">
                                             <i class="bi bi-arrow-clockwise"></i> Reset
