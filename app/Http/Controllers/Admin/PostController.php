@@ -21,7 +21,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Posts::orderBy('created_at', 'DESC')->get();
+        $posts = Posts::where('deleted_at', '=', NULL)->orderBy('created_at', 'DESC')->get();
 
         return view('admin.post.index', compact('posts'));
     }
