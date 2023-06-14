@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Posts;
 use App\Models\PostsCategory;
 use App\Models\Recent;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Webpatser\Uuid\Uuid;
@@ -64,7 +65,8 @@ class PostController extends Controller
             'foto_berita' => $request->foto_berita,
             'users_id' => Auth::user()->id,
             'posts_category_id' => $request->posts_category_id,
-            'tags' => $request->tags
+            'tags' => $request->tags,
+            'created_at' => $request->date . ' ' . $request->time . ':' . date('s')
         ]);
 
         Helpers::_recentAdd($id, 'membuat posting', 'post');
@@ -145,8 +147,11 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Posts::findOrFail($id);
-        unlink($post->foto_berita);
-        $post->delete();
+        $post->update([
+            'deleted_at' => new DateTime()
+        ]);
+        // unlink($post->foto_berita);
+        // $post->delete();
 
         return redirect()->route('post-admin.index')->with(['success' => 'Postingan dihapus!']);
     }

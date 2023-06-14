@@ -80,6 +80,23 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
+                                    <label for="inputText" class="col-sm-2 col-form-label">Waktu Upload</label>
+                                    <div class="col-sm-2">
+                                        <input id="date" type="date" name="date"
+                                            class="form-control @error('date') is-invalid @enderror">
+                                        @error('date')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input id="time" type="time" name="time"
+                                            class="form-control @error('time') is-invalid @enderror">
+                                        @error('time')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
                                     <div class="col-sm-12">
                                         <button class="btn btn-outline-warning btn-md" style="float: right;" type="reset">
                                             <i class="bi bi-arrow-clockwise"></i> Reset
