@@ -124,7 +124,6 @@ class PostController extends Controller
             ]);
             Helpers::_recentAdd($id, 'mengubah posting', 'post');
         } elseif ($foto == null) {
-            // dd($request->date . ' ' . $request->time);
             $posts->update([
                 'title' => $request->title,
                 'content' => $request->content,
