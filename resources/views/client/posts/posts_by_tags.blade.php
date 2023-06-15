@@ -1,5 +1,5 @@
 @extends('client.index')
-@section('title', 'Tags')
+@section('title', 'Tags |')
 @section('menu-berita', 'active')
 @section('additional-css')
     <style>

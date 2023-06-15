@@ -1,5 +1,5 @@
 @extends('client.index')
-@section('title', 'Detail Berita')
+@section('title', 'Kategori |')
 @section('additional-css')
     <style>
         .tags {

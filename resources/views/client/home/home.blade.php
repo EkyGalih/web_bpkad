@@ -1,5 +1,4 @@
 @extends('client.index')
-@section('title', 'Home')
 @section('menu-home', 'active')
 @section('additional-css')
     <!-- Basic stylesheet -->

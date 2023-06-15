@@ -1,5 +1,5 @@
 @extends('client.index')
-@section('title', 'Detail Berita')
+@section('title', 'Detail Berita |')
 @section('menu-berita', 'active')
 @section('additional-css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />

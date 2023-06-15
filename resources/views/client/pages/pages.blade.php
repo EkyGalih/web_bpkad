@@ -1,5 +1,5 @@
 @extends('client.index')
-@section('title', $pages->title)
+@section('title', $pages->title. ' |')
 @section('content_home')
     <main id="main" data-aos="fade-up">
         <!-- ======= Berita ======= -->

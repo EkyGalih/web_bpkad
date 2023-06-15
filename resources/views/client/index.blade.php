@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>@yield('title') | BPKAD (Badan Pengelolaan Keuangan dan Aset Daerah</title>
+    <title>@yield('title') BPKAD (Badan Pengelolaan Keuangan dan Aset Daerah</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
     @include('layouts.client.css')
@@ -13,7 +13,7 @@
 <body>
     <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
         <div class="container d-flex">
-            
+
         </div>
     </div>
     @include('layouts.client.header')

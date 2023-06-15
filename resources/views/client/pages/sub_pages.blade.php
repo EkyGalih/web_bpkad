@@ -1,5 +1,5 @@
 @extends('client.index')
-@section('title', $subPages->title)
+@section('title', $subPages->title .' |')
 @section('content_home')
     <main id="main" data-aos="fade-up">
 

@@ -1,5 +1,5 @@
 @extends('client.index')
-@section('title', 'Halaman')
+@section('title', 'Q&A |')
 @section('content')
     <!-- ======= Breadcrumbs Section ======= -->
     <section class="breadcrumbs" style="margin-top: 8%;">
