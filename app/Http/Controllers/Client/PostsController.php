@@ -22,8 +22,10 @@ class PostsController extends Controller
                 'content_type.*',
                 'content_type.id as type_id',
             )
+            ->where('posts_category_id', '=', '1')
             ->orderBy('created_at', 'desc')
             ->get();
+            dd($posts);
         return view('client.posts.posts', compact('menu', 'posts'));
     }
 

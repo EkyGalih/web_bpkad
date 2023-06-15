@@ -34,8 +34,19 @@ class HomeController extends Controller
                 'posts.id as posts_id',
                 'content_type.id as type_id',
             )
+            ->where('posts_category_id', '=', '1')
             ->orderBy('posts.created_at', 'desc')
             ->limit(8)
+            ->get();
+        $artikels = Posts::join('content_type', 'posts.content_type_id', '=', 'content_type.id')
+            ->select(
+                'posts.*',
+                'posts.id as posts_id',
+                'content_type.id as type_id',
+            )
+            ->where('posts_category_id', '=', '2')
+            ->orderBy('posts.created_at', 'desc')
+            ->limit(6)
             ->get();
         unset($new_posts[0]);
         unset($new_posts[1]);
@@ -66,7 +77,7 @@ class HomeController extends Controller
         // slider
         $slides = Slideitem::where('slide_id', '=', '2')->get();
         $slidesInformasi = Slideitem::where('slide_id', '=', '1')->where('deleted_at', '=', NULL)->orderBy('created_at', 'DESC')->get();
-        return view('client.home.home', compact('new_posts', 'carousel', 'old_posts', 'videos', 'apps', 'slides', 'slidesInformasi', 'banners'));
+        return view('client.home.home', compact('new_posts', 'artikels', 'carousel', 'old_posts', 'videos', 'apps', 'slides', 'slidesInformasi', 'banners'));
     }
 
     /**
@@ -78,14 +89,14 @@ class HomeController extends Controller
     {
         $pages = Pages::findOrFail($id);
 
-        return view('client.home.pages', compact('pages'));
+        return view('client.pages.pages', compact('pages'));
     }
 
     public function ShowSubPages($id)
     {
         $subPages = SubPages::findOrFail($id);
 
-        return view('client.home.sub_pages', compact('subPages'));
+        return view('client.pages.sub_pages', compact('subPages'));
     }
 
     /**
@@ -96,9 +107,9 @@ class HomeController extends Controller
      */
     public function post()
     {
-        $posts = Posts::orderBy('created_at', 'DESC')->paginate(16);
+        $posts = Posts::where('posts_category_id', '=', '1')->orderBy('created_at', 'DESC')->paginate(16);
 
-        return view('client.home.posts', compact('posts'));
+        return view('client.posts.posts', compact('posts'));
     }
 
     public function PostCat($token1, $token2, $id)
@@ -107,16 +118,16 @@ class HomeController extends Controller
             ->orderBy('created_at', 'DESC')
             ->paginate(12);
 
-        return view('client.home.posts', compact('posts'));
+        return view('client.posts.posts', compact('posts'));
     }
 
     public function PostTag($tags)
     {
-        $posts = Posts::where('tags', 'LIKE', '%'.$tags.'%')
-        ->orderBy('created_at', 'DESC')
-        ->paginate(12);
+        $posts = Posts::where('tags', 'LIKE', '%' . $tags . '%')
+            ->orderBy('created_at', 'DESC')
+            ->paginate(12);
 
-        return view('client.home.posts_by_tags', compact('posts'));
+        return view('client.posts.posts_by_tags', compact('posts'));
     }
 
     /**
@@ -139,7 +150,7 @@ class HomeController extends Controller
             ->whatsapp()
             ->reddit();
 
-        return view('client.home.detail_posts', compact('posts', 'share'));
+        return view('client.posts.detail_posts', compact('posts', 'share'));
     }
 
     /**

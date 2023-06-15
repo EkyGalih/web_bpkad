@@ -43,7 +43,7 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Judul</th>
-                                        <th scope="col">Tipe Postingan</th>
+                                        <th scope="col">Kategori</th>
                                         <th scope="col">Dibuat Oleh</th>
                                         <th scope="col">Buat Pada</th>
                                         <th scope="col">Ubah Pada</th>
@@ -55,7 +55,12 @@
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
                                             <td>{{ $post->title }}</td>
-                                            <td>{{ Helpers::GetTypeContent($post->content_type_id) }}</td>
+                                            <td>
+                                                <button
+                                                    class="btn btn-sm btn-{{ $post->posts_category_id == '1' ? 'success' : 'primary' }}">
+                                                    <i class="bi bi-{{ $post->posts_category_id == '1' ? 'newspaper' : 'file-text' }}"></i> {{ Helpers::GetCategoryContent($post->posts_category_id) }}
+                                                </button>
+                                            </td>
                                             <td>{{ Helpers::GetUser($post->users_id) }}</td>
                                             <td>{{ Helpers::GetDate($post->created_at) }}</td>
                                             <td>{{ $post->updated_at == null ? 'None' : Helpers::GetDate($post->updated_at) }}
@@ -75,7 +80,9 @@
                                                     <div class="modal-dialog modal-dialog-centered">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title"><i class="bi bi-exclamation-octagon-fill"></i> Hapus Postingan</h5>
+                                                                <h5 class="modal-title"><i
+                                                                        class="bi bi-exclamation-octagon-fill"></i> Hapus
+                                                                    Postingan</h5>
                                                                 <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
@@ -84,11 +91,14 @@
                                                                     akan dihapus.<br /> Anda Yakin?</p>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i> Tidak</button>
-                                                                <a href="{{ route('post-admin.destroy', $post->id) }}" class="btn btn-outline-danger">
+                                                                <button type="button" class="btn btn-outline-secondary"
+                                                                    data-bs-dismiss="modal"><i class="bi bi-x-circle"></i>
+                                                                    Tidak</button>
+                                                                <a href="{{ route('post-admin.destroy', $post->id) }}"
+                                                                    class="btn btn-outline-danger">
                                                                     <i class="bi bi-check-circle"></i> Ya
                                                                 </a>
-                                                              </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
