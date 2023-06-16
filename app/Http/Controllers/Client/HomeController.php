@@ -26,6 +26,7 @@ class HomeController extends Controller
                 'content_type.id as type_id',
             )
             ->orderBy('posts.created_at', 'desc')
+            ->where('deleted_at', '=', NULL)
             ->limit(4)
             ->get();
         $new_posts = Posts::join('content_type', 'posts.content_type_id', '=', 'content_type.id')
