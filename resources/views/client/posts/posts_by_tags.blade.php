@@ -68,7 +68,7 @@
                                             <div class="ratio_right-cover-2 image-wrapper">
                                                 <a
                                                     href="{{ route('client.show', Helpers::randomString(100) . '/' . $post->id . '/' . Helpers::randomString(100)) }}">
-                                                    <img height="200" src="{{ asset($post->foto_berita) }}"
+                                                    <img height="200" width="100%" src="{{ asset($post->foto_berita) }}"
                                                         alt="simple blog template bootstrap">
                                                 </a>
                                             </div>

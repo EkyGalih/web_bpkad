@@ -30,7 +30,7 @@
                                             <!--thumbnail img-->
                                             <div class="ratio_right-cover-2 image-wrapper">
                                                 <a href="#">
-                                                    <img height="200" src="{{ asset($post->foto_berita) }}"
+                                                    <img height="200" width="100%" src="{{ asset($post->foto_berita) }}"
                                                         alt="simple blog template bootstrap">
                                                 </a>
                                             </div>
