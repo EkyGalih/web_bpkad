@@ -14,7 +14,7 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('post-admin.index') }}">
                 <i class="bi bi-file-earmark-post"></i>
-                <span>Post</span>
+                <span>Berita & Artikel</span>
             </a>
         </li><!-- End Profile Page Nav -->
 

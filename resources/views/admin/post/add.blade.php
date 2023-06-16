@@ -37,6 +37,17 @@
                             <form action="{{ route('post-admin.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row mb-3">
+                                    <label for="inputText" class="col-sm-2 col-form-label">Kategori</label>
+                                    <div class="col-sm-10">
+                                        <select name="posts_category_id" class="form-control">
+                                            <option value="">Pilih Kategori</option>
+                                            @foreach ($PostCategory as $category)
+                                                <option value="{{ $category->id }}">{{ $category->category }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Judul</label>
                                     <div class="col-sm-10">
                                         <input type="text" name="title" class="form-control">
@@ -60,17 +71,6 @@
                                     <label for="inputText" class="col-sm-2 col-form-label">Kontent</label>
                                     <div class="col-sm-10">
                                         <textarea name="content" class="tinymce-editor"></textarea><!-- End TinyMCE Editor -->
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Kategori</label>
-                                    <div class="col-sm-10">
-                                        <select name="posts_category_id" class="form-control">
-                                            <option value="">-------</option>
-                                            @foreach ($PostCategory as $category)
-                                                <option value="{{ $category->id }}">{{ $category->category }}</option>
-                                            @endforeach
-                                        </select>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
