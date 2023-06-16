@@ -117,6 +117,7 @@ class HomeController extends Controller
     {
         $posts = Posts::where('posts_category_id', '=', $id)
             ->orderBy('created_at', 'DESC')
+            ->where('deleted_at', '=', NULL)
             ->paginate(12);
 
         return view('client.posts.posts', compact('posts'));
@@ -126,6 +127,7 @@ class HomeController extends Controller
     {
         $posts = Posts::where('tags', 'LIKE', '%' . $tags . '%')
             ->orderBy('created_at', 'DESC')
+            ->where('deleted_at', '=', NULL)
             ->paginate(12);
 
         return view('client.posts.posts_by_tags', compact('posts'));
