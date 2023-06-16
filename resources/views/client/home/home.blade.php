@@ -316,6 +316,7 @@
                     @endforeach
                 </div>
             </div>
+            <a class="btn btn-primary btn-block" href="{{ route('artikel.index') }}">Selengkapnya</a>
         </div>
     </section>
 

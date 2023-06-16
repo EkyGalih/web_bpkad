@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\PPID\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Client\ArtikelController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\LaporanPermohonanMasyarakatController;
 use App\Http\Controllers\Client\PegawaiController;
@@ -40,6 +41,10 @@ Route::group(['prefix' => 'posts'], function () {
     Route::get('tags/{tags?}', [HomeController::class, 'PostTag'])->name('post.tags');
     Route::get('like/{id}', [PostsController::class, 'like'])->name('post.like');
     Route::post('comment/{id}', [PostsController::class, 'comment'])->name('post.comment');
+});
+
+Route::group(['prefix' => 'artikel'], function () {
+    Route::get('/', [ArtikelController::class, 'index'])->name('artikel.index');
 });
 
 Route::group(['prefix' => 'Pages'], function () {

@@ -58,7 +58,9 @@
                                             <td>
                                                 <button
                                                     class="btn btn-sm btn-{{ $post->posts_category_id == '1' ? 'success' : 'primary' }}">
-                                                    <i class="bi bi-{{ $post->posts_category_id == '1' ? 'newspaper' : 'file-text' }}"></i> {{ Helpers::GetCategoryContent($post->posts_category_id) }}
+                                                    <i
+                                                        class="bi bi-{{ $post->posts_category_id == '1' ? 'newspaper' : 'file-text' }}"></i>
+                                                    {{ Helpers::GetCategoryContent($post->posts_category_id) }}
                                                 </button>
                                             </td>
                                             <td>{{ Helpers::GetUser($post->users_id) }}</td>

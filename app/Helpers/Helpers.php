@@ -6,6 +6,7 @@ use App\Models\Address;
 use App\Models\Apps;
 use App\Models\Assets;
 use App\Models\Bender;
+use App\Models\ContentType;
 use App\Models\Galery;
 use App\Models\KIP;
 use App\Models\Laporan;
@@ -65,6 +66,13 @@ class Helpers
         $type = PostsCategory::where('id', '=', $param)->select('category')->first();
 
         return $type->category;
+    }
+
+    public static function GetTypeContent($param)
+    {
+        $type = ContentType::where('id', '=', $param)->select('name')->first();
+
+        return $type->name;
     }
 
     public static function GetUser($param)
