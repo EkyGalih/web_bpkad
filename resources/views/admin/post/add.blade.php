@@ -65,7 +65,7 @@
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Kategori</label>
                                     <div class="col-sm-10">
-                                        <select name="post_category_id" class="form-control">
+                                        <select name="posts_category_id" class="form-control">
                                             <option value="">-------</option>
                                             @foreach ($PostCategory as $category)
                                                 <option value="{{ $category->id }}">{{ $category->category }}</option>
