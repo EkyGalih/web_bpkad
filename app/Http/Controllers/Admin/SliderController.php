@@ -9,6 +9,7 @@ use App\Models\Slideitem;
 use DateTime;
 use Illuminate\Http\Request;
 use Webpatser\Uuid\Uuid;
+use Intervention\Image\Facades\Image;
 
 class SliderController extends Controller
 {
@@ -42,14 +43,27 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
-        $id = (string)Uuid::generate(4);
+        $foto       = $request->file('foto');
+        $ext        = array('png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG');
+        $filename   = 'berita-' . md5($foto->getClientOriginalName()) . '.' . $foto->getClientOriginalExtension();
+        $id         = (string)Uuid::generate(4);
+
+        if (in_array($foto->getClientOriginalExtension(), $ext)) {
+            if ($foto->getSize() <= 5000000) {
+                // Image::make($foto)->resize(115, 115)->save('uploads/slider/'.$filename); // metode resize dengan menghilangkan aspect ratio
+                Image::make($foto)->resize(null, 1000, function($constraint){
+                    $constraint->aspectRatio();
+                })->save('uploads/slider/'.$filename); // metode resize dengan mempertahankan aspect ratio
+                $request->foto = 'uploads/slider/' . $filename;
+            }
+        }
 
         Slideitem::create([
             'id' => $id,
             'title' => $request->title,
             'keterangan' => $request->keterangan,
             'slide_id' => $request->slide_id,
-            'foto' => '',
+            'foto' => $request->foto,
             'url' => ''
         ]);
 

@@ -48,7 +48,7 @@ class PostController extends Controller
     {
         $foto       = $request->file('foto_berita');
         $ext        = array('png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG');
-        $filename   = 'eky-' . md5($foto->getClientOriginalName()) . '.' . $foto->getClientOriginalExtension();
+        $filename   = 'berita-' . md5($foto->getClientOriginalName()) . '.' . $foto->getClientOriginalExtension();
         $id         = (string)Uuid::generate(4);
 
         if (in_array($foto->getClientOriginalExtension(), $ext)) {

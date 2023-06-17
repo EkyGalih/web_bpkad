@@ -23,7 +23,7 @@
         <div class="portfolio-details-container">
             <div class="owl-carousel portfolio-details-carousel">
                 @foreach ($slides as $slide)
-                    <img src="{{ asset($slide->foto) }}" alt="{{ $slide->title }}" style="margin-top: 40%">
+                    <img src="{{ asset($slide->foto) }}" alt="{{ $slide->title }}" style="margin-top: 40%; width: 100%; height: 5%;">
                 @endforeach
             </div>
         </div>
