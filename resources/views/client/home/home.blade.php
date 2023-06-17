@@ -20,13 +20,13 @@
 @endsection
 @section('content_home')
     <section id="hero" class="d-flex align-items-center">
-        <div class="portfolio-details-container">
+        {{-- <div class="portfolio-details-container">
             <div class="owl-carousel portfolio-details-carousel">
                 @foreach ($slides as $slide)
                     <img src="{{ asset($slide->foto) }}" alt="{{ $slide->title }}" style="margin-top: 40%; width: 100%; height: 5%;">
                 @endforeach
             </div>
-        </div>
+        </div> --}}
     </section>
     <div class="row py-2">
         <!--Breaking box-->
