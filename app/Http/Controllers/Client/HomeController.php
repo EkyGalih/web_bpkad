@@ -27,6 +27,7 @@ class HomeController extends Controller
             )
             ->orderBy('posts.created_at', 'desc')
             ->where('posts.deleted_at', '=', NULL)
+            ->where('posts.posts_category_id', '=', '1')
             ->limit(4)
             ->get();
         $new_posts = Posts::join('content_type', 'posts.content_type_id', '=', 'content_type.id')
@@ -47,7 +48,7 @@ class HomeController extends Controller
             )
             ->where('posts_category_id', '=', '2')
             ->orderBy('posts.created_at', 'desc')
-            ->limit(6)
+            ->limit(3)
             ->get();
         unset($new_posts[0]);
         unset($new_posts[1]);

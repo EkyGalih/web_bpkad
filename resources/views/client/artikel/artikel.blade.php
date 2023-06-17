@@ -66,7 +66,7 @@
                                             <!--thumbnail img-->
                                             <div class="ratio_right-cover-2 image-wrapper">
                                                 <a
-                                                    href="{{ route('client.show', Helpers::randomString(100) . '/' . $artikel->id . '/' . Helpers::randomString(100)) }}">
+                                                    href="{{ route('artikel.show', Helpers::randomString(100) . '/' . $artikel->id . '/' . Helpers::randomString(100)) }}">
                                                     <img height="200" src="{{ asset($artikel->foto_berita) }}"
                                                         alt="simple blog template bootstrap">
                                                 </a>
@@ -78,7 +78,7 @@
 
                                                 <!--title-->
                                                 <a
-                                                    href="{{ route('client.show', Helpers::randomString(100) . '/' . $artikel->id . '/' . Helpers::randomString(100)) }}">
+                                                    href="{{ route('artikel.show', Helpers::randomString(100) . '/' . $artikel->id . '/' . Helpers::randomString(100)) }}">
                                                     <h4 class="h5 text-white my-1">
                                                         {{ substr($artikel->title, 0, 50) }}...
                                                         <span style="font-size: 16px;">Selengkapnya</span>

@@ -93,7 +93,7 @@
                     </ul>
                     <br /><br />
                     @php
-                        $posting = Helpers::getPostTag($posts->tags);
+                        $posting = Helpers::getPostTag($posts->tags, '1');
                     @endphp
                     <div class="list-group">
                         <button type="button" class="list-group-item list-group-item-action active" aria-current="true">

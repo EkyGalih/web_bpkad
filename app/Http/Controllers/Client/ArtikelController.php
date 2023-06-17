@@ -47,9 +47,21 @@ class ArtikelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($token1, $id, $token2)
     {
-        //
+        $artikel = Posts::where('id', '=', $id)->first();
+        $share = \Share::page(
+            url()->full(),
+            $artikel->title,
+        )
+            ->facebook()
+            ->twitter()
+            ->linkedin()
+            ->telegram()
+            ->whatsapp()
+            ->reddit();
+
+        return view('client.artikel.detail_artikel', compact('artikel', 'share'));
     }
 
     /**

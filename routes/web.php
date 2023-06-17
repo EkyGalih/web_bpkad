@@ -34,7 +34,7 @@ Route::group(['prefix' => 'operator', 'middleware' => ['auth', 'operator']], fun
     Route::get('/', [OperatorController::class, 'index'])->name('operator');
 });
 
-Route::group(['prefix' => 'posts'], function () {
+Route::group(['prefix' => 'berita'], function () {
     Route::get('/', [HomeController::class, 'post'])->name('post.index');
     Route::get('category/{token1?}/{token2?}/{id?}', [HomeController::class, 'PostCat'])->name('post.post_cat');
     Route::get('detail/{token1?}/{id?}/{token2?}', [HomeController::class, 'show'])->name('client.show');
@@ -45,6 +45,7 @@ Route::group(['prefix' => 'posts'], function () {
 
 Route::group(['prefix' => 'artikel'], function () {
     Route::get('/', [ArtikelController::class, 'index'])->name('artikel.index');
+    Route::get('detail/{token1?}/{id?}/{token2?}', [ArtikelController::class, 'show'])->name('artikel.show');
 });
 
 Route::group(['prefix' => 'Pages'], function () {

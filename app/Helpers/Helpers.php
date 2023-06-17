@@ -122,9 +122,10 @@ class Helpers
             ->count();
     }
 
-    public static function getPostTag($tags)
+    public static function getPostTag($tags, $cat)
     {
         return Posts::where('tags', 'LIKE', '%' . $tags . '%')
+            ->where('posts_category_id', '=', $cat)
             ->orderBy('created_at', 'DESC')
             ->limit(5)
             ->get();
