@@ -1,5 +1,5 @@
 @extends('admin.index')
-@section('title', 'Post')
+@section('title', 'Berita/Artikel')
 @section('additional-css')
     <link rel="stylesheet" type="text/css"
         href="{{ asset('server/vendor/DataTables/DataTables-1.13.1/css/jquery.dataTables.min.css') }}" />
@@ -7,12 +7,11 @@
 @section('content')
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Post</h1>
+            <h1>Berita/Artikel</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('post-admin.index') }}">Post</a></li>
-                    <li class="breadcrumb-item active">Data Post</li>
+                    <li class="breadcrumb-item"><a href="{{ route('post-admin.index') }}">Berita/Artikel</a></li>
                 </ol>
             </nav>
         </div>
@@ -29,12 +28,12 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-10">
-                                    <h5 class="card-title">Data Post</h5>
+                                    <h5 class="card-title">Berita/Artikel</h5>
                                 </div>
                                 <div class="col-lg-2">
                                     <a href="{{ route('post-admin.create') }}" class="btn btn-outline-primary btn-md"
                                         style="margin-top: 10px;">
-                                        <i class="bi bi-journal-plus"></i> Tambah Post
+                                        <i class="bi bi-journal-plus"></i> Tambah Berita/Artikel
                                     </a>
                                 </div>
                             </div>
