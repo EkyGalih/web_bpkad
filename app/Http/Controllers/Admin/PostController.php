@@ -64,6 +64,7 @@ class PostController extends Controller
             'content_type_id' => '1',
             'foto_berita' => $request->foto_berita,
             'users_id' => Auth::user()->id,
+            'caption' => $request->caption,
             'posts_category_id' => $request->posts_category_id,
             'tags' => $request->tags,
             'created_at' => $request->date . ' ' . $request->time . ':' . date('s')
@@ -120,6 +121,7 @@ class PostController extends Controller
                 'users_id' => Auth::user()->id,
                 'posts_category_id' => $request->posts_category_id,
                 'tags' => $request->tags,
+                'caption' => $request->caption,
                 'created_at' => $request->date . ' ' . $request->time
             ]);
             Helpers::_recentAdd($id, 'mengubah posting', 'post');
@@ -132,6 +134,7 @@ class PostController extends Controller
                 'users_id' => Auth::user()->id,
                 'posts_category_id' => $request->posts_category_id,
                 'tags' => $request->tags,
+                'caption' => $request->caption,
                 'created_at' => $request->date . ' ' . $request->time
             ]);
             Helpers::_recentAdd($id, 'mengubah posting', 'post');

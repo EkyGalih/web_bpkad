@@ -60,6 +60,13 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
+                                    <label for="inputText" class="col-sm-2 col-form-label">Caption</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="caption" class="form-control"
+                                            value="{{ $posts->caption }}">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Kontent</label>
                                     <div class="col-sm-10">
                                         <textarea name="content" class="tinymce-editor">{{ $posts->content }}</textarea><!-- End TinyMCE Editor -->
@@ -103,12 +110,17 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="row mb-3">
+                                <div class="row mb-4">
                                     <div class="col-sm-12">
-                                        <button class="btn btn-outline-warning btn-md" style="float: right;" type="reset">
+                                        <a class="btn btn-dark btn-md" href="{{ route('post-admin.index') }}"
+                                            style="float: right">
+                                            <i class="bi bi-skip-backward"></i> Kembali
+                                        </a>
+                                        <button class="btn btn-warning btn-md" style="float: right; margin-right: 2px;"
+                                            type="reset">
                                             <i class="bi bi-arrow-clockwise"></i> Reset
                                         </button>
-                                        <button class="btn btn-outline-success btn-md"
+                                        <button class="btn btn-success btn-md"
                                             style="float: right; margin-right: 2px;" type="submit">
                                             <i class="bi bi-save"></i> Simpan
                                         </button>
