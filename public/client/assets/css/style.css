@@ -40,6 +40,42 @@ h1, h2, h3, h4, h5, h6 {
   background: #fff;
 }
 
+.text-loader {
+    color: #106eea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 111%;
+  -webkit-animation: text-loader 3.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) 1s alternate both;
+	        animation: text-loader 3.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) 1s alternate both;
+}
+
+@-webkit-keyframes text-loader {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes text-loader {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
 #preloader:before {
   content: "";
   position: fixed;
