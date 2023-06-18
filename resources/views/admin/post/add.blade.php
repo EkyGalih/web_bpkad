@@ -1,5 +1,5 @@
 @extends('admin.index')
-@section('title', 'Tambah Post')
+@section('title', 'Buat Berita/Artikel')
 @section('additional-css')
     <link rel="stylesheet" href="{{ asset('server/vendor/tom-select/tom-select.css') }}">
     <style>
@@ -17,12 +17,12 @@
     <main id="main" class="main">
         <div class="pagetitle">
             <div class="pagetitle">
-                <h1>Post</h1>
+                <h1>Berita/Artikel</h1>
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('post-admin.index') }}">Post</a></li>
-                        <li class="breadcrumb-item active">Tambah Post</li>
+                        <li class="breadcrumb-item"><a href="{{ route('post-admin.index') }}">Berita/Artikel</a></li>
+                        <li class="breadcrumb-item active">Buat Berita/Artikel</li>
                     </ol>
                 </nav>
             </div>
@@ -32,7 +32,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="card-title">Tambah Postingan</div>
+                            <div class="card-title">Buat Berita/Artikel</div>
                             <hr />
                             <form action="{{ route('post-admin.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf

@@ -1,5 +1,5 @@
 @extends('admin.index')
-@section('title', 'Edit Post')
+@section('title', 'Edit Berita/Artikel')
 @section('additional-css')
     <link rel="stylesheet" href="{{ asset('server/vendor/tom-select/tom-select.css') }}">
     <style>
@@ -17,12 +17,12 @@
     <main id="main" class="main">
         <div class="pagetitle">
             <div class="pagetitle">
-                <h1>Post</h1>
+                <h1>Berita/Artikel</h1>
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('post-admin.index') }}">Post</a></li>
-                        <li class="breadcrumb-item active">Edit Post {{ $posts->title }}</li>
+                        <li class="breadcrumb-item"><a href="{{ route('post-admin.index') }}">Berita/Artikel</a></li>
+                        <li class="breadcrumb-item active">Edit Berita/Artikel {{ $posts->title }}</li>
                     </ol>
                 </nav>
             </div>
@@ -32,7 +32,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="card-title">Ubah Postingan</div>
+                            <div class="card-title">Ubah Berita/Artikel</div>
                             <hr />
                             <form action="{{ route('post-admin.update', $posts->id) }}" method="POST"
                                 enctype="multipart/form-data">
