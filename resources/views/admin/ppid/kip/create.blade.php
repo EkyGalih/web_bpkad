@@ -1,7 +1,7 @@
 @extends('admin.index')
 @section('title', 'PPID | Tambah Klasifikasi Informasi Publik')
-@section('di-menu', 'show')
-@section('di-ppid', 'active')
+@section('ppid-menu', 'show')
+@section('ppid-ki', 'active')
 @section('content')
     <main id="main" class="main">
         <div class="pagetitle">

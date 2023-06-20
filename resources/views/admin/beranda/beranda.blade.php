@@ -324,8 +324,10 @@
                                             @php $badge = 'secondary' @endphp
                                         @elseif ($recent->jenis == 'ppid_struktur')
                                             @php $badge = 'info' @endphp
-                                            @elseif ($recent->jenis == 'pegawai')
+                                        @elseif ($recent->jenis == 'pegawai')
                                             @php $badge = 'success' @endphp
+                                        @elseif ($recent->jenis == 'kip')
+                                            @php $badge = 'info' @endphp
                                         @endif
                                         <i
                                             class='bi bi-circle-fill activity-badge text-{{ $badge }} align-self-start'></i>

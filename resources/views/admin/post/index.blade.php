@@ -27,12 +27,12 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-10">
+                                <div class="col-lg-9">
                                     <h5 class="card-title">Berita/Artikel</h5>
                                 </div>
-                                <div class="col-lg-2">
+                                <div class="col-lg-3">
                                     <a href="{{ route('post-admin.create') }}" class="btn btn-outline-primary btn-md"
-                                        style="margin-top: 10px;">
+                                        style="margin-top: 10px; margin-left: 80px;">
                                         <i class="bi bi-journal-plus"></i> Tambah Berita/Artikel
                                     </a>
                                 </div>

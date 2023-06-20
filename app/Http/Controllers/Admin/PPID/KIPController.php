@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin\PPID;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\KIP;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Webpatser\Uuid\Uuid;
 
 class KIPController extends Controller
 {
@@ -16,7 +19,9 @@ class KIPController extends Controller
      */
     public function index()
     {
-        $kip = KIP::orderBy('created_at', 'DESC')->get();
+        $kip = KIP::orderBy('created_at', 'DESC')
+        ->where('deleted_at', '=', NULL)
+        ->get();
 
         return view('admin.ppid.kip.index', compact('kip'));
     }
@@ -48,9 +53,11 @@ class KIPController extends Controller
             'time' => 'required',
             'tahun' => 'required'
         ]);
+        $id = (string)Uuid::generate(4);
 
         if ($request->jenis_file == 'link') {
             KIP::create([
+                'id' => $id,
                 'nama_informasi' => $request->nama_informasi,
                 'jenis_informasi' => $request->jenis_informasi,
                 'jenis_file' => $request->jenis_file,
@@ -61,7 +68,9 @@ class KIPController extends Controller
             ]);
         }
 
-        return redirect()->route('ppid-kip')->with(['success' => 'Data informasi berhasil disimpan!']);
+        Helpers::_recentAdd($id, 'mengupload file pada PPID informasi '.$request->jenis_informasi, 'kip');
+
+        return redirect()->route('ppid-kip.index')->with(['success' => 'Data informasi berhasil disimpan!']);
     }
 
     /**
@@ -110,6 +119,8 @@ class KIPController extends Controller
             ]);
         }
 
+        Helpers::_recentAdd($id, 'mengubah file pada PPID informasi '.$request->jenis_informasi.' menjadi', 'kip');
+
         return redirect()->route('ppid-kip.index')->with(['success' => 'Data informasi berhasil diubah!']);
     }
 
@@ -124,8 +135,12 @@ class KIPController extends Controller
         $kip = KIP::findOrFail($id);
 
         if ($kip->jenis_file == 'link') {
-            $kip->delete();
+            // $kip->delete();
+            $kip->update([
+                'deleted_at' => new DateTime()
+            ]);
         }
+        Helpers::_recentAdd($id, 'menghapus file pada PPID informasi '.$kip->jenis_informasi, 'kip');
 
         return redirect()->back()->with(['success' => 'Data berhasil dihapus!']);
     }

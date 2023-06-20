@@ -18,7 +18,7 @@ class AppsController extends Controller
     {
         $apps = Apps::orderBy('created_at', 'DESC')->get();
 
-        return view('admin.tools.apps.index', compact('apps'));
+        return view('admin.Tools.apps.index', compact('apps'));
     }
 
     /**
@@ -28,7 +28,7 @@ class AppsController extends Controller
      */
     public function create()
     {
-        return view('admin.tools.apps.add');
+        return view('admin.Tools.apps.add');
     }
 
     /**

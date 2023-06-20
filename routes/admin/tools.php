@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Tools\AddressController;
+use App\Http\Controllers\Admin\Tools\AppsController;
 use App\Http\Controllers\Admin\Tools\LinkController;
 use App\Http\Controllers\Admin\Tools\SocialController;
 use Illuminate\Support\Facades\Route;
