@@ -32,9 +32,14 @@
                                 </div>
                                 <div class="col-lg-3">
                                     <a href="{{ route('post-admin.create') }}" class="btn btn-outline-primary btn-md"
-                                        style="margin-top: 10px; margin-left: 80px;">
+                                        style="margin-top: 10px; margin-left: 40px;">
                                         <i class="bi bi-journal-plus"></i> Tambah Berita/Artikel
                                     </a>
+                                    <button data-bs-toggle="modal" data-bs-target="#CachePost" data-bs-tooltip="tooltip"
+                                        data-bs-placement="top" style="margin-top: 10px;" title="Lihat File Sampah" class="btn btn-danger btn-md">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                    @include('admin/post/addons/_cache')
                                 </div>
                             </div>
                             <table class="table table-hover" id="example">

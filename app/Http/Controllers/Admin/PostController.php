@@ -21,9 +21,14 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Posts::where('deleted_at', '=', NULL)->orderBy('created_at', 'DESC')->get();
+        $posts = Posts::where('deleted_at', '=', NULL)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+        $DeletedPosts = Posts::where('deleted_at', '!=', NULL)
+            ->orderBy('created_at', 'DESC')
+            ->get();
 
-        return view('admin.post.index', compact('posts'));
+        return view('admin.post.index', compact('posts', 'DeletedPosts'));
     }
 
     /**
@@ -53,8 +58,13 @@ class PostController extends Controller
 
         if (in_array($foto->getClientOriginalExtension(), $ext)) {
             if ($foto->getSize() <= 5000000) {
-                $foto->move('uploads/berita/', $filename);
-                $request->foto_berita = 'uploads/berita/' . $filename;
+                if ($request->posts_category_id == '1') {
+                    $foto->move('uploads/berita/', $filename);
+                    $request->foto_berita = 'uploads/berita/' . $filename;
+                } elseif ($request->posts_category_id == '2') {
+                    $foto->move('uploads/artikel/', $filename);
+                    $request->foto_berita = 'uploads/artikel/' . $filename;
+                }
             }
         }
         Posts::create([
@@ -70,9 +80,9 @@ class PostController extends Controller
             'created_at' => $request->date . ' ' . $request->time . ':' . date('s')
         ]);
 
-        Helpers::_recentAdd($id, 'membuat posting', 'post');
+        Helpers::_recentAdd($id, 'membuat Berita/Artikel', 'post');
 
-        return redirect()->route('post-admin.index')->with(['success' => 'Posting berhasil diupload!']);
+        return redirect()->route('post-admin.index')->with(['success' => 'Berita/Artikel berhasil diupload!']);
     }
 
     /**
@@ -109,8 +119,13 @@ class PostController extends Controller
             if (in_array($foto->getClientOriginalExtension(), $ext)) {
                 if ($foto->getSize() <= 5000000) {
                     unlink($posts->foto_berita);
-                    $foto->move('uploads/berita/', $filename);
-                    $request->foto_berita = 'uploads/berita/' . $filename;
+                    if ($request->posts_category_id == '1') {
+                        $foto->move('uploads/berita/', $filename);
+                        $request->foto_berita = 'uploads/berita/' . $filename;
+                    } elseif ($request->posts_category_id == '2') {
+                        $foto->move('uploads/artikel/', $filename);
+                        $request->foto_berita = 'uploads/artikel/' . $filename;
+                    }
                 }
             }
             $posts->update([
@@ -137,14 +152,26 @@ class PostController extends Controller
                 'caption' => $request->caption,
                 'created_at' => $request->date . ' ' . $request->time
             ]);
-            Helpers::_recentAdd($id, 'mengubah posting', 'post');
+            Helpers::_recentAdd($id, 'mengubah Berita/Artikel', 'post');
         }
 
-        return redirect()->route('post-admin.index')->with(['success' => 'Posting berhasil diupload!']);
+        return redirect()->route('post-admin.index')->with(['success' => 'Berita/Artikel berhasil diupload!']);
+    }
+
+    public function restore($id)
+    {
+        $post = Posts::findOrFail($id);
+        $post->update([
+            'deleted_at' => NULL
+        ]);
+
+        Helpers::_recentAdd($id, 'memulihkan berita/artikel yang dihapus', 'post');
+
+        return redirect()->route('post-admin.index')->with(['success' => 'Berita/Artikel berhasil dipulihkan!']);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from storage temporary.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -155,9 +182,50 @@ class PostController extends Controller
         $post->update([
             'deleted_at' => new DateTime()
         ]);
-        // unlink($post->foto_berita);
-        // $post->delete();
 
-        return redirect()->route('post-admin.index')->with(['success' => 'Postingan dihapus!']);
+        return redirect()->route('post-admin.index')->with(['success' => 'Berita/Artikel dipindahkan ke tong sampah!']);
+    }
+
+    /**
+     * Remove the specified resource from storage permanent.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        $post = Posts::findOrFail($id);
+        $recent = Recent::where('uuid_activity', '=', $id)->get();
+        foreach ($recent as $item) {
+            $item->delete();
+        }
+        unlink($post->foto_berita);
+        $post->delete();
+
+        return redirect()->route('post-admin.index')->with(['success' => 'Berita/Artikel dihapus permanen!']);
+    }
+
+    /**
+     * clear all data from reycicle.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function clear()
+    {
+        $posts = Posts::where('deleted_at', '!=', NULL)->get();
+        foreach ($posts as $post) {
+            $recent = Recent::where('uuid_activity', '=', $post->id)->first();
+            if ($recent != NULL) {
+                $recent->delete();
+            }
+            if ($post->foto_berita != NULL) {
+                unlink($post->foto_berita);
+            }
+            $post->delete();
+        }
+
+        return redirect()->route('post-admin.index')->with(['success' => 'File Sampah berhasil dibersihkan!']);
     }
 }
