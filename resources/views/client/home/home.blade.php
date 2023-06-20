@@ -92,7 +92,7 @@
                                                 </div>
                                                 <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
                                                     <a class="p-1 badge badge-info rounded-0"
-                                                        href="{{ route('post.post_cat', $carousel[0]->id) }}">{{ Helpers::PostCategory($carousel[0]->posts_category_id) }}</a>
+                                                        href="#">{{ Helpers::PostCategory($carousel[0]->posts_category_id) }}</a>
                                                     <!--title-->
                                                     <a
                                                         href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[0]->id . '/' . Helpers::randomString(100)) }}">
@@ -126,7 +126,7 @@
                                                 </div>
                                                 <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
                                                     <a class="p-1 badge badge-info rounded-0"
-                                                        href="{{ route('post.post_cat', $carousel[1]->id) }}">{{ Helpers::PostCategory($carousel[1]->posts_category_id) }}</a>
+                                                        href="#">{{ Helpers::PostCategory($carousel[1]->posts_category_id) }}</a>
                                                     <!--title-->
                                                     <a
                                                         href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[1]->id . '/' . Helpers::randomString(100)) }}">
@@ -160,7 +160,7 @@
                                                 </div>
                                                 <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
                                                     <a class="p-1 badge badge-info rounded-0"
-                                                        href="{{ route('post.post_cat', $carousel[2]->id) }}">{{ Helpers::PostCategory($carousel[2]->posts_category_id) }}</a>
+                                                        href="#">{{ Helpers::PostCategory($carousel[2]->posts_category_id) }}</a>
                                                     <!--title-->
                                                     <a
                                                         href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[2]->id . '/' . Helpers::randomString(100)) }}">
@@ -194,7 +194,7 @@
                                                 </div>
                                                 <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
                                                     <a class="p-1 badge badge-info rounded-0"
-                                                        href="{{ route('post.post_cat', $carousel[3]->id) }}">{{ Helpers::PostCategory($carousel[3]->posts_category_id) }}</a>
+                                                        href="#">{{ Helpers::PostCategory($carousel[3]->posts_category_id) }}</a>
                                                     <!--title-->
                                                     <a
                                                         href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[3]->id . '/' . Helpers::randomString(100)) }}">
@@ -249,7 +249,7 @@
                                                 <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
                                                     <!-- category -->
                                                     <a class="p-1 badge badge-primary rounded-0"
-                                                        href="{{ route('post.post_cat', Helpers::randomString(120) . '/' . Helpers::randomString(100) . '/' . $post->posts_category_id ?? 0) }}">{{ Helpers::PostCategory($post->posts_category_id) }}</a>
+                                                        href="#">{{ Helpers::PostCategory($post->posts_category_id) }}</a>
 
                                                     <!--title-->
                                                     <a
@@ -299,7 +299,7 @@
                                     <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
                                         <!-- category -->
                                         <a class="p-1 badge badge-primary rounded-0"
-                                            href="{{ route('post.post_cat', Helpers::randomString(120) . '/' . Helpers::randomString(100) . '/' . $artikel->posts_category_id ?? 0) }}">{{ Helpers::PostCategory($artikel->posts_category_id) }}</a>
+                                            href="#">{{ Helpers::PostCategory($artikel->posts_category_id) }}</a>
 
                                         <!--title-->
                                         <a
