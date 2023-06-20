@@ -36,7 +36,6 @@ Route::group(['prefix' => 'operator', 'middleware' => ['auth', 'operator']], fun
 
 Route::group(['prefix' => 'berita'], function () {
     Route::get('/', [HomeController::class, 'post'])->name('post.index');
-    Route::get('category/{token1?}/{token2?}/{id?}', [HomeController::class, 'PostCat'])->name('post.post_cat');
     Route::get('detail/{token1?}/{id?}/{token2?}', [HomeController::class, 'show'])->name('client.show');
     Route::get('tags/{tags?}', [HomeController::class, 'PostTag'])->name('post.tags');
     Route::get('like/{id}', [PostsController::class, 'like'])->name('post.like');

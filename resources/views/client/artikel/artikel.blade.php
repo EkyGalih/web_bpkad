@@ -22,22 +22,20 @@
             <div class="portfolio-details" style="margin: 2%;">
                 <div class="row">
                     <div class="col-2">
-                        @php
-                            $cat = Helpers::getPostCategory();
-                        @endphp
                         <ul class="list-group">
                             <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
                                 <i class="bx bx-border-all"></i> Kategori
                             </button>
-                            @foreach ($cat as $cat)
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <a
-                                        href="{{ route('post.post_cat', Helpers::randomString(120) . '/' . Helpers::randomString(100) . '/' . $cat->id) }}">{{ $cat->category }}
-                                    </a>
-                                    <span
-                                        class="badge badge-primary badge-pill">({{ Helpers::countCategoryPost($cat->id) }})</span>
-                                </li>
-                            @endforeach
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <a href="{{ route('post.index') }}"> Berita
+                                </a>
+                                <span class="badge badge-primary badge-pill">({{ Helpers::countCategoryPost('1') }})</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <a href="{{ route('artikel.show') }}"> Artikel
+                                </a>
+                                <span class="badge badge-primary badge-pill">({{ Helpers::countCategoryPost('2') }})</span>
+                            </li>
                         </ul>
                         <br /><br />
                         @php

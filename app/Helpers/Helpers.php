@@ -116,9 +116,9 @@ class Helpers
             ->get();
     }
 
-    public static function countCategoryPost($cat_id)
+    public static function countCategoryPost($cat)
     {
-        return Posts::where('posts_category_id', '=', $cat_id)
+        return Posts::where('posts_category_id', '=', $cat)
             ->count();
     }
 

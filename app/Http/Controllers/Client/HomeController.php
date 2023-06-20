@@ -114,16 +114,6 @@ class HomeController extends Controller
         return view('client.posts.posts', compact('posts'));
     }
 
-    public function PostCat($token1, $token2, $id)
-    {
-        $posts = Posts::where('posts_category_id', '=', $id)
-            ->orderBy('created_at', 'DESC')
-            ->where('deleted_at', '=', NULL)
-            ->paginate(12);
-
-        return view('client.posts.posts', compact('posts'));
-    }
-
     public function PostTag($tags)
     {
         $posts = Posts::where('tags', 'LIKE', '%' . $tags . '%')
