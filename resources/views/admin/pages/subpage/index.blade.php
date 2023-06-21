@@ -30,16 +30,23 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-10">
+                                <div class="col-lg-9">
                                     <h5 class="card-title">Data Sub Halaman</h5>
                                 </div>
-                                <div class="col-lg-2">
+                                <div class="col-lg-3">
                                     <a href="{{ route('subpages-admin.create') }}" class="btn btn-outline-primary btn-md"
-                                        style="margin-top: 10px;">
+                                        style="margin-top: 10px; margin-left: 120px;">
                                         <i class="bi bi-journal-plus"></i> Tambah
                                     </a>
+                                    <button type="button" class="btn btn-danger btn-md" data-bs-toggle="modal"
+                                        data-bs-target="#CacheSubPages" data-bs-tooltip="tooltip" data-bs-placement="top"
+                                        title="File Sampah" style="margin-top: 10px;">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                    @include('admin/pages/subpage/addons/_cache')
                                 </div>
                             </div>
+                            <div class="table-responsive">
                             <table class="table table-hover" id="example">
                                 <thead>
                                     <tr>
@@ -104,6 +111,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            </div>
                         </div>
                     </div>
                 </div>

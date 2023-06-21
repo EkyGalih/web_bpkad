@@ -26,6 +26,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         Route::get('restore/{id}', [SubPagesController::class, 'restore'])->name('subpages-admin.restore');
         Route::get('destroy/{id}', [SubPagesController::class, 'destroy'])->name('subpages-admin.destroy');
         Route::get('delete/{id}', [SubPagesController::class, 'delete'])->name('subpages-admin.delete');
-        Route::get('clear', [SubPagesController::class, 'delete'])->name('subpages-admin.clear');
+        Route::get('clear', [SubPagesController::class, 'clear'])->name('subpages-admin.clear');
     });
 });

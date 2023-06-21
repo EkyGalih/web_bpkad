@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Pages;
+use App\Models\Recent;
 use App\Models\SubPages;
 use DateTime;
 use Illuminate\Http\Request;
@@ -20,9 +21,14 @@ class SubPagesController extends Controller
      */
     public function index()
     {
-        $subpages = SubPages::where('deleted_at', '=', NULL)->orderBy('created_at', 'DESC')->get();
+        $subpages = SubPages::where('deleted_at', '=', NULL)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+        $DeletedSubPages = SubPages::where('deleted_at', '!=', NULL)
+            ->orderBy('created_at', 'DESC')
+            ->get();
 
-        return view('admin.pages.subpage.index', compact('subpages'));
+        return view('admin.pages.subpage.index', compact('subpages', 'DeletedSubPages'));
     }
 
     /**
@@ -84,6 +90,7 @@ class SubPagesController extends Controller
                     'sub_pages_id' => $request->sub_pages_id
                 ]);
             }
+            Helpers::_recentAdd($id, 'menambahkan sub halaman', 'sub_pages');
             return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Pages berhasil ditambahkan!']);
         } elseif ($request->jenis_link == 'link') {
             SubPages::create([
@@ -95,21 +102,9 @@ class SubPagesController extends Controller
                 'create_by_id' => Auth::user()->id,
                 'sub_pages_id' => $request->sub_pages_id
             ]);
+            Helpers::_recentAdd($id, 'menambahkan sub halaman', 'sub_pages');
             return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Pages berhasil ditambahkan!']);
         }
-
-        Helpers::_recentAdd($id, 'menambahkan sub halaman', 'sub_pages');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -150,6 +145,18 @@ class SubPagesController extends Controller
         return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Pages berhasil diubah!']);
     }
 
+    public function restore($id)
+    {
+        $subpage = SubPages::findOrFail($id);
+        $subpage->update([
+            'deleted_at' => NULL
+        ]);
+
+        Helpers::_recentAdd($id, 'mengembalikan sub halaman yang dihapus', 'sub_pages');
+
+        return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Halaman berhasil dipulihkan1!']);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -169,5 +176,44 @@ class SubPagesController extends Controller
         Helpers::_recentAdd($id, 'menghapus halaman', 'sub_pages');
 
         return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Pages berhasil dihapus!']);
+    }
+
+    /**
+     * Remove the specified resource from storage permanent.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        $subpages = SubPages::findOrFail($id);
+        $recent = Recent::where('uuid_activity', '=', $id)->get();
+        foreach ($recent as $item) {
+            $item->delete();
+        }
+        $subpages->delete();
+
+        return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Halaman dihapus permanen!']);
+    }
+
+    /**
+     * clear all data from reycicle.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function clear()
+    {
+        $subpages = SubPages::where('deleted_at', '!=', NULL)->get();
+        foreach ($subpages as $spage) {
+            $recent = Recent::where('uuid_activity', '=', $spage->id)->first();
+            if ($recent != NULL) {
+                $recent->delete();
+            }
+            $spage->delete();
+        }
+
+        return redirect()->route('subpages-admin.index')->with(['success' => 'Tong Sampah dibersihkan!']);
     }
 }
