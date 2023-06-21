@@ -6,7 +6,7 @@ use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use App\Models\Pages;
-use App\Models\PagesType;
+use App\Models\Recent;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,9 +21,14 @@ class PagesController extends Controller
      */
     public function index()
     {
-        $pages = Pages::where('deleted_at', '=', NULL)->orderBy('created_at', 'DESC')->get();
+        $pages = Pages::where('deleted_at', '=', NULL)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+        $DeletedPages = Pages::where('deleted_at', '!=', NULL)
+            ->orderBy('created_at', 'DESC')
+            ->get();
 
-        return view('admin.pages.page.index', compact('pages'));
+        return view('admin.pages.page.index', compact('pages', 'DeletedPages'));
     }
 
     /**
@@ -97,8 +102,6 @@ class PagesController extends Controller
         $menus = Menu::orderBy('name', 'ASC')->get();
         $pages = Pages::findOrFail($id);
 
-        Helpers::_recentAdd($id, 'memperbaharui halaman', 'pages');
-
         return view('admin.pages.page.edit', compact('pages', 'menus'));
     }
 
@@ -121,7 +124,28 @@ class PagesController extends Controller
             'menu_id' => $request->menu_id
         ]);
 
+        Helpers::_recentAdd($id, 'memperbaharui halaman', 'pages');
+
         return redirect()->route('pages-admin.index')->with(['success' => 'Pages berhasil diubah!']);
+    }
+
+    /**
+     * Restore  the files in the reycicle.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function restore($id)
+    {
+        $page = Pages::findOrFail($id);
+        $page->update([
+            'deleted_at' => NULL
+        ]);
+
+        Helpers::_recentAdd($id, 'mengembalikan halaman yang dihapus', 'pages');
+
+        return redirect()->route('pages-admin.index')->with(['success' => 'Halaman berhasil dipulihkan1!']);
     }
 
     /**
@@ -139,6 +163,45 @@ class PagesController extends Controller
 
         Helpers::_recentAdd($id, 'menghapus halaman', 'pages');
 
-        return redirect()->route('pages-admin.index')->with(['success' => 'Pages berhasil dihapus!']);
+        return redirect()->route('pages-admin.index')->with(['success' => 'Halaman ditaruh ke tong sampah!']);
+    }
+
+    /**
+     * Remove the specified resource from storage permanent.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        $pages = Pages::findOrFail($id);
+        $recent = Recent::where('uuid_activity', '=', $id)->get();
+        foreach ($recent as $item) {
+            $item->delete();
+        }
+        $pages->delete();
+
+        return redirect()->route('pages-admin.index')->with(['success' => 'Halaman dihapus permanen!']);
+    }
+
+    /**
+     * clear all data from reycicle.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function clear()
+    {
+        $pages = Pages::where('deleted_at', '!=', NULL)->get();
+        foreach ($pages as $page) {
+            $recent = Recent::where('uuid_activity', '=', $page->id)->first();
+            if ($recent != NULL) {
+                $recent->delete();
+            }
+            $page->delete();
+        }
+
+        return redirect()->route('pages-admin.index')->with(['success' => 'Tong Sampah dibersihkan!']);
     }
 }
