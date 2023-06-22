@@ -30,14 +30,20 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-10">
+                                <div class="col-sm-9">
                                     <h5 class="card-title">Slider</h5>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     <a href="{{ route('slider.create') }}" class="btn btn-outline-primary btn-md"
-                                        style="margin-top: 10px;">
+                                        style="margin-top: 10px; margin-left: 80px;">
                                         <i class="bi bi-plus-square"></i> Tambah Data
                                     </a>
+                                    <button type="button" class="btn btn-danger btn-md" data-bs-toggle="modal"
+                                        data-bs-target="#CacheSlider" data-bs-tooltip="tooltip" data-bs-placement="top"
+                                        title="File Sampah" style="margin-top: 10px;">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                    @include('admin/slider/addons/_cache')
                                 </div>
                             </div>
                             <table class="table table-hover slider">
@@ -56,7 +62,7 @@
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
                                             <td>{{ $item->title }}</td>
-                                            <td>{{ $item->keterangan }}</td>
+                                            <td style="width: 50%;">{{ $item->keterangan }}</td>
                                             <td>{{ $item->Slide->nama_slide }}</td>
                                             <td>{{ Helpers::GetDate($item->created_at) ?? '-' }}</td>
                                             <td>
@@ -88,6 +94,7 @@
     <script>
         $(document).ready(function() {
             $('.slider').DataTable();
+            $('.cache').DataTable();
         });
     </script>
 @endsection

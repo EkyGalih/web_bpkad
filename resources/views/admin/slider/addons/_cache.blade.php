@@ -1,4 +1,4 @@
-<div class="modal fade" id="CacheSubPages" tabindex="-1">
+<div class="modal fade" id="CacheSlider" tabindex="-1">
     <div class="modal-lg modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -6,34 +6,32 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <table class="table table-hover" id="example">
+                <table class="table table-hover cache">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Judul</th>
-                            <th scope="col">Tipe Halaman</th>
-                            <th scope="col">Dibuat Oleh</th>
+                            <th scope="col">Nama/Katergori</th>
+                            <th scope="col">Keterangan</th>
+                            <th scope="col">Jenis Slide</th>
                             <th scope="col">Hapus Pada</th>
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($DeletedSubPages as $del)
+                        @foreach ($DeletedSlider as $del)
                             <tr>
-                                <th scope="row">{{ $loop->iteration }}</th>
+                                <th style="width: 10px;">{{ $loop->iteration }}</th>
                                 <td>{{ $del->title }}</td>
+                                <td style="width: 35%;">{{ $del->keterangan }}</td>
+                                <td>{{ $del->Slide->nama_slide }}</td>
+                                <td>{{ Helpers::GetDate($del->deleted_at) ?? '-' }}</td>
                                 <td>
-                                    {{ Helpers::GetTypePage($del->pages_type_id) }}
-                                </td>
-                                <td>{{ Helpers::GetUser($del->create_by_id) }}</td>
-                                <td>{{ Helpers::GetDate($del->deleted_at) }}</td>
-                                <td style="width: 5%;">
-                                    <a href="{{ route('subpages-admin.restore', $del->id) }}" data-bs-tooltip="tooltip"
-                                        data-bs-placement="top" title="Pulihkan" class="btn btn-success btn-md">
+                                    <a href="{{ route('slider.restore', $del->id) }}" class="btn btn-info btn-sm"
+                                        data-bs-tooltip="tooltip" data-bs-placement="top" title="Pulihkan Slide">
                                         <i class="bi bi-arrow-counterclockwise"></i>
                                     </a>
-                                    <a href="{{ route('subpages-admin.delete', $del->id) }}" data-bs-tooltip="tooltip"
-                                        data-bs-placement="top" title="Hapus Permanen" class="btn btn-danger btn-md">
+                                    <a href="{{ route('slider.delete', $del->id) }}" class="btn btn-danger btn-sm"
+                                        data-bs-tooltip="tooltip" data-bs-placement="top" title="Hapus Permanen Slide">
                                         <i class="bi bi-trash"></i>
                                     </a>
                                 </td>
@@ -45,7 +43,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i>
                     Close</button>
-                <a href="{{ route('subpages-admin.clear') }}" class="btn btn-success">
+                <a href="{{ route('slider.clear') }}" class="btn btn-success">
                     <i class="bi bi-arrow-clockwise"></i> Bersihkan
                 </a>
             </div>
