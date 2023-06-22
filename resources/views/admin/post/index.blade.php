@@ -42,7 +42,7 @@
                                     @include('admin/post/addons/_cache')
                                 </div>
                             </div>
-                            <table class="table table-hover" id="example">
+                            <table class="table table-hover post">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -58,7 +58,7 @@
                                     @foreach ($posts as $post)
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
-                                            <td>{{ $post->title }}</td>
+                                            <td style="width: 50%;">{{ $post->title }}</td>
                                             <td>
                                                 <button
                                                     class="btn btn-sm btn-{{ $post->posts_category_id == '1' ? 'success' : 'primary' }}">
@@ -125,7 +125,7 @@
     <script src="{{ asset('server/vendor/DataTables/DataTables-1.13.1/js/jquery.dataTables.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('#example').DataTable();
+            $('.post').DataTable();
         });
     </script>
 @endsection

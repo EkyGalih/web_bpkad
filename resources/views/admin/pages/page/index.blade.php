@@ -47,7 +47,7 @@
                                     @include('admin/pages/page/addons/_cache')
                                 </div>
                             </div>
-                            <table class="table table-hover" id="example">
+                            <table class="table table-hover page">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -123,7 +123,7 @@
     <script src="{{ asset('server/vendor/DataTables/DataTables-1.13.1/js/jquery.dataTables.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('#example').DataTable();
+            $('.page').DataTable();
         });
     </script>
 @endsection

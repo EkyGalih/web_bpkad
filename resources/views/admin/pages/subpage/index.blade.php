@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                             <div class="table-responsive">
-                            <table class="table table-hover" id="example">
+                            <table class="table table-hover subpage">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -124,7 +124,7 @@
     <script src="{{ asset('server/vendor/DataTables/DataTables-1.13.1/js/jquery.dataTables.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('#example').DataTable();
+            $('.subpage').DataTable();
         });
     </script>
 @endsection
