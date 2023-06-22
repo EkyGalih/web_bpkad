@@ -46,7 +46,6 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Nama Pegawai</th>
                                         <th scope="col">Jabatan</th>
-                                        <th scope="col">Nama Jabatan</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
@@ -55,7 +54,6 @@
                                         <tr>
                                             <td scope="row">{{ $loop->iteration }}</td>
                                             <td>{{ $item->Pegawai->name }}</td>
-                                            <td>{{ $item->jabatan }}</td>
                                             <td>{{ $item->nama_jabatan }}</td>
                                             <td>
                                                 <a href="{{ route('ppid-struktur.edit', $item->ppid_id) }}"
