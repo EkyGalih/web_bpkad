@@ -57,21 +57,24 @@
                                     @foreach ($kip as $item)
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
-                                            <td>{{ $item->nama_informasi }}</td>
+                                            <td style="width: 35%;">{{ $item->nama_informasi }}</td>
                                             <td>
                                                 @if ($item->jenis_informasi == 'berkala')
-                                                    <span class="badge bg-info"><i class="bi bi-arrow-repeat"></i></span>
-                                                    {{ ucfirst($item->jenis_informasi) }}
+                                                    <span class="badge bg-info"><i class="bi bi-arrow-repeat"></i>
+                                                        {{ ucfirst($item->jenis_informasi) }}
+                                                    </span>
                                                 @elseif ($item->jenis_informasi == 'dikecualikan')
-                                                    <span class="badge bg-danger"><i class="bi bi-eye-slash"></i></span>
-                                                    {{ ucfirst($item->jenis_informasi) }}
+                                                    <span class="badge bg-danger"><i class="bi bi-eye-slash"></i>
+                                                        {{ ucfirst($item->jenis_informasi) }}
+                                                    </span>
                                                 @elseif ($item->jenis_informasi == 'setiap saat')
-                                                    <span class="badge bg-warning"><i class="bi bi-stars"></i></span>
-                                                    {{ ucfirst($item->jenis_informasi) }}
+                                                    <span class="badge bg-warning"><i class="bi bi-stars"></i>
+                                                        {{ ucfirst($item->jenis_informasi) }}
+                                                    </span>
                                                 @elseif ($item->jenis_informasi == 'serta merta')
-                                                    <span class="badge bg-secondary"><i
-                                                            class="bi bi-info-circle"></i></span>
-                                                    {{ ucfirst($item->jenis_informasi) }}
+                                                    <span class="badge bg-secondary"><i class="bi bi-info-circle"></i>
+                                                        {{ ucfirst($item->jenis_informasi) }}
+                                                    </span>
                                                 @endif
                                             </td>
                                             <td><span
