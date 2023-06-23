@@ -68,15 +68,15 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Caption</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="caption" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Kontent</label>
                                     <div class="col-sm-10">
                                         <textarea name="content" class="tinymce-editor"></textarea><!-- End TinyMCE Editor -->
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputText" class="col-sm-2 col-form-label">Caption</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="caption" class="form-control">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -85,7 +85,7 @@
                                         <input id="input-tags" autocomplete="off" placeholder="Tags" name="tags">
                                     </div>
                                 </div>
-                                <div class="row mb-3">
+                                {{-- <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Waktu Upload</label>
                                     <div class="col-sm-2">
                                         <input id="date" type="date" name="date"
@@ -101,7 +101,7 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="row mb-3">
                                     <div class="col-sm-12">
                                         <a class="btn btn-outline-secondary btn-md" href="{{ route('post-admin.index') }}"

@@ -60,16 +60,16 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
+                                    <label for="inputText" class="col-sm-2 col-form-label">Kontent</label>
+                                    <div class="col-sm-10">
+                                        <textarea name="content" class="tinymce-editor">{{ $posts->content }}</textarea><!-- End TinyMCE Editor -->
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Caption</label>
                                     <div class="col-sm-10">
                                         <input type="text" name="caption" class="form-control"
                                             value="{{ $posts->caption }}">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Kontent</label>
-                                    <div class="col-sm-10">
-                                        <textarea name="content" class="tinymce-editor">{{ $posts->content }}</textarea><!-- End TinyMCE Editor -->
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -92,7 +92,7 @@
                                             value="{{ $posts->tags }}">
                                     </div>
                                 </div>
-                                <div class="row mb-3">
+                                {{-- <div class="row mb-3">
                                     @php $created_at = explode(" ", $posts->created_at) @endphp
                                     <label for="inputText" class="col-sm-2 col-form-label">Waktu Upload</label>
                                     <div class="col-sm-2">
@@ -109,7 +109,7 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="row mb-4">
                                     <div class="col-sm-12">
                                         <a class="btn btn-dark btn-md" href="{{ route('post-admin.index') }}"

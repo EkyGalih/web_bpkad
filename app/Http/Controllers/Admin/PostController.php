@@ -76,8 +76,8 @@ class PostController extends Controller
             'users_id' => Auth::user()->id,
             'caption' => $request->caption,
             'posts_category_id' => $request->posts_category_id,
-            'tags' => $request->tags,
-            'created_at' => $request->date . ' ' . $request->time . ':' . date('s')
+            'tags' => $request->tags
+            // 'created_at' => $request->date . ' ' . $request->time . ':' . date('s')
         ]);
 
         Helpers::_recentAdd($id, 'membuat Berita/Artikel', 'post');
@@ -136,8 +136,8 @@ class PostController extends Controller
                 'users_id' => Auth::user()->id,
                 'posts_category_id' => $request->posts_category_id,
                 'tags' => $request->tags,
-                'caption' => $request->caption,
-                'created_at' => $request->date . ' ' . $request->time
+                'caption' => $request->caption
+                // 'created_at' => $request->date . ' ' . $request->time
             ]);
             Helpers::_recentAdd($id, 'mengubah posting', 'post');
         } elseif ($foto == null) {
@@ -149,8 +149,8 @@ class PostController extends Controller
                 'users_id' => Auth::user()->id,
                 'posts_category_id' => $request->posts_category_id,
                 'tags' => $request->tags,
-                'caption' => $request->caption,
-                'created_at' => $request->date . ' ' . $request->time
+                'caption' => $request->caption
+                // 'created_at' => $request->date . ' ' . $request->time
             ]);
             Helpers::_recentAdd($id, 'mengubah Berita/Artikel', 'post');
         }
