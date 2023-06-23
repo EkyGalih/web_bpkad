@@ -37,7 +37,7 @@
                                         <i class="bi bi-arrow-counterclockwise"></i>
                                     </a>
                                     <a href="{{ route('post-admin.delete', $del->id) }}" data-bs-tooltip="tooltip" data-bs-placement="top" title="Hapus Permanen" class="btn btn-danger btn-md">
-                                        <i class="bi bi-trash"></i>
+                                        <i class="bi bi-erase-fill"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -49,8 +49,8 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
                         class="bi bi-x-circle"></i>
                     Close</button>
-                <a href="{{ route('post-admin.clear') }}" class="btn btn-success">
-                    <i class="bi bi-arrow-clockwise"></i> Bersihkan
+                <a href="{{ route('post-admin.clear') }}" class="btn btn-danger">
+                    <i class="bi bi-trash3-fill"></i> Bersihkan
                 </a>
             </div>
         </div>

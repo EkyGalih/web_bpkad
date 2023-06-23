@@ -20,10 +20,13 @@ class KIPController extends Controller
     public function index()
     {
         $kip = KIP::orderBy('created_at', 'DESC')
-        ->where('deleted_at', '=', NULL)
-        ->get();
+            ->where('deleted_at', '=', NULL)
+            ->get();
+        $DeletedKIP = KIP::orderBy('created_at', 'DESC')
+            ->where('deleted_at', '!=', NULL)
+            ->get();
 
-        return view('admin.ppid.kip.index', compact('kip'));
+        return view('admin.ppid.kip.index', compact('kip', 'DeletedKIP'));
     }
 
     /**
@@ -68,7 +71,7 @@ class KIPController extends Controller
             ]);
         }
 
-        Helpers::_recentAdd($id, 'mengupload file pada PPID informasi '.$request->jenis_informasi, 'kip');
+        Helpers::_recentAdd($id, 'mengupload file pada PPID informasi ' . $request->jenis_informasi, 'kip');
 
         return redirect()->route('ppid-kip.index')->with(['success' => 'Data informasi berhasil disimpan!']);
     }
@@ -119,7 +122,7 @@ class KIPController extends Controller
             ]);
         }
 
-        Helpers::_recentAdd($id, 'mengubah file pada PPID informasi '.$request->jenis_informasi.' menjadi', 'kip');
+        Helpers::_recentAdd($id, 'mengubah file pada PPID informasi ' . $request->jenis_informasi . ' menjadi', 'kip');
 
         return redirect()->route('ppid-kip.index')->with(['success' => 'Data informasi berhasil diubah!']);
     }
@@ -140,7 +143,7 @@ class KIPController extends Controller
                 'deleted_at' => new DateTime()
             ]);
         }
-        Helpers::_recentAdd($id, 'menghapus file pada PPID informasi '.$kip->jenis_informasi, 'kip');
+        Helpers::_recentAdd($id, 'menghapus file pada PPID informasi ' . $kip->jenis_informasi, 'kip');
 
         return redirect()->back()->with(['success' => 'Data berhasil dihapus!']);
     }

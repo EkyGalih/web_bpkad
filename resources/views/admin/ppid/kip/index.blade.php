@@ -38,6 +38,12 @@
                                         style="margin-top: 10px;">
                                         <i class="bi bi-plus-square"></i> Tambah Data
                                     </a>
+                                    <button data-bs-toggle="modal" data-bs-target="#CacheKIP" data-bs-tooltip="tooltip"
+                                        data-bs-placement="top" style="margin-top: 10px;" title="File Sampah"
+                                        class="btn btn-danger btn-md">
+                                        <i class="bi bi-trash2"></i>
+                                    </button>
+                                    @include('admin/ppid/kip/addons/_cache')
                                 </div>
                             </div>
                             <table class="table table-hover" id="example">
@@ -88,12 +94,14 @@
                                             </td>
                                             <td>
                                                 <a href="{{ route('ppid-kip.edit', $item->id) }}"
-                                                    class="btn btn-warning btn-md">
+                                                    class="btn btn-secondary btn-md" data-bs-tooltip="tooltip"
+                                                    data-bs-placement="top" title="Ubah Berkas">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
-                                                <button class="btn btn-danger btn-md" data-bs-toggle="modal"
+                                                <button class="btn btn-warning btn-md" data-bs-toggle="modal"
+                                                    data-bs-tooltip="tooltip" data-bs-placement="top" title="Hapus Berkas"
                                                     data-bs-target="#DeletePost{{ $loop->iteration }}">
-                                                    <i class="bi bi-trash"></i>
+                                                    <i class="bi bi-recycle"></i>
                                                 </button>
 
                                                 @include('admin/ppid/kip/delete')

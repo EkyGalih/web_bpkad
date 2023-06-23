@@ -27,17 +27,18 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-9">
+                                <div class="col-lg-10">
                                     <h5 class="card-title">Berita/Artikel</h5>
                                 </div>
-                                <div class="col-lg-3">
+                                <div class="col-lg-2">
                                     <a href="{{ route('post-admin.create') }}" class="btn btn-outline-primary btn-md"
-                                        style="margin-top: 10px; margin-left: 40px;">
-                                        <i class="bi bi-journal-plus"></i> Tambah Berita/Artikel
+                                        style="margin-top: 10px; margin-left: 30px;">
+                                        <i class="bi bi-journal-plus"></i> Tambah
                                     </a>
                                     <button data-bs-toggle="modal" data-bs-target="#CachePost" data-bs-tooltip="tooltip"
-                                        data-bs-placement="top" style="margin-top: 10px;" title="Lihat File Sampah" class="btn btn-danger btn-md">
-                                        <i class="bi bi-trash"></i>
+                                        data-bs-placement="top" style="margin-top: 10px;" title="Tong Sampah"
+                                        class="btn btn-danger btn-md">
+                                        <i class="bi bi-trash2"></i>
                                     </button>
                                     @include('admin/post/addons/_cache')
                                 </div>
@@ -73,41 +74,16 @@
                                             </td>
                                             <td>
                                                 <a href="{{ route('post-admin.edit', $post->id) }}"
-                                                    class="btn btn-warning btn-md">
+                                                    class="btn btn-secondary btn-md" data-bs-tooltip="tooltip"
+                                                    data-bs-placement="top" title="Ubah Berkas">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
-                                                <button class="btn btn-danger btn-md" data-bs-toggle="modal"
+                                                <button class="btn btn-warning btn-md" data-bs-toggle="modal"
+                                                    data-bs-tooltip="tooltip" data-bs-placement="top" title="Hapus Berkas"
                                                     data-bs-target="#DeletePost{{ $loop->iteration }}">
-                                                    <i class="bi bi-trash"></i>
+                                                    <i class="bi bi-recycle"></i>
                                                 </button>
-
-                                                <div class="modal fade" id="DeletePost{{ $loop->iteration }}"
-                                                    tabindex="-1">
-                                                    <div class="modal-dialog modal-dialog-centered">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title"><i
-                                                                        class="bi bi-exclamation-octagon-fill"></i> Hapus
-                                                                    Postingan</h5>
-                                                                <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <p>Postingan <strong><u>{{ $post->title }}</u></strong>
-                                                                    akan dihapus.<br /> Anda Yakin?</p>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-outline-secondary"
-                                                                    data-bs-dismiss="modal"><i class="bi bi-x-circle"></i>
-                                                                    Tidak</button>
-                                                                <a href="{{ route('post-admin.destroy', $post->id) }}"
-                                                                    class="btn btn-outline-danger">
-                                                                    <i class="bi bi-check-circle"></i> Ya
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                @include('admin/post/addons/_delete')
                                             </td>
                                         </tr>
                                     @endforeach
