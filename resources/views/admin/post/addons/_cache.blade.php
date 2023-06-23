@@ -37,7 +37,7 @@
                                         <i class="bi bi-arrow-counterclockwise"></i>
                                     </a>
                                     <a href="{{ route('post-admin.delete', $del->id) }}" data-bs-tooltip="tooltip" data-bs-placement="top" title="Hapus Permanen" class="btn btn-danger btn-md">
-                                        <i class="bi bi-erase-fill"></i>
+                                        <i class="bi bi-eraser-fill"></i>
                                     </a>
                                 </td>
                             </tr>

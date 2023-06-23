@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <table class="table table-hover" id="example">
+                <table class="table table-hover recycle">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -34,7 +34,7 @@
                                     </a>
                                     <a href="{{ route('pages-admin.delete', $del->id) }}" data-bs-tooltip="tooltip"
                                         data-bs-placement="top" title="Hapus Permanen" class="btn btn-danger btn-md">
-                                        <i class="bi bi-trash"></i>
+                                        <i class="bi bi-eraser-fill"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -43,10 +43,10 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i>
                     Close</button>
-                <a href="{{ route('post-admin.clear') }}" class="btn btn-success">
-                    <i class="bi bi-arrow-clockwise"></i> Bersihkan
+                <a href="{{ route('post-admin.clear') }}" class="btn btn-outline-danger">
+                    <i class="bi bi-trash3-fill"></i> Bersihkan
                 </a>
             </div>
         </div>
