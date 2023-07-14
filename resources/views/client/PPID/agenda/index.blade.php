@@ -1,5 +1,5 @@
 @extends('client.index')
-@section('title', 'Semua Berita |')
+@section('title', 'Agenda Pimpinan |')
 @section('menu-berita', 'active')
 @section('additional-css')
     <style>
