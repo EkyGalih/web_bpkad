@@ -46,7 +46,7 @@
                                     @include('admin/ppid/kip/addons/_cache')
                                 </div>
                             </div>
-                            <table class="table table-hover" id="example">
+                            <table class="table table-hover datatables">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -120,9 +120,4 @@
 @section('additional-js')
     <script type="text/javascript" src="{{ asset('server/js/jquery-5.3.1.js') }}"></script>
     <script src="{{ asset('server/vendor/DataTables/DataTables-1.13.1/js/jquery.dataTables.min.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            $('#example').DataTable();
-        });
-    </script>
 @endsection
