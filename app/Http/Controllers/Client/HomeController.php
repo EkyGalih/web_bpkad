@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\DaftarApp;
 use App\Models\GaleryVideo;
+use App\Models\KIP;
 use App\Models\Pages;
 use App\Models\Posts;
 use App\Models\Slideitem;
@@ -79,7 +80,16 @@ class HomeController extends Controller
         // slider
         $slides = Slideitem::where('slide_id', '=', '2')->where('deleted_at', '=', NULL)->get();
         $slidesInformasi = Slideitem::where('slide_id', '=', '1')->where('deleted_at', '=', NULL)->orderBy('created_at', 'DESC')->get();
-        return view('client.home.home', compact('new_posts', 'artikels', 'carousel', 'old_posts', 'videos', 'apps', 'slides', 'slidesInformasi', 'banners'));
+
+        $agenda = Posts::where('agenda_kaban', '=', 'ya')
+            ->orderBy('created_at', 'DESC')
+            ->limit(1)
+            ->get();
+        $informasi = KIP::where('jenis_informasi', '=', 'berkala')
+            ->where('created_at', 'LIKE', date('Y') . '%')
+            ->limit(5)
+            ->get();
+        return view('client.home.home', compact('new_posts', 'artikels', 'carousel', 'old_posts', 'videos', 'apps', 'slides', 'slidesInformasi', 'banners', 'agenda', 'informasi'));
     }
 
     /**

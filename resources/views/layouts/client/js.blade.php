@@ -11,6 +11,9 @@
 <script src="{{asset('client/assets/js/main.js')}}"></script>
 @yield('additional-js')
 <script>
+    $(function() {
+         $("[data-bs-tooltip='tooltip']").tooltip();
+     });
     // fungsi initialize untuk mempersiapkan peta
     function initialize() {
          const lat = parseFloat(-8.5830920000);
