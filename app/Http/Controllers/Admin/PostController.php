@@ -139,8 +139,8 @@ class PostController extends Controller
                 'posts_category_id' => $request->posts_category_id,
                 'tags' => $request->tags,
                 'caption' => $request->caption,
-                'agenda_kaban' => $request->agenda_kaban
-                // 'created_at' => $request->date . ' ' . $request->time
+                'agenda_kaban' => $request->agenda_kaban,
+                'created_at' => $request->date . ' ' . $request->time
             ]);
             Helpers::_recentAdd($id, 'mengubah posting', 'post');
         } elseif ($foto == null) {
@@ -153,8 +153,8 @@ class PostController extends Controller
                 'posts_category_id' => $request->posts_category_id,
                 'tags' => $request->tags,
                 'caption' => $request->caption,
-                'agenda_kaban' => $request->agenda_kaban
-                // 'created_at' => $request->date . ' ' . $request->time
+                'agenda_kaban' => $request->agenda_kaban,
+                'created_at' => $request->date . ' ' . $request->time
             ]);
             Helpers::_recentAdd($id, 'mengubah Berita/Artikel', 'post');
         }
@@ -177,11 +177,18 @@ class PostController extends Controller
     public function agenda($id)
     {
         $agenda = Posts::findOrFail($id);
-        $agenda->update([
-            'agenda_kaban'    => 'ya'
-        ]);
+        if ($agenda->agenda_kaban == 'ya') {
+            $agenda->update([
+                'agenda_kaban'    => 'tidak'
+            ]);
+            return redirect()->route('post-admin.index')->with(['success' => 'Agenda kaban berhasil ditambahkan!']);
+        } else {
+            $agenda->update([
+                'agenda_kaban'    => 'ya'
+            ]);
+            return redirect()->route('post-admin.index')->with(['success' => 'Agenda kaban berhasil dihapus!']);
+        }
 
-        return redirect()->route('post-admin.index')->with(['success' => 'Agenda kaban berhasil ditambahkan!']);
     }
 
     /**

@@ -84,8 +84,8 @@
                                                     <i class="bi bi-recycle"></i>
                                                 </button>
                                                 @include('admin/post/addons/_delete')
-                                                <a href="{{ route('post-admin.agenda', $post->id) }}" class="btn btn-info btn-md" data-bs-tooltip="tooltip"
-                                                    data-bs-placement="top" title="Jadikan Agenda Kaban">
+                                                <a href="{{ route('post-admin.agenda', $post->id) }}" class="btn btn-{{ $post->agenda_kaban == 'ya' ? 'danger' : 'success' }} btn-md" data-bs-tooltip="tooltip"
+                                                    data-bs-placement="top" title="{{ $post->agenda_kaban == 'ya' ? 'Hapus agenda kaban' : 'Jadikan Agenda Kaban' }}">
                                                 <i class="bi bi-calendar"></i>
                                                 </a>
                                             </td>
