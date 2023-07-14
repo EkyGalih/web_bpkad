@@ -29,7 +29,7 @@ class PpidKipController extends Controller
      */
     public function agenda()
     {
-        $agenda = Posts::where('agenda_kaban', '=', 'ya')->paginate(10);
+        $agenda = Posts::where('agenda_kaban', '=', 'ya')->orderBy('created_at', 'ASC')->paginate(10);
 
         return view('client.PPID.agenda.index', compact('agenda'));
     }
