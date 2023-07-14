@@ -87,7 +87,7 @@ class HomeController extends Controller
             ->get();
         $informasi = KIP::where('jenis_informasi', '=', 'berkala')
             ->where('tahun', '=', date('Y'))
-            ->limit(10)
+            ->limit(13)
             ->get();
         return view('client.home.home', compact('new_posts', 'artikels', 'carousel', 'old_posts', 'videos', 'apps', 'slides', 'slidesInformasi', 'banners', 'agenda', 'informasi'));
     }
