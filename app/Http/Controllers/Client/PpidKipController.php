@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\KIP;
+use App\Models\Posts;
 use Illuminate\Http\Request;
 
 class PpidKipController extends Controller
@@ -26,9 +27,11 @@ class PpidKipController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function agenda()
     {
-        //
+        $agenda = Posts::where('agenda_kaban', '=', 'ya')->paginate(10);
+
+        return view('client.PPID.agenda.index', compact('agenda'));
     }
 
     /**

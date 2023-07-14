@@ -81,4 +81,8 @@ Route::group(['prefix' => 'PPID'], function () {
             Route::get('/', [ProfileController::class, 'struktur'])->name('profile.struktur-organisasi');
         });
     });
+
+    Route::group(['prefix' => 'agenda'], function () {
+        Route::get('/', [PpidKipController::class, 'agenda'])->name('ppid.agenda');
+    });
 });
