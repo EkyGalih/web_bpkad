@@ -83,7 +83,7 @@ class HomeController extends Controller
 
         $agenda = Posts::where('agenda_kaban', '=', 'ya')
             ->orderBy('created_at', 'DESC')
-            ->limit(1)
+            ->limit(3)
             ->get();
         $informasi = KIP::where('jenis_informasi', '=', 'berkala')
             ->where('created_at', 'LIKE', date('Y') . '%')

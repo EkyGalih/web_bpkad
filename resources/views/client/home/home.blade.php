@@ -277,70 +277,74 @@
         </div>
     </section>
 
-    <section class="section-bg">
-        <div class="container">
-            <div class="section-title">
-                <h3>Agenda & Informasi <span>Terbaru</span></h3>
-                <hr />
-            </div>
-            <div class="row">
-                <div class="col-lg-4">
-                    @foreach ($agenda as $item)
-                        <div class="col-2 pb-1 pt-0 pr-1">
-                            <div class="card" style="width: 18rem;">
-                                <img src="{{ asset($item->foto_berita) }}" class="card-img-top"
-                                    alt="{{ $item->title }}">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        {{ Helpers::getDate($item->created_at) . ' - ' . Helpers::getTime($item->created_at) }}
-                                    </h5>
-                                    <p class="card-text">{{ $item->title }}</p>
-                                    <a href="{{ route('client.show', Helpers::randomString(100) . '/' . $item->id . '/' . Helpers::randomString(100)) }}"
-                                        class="btn btn-primary">
-                                        <i class="bx bx-link-external"></i> Lihat Agenda
-                                    </a>
+    <section class="section-bg" style="padding-left: 3%; padding-right: 3%;">
+        {{-- <div class="container"> --}}
+        <div class="section-title">
+            <h3>Agenda & Informasi <span>Terbaru</span></h3>
+            <hr />
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="col-12">
+                    <div class="row">
+                        @foreach ($agenda as $item)
+                            <div class="col-3 pb-1 pt-0 pr-1">
+                                <div class="card" style="width: 18rem;">
+                                    <img src="{{ asset($item->foto_berita) }}" class="card-img-top"
+                                        alt="{{ $item->title }}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            {{ Helpers::getDate($item->created_at) . ' - ' . Helpers::getTime($item->created_at) }}
+                                        </h5>
+                                        <p class="card-text">{{ $item->title }}</p>
+                                        <a href="{{ route('client.show', Helpers::randomString(100) . '/' . $item->id . '/' . Helpers::randomString(100)) }}"
+                                            class="btn btn-primary">
+                                            <i class="bx bx-link-external"></i> Lihat Agenda
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
-                </div>
-                <div class="col-lg-8">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Informasi</th>
-                                <th>Waktu Unggah</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($informasi as $berkala)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $berkala->nama_informasi }}</td>
-                                    <td>{{ Helpers::getDate($berkala->created_at) . ' ' . Helpers::getTime($berkala->created_at) }}
-                                    </td>
-                                    <td>
-                                        @if ($berkala->jenis_file == 'link')
-                                            <a href="{{ $berkala->files }}" class="btn btn-success btn-sm"
-                                                target="_blank" data-bs-tooltip="tooltip" data-bs-placement="top" title="Download">
-                                                <i class="bx bx-download"></i>
-                                            </a>
-                                        @else
-                                            <a href="{{ $berkala->files }}" class="btn btn-info btn-sm"
-                                                target="_blank" data-bs-tooltip="tooltip" data-bs-placement="top" title="Lihat">
-                                                <i class="bx bx-show"></i>
-                                            </a>
-                                        @endif
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                        @endforeach
+                    </div>
                 </div>
             </div>
+            <div class="col-4">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Informasi</th>
+                            <th>Waktu Unggah</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($informasi as $berkala)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $berkala->nama_informasi }}</td>
+                                <td>{{ Helpers::getDate($berkala->created_at) . ' ' . Helpers::getTime($berkala->created_at) }}
+                                </td>
+                                <td>
+                                    @if ($berkala->jenis_file == 'link')
+                                        <a href="{{ $berkala->files }}" class="btn btn-success btn-sm" target="_blank"
+                                            data-bs-tooltip="tooltip" data-bs-placement="top" title="Download">
+                                            <i class="bx bx-download"></i>
+                                        </a>
+                                    @else
+                                        <a href="{{ $berkala->files }}" class="btn btn-info btn-sm" target="_blank"
+                                            data-bs-tooltip="tooltip" data-bs-placement="top" title="Lihat">
+                                            <i class="bx bx-show"></i>
+                                        </a>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
+        {{-- </div> --}}
     </section>
 
     <section class="section">
