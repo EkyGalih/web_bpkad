@@ -53,16 +53,29 @@
 @endsection
 @section('content')
     <section id="news" class="news">
-        <div class="container" data-aos="fade-up">
-
-            <div class="section-title">
-                <h3>Berita <span>Terkini</span></h3>
-                <hr />
-            </div>
-
+        <div style="padding: 5%;" data-aos="fade-up">
 
             <div class="row">
-                <div class="col-12 pb-5">
+                <div class="col-3">
+                    <div class="list-group">
+                        <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+                            <i class="bx bx-news"></i> Informasi Terbuka
+                        </button>
+                        @foreach ($informasi as $berkala)
+                            <a href="{{ $berkala->files }}" type="button" data-bs-tooltip="tooltip" target="_blank"
+                                data-bs-placement="top"
+                                title="{{ $berkala->jenis_file == 'link' ? 'Download' : 'Lihat File' }}"
+                                class="list-group-item list-group-item-action"><span style="color: #0844c5;">#</span>
+                                {{ $berkala->nama_informasi }}</a>
+                        @endforeach
+                        <a href="PPID/Klasifikasi-Informasi-Publik" type="button" class="list-group-item list-group-item-action"><strong>Lihat Semua</strong></a>
+                    </div>
+                </div>
+                <div class="col-9 pb-5">
+                    <div class="section-title">
+                        <h3>Berita <span>Terkini</span></h3>
+                        <hr />
+                    </div>
                     <!--SECTION START-->
                     <section class="row">
                         <!--Start slider news-->
@@ -277,57 +290,38 @@
         </div>
     </section>
 
-    <section class="section-bg" style="padding-left: 3%; padding-right: 3%;">
-        {{-- <div class="container"> --}}
-        <div class="section-title">
-            <h3>Agenda & Informasi <span>Terbaru</span></h3>
-            <hr />
-        </div>
-        <div class="row">
-            <div class="col-8">
-                <div class="col-12">
-                    <div class="row">
-                        @foreach ($agenda as $item)
-                            <div class="col-3 pb-1 pt-0 pr-1">
-                                <div class="card" style="width: 18rem;">
-                                    <img src="{{ asset($item->foto_berita) }}" class="card-img-top"
-                                        alt="{{ $item->title }}">
-                                    <div class="card-body">
-                                        <h5 class="card-title">
-                                            {{ Helpers::getDate($item->created_at) . ' - ' . Helpers::getTime($item->created_at) }}
-                                        </h5>
-                                        <p class="card-text">{{ $item->title }}</p>
-                                        <a href="{{ route('client.show', Helpers::randomString(100) . '/' . $item->id . '/' . Helpers::randomString(100)) }}"
-                                            class="btn btn-primary">
-                                            <i class="bx bx-link-external"></i> Lihat Agenda
-                                        </a>
-                                    </div>
+    <section class="section-bg">
+        <div class="container">
+            <div class="section-title">
+                <h3>Agenda Terbaru <span>Pimpinan</span></h3>
+                <hr />
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    @foreach ($agenda as $item)
+                        <div class="col-3 pb-1 pt-0 pr-1" style="margin-right: 5%;">
+                            <div class="card" style="width: 18rem;">
+                                <img src="{{ asset($item->foto_berita) }}" class="card-img-top"
+                                    alt="{{ $item->title }}">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        {{ Helpers::getDate($item->created_at) . ' - ' . Helpers::getTime($item->created_at) }}
+                                    </h5>
+                                    <p class="card-text">{{ $item->title }}</p>
+                                    <a href="{{ route('client.show', Helpers::randomString(100) . '/' . $item->id . '/' . Helpers::randomString(100)) }}"
+                                        class="btn btn-primary">
+                                        <i class="bx bx-link-external"></i> Lihat Agenda
+                                    </a>
                                 </div>
                             </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="list-group">
-                    <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-                        <i class="bx bx-news"></i> Informasi Terbuka
-                    </button>
-                    @foreach ($informasi as $berkala)
-                        <a href="{{ $berkala->files }}" type="button" data-bs-tooltip="tooltip" target="_blank"
-                            data-bs-placement="top" title="{{ $berkala->jenis_file == 'link' ? 'Download' : 'Lihat File' }}" class="list-group-item list-group-item-action"><span
-                                style="color: #0844c5;">#</span>
-                            {{ $berkala->nama_informasi }}</a>
+                        </div>
                     @endforeach
                 </div>
-                @foreach ($informasi as $berkala)
-                @endforeach
             </div>
         </div>
-        {{-- </div> --}}
     </section>
 
-    <section class="section">
+    {{-- <section class="section">
         <div class="container">
             <div class="section-title">
                 <h3>Art<span>ikel</span></h3>
@@ -370,7 +364,7 @@
             </div>
             <a class="btn btn-primary btn-block" href="{{ route('artikel.index') }}">Selengkapnya</a>
         </div>
-    </section>
+    </section> --}}
 
     <section id="about" class="about section-bg">
         <div class="container">
