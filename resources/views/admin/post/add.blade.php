@@ -85,7 +85,7 @@
                                         <input id="input-tags" autocomplete="off" placeholder="Tags" name="tags">
                                     </div>
                                 </div>
-                                {{-- <div class="row mb-3">
+                                <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Waktu Upload</label>
                                     <div class="col-sm-2">
                                         <input id="date" type="date" name="date"
@@ -101,14 +101,15 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                </div> --}}
+                                </div>
                                 <div class="row mb-3">
                                     <div class="col-sm-12">
                                         <a class="btn btn-outline-secondary btn-md" href="{{ route('post-admin.index') }}"
                                             style="float: right">
                                             <i class="bi bi-skip-backward"></i> Kembali
                                         </a>
-                                        <button class="btn btn-outline-warning btn-md" style="float: right; margin-right: 2px;" type="reset">
+                                        <button class="btn btn-outline-warning btn-md"
+                                            style="float: right; margin-right: 2px;" type="reset">
                                             <i class="bi bi-arrow-clockwise"></i> Reset
                                         </button>
                                         <button class="btn btn-outline-success btn-md"

@@ -67,6 +67,7 @@ class PostController extends Controller
                 }
             }
         }
+        
         Posts::create([
             'id' => $id,
             'title' => $request->title,
@@ -76,8 +77,8 @@ class PostController extends Controller
             'users_id' => Auth::user()->id,
             'caption' => $request->caption,
             'posts_category_id' => $request->posts_category_id,
-            'tags' => $request->tags
-            // 'created_at' => $request->date . ' ' . $request->time . ':' . date('s')
+            'tags' => $request->tags,
+            'created_at' => $request->date . ' ' . $request->time . ':' . date('s')
         ]);
 
         Helpers::_recentAdd($id, 'membuat Berita/Artikel', 'post');
