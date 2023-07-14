@@ -309,39 +309,19 @@
                 </div>
             </div>
             <div class="col-4">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Informasi</th>
-                            <th>Waktu Unggah</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($informasi as $berkala)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $berkala->nama_informasi }}</td>
-                                <td>{{ Helpers::getDate($berkala->created_at) . ' ' . Helpers::getTime($berkala->created_at) }}
-                                </td>
-                                <td>
-                                    @if ($berkala->jenis_file == 'link')
-                                        <a href="{{ $berkala->files }}" class="btn btn-success btn-sm" target="_blank"
-                                            data-bs-tooltip="tooltip" data-bs-placement="top" title="Download">
-                                            <i class="bx bx-download"></i>
-                                        </a>
-                                    @else
-                                        <a href="{{ $berkala->files }}" class="btn btn-info btn-sm" target="_blank"
-                                            data-bs-tooltip="tooltip" data-bs-placement="top" title="Lihat">
-                                            <i class="bx bx-show"></i>
-                                        </a>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                <div class="list-group">
+                    <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+                        <i class="bx bx-news"></i> Informasi Terbuka
+                    </button>
+                    @foreach ($informasi as $berkala)
+                        <a href="{{ $berkala->files }}" type="button" data-bs-tooltip="tooltip" target="_blank"
+                            data-bs-placement="top" title="{{ $berkala->jenis_file == 'link' ? 'Download' : 'Lihat File' }}" class="list-group-item list-group-item-action"><span
+                                style="color: #0844c5;">#</span>
+                            {{ $berkala->nama_informasi }}</a>
+                    @endforeach
+                </div>
+                @foreach ($informasi as $berkala)
+                @endforeach
             </div>
         </div>
         {{-- </div> --}}
