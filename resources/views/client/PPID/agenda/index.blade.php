@@ -15,36 +15,41 @@
     </style>
 @endsection
 @section('content_home')
-<main id="main" data-aos="fade-up">
-    <!-- ======= Berita ======= -->
-    <section class="breadcrumbs" style="margin-top: 5%;">
+    <main id="main" data-aos="fade-up">
+        <!-- ======= Berita ======= -->
+        <section class="breadcrumbs" style="margin-top: 5%;">
 
-        <div class="card" style="padding: 5%; margin-right: 5%; margin-left: 5%; margin-top: 1%;">
-            <div class="fortofolio-description">
-                <div class="col-12">
-                    <div class="row">
-                        <!--news box-->
-                        @foreach ($agenda as $item)
-                            <div class="col-3 pb-1 pt-0 pr-1">
-                                <div class="card" style="width: 18rem;">
-                                    <img src="{{ asset($item->foto_berita) }}" class="card-img-top" alt="{{ $item->title }}">
-                                    <div class="card-body">
-                                      <h5 class="card-title">{{ Helpers::getDate($item->created_at) .' - '. Helpers::getTime($item->created_at) }}</h5>
-                                      <p class="card-text">{{ $item->title }}</p>
-                                      <a href="{{ route('client.show', Helpers::randomString(100) . '/' . $item->id . '/' . Helpers::randomString(100)) }}" class="btn btn-primary">
-                                        <i class="bx bx-link"></i> Link Berita
-                                      </a>
+            <div class="card" style="padding: 5%; margin-right: 5%; margin-left: 5%; margin-top: 1%;">
+                <div class="fortofolio-description">
+                    <h1 style="margin-bottom: 5%; text-align: center;">AGENDA PIMPINAN SELAMA 1 TAHUN (2022)</h1>
+                    <div class="col-12">
+                        <div class="row">
+                            <!--news box-->
+                            @foreach ($agenda as $item)
+                                <div class="col-3 pb-1 pt-0 pr-1">
+                                    <div class="card" style="width: 18rem;">
+                                        <img src="{{ asset($item->foto_berita) }}" class="card-img-top"
+                                            alt="{{ $item->title }}">
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                {{ Helpers::getDate($item->created_at) . ' - ' . Helpers::getTime($item->created_at) }}
+                                            </h5>
+                                            <p class="card-text">{{ $item->title }}</p>
+                                            <a href="{{ route('client.show', Helpers::randomString(100) . '/' . $item->id . '/' . Helpers::randomString(100)) }}"
+                                                class="btn btn-primary">
+                                                <i class="bx bx-link"></i> Link Berita
+                                            </a>
+                                        </div>
                                     </div>
-                                  </div>
-                            </div>
-                        @endforeach
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section><!-- End Portfolio Details Section -->
+        </section><!-- End Portfolio Details Section -->
 
-</main><!-- End #main -->
+    </main><!-- End #main -->
 
     <footer id="footer">
         <div class="footer-newsletter">
