@@ -11,6 +11,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         Route::post('store', [KIPController::class, 'store'])->name('ppid-kip.store');
         Route::get('edit/{id}', [KIPController::class, 'edit'])->name('ppid-kip.edit');
         Route::put('update/{id}', [KIPController::class, 'update'])->name('ppid-kip.update');
+        Route::get('agenda', [KIPController::class, 'agenda'])->name('ppid-kip.agenda');
         Route::get('destroy/{id}', [KIPController::class, 'destroy'])->name('ppid-kip.destroy');
     });
 

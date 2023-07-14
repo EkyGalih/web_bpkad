@@ -67,7 +67,7 @@ class PostController extends Controller
                 }
             }
         }
-        
+
         Posts::create([
             'id' => $id,
             'title' => $request->title,
@@ -169,6 +169,16 @@ class PostController extends Controller
         Helpers::_recentAdd($id, 'memulihkan berita/artikel yang dihapus', 'post');
 
         return redirect()->route('post-admin.index')->with(['success' => 'Berita/Artikel berhasil dipulihkan!']);
+    }
+
+    public function agenda($id)
+    {
+        $agenda = Posts::findOrFail($id);
+        $agenda->update([
+            'agenda_kaban'    => 'ya'
+        ]);
+
+        return redirect()->route('post-admin.index')->with(['success' => 'Agenda kaban berhasil ditambahkan!']);
     }
 
     /**

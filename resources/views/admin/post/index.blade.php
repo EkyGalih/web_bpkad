@@ -84,6 +84,10 @@
                                                     <i class="bi bi-recycle"></i>
                                                 </button>
                                                 @include('admin/post/addons/_delete')
+                                                <a href="{{ route('post-admin.agenda', $post->id) }}" class="btn btn-info btn-md" data-bs-tooltip="tooltip"
+                                                    data-bs-placement="top" title="Jadikan Agenda Kaban">
+                                                <i class="bi bi-calendar"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach

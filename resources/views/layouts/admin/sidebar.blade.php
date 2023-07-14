@@ -100,6 +100,11 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('ppid-kip.agenda') }}" class="@yield('ppid-agenda')">
+                        <i class="bi bi-circle"></i><span>Agenda Pimpinan</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('ppid-struktur.index') }}" class="@yield('ppid-struktur')">
                         <i class="bi bi-circle"></i><span>Struktur Organisasi PPID</span>
                     </a>

@@ -14,5 +14,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         Route::get('destroy/{id}', [PostController::class, 'destroy'])->name('post-admin.destroy');
         Route::get('delete/{id}', [PostController::class, 'delete'])->name('post-admin.delete');
         Route::get('clear', [PostController::class, 'clear'])->name('post-admin.clear');
+        Route::get('agenda/{id}', [PostController::class, 'agenda'])->name('post-admin.agenda');
     });
 });
