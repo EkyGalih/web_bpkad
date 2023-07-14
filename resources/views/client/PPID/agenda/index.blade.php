@@ -26,9 +26,14 @@
                         <div class="card" style="width: 18rem;">
                             <img src="{{ asset($item->foto_berita) }}" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <h5 class="card-title">{{ Helpers::getDate($item->created_at) . '-' . Helpers::getTime($item->created_at) }}</h5>
+                                <h5 class="card-title">
+                                    {{ Helpers::getDate($item->created_at) . '-' . Helpers::getTime($item->created_at) }}
+                                </h5>
                                 <p class="card-text">{{ $item->title }}</p>
-                                <a href="{{ route('client.show', Helpers::randomString(100) . '/' . $item->id . '/' . Helpers::randomString(100)) }}" class="btn btn-primary">Link berita</a>
+                                <a href="{{ route('client.show', Helpers::randomString(100) . '/' . $item->id . '/' . Helpers::randomString(100)) }}"
+                                    class="btn btn-primary">
+                                    <i class="bx bx-link"></i> Link berita
+                                </a>
                             </div>
                         </div>
                     @endforeach

@@ -46,6 +46,15 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
+                                    <label for="inputText" class="col-sm-2 col-form-label">Agenda Kaban?</label>
+                                    <div class="col-sm-10">
+                                        <input type="radio" name="agenda_kaban" value="ya"
+                                            {{ $posts->agenda_kaban == 'ya' ? 'checked' : '' }}> Ya
+                                        <input type="radio" name="agenda_kaban" value="tidak"
+                                            {{ $posts->agenda_kaban == 'tidak' ? 'checked' : '' }}> Tidak
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Foto Berita</label>
                                     <div class="col-sm-10">
                                         <p class="image_upload">
@@ -112,18 +121,18 @@
                                 </div> --}}
                                 <div class="row mb-4">
                                     <div class="col-sm-12">
-                                        <a class="btn btn-dark btn-md" href="{{ route('post-admin.index') }}"
-                                            style="float: right">
-                                            <i class="bi bi-skip-backward"></i> Kembali
-                                        </a>
+                                        <button class="btn btn-success btn-md" style="float: right; margin-right: 2px;"
+                                            type="submit">
+                                            <i class="bi bi-save"></i> Simpan
+                                        </button>
                                         <button class="btn btn-warning btn-md" style="float: right; margin-right: 2px;"
                                             type="reset">
                                             <i class="bi bi-arrow-clockwise"></i> Reset
                                         </button>
-                                        <button class="btn btn-success btn-md"
-                                            style="float: right; margin-right: 2px;" type="submit">
-                                            <i class="bi bi-save"></i> Simpan
-                                        </button>
+                                        <a class="btn btn-secondary btn-md" href="{{ route('post-admin.index') }}"
+                                            style="float: right; margin-right: 2px;">
+                                            <i class="bi bi-skip-backward"></i> Kembali
+                                        </a>
                                     </div>
                                 </div>
                             </form>
