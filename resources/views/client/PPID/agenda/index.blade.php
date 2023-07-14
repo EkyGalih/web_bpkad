@@ -20,6 +20,7 @@
         <section class="breadcrumbs">
             <div class="card" style="padding: 5%; margin-right: 5%; margin-left: 5%; margin-top: 1%;">
 
+                <h3 style="text-align: center; padding: 20px;">AGENDA PIMPINAN SELAMA 1 TAHUN - 2022</h3>
                 <div class="portfolio-description">
                     @foreach ($agenda as $item)
                         <div class="card" style="width: 18rem;">
