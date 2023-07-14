@@ -53,7 +53,7 @@
 @endsection
 @section('content')
     <section id="news" class="news">
-        <div style="padding: 5%;" data-aos="fade-up">
+        <div style="padding-left: 8%; padding-right: 8%;" data-aos="fade-up">
 
             <div class="row">
                 <div class="col-3">
