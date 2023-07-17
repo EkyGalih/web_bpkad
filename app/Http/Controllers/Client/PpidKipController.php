@@ -27,11 +27,15 @@ class PpidKipController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function agenda()
+    public function agenda($tahun = NULL)
     {
-        $agenda = Posts::where('agenda_kaban', '=', 'ya')->orderBy('created_at', 'ASC')->paginate(10);
+        $tahun = $tahun == NULL ? date('Y')-1 : $tahun;
+        $agenda = Posts::where('agenda_kaban', '=', 'ya')
+                ->orderBy('created_at', 'ASC')
+                ->where('created_at', 'LIKE', $tahun.'%')
+                ->paginate(10);
 
-        return view('client.PPID.agenda.index', compact('agenda'));
+        return view('client.PPID.agenda.index', compact('agenda', 'tahun'));
     }
 
     /**

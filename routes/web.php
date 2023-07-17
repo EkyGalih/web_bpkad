@@ -83,6 +83,6 @@ Route::group(['prefix' => 'PPID'], function () {
     });
 
     Route::group(['prefix' => 'agenda'], function () {
-        Route::get('/', [PpidKipController::class, 'agenda'])->name('ppid.agenda');
+        Route::get('/{tahun?}', [PpidKipController::class, 'agenda'])->name('ppid.agenda');
     });
 });
