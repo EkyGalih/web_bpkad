@@ -25,7 +25,7 @@
         <!--Breaking box-->
         <div class="col-1 col-md-3 col-lg-2 py-1 pr-md-0 mb-md-1">
             <div class="d-inline-block d-md-block bg-primary text-white text-center breaking-caret py-1 px-2">
-                <span class="d-none d-md-inline-block">Informasi</span>
+                <span class="d-none d-md-inline-block">Berita Terkini</span>
             </div>
         </div>
         <!--Breaking content-->
@@ -61,7 +61,8 @@
                                 class="list-group-item list-group-item-action"><span style="color: #0844c5;">#</span>
                                 {{ $berkala->nama_informasi }}</a>
                         @endforeach
-                        <a href="PPID/Klasifikasi-Informasi-Publik" type="button" class="list-group-item list-group-item-action"><strong>Lihat Semua</strong></a>
+                        <a href="PPID/Klasifikasi-Informasi-Publik" type="button"
+                            class="list-group-item list-group-item-action"><strong>Lihat Semua</strong></a>
                     </div>
                 </div>
                 <div class="col-9 pb-5">
@@ -285,25 +286,30 @@
 
     <section class="section">
         <div style="padding-left: 8%; padding-right: 8%;" data-aos="fade-up">
-           <div class="row">
-               <div class="col-3">
-                <div class="list-group">
-                    <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-                        <i class="bx bx-calendar"></i> Agenda Pimpinan
-                    </button>
-                <ul class="list-unstyled" style="margin-top: 5%;">
-                    @foreach ($agenda as $item)
-                     <li class="media">
-                       <img src="{{ $item->foto_berita }}" class="mr-3" alt="{{ $item->title }}" style="max-width: 80px; max-height: 80px;">
-                       <div class="media-body">
-                         <h5 class="mt-0 mb-1">{{ Helpers::getDate($item->created_at) . ' - ' . Helpers::getTime($item->created_at) }}</h5>
-                         <p>{{ $item->title }}</p>
-                       </div>
-                     </li>
-                     @endforeach
-                 </ul>
+            <div class="row">
+                <div class="col-3">
+                    <div class="list-group">
+                        <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+                            <i class="bx bx-calendar"></i> Agenda Pimpinan
+                        </button>
+                        <ul class="list-unstyled" style="margin-top: 5%;">
+                            @foreach ($agenda as $item)
+                                <li class="media">
+                                    <img src="{{ $item->foto_berita }}" class="mr-3" alt="{{ $item->title }}"
+                                        style="max-width: 80px; max-height: 80px;">
+                                    <div class="media-body">
+                                        <h5 class="mt-0 mb-1">
+                                            {{ Helpers::getDate($item->created_at) . ' - ' . Helpers::getTime($item->created_at) }}
+                                        </h5>
+                                        <p>{{ $item->title }}</p>
+                                    </div>
+                                </li>
+                            @endforeach
+                            <a href="PPID/agenda" type="button"
+                            class="list-group-item list-group-item-action"><strong>Lihat Semua</strong></a>
+                        </ul>
+                    </div>
                 </div>
-               </div>
                 <div class="col-9">
                     <div class="section-title">
                         <h3>Art<span>ikel</span></h3>
@@ -344,7 +350,7 @@
                     </div>
                     <a class="btn btn-primary btn-block" href="{{ route('artikel.index') }}">Selengkapnya</a>
                 </div>
-           </div>
+            </div>
         </div>
     </section>
 
