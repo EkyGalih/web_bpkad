@@ -299,9 +299,15 @@
                                         style="max-width: 80px; max-height: 80px;">
                                     <div class="media-body">
                                         <h5 class="mt-0 mb-1">
+                                           <a style="color: black;" href="{{ route('client.show', Helpers::randomString(120) . '/' . $item->id . '/' . Helpers::randomString(100)) }}">
                                             {{ Helpers::getDate($item->created_at) . ' - ' . Helpers::getTime($item->created_at) }}
+                                           </a>
                                         </h5>
-                                        <p>{{ $item->title }}</p>
+                                        <p>
+                                           <a style="color: black;" href="{{ route('client.show', Helpers::randomString(120) . '/' . $item->id . '/' . Helpers::randomString(100)) }}">
+                                            {{ $item->title }}
+                                           </a>
+                                        </p>
                                     </div>
                                 </li>
                             @endforeach
