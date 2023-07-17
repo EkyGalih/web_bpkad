@@ -45,7 +45,7 @@
                                 <div class="col-3 pb-1 pt-0 pr-1">
                                     <div class="card" style="width: 18rem;">
                                         <img src="{{ asset($item->foto_berita) }}" class="card-img-top"
-                                            alt="{{ $item->title }}" style="max-height: 280px;">
+                                            alt="{{ $item->title }}" style="height: 280px;">
                                         <div class="card-body">
                                             <h5 class="card-title">
                                                 {{ Helpers::getDate($item->created_at) . ' - ' . Helpers::getTime($item->created_at) }}
