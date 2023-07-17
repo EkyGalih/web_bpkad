@@ -50,7 +50,7 @@
                                             <h5 class="card-title">
                                                 {{ Helpers::getDate($item->created_at) . ' - ' . Helpers::getTime($item->created_at) }}
                                             </h5>
-                                            <p class="card-text">{{ $item->title }}</p>
+                                            <p class="card-text">{{ substr($item->title, 0, 50) }}...</p>
                                             <a href="{{ route('client.show', Helpers::randomString(100) . '/' . $item->id . '/' . Helpers::randomString(100)) }}"
                                                 class="btn btn-primary">
                                                 <i class="bx bx-link"></i> Link Berita
