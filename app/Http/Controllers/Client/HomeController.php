@@ -49,7 +49,7 @@ class HomeController extends Controller
             )
             ->where('posts_category_id', '=', '2')
             ->orderBy('posts.created_at', 'desc')
-            ->limit(3)
+            ->limit(6)
             ->get();
         unset($new_posts[0]);
         unset($new_posts[1]);
@@ -83,10 +83,12 @@ class HomeController extends Controller
 
         $agenda = Posts::where('agenda_kaban', '=', 'ya')
             ->orderBy('created_at', 'DESC')
-            ->limit(3)
+            ->limit(4)
             ->get();
         $informasi = KIP::where('jenis_informasi', '=', 'berkala')
             ->where('tahun', '=', date('Y'))
+            ->orWhere('tahun', '=', date('Y')-1)
+            ->orderBy('tahun', 'DESC')
             ->limit(13)
             ->get();
         return view('client.home.home', compact('new_posts', 'artikels', 'carousel', 'old_posts', 'videos', 'apps', 'slides', 'slidesInformasi', 'banners', 'agenda', 'informasi'));

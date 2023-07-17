@@ -290,7 +290,7 @@
         </div>
     </section>
 
-    <section class="section-bg">
+    {{-- <section class="section-bg">
         <div class="container">
             <div class="section-title">
                 <h3>Agenda Terbaru <span>Pimpinan</span></h3>
@@ -319,52 +319,72 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
-    {{-- <section class="section">
-        <div class="container">
-            <div class="section-title">
-                <h3>Art<span>ikel</span></h3>
-                <hr />
-            </div>
-            <div class="col-12">
-                <div class="row">
-                    <!--news box-->
-                    @foreach ($artikels as $artikel)
-                        <div class="col-4 pb-1 pt-0 pr-1">
-                            <div class="card border-0 rounded-0 text-white overflow zoom">
-                                <div class="position-relative">
-                                    <!--thumbnail img-->
-                                    <div class="ratio_right-cover-2 image-wrapper">
-                                        <a
-                                            href="{{ route('artikel.show', Helpers::randomString(120) . '/' . $artikel->id . '/' . Helpers::randomString(100)) }}">
-                                            <img height="200" src="{{ asset($artikel->foto_berita) }}"
-                                                alt="simple blog template bootstrap">
-                                        </a>
-                                    </div>
-                                    <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
-                                        <!-- category -->
-                                        <a class="p-1 badge badge-primary rounded-0"
-                                            href="#">{{ Helpers::PostCategory($artikel->posts_category_id) }}</a>
+    <section class="section">
+        <div style="padding-left: 8%; padding-right: 8%;" data-aos="fade-up">
+           <div class="row">
+               <div class="col-3">
+                <div class="list-group">
+                    <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+                        <i class="bx bx-calendar"></i> Agenda Pimpinan
+                    </button>
+                <ul class="list-unstyled" style="margin-top: 5%;">
+                    @foreach ($agenda as $item)
+                     <li class="media">
+                       <img src="{{ $item->foto_berita }}" class="mr-3" alt="{{ $item->title }}" style="max-width: 80px; max-height: 80px;">
+                       <div class="media-body">
+                         <h5 class="mt-0 mb-1">{{ Helpers::getDate($item->created_at) . ' - ' . Helpers::getTime($item->created_at) }}</h5>
+                         <p>{{ $item->title }}</p>
+                       </div>
+                     </li>
+                     @endforeach
+                 </ul>
+                </div>
+               </div>
+                <div class="col-9">
+                    <div class="section-title">
+                        <h3>Art<span>ikel</span></h3>
+                        <hr />
+                    </div>
+                    <div class="row">
+                        <!--news box-->
+                        @foreach ($artikels as $artikel)
+                            <div class="col-4 pb-1 pt-0 pr-1">
+                                <div class="card border-0 rounded-0 text-white overflow zoom">
+                                    <div class="position-relative">
+                                        <!--thumbnail img-->
+                                        <div class="ratio_right-cover-2 image-wrapper">
+                                            <a
+                                                href="{{ route('artikel.show', Helpers::randomString(120) . '/' . $artikel->id . '/' . Helpers::randomString(100)) }}">
+                                                <img height="200" src="{{ asset($artikel->foto_berita) }}"
+                                                    alt="simple blog template bootstrap">
+                                            </a>
+                                        </div>
+                                        <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
+                                            <!-- category -->
+                                            <a class="p-1 badge badge-primary rounded-0"
+                                                href="#">{{ Helpers::PostCategory($artikel->posts_category_id) }}</a>
 
-                                        <!--title-->
-                                        <a
-                                            href="{{ route('artikel.show', Helpers::randomString(120) . '/' . $artikel->id . '/' . Helpers::randomString(100)) }}">
-                                            <h4 class="h5 text-white my-1">
-                                                {{ substr($artikel->title, 0, 50) }}...
-                                                <span style="font-size: 16px;">Selengkapnyaaa</span>
-                                            </h4>
-                                        </a>
+                                            <!--title-->
+                                            <a
+                                                href="{{ route('artikel.show', Helpers::randomString(120) . '/' . $artikel->id . '/' . Helpers::randomString(100)) }}">
+                                                <h4 class="h5 text-white my-1">
+                                                    {{ substr($artikel->title, 0, 50) }}...
+                                                    <span style="font-size: 16px;">Selengkapnyaaa</span>
+                                                </h4>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
+                    <a class="btn btn-primary btn-block" href="{{ route('artikel.index') }}">Selengkapnya</a>
                 </div>
-            </div>
-            <a class="btn btn-primary btn-block" href="{{ route('artikel.index') }}">Selengkapnya</a>
+           </div>
         </div>
-    </section> --}}
+    </section>
 
     <section id="about" class="about section-bg">
         <div class="container">
