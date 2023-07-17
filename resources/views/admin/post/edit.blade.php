@@ -101,7 +101,7 @@
                                             value="{{ $posts->tags }}">
                                     </div>
                                 </div>
-                                {{-- <div class="row mb-3">
+                                <div class="row mb-3">
                                     @php $created_at = explode(" ", $posts->created_at) @endphp
                                     <label for="inputText" class="col-sm-2 col-form-label">Waktu Upload</label>
                                     <div class="col-sm-2">
@@ -118,7 +118,7 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                </div> --}}
+                                </div>
                                 <div class="row mb-4">
                                     <div class="col-sm-12">
                                         <button class="btn btn-success btn-md" style="float: right; margin-right: 2px;"
