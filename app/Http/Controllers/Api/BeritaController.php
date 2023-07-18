@@ -14,7 +14,7 @@ class BeritaController extends Controller
 {
     public function index()
     {
-        $berita = Posts::all();
+        $berita = Posts::orderBy('created_at', 'DESC')->get();
 
         return new BeritaResource(true, 'Data Berita !', $berita);
     }
