@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\BeritaController;
+use App\Http\Controllers\Api\KIPController;
+use App\Http\Controllers\Api\PegawaiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +22,5 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::apiResource('/api/berita', BeritaController::class);
+Route::apiResource('/api/kip', KIPController::class);
+Route::apiResource('/api/pegawai', PegawaiController::class);

@@ -19,41 +19,41 @@ class BeritaController extends Controller
         return new BeritaResource(true, 'Data Berita !', $berita);
     }
 
-    public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'title'             => 'required',
-            'content'           => 'required',
-            'foto_berita'       => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'content_type_id'   => 'required',
-            'users_id'          => 'required',
-            'posts_category_id'  => 'required',
-            'agenda_kaban'      => 'required'
-        ]);
+    // public function store(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'title'             => 'required',
+    //         'content'           => 'required',
+    //         'foto_berita'       => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    //         'content_type_id'   => 'required',
+    //         'users_id'          => 'required',
+    //         'posts_category_id'  => 'required',
+    //         'agenda_kaban'      => 'required'
+    //     ]);
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
+    //     if ($validator->fails()) {
+    //         return response()->json($validator->errors(), 422);
+    //     }
 
-        // upload image
-        $image = $request->file('foto_berita');
-        $image->storeAs('uploads/berita', $image->hashName());
+    //     // upload image
+    //     $image = $request->file('foto_berita');
+    //     $image->storeAs('uploads/berita', $image->hashName());
 
-        $post = Posts::create([
-            'id'                => (string)Uuid::generate(4),
-            'title'             => $request->title,
-            'content'           => $request->content,
-            'foto_berita'       => 'uploads/berita/' . $image->hashName(),
-            'content_type_id'   => $request->content_type_id,
-            'users_id'          => $request->users_id,
-            'tags'              => $request->tags,
-            'caption'           => $request->caption,
-            'posts_category_id'  => $request->post_category_id,
-            'agenda_kaban'      => $request->agenda_kaban
-        ]);
+    //     $post = Posts::create([
+    //         'id'                => (string)Uuid::generate(4),
+    //         'title'             => $request->title,
+    //         'content'           => $request->content,
+    //         'foto_berita'       => 'uploads/berita/' . $image->hashName(),
+    //         'content_type_id'   => $request->content_type_id,
+    //         'users_id'          => $request->users_id,
+    //         'tags'              => $request->tags,
+    //         'caption'           => $request->caption,
+    //         'posts_category_id'  => $request->post_category_id,
+    //         'agenda_kaban'      => $request->agenda_kaban
+    //     ]);
 
-        return new BeritaResource(true, 'Data Berita berhasil ditambahkan!', $post);
-    }
+    //     return new BeritaResource(true, 'Data Berita berhasil ditambahkan!', $post);
+    // }
 
     public function show($id)
     {
@@ -68,63 +68,63 @@ class BeritaController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
-    {
-        $post = Posts::findOrFail($id);
-        // return $request;
-        $validator = Validator::make($request->all(), [
-            'title'             => 'required',
-            'content'           => 'required',
-            'foto_berita'       => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
-            'content_type_id'   => 'required',
-            'users_id'          => 'required',
-            'posts_category_id'  => 'required',
-            'agenda_kaban'      => 'required'
-        ]);
+    // public function update(Request $request, $id)
+    // {
+    //     $post = Posts::findOrFail($id);
+    //     // return $request;
+    //     $validator = Validator::make($request->all(), [
+    //         'title'             => 'required',
+    //         'content'           => 'required',
+    //         'foto_berita'       => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
+    //         'content_type_id'   => 'required',
+    //         'users_id'          => 'required',
+    //         'posts_category_id'  => 'required',
+    //         'agenda_kaban'      => 'required'
+    //     ]);
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
+    //     if ($validator->fails()) {
+    //         return response()->json($validator->errors(), 422);
+    //     }
 
-        if ($request->file('foto_berita')) {
-            // upload image
-            $image = $request->file('foto_berita');
-            $image->storeAs('uploads/berita', $image->hashName());
+    //     if ($request->file('foto_berita')) {
+    //         // upload image
+    //         $image = $request->file('foto_berita');
+    //         $image->storeAs('uploads/berita', $image->hashName());
 
-            $post->update([
-                'title'             => $request->title,
-                'content'           => $request->content,
-                'foto_berita'       => 'uploads/berita/' . $image->hashName(),
-                'content_type_id'   => $request->content_type_id,
-                'users_id'          => $request->users_id,
-                'tags'              => $request->tags,
-                'caption'           => $request->caption,
-                'posts_category_id' => $request->posts_category_id,
-                'agenda_kaban'      => $request->agenda_kaban
-            ]);
-        } else {
-            $post->update([
-                'title'             => $request->title,
-                'content'           => $request->content,
-                'content_type_id'   => $request->content_type_id,
-                'users_id'          => $request->users_id,
-                'tags'              => $request->tags,
-                'caption'           => $request->caption,
-                'posts_category_id'  => $request->posts_category_id,
-                'agenda_kaban'      => $request->agenda_kaban
-            ]);
-        }
+    //         $post->update([
+    //             'title'             => $request->title,
+    //             'content'           => $request->content,
+    //             'foto_berita'       => 'uploads/berita/' . $image->hashName(),
+    //             'content_type_id'   => $request->content_type_id,
+    //             'users_id'          => $request->users_id,
+    //             'tags'              => $request->tags,
+    //             'caption'           => $request->caption,
+    //             'posts_category_id' => $request->posts_category_id,
+    //             'agenda_kaban'      => $request->agenda_kaban
+    //         ]);
+    //     } else {
+    //         $post->update([
+    //             'title'             => $request->title,
+    //             'content'           => $request->content,
+    //             'content_type_id'   => $request->content_type_id,
+    //             'users_id'          => $request->users_id,
+    //             'tags'              => $request->tags,
+    //             'caption'           => $request->caption,
+    //             'posts_category_id'  => $request->posts_category_id,
+    //             'agenda_kaban'      => $request->agenda_kaban
+    //         ]);
+    //     }
 
-        return new BeritaResource(true, 'Data post berhasil diubah!', $post);
-    }
+    //     return new BeritaResource(true, 'Data post berhasil diubah!', $post);
+    // }
 
-    public function destroy($id)
-    {
-        $post = Posts::findOrFail($id);
+    // public function destroy($id)
+    // {
+    //     $post = Posts::findOrFail($id);
 
-        Storage::delete($post->foto_berita);
-        $post->delete();
+    //     Storage::delete($post->foto_berita);
+    //     $post->delete();
 
-        return new BeritaResource(true, 'Data post berhasil dihapus!', NULL);
-    }
+    //     return new BeritaResource(true, 'Data post berhasil dihapus!', NULL);
+    // }
 }
