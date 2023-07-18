@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Operator\Galery;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\KIPResource;
+use App\Models\KIP;
 use Illuminate\Http\Request;
 
-class GaleryFotoController extends Controller
+class KIPController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,9 @@ class GaleryFotoController extends Controller
      */
     public function index()
     {
-        //
+        $kip = KIP::orderBy('tahun', 'DESC')->get();
+
+        return new KIPResource(true, 'Data KIP!', $kip);
     }
 
     /**
@@ -22,9 +26,9 @@ class GaleryFotoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
-        return view('admin.galery.foto.uploadFoto', compact('id'));
+        //
     }
 
     /**
@@ -35,10 +39,7 @@ class GaleryFotoController extends Controller
      */
     public function store(Request $request)
     {
-        $image = $request->file('file');
-        $imageName = md5($image).'.'.$image->extension();
-        $image->move('uploads/galery/foto/', $imageName);
-        return response()->json(['success' => $imageName]);
+        //
     }
 
     /**
@@ -49,7 +50,15 @@ class GaleryFotoController extends Controller
      */
     public function show($id)
     {
-        //
+        $kip = KIP::findOrFail($id);
+
+        if ($kip) {
+            return new KIPResource(true, 'Data kip!', $kip);
+        } else {
+            return response()->json([
+                'message'   => 'Data not found!'
+            ], 422);
+        }
     }
 
     /**

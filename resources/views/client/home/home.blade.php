@@ -20,19 +20,12 @@
 @endsection
 @section('content_home')
     <section id="hero" class="d-flex align-items-center">
-        {{-- <div class="portfolio-details-container">
-            <div class="owl-carousel portfolio-details-carousel">
-                @foreach ($slides as $slide)
-                    <img src="{{ asset($slide->foto) }}" alt="{{ $slide->title }}" style="margin-top: 40%; width: 100%; height: 5%;">
-                @endforeach
-            </div>
-        </div> --}}
     </section>
     <div class="row py-2">
         <!--Breaking box-->
         <div class="col-1 col-md-3 col-lg-2 py-1 pr-md-0 mb-md-1">
             <div class="d-inline-block d-md-block bg-primary text-white text-center breaking-caret py-1 px-2">
-                <span class="d-none d-md-inline-block">Informasi</span>
+                <span class="d-none d-md-inline-block">Berita Terkini</span>
             </div>
         </div>
         <!--Breaking content-->
@@ -68,7 +61,8 @@
                                 class="list-group-item list-group-item-action"><span style="color: #0844c5;">#</span>
                                 {{ $berkala->nama_informasi }}</a>
                         @endforeach
-                        <a href="PPID/Klasifikasi-Informasi-Publik" type="button" class="list-group-item list-group-item-action"><strong>Lihat Semua</strong></a>
+                        <a href="PPID/Klasifikasi-Informasi-Publik" type="button"
+                            class="list-group-item list-group-item-action"><strong>Lihat Semua</strong></a>
                     </div>
                 </div>
                 <div class="col-9 pb-5">
@@ -290,98 +284,88 @@
         </div>
     </section>
 
-    <section class="section-bg">
-        <div class="container">
-            <div class="section-title">
-                <h3>Agenda Terbaru <span>Pimpinan</span></h3>
-                <hr />
-            </div>
-            <div class="col-12">
-                <div class="row">
-                    @foreach ($agenda as $item)
-                        <div class="col-3 pb-1 pt-0 pr-1" style="margin-right: 5%;">
-                            <div class="card" style="width: 18rem;">
-                                <img src="{{ asset($item->foto_berita) }}" class="card-img-top"
-                                    alt="{{ $item->title }}">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        {{ Helpers::getDate($item->created_at) . ' - ' . Helpers::getTime($item->created_at) }}
-                                    </h5>
-                                    <p class="card-text">{{ $item->title }}</p>
-                                    <a href="{{ route('client.show', Helpers::randomString(100) . '/' . $item->id . '/' . Helpers::randomString(100)) }}"
-                                        class="btn btn-primary">
-                                        <i class="bx bx-link-external"></i> Lihat Agenda
-                                    </a>
+    <section class="section">
+        <div style="padding-left: 8%; padding-right: 8%;" data-aos="fade-up">
+            <div class="row">
+                <div class="col-3">
+                    <div class="list-group">
+                        <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+                            <i class="bx bx-calendar"></i> Agenda Pimpinan
+                        </button>
+                        <ul class="list-unstyled" style="margin-top: 5%;">
+                            @foreach ($agenda as $item)
+                                <li class="media">
+                                    <img src="{{ $item->foto_berita }}" class="mr-3" alt="{{ $item->title }}"
+                                        style="max-width: 80px; max-height: 80px;">
+                                    <div class="media-body">
+                                        <h5 class="mt-0 mb-1">
+                                           <a style="color: black;" href="{{ route('client.show', Helpers::randomString(120) . '/' . $item->id . '/' . Helpers::randomString(100)) }}">
+                                            {{ Helpers::getDate($item->created_at) . ' - ' . Helpers::getTime($item->created_at) }}
+                                           </a>
+                                        </h5>
+                                        <p>
+                                           <a style="color: black;" href="{{ route('client.show', Helpers::randomString(120) . '/' . $item->id . '/' . Helpers::randomString(100)) }}">
+                                            {{ $item->title }}
+                                           </a>
+                                        </p>
+                                    </div>
+                                </li>
+                            @endforeach
+                            <a href="PPID/agenda" type="button"
+                            class="list-group-item list-group-item-action"><strong>Lihat Semua</strong></a>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-9">
+                    <div class="section-title">
+                        <h3>Art<span>ikel</span></h3>
+                        <hr />
+                    </div>
+                    <div class="row">
+                        <!--news box-->
+                        @foreach ($artikels as $artikel)
+                            <div class="col-4 pb-1 pt-0 pr-1">
+                                <div class="card border-0 rounded-0 text-white overflow zoom">
+                                    <div class="position-relative">
+                                        <!--thumbnail img-->
+                                        <div class="ratio_right-cover-2 image-wrapper">
+                                            <a
+                                                href="{{ route('artikel.show', Helpers::randomString(120) . '/' . $artikel->id . '/' . Helpers::randomString(100)) }}">
+                                                <img height="200" src="{{ asset($artikel->foto_berita) }}"
+                                                    alt="simple blog template bootstrap">
+                                            </a>
+                                        </div>
+                                        <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
+                                            <!-- category -->
+                                            <a class="p-1 badge badge-primary rounded-0"
+                                                href="#">{{ Helpers::PostCategory($artikel->posts_category_id) }}</a>
+
+                                            <!--title-->
+                                            <a
+                                                href="{{ route('artikel.show', Helpers::randomString(120) . '/' . $artikel->id . '/' . Helpers::randomString(100)) }}">
+                                                <h4 class="h5 text-white my-1">
+                                                    {{ substr($artikel->title, 0, 50) }}...
+                                                    <span style="font-size: 16px;">Selengkapnyaaa</span>
+                                                </h4>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
+                    <a class="btn btn-primary btn-block" href="{{ route('artikel.index') }}">Selengkapnya</a>
                 </div>
             </div>
         </div>
     </section>
 
-    {{-- <section class="section">
-        <div class="container">
-            <div class="section-title">
-                <h3>Art<span>ikel</span></h3>
-                <hr />
-            </div>
-            <div class="col-12">
-                <div class="row">
-                    <!--news box-->
-                    @foreach ($artikels as $artikel)
-                        <div class="col-4 pb-1 pt-0 pr-1">
-                            <div class="card border-0 rounded-0 text-white overflow zoom">
-                                <div class="position-relative">
-                                    <!--thumbnail img-->
-                                    <div class="ratio_right-cover-2 image-wrapper">
-                                        <a
-                                            href="{{ route('artikel.show', Helpers::randomString(120) . '/' . $artikel->id . '/' . Helpers::randomString(100)) }}">
-                                            <img height="200" src="{{ asset($artikel->foto_berita) }}"
-                                                alt="simple blog template bootstrap">
-                                        </a>
-                                    </div>
-                                    <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
-                                        <!-- category -->
-                                        <a class="p-1 badge badge-primary rounded-0"
-                                            href="#">{{ Helpers::PostCategory($artikel->posts_category_id) }}</a>
-
-                                        <!--title-->
-                                        <a
-                                            href="{{ route('artikel.show', Helpers::randomString(120) . '/' . $artikel->id . '/' . Helpers::randomString(100)) }}">
-                                            <h4 class="h5 text-white my-1">
-                                                {{ substr($artikel->title, 0, 50) }}...
-                                                <span style="font-size: 16px;">Selengkapnyaaa</span>
-                                            </h4>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-            <a class="btn btn-primary btn-block" href="{{ route('artikel.index') }}">Selengkapnya</a>
-        </div>
-    </section> --}}
-
-    <section id="about" class="about section-bg">
+    <section id="about" class="about section">
         <div class="container">
             <div class="section-title">
                 <h3>Video <span>BPKAD</span></h3>
                 <hr />
             </div>
-            {{-- <div class="row">
-                <div class="col-lg-12">
-                    @foreach ($videos as $video)
-                        <center>
-                            <iframe width="350" height="250" src="https://www.youtube.com/embed/0k99VGaKa9c">
-                            </iframe>
-                        </center>
-                    @endforeach
-                </div>
-            </div> --}}
             <div class="owl-carousel owl-theme" id="owl-video">
                 @foreach ($banners as $banner)
                     <iframe width="350" height="250" src="{{ $banner->path }}"></iframe>
