@@ -17,7 +17,7 @@ class PegawaiController extends Controller
     public function index()
     {
         $pegawai = Pegawai::orderBy('createdAt', 'DESC')
-                ->select('name', 'nip', 'jabatan')
+                ->select('name', 'nip', 'jabatan','foto')
                 ->where('jenis_pegawai', '=', 'pns')
                 ->get();
 
@@ -55,7 +55,7 @@ class PegawaiController extends Controller
     {
         $pegawai = Pegawai::where('id', '=', $id)
                 ->where('jenis_pegawai', '=', 'pns')
-                ->select('name', 'nip', 'jabatan')
+                ->select('name', 'nip', 'jabatan', 'foto')
                 ->first();
 
         if ($pegawai) {
