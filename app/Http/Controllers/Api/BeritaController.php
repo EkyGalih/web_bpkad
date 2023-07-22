@@ -14,7 +14,18 @@ class BeritaController extends Controller
 {
     public function index()
     {
-        $berita = Posts::orderBy('created_at', 'DESC')->get();
+        $berita = Posts::join('users', 'posts.users_id', '=', 'users.id')
+                ->orderBy('created_at', 'DESC')
+                ->select(
+                    'users.nama as author',
+                    'posts.id',
+                    'posts.title',
+                    'posts.content',
+                    'posts.foto_berita',
+                    'posts.tags',
+                    'posts.created_at',
+                    )
+                ->get();
 
         return new BeritaResource(true, 'Data Berita !', $berita);
     }
