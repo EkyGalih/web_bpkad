@@ -19,7 +19,7 @@ class PegawaiController extends Controller
         $pegawai = Pegawai::orderBy('createdAt', 'DESC')
                 ->select('name', 'nip', 'jabatan','foto')
                 // ->where('jenis_pegawai', '=', 'pns')
-                ->paginate(15);
+                ->get();
 
         return new PegawaiResource(true, 'Data pegawai !', $pegawai);
     }

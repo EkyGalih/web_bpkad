@@ -25,7 +25,7 @@ class BeritaController extends Controller
                     'posts.tags',
                     'posts.created_at',
                     )
-                ->paginate(15);
+                ->get();
 
         return new BeritaResource(true, 'Data Berita !', $berita);
     }
