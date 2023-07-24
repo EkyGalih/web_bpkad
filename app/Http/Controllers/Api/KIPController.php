@@ -16,7 +16,9 @@ class KIPController extends Controller
      */
     public function index()
     {
-        $kip = KIP::orderBy('tahun', 'DESC')->get();
+        $kip = KIP::orderBy('tahun', 'DESC')
+                    ->orderBy('created_at', 'DESC')
+                    ->get();
 
         return new KIPResource(true, 'Data KIP!', $kip);
     }
