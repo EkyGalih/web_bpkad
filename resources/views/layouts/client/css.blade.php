@@ -12,4 +12,22 @@
 <link href="{{ asset('client/assets/vendor/aos/aos.css') }}" rel="stylesheet">
 <link href="{{ asset('client/assets/css/style.css') }}" rel="stylesheet">
 <link href="{{ asset('client/assets/css/bpkad.css') }}" rel="stylesheet">
+<style>
+
+    /* Blur Menu */
+    .blur-ul {
+        display: flex;
+        gap: 2.5 rem;
+    }
+    .blur-ul {
+        display: block;
+        transition: .5s;
+    }
+    .blur-ul:hover .blur-li {
+        filter: blur(5px);
+    }
+    .blur-ul .blur-li:hover{
+        filter: blur(0px);
+    }
+</style>
 @yield('additional-css')

@@ -16,6 +16,12 @@
             width: 100%;
             height: auto;
         }
+
+       @media screen and (max-width: 50px) {
+        .list-group {
+            width: 50%;
+        }
+       }
     </style>
 @endsection
 @section('content_home')
@@ -51,7 +57,7 @@
             <div class="row">
                 <div class="col-3">
                     <div class="list-group">
-                        <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+                        <button type="button" class="list-group-item list-group-item-action active tes" aria-current="true">
                             <i class="bx bx-news"></i> Informasi Terbuka
                         </button>
                         @foreach ($informasi as $berkala)

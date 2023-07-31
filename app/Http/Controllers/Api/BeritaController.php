@@ -24,6 +24,7 @@ class BeritaController extends Controller
                     'posts.foto_berita',
                     'posts.tags',
                     'posts.created_at',
+                    'users.avatar'
                     )
                 ->get();
 
