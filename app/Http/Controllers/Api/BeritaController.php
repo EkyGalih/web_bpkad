@@ -26,7 +26,7 @@ class BeritaController extends Controller
                     'posts.created_at',
                     'users.avatar'
                     )
-                ->get();
+                ->paginate(10);
 
         return new BeritaResource(true, 'Data Berita !', $berita);
     }
