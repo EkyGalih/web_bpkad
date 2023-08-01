@@ -18,7 +18,7 @@ class KIPController extends Controller
     {
         $kip = KIP::orderBy('tahun', 'DESC')
                     ->orderBy('created_at', 'DESC')
-                    ->pagintate(12);
+                    ->paginate(12);
 
         return new KIPResource(true, 'Data KIP!', $kip);
     }
