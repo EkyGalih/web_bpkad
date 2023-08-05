@@ -41,7 +41,20 @@
                     $KipSertaMerta = Helpers::_KipPPID('serta merta');
                 @endphp
                 <div class="tab-pane fade show active" id="berkala" role="tabpanel" aria-labelledby="berkala-tab">
-                    <h2 class="title" style="margin: 20px; font-size: 30px;"><strong>INFORMASI BERKALA</strong></h2>
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h2 class="title" style="margin: 20px; font-size: 30px;"><strong>INFORMASI BERKALA</strong>
+                            </h2>
+                        </div>
+                        <div class="col-lg-4">
+                            {{-- <form action="{{ route('ppid-kip.search_berkala') }}">
+                                <div class="form-group">
+                                    <input type="text" name="search" id="search_berkala" class="form-control"
+                                        placeholder="Cari Data Informasi Berkala">
+                                </div>
+                            </form> --}}
+                        </div>
+                    </div>
                     <div class="table-responsive">
 
                         <table class="table table-hover table-bordered">
@@ -196,7 +209,15 @@
 @section('additional-js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
     <script type="text/javascript">
-        var route = "{{ route('ppid-kip.search') }}";
+        // var route = "{{ route('ppid-kip.search_berkala') }}";
+        // http://web_bpkad.suru.test/PPID/Klasifikasi-Informasi-Publik/info-berkala?search=tes
+        // pencarian dengan tekan enter untuk jquery
+        // $('#search_berkala').on('keyup', function(e) {
+        //     if (e.keyCode === 13) {
+        //         var query = $('#search_berkala').val();
+        //         console.log(route);
+        //     }
+        // });
 
         $('#search_berkala').typeahead({
             source: function(query, process) {

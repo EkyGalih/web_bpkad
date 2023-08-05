@@ -55,7 +55,7 @@ class PpidKipController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function search(Request $request)
+    public function searchBerkala(Request $request)
     {
         $query = $request->get('query');
         $filterResult = KIP::where('nama_informasi', 'LIKE', '%' . $query . '%')
