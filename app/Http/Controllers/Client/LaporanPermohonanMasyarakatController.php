@@ -31,15 +31,28 @@ class LaporanPermohonanMasyarakatController extends Controller
      */
     public function show(Request $token)
     {
-        $status = Permohonan::where('kode_pemohon', '=', $token->code)
-        ->select('status')
-        ->first();
+        // $explode = explode("-", $token->code);
+        // if ($explode[0] == 'req') {
+            $status = Permohonan::where('kode_pemohon', '=', $token->code)
+            ->select('status')
+            ->first();
 
-        if ($status->status == 'proses') {
-            return redirect()->back()->with(['warning_ext' => 'status permohonan anda sedang dalam proses, hubungi admin jika permohonan anda belum selesai']);
-        } else {
-            return redirect()->back()->with(['success' => 'status permohonan anda sudah selesai']);
-        }
+            if ($status->status == 'proses') {
+                return redirect()->back()->with(['warning_ext_req' => 'status permohonan anda sedang dalam proses, hubungi admin jika permohonan anda belum selesai']);
+            } else {
+                return redirect()->back()->with(['success_req' => 'status permohonan anda sudah selesai']);
+            }
+        // } elseif ($explode[0] == 'lap') {
+        //     $status = Laporan::where('kode_laporan', '=', $token->code)
+        //     ->select('status')
+        //     ->first();
+
+        //     if ($status->status == 'proses') {
+        //         return redirect()->back()->with(['warning_ext' => 'status permohonan anda sedang dalam proses, hubungi admin jika permohonan anda belum selesai']);
+        //     } else {
+        //         return redirect()->back()->with(['success' => 'status permohonan anda sudah selesai']);
+        //     }
+        // }
     }
 
     /**
@@ -99,7 +112,7 @@ class LaporanPermohonanMasyarakatController extends Controller
                 'asal_instansi' => $request->asal_instansi
             ]);
 
-            return redirect()->back()->with(['success' => 'Permohonan sudah masuk kode "' . $code . '" harap catat kode permohonan untuk pengecekkan status permohonan'], 'Pshow', 'Pactive', 'Lshow', 'Lactive');
+            return redirect()->back()->with(['success_req' => 'Permohonan sudah masuk kode "' . $code . '" harap catat kode permohonan untuk pengecekkan status permohonan'], 'Pshow', 'Pactive', 'Lshow', 'Lactive');
         } elseif ($request->jenis == 'pelaporan') {
             $code       = 'lap-' . uniqid();
             $Pshow       = '';
@@ -109,7 +122,7 @@ class LaporanPermohonanMasyarakatController extends Controller
 
             $request->validate([
                 'nama_pelapor' => 'required',
-                'kode_laporan' => strtoupper('Lap' . bin2hex(random_bytes(5))),
+                'kode_laporan' => 'Lap-' . bin2hex(random_bytes(5)),
                 'judul_laporan' => 'required|max:100',
                 'no_pelapor' => 'required|numeric|min:12',
                 'isi_laporan' => 'required|max:500',

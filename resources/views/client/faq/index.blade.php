@@ -62,25 +62,25 @@
                                 </form>
                             </div>
                         </div>
-                        @if (session('success'))
+                        @if (session('success_req'))
                             <div class="alert alert-success" role="alert">
                                 <button class="close" data-dismiss="alert" aria-label="Close"><span
                                         aria-hidden="true">&times;</span></button>
-                                {{ session('success') }}
+                                {{ session('success_req') }}
                             </div>
                         @endif
-                        @if (session('warning_size'))
+                        @if (session('warning_size_req'))
                             <div class="alert alert-warning" role="alert">
                                 <button class="close" data-dismiss="alert" aria-label="Close"><span
                                         aria-hidden="true">&times;</span></button>
-                                {{ session('warning_size') }}
+                                {{ session('warning_size_req') }}
                             </div>
                         @endif
-                        @if (session('warning_ext'))
+                        @if (session('warning_ext_req'))
                             <div class="alert alert-warning" role="alert">
                                 <button class="close" data-dismiss="alert" aria-label="Close"><span
                                         aria-hidden="true">&times;</span></button>
-                                {{ session('warning_ext') }}
+                                {{ session('warning_ext_req') }}
                             </div>
                         @endif
                         <form action="{{ route('faq.store') }}" method="POST" enctype="multipart/form-data">
@@ -186,7 +186,7 @@
                                 {{ session('warning_lap_size') }}
                             </div>
                         @endif
-                        @if (session('warning_ext'))
+                        @if (session('warning_lap_ext'))
                             <div class="alert alert-warning" role="alert">
                                 <button class="close" data-dismiss="alert" aria-label="Close"><span
                                         aria-hidden="true">&times;</span></button>
