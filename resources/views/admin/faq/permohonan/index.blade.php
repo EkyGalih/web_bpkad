@@ -59,8 +59,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                    date_default_timezone_set('Asia/Makassar');
+                                        $info = getdate();
+                                        $date = $info['mday'];
+                                        $month = $info['mon'];
+                                        $year = $info['year'];
+                                        $hour = $info['hours'];
+                                        $min = $info['minutes'];
+                                        $sec = $info['seconds'];
+
+                                        $current_date = "$date/$month/$year == $hour:$min:$sec";
+                                        @endphp
                                     @foreach ($permohonan as $item)
-                                        <tr>
+                                    @php
+                                    $tes = Helpers::getDate($item->created_at);
+                                    @endphp
+                                    {{ Helpers::NewData($item->created_at) }}
+                                    {{ Helpers::getDate(new DateTime()) }}
+                                        <tr style="background-color: {{ Helpers::RangeTime($item->created_at) >= '1hari lalu' ? 'none' : 'rgba(255, 255, 11, 0.658)' }}">
                                             <th scope="row">{{ $loop->iteration }}</th>
                                             <td><button class="btn btn-link" data-bs-tooltip="tooltip"
                                                     data-bs-toggle="modal"
@@ -69,9 +86,11 @@
                                                     title="Lihat Permohonan">{{ $item->kode_pemohon }}</button></td>
                                             @include('admin/faq/permohonan/addons/_detail')
                                             <td><a href="https://mail.google.com/mail/u/0/#inbox?compose=new"
-                                                    target="_blank" data-bs-tooltip="tooltip" data-bs-placement="top" title="Send Data via Email">{{ $item->email }}</a></td>
-                                            <td><a href="https://wa.me/{{ $item->telepon }}"
-                                                    target="_blank" data-bs-tooltip="tooltip" data-bs-placement="top" title="Send Data via Whatsapp">{{ $item->telepon }}</a></td>
+                                                    target="_blank" data-bs-tooltip="tooltip" data-bs-placement="top"
+                                                    title="Send Data via Email">{{ $item->email }}</a></td>
+                                            <td><a href="https://wa.me/{{ $item->telepon }}" target="_blank"
+                                                    data-bs-tooltip="tooltip" data-bs-placement="top"
+                                                    title="Send Data via Whatsapp">{{ $item->telepon }}</a></td>
                                             <td>
                                                 <address>{{ $item->alamat }}</address>
                                             </td>

@@ -310,27 +310,40 @@ class Helpers
         return $month;
     }
 
+    public static function NewData($date)
+    {
+        $info = $date;
+        dd($info);
+        $date = $info['mday'];
+        $month = $info['mon'];
+        $year = $info['year'];
+        $hour = $info['hours'];
+        $min = $info['minutes'];
+        $sec = $info['seconds'];
+        return $date;
+    }
+
     public static function RangeTime($param)
     {
         $param3 = date_diff(new DateTime($param), new DateTime());
 
         if ($param3->i == 0) {
-            $param4 = $param3->s . 's ago';
+            $param4 = $param3->s . 'detik lalu';
             return $param4;
         } elseif ($param3->h == 0) {
-            $param4 = $param3->i . 'min ago';
+            $param4 = $param3->i . 'menit lalu';
             return $param4;
         } elseif ($param3->days == 0) {
-            $param4 = $param3->h . 'h ago';
+            $param4 = $param3->h . 'jam lalu';
             return $param4;
         } elseif ($param3->m == 0) {
-            $param4 = $param3->d . 'd ago';
+            $param4 = $param3->d . 'hari lalu';
             return $param4;
         } elseif ($param3->y == 0) {
-            $param4 = $param3->m . 'm ago';
+            $param4 = $param3->m . 'bulan lalu';
             return $param4;
         } elseif ($param3->y != 0) {
-            $param4 = $param3->y . 'y ago';
+            $param4 = $param3->y . 'tahun lalu';
             return $param4;
         } else {
             $param4 = 0;
