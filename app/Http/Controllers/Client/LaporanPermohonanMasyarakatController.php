@@ -24,13 +24,22 @@ class LaporanPermohonanMasyarakatController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display the specified resource.
      *
+     * @param  int  $token
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function show(Request $token)
     {
-        //
+        $status = Permohonan::where('kode_pemohon', '=', $token->code)
+        ->select('status')
+        ->first();
+
+        if ($status->status == 'proses') {
+            return redirect()->back()->with(['warning_ext' => 'status permohonan anda sedang dalam proses, hubungi admin jika permohonan anda belum selesai']);
+        } else {
+            return redirect()->back()->with(['success' => 'status permohonan anda sudah selesai']);
+        }
     }
 
     /**
@@ -44,6 +53,7 @@ class LaporanPermohonanMasyarakatController extends Controller
         $ext        = array('png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG');
 
         if ($request->jenis == 'permohonan') {
+            $code       = 'req-' . uniqid();
             $Pshow       = 'show';
             $Lshow       = '';
             $Pactive     = 'active';
@@ -77,6 +87,7 @@ class LaporanPermohonanMasyarakatController extends Controller
             }
 
             Permohonan::create([
+                'kode_pemohon' => $code,
                 'nama' => $request->nama,
                 'email' => $request->email,
                 'telepon' => $request->telepon,
@@ -88,9 +99,9 @@ class LaporanPermohonanMasyarakatController extends Controller
                 'asal_instansi' => $request->asal_instansi
             ]);
 
-            return redirect()->back()->with(['success' => 'Permohonan sudah masuk!'], 'Pshow', 'Pactive', 'Lshow', 'Lactive');
+            return redirect()->back()->with(['success' => 'Permohonan sudah masuk kode "' . $code . '" harap catat kode permohonan untuk pengecekkan status permohonan'], 'Pshow', 'Pactive', 'Lshow', 'Lactive');
         } elseif ($request->jenis == 'pelaporan') {
-
+            $code       = 'lap-' . uniqid();
             $Pshow       = '';
             $Lshow       = 'show';
             $Pactive     = '';

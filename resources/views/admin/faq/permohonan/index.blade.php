@@ -82,7 +82,7 @@
                                                         Proses</a>
                                                 @else
                                                     <a href="#" class="btn btn-success btn-sm"><i
-                                                            class="bi bi-check"></i> Selesai</a>
+                                                            class="bi bi-check"></i> selesai</a>
                                                 @endif
                                             </td>
                                             <td>

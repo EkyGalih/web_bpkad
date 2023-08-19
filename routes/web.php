@@ -58,6 +58,7 @@ Route::group(['prefix' => 'SubPages'], function () {
 Route::group(['prefix' => 'Permohonan_dan_Pengaduan'], function () {
     Route::get('/', [LaporanPermohonanMasyarakatController::class, 'index'])->name('faq.index');
     Route::post('store', [LaporanPermohonanMasyarakatController::class, 'store'])->name('faq.store');
+    Route::post('show', [LaporanPermohonanMasyarakatController::class, 'show'])->name('faq.show');
     Route::put('update/{id}', [LaporanPermohonanMasyarakatController::class, 'update'])->name('faq.update');
     Route::get('destroy/{id}', [LaporanPermohonanMasyarakatController::class, 'destroy'])->name('faq.destroy');
 });
