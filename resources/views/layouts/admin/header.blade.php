@@ -32,7 +32,9 @@
 
                 <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                     <i class="bi bi-bell"></i>
+                    @if ($count != 0)
                     <span class="badge bg-danger badge-number">{{ $count }}</span>
+                    @endif
                 </a><!-- End Notification Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
@@ -76,7 +78,9 @@
                 @endphp
                 <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                     <i class="bi bi-chat-left-text"></i>
+                    @if ($count2 != 0)
                     <span class="badge bg-success badge-number">{{ $count2 }}</span>
+                    @endif
                 </a><!-- End Messages Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
