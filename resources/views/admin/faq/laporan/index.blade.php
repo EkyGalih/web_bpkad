@@ -5,6 +5,11 @@
 @section('additional-css')
     <link rel="stylesheet" type="text/css"
         href="{{ asset('server/vendor/DataTables/DataTables-1.13.1/css/jquery.dataTables.min.css') }}" />
+        <style>
+            .image_upload>input {
+                display: none;
+            }
+        </style>
 @endsection
 @section('content')
     <main id="main" class="main">
@@ -120,5 +125,13 @@
         $(document).ready(function() {
             $('#example').DataTable();
         });
+
+        var loadBerkas = function(event) {
+            var berkas = document.getElementById('berkas');
+            berkas.src = URL.createObjectURL(event.target.files[0]);
+            berkas.onload = function() {
+                URL.revokeObjectURL(berkas.src);
+            }
+        };
     </script>
 @endsection

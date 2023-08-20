@@ -114,6 +114,7 @@ class LaporanPermohonanMasyarakatController extends Controller
 
             return redirect()->back()->with(['success_req' => 'Permohonan sudah masuk kode "' . $code . '" harap catat kode permohonan untuk pengecekkan status permohonan'], 'Pshow', 'Pactive', 'Lshow', 'Lactive');
         } elseif ($request->jenis == 'pelaporan') {
+            // dd($request);
             $code       = 'lap-' . uniqid();
             $Pshow       = '';
             $Lshow       = 'show';
@@ -221,7 +222,7 @@ class LaporanPermohonanMasyarakatController extends Controller
     public function destroy($id)
     {
         $laporan = Laporan::findOrFail($id);
-       
+
         $laporan->berkas != null ? unlink($laporan->berkas) : '';
         $laporan->berkas_jawaban != null ? unlink($laporan->berkas_jawaban) : '';
         $laporan->delete();

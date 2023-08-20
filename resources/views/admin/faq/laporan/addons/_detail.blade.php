@@ -7,10 +7,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>{{ Helpers::GetDate($lap->tgl_laporan) }} {{ Helpers::GetTime($lap->tgl_laporan) }}</p>
+                <p><i class="bi bi-calendar"></i> {{ Helpers::GetDate($lap->tgl_laporan) }} {{ Helpers::GetTime($lap->tgl_laporan) }}</p>
                 <fieldset>
-                    <legend>{{ $lap->lokasi_kejadian }}</legend>
-                    <p>{{ $lap->isi_laporan }}</p>
+                    <legend><i class="bi bi-geo-alt-fill"></i> {{ $lap->lokasi_kejadian }}</legend>
+                    <p style="border: 2px solid; border-top-left-radius: 50px; border-bottom-right-radius: 50px; padding-left: 25px; padding-bottom: 10px; padding-top: 10px;">
+                        <i class="bi bi-volume-up-fill">:</i>
+                        {{ $lap->isi_laporan }}
+                    </p>
                 </fieldset>
             </div>
             <div class="modal-footer">

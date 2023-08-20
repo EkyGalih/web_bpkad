@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <img src="{{ asset($lap->berkas) }}" style="text-align: center;" height="200" width="150" alt="{{ $lap->judul_laporan }}">
+                <img src="{{ asset($lap->berkas) }}" style="text-align: center;" height="200" max-width="50%" alt="{{ $lap->judul_laporan }}">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i>
