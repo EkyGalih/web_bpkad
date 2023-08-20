@@ -312,15 +312,16 @@ class Helpers
 
     public static function NewData($date)
     {
-        $info = $date;
-        dd($info);
-        $date = $info['mday'];
-        $month = $info['mon'];
-        $year = $info['year'];
-        $hour = $info['hours'];
-        $min = $info['minutes'];
-        $sec = $info['seconds'];
-        return $date;
+        $exp_date = explode(' ', $date);
+        $new_date = date('Y-m-d');
+
+        if ($exp_date[0] == $new_date) {
+            $data = 'true';
+        } else {
+            $data = 'false';
+        }
+
+        return $data;
     }
 
     public static function RangeTime($param)
@@ -393,7 +394,10 @@ class Helpers
 
     public static function _getPermohonan()
     {
-        return Permohonan::where('status', 'proses')->limit(4)->get();
+        return Permohonan::where('status', 'proses')
+            ->limit(4)
+            ->orderBy('created_at', 'DESC')
+            ->get();
     }
 
     public static function _PostMonth($param)

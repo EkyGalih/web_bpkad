@@ -19,4 +19,27 @@
 
  <!-- Template Main CSS File -->
  <link href="{{ asset('server/css/style.css') }}" rel="stylesheet">
+ <style>
+     @-webkit-keyframes blinker {
+         from {
+             opacity: 1.0;
+         }
+
+         to {
+             opacity: 0.0;
+         }
+     }
+
+     .blink {
+         text-decoration: blink;
+         color: lightcoral;
+         background-color: lightyellow;
+         font-weight: bold;
+         -webkit-animation-name: blinker;
+         -webkit-animation-duration: 0.6s;
+         -webkit-animation-iteration-count: infinite;
+         -webkit-animation-timing-function: ease-in-out;
+         -webkit-animation-direction: alternate;
+     }
+ </style>
  @yield('additional-css')

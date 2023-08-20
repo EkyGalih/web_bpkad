@@ -7,7 +7,7 @@
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
-{{--
+    {{--
     <div class="search-bar">
         <form class="search-form d-flex align-items-center" method="POST" action="#">
             <input type="text" name="query" placeholder="Search" title="Enter search keyword">
@@ -38,7 +38,8 @@
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                     <li class="dropdown-header">
                         You have {{ $count }} new notifications
-                        <a href="{{ route('laporan-admin.index') }}"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                        <a href="{{ route('laporan-admin.index') }}"><span
+                                class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
@@ -91,12 +92,16 @@
                     @foreach ($permohonan as $item)
                         <li class="message-item">
                             <a href="#">
-                                <img src="{{ asset($item->ktp) }}" alt=""
-                                    class="rounded-circle">
+                                <img src="{{ asset($item->ktp) }}" alt="" class="rounded-circle">
                                 <div>
                                     <h4>{{ $item->nama }}</h4>
                                     <p>{{ $item->informasi_diminta }}</p>
-                                    <p>{{ Helpers::RangeTime($item->created_at) }} </p>
+                                    <p><span
+                                            class="badge bg-secondary">{{ Helpers::RangeTime($item->created_at) }}</span>
+                                        <span
+                                            class="{{ Helpers::NewData($item->created_at) == 'false' ? '' : 'blink' }}"
+                                            style="font-size: 8px;">{{ Helpers::NewData($item->created_at) == 'true' ? 'Baru' : '' }}</span>
+                                    </p>
                                 </div>
                             </a>
                         </li>
@@ -130,7 +135,8 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('profile', Auth::user()->id) }}">
+                        <a class="dropdown-item d-flex align-items-center"
+                            href="{{ route('profile', Auth::user()->id) }}">
                             <i class="bi bi-person"></i>
                             <span>Profil</span>
                         </a>

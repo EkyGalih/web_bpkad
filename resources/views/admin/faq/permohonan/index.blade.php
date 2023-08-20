@@ -59,31 +59,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php
-                                    date_default_timezone_set('Asia/Makassar');
-                                        $info = getdate();
-                                        $date = $info['mday'];
-                                        $month = $info['mon'];
-                                        $year = $info['year'];
-                                        $hour = $info['hours'];
-                                        $min = $info['minutes'];
-                                        $sec = $info['seconds'];
-
-                                        $current_date = "$date/$month/$year == $hour:$min:$sec";
-                                        @endphp
                                     @foreach ($permohonan as $item)
-                                    @php
-                                    $tes = Helpers::getDate($item->created_at);
-                                    @endphp
-                                    {{ Helpers::NewData($item->created_at) }}
-                                    {{ Helpers::getDate(new DateTime()) }}
-                                        <tr style="background-color: {{ Helpers::RangeTime($item->created_at) >= '1hari lalu' ? 'none' : 'rgba(255, 255, 11, 0.658)' }}">
+                                        @php
+                                            $tes = Helpers::getDate($item->created_at);
+                                        @endphp
+                                        <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
                                             <td><button class="btn btn-link" data-bs-tooltip="tooltip"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#ShowPermohonan{{ $loop->iteration }}"
                                                     data-bs-placement="top"
-                                                    title="Lihat Permohonan">{{ $item->kode_pemohon }}</button></td>
+                                                    title="Lihat Permohonan">{{ $item->kode_pemohon }}</button> <sup
+                                                    class="{{ Helpers::NewData($item->created_at) == 'true' ? 'blink' : '' }}">{{ Helpers::NewData($item->created_at) == 'true' ? 'Baru' : '' }}</sup></td>
                                             @include('admin/faq/permohonan/addons/_detail')
                                             <td><a href="https://mail.google.com/mail/u/0/#inbox?compose=new"
                                                     target="_blank" data-bs-tooltip="tooltip" data-bs-placement="top"
