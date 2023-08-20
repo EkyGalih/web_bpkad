@@ -221,8 +221,9 @@ class LaporanPermohonanMasyarakatController extends Controller
     public function destroy($id)
     {
         $laporan = Laporan::findOrFail($id);
-        unlink($laporan->berkas);
-        unlink($laporan->berkas_jawaban);
+       
+        $laporan->berkas != null ? unlink($laporan->berkas) : '';
+        $laporan->berkas_jawaban != null ? unlink($laporan->berkas_jawaban) : '';
         $laporan->delete();
 
         return redirect()->back()->with(['success' => 'Laporan dihapus!']);
