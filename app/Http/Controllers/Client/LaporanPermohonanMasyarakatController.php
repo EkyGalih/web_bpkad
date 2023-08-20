@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Mail\MailPermohonan;
 use App\Models\Laporan;
 use App\Models\Permohonan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class LaporanPermohonanMasyarakatController extends Controller
 {
