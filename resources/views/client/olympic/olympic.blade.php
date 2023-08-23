@@ -78,7 +78,18 @@
                         <tbody>
                             @foreach ($olympics as $olympic)
                                 <tr>
-                                    <td style="text-align: center;">{{ $loop->iteration }}</td>
+                                    @if ($max1 == $olympic->total)
+                                        <td style="text-align: center;"><img height="20px" width="30px"
+                                                src="{{ asset('upload/1st.png') }}" alt="1st"></td>
+                                    @elseif ($max2 == $olympic->total)
+                                        <td style="text-align: center;"><img height="20px" width="30px"
+                                                src="{{ asset('upload/2nd.png') }}" alt="1st"></td>
+                                    @elseif ($max3 == $olympic->total)
+                                        <td style="text-align: center;"><img height="20px" width="30px"
+                                                src="{{ asset('upload/3trd.png') }}" alt="1st"></td>
+                                    @else
+                                        <td style="text-align: center'">{{ $loop->iteration }}</td>
+                                    @endif
                                     <td>{{ $olympic->nama_bidang }}</td>
                                     <td style="text-align: center; font-weight: bold;">
                                         {{ $olympic->emas }}</td>

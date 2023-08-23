@@ -88,8 +88,8 @@ class HomeController extends Controller
             ->get();
         $informasi = KIP::where('jenis_informasi', '=', 'berkala')
             ->where('tahun', '=', date('Y'))
-            ->limit(13  )
-            ->orWhere('tahun', '=', date('Y')-1)
+            ->limit(13)
+            ->orWhere('tahun', '=', date('Y') - 1)
             ->orderBy('tahun', 'DESC')
             ->limit(13)
             ->get();
@@ -205,15 +205,29 @@ class HomeController extends Controller
     {
         $olympics = Olympic::join('bidang', 'olympic.bidang_id', '=', 'bidang.uuid')
             ->orderBy('emas', 'DESC')
-            // ->orderBy('perak', 'DESC')
-            // ->orderBy('perunggu', 'DESC')
             ->orderBy('total', 'DESC')
             ->select(
                 'bidang.nama_bidang',
                 'olympic.*'
             )
             ->get();
+        $total1 = Olympic::join('bidang', 'olympic.bidang_id', '=', 'bidang.uuid')
+            ->orderBy('emas', 'DESC')
+            ->orderBy('total', 'DESC')
+            ->select(
+                'olympic.total'
+            )
+            ->get()->toArray();
+        $max = [];
+        foreach ($total1 as $item) {
+            array_push($max, $item['total']);
+        }
+        $maxx = array_unique($max);
+        $maxx = array_values($maxx);
+        $max1 = $maxx[0];
+        $max2 = $maxx[1];
+        $max3 = $maxx[2];
 
-        return view('client.olympic.olympic', compact('olympics'));
+        return view('client.olympic.olympic', compact('olympics', 'max1', 'max2', 'max3'));
     }
 }
