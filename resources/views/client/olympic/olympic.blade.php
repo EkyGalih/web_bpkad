@@ -115,7 +115,7 @@
                                         @else
                                             <td style="text-align: center'">{{ $loop->iteration }}</td>
                                         @endif
-                                        <td>{{ $olympic->nama_bidang }}</td>
+                                        <td>{{ strtoupper($olympic->nama_bidang) }}</td>
                                         <td style="text-align: center; font-weight: bold;">
                                             {{ $olympic->emas }}</td>
                                         <td style="text-align: center; font-weight: bold;">
