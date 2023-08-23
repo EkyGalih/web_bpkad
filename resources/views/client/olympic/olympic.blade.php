@@ -64,7 +64,7 @@
         <section class="breadcrumbs">
             <div class="card olympic-card" style="padding: 5%; margin-right: 2%; margin-left: 2%; margin-top: 1%;">
                 <div class="portofolio-description">
-                    <table class="table styled-table" style="margin-top: 25%;">
+                    <table class="table styled-table table-responsive" style="margin-top: 25%;">
                         <thead>
                             <tr>
                                 <td>Rank</td>
