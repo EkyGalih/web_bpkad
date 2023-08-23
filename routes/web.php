@@ -18,6 +18,7 @@ Route::get('login', [LoginController::class, 'index'])->name('login.index');
 Route::post('login', [LoginController::class, 'login'])->name('login.store');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('404', [HomeController::class, '_NotFound'])->name('not_found.client');
+Route::get('bpkad-olympic', [HomeController::class, 'olympic'])->name('bpkad-olympic');
 
 Route::get('/auth/redirect', 'Auth\LoginController@redirectToProvider');
 Route::get('/auth/callback', 'Auth\LoginController@handleProviderCallback');

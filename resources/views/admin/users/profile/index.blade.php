@@ -148,7 +148,7 @@
                                                     <p class="image_upload">
                                                         <label for="userImage">
                                                             <a class="btn btn-primary btn-sm" rel="nofollow"><span
-                                                                    class='bi bi-upload'></span></a>
+                                                                       class='bi bi-upload'></span></a>
                                                         </label>
                                                         <input type="file" name="foto" id="userImage"
                                                             accept="image/*" onchange="loadFile(event)">

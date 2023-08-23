@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\DaftarApp;
 use App\Models\GaleryVideo;
 use App\Models\KIP;
+use App\Models\Olympic;
 use App\Models\Pages;
 use App\Models\Posts;
 use App\Models\Slideitem;
@@ -197,5 +198,22 @@ class HomeController extends Controller
     public function _NotFound()
     {
         return view('client.not_found');
+    }
+
+
+    public function olympic()
+    {
+        $olympics = Olympic::join('bidang', 'olympic.bidang_id', '=', 'bidang.uuid')
+            ->orderBy('emas', 'DESC')
+            // ->orderBy('perak', 'DESC')
+            // ->orderBy('perunggu', 'DESC')
+            ->orderBy('total', 'DESC')
+            ->select(
+                'bidang.nama_bidang',
+                'olympic.*'
+            )
+            ->get();
+
+        return view('client.olympic.olympic', compact('olympics'));
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Tools\AddressController;
 use App\Http\Controllers\Admin\Tools\AppsController;
 use App\Http\Controllers\Admin\Tools\LinkController;
@@ -34,6 +35,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         Route::get('edit/{id}', [AppsController::class, 'edit'])->name('apps-admin.edit');
         Route::put('update/{id}', [AppsController::class, 'update'])->name('apps-admin.update');
         Route::get('destroy/{id}', [AppsController::class, 'destroy'])->name('apps-admin.destroy');
+    });
+
+    Route::group(['prefix' => 'olympic'], function () {
+        Route::get('/{id?}', [AdminController::class, 'olympic'])->name('olympic-admin.index');
+        Route::post('store', [AdminController::class, 'store'])->name('olympic-admin.store');
+        Route::put('update/{id}', [AdminController::class, 'update'])->name('olympic-admin.update');
+        Route::get('destroy/{id}', [AdminController::class, 'destroy'])->name('olympic-admin.destroy');
     });
 
 });

@@ -144,6 +144,11 @@
                         <i class="bi bi-circle"></i><span>Apps</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('olympic-admin.index') }}" class="@yield('tools-olympic')">
+                        <i class="bi bi-circle"></i><span>Olympic</span>
+                    </a>
+                </li>
             </ul>
         </li><!-- End Components Nav -->
 
