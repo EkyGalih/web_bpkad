@@ -57,7 +57,7 @@ class AdminController extends Controller
                 ->first();
         }
 
-        return view('admin.tools.olympic.index', compact('bidangs', 'olympics', 'olympic'));
+        return view('admin.Tools.olympic.index', compact('bidangs', 'olympics', 'olympic'));
     }
 
     public function store(Request $request)
