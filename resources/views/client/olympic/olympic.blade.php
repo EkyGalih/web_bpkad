@@ -51,9 +51,30 @@
             color: #009879;
         }
 
-        .title {
-            background: -webkit-linear-gradient(45deg, #ffffff, #df0606);
-            font-weight: bold;
+        .blink {
+            animation: blinker 3s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .card-olympic {
+            border-style: solid;
+            width: auto;
+            height: auto;
+
+            padding-top: 35px;
+            padding-bottom: 20px;
+            padding-left: 40px;
+
+            background: linear-gradient(red, white);
+        }
+
+        h2 {
+            background: -webkit-linear-gradient(white, black);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -65,7 +86,12 @@
             <div class="card olympic-card" style="padding: 5%; margin-right: 2%; margin-left: 2%; margin-top: 1%;">
                 <div class="portofolio-description">
                     <div style="overflow-x:auto;">
-                        <table class="table styled-table" style="margin-top: 25%;">
+                        <div class="card-olympic">
+                            <h2 class="blink"
+                                style="margin-top: 25%; color: #FFFFFF; font-weight: bold; margin-top: -10%; padding: -5%;">
+                                KLASEMEN SEMENTARA OLIMPIADE BPKAD AGUSTUS {{ date('Y') }}</h2>
+                        </div>
+                        <table class="table styled-table">
                             <thead>
                                 <tr>
                                     <td>Rank</td>
