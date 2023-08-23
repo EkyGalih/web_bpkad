@@ -104,6 +104,7 @@
                                     </h5>
                                 </div>
                             </div>
+                            <div style="overflow-x: auto;">
                             <table class="table table-hover" id="table-link">
                                 <thead>
                                     <tr>
@@ -135,6 +136,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            </div>
                         </div>
                     </div>
                 </div>
