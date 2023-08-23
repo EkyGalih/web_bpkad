@@ -74,7 +74,7 @@
             <div class="card olympic-card" style="padding: 5%; margin-right: 2%; margin-left: 2%; margin-top: 1%;">
                 <div class="portofolio-description">
                     <div style="overflow-x:auto;">
-                        <table class="table styled-table">
+                        <table class="table styled-table" style="margin-top: 25%;">
                             <thead>
                                 <tr>
                                     <td>Rank</td>
