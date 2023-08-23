@@ -74,9 +74,6 @@
             <div class="card olympic-card" style="padding: 5%; margin-right: 2%; margin-left: 2%; margin-top: 1%;">
                 <div class="portofolio-description">
                     <div style="overflow-x:auto;">
-                        <h1 class="blink"
-                            style="margin-top: 25%; color: #FFFFFF; font-weight: bold; text-align: center;">
-                            KLASEMEN SEMENTARA OLIMPIADE BPKAD AGUSTUS {{ date('Y') }}</h1>
                         <table class="table styled-table">
                             <thead>
                                 <tr>
