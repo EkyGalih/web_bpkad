@@ -205,29 +205,49 @@ class HomeController extends Controller
     {
         $olympics = Olympic::join('bidang', 'olympic.bidang_id', '=', 'bidang.uuid')
             ->orderBy('emas', 'DESC')
+            ->orderBy('perak', 'DESC')
+            ->orderBy('perunggu', 'DESC')
             ->orderBy('total', 'DESC')
             ->select(
                 'bidang.nama_bidang',
                 'olympic.*'
             )
             ->get();
-        $total1 = Olympic::join('bidang', 'olympic.bidang_id', '=', 'bidang.uuid')
+        $rank = Olympic::join('bidang', 'olympic.bidang_id', '=', 'bidang.uuid')
             ->orderBy('emas', 'DESC')
+            ->orderBy('perak', 'DESC')
+            ->orderBy('perunggu', 'DESC')
             ->orderBy('total', 'DESC')
             ->select(
-                'olympic.total'
+                'olympic.emas',
+                'olympic.perak',
+                'olympic.perunggu',
+                'olympic.total',
             )
             ->get()->toArray();
-        $max = [];
-        foreach ($total1 as $item) {
-            array_push($max, $item['total']);
-        }
-        $maxx = array_unique($max);
-        $maxx = array_values($maxx);
-        $max1 = $maxx[0];
-        $max2 = $maxx[1];
-        $max3 = $maxx[2];
 
-        return view('client.olympic.olympic', compact('olympics', 'max1', 'max2', 'max3'));
+        $ranks = [];
+
+        foreach ($rank as $item) {
+            array_push($ranks, $item);
+        }
+
+        $emas1 = $ranks[0]['emas'];
+        $emas2 = $ranks[1]['emas'];
+        $emas3 = $ranks[2]['emas'];
+
+        $perak1 = $ranks[0]['perak'];
+        $perak2 = $ranks[1]['perak'];
+        $perak3 = $ranks[2]['perak'];
+
+        $perunggu1 = $ranks[0]['perunggu'];
+        $perunggu2 = $ranks[1]['perunggu'];
+        $perunggu3 = $ranks[2]['perunggu'];
+
+        $max1 = $ranks[0]['total'];
+        $max2 = $ranks[1]['total'];
+        $max3 = $ranks[2]['total'];
+
+        return view('client.olympic.olympic', compact('olympics', 'max1', 'max2', 'max3', 'emas1', 'emas2', 'emas3', 'perak1', 'perak2', 'perak3', 'perunggu1', 'perunggu2', 'perunggu3'));
     }
 }

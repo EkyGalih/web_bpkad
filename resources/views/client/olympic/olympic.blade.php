@@ -67,7 +67,7 @@
                     <table class="table styled-table" style="margin-top: 25%;">
                         <thead>
                             <tr>
-                                <td style="text-align: center;">No</td>
+                                <td>Rank</td>
                                 <td>Bidang</td>
                                 <td style="text-align: center; font-weight: bold;">Emas</td>
                                 <td style="text-align: center; font-weight: bold;">Perak</td>
@@ -76,16 +76,19 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {{-- {{ $emas1 .$perak1.$perunggu1 }}<br/>
+                            {{ $emas2 .$perak2.$perunggu2 }}<br/>
+                            {{ $emas3 .$perak3.$perunggu3 }} --}}
                             @foreach ($olympics as $olympic)
                                 <tr>
-                                    @if ($max1 == $olympic->total)
-                                        <td style="text-align: center;"><img height="20px" width="20px"
+                                    @if ($max1 == $olympic->total && $emas1 == $olympic->emas && $perak1 == $olympic->perak && $perunggu1 == $olympic->perunggu)
+                                        <td><img height="20px" width="20px"
                                                 src="{{ asset('upload/1st.png') }}" alt="1st"></td>
-                                    @elseif ($max2 == $olympic->total)
-                                        <td style="text-align: center;"><img height="20px" width="20px"
+                                    @elseif ($max2 == $olympic->total && $emas2 == $olympic->emas && $perak2 == $olympic->perak && $perunggu2 == $olympic->perunggu)
+                                        <td><img height="20px" width="20px"
                                                 src="{{ asset('upload/2nd.png') }}" alt="1st"></td>
-                                    @elseif ($max3 == $olympic->total)
-                                        <td style="text-align: center;"><img height="20px" width="20px"
+                                    @elseif ($max3 == $olympic->total && $emas3 == $olympic->emas && $perak3== $olympic->perak && $perunggu3 == $olympic->perunggu)
+                                        <td><img height="20px" width="20px"
                                                 src="{{ asset('upload/3trd.png') }}" alt="1st"></td>
                                     @else
                                         <td style="text-align: center'">{{ $loop->iteration }}</td>
