@@ -213,6 +213,16 @@ class HomeController extends Controller
                 'olympic.*'
             )
             ->get();
+        $champions = Olympic::join('bidang', 'olympic.bidang_id', '=', 'bidang.uuid')
+            ->orderBy('emas', 'DESC')
+            ->orderBy('perak', 'DESC')
+            ->orderBy('perunggu', 'DESC')
+            ->orderBy('total', 'DESC')
+            ->select(
+                'bidang.nama_bidang',
+                'olympic.*'
+            )
+            ->first();
         $rank = Olympic::join('bidang', 'olympic.bidang_id', '=', 'bidang.uuid')
             ->orderBy('emas', 'DESC')
             ->orderBy('perak', 'DESC')
@@ -248,6 +258,6 @@ class HomeController extends Controller
         $max2 = $ranks[1]['total'];
         $max3 = $ranks[2]['total'];
 
-        return view('client.olympic.olympic', compact('olympics', 'max1', 'max2', 'max3', 'emas1', 'emas2', 'emas3', 'perak1', 'perak2', 'perak3', 'perunggu1', 'perunggu2', 'perunggu3'));
+        return view('client.olympic.olympic', compact('olympics', 'champions', 'max1', 'max2', 'max3', 'emas1', 'emas2', 'emas3', 'perak1', 'perak2', 'perak3', 'perunggu1', 'perunggu2', 'perunggu3'));
     }
 }
