@@ -168,7 +168,7 @@
                 <div class="portofolio-description">
                     <div style="overflow-x:auto;">
                         <div class="box Efek2" style="margin-bottom: -20%;">
-                            <h3> <span style="color: #FFFFFF; font-size: 20px;">Champions of BPKAD</span><br /> <img
+                            <h3> <span style="color: #FFFFFF; font-size: 20px;">Champions of BPKAD {{ $olympics[0]->tahun }} </span><br /> <img
                                     class="blink" src="{{ asset('upload/mahkota.png') }}" alt="mahkota" height="50px"
                                     width="60px" style="margin-top: -6px;">
                                 <br /> <span style="font-weight: bold;">{{ $champions->nama_bidang }}</span>
