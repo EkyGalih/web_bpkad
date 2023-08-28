@@ -68,7 +68,7 @@
         }
 
         /* efek kembang api */
-        @import "compass/css3";
+        /* @import "compass/css3"; */
 
         html,
         body {
@@ -78,9 +78,9 @@
             background: black;
         }
 
-        canvas {
+        /* canvas {
             display: block;
-        }
+        } */
 
         /* box champions */
         .box h3 {
@@ -103,7 +103,7 @@
         /*==================================================
                  * Efek 2
                  * ===============================================*/
-        .Efek2 {
+        /* .Efek2 {
             position: relative;
         }
 
@@ -138,7 +138,7 @@
             transform: rotate(3deg);
             right: 10px;
             left: auto;
-        }
+        } */
 
         /* css blink */
         @-webkit-keyframes blinker {
@@ -174,8 +174,8 @@
                                 <br /> <span style="font-weight: bold;">{{ $champions->nama_bidang }}</span>
                             </h3>
                         </div>
-                        <table class="table styled-table" style="margin-top: -25%;">
-                            <canvas id="canvas"></canvas>
+                        <table class="table styled-table" style="margin-top: 25%;">
+                            {{-- <canvas id="canvas"></canvas> --}}
                             <thead>
                                 <tr>
                                     <td>Rank</td>
