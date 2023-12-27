@@ -37,7 +37,7 @@
                             <form action="{{ route('post-admin.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Kategori</label>
+                                    <label for="inputText" class="col-sm-2 col-form-label">Kategori <sup style="color: red;">*</sup></label>
                                     <div class="col-sm-10">
                                         <select name="posts_category_id" class="form-control">
                                             <option value="">Pilih Kategori</option>
@@ -48,20 +48,20 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Judul</label>
+                                    <label for="inputText" class="col-sm-2 col-form-label">Judul <sup style="color: red;">*</sup></label>
                                     <div class="col-sm-10">
                                         <input type="text" name="title" class="form-control">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Agenda Kaban?</label>
+                                    <label for="inputText" class="col-sm-2 col-form-label">Agenda Kaban? <sup style="color: red;">*</sup></label>
                                     <div class="col-sm-10">
                                         <input type="radio" name="agenda_kaban" value="ya"> Ya
                                         <input type="radio" name="agenda_kaban" value="tidak" checked> Tidak
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Foto Berita</label>
+                                    <label for="inputText" class="col-sm-2 col-form-label">Foto Berita <sup style="color: red;">*</sup></label>
                                     <div class="col-sm-10">
                                         <p class="image_upload">
                                             <label for="userImage">
@@ -75,13 +75,13 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Kontent</label>
+                                    <label for="inputText" class="col-sm-2 col-form-label">Kontent <sup style="color: red;">*</sup></label>
                                     <div class="col-sm-10">
                                         <textarea name="content" class="tinymce-editor"></textarea><!-- End TinyMCE Editor -->
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Caption</label>
+                                    <label for="inputText" class="col-sm-2 col-form-label">Caption <sup style="color: red;">*</sup></label>
                                     <div class="col-sm-10">
                                         <input type="text" name="caption" class="form-control">
                                     </div>
@@ -93,7 +93,7 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Waktu Upload</label>
+                                    <label for="inputText" class="col-sm-2 col-form-label">Waktu Upload <sup style="color: red;">*</sup></label>
                                     <div class="col-sm-2">
                                         <input id="date" type="date" name="date"
                                             class="form-control @error('date') is-invalid @enderror">

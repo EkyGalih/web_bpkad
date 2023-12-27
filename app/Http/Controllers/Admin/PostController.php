@@ -76,7 +76,7 @@ class PostController extends Controller
             'foto_berita' => $request->foto_berita,
             'users_id' => Auth::user()->id,
             'caption' => $request->caption,
-            'posts_category_id' => $request->posts_category_id,
+            'posts_category_id' => $request->posts_category_id || 1,
             'tags' => $request->tags,
             'agenda_kaban' => $request->agenda_kaban,
             'created_at' => $request->date . ' ' . $request->time . ':' . date('s')
