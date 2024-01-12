@@ -257,7 +257,7 @@
                                                         <a
                                                             href="{{ route('client.show', Helpers::randomString(120) . '/' . $post->id . '/' . Helpers::randomString(100)) }}">
                                                             <img height="200" src="{{ asset($post->foto_berita) }}"
-                                                                alt="simple blog template bootstrap">
+                                                                alt="{{ substr($post->title, 0, 50) }}">
                                                         </a>
                                                     </div>
                                                     <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
@@ -340,7 +340,7 @@
                                                 <a
                                                     href="{{ route('artikel.show', Helpers::randomString(120) . '/' . $artikel->id . '/' . Helpers::randomString(100)) }}">
                                                     <img height="200" src="{{ asset($artikel->foto_berita) }}"
-                                                        alt="simple blog template bootstrap">
+                                                        alt="{{ substr($post->title, 0, 50) }}">
                                                 </a>
                                             </div>
                                             <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
@@ -691,7 +691,7 @@
                             <a
                                 href="{{ route('client.show', Helpers::randomString(120) . '/' . $post->id . '/' . Helpers::randomString(100)) }}">
                                 <img height="200" src="{{ asset($post->foto_berita) }}"
-                                    alt="simple blog template bootstrap">
+                                    alt="{{ substr($post->title, 0, 50) }}">
                             </a>
                         </div>
                         <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
@@ -761,7 +761,7 @@
                                     <a
                                         href="{{ route('artikel.show', Helpers::randomString(120) . '/' . $artikel->id . '/' . Helpers::randomString(100)) }}">
                                         <img height="200" src="{{ asset($artikel->foto_berita) }}"
-                                            alt="simple blog template bootstrap">
+                                            alt="{{ substr($post->title, 0, 50) }}">
                                     </a>
                                 </div>
                                 <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
