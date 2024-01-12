@@ -486,6 +486,8 @@
             </div>
         </section>
     @elsedesktop
+    <section id="hero-mobile" class="d-flex align-items-center">
+    </section>
         <div class="row py-2">
             <!--Breaking box-->
             <div class="col-1 col-md-3 col-lg-2 py-1 pr-md-0 mb-md-1">
