@@ -96,10 +96,10 @@
                                             <div class="card border-0 rounded-0 text-light overflow zoom">
                                                 <div class="position-relative">
                                                     <!--thumbnail img-->
-                                                    <div class="ratio_left-cover-1 image-wrapper">
+                                                    <div class="ratio_left-cover-2 image-wrapper">
                                                         <a
                                                             href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[0]->id . '/' . Helpers::randomString(100)) }}">
-                                                            <img height="437" src="{{ asset($carousel[0]->foto_berita) }}"
+                                                            <img height="437" width="100%" src="{{ asset($carousel[0]->foto_berita) }}"
                                                                 alt="Bootstrap news template">
                                                         </a>
                                                     </div>
@@ -133,7 +133,7 @@
                                                     <div class="ratio_left-cover-1 image-wrapper">
                                                         <a
                                                             href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[1]->id . '/' . Helpers::randomString(100)) }}">
-                                                            <img height="437" src="{{ asset($carousel[1]->foto_berita) }}"
+                                                            <img height="437" width="100%" src="{{ asset($carousel[1]->foto_berita) }}"
                                                                 alt="Bootstrap news template">
                                                         </a>
                                                     </div>
@@ -167,7 +167,7 @@
                                                     <div class="ratio_left-cover-1 image-wrapper">
                                                         <a
                                                             href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[2]->id . '/' . Helpers::randomString(100)) }}">
-                                                            <img height="437" src="{{ asset($carousel[2]->foto_berita) }}"
+                                                            <img height="437" width="100%" src="{{ asset($carousel[2]->foto_berita) }}"
                                                                 alt="Bootstrap news template">
                                                         </a>
                                                     </div>
@@ -201,7 +201,7 @@
                                                     <div class="ratio_left-cover-1 image-wrapper">
                                                         <a
                                                             href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[3]->id . '/' . Helpers::randomString(100)) }}">
-                                                            <img height="437" src="{{ asset($carousel[3]->foto_berita) }}"
+                                                            <img height="437" width="100%" src="{{ asset($carousel[3]->foto_berita) }}"
                                                                 alt="Bootstrap news template">
                                                         </a>
                                                     </div>
@@ -255,22 +255,22 @@
                                                     <!--thumbnail img-->
                                                     <div class="ratio_right-cover-2 image-wrapper">
                                                         <a
-                                                            href="{{ route('client.show', Helpers::randomString(120) . '/' . $post->id . '/' . Helpers::randomString(100)) }}">
-                                                            <img height="200" src="{{ asset($post->foto_berita) }}"
+                                                            href="{{ route('client.show', Helpers::randomString(100) . '/' . $post->id . '/' . Helpers::randomString(100)) }}">
+                                                            <img height="250" width="100%" src="{{ asset($post->foto_berita) }}"
                                                                 alt="{{ substr($post->title, 0, 50) }}">
                                                         </a>
                                                     </div>
                                                     <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
                                                         <!-- category -->
                                                         <a class="p-1 badge badge-primary rounded-0"
-                                                            href="#">{{ Helpers::PostCategory($post->posts_category_id) }}</a>
+                                                            href="">{{ Helpers::PostCategory($post->posts_category_id) }}</a>
 
                                                         <!--title-->
                                                         <a
-                                                            href="{{ route('client.show', Helpers::randomString(120) . '/' . $post->id . '/' . Helpers::randomString(100)) }}">
+                                                            href="{{ route('client.show', Helpers::randomString(100) . '/' . $post->id . '/' . Helpers::randomString(100)) }}">
                                                             <h4 class="h5 text-white my-1">
                                                                 {{ substr($post->title, 0, 50) }}...
-                                                                <span style="font-size: 16px;">Selengkapnyaaa</span>
+                                                                <span style="font-size: 16px;">Selengkapnya</span>
                                                             </h4>
                                                         </a>
                                                     </div>
@@ -486,7 +486,7 @@
             </div>
         </section>
     @elsedesktop
-    <section id="testimonials" class="testimonials">
+        <section id="testimonials" class="testimonials">
         </section>
         <div class="row py-2">
             <!--Breaking box-->
@@ -689,22 +689,22 @@
                         <!--thumbnail img-->
                         <div class="ratio_right-cover-2 image-wrapper">
                             <a
-                                href="{{ route('client.show', Helpers::randomString(120) . '/' . $post->id . '/' . Helpers::randomString(100)) }}">
-                                <img height="200" src="{{ asset($post->foto_berita) }}"
+                                href="{{ route('client.show', Helpers::randomString(100) . '/' . $post->id . '/' . Helpers::randomString(100)) }}">
+                                <img height="250" width="100%" src="{{ asset($post->foto_berita) }}"
                                     alt="{{ substr($post->title, 0, 50) }}">
                             </a>
                         </div>
                         <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
                             <!-- category -->
                             <a class="p-1 badge badge-primary rounded-0"
-                                href="#">{{ Helpers::PostCategory($post->posts_category_id) }}</a>
+                                href="">{{ Helpers::PostCategory($post->posts_category_id) }}</a>
 
                             <!--title-->
                             <a
-                                href="{{ route('client.show', Helpers::randomString(120) . '/' . $post->id . '/' . Helpers::randomString(100)) }}">
+                                href="{{ route('client.show', Helpers::randomString(100) . '/' . $post->id . '/' . Helpers::randomString(100)) }}">
                                 <h4 class="h5 text-white my-1">
                                     {{ substr($post->title, 0, 50) }}...
-                                    <span style="font-size: 16px;">Selengkapnyaaa</span>
+                                    <span style="font-size: 16px;">Selengkapnya</span>
                                 </h4>
                             </a>
                         </div>
