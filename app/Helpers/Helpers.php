@@ -133,7 +133,7 @@ class Helpers
 
     public static function countTag()
     {
-        $posts = Posts::select('tags')->groupBy('tags')->get();
+        $posts = Posts::select('tags')->groupBy('tags')->limit('14')->orderBy('created_at', 'DESC')->get();
         $tags = array();
         foreach ($posts as $post) {
             if ($post->tags != null) {
@@ -143,6 +143,7 @@ class Helpers
                 }
             }
         }
+
         return $tags;
     }
 

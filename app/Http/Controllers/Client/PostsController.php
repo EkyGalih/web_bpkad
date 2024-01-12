@@ -25,7 +25,7 @@ class PostsController extends Controller
             ->where('posts_category_id', '=', '1')
             ->orderBy('created_at', 'desc')
             ->get();
-            dd($posts);
+            
         return view('client.posts.posts', compact('menu', 'posts'));
     }
 
