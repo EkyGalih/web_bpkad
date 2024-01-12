@@ -58,7 +58,7 @@
                         <div class="list-group">
                             <button type="button" class="list-group-item list-group-item-action active tes"
                                 aria-current="true">
-                                <i class="bx bx-news"></i> Informasi Terbuka
+                                <i class="bx bx-news"></i> Download Informasi Terbuka
                             </button>
                             @foreach ($informasi as $berkala)
                                 <a href="{{ $berkala->files }}" type="button" data-bs-tooltip="tooltip" target="_blank"
@@ -513,7 +513,7 @@
         <div style="padding-left: 8%; padding-right: 8%;" data-aos="fade-up">
             <div class="list-group">
                 <button type="button" class="list-group-item list-group-item-action active tes" aria-current="true">
-                    <i class="bx bx-news"></i> Informasi Terbuka
+                    <i class="bx bx-news"></i> Download Informasi Terbuka
                 </button>
                 @foreach ($informasi as $berkala)
                     <a href="{{ $berkala->files }}" type="button" data-bs-tooltip="tooltip" target="_blank"
