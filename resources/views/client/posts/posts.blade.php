@@ -60,6 +60,30 @@
                             </ul>
                         </div>
                         <div class="col-10">
+                            <form action="{{ route('post.search') }}" method="POST">
+                                @csrf
+                                <div class="form-row align-items-center">
+                                    <div class="col-4">
+                                        <div class="input-group mb-4">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="bx bx-search"></i>
+                                                </div>
+                                            </div>
+                                            <input type="text" name="cari" class="form-control" id="inlineFormInputGroup"
+                                                placeholder="Cari Berita ...">
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="submit" class="btn btn-primary mb-2">Cari</button>
+                                    </div>
+                                </div>
+                            </form>
+                            @if ($cari != 'Seluruh Berita')
+                                <p>Menampilkan hasil pencarian : <strong>{{ $cari }}</strong></p>
+                                <a href="{{ route('post.index') }}">Lihat Seluruh Berita</a>
+                            @endif
+                            <hr />
                             <div class="row">
                                 <!--news box-->
                                 @foreach ($posts as $post)
@@ -70,7 +94,8 @@
                                                 <div class="ratio_right-cover-2 image-wrapper">
                                                     <a
                                                         href="{{ route('client.show', Helpers::randomString(100) . '/' . $post->id . '/' . Helpers::randomString(100)) }}">
-                                                        <img height="250" width="100%" src="{{ asset($post->foto_berita) }}"
+                                                        <img height="250" width="100%"
+                                                            src="{{ asset($post->foto_berita) }}"
                                                             alt="{{ substr($post->title, 0, 50) }}">
                                                     </a>
                                                 </div>

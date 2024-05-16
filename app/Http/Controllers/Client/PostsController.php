@@ -25,7 +25,7 @@ class PostsController extends Controller
             ->where('posts_category_id', '=', '1')
             ->orderBy('created_at', 'desc')
             ->get();
-            
+
         return view('client.posts.posts', compact('menu', 'posts'));
     }
 
@@ -47,6 +47,17 @@ class PostsController extends Controller
     public function like($id)
     {
         $post = Posts::findOrFail($id);
+    }
+
+    public function search(Request $search)
+    {
+        $posts = Posts::where('title', 'LIKE', '%' . $search->cari . '%')
+            ->where('deleted_at', '=', NULL)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(16);
+        $cari = $search->cari;
+
+        return view('client.posts.posts', compact('posts', 'cari'));
     }
 
     /**

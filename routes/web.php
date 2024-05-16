@@ -41,6 +41,7 @@ Route::group(['prefix' => 'berita'], function () {
     Route::get('tags/{tags?}', [HomeController::class, 'PostTag'])->name('post.tags');
     Route::get('like/{id}', [PostsController::class, 'like'])->name('post.like');
     Route::post('comment/{id}', [PostsController::class, 'comment'])->name('post.comment');
+    Route::post('search', [PostsController::class, 'search'])->name('post.search');
 });
 
 Route::group(['prefix' => 'artikel'], function () {
