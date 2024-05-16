@@ -1,10 +1,11 @@
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
-        <h1 class="logo mr-auto"><a href="{{ '/' }}">BPKAD<span> NTB</span></a></h1>
+        <h1 class="logo mr-auto"><a href="{{ '/' }}">BPKAD<span> NTB </span></a></h1>
         <nav class="nav-menu d-none d-lg-block">
             <ul>
                 <li class="@yield('menu-home')"><a href="{{ '/' }}">Home</a></li>
-                <li class="@yield('menu-berita')"><a href="#news">Berita</a></li>
+                <li class="@yield('menu-berita')"><a href="{{ $_SERVER['REQUEST_URI'] == '/' ? '#news' : route('post.index') }}">Berita</a></li>
+
                 @php
                     $menus = Helpers::Menu();
                 @endphp
@@ -42,7 +43,7 @@
                         <li><a href="{{ $menu->url }}">{{ $menu->name }}</a></li>
                     @endif
                 @endforeach
-                <li class="@yield('menu-kontak')"><a href="#contact">Kontak</a></li>
+                <li class="@yield('menu-kontak')"><a href="{{ $_SERVER['REQUEST_URI'] == '/' ? '#contact' : '/#contact' }}">Kontak</a></li>
             </ul>
         </nav>
 
