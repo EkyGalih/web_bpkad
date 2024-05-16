@@ -74,9 +74,17 @@
                                                     class="{{ Helpers::NewData($item->created_at) == 'true' ? 'blink' : '' }}">{{ Helpers::NewData($item->created_at) == 'true' ? 'Baru' : '' }}</sup>
                                             </td>
                                             @include('admin/faq/permohonan/addons/_detail')
-                                            <td><a href="https://mail.google.com/mail/u/0/#inbox?compose=new"
+                                            <td>
+                                                <a href="https://mail.google.com/mail/u/0/#inbox?compose=new"
                                                     target="_blank" data-bs-tooltip="tooltip" data-bs-placement="top"
-                                                    title="Send Data via Email">{{ $item->email }}</a></td>
+                                                    title="Send Data via Email" >
+                                                    {{ $item->email }}
+                                                </a>
+                                                <input type="hidden" value="{{ $item->email }}" id="email">
+                                                <sup><button class="btn btn-xs" data-bs-tooltip="tooltip"
+                                                        data-bs-placement="top" title="copy email address" onclick="copyContent()"><i
+                                                            class="bx bx-copy"></i></button></sup>
+                                            </td>
                                             <td><a href="https://wa.me/62{{ substr($item->telepon, 1) }}" target="_blank"
                                                     data-bs-tooltip="tooltip" data-bs-placement="top"
                                                     title="Send Data via Whatsapp">{{ $item->telepon }}</a></td>
@@ -122,5 +130,15 @@
         $(document).ready(function() {
             $('#example').DataTable();
         });
+
+        let text = document.getElementById('email').innerHTML;
+        const copyContent = async () => {
+            try {
+                await navigator.clipboard.writeText(text);
+                console.log('Content copied to clipboard');
+            } catch (err) {
+                console.error('Failed to copy: ', err);
+            }
+        }
     </script>
 @endsection
