@@ -60,25 +60,70 @@
                             </ul>
                         </div>
                         <div class="col-10">
-                            <form action="{{ route('post.search') }}" method="POST">
-                                @csrf
-                                <div class="form-row align-items-center">
-                                    <div class="col-4">
-                                        <div class="input-group mb-4">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <i class="bx bx-search"></i>
+                            {{-- <div class="row">
+                                <div class="col-6"> --}}
+                                    <form action="{{ route('post.search') }}" method="POST">
+                                        @csrf
+                                        <div class="form-row align-items-center">
+                                            <div class="col-6">
+                                                <div class="input-group mb-4">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <i class="bx bx-search"></i>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="cari" class="form-control"
+                                                        id="inlineFormInputGroup" placeholder="Cari Berita ...">
                                                 </div>
                                             </div>
-                                            <input type="text" name="cari" class="form-control" id="inlineFormInputGroup"
-                                                placeholder="Cari Berita ...">
+                                            <div class="col-auto" style="margin-bottom: 1%;">
+                                                <button type="submit" class="btn btn-primary mb-2">Cari</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                {{-- </div> --}}
+                                {{-- <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <p style="margin-top: 5%;">short by :</p>
+                                        </div>
+                                        <div class="col-5">
+                                            <select name="bulan" id="bulan" class="form-control">
+                                                <option value="">Bulan</option>
+                                                <option value="01">Jan</option>
+                                                <option value="02">Feb</option>
+                                                <option value="03">Mar</option>
+                                                <option value="04">Apr</option>
+                                                <option value="05">Mei</option>
+                                                <option value="06">Jun</option>
+                                                <option value="07">Jul</option>
+                                                <option value="08">Agu</option>
+                                                <option value="09">Sep</option>
+                                                <option value="10">Okt</option>
+                                                <option value="11">Nov</option>
+                                                <option value="12">Des</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-5">
+                                            @php
+                                                $years = [
+                                                    date('Y'),
+                                                    date('Y') - 1,
+                                                    date('Y') - 2,
+                                                    date('Y') - 3,
+                                                    date('Y') - 4,
+                                                ];
+                                            @endphp
+                                            <select name="tahun" id="tahun" class="form-control">
+                                                <option value="">Tahun</option>
+                                                @foreach ($years as $year)
+                                                    <option value="{{ $year }}">{{ $year }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
-                                    <div class="col-auto">
-                                        <button type="submit" class="btn btn-primary mb-2">Cari</button>
-                                    </div>
-                                </div>
-                            </form>
+                                </div> --}}
+                            {{-- </div> --}}
                             @if ($cari != 'Seluruh Berita')
                                 <p>Menampilkan hasil pencarian : <strong>{{ $cari }}</strong></p>
                                 <a href="{{ route('post.index') }}">Lihat Seluruh Berita</a>
@@ -142,31 +187,64 @@
                             <span class="badge badge-primary badge-pill">({{ Helpers::countCategoryPost('2') }})</span>
                         </li>
                     </ul> <br />
-                    @foreach ($posts as $post)
-                        <form action="{{ route('post.search') }}" method="POST">
-                            @csrf
-                            <div class="form-row align-items-center">
-                                <div class="col-10">
-                                    <div class="input-group mb-4">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <i class="bx bx-search"></i>
-                                            </div>
+                    <form action="{{ route('post.search') }}" method="POST">
+                        @csrf
+                        <div class="form-row align-items-center">
+                            <div class="col-10">
+                                <div class="input-group mb-4">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="bx bx-search"></i>
                                         </div>
-                                        <input type="text" name="cari" class="form-control" id="inlineFormInputGroup"
-                                            placeholder="Cari Berita ...">
                                     </div>
-                                </div>
-                                <div class="col-auto">
-                                    <button type="submit" class="btn btn-primary mb-2">Cari</button>
+                                    <input type="text" name="cari" class="form-control" id="inlineFormInputGroup"
+                                        placeholder="Cari Berita ...">
                                 </div>
                             </div>
-                        </form>
-                        @if ($cari != 'Seluruh Berita')
-                            <p>Menampilkan hasil pencarian : <strong>{{ $cari }}</strong></p>
-                            <a href="{{ route('post.index') }}">Lihat Seluruh Berita</a>
-                            <hr />
-                        @endif
+                            <div class="col-auto" style="margin-bottom: 1%;">
+                                <button type="submit" class="btn btn-primary mb-2">Cari</button>
+                            </div>
+                        </div>
+                    </form>
+                    {{-- <div class="row">
+                        <div class="col-2">
+                            <p style="margin-top: 5%;">short by :</p>
+                        </div>
+                        <div class="col-5">
+                            <select name="bulan" id="bulan" class="form-control">
+                                <option value="">Bulan</option>
+                                <option value="01">Jan</option>
+                                <option value="02">Feb</option>
+                                <option value="03">Mar</option>
+                                <option value="04">Apr</option>
+                                <option value="05">Mei</option>
+                                <option value="06">Jun</option>
+                                <option value="07">Jul</option>
+                                <option value="08">Agu</option>
+                                <option value="09">Sep</option>
+                                <option value="10">Okt</option>
+                                <option value="11">Nov</option>
+                                <option value="12">Des</option>
+                            </select>
+                        </div>
+                        <div class="col-5">
+                            @php
+                                $years = [date('Y'), date('Y') - 1, date('Y') - 2, date('Y') - 3, date('Y') - 4];
+                            @endphp
+                            <select name="tahun" id="tahun" class="form-control">
+                                <option value="">Tahun</option>
+                                @foreach ($years as $year)
+                                    <option value="{{ $year }}">{{ $year }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div> --}}
+                    @if ($cari != 'Seluruh Berita')
+                        <p>Menampilkan hasil pencarian : <strong>{{ $cari }}</strong></p>
+                        <a href="{{ route('post.index') }}">Lihat Seluruh Berita</a>
+                        <hr />
+                    @endif
+                    @foreach ($posts as $post)
                         <div class="card border-0 rounded-0 text-white overflow zoom">
                             <div class="position-relative">
                                 <!--thumbnail img-->
