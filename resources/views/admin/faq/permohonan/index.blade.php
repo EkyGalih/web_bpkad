@@ -9,12 +9,12 @@
 @section('content')
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>LAPORAN</h1>
+            <h1>PERMOHONAN</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('laporan-admin.index') }}">Laporan</a></li>
-                    <li class="breadcrumb-item active">Data Laporan Masyarakat</li>
+                    <li class="breadcrumb-item"><a href="{{ route('laporan-admin.index') }}">Permohonan</a></li>
+                    <li class="breadcrumb-item active">Data Permohonan Masyarakat</li>
                 </ol>
             </nav>
         </div>
@@ -54,6 +54,7 @@
                                         <th scope="col">Email</th>
                                         <th scope="col">No.Hp</th>
                                         <th scope="col">Alamat</th>
+                                        <th scope="col">Tgl Pengajuan</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
@@ -70,7 +71,8 @@
                                                     data-bs-target="#ShowPermohonan{{ $loop->iteration }}"
                                                     data-bs-placement="top"
                                                     title="Lihat Permohonan">{{ $item->kode_pemohon }}</button> <sup
-                                                    class="{{ Helpers::NewData($item->created_at) == 'true' ? 'blink' : '' }}">{{ Helpers::NewData($item->created_at) == 'true' ? 'Baru' : '' }}</sup></td>
+                                                    class="{{ Helpers::NewData($item->created_at) == 'true' ? 'blink' : '' }}">{{ Helpers::NewData($item->created_at) == 'true' ? 'Baru' : '' }}</sup>
+                                            </td>
                                             @include('admin/faq/permohonan/addons/_detail')
                                             <td><a href="https://mail.google.com/mail/u/0/#inbox?compose=new"
                                                     target="_blank" data-bs-tooltip="tooltip" data-bs-placement="top"
@@ -80,6 +82,9 @@
                                                     title="Send Data via Whatsapp">{{ $item->telepon }}</a></td>
                                             <td>
                                                 <address>{{ $item->alamat }}</address>
+                                            </td>
+                                            <td>
+                                                {{ Helpers::getDate($item->created_at) }}
                                             </td>
                                             <td>
                                                 @if ($item->status == 'proses')
