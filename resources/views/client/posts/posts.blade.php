@@ -82,8 +82,8 @@
                             @if ($cari != 'Seluruh Berita')
                                 <p>Menampilkan hasil pencarian : <strong>{{ $cari }}</strong></p>
                                 <a href="{{ route('post.index') }}">Lihat Seluruh Berita</a>
+                                <hr />
                             @endif
-                            <hr />
                             <div class="row">
                                 <!--news box-->
                                 @foreach ($posts as $post)
@@ -143,6 +143,30 @@
                         </li>
                     </ul> <br />
                     @foreach ($posts as $post)
+                        <form action="{{ route('post.search') }}" method="POST">
+                            @csrf
+                            <div class="form-row align-items-center">
+                                <div class="col-10">
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="bx bx-search"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" name="cari" class="form-control" id="inlineFormInputGroup"
+                                            placeholder="Cari Berita ...">
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary mb-2">Cari</button>
+                                </div>
+                            </div>
+                        </form>
+                        @if ($cari != 'Seluruh Berita')
+                            <p>Menampilkan hasil pencarian : <strong>{{ $cari }}</strong></p>
+                            <a href="{{ route('post.index') }}">Lihat Seluruh Berita</a>
+                            <hr />
+                        @endif
                         <div class="card border-0 rounded-0 text-white overflow zoom">
                             <div class="position-relative">
                                 <!--thumbnail img-->
