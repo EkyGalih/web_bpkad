@@ -103,7 +103,7 @@
                                                     <!-- category -->
                                                     <a class="p-1 badge badge-primary rounded-0"
                                                         href="">{{ Helpers::PostCategory($post->posts_category_id) }}</a>
-
+                                                    {{ Helpers::getDate($post->created_at) }}
                                                     <!--title-->
                                                     <a
                                                         href="{{ route('client.show', Helpers::randomString(100) . '/' . $post->id . '/' . Helpers::randomString(100)) }}">
@@ -181,7 +181,7 @@
                                     <!-- category -->
                                     <a class="p-1 badge badge-primary rounded-0"
                                         href="">{{ Helpers::PostCategory($post->posts_category_id) }}</a>
-
+                                    {{ Helpers::getDate($post->created_at) }}
                                     <!--title-->
                                     <a
                                         href="{{ route('client.show', Helpers::randomString(100) . '/' . $post->id . '/' . Helpers::randomString(100)) }}">
