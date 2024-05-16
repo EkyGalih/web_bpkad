@@ -99,7 +99,8 @@
                                                     <div class="ratio_left-cover-2 image-wrapper">
                                                         <a
                                                             href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[0]->id . '/' . Helpers::randomString(100)) }}">
-                                                            <img height="437" width="100%" src="{{ asset($carousel[0]->foto_berita) }}"
+                                                            <img height="437" width="100%"
+                                                                src="{{ asset($carousel[0]->foto_berita) }}"
                                                                 alt="Bootstrap news template">
                                                         </a>
                                                     </div>
@@ -133,7 +134,8 @@
                                                     <div class="ratio_left-cover-1 image-wrapper">
                                                         <a
                                                             href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[1]->id . '/' . Helpers::randomString(100)) }}">
-                                                            <img height="437" width="100%" src="{{ asset($carousel[1]->foto_berita) }}"
+                                                            <img height="437" width="100%"
+                                                                src="{{ asset($carousel[1]->foto_berita) }}"
                                                                 alt="Bootstrap news template">
                                                         </a>
                                                     </div>
@@ -167,7 +169,8 @@
                                                     <div class="ratio_left-cover-1 image-wrapper">
                                                         <a
                                                             href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[2]->id . '/' . Helpers::randomString(100)) }}">
-                                                            <img height="437" width="100%" src="{{ asset($carousel[2]->foto_berita) }}"
+                                                            <img height="437" width="100%"
+                                                                src="{{ asset($carousel[2]->foto_berita) }}"
                                                                 alt="Bootstrap news template">
                                                         </a>
                                                     </div>
@@ -201,7 +204,8 @@
                                                     <div class="ratio_left-cover-1 image-wrapper">
                                                         <a
                                                             href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[3]->id . '/' . Helpers::randomString(100)) }}">
-                                                            <img height="437" width="100%" src="{{ asset($carousel[3]->foto_berita) }}"
+                                                            <img height="437" width="100%"
+                                                                src="{{ asset($carousel[3]->foto_berita) }}"
                                                                 alt="Bootstrap news template">
                                                         </a>
                                                     </div>
@@ -256,14 +260,15 @@
                                                     <div class="ratio_right-cover-2 image-wrapper">
                                                         <a
                                                             href="{{ route('client.show', Helpers::randomString(100) . '/' . $post->id . '/' . Helpers::randomString(100)) }}">
-                                                            <img height="250" width="100%" src="{{ asset($post->foto_berita) }}"
+                                                            <img height="250" width="100%"
+                                                                src="{{ asset($post->foto_berita) }}"
                                                                 alt="{{ substr($post->title, 0, 50) }}">
                                                         </a>
                                                     </div>
                                                     <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
                                                         <!-- category -->
                                                         <a class="p-1 badge badge-primary rounded-0"
-                                                            href="">{{ Helpers::PostCategory($post->posts_category_id) }}</a>
+                                                            href="{{ route('post.index') }}">{{ Helpers::PostCategory($post->posts_category_id) }}</a>
 
                                                         <!--title-->
                                                         <a
@@ -296,42 +301,60 @@
                     <div class="col-3">
                         <div class="list-group">
                             <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-                                <i class="bx bx-calendar"></i> Agenda Pimpinan
+                                Berita Lainnya
                             </button>
                             <ul class="list-unstyled" style="margin-top: 5%;">
-                                @foreach ($agenda as $item)
-                                    <li class="media">
-                                        <img src="{{ $item->foto_berita }}" class="mr-3" alt="{{ $item->title }}"
+                                @foreach (array_slice($politiks, 0, 7, true) as $politik)
+                                    <div class="media">
+                                        <img src="{{ $politik['thumbnail'] }}" class="mr-3" alt="{{ $politik['title'] }}"
                                             style="max-width: 80px; max-height: 80px;">
                                         <div class="media-body">
-                                            <h5 class="mt-0 mb-1">
-                                                <a style="color: black;"
-                                                    href="{{ route('client.show', Helpers::randomString(120) . '/' . $item->id . '/' . Helpers::randomString(100)) }}">
-                                                    {{ Helpers::getDate($item->created_at) . ' - ' . Helpers::getTime($item->created_at) }}
-                                                </a>
-                                            </h5>
-                                            <p>
-                                                <a style="color: black;"
-                                                    href="{{ route('client.show', Helpers::randomString(120) . '/' . $item->id . '/' . Helpers::randomString(100)) }}">
-                                                    {{ $item->title }}
-                                                </a>
-                                            </p>
+                                            <p class="mt-0"><a target="_blank"
+                                                    href="{{ $politik['link'] }}">{{ $politik['title'] }}</a></p>
                                         </div>
-                                    </li>
+                                    </div>
                                 @endforeach
-                                <a href="PPID/agenda" type="button"
-                                    class="list-group-item list-group-item-action"><strong>Lihat Semua</strong></a>
                             </ul>
                         </div>
                     </div>
                     <div class="col-9">
                         <div class="section-title">
-                            <h3>Art<span>ikel</span></h3>
+                            <h3>Agenda <span>Pimpinan</span></h3>
                             <hr />
                         </div>
                         <div class="row">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="list-group">
+                                        <ul class="list-unstyled">
+                                            @foreach ($agenda as $item)
+                                                <li class="media">
+                                                    <img src="{{ $item->foto_berita }}" class="mr-3"
+                                                        alt="{{ $item->title }}" style="max-width: 80px; max-height: 80px;">
+                                                    <div class="media-body">
+                                                        <h5 class="mt-0 mb-1">
+                                                            <a style="color: black;"
+                                                                href="{{ route('client.show', Helpers::randomString(120) . '/' . $item->id . '/' . Helpers::randomString(100)) }}">
+                                                                {{ $item->title }}
+                                                            </a>
+                                                        </h5>
+                                                        <p>
+                                                            <a style="color: black;"
+                                                                href="{{ route('client.show', Helpers::randomString(120) . '/' . $item->id . '/' . Helpers::randomString(100)) }}">
+                                                                {!! substr($item->content, 0, 150) !!} ...
+                                                            </a> <br />
+                                                            <sub>
+                                                                {{ Helpers::getDate($item->created_at) . ' - ' . Helpers::getTime($item->created_at) }}</sub>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                             <!--news box-->
-                            @foreach ($artikels as $artikel)
+                            {{-- @foreach ($artikels as $artikel)
                                 <div class="col-4 pb-1 pt-0 pr-1">
                                     <div class="card border-0 rounded-0 text-white overflow zoom">
                                         <div class="position-relative">
@@ -360,9 +383,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
+                            @endforeach --}}
                         </div>
-                        <a class="btn btn-primary btn-block" href="{{ route('artikel.index') }}">Selengkapnya</a>
+                        <a href="PPID/agenda" type="button" class="btn btn-primary btn-block">Lihat Semua</a>
                     </div>
                 </div>
             </div>

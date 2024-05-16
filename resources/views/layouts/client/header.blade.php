@@ -4,7 +4,7 @@
         <nav class="nav-menu d-none d-lg-block">
             <ul>
                 <li class="@yield('menu-home')"><a href="{{ '/' }}">Home</a></li>
-                <li class="@yield('menu-berita')"><a href="{{ $_SERVER['REQUEST_URI'] == '/' ? '#news' : route('post.index') }}">Berita</a></li>
+                <li class="@yield('menu-berita')"><a href="{{ $_SERVER['REQUEST_URI'] == '/' ? '#news' : route('post.index') }}">Blog</a></li>
 
                 @php
                     $menus = Helpers::Menu();

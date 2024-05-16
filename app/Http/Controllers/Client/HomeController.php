@@ -93,7 +93,27 @@ class HomeController extends Controller
             ->orderBy('tahun', 'DESC')
             ->limit(13)
             ->get();
-        return view('client.home.home', compact('new_posts', 'artikels', 'carousel', 'old_posts', 'videos', 'apps', 'slides', 'slidesInformasi', 'banners', 'agenda', 'informasi'));
+
+        // berita luar
+        // politik
+        $client = Http::get('https://api-berita-indonesia.vercel.app/antara/politik/');
+        $response = $client->json();
+        $data = $response['data'];
+        $politiks = $data['posts'];
+
+        // cnbc
+        $client2 = Http::get('https://api-berita-indonesia.vercel.app/cnbc/terbaru/');
+        $response = $client2->json();
+        $data2 = $response['data'];
+        $cnbcs = $data2['posts'];
+
+        // kumparan
+        $client3 = Http::get('https://api-berita-indonesia.vercel.app/kumparan/terbaru/');
+        $response = $client3->json();
+        $data3 = $response['data'];
+        $kumparans = $data3['posts'];
+
+        return view('client.home.home', compact('new_posts', 'artikels', 'carousel', 'old_posts', 'videos', 'apps', 'slides', 'slidesInformasi', 'banners', 'agenda', 'informasi', 'data', 'data2', 'data3' ,'politiks', 'cnbcs', 'kumparans'));
     }
 
     /**
