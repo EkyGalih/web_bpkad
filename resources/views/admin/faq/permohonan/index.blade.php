@@ -77,13 +77,13 @@
                                             <td>
                                                 <a href="https://mail.google.com/mail/u/0/#inbox?compose=new"
                                                     target="_blank" data-bs-tooltip="tooltip" data-bs-placement="top"
-                                                    title="Send Data via Email" >
+                                                    title="Send Data via Email">
                                                     {{ $item->email }}
                                                 </a>
-                                                <input type="hidden" value="{{ $item->email }}" id="email">
+                                                <p id="email" hidden>{{ $item->email }}</p>
                                                 <sup><button class="btn btn-xs" data-bs-tooltip="tooltip"
-                                                        data-bs-placement="top" title="copy email address" onclick="copyContent()"><i
-                                                            class="bx bx-copy"></i></button></sup>
+                                                        data-bs-placement="top" title="copy email address"
+                                                        onclick="copyToClipboard('#email')"><i class="bx bx-copy"></i></button></sup>
                                             </td>
                                             <td><a href="https://wa.me/62{{ substr($item->telepon, 1) }}" target="_blank"
                                                     data-bs-tooltip="tooltip" data-bs-placement="top"
@@ -131,14 +131,12 @@
             $('#example').DataTable();
         });
 
-        let text = document.getElementById('email').innerHTML;
-        const copyContent = async () => {
-            try {
-                await navigator.clipboard.writeText(text);
-                console.log('Content copied to clipboard');
-            } catch (err) {
-                console.error('Failed to copy: ', err);
-            }
+        function copyToClipboard(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
         }
     </script>
 @endsection
