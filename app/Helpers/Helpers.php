@@ -509,9 +509,13 @@ class Helpers
         return $data->nama;
     }
 
-    public static function _KipPPID($param)
+    public static function _KipPPID($param, $param2)
     {
-        $KIP = KIP::where('jenis_informasi', '=', $param)->orderBy('tahun', 'DESC')->get();
+        if ($param2 == "") {
+            $KIP = KIP::where('jenis_informasi', '=', $param)->orderBy('tahun', 'DESC')->get();
+        } else {
+            $KIP = KIP::where('jenis_informasi', '=', $param)->where('nama_informasi', 'LIKE', '%'.$param2.'%')->orderBy('tahun', 'DESC')->get();
+        }
 
         $data = [
             'tahun' => array(),

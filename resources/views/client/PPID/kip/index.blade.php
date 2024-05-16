@@ -29,16 +29,18 @@
                 </ul>
                 <ol>
                     <li><a href="{{ '/' }}">Home</a></li>
-                    <li><a href="PPID">PPID</a></li>
-                    <li>Klasifikasi Informasi Publik</li>
+                    <li><a href="#">PPID</a></li>
+                    <li>
+                        <a href="{{ route('ppid-kip') }}">Klasifikasi Informasi Publik</a>
+                    </li>
                 </ol>
             </div>
             <div class="tab-content" id="myTabContent">
                 @php
-                    $KipBerkala = Helpers::_KipPPID('berkala');
-                    $KipSetiapSaat = Helpers::_KipPPID('setiap saat');
-                    $KipDikecualikan = Helpers::_KipPPID('dikecualikan');
-                    $KipSertaMerta = Helpers::_KipPPID('serta merta');
+                    $KipBerkala = Helpers::_KipPPID('berkala', $query);
+                    $KipSetiapSaat = Helpers::_KipPPID('setiap saat', $query);
+                    $KipDikecualikan = Helpers::_KipPPID('dikecualikan', $query);
+                    $KipSertaMerta = Helpers::_KipPPID('serta merta', $query);
                 @endphp
                 <div class="tab-pane fade show active" id="berkala" role="tabpanel" aria-labelledby="berkala-tab">
                     <div class="row">
@@ -46,13 +48,25 @@
                             <h2 class="title" style="margin: 20px; font-size: 30px;"><strong>INFORMASI BERKALA</strong>
                             </h2>
                         </div>
-                        <div class="col-lg-4">
-                            {{-- <form action="{{ route('ppid-kip.search_berkala') }}">
-                                <div class="form-group">
-                                    <input type="text" name="search" id="search_berkala" class="form-control"
-                                        placeholder="Cari Data Informasi Berkala">
+                        <div class="col-4">
+                            <form action="{{ route('ppid-kip.search_berkala') }}">
+                                <div class="form-row align-items-center">
+                                    <div class="col-10">
+                                        <div class="input-group mb-4">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="bx bx-search"></i>
+                                                </div>
+                                            </div>
+                                            <input type="text" name="search" id="search_berkala" class="form-control"
+                                                placeholder="Cari Data ..">
+                                        </div>
+                                    </div>
+                                    <div class="col-auto btn-group" style="margin-bottom: 3%;">
+                                        <button type="submit" class="btn btn-primary mb-2">Cari</button>
+                                    </div>
                                 </div>
-                            </form> --}}
+                            </form>
                         </div>
                     </div>
                     <div class="table-responsive">

@@ -18,8 +18,9 @@ class PpidKipController extends Controller
     {
         $kip_title = KIP::select('jenis_informasi')->groupBy('jenis_informasi')->get();
         $kip_content = KIP::get();
+        $query = "";
 
-        return view('client.PPID.kip.index', compact('kip_title', 'kip_content'));
+        return view('client.PPID.kip.index', compact('kip_title', 'kip_content', 'query'));
     }
 
     /**
@@ -57,11 +58,13 @@ class PpidKipController extends Controller
      */
     public function searchBerkala(Request $request)
     {
-        $query = $request->get('query');
-        $filterResult = KIP::where('nama_informasi', 'LIKE', '%' . $query . '%')
-            ->where('jenis_informasi', '=', 'berkala')
-            ->pluck('nama_informasi');
-        return response()->json($filterResult);
+        $query = $request->search;
+
+        $kip_title = KIP::select('jenis_informasi')->groupBy('jenis_informasi')->get();
+        $kip_content = KIP::get();
+
+        return view('client.PPID.kip.index', compact('kip_title', 'kip_content', 'query'));
+        // return response()->json($filterResult);
     }
 
     /**

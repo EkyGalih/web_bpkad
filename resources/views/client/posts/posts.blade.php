@@ -76,7 +76,7 @@
                                                         id="inlineFormInputGroup" placeholder="Cari Berita ...">
                                                 </div>
                                             </div>
-                                            <div class="col-auto" style="margin-bottom: 1%;">
+                                            <div class="col-auto" style="margin-bottom: 2%;">
                                                 <button type="submit" class="btn btn-primary mb-2">Cari</button>
                                             </div>
                                         </div>
