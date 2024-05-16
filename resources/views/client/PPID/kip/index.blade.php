@@ -59,7 +59,7 @@
                                                 </div>
                                             </div>
                                             <input type="text" name="search" id="search_berkala" class="form-control"
-                                                placeholder="Cari Data ..">
+                                                placeholder="Cari Data .." value="{{ old('search') ?? $query }}">
                                         </div>
                                     </div>
                                     <div class="col-auto btn-group" style="margin-bottom: 3%;">
