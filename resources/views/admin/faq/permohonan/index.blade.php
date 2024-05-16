@@ -77,7 +77,7 @@
                                             <td><a href="https://mail.google.com/mail/u/0/#inbox?compose=new"
                                                     target="_blank" data-bs-tooltip="tooltip" data-bs-placement="top"
                                                     title="Send Data via Email">{{ $item->email }}</a></td>
-                                            <td><a href="https://wa.me/{{ $item->telepon }}" target="_blank"
+                                            <td><a href="https://wa.me/62{{ substr($item->telepon, 1) }}" target="_blank"
                                                     data-bs-tooltip="tooltip" data-bs-placement="top"
                                                     title="Send Data via Whatsapp">{{ $item->telepon }}</a></td>
                                             <td>
