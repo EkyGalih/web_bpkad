@@ -304,9 +304,9 @@
                                 Berita Lainnya
                             </button>
                             <ul class="list-unstyled" style="margin-top: 5%;">
-                                @foreach (array_slice($politiks, 0, 7, true) as $politik)
+                                @foreach (array_slice($data, 0, 7, true) as $politik)
                                     <div class="media">
-                                        <img src="{{ $politik['thumbnail'] }}" class="mr-3" alt="{{ $politik['title'] }}"
+                                        <img src="{{ $politik['image'] }}" class="mr-3" alt="{{ $politik['title'] }}"
                                             style="max-width: 80px; max-height: 80px;">
                                         <div class="media-body">
                                             <p class="mt-0"><a target="_blank"

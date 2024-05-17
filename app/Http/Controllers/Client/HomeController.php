@@ -96,12 +96,12 @@ class HomeController extends Controller
 
         // berita luar
         // politik
-        $client = Http::get('https://api-berita-indonesia.vercel.app/antara/politik/');
+        $client = Http::get('https://berita-indo-api-next.vercel.app/api/antara-news/politik');
         $response = $client->json();
         $data = $response['data'];
-        $politiks = $data['posts'];
+        // $politiks = $data['posts'];
 
-        return view('client.home.home', compact('new_posts', 'artikels', 'carousel', 'old_posts', 'videos', 'apps', 'slides', 'slidesInformasi', 'banners', 'agenda', 'informasi', 'data', 'politiks'));
+        return view('client.home.home', compact('new_posts', 'artikels', 'carousel', 'old_posts', 'videos', 'apps', 'slides', 'slidesInformasi', 'banners', 'agenda', 'informasi', 'data'));
     }
 
     /**
