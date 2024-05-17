@@ -3,9 +3,8 @@
         <h1 class="logo mr-auto"><a href="{{ '/' }}">BPKAD<span> NTB </span></a></h1>
         <nav class="nav-menu d-none d-lg-block">
             <ul>
-                <li class="@yield('menu-home')"><a href="{{ '/' }}">Home</a></li>
+                <li class="@yield('menu-home')"><a href="{{ '/' }}">Beranda</a></li>
                 <li class="@yield('menu-berita')"><a href="{{ $_SERVER['REQUEST_URI'] == '/' ? '#news' : route('post.index') }}">Blog</a></li>
-
                 @php
                     $menus = Helpers::Menu();
                 @endphp

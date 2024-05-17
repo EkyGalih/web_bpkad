@@ -304,7 +304,7 @@
                                 Berita Lainnya
                             </button>
                             <ul class="list-unstyled" style="margin-top: 5%;">
-                                {{-- @foreach (array_slice($politiks, 0, 7, true) as $politik)
+                                @foreach (array_slice($politiks, 0, 7, true) as $politik)
                                     <div class="media">
                                         <img src="{{ $politik['thumbnail'] }}" class="mr-3" alt="{{ $politik['title'] }}"
                                             style="max-width: 80px; max-height: 80px;">
@@ -313,7 +313,7 @@
                                                     href="{{ $politik['link'] }}">{{ $politik['title'] }}</a></p>
                                         </div>
                                     </div>
-                                @endforeach --}}
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -740,71 +740,48 @@
         <div style="padding-left: 8%; padding-right: 8%;" data-aos="fade-up">
             <div class="list-group">
                 <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-                    <i class="bx bx-calendar"></i> Agenda Pimpinan
+                    <i class="bx bx-calendar"></i> Berita Lainnya
                 </button>
                 <ul class="list-unstyled" style="margin-top: 5%;">
-                    @foreach ($agenda as $item)
-                        <li class="media">
-                            <img src="{{ $item->foto_berita }}" class="mr-3" alt="{{ $item->title }}"
-                                style="max-width: 80px; max-height: 80px;">
-                            <div class="media-body">
-                                <h5 class="mt-0 mb-1">
-                                    <a style="color: black;"
-                                        href="{{ route('client.show', Helpers::randomString(120) . '/' . $item->id . '/' . Helpers::randomString(100)) }}">
-                                        {{ Helpers::getDate($item->created_at) . ' - ' . Helpers::getTime($item->created_at) }}
-                                    </a>
-                                </h5>
-                                <p>
-                                    <a style="color: black;"
-                                        href="{{ route('client.show', Helpers::randomString(120) . '/' . $item->id . '/' . Helpers::randomString(100)) }}">
-                                        {{ $item->title }}
-                                    </a>
-                                </p>
-                            </div>
-                        </li>
-                    @endforeach
-                    <a href="PPID/agenda" type="button" class="list-group-item list-group-item-action"><strong>Lihat
-                            Semua</strong></a>
+                    {{-- berita luar --}}
                 </ul>
             </div>
         </div>
         <div style="padding-left: 8%; padding-right: 8%;" data-aos="fade-up">
             <div class="section-title">
-                <h3>Art<span>ikel</span></h3>
+                <h3>Agenda<span>Pimpinan</span></h3>
                 <hr />
             </div>
             <div class="row">
                 <!--news box-->
-                @foreach ($artikels as $artikel)
-                    <div class="col-4 pb-1 pt-0 pr-1">
-                        <div class="card border-0 rounded-0 text-white overflow zoom">
-                            <div class="position-relative">
-                                <!--thumbnail img-->
-                                <div class="ratio_right-cover-2 image-wrapper">
-                                    <a
-                                        href="{{ route('artikel.show', Helpers::randomString(120) . '/' . $artikel->id . '/' . Helpers::randomString(100)) }}">
-                                        <img height="200" src="{{ asset($artikel->foto_berita) }}"
-                                            alt="{{ substr($post->title, 0, 50) }}">
-                                    </a>
-                                </div>
-                                <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
-                                    <!-- category -->
-                                    <a class="p-1 badge badge-primary rounded-0"
-                                        href="#">{{ Helpers::PostCategory($artikel->posts_category_id) }}</a>
-
-                                    <!--title-->
-                                    <a
-                                        href="{{ route('artikel.show', Helpers::randomString(120) . '/' . $artikel->id . '/' . Helpers::randomString(100)) }}">
-                                        <h4 class="h5 text-white my-1">
-                                            {{ substr($artikel->title, 0, 50) }}...
-                                            <span style="font-size: 16px;">Selengkapnyaaa</span>
-                                        </h4>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                <div class="col-12">
+                    <div class="list-group">
+                        <ul class="list-unstyled">
+                            @foreach ($agenda as $item)
+                                <li class="media">
+                                    <img src="{{ $item->foto_berita }}" class="mr-3" alt="{{ $item->title }}"
+                                        style="max-width: 80px; max-height: 80px;">
+                                    <div class="media-body">
+                                        <h5 class="mt-0 mb-1">
+                                            <a style="color: black;"
+                                                href="{{ route('client.show', Helpers::randomString(120) . '/' . $item->id . '/' . Helpers::randomString(100)) }}">
+                                                {{ $item->title }}
+                                            </a>
+                                        </h5>
+                                        <p>
+                                            <a style="color: black;"
+                                                href="{{ route('client.show', Helpers::randomString(120) . '/' . $item->id . '/' . Helpers::randomString(100)) }}">
+                                                {!! substr($item->content, 0, 150) !!} ...
+                                            </a> <br />
+                                            <sub>
+                                                {{ Helpers::getDate($item->created_at) . ' - ' . Helpers::getTime($item->created_at) }}</sub>
+                                        </p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
                     </div>
-                @endforeach
+                </div>
             </div>
             <a class="btn btn-primary btn-block" href="{{ route('artikel.index') }}">Selengkapnya</a>
         </div>
