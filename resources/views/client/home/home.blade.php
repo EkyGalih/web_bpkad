@@ -304,7 +304,7 @@
                                 Berita Lainnya
                             </button>
                             <ul class="list-unstyled" style="margin-top: 5%;">
-                                @foreach (array_slice($data, 0, 7, true) as $politik)
+                                {{-- @foreach (array_slice($data, 0, 7, true) as $politik)
                                     <div class="media">
                                         <img src="{{ $politik->image }}" class="mr-3" alt="{{ $politik->title }}"
                                             style="max-width: 80px; max-height: 80px;">
@@ -313,7 +313,7 @@
                                                     href="{{ $politik->link }}">{{ $politik->title }}</a></p>
                                         </div>
                                     </div>
-                                @endforeach
+                                @endforeach --}}
                             </ul>
                         </div>
                     </div>
