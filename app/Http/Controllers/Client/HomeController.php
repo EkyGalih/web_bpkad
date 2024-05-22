@@ -94,15 +94,14 @@ class HomeController extends Controller
             ->limit(13)
             ->get();
 
-        // berita luar
-        // politik
-        // $client = new \GuzzleHttp\Client();
-        // $res = $client->request('GET', 'https://berita-indo-api-next.vercel.app/api/antara-news/politik');
-        // $response = json_decode($res->getBody()->getContents());
-        // $data = $response->data;
-        // $politiks = $data['posts'];
+        // berita ntb
+        $client = new \GuzzleHttp\Client();
+        $res = $client->request('GET', 'https://ntbprov.go.id/api/news');
+        $response = json_decode($res->getBody()->getContents());
+        $data = $response->data;
+        // dd($response);
 
-        return view('client.home.home', compact('new_posts', 'artikels', 'carousel', 'old_posts', 'videos', 'apps', 'slides', 'slidesInformasi', 'banners', 'agenda', 'informasi'));
+        return view('client.home.home', compact('new_posts', 'artikels', 'carousel', 'old_posts', 'videos', 'apps', 'slides', 'slidesInformasi', 'banners', 'agenda', 'informasi', 'data'));
     }
 
     /**

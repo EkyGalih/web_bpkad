@@ -32,7 +32,7 @@
             <!--Breaking box-->
             <div class="col-1 col-md-3 col-lg-2 py-1 pr-md-0 mb-md-1">
                 <div class="d-inline-block d-md-block bg-primary text-white text-center breaking-caret py-1 px-2">
-                    <span class="d-none d-md-inline-block">Berita Terkini</span>
+                    <span class="d-none d-md-inline-block">Informasi</span>
                 </div>
             </div>
             <!--Breaking content-->
@@ -73,7 +73,7 @@
                     </div>
                     <div class="col-9 pb-5">
                         <div class="section-title">
-                            <h3>Berita <span>Terkini</span></h3>
+                            <h3><span>Blog</span></h3>
                             <hr />
                         </div>
                         <!--SECTION START-->
@@ -301,19 +301,20 @@
                     <div class="col-3">
                         <div class="list-group">
                             <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-                                Berita Lainnya
+                                Berita NTB
                             </button>
                             <ul class="list-unstyled" style="margin-top: 5%;">
-                                {{-- @foreach (array_slice($data, 0, 7, true) as $politik)
+                                @foreach (array_slice($data, 0, 6) as $item)
+                                {{-- {{ dd($item->desc->content) }} --}}
                                     <div class="media">
-                                        <img src="{{ $politik->image }}" class="mr-3" alt="{{ $politik->title }}"
+                                        <img src="{{$item->thumbnail }}" class="mr-3" alt="{{ $item->desc == null ? $item->seotitle : $item->desc->title }}"
                                             style="max-width: 80px; max-height: 80px;">
                                         <div class="media-body">
                                             <p class="mt-0"><a target="_blank"
-                                                    href="{{ $politik->link }}">{{ $politik->title }}</a></p>
+                                                    href="https://ntbprov.go.id/post/{{ $item->seotitle }}">{!! $item->desc == null ? $item->picture_description : substr($item->desc->content, 0, 100).'...' !!}</a></p>
                                         </div>
                                     </div>
-                                @endforeach --}}
+                                @endforeach
                             </ul>
                         </div>
                     </div>
