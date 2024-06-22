@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
-use App\Mail\MailPermohonan;
 use App\Models\Laporan;
 use App\Models\Permohonan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
+use Telegram\Bot\Api;
 
 class LaporanPermohonanMasyarakatController extends Controller
 {
@@ -22,6 +21,7 @@ class LaporanPermohonanMasyarakatController extends Controller
         $Lshow   = '';
         $Pactive = 'active';
         $Lactive = '';
+
         return view('client.faq.index', compact('Pshow', 'Pactive', 'Lshow', 'Lactive'));
     }
 
@@ -35,15 +35,15 @@ class LaporanPermohonanMasyarakatController extends Controller
     {
         // $explode = explode("-", $token->code);
         // if ($explode[0] == 'req') {
-            $status = Permohonan::where('kode_pemohon', '=', $token->code)
+        $status = Permohonan::where('kode_pemohon', '=', $token->code)
             ->select('status')
             ->first();
 
-            if ($status->status == 'proses') {
-                return redirect()->back()->with(['warning_ext_req' => 'status permohonan anda sedang dalam proses, hubungi admin jika permohonan anda belum selesai']);
-            } else {
-                return redirect()->back()->with(['success_req' => 'status permohonan anda sudah selesai']);
-            }
+        if ($status->status == 'proses') {
+            return redirect()->back()->with(['warning_ext_req' => 'status permohonan anda sedang dalam proses, hubungi admin jika permohonan anda belum selesai']);
+        } else {
+            return redirect()->back()->with(['success_req' => 'status permohonan anda sudah selesai']);
+        }
         // } elseif ($explode[0] == 'lap') {
         //     $status = Laporan::where('kode_laporan', '=', $token->code)
         //     ->select('status')
@@ -69,10 +69,6 @@ class LaporanPermohonanMasyarakatController extends Controller
 
         if ($request->jenis == 'permohonan') {
             $code       = 'req-' . uniqid();
-            $Pshow       = 'show';
-            $Lshow       = '';
-            $Pactive     = 'active';
-            $Lactive     = '';
 
             // validasi data
             $request->validate([
@@ -114,14 +110,18 @@ class LaporanPermohonanMasyarakatController extends Controller
                 'asal_instansi' => $request->asal_instansi
             ]);
 
+            $telegram   = new Api(env('TELEGRAM_BOT_TOKEN'));
+            $chatID     = env('TELEGRAM_CHAT_ID');
+            $text       = 'Peromohonan Masuk dari '.$request->nama.' dengan nomor permohonan '.$code . ', memohonkan informasi ' . $request->informasi_diminta . ' untuk kebutuhan ' . $request->tujuan_informasi;
+
+            $telegram->sendMessage([
+                'chat_id' => $chatID,
+                'text' => $text
+            ]);
+
             return redirect()->back()->with(['success_req' => 'Permohonan sudah masuk kode "' . $code . '" harap catat kode permohonan untuk pengecekkan status permohonan'], 'Pshow', 'Pactive', 'Lshow', 'Lactive');
         } elseif ($request->jenis == 'pelaporan') {
-            // dd($request);
             $code       = 'lap-' . uniqid();
-            $Pshow       = '';
-            $Lshow       = 'show';
-            $Pactive     = '';
-            $Lactive     = 'active';
 
             $request->validate([
                 'nama_pelapor' => 'required',
@@ -150,7 +150,7 @@ class LaporanPermohonanMasyarakatController extends Controller
 
             Laporan::create([
                 'nama_pelapor' => $request->nama_pelapor,
-                'kode_laporan' => strtoupper('Lap' . bin2hex(random_bytes(5))),
+                'kode_laporan' => $code,
                 'judul_laporan' => $request->judul_laporan,
                 'tgl_laporan' => date('Y-m-d h:i:s'),
                 'no_pelapor' => $request->no_pelapor,
@@ -158,6 +158,15 @@ class LaporanPermohonanMasyarakatController extends Controller
                 'lokasi_kejadian' => $request->lokasi_kejadian,
                 'kategori_laporan' => $request->kategori_laporan,
                 'berkas' => $request->berkas
+            ]);
+
+            $telegram   = new Api(env('TELEGRAM_BOT_TOKEN'));
+            $chatID     = env('TELEGRAM_CHAT_ID');
+            $text       = 'Pengaduan Masuk dari '.$request->nama_pelapor.' dengan nomor laporan '.$code . ', melaporkan ' . $request->judul_laporan . ', berlokasi ' . $request->lokasi_kejadian;
+
+            $telegram->sendMessage([
+                'chat_id' => $chatID,
+                'text' => $text
             ]);
 
             return redirect()->back()->with(['lap_success' => 'Laporan sudah diterima!'], 'Pshow', 'Pactive', 'Lshow', 'Lactive');
