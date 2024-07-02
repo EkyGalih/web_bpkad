@@ -20,7 +20,7 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('404', [HomeController::class, '_NotFound'])->name('not_found.client');
 Route::get('bpkad-olympic', [HomeController::class, 'olympic'])->name('bpkad-olympic');
 
-Route::get('/auth/redirect', 'Auth\LoginController@redirectToProvider');
+Route::get('/auth/redirect', 'Auth\LoginController@redirectToProvider')->name('login.google');
 Route::get('/auth/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::group(['prefix' => 'bpkad', 'middleware' => 'auth'], function () {

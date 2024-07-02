@@ -62,6 +62,11 @@ class LoginController extends Controller
         return redirect()->back()->with(['failed' => 'Login gagal, pastikan username dan password anda benar'])->withInput($request->all());
     }
 
+    public function login_google()
+    {
+        return view('auth.login_google');
+    }
+
     // login via google
 
     public function redirectToProvider()
@@ -81,7 +86,7 @@ class LoginController extends Controller
 
             if ($user != NULL) {
                 auth()->login($user, true);
-                return redirect()->route('dashboard');
+                return redirect()->back();
             } else {
                 $create = User::create([
                     'email' => $user_google->getEmail(),
@@ -95,7 +100,7 @@ class LoginController extends Controller
                 ]);
 
                 auth()->login($create, true);
-                return redirect()->route('dashboard');
+                return redirect()->back();
             }
         } catch (\Throwable $th) {
             return redirect()->back();

@@ -105,6 +105,74 @@
                                 </label>
                             @endforeach
                         </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button type="button" class="btn btn-primary btn-sm" style="margin-top: 10px; margin-bottom: 5px;">
+                                    <i class="bx bx-heart"></i> Like <span class="badge badge-danger">5k</span>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm" style="margin-top: 10px; margin-bottom: 5px;" id="btn-koment">
+                                    <i class="bx bx-chat"></i> Komentar <span class="badge badge-danger">1k</span>
+                                </button>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="card mt-3">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Komentar</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        {{ Auth::check() }}
+                                        @guest
+                                            <div class="alert alert-warning">
+                                                Anda harus login dengan akun Google untuk memberikan komentar.
+                                                <a href="{{ route('login.google') }}" class="btn btn-primary"><i class="bx bx-user-check"></i> Login</a>
+                                            </div>
+                                        @else
+                                            <form action="#" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="posts_id" value="{{ $posts->id }}">
+                                                <div class="form-group">
+                                                    <label for="comment">Komentar</label>
+                                                    <textarea name="comment" id="comment" class="form-control" rows="5"></textarea>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary"><i class="bx bx-send"></i> Kirim</button>
+                                            </form>
+                                        @endguest
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-1">
+                                                <img src="https://via.placeholder.com/50" alt="" class="img-fluid rounded-circle">
+                                            </div>
+                                            <div class="col-lg-11">
+                                                <h6>Nama User</h6>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae augue non lectus tincidunt tincidunt.</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-lg-1">
+                                                <img src="https://via.placeholder.com/50" alt="" class="img-fluid rounded-circle">
+                                            </div>
+                                            <div class="col-lg-11">
+                                                <h6>Nama User</h6>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae augue non lectus tincidunt tincidunt.</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-lg-1">
+                                                <img src="https://via.placeholder.com/50" alt="" class="img-fluid rounded-circle">
+                                            </div>
+                                            <div class="col-lg-11">
+                                                <h6>Nama User</h6>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae augue non lectus tincidunt tincidunt.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-lg-3">
                         <ul class="list-group">
@@ -154,4 +222,13 @@
             </div>
         </div>
     </footer>
+@endsection
+@section('js-additional')
+<script>
+    $(document).ready(function(){
+        $("#btn-koment").click(function(){
+            $("#form-koment").attr('hidden', false);
+        });
+    });
+</script>
 @endsection

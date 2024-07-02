@@ -12,9 +12,6 @@ use App\Models\Posts;
 use App\Models\Slideitem;
 use App\Models\SubPages;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
-use Jorenvh\Share\Share;
-use Webpatser\Uuid\Uuid;
 
 class HomeController extends Controller
 {
