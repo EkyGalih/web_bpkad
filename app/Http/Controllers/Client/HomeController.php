@@ -153,21 +153,32 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($token1, $id, $token2)
+    public function show($category, $slug = null)
     {
-        $posts = Posts::where('id', '=', $id)->first();
-        $share = \Share::page(
-            url()->full(),
-            $posts->title,
-        )
-            ->facebook()
-            ->twitter()
-            ->linkedin()
-            ->telegram()
-            ->whatsapp()
-            ->reddit();
+        if ($category == 'berita') {
+            if ($slug != null) {
+                $posts = Posts::query()
+                ->where('posts_category_id', 1)
+                ->where('slug', $slug)
+                ->first();
+            } else {
+                $posts = Posts::query()
+                ->where('posts_category_id', 1)
+                ->first();
+            }
 
-        return view('client.posts.detail_posts', compact('posts', 'share'));
+            $share = \Share::page(
+                url()->full(),
+                $posts->title,
+            )
+                ->facebook()
+                ->twitter()
+                ->linkedin()
+                ->telegram()
+                ->whatsapp()
+                ->reddit();
+            return view('client.posts.detail_posts', compact('posts', 'share'));
+        }
     }
 
     /**

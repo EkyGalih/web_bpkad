@@ -11,6 +11,7 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Webpatser\Uuid\Uuid;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -24,6 +25,12 @@ class PostController extends Controller
         $posts = Posts::where('deleted_at', '=', NULL)
             ->orderBy('created_at', 'DESC')
             ->get();
+
+        foreach ($posts as $value) {
+            $post = Posts::findOrFail($value->id);
+            $post->update(['slug' => Str::slug($value->title)]);
+        }
+
         $DeletedPosts = Posts::where('deleted_at', '!=', NULL)
             ->orderBy('created_at', 'DESC')
             ->get();
@@ -71,6 +78,7 @@ class PostController extends Controller
         Posts::create([
             'id' => $id,
             'title' => $request->title,
+            'slug'  => $request->slug,
             'content' => $request->content,
             'content_type_id' => '1',
             'foto_berita' => $request->foto_berita,
@@ -132,6 +140,7 @@ class PostController extends Controller
             }
             $posts->update([
                 'title' => $request->title,
+                'slug'  => $request->slug,
                 'content' => $request->content,
                 'content_type_id' => '1',
                 'foto_berita' => $request->foto_berita,
@@ -188,7 +197,6 @@ class PostController extends Controller
             ]);
             return redirect()->route('post-admin.index')->with(['success' => 'Agenda kaban berhasil dihapus!']);
         }
-
     }
 
     /**

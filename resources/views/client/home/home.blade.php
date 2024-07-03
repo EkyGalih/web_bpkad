@@ -98,7 +98,7 @@
                                                     <!--thumbnail img-->
                                                     <div class="ratio_left-cover-2 image-wrapper">
                                                         <a
-                                                            href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[0]->id . '/' . Helpers::randomString(100)) }}">
+                                                            href="{{ route('post.show', [Helpers::PostCategory($carousel[0]->posts_category_id), $carousel[0]->slug]) }}">
                                                             <img height="437" width="100%"
                                                                 src="{{ asset($carousel[0]->foto_berita) }}"
                                                                 alt="Bootstrap news template">
@@ -109,7 +109,7 @@
                                                             href="#">{{ Helpers::PostCategory($carousel[0]->posts_category_id) }}</a>
                                                         <!--title-->
                                                         <a
-                                                            href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[0]->id . '/' . Helpers::randomString(100)) }}">
+                                                            href="{{ route('post.show', [Helpers::PostCategory($carousel[0]->posts_category_id), $carousel[0]->slug]) }}">
                                                             <h2 class="h3 post-title text-white my-1">
                                                                 {{ substr($carousel[0]->title, 0, 50) }}... <span
                                                                     style="font-size: 20px;">Selengkapnya</span></h2>
@@ -133,7 +133,7 @@
                                                     <!--thumbnail img-->
                                                     <div class="ratio_left-cover-1 image-wrapper">
                                                         <a
-                                                            href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[1]->id . '/' . Helpers::randomString(100)) }}">
+                                                            href="{{ route('post.show', [Helpers::PostCategory($carousel[1]->posts_category_id), $carousel[1]->slug]) }}">
                                                             <img height="437" width="100%"
                                                                 src="{{ asset($carousel[1]->foto_berita) }}"
                                                                 alt="Bootstrap news template">
@@ -144,7 +144,7 @@
                                                             href="#">{{ Helpers::PostCategory($carousel[1]->posts_category_id) }}</a>
                                                         <!--title-->
                                                         <a
-                                                            href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[1]->id . '/' . Helpers::randomString(100)) }}">
+                                                            href="{{ route('post.show', [Helpers::PostCategory($carousel[1]->posts_category_id), $carousel[1]->slug]) }}">
                                                             <h2 class="h3 post-title text-white my-1">
                                                                 {{ substr($carousel[1]->title, 0, 50) }}... <span
                                                                     style="font-size: 20px;">Selengkapnya</span></h2>
@@ -168,7 +168,7 @@
                                                     <!--thumbnail img-->
                                                     <div class="ratio_left-cover-1 image-wrapper">
                                                         <a
-                                                            href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[2]->id . '/' . Helpers::randomString(100)) }}">
+                                                            href="{{ route('post.show', [Helpers::PostCategory($carousel[2]->posts_category_id), $carousel[2]->slug]) }}">
                                                             <img height="437" width="100%"
                                                                 src="{{ asset($carousel[2]->foto_berita) }}"
                                                                 alt="Bootstrap news template">
@@ -179,7 +179,7 @@
                                                             href="#">{{ Helpers::PostCategory($carousel[2]->posts_category_id) }}</a>
                                                         <!--title-->
                                                         <a
-                                                            href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[2]->id . '/' . Helpers::randomString(100)) }}">
+                                                            href="{{ route('post.show', [Helpers::PostCategory($carousel[2]->posts_category_id), $carousel[2]->slug]) }}">
                                                             <h2 class="h3 post-title text-white my-1">
                                                                 {{ substr($carousel[2]->title, 0, 50) }}... <span
                                                                     style="font-size: 20px;">Selengkapnya</span></h2>
@@ -203,7 +203,7 @@
                                                     <!--thumbnail img-->
                                                     <div class="ratio_left-cover-1 image-wrapper">
                                                         <a
-                                                            href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[3]->id . '/' . Helpers::randomString(100)) }}">
+                                                            href="{{ route('post.show', [Helpers::PostCategory($carousel[3]->posts_category_id), $carousel[3]->slug]) }}">
                                                             <img height="437" width="100%"
                                                                 src="{{ asset($carousel[3]->foto_berita) }}"
                                                                 alt="Bootstrap news template">
@@ -214,7 +214,7 @@
                                                             href="#">{{ Helpers::PostCategory($carousel[3]->posts_category_id) }}</a>
                                                         <!--title-->
                                                         <a
-                                                            href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[3]->id . '/' . Helpers::randomString(100)) }}">
+                                                            href="{{ route('post.show', [Helpers::PostCategory($carousel[3]->posts_category_id), $carousel[3]->slug]) }}">
                                                             <h2 class="h3 post-title text-white my-1">
                                                                 {{ substr($carousel[3]->title, 0, 50) }}... <span
                                                                     style="font-size: 20px;">Selengkapnya</span></h2>
@@ -259,7 +259,7 @@
                                                     <!--thumbnail img-->
                                                     <div class="ratio_right-cover-2 image-wrapper">
                                                         <a
-                                                            href="{{ route('client.show', Helpers::randomString(100) . '/' . $post->id . '/' . Helpers::randomString(100)) }}">
+                                                            href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">
                                                             <img height="250" width="100%"
                                                                 src="{{ asset($post->foto_berita) }}"
                                                                 alt="{{ substr($post->title, 0, 50) }}">
@@ -272,7 +272,7 @@
 
                                                         <!--title-->
                                                         <a
-                                                            href="{{ route('client.show', Helpers::randomString(100) . '/' . $post->id . '/' . Helpers::randomString(100)) }}">
+                                                            href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">
                                                             <h4 class="h5 text-white my-1">
                                                                 {{ substr($post->title, 0, 50) }}...
                                                                 <span style="font-size: 16px;">Selengkapnya</span>
@@ -335,13 +335,13 @@
                                                     <div class="media-body">
                                                         <h5 class="mt-0 mb-1">
                                                             <a style="color: black;"
-                                                                href="{{ route('client.show', Helpers::randomString(120) . '/' . $item->id . '/' . Helpers::randomString(100)) }}">
+                                                                href="{{ route('post.show', [Helpers::PostCategory($item->posts_category_id), $item->slug]) }}">
                                                                 {{ $item->title }}
                                                             </a>
                                                         </h5>
                                                         <p>
                                                             <a style="color: black;"
-                                                                href="{{ route('client.show', Helpers::randomString(120) . '/' . $item->id . '/' . Helpers::randomString(100)) }}">
+                                                                href="{{ route('post.show', [Helpers::PostCategory($item->posts_category_id), $item->slug]) }}">
                                                                 {!! substr($item->content, 0, 150) !!} ...
                                                             </a> <br />
                                                             <sub>
@@ -572,7 +572,7 @@
                                 <!--thumbnail img-->
                                 <div class="ratio_left-cover-1 image-wrapper">
                                     <a
-                                        href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[0]->id . '/' . Helpers::randomString(100)) }}">
+                                        href="{{ route('post.show', [Helpers::PostCategory($carousel[0]->posts_category_id), $carousel[0]->slug]) }}">
                                         <img height="437" src="{{ asset($carousel[0]->foto_berita) }}"
                                             alt="Bootstrap news template">
                                     </a>
@@ -582,7 +582,7 @@
                                         href="#">{{ Helpers::PostCategory($carousel[0]->posts_category_id) }}</a>
                                     <!--title-->
                                     <a
-                                        href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[0]->id . '/' . Helpers::randomString(100)) }}">
+                                        href="{{ route('post.show', [Helpers::PostCategory($carousel[0]->posts_category_id), $carousel[0]->slug]) }}">
                                         <h2 class="h3 post-title text-white my-1">
                                             {{ substr($carousel[0]->title, 0, 50) }}... <span
                                                 style="font-size: 20px;">Selengkapnya</span></h2>
@@ -604,7 +604,7 @@
                                 <!--thumbnail img-->
                                 <div class="ratio_left-cover-1 image-wrapper">
                                     <a
-                                        href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[1]->id . '/' . Helpers::randomString(100)) }}">
+                                        href="{{ route('post.show', [Helpers::PostCategory($carousel[1]->posts_category_id), $carousel[1]->slug]) }}">
                                         <img height="437" src="{{ asset($carousel[1]->foto_berita) }}"
                                             alt="Bootstrap news template">
                                     </a>
@@ -614,7 +614,7 @@
                                         href="#">{{ Helpers::PostCategory($carousel[1]->posts_category_id) }}</a>
                                     <!--title-->
                                     <a
-                                        href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[1]->id . '/' . Helpers::randomString(100)) }}">
+                                        href="{{ route('post.show', [Helpers::PostCategory($carousel[1]->posts_category_id), $carousel[1]->slug]) }}">
                                         <h2 class="h3 post-title text-white my-1">
                                             {{ substr($carousel[1]->title, 0, 50) }}... <span
                                                 style="font-size: 20px;">Selengkapnya</span></h2>
@@ -636,7 +636,7 @@
                                 <!--thumbnail img-->
                                 <div class="ratio_left-cover-1 image-wrapper">
                                     <a
-                                        href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[2]->id . '/' . Helpers::randomString(100)) }}">
+                                        href="{{ route('post.show', [Helpers::PostCategory($carousel[2]->posts_category_id), $carousel[2]->slug]) }}">
                                         <img height="437" src="{{ asset($carousel[2]->foto_berita) }}"
                                             alt="Bootstrap news template">
                                     </a>
@@ -646,7 +646,7 @@
                                         href="#">{{ Helpers::PostCategory($carousel[2]->posts_category_id) }}</a>
                                     <!--title-->
                                     <a
-                                        href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[2]->id . '/' . Helpers::randomString(100)) }}">
+                                        href="{{ route('post.show', [Helpers::PostCategory($carousel[2]->posts_category_id), $carousel[2]->slug]) }}">
                                         <h2 class="h3 post-title text-white my-1">
                                             {{ substr($carousel[2]->title, 0, 50) }}... <span
                                                 style="font-size: 20px;">Selengkapnya</span></h2>
@@ -668,7 +668,7 @@
                                 <!--thumbnail img-->
                                 <div class="ratio_left-cover-1 image-wrapper">
                                     <a
-                                        href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[3]->id . '/' . Helpers::randomString(100)) }}">
+                                        href="{{ route('post.show', [Helpers::PostCategory($carousel[3]->posts_category_id), $carousel[3]->slug]) }}">
                                         <img height="437" src="{{ asset($carousel[3]->foto_berita) }}"
                                             alt="Bootstrap news template">
                                     </a>
@@ -678,7 +678,7 @@
                                         href="#">{{ Helpers::PostCategory($carousel[3]->posts_category_id) }}</a>
                                     <!--title-->
                                     <a
-                                        href="{{ route('client.show', Helpers::randomString(100) . '/' . $carousel[3]->id . '/' . Helpers::randomString(100)) }}">
+                                        href="{{ route('post.show', [Helpers::PostCategory($carousel[3]->posts_category_id), $carousel[3]->slug]) }}">
                                         <h2 class="h3 post-title text-white my-1">
                                             {{ substr($carousel[3]->title, 0, 50) }}... <span
                                                 style="font-size: 20px;">Selengkapnya</span></h2>
@@ -713,7 +713,7 @@
                         <!--thumbnail img-->
                         <div class="ratio_right-cover-2 image-wrapper">
                             <a
-                                href="{{ route('client.show', Helpers::randomString(100) . '/' . $post->id . '/' . Helpers::randomString(100)) }}">
+                                href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">
                                 <img height="250" width="100%" src="{{ asset($post->foto_berita) }}"
                                     alt="{{ substr($post->title, 0, 50) }}">
                             </a>
@@ -725,7 +725,7 @@
 
                             <!--title-->
                             <a
-                                href="{{ route('client.show', Helpers::randomString(100) . '/' . $post->id . '/' . Helpers::randomString(100)) }}">
+                                href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">
                                 <h4 class="h5 text-white my-1">
                                     {{ substr($post->title, 0, 50) }}...
                                     <span style="font-size: 16px;">Selengkapnya</span>
@@ -775,13 +775,13 @@
                                     <div class="media-body">
                                         <h5 class="mt-0 mb-1">
                                             <a style="color: black;"
-                                                href="{{ route('client.show', Helpers::randomString(120) . '/' . $item->id . '/' . Helpers::randomString(100)) }}">
+                                                href="{{ route('post.show', [Helpers::PostCategory($item->posts_category_id), $item->slug]) }}">
                                                 {{ $item->title }}
                                             </a>
                                         </h5>
                                         <p>
                                             <a style="color: black;"
-                                                href="{{ route('client.show', Helpers::randomString(120) . '/' . $item->id . '/' . Helpers::randomString(100)) }}">
+                                                href="{{ route('post.show', [Helpers::PostCategory($item->posts_category_id), $item->slug]) }}">
                                                 {!! substr($item->content, 0, 150) !!} ...
                                             </a> <br />
                                             <sub>

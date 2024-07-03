@@ -36,98 +36,101 @@
                             <hr />
                             <form action="{{ route('post-admin.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Kategori <sup style="color: red;">*</sup></label>
-                                    <div class="col-sm-10">
-                                        <select name="posts_category_id" class="form-control">
-                                            <option value="">Pilih Kategori</option>
-                                            @foreach ($PostCategory as $category)
-                                                <option value="{{ $category->id }}">{{ $category->category }}</option>
-                                            @endforeach
-                                        </select>
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        <div class="col-sm-12">
+                                            <label for="title" class="form-label">Judul <sup
+                                                    style="color: red;">*</sup></label>
+                                            <input type="text" id="title" name="title" class="form-control mb-3"
+                                                required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="inputText" class="form-label">Konten <sup
+                                                    style="color: red;">*</sup></label>
+                                            <textarea class="tinymce-editor" name="content"></textarea>
+                                        </div>
+                                        <div class="d-flex" style="float: right;">
+                                            <button class="btn btn-success me-2" type="submit">
+                                                <i class="bi bi-save"></i> Simpan
+                                            </button>
+                                            <button class="btn btn-warning me-2" type="reset">
+                                                <i class="bi bi-arrow-clockwise"></i> Reset
+                                            </button>
+                                            <a class="btn btn-secondary" href="{{ route('post-admin.index') }}">
+                                                <i class="bi bi-skip-backward"></i> Kembali
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div class="col-sm-12">
+                                            <label for="slug" class="form-label">Slug <sup
+                                                    style="color: red;">*</sup></label>
+                                            <input type="text" id="slug" name="slug" class="form-control mb-3"
+                                                required>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label for="inputText" class="col-form-label">Kategori <sup
+                                                    style="color: red;">*</sup></label>
+                                            <select name="posts_category_id" class="form-control mb-3">
+                                                <option value="">Pilih Kategori</option>
+                                                @foreach ($PostCategory as $category)
+                                                    <option value="{{ $category->id }}">{{ $category->category }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label for="inputText" class="col-form-label">Agenda Kaban? <sup
+                                                    style="color: red;">*</sup></label>
+                                            <input type="radio" name="agenda_kaban" value="ya"> Ya
+                                            <input type="radio" name="agenda_kaban" value="tidak" checked> Tidak
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label for="inputText" class="col-form-label">Foto Berita <sup
+                                                    style="color: red;">*</sup></label>
+                                            <p class="image_upload">
+                                                <label for="userImage">
+                                                    <a class="btn btn-primary btn-sm" rel="nofollow"><span
+                                                            class='bi bi-upload'></span> Upload Foto</a>
+                                                </label>
+                                                <input type="file" name="foto_berita" id="userImage" accept="image/*"
+                                                    onchange="loadFile(event)">
+                                            </p>
+                                            <img class="images" id="post">
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label for="inputText" class="col-form-label">Caption <sup
+                                                    style="color: red;">*</sup></label>
+                                            <input type="text" name="caption" class="form-control mb-3">
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label for="inputText" class="col-form-label">Tags</label>
+                                            <input id="input-tags" autocomplete="off" class="mb-3" placeholder="Tags"
+                                                name="tags">
+                                        </div>
+                                        <div class="row">
+                                            <label for="inputText" class="col-form-label">Waktu Upload <sup
+                                                    style="color: red;">*</sup></label>
+                                            <div class="col-sm-6">
+                                                <input id="date" type="date" name="date"
+                                                    class="form-control mb-3 @error('date') is-invalid @enderror">
+                                                @error('date')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input id="time" type="time" name="time"
+                                                    class="form-control mb-3 @error('time') is-invalid @enderror">
+                                                @error('time')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Judul <sup style="color: red;">*</sup></label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="title" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Agenda Kaban? <sup style="color: red;">*</sup></label>
-                                    <div class="col-sm-10">
-                                        <input type="radio" name="agenda_kaban" value="ya"> Ya
-                                        <input type="radio" name="agenda_kaban" value="tidak" checked> Tidak
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Foto Berita <sup style="color: red;">*</sup></label>
-                                    <div class="col-sm-10">
-                                        <p class="image_upload">
-                                            <label for="userImage">
-                                                <a class="btn btn-primary btn-sm" rel="nofollow"><span
-                                                        class='bi bi-upload'></span> Upload Foto</a>
-                                            </label>
-                                            <input type="file" name="foto_berita" id="userImage" accept="image/*"
-                                                onchange="loadFile(event)">
-                                        </p>
-                                        <img class="images" id="post">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Kontent <sup style="color: red;">*</sup></label>
-                                    <div class="col-sm-10">
-                                        <textarea name="content" class="tinymce-editor"></textarea><!-- End TinyMCE Editor -->
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Caption <sup style="color: red;">*</sup></label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="caption" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Tags</label>
-                                    <div class="col-sm-10">
-                                        <input id="input-tags" autocomplete="off" placeholder="Tags" name="tags">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Waktu Upload <sup style="color: red;">*</sup></label>
-                                    <div class="col-sm-2">
-                                        <input id="date" type="date" name="date"
-                                            class="form-control @error('date') is-invalid @enderror">
-                                        @error('date')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <input id="time" type="time" name="time"
-                                            class="form-control @error('time') is-invalid @enderror">
-                                        @error('time')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-sm-12">
-                                        <button class="btn btn-success btn-md"
-                                            style="float: right; margin-right: 2px;" type="submit">
-                                            <i class="bi bi-save"></i> Simpan
-                                        </button>
-                                        <button class="btn btn-warning btn-md"
-                                            style="float: right; margin-right: 2px;" type="reset">
-                                            <i class="bi bi-arrow-clockwise"></i> Reset
-                                        </button>
-                                        <a class="btn btn-secondary btn-md" href="{{ route('post-admin.index') }}"
-                                            style="float: right; margin-right: 2px;">
-                                            <i class="bi bi-skip-backward"></i> Kembali
-                                        </a>
-                                    </div>
-                                </div>
-                            </form>
                         </div>
                     </div>
+                    </form>
                 </div>
             </div>
         </section>
@@ -150,5 +153,18 @@
                 URL.revokeObjectURL(output.src) // free memory
             }
         };
+
+        $(document).ready(function() {
+            $('#title').on('keyup', function() {
+                var slug = $(this).val()
+                    .toLowerCase()
+                    .replace(/\s+/g, '-') // Ganti spasi dengan -
+                    .replace(/[^\w\-]+/g, '') // Hapus semua karakter non-word
+                    .replace(/\-\-+/g, '-') // Ganti multiple - dengan single -
+                    .replace(/^-+/, '') // Hapus - di awal teks
+                    .replace(/-+$/, ''); // Hapus - di akhir teks
+                $('#slug').val(slug);
+            });
+        });
     </script>
 @endsection
