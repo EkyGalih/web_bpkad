@@ -11,6 +11,10 @@
             max-width: 100%;
             max-height: auto;
         }
+
+        #content {
+            min-height: 400px; /* Atur tinggi minimum sesuai keinginan Anda */
+        }
     </style>
 @endsection
 @section('content')
@@ -44,7 +48,7 @@
                                             <input type="text" id="title" name="title" class="form-control mb-3"
                                                 required>
                                         </div>
-                                        <div class=mb-3">
+                                        <div class="mb-3">
                                             <label for="slug" class="form-label">Slug <sup
                                                     style="color: red;">*</sup></label>
                                             <input type="text" id="slug" name="slug" class="form-control mb-3"
@@ -53,7 +57,7 @@
                                         <div class="mb-3">
                                             <label for="inputText" class="form-label">Konten <sup
                                                     style="color: red;">*</sup></label>
-                                            <textarea class="tinymce-editor" name="content"></textarea>
+                                            <textarea class="form-control" name="content" id="content"></textarea>
                                         </div>
                                         <div class="d-flex" style="float: right;">
                                             <button class="btn btn-success me-2" type="submit">
@@ -128,9 +132,9 @@
                                         </div>
                                     </div>
                                 </div>
+                            </form>
                         </div>
                     </div>
-                    </form>
                 </div>
             </div>
         </section>
@@ -138,6 +142,7 @@
 @endsection
 @section('additional-js')
     <script src="{{ asset('server/vendor/tom-select/tom-select.js') }}"></script>
+    <script src="{{ asset('server/vendor/ckeditor/ckeditor-classic.bundle.js') }}" type="text/javascript"></script>
     <script>
         new TomSelect("#input-tags", {
             persist: false,
@@ -165,6 +170,18 @@
                     .replace(/-+$/, ''); // Hapus - di akhir teks
                 $('#slug').val(slug);
             });
+
+            ClassicEditor
+                .create(document.querySelector('#content'), {
+                    // Konfigurasi tambahan untuk CKEditor
+                    height: 500 // Atur tinggi editor di sini
+                })
+                .then(editor => {
+                    console.log(editor);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         });
     </script>
 @endsection

@@ -26,11 +26,6 @@ class PostController extends Controller
             ->orderBy('created_at', 'DESC')
             ->get();
 
-        foreach ($posts as $value) {
-            $post = Posts::findOrFail($value->id);
-            $post->update(['slug' => Str::slug($value->title)]);
-        }
-
         $DeletedPosts = Posts::where('deleted_at', '!=', NULL)
             ->orderBy('created_at', 'DESC')
             ->get();
