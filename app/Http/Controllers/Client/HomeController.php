@@ -155,7 +155,7 @@ class HomeController extends Controller
      */
     public function show($category, $slug = null)
     {
-        if ($category == 'berita') {
+        if ($category == 'Berita') {
             if ($slug != null) {
                 $posts = Posts::query()
                 ->where('posts_category_id', 1)

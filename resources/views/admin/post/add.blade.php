@@ -44,6 +44,12 @@
                                             <input type="text" id="title" name="title" class="form-control mb-3"
                                                 required>
                                         </div>
+                                        <div class=mb-3">
+                                            <label for="slug" class="form-label">Slug <sup
+                                                    style="color: red;">*</sup></label>
+                                            <input type="text" id="slug" name="slug" class="form-control mb-3"
+                                                required readonly>
+                                        </div>
                                         <div class="mb-3">
                                             <label for="inputText" class="form-label">Konten <sup
                                                     style="color: red;">*</sup></label>
@@ -62,12 +68,6 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-5">
-                                        <div class="col-sm-12">
-                                            <label for="slug" class="form-label">Slug <sup
-                                                    style="color: red;">*</sup></label>
-                                            <input type="text" id="slug" name="slug" class="form-control mb-3"
-                                                required>
-                                        </div>
                                         <div class="col-sm-12">
                                             <label for="inputText" class="col-form-label">Kategori <sup
                                                     style="color: red;">*</sup></label>
@@ -96,7 +96,7 @@
                                                 <input type="file" name="foto_berita" id="userImage" accept="image/*"
                                                     onchange="loadFile(event)">
                                             </p>
-                                            <img class="images" id="post">
+                                            <img class="images" id="post" style="max-height: 250px; max-width: 100%;">
                                         </div>
                                         <div class="col-sm-12">
                                             <label for="inputText" class="col-form-label">Caption <sup

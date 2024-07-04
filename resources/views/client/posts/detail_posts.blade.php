@@ -106,7 +106,7 @@
                             @endforeach
                         </div>
 
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-lg-12">
                                 <button type="button" class="btn btn-primary btn-sm" style="margin-top: 10px; margin-bottom: 5px;">
                                     <i class="bx bx-heart"></i> Like <span class="badge badge-danger">5k</span>
@@ -172,7 +172,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="col-lg-3">
                         <ul class="list-group">
@@ -201,7 +201,7 @@
                                 <i class="bx bx-news"></i> Topik Terkait
                             </button>
                             @foreach ($posting as $post)
-                                <a href="{{ route('client.show', Helpers::randomString(120) . '/' . $post->id . '/' . Helpers::randomString(100)) }}"
+                                <a href="{{ route('post.show', [Helpers::GetCategoryContent($post->posts_category_id), $post->slug]) }}"
                                     type="button" class="list-group-item list-group-item-action"><span
                                         style="color: #0844c5;">#</span> {{ $post->title }}</a>
                             @endforeach

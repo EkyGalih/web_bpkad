@@ -228,7 +228,9 @@ class PostController extends Controller
         foreach ($recent as $item) {
             $item->delete();
         }
-        unlink($post->foto_berita);
+        if (file_exists($post->foto_berita)) {
+            unlink($post->foto_berita);
+        }
         $post->delete();
 
         return redirect()->route('post-admin.index')->with(['success' => 'Berita/Artikel dihapus permanen!']);

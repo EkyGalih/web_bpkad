@@ -357,7 +357,7 @@
                                 @foreach ($posts as $berita)
                                     <div class="post-item clearfix">
                                         <img src="{{ $berita->foto_berita }}" alt="">
-                                        <h4><a href="{{ route('client.show', $berita->id) }}"
+                                        <h4><a href="{{ route('post.show', [Helpers::GetCategoryContent($berita->posts_category_id), $berita->slug]) }}"
                                                 target="_blank">{{ substr($berita->title, 0, 50) }}...Selengkapnya</a>
                                         </h4>
                                         <p>{{ Helpers::GetDate($berita->created_at) }}</p>

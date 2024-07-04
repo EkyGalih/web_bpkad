@@ -59,7 +59,7 @@
                                     @foreach ($posts as $post)
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
-                                            <td style="width: 50%;">{{ $post->title }}</td>
+                                            <td style="width: 50%;">{{ $post->created_at }}</td>
                                             <td>
                                                 <button
                                                     class="btn btn-sm btn-{{ $post->posts_category_id == '1' ? 'success' : 'primary' }}">
