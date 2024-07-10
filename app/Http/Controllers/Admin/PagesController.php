@@ -11,6 +11,7 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Webpatser\Uuid\Uuid;
+use Illuminate\Support\Str;
 
 class PagesController extends Controller
 {
@@ -24,6 +25,14 @@ class PagesController extends Controller
         $pages = Pages::where('deleted_at', '=', NULL)
             ->orderBy('created_at', 'DESC')
             ->get();
+
+            foreach ($pages as $page) {
+                $hal = Pages::findOrFail($page->id);
+                $hal->update([
+                    'slug' => Str::slug($page->title),
+                ]);
+            }
+
         $DeletedPages = Pages::where('deleted_at', '!=', NULL)
             ->orderBy('created_at', 'DESC')
             ->get();
@@ -58,6 +67,7 @@ class PagesController extends Controller
                 'id' => $id,
                 'jenis_link' => $request->jenis_link,
                 'title' => $request->title,
+                'slug' => $request->slug,
                 'content' => $request->content,
                 'pages_type_id' => '1',
                 'create_by_id' => Auth::user()->id,
@@ -69,6 +79,7 @@ class PagesController extends Controller
                 'jenis_link' => $request->jenis_link,
                 'link' => $request->link,
                 'title' => $request->title,
+                'slug' => $request->slug,
                 'content' => $request->content,
                 'pages_type_id' => '1',
                 'create_by_id' => Auth::user()->id,
@@ -118,6 +129,7 @@ class PagesController extends Controller
 
         $pages->update([
             'title' => $request->title,
+            'slug' => $request->slug,
             'content' => $request->content,
             'pages_type_id' => '1',
             'create_by_id' => Auth::user()->id,
