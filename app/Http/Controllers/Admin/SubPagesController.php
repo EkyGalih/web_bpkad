@@ -60,6 +60,7 @@ class SubPagesController extends Controller
      */
     public function store(Request $request)
     {
+
         $id = (string)Uuid::generate(4);
 
         if ($request->jenis_link == 'non-link') {
@@ -83,6 +84,7 @@ class SubPagesController extends Controller
                 SubPages::create([
                     'id' => $id,
                     'title' => $request->title,
+                    'slug' => $request->slug,
                     'content' => $request->content,
                     'pages_type_id' => '1',
                     'pdf_file' => $request->pdf_file,
@@ -93,6 +95,7 @@ class SubPagesController extends Controller
                 SubPages::create([
                     'id' => $id,
                     'title' => $request->title,
+                    'slug' => $request->slug,
                     'content' => $request->content,
                     'pages_type_id' => '1',
                     'create_by_id' => Auth::user()->id,
@@ -107,6 +110,7 @@ class SubPagesController extends Controller
                 'jenis_link' => $request->jenis_link,
                 'link' => $request->link,
                 'title' => $request->title,
+                'slug' => $request->slug,
                 'pages_type_id' => '1',
                 'create_by_id' => Auth::user()->id,
                 'sub_pages_id' => $request->sub_pages_id
@@ -143,6 +147,7 @@ class SubPagesController extends Controller
 
         $subpages->update([
             'title' => $request->title,
+            'slug' => $request->slug,
             'content' => $request->content,
             'link' => $request->link,
             'pages_type_id' => '1',

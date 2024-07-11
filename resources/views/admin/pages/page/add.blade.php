@@ -46,7 +46,8 @@
                                             <label for="inputText" class="col-sm-2 col-form-label" id="label-link"
                                                 hidden>Ekternal Link</label>
                                             <div class="col-sm-10">
-                                                <input type="hidden" name="link" class="form-control" id="link" placeholder="https://example.com/example">
+                                                <input type="hidden" name="link" class="form-control" id="link"
+                                                    placeholder="https://example.com/example">
                                             </div>
                                         </div>
                                     </div>
@@ -111,22 +112,30 @@
                 $('#link').prop('type', 'text');
                 $('#content').attr('hidden', true);
                 $('#menu_id').attr('disabled', true);
-                $('#slug').attr('disabled', true);
+                $('#slug').attr('readonly', true);
             }
         });
 
         $(document).ready(function() {
             $('#title').on('keyup', function() {
-                if (!$('#slug').is(':disabled')) {
-                    var slug = $(this).val()
-                        .toLowerCase()
-                        .replace(/\s+/g, '-') // Ganti spasi dengan -
-                        .replace(/[^\w\-]+/g, '') // Hapus semua karakter non-word
-                        .replace(/\-\-+/g, '-') // Ganti multiple - dengan single -
-                        .replace(/^-+/, '') // Hapus - di awal teks
-                        .replace(/-+$/, ''); // Hapus - di akhir teks
-                    $('#slug').val(slug);
-                }
+                var slug = $(this).val()
+                    .toLowerCase()
+                    .replace(/\s+/g, '-') // Ganti spasi dengan -
+                    .replace(/[^\w\-]+/g, '') // Hapus semua karakter non-word
+                    .replace(/\-\-+/g, '-') // Ganti multiple - dengan single -
+                    .replace(/^-+/, '') // Hapus - di awal teks
+                    .replace(/-+$/, ''); // Hapus - di akhir teks
+
+                $.ajax({
+                    url: '/check-slug',
+                    method: 'GET',
+                    data: {
+                        slug: slug
+                    },
+                    success: function(response) {
+                        $('#slug').val(response.slug);
+                    }
+                });
             });
 
             ClassicEditor

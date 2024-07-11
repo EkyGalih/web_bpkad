@@ -106,9 +106,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function pages($id)
+    public function pages($slug)
     {
-        $pages = Pages::findOrFail($id);
+        $pages = Pages::where('slug', $slug)->first();
 
         return view('client.pages.pages', compact('pages'));
     }

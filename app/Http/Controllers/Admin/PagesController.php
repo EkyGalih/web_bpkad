@@ -26,12 +26,12 @@ class PagesController extends Controller
             ->orderBy('created_at', 'DESC')
             ->get();
 
-            foreach ($pages as $page) {
-                $hal = Pages::findOrFail($page->id);
-                $hal->update([
-                    'slug' => Str::slug($page->title),
-                ]);
-            }
+            // foreach ($pages as $page) {
+            //     $hal = Pages::findOrFail($page->id);
+            //     $hal->update([
+            //         'slug' => Str::slug($page->title),
+            //     ]);
+            // }
 
         $DeletedPages = Pages::where('deleted_at', '!=', NULL)
             ->orderBy('created_at', 'DESC')

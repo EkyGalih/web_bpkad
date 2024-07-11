@@ -14,7 +14,7 @@
                     @endphp
                     @if (count($sub_menu) != 0)
                         <li class="drop-down"><a
-                                href="{{ route('client.show_pages', $menu->slug) }}">{{ $menu->name }}</a>
+                                href="{{ route('client.pages', $menu->slug) }}">{{ $menu->name }}</a>
                             <ul>
                                 @foreach ($sub_menu as $item)
                                     @php $sub_item = Helpers::SubPages($item->sub_menu_id) @endphp
@@ -24,7 +24,7 @@
                                                 @foreach ($sub_item as $item2)
                                                     <li>
                                                         <a
-                                                            href="{{ $item2->jenis_link == 'non-link' ? route('client.show_sub_pages', $item2->slug) : $item2->link }}">
+                                                            href="{{ $item2->jenis_link == 'non-link' ? route('client.pages', $item2->slug) : $item2->link }}">
                                                             {{ $item2->title }}</a>
                                                     </li>
                                                 @endforeach
@@ -32,7 +32,7 @@
                                         </li>
                                     @elseif (count($sub_item) == 0)
                                         <li><a
-                                                href="{{ $item->jenis_link == 'non-link' ? route('client.show_pages', $item->slug) : '/' . $item->link }}">{{ $item->title }}</a>
+                                                href="{{ $item->jenis_link == 'non-link' ? route('client.pages', $item->slug) : '/' . $item->link }}">{{ $item->title }}</a>
                                         </li>
                                     @endif
                                 @endforeach

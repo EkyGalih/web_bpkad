@@ -50,11 +50,13 @@ Route::group(['prefix' => 'artikel'], function () {
     Route::get('detail/{token1?}/{id?}/{token2?}', [ArtikelController::class, 'show'])->name('artikel.show');
 });
 
-Route::get('/pages/{slug?}', [HomeController::class, 'pages'])->name('client.show_pages');
+Route::get('/pages/{slug?}', [HomeController::class, 'pages'])->name('client.pages');
 
-Route::group(['prefix' => 'SubPages'], function () {
-    Route::get('/{slug?}', [HomeController::class, 'ShowSubPages'])->name('client.show_sub_pages');
-});
+// Route::group(['prefix' => 'SubPages'], function () {
+//     Route::get('/{slug?}', [HomeController::class, 'ShowSubPages'])->name('client.show_sub_pages');
+// });
+
+Route::get('/check-slug', [AdminController::class, 'checkSlugPage']);
 
 Route::group(['prefix' => 'Permohonan_dan_Pengaduan'], function () {
     Route::get('/', [LaporanPermohonanMasyarakatController::class, 'index'])->name('faq.index');

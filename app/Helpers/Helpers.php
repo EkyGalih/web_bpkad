@@ -28,6 +28,7 @@ use App\Models\User;
 use App\Models\PostsCategory;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class Helpers
 {
@@ -514,7 +515,7 @@ class Helpers
         if ($param2 == "") {
             $KIP = KIP::where('jenis_informasi', '=', $param)->orderBy('tahun', 'DESC')->get();
         } else {
-            $KIP = KIP::where('jenis_informasi', '=', $param)->where('nama_informasi', 'LIKE', '%'.$param2.'%')->orderBy('tahun', 'DESC')->get();
+            $KIP = KIP::where('jenis_informasi', '=', $param)->where('nama_informasi', 'LIKE', '%' . $param2 . '%')->orderBy('tahun', 'DESC')->get();
         }
 
         $data = [
@@ -663,5 +664,23 @@ class Helpers
             ->where('ppid_struktur.deleted_at', '=', NULL)
             ->select('ppid_struktur.jabatan', 'ppid_struktur.nama_jabatan', 'pegawai.name', 'pegawai.foto')
             ->get();
+    }
+
+    public static function createSlug($title, $model)
+    {
+        // Generate initial slug
+        $slug = Str::slug($title);
+
+        // Check if the slug already exists in the database
+        $originalSlug = $slug;
+        $counter = 1;
+
+        while ($model::where('slug', $slug)->exists()) {
+            // If the slug exists, add the counter to the end
+            $slug = $originalSlug . '-' . $counter;
+            $counter++;
+        }
+
+        return $slug;
     }
 }

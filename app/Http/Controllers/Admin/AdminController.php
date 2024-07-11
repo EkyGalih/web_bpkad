@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Bidang;
 use App\Models\Laporan;
 use App\Models\Olympic;
+use App\Models\Pages;
 use App\Models\Permohonan;
 use App\Models\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
@@ -107,5 +109,19 @@ class AdminController extends Controller
         ]);
 
         return redirect()->route('olympic-admin.index')->with(['success' => 'Data berhasil diupdate!']);
+    }
+
+    public function checkSlugPage(Request $request)
+    {
+        $slug = Str::slug($request->input('slug'));
+        $originalSlug = $slug;
+        $counter = 1;
+
+        while (Pages::where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $counter;
+            $counter++;
+        }
+
+        return response()->json(['slug' => $slug]);
     }
 }
