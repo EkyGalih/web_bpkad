@@ -178,6 +178,10 @@ class HomeController extends Controller
                 ->whatsapp()
                 ->reddit();
             return view('client.posts.detail_posts', compact('posts', 'share'));
+        } else {
+            $uri = request()->path();
+            $url = $uri;
+            return redirect(url($url));
         }
     }
 

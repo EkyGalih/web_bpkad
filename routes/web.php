@@ -43,7 +43,7 @@ Route::group(['prefix' => 'berita'], function () {
     Route::post('search', [PostsController::class, 'search'])->name('post.search');
 });
 
-Route::get('/{category?}/{slug?}', [HomeController::class, 'show'])->name('post.show');
+Route::get('/posts/{category?}/{slug?}', [HomeController::class, 'show'])->name('post.show');
 
 Route::group(['prefix' => 'artikel'], function () {
     Route::get('/', [ArtikelController::class, 'index'])->name('artikel.index');
