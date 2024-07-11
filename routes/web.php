@@ -52,11 +52,10 @@ Route::group(['prefix' => 'artikel'], function () {
 
 Route::get('/pages/{slug?}', [HomeController::class, 'pages'])->name('client.pages');
 
-// Route::group(['prefix' => 'SubPages'], function () {
-//     Route::get('/{slug?}', [HomeController::class, 'ShowSubPages'])->name('client.show_sub_pages');
-// });
+Route::get('/pages/sub-pages/{slug?}', [HomeController::class, 'sub_pages'])->name('client.sub_pages');
 
 Route::get('/check-slug', [AdminController::class, 'checkSlugPage']);
+Route::get('/check-slug-sub', [AdminController::class, 'checkSlugSubPage']);
 
 Route::group(['prefix' => 'Permohonan_dan_Pengaduan'], function () {
     Route::get('/', [LaporanPermohonanMasyarakatController::class, 'index'])->name('faq.index');

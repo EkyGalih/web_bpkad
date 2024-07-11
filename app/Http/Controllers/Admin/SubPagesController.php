@@ -26,12 +26,12 @@ class SubPagesController extends Controller
             ->orderBy('created_at', 'DESC')
             ->get();
 
-            foreach ($subpages as $page) {
-                $hal = SubPages::findOrFail($page->id);
-                $hal->update([
-                    'slug' => Str::slug($page->title),
-                ]);
-            }
+            // foreach ($subpages as $page) {
+            //     $hal = SubPages::where('id', $page->id);
+            //     $hal->update([
+            //         'slug' => Str::slug($page->title),
+            //     ]);
+            // }
 
         $DeletedSubPages = SubPages::where('deleted_at', '!=', NULL)
             ->orderBy('created_at', 'DESC')
@@ -149,6 +149,7 @@ class SubPagesController extends Controller
             'title' => $request->title,
             'slug' => $request->slug,
             'content' => $request->content,
+            'jenis_link' => $request->jenis_link,
             'link' => $request->link,
             'pages_type_id' => '1',
             'create_by_id' => Auth::user()->id,

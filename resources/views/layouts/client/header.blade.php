@@ -24,7 +24,7 @@
                                                 @foreach ($sub_item as $item2)
                                                     <li>
                                                         <a
-                                                            href="{{ $item2->jenis_link == 'non-link' ? route('client.pages', $item2->slug) : $item2->link }}">
+                                                            href="{{ $item2->jenis_link == 'non-link' ? route('client.sub_pages', $item2->slug) : $item2->link }}">
                                                             {{ $item2->title }}</a>
                                                     </li>
                                                 @endforeach

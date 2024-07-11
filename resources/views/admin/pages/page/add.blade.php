@@ -47,7 +47,7 @@
                                                 hidden>Ekternal Link</label>
                                             <div class="col-sm-10">
                                                 <input type="hidden" name="link" class="form-control" id="link"
-                                                    placeholder="https://example.com/example">
+                                                    placeholder="https://example.com/example or /example">
                                             </div>
                                         </div>
                                     </div>
@@ -111,7 +111,6 @@
                 $('#label-link').removeAttr('hidden');
                 $('#link').prop('type', 'text');
                 $('#content').attr('hidden', true);
-                $('#menu_id').attr('disabled', true);
                 $('#slug').attr('readonly', true);
             }
         });

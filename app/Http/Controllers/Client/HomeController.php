@@ -113,9 +113,9 @@ class HomeController extends Controller
         return view('client.pages.pages', compact('pages'));
     }
 
-    public function ShowSubPages($id)
+    public function sub_pages($slug)
     {
-        $subPages = SubPages::findOrFail($id);
+        $subPages = SubPages::where('slug', $slug)->first();
 
         return view('client.pages.sub_pages', compact('subPages'));
     }

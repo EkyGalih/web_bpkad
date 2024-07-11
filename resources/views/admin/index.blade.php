@@ -9,7 +9,6 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
     @include('layouts.admin.css')
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
 <body>

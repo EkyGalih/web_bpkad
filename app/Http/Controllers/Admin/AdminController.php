@@ -9,6 +9,7 @@ use App\Models\Olympic;
 use App\Models\Pages;
 use App\Models\Permohonan;
 use App\Models\Posts;
+use App\Models\SubPages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -118,6 +119,20 @@ class AdminController extends Controller
         $counter = 1;
 
         while (Pages::where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $counter;
+            $counter++;
+        }
+
+        return response()->json(['slug' => $slug]);
+    }
+
+    public function checkSlugSubPage(Request $request)
+    {
+        $slug = Str::slug($request->input('slug'));
+        $originalSlug = $slug;
+        $counter = 1;
+
+        while (SubPages::where('slug', $slug)->exists()) {
             $slug = $originalSlug . '-' . $counter;
             $counter++;
         }

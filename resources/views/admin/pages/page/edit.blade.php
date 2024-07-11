@@ -1,5 +1,7 @@
 @extends('admin.index')
 @section('title', 'Edit Halaman')
+@section('pages-menu', 'show')
+@section('p-pages', 'active')
 @section('content')
     <main id="main" class="main">
         <div class="pagetitle">
@@ -46,8 +48,7 @@
                                             <label for="inputText" class="col-sm-2 col-form-label" id="label-link"
                                                 {{ $pages->link == null ? 'hidden' : '' }}>Ekternal Link</label>
                                             <div class="col-sm-10">
-                                                <input type="{{ $pages->link == null ? 'hidden' : '' }}" value="{{ $pages->link }}" name="link" class="form-control" id="link"
-                                                    placeholder="https://example.com/example">
+                                                <input type="{{ $pages->link == null ? 'hidden' : 'text' }}" name="link" class="form-control" id="link" value="{{ $pages->link }}">
                                             </div>
                                         </div>
                                     </div>
@@ -104,16 +105,14 @@
             var jenis_link = $('#jenis_link').val();
 
             if (jenis_link == 'non-link') {
-                $('#content').attr('hidden', false);
-                $('#link').attr('hidden', true);
-                $('#label-link').attr('hidden', true);
-                $('#menu_id').attr('disabled', false);
-            } else if (jenis_link == 'link'){
-                $('#content').attr('hidden', true);
-                $('#link').attr('hidden', false);
-                $('#label-link').attr('hidden', false);
-                $('#menu_id').attr('disabled', true);
-            }
+            $('#label-link').attr('hidden', true);
+            $('#link').prop('type', 'hidden');
+            $('#content').attr('hidden', false);
+        } else {
+            $('#link').prop('type', 'text');
+            $('#content').attr('hidden', true);
+            $('#label-link').removeAttr('hidden');
+        }
         });
 
         $(document).ready(function() {
