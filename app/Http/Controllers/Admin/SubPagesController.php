@@ -11,6 +11,7 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Webpatser\Uuid\Uuid;
+use Illuminate\Support\Str;
 
 class SubPagesController extends Controller
 {
@@ -24,6 +25,14 @@ class SubPagesController extends Controller
         $subpages = SubPages::where('deleted_at', '=', NULL)
             ->orderBy('created_at', 'DESC')
             ->get();
+
+            foreach ($subpages as $page) {
+                $hal = SubPages::findOrFail($page->id);
+                $hal->update([
+                    'slug' => Str::slug($page->title),
+                ]);
+            }
+
         $DeletedSubPages = SubPages::where('deleted_at', '!=', NULL)
             ->orderBy('created_at', 'DESC')
             ->get();

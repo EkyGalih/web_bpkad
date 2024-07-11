@@ -106,7 +106,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function ShowPages($id)
+    public function pages($id)
     {
         $pages = Pages::findOrFail($id);
 

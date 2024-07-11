@@ -44,9 +44,9 @@
                                         </div>
                                         <div class="row mb-3">
                                             <label for="inputText" class="col-sm-2 col-form-label" id="label-link"
-                                                hidden>Link</label>
+                                                hidden>Ekternal Link</label>
                                             <div class="col-sm-10">
-                                                <input type="hidden" name="link" class="form-control" id="link">
+                                                <input type="hidden" name="link" class="form-control" id="link" placeholder="https://example.com/example">
                                             </div>
                                         </div>
                                     </div>
@@ -66,7 +66,7 @@
                                         <div class="row mb-3">
                                             <label for="inputText" class="col-sm-2 col-form-label">Menu</label>
                                             <div class="col-sm-10">
-                                                <select name="menu_id" class="form-control">
+                                                <select name="menu_id" id="menu_id" class="form-control">
                                                     <option value="">--Tanpa Menu--</option>
                                                     @foreach ($menus as $menu)
                                                         <option value="{{ $menu->id }}">{{ $menu->name }}</option>
@@ -110,19 +110,23 @@
                 $('#label-link').removeAttr('hidden');
                 $('#link').prop('type', 'text');
                 $('#content').attr('hidden', true);
+                $('#menu_id').attr('disabled', true);
+                $('#slug').attr('disabled', true);
             }
         });
 
         $(document).ready(function() {
             $('#title').on('keyup', function() {
-                var slug = $(this).val()
-                    .toLowerCase()
-                    .replace(/\s+/g, '-') // Ganti spasi dengan -
-                    .replace(/[^\w\-]+/g, '') // Hapus semua karakter non-word
-                    .replace(/\-\-+/g, '-') // Ganti multiple - dengan single -
-                    .replace(/^-+/, '') // Hapus - di awal teks
-                    .replace(/-+$/, ''); // Hapus - di akhir teks
-                $('#slug').val(slug);
+                if (!$('#slug').is(':disabled')) {
+                    var slug = $(this).val()
+                        .toLowerCase()
+                        .replace(/\s+/g, '-') // Ganti spasi dengan -
+                        .replace(/[^\w\-]+/g, '') // Hapus semua karakter non-word
+                        .replace(/\-\-+/g, '-') // Ganti multiple - dengan single -
+                        .replace(/^-+/, '') // Hapus - di awal teks
+                        .replace(/-+$/, ''); // Hapus - di akhir teks
+                    $('#slug').val(slug);
+                }
             });
 
             ClassicEditor

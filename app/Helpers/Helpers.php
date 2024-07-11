@@ -43,7 +43,7 @@ class Helpers
     public static function Pages($param)
     {
         return Pages::where('menu_id', '=', $param)
-            ->select('pages.title', 'pages.id as sub_menu_id', 'pages.jenis_link', 'pages.link')
+            ->select('pages.title', 'pages.slug', 'pages.id as sub_menu_id', 'pages.jenis_link', 'pages.link')
             ->where('deleted_at', '=', NULL)
             ->orderBy('title', 'ASC')
             ->get();
@@ -52,7 +52,7 @@ class Helpers
     public static function SubPages($param)
     {
         return SubPages::where('sub_pages_id', '=', $param)
-            ->select('sub_pages.title', 'sub_pages.id as sub_menu_id', 'sub_pages.jenis_link', 'sub_pages.link')
+            ->select('sub_pages.title', 'sub_pages.slug', 'sub_pages.id as sub_menu_id', 'sub_pages.jenis_link', 'sub_pages.link')
             ->where('deleted_at', '=', NULL)
             ->orderBy('title', 'ASC')
             ->get();
