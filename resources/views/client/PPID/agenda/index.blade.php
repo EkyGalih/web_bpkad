@@ -1,5 +1,4 @@
 @extends('client.index')
-@section('title', 'Agenda Pimpinan |')
 @section('menu-berita', 'active')
 @section('additional-css')
     <style>
@@ -31,7 +30,7 @@
                         ]
                     @endphp
                     <h1 style="margin-bottom: 5%; text-align: center;">
-                        AGENDA PIMPINAN SELAMA 1 TAHUN
+                        AGENDA PIMPINAN TAHUN
                         <select name="tahun" id="filter_tahun">
                             @foreach ($years as $year)
                                 <option value="{{ $year }}" {{ $year == $tahun ? 'selected' : '' }}>{{ $year }}</option>
@@ -51,7 +50,7 @@
                                                 {{ Helpers::getDate($item->created_at) . ' - ' . Helpers::getTime($item->created_at) }}
                                             </h5>
                                             <p class="card-text">{{ substr($item->title, 0, 50) }}...</p>
-                                            <a href="{{ route('client.show', Helpers::randomString(100) . '/' . $item->id . '/' . Helpers::randomString(100)) }}"
+                                            <a href="{{ route('post.show', [Helpers::PostCategory($item->posts_category_id), $item->slug]) }}"
                                                 class="btn btn-primary">
                                                 <i class="bx bx-link"></i> Link Berita
                                             </a>

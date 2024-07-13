@@ -30,11 +30,26 @@ class PpidKipController extends Controller
      */
     public function agenda($tahun = NULL)
     {
-        $tahun = $tahun == NULL ? date('Y')-1 : $tahun;
-        $agenda = Posts::where('agenda_kaban', '=', 'ya')
-                ->orderBy('created_at', 'ASC')
-                ->where('created_at', 'LIKE', $tahun.'%')
-                ->paginate(10);
+        $tahun = $tahun == NULL ? date('Y') : $tahun;
+        $cek = Posts::where('agenda_kaban', '=', 'ya')
+            ->orderBy('created_at', 'ASC')
+            ->where('created_at', 'LIKE', $tahun . '%')
+            ->paginate(10);
+        switch ($cek) {
+            case $cek->count() == 0:
+                $tahun = $tahun == NULL ? date('Y') - 1 : $tahun;
+                $agenda = Posts::where('agenda_kaban', '=', 'ya')
+                    ->orderBy('created_at', 'ASC')
+                    ->where('created_at', 'LIKE', $tahun . '%')
+                    ->paginate(10);
+                break;
+            default:
+                $agenda = Posts::where('agenda_kaban', '=', 'ya')
+                    ->orderBy('created_at', 'ASC')
+                    ->where('created_at', 'LIKE', $tahun . '%')
+                    ->paginate(10);
+                break;
+        }
 
         return view('client.PPID.agenda.index', compact('agenda', 'tahun'));
     }

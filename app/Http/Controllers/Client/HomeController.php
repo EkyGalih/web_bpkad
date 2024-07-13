@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\CategoryEnum;
 use App\Http\Controllers\Controller;
 use App\Models\DaftarApp;
 use App\Models\GaleryVideo;
@@ -83,6 +84,7 @@ class HomeController extends Controller
             ->orderBy('created_at', 'DESC')
             ->limit(4)
             ->get();
+            
         $informasi = KIP::where('jenis_informasi', '=', 'berkala')
             ->where('tahun', '=', date('Y'))
             ->limit(13)
@@ -155,33 +157,80 @@ class HomeController extends Controller
      */
     public function show($category, $slug = null)
     {
-        if ($category == 'Berita') {
-            if ($slug != null) {
-                $posts = Posts::query()
-                ->where('posts_category_id', 1)
-                ->where('slug', $slug)
-                ->first();
-            } else {
-                $posts = Posts::query()
-                ->where('posts_category_id', 1)
-                ->first();
-            }
+        switch ($category) {
+            case CategoryEnum::BERITA->value:
+                if ($slug != null) {
+                    $posts = Posts::query()
+                        ->where('posts_category_id', 1)
+                        ->where('slug', $slug)
+                        ->first();
+                } else {
+                    $posts = Posts::query()
+                        ->where('posts_category_id', 1)
+                        ->first();
+                }
 
-            $share = \Share::page(
-                url()->full(),
-                $posts->title,
-            )
-                ->facebook()
-                ->twitter()
-                ->linkedin()
-                ->telegram()
-                ->whatsapp()
-                ->reddit();
-            return view('client.posts.detail_posts', compact('posts', 'share'));
-        } else {
-            $uri = request()->path();
-            $url = $uri;
-            return redirect(url($url));
+                $share = \Share::page(
+                    url()->full(),
+                    $posts->title,
+                )
+                    ->facebook()
+                    ->twitter()
+                    ->linkedin()
+                    ->telegram()
+                    ->whatsapp()
+                    ->reddit();
+                return view('client.posts.detail_posts', compact('posts', 'share'));
+                break;
+            case CategoryEnum::ARTIKEL->value:
+                if ($slug != null) {
+                    $artikel = Posts::query()
+                        ->where('posts_category_id', 2)
+                        ->where('slug', $slug)
+                        ->first();
+                } else {
+                    $artikel = Posts::query()
+                        ->where('posts_category_id', 2)
+                        ->first();
+                }
+
+                $share = \Share::page(
+                    url()->full(),
+                    $artikel->title,
+                )
+                    ->facebook()
+                    ->twitter()
+                    ->linkedin()
+                    ->telegram()
+                    ->whatsapp()
+                    ->reddit();
+                return view('client.artikel.detail_artikel', compact('artikel', 'share'));
+                break;
+            case CategoryEnum::AGENDAPIMPINAN->value:
+                if ($slug != null) {
+                    $posts = Posts::query()
+                        ->where('posts_category_id', 3)
+                        ->where('slug', $slug)
+                        ->first();
+                } else {
+                    $posts = Posts::query()
+                        ->where('posts_category_id', 3)
+                        ->first();
+                }
+
+                $share = \Share::page(
+                    url()->full(),
+                    $posts->title,
+                )
+                    ->facebook()
+                    ->twitter()
+                    ->linkedin()
+                    ->telegram()
+                    ->whatsapp()
+                    ->reddit();
+
+                return view('client.posts.detail_posts', compact('posts', 'share'));
+                break;
         }
     }
 
