@@ -1,5 +1,6 @@
+<link href="{{ asset('client/assets/img/favicon.png') }}" rel="shortcut icon">
 <link href="{{ asset('client/assets/img/favicon.png') }}" rel="icon">
-<link href="{{ asset('client/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+<link href="{{ asset('client/assets/img/favicon.png') }}" rel="apple-touch-icon">
 <link
     href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
     rel="stylesheet">
@@ -12,6 +13,13 @@
 <link href="{{ asset('client/assets/vendor/aos/aos.css') }}" rel="stylesheet">
 <link href="{{ asset('client/assets/css/style.css') }}" rel="stylesheet">
 <link href="{{ asset('client/assets/css/bpkad.css') }}" rel="stylesheet">
+
+<!-- Meta and SEO -->
+<meta name="description" content="Website resmi Badan Pengelolaan Keuangan dan Aset Daerah Provinsi NTB">
+<meta name="keywords" content="bpkad, keuangan, aset, pemerintah, gov, pemda">
+<meta name="author" content="ITeam BPKAD NTB">
+<meta name="robots" content="">
+<link rel="canonical" href="https://bpkad.ntbprov.go.id/">
 <style>
 
     /* Blur Menu */
