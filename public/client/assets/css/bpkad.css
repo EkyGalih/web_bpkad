@@ -123,8 +123,9 @@
         margin-left: 0px;
         float: left;
         padding-left: 0px;
-        padding-top: 10px; }
+        padding-top: 10px;
     }
+
     .card.full-height {
         height: calc(100% - 30px);
     }

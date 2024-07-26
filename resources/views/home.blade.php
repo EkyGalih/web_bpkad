@@ -208,6 +208,14 @@
     height: 135px;
   }
 
+  .card.hovercard .cardheader-inv {
+    background: url("{{ asset('client/assets/img/invent-bg.jpg') }}");
+    background-size: cover;
+    filter: blur(1px);
+    -webkit-filter: blur(1px);
+    height: 135px;
+  }
+
   .card.hovercard .avatar {
     position: relative;
     top: -50px;
