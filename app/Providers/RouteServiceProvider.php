@@ -63,6 +63,9 @@ class RouteServiceProvider extends ServiceProvider
 
         // ROUTE CLIENT
         $this->mapWebRoutes();
+
+        // ROUTE INVENTARIS
+        $this->mapInventarisRoutes();
     }
 
     public function mapPostAdmin()
@@ -210,6 +213,13 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/web.php'));
+    }
+
+    public function mapInventarisRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/admin/inventaris.php'));
     }
 
     public function mapApiRoutes()
