@@ -1,5 +1,6 @@
 @extends('layouts.admin.inventaris.app')
 @section('title', 'Kategori')
+@section('kategori', 'active')
 @section('header')
     <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
         <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
@@ -83,16 +84,20 @@
                                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4"
                                                 data-kt-menu="true">
                                                 <div class="menu-item px-3">
-                                                    <a href="apps/ecommerce/catalog/add-category.html"
-                                                        class="menu-link px-3">Edit</a>
+                                                    <a href="#" class="menu-link px-3" data-bs-toggle="modal" data-bs-target="#editCategory{{ $loop->iteration }}">
+                                                        Edit
+                                                    </a>
                                                 </div>
                                                 <div class="menu-item px-3">
-                                                    <a href="#" class="menu-link px-3"
-                                                        data-kt-ecommerce-category-filter="delete_row">Delete</a>
+                                                    <a href="#" class="menu-link px-3" data-bs-toggle="modal" data-bs-target="#deleteCategory{{ $loop->iteration }}">
+                                                        Delete
+                                                    </a>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
+                                    @include('inventaris.kategori.partials.edit')
+                                    @include('inventaris.kategori.partials.delete')
                                 @endforeach
                             @endif
                         </tbody>

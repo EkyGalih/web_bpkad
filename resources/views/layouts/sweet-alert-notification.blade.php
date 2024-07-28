@@ -1,78 +1,29 @@
-@if ($message = Session::get('success'))
-    <script>
-        swal({
-            title: 'Berhasil!',
-            text: '{{$message}}',
-            icon: "success",
-            buttons : {
-                confirm : {
-                    className: 'btn btn-success'
-                }
-            }
-        });
+@if (Session::has('success') || Session::has('info'))
+    <script type="text/javascript">
+        toastr.success("{!! Session::pull('success') !!}");
     </script>
 @endif
-
-@if ($message = Session::get('info'))
-    <script>
-        swal({
-            title: 'Informasi!',
-            text: '{{$message}}',
-            icon: "info",
-            buttons : {
-                confirm : {
-                    className: 'btn btn-success'
-                }
-            }
-        });
-    </script>
-@endif
-
-@if ($message = Session::get('warning'))
-    <script>
-        swal({
-            title: 'Opps!',
-            text: '{{$message}}',
-            icon: "warning",
-            buttons : {
-                confirm : {
-                    className: 'btn btn-success'
-                }
-            }
-        });
-    </script>
-@endif
-
-@if ($message = Session::get('error'))
-    <script>
-        swal({
-            title: 'Terjadi Kesalahan!',
-            text: '{{$message}}',
-            icon: "error",
-            buttons : {
-                confirm : {
-                    className: 'btn btn-success'
-                }
-            }
-        });
+@if (Session::has('warning') || Session::has('error'))
+    <script type="text/javascript">
+        toastr.error("{!! Session::pull('fail') !!}");
     </script>
 @endif
 
 <script>
-    function deleteData(url){
+    function deleteData(url) {
         swal({
             title: 'Apakah Anda yakin?',
             text: "Data yang terhapus tidak dapat dikembalikan lagi!",
             icon: 'warning',
-            buttons:{
+            buttons: {
                 cancel: {
                     text: 'Batalkan',
                     visible: true,
                     className: 'btn btn-danger'
                 },
                 confirm: {
-                    text : 'Ya, Hapus sekarang!',
-                    className : 'btn btn-success'
+                    text: 'Ya, Hapus sekarang!',
+                    className: 'btn btn-success'
                 }
             }
         }).then((Delete) => {
@@ -84,12 +35,12 @@
         });
     }
 
-    function changeStatus(url){
+    function changeStatus(url) {
         swal({
             title: 'Apakah Anda Yakin?',
             text: "Perubahan status akan berdampak pada beberapa data",
             icon: 'warning',
-            buttons:{
+            buttons: {
                 cancel: {
                     text: 'Batalkan',
                     visible: true,
@@ -115,5 +66,14 @@
             event.preventDefault();
         }
     }
-</script>
 
+    function formatRupiah(element) {
+        let value = element.value.replace(/[^,\d]/g, '');
+        let parts = value.split(',');
+        let integerPart = parts[0];
+        let decimalPart = parts[1] ? ',' + parts[1] : '';
+
+        let rupiah = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        element.value = 'Rp ' + rupiah + decimalPart;
+    }
+</script>

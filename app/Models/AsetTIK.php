@@ -22,4 +22,9 @@ class AsetTIK extends Model
             $model->id = (string) Uuid::generate(4);
         });
     }
+
+    public function kategori()
+    {
+        return $this->belongsTo(KategoriAset::class, 'kategori_id');
+    }
 }

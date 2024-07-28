@@ -22,4 +22,9 @@ class KategoriAset extends Model
             $model->id = (string) Uuid::generate(4);
         });
     }
+
+    public function aset()
+    {
+        return $this->hasMany(AsetTIK::class, 'kategori_id');
+    }
 }

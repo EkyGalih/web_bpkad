@@ -6,7 +6,7 @@
             <div class="menu menu-column menu-rounded menu-sub-indention fw-semibold fs-6" id="#kt_app_sidebar_menu"
                 data-kt-menu="true" data-kt-menu-expand="false">
                 <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
-                    <span class="menu-link">
+                    <span class="menu-link @yield('dashboard')">
                         <span class="menu-icon">
                             <i class="ki-duotone ki-element-11 fs-2">
                                 <span class="path1"></span>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="menu-item">
-                    <a class="menu-link" href="{{ route('inventaris.kategori.index') }}">
+                    <a class="menu-link @yield('kategori')" href="{{ route('inventaris.kategori.index') }}">
                         <span class="menu-icon">
                             <i class="ki-duotone ki-category fs-2">
                                 <span class="path1"></span>
@@ -38,7 +38,7 @@
                     </a>
                 </div>
                 <div class="menu-item">
-                    <a class="menu-link" href="#">
+                    <a class="menu-link @yield('aset-tik')" href="{{ route('inventaris.aset.index') }}">
                         <span class="menu-icon">
                             <i class="ki-duotone ki-logistic fs-2">
                                 <span class="path1"></span>
@@ -54,7 +54,7 @@
                     </a>
                 </div>
                 <div class="menu-item">
-                    <a class="menu-link" href="#">
+                    <a class="menu-link @yield('pemegang')" href="{{ route('inventaris.aset.create') }}">
                         <span class="menu-icon">
                             <i class="ki-duotone ki-fingerprint-scanning fs-2">
                                 <span class="path1"></span>
