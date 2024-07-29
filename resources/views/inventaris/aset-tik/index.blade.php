@@ -113,11 +113,11 @@
                                                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-200px py-3"
                                                     data-kt-menu="true">
                                                     <div class="menu-item px-3">
-                                                        <a href="{{ route('inventaris.aset.edit', $aset?->id) }}"
+                                                        <a href="{{ route('inventaris.aset.edit', $aset->id ?? '') }}"
                                                             class="menu-link px-3">
                                                             Edit
                                                         </a>
-                                                        <a href="{{ route('inventaris.aset.destroy', $aset?->id) }}"
+                                                        <a href="{{ route('inventaris.aset.destroy', $aset->id ?? '') }}"
                                                             class="menu-link px-3">
                                                             Hapus
                                                         </a>
@@ -175,8 +175,7 @@
                             </div>
                             <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold">
                                 <li class="nav-item mt-2">
-                                    <a class="nav-link text-active-primary ms-0 me-10 py-5"
-                                        href="pages/user-profile/followers.html">Lokasi Aset</a>
+                                    <a class="nav-link text-active-primary ms-0 me-10 py-5" href="#">Lokasi Aset</a>
                                 </li>
                             </ul>
                         </div>
