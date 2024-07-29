@@ -91,10 +91,10 @@
                         </div>
                         <div class="row mb-6">
                             <div class="col-md-6">
-                                <label for="type" class="form-label">Tipe</label>
-                                <input type="text" class="form-control @error('type') is-invalid @enderror"
-                                    id="type" name="type" value="{{ $aset->type ?? old('type') }}">
-                                @error('type')
+                                <label for="merek" class="form-label">Merek</label>
+                                <input type="text" class="form-control @error('merek') is-invalid @enderror"
+                                    id="merek" name="merek" value="{{ $aset->merek ?? old('merek') }}">
+                                @error('merek')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -193,14 +193,14 @@
                             <div class="row mb-6">
                                 <div class="col-md-6">
                                     <label for="deskripsi" class="form-label">Deskripsi Aset</label>
-                                    <textarea name="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror">{{ $aset->deskripsi ?? old('deskripsi') }}</textarea>
+                                    <textarea name="deskripsi" id="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror">{{ $aset->deskripsi ?? old('deskripsi') }}</textarea>
                                     @error('deskripsi')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6">
                                     <label for="keterangan" class="form-label">Keterangan</label>
-                                    <textarea name="keterangan" class="form-control @error('keterangan') is-invalid @enderror">{{ $aset->keterangan ?? old('keterangan') }}</textarea>
+                                    <textarea name="keterangan" id="keterangan" class="form-control @error('keterangan') is-invalid @enderror">{{ $aset->keterangan ?? old('keterangan') }}</textarea>
                                     @error('keterangan')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
@@ -250,6 +250,7 @@
     </div>
 @endsection
 @section('scripts')
+<script src="{{ asset('server/vendor/ckeditor/ckeditor-classic.bundle.js') }}" type="text/javascript"></script>
     <script>
         $(document).ready(function() {
             $('#imageInput').on('change', function() {
@@ -264,6 +265,29 @@
                     $('#imagePreview').hide();
                 }
             });
+
+            ClassicEditor
+                .create(document.querySelector('#deskripsi'), {
+                    // Konfigurasi tambahan untuk CKEditor
+                    height: 500 // Atur tinggi editor di sini
+                })
+                .then(editor => {
+                    console.log(editor);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+            ClassicEditor
+                .create(document.querySelector('#keterangan'), {
+                    // Konfigurasi tambahan untuk CKEditor
+                    height: 500 // Atur tinggi editor di sini
+                })
+                .then(editor => {
+                    console.log(editor);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         });
     </script>
 @endsection

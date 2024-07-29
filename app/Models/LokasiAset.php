@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Webpatser\Uuid\Uuid;
 
-class PemegangAset extends Model
+class LokasiAset extends Model
 {
     use HasFactory;
 
     public $incrementing = false;
-    protected $table = 'pemegang_aset';
+    protected $table = 'lokasi_aset';
     protected $guarded = ['created_at', 'updated_at'];
 
     public static function boot()

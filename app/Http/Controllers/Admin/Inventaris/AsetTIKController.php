@@ -12,7 +12,7 @@ class AsetTIKController extends Controller
 {
     public function index()
     {
-        $asets = AsetTIK::paginate(10);
+        $asets = AsetTIK::orderBy('created_at', 'DESC')->paginate(10);
 
         return view('inventaris.aset-tik.index', compact('asets'));
     }
@@ -26,7 +26,7 @@ class AsetTIKController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'gambar' => 'required|mimes:jpg,png,jpeg|max:2048', // rules: hanya menerima file jpg, png, pdf dengan ukuran maksimum 2MB
+            'gambar' => 'required|mimes:jpg,png,jpeg|max:5120', // rules: hanya menerima file jpg, png, pdf dengan ukuran maksimum 5MB
         ]);
 
         $file = $request->file('gambar');
@@ -40,7 +40,7 @@ class AsetTIKController extends Controller
             'kode_aset' => $request->kode_aset,
             'model' => $request->model,
             'serial_number' => $request->serial_number,
-            'type' => $request->type,
+            'merek' => $request->merek,
             'deskripsi' => $request->deskripsi,
             'kategori_id' => $request->kategori_id,
             'tanggal_perolehan' => $request->tanggal_perolehan,
@@ -62,17 +62,70 @@ class AsetTIKController extends Controller
         return view('inventaris.aset-tik.partials.edit', compact('aset', 'kategories'));
     }
 
+    public function detail($id)
+    {
+        $aset = AsetTIK::findOrFail($id);
+        return view('inventaris.aset-tik.partials.detail', compact('aset'));
+    }
+
     public function update(Request $request, $id)
     {
-        $data = AsetTIK::findOrFail($id);
-        $data->update($request->all());
-        return redirect()->route('inventaris.aset.index')->with('success', 'Data berhasil di update');
+        $request->validate([
+            'gambar' => 'nullable|mimes:jpg,png,jpeg|max:2048', // rules: hanya menerima file jpg, png, jpeg dengan ukuran maksimum 2MB
+        ]);
+
+        $asetTIK = AsetTIK::findOrFail($id);
+
+        if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada
+            if ($asetTIK->gambar) {
+                // Get the old file path from the URL
+                $oldFilePath = str_replace('/storage/', '', $asetTIK->gambar);
+                Storage::disk('public')->delete($oldFilePath);
+            }
+
+            // Upload gambar baru
+            $file = $request->file('gambar');
+            $path = $file->store('uploads/aset', 'public');
+            $url = Storage::url($path);
+        } else {
+            $url = $asetTIK->gambar;
+        }
+
+        // Format rupiah ke integer
+        $rupiah = preg_replace('/[^\d]/', '', $request->nilai);
+
+        $asetTIK->update([
+            'nama_aset' => $request->nama_aset,
+            'kode_aset' => $request->kode_aset,
+            'model' => $request->model,
+            'serial_number' => $request->serial_number,
+            'merek' => $request->merek,
+            'deskripsi' => $request->deskripsi,
+            'kategori_id' => $request->kategori_id,
+            'tanggal_perolehan' => $request->tanggal_perolehan,
+            'status' => $request->status,
+            'nilai' => $rupiah,
+            'jumlah' => $request->jumlah,
+            'gambar' => $url,
+            'keterangan' => $request->keterangan,
+        ]);
+
+        return redirect()->route('inventaris.aset.index')->with('success', 'Aset berhasil diupdate');
     }
 
     public function destroy($id)
     {
-        $data = AsetTIK::findOrFail($id);
-        $data->delete();
+        $asetTIK = AsetTIK::findOrFail($id);
+
+        // Delete the image file if it exists
+        if ($asetTIK->gambar) {
+            $oldFilePath = str_replace('/storage/', '', $asetTIK->gambar);
+            Storage::disk('public')->delete($oldFilePath);
+        }
+
+        // Delete the asset record from the database
+        $asetTIK->delete();
         return redirect()->route('inventaris.aset.index')->with('success', 'Data berhasil di hapus');
     }
 }

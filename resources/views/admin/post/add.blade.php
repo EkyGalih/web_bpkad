@@ -13,7 +13,8 @@
         }
 
         #content {
-            min-height: 400px; /* Atur tinggi minimum sesuai keinginan Anda */
+            min-height: 400px;
+            /* Atur tinggi minimum sesuai keinginan Anda */
         }
     </style>
 @endsection

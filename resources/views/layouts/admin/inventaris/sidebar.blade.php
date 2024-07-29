@@ -54,7 +54,7 @@
                     </a>
                 </div>
                 <div class="menu-item">
-                    <a class="menu-link @yield('pemegang')" href="{{ route('inventaris.aset.create') }}">
+                    <a class="menu-link @yield('lokasi')" href="{{ route('inventaris.lokasi.index') }}">
                         <span class="menu-icon">
                             <i class="ki-duotone ki-fingerprint-scanning fs-2">
                                 <span class="path1"></span>
@@ -64,7 +64,7 @@
                                 <span class="path5"></span>
                             </i>
                         </span>
-                        <span class="menu-title">Pemegang Aset</span>
+                        <span class="menu-title">Lokasi Aset</span>
                     </a>
                 </div>
             </div>
