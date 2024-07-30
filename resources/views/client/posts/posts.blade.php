@@ -138,9 +138,9 @@
                                                 <!--thumbnail img-->
                                                 <div class="ratio_right-cover-2 image-wrapper">
                                                     <a
-                                                        href="{{ route('client.show', Helpers::randomString(100) . '/' . $post->id . '/' . Helpers::randomString(100)) }}">
+                                                        href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">
                                                         <img height="250" width="100%"
-                                                            src="{{ asset($post->foto_berita) }}"
+                                                            src="{{ asset($post->foto_berita) ?? asset('static/images/no-image-post.png') }}"
                                                             alt="{{ substr($post->title, 0, 50) }}">
                                                     </a>
                                                 </div>
@@ -151,7 +151,7 @@
                                                     {{ Helpers::getDate($post->created_at) }}
                                                     <!--title-->
                                                     <a
-                                                        href="{{ route('client.show', Helpers::randomString(100) . '/' . $post->id . '/' . Helpers::randomString(100)) }}">
+                                                        href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">
                                                         <h4 class="h5 text-white my-1">
                                                             {{ substr($post->title, 0, 50) }}...
                                                             <span style="font-size: 16px;">Selengkapnya</span>
@@ -250,8 +250,8 @@
                                 <!--thumbnail img-->
                                 <div class="ratio_right-cover-2 image-wrapper">
                                     <a
-                                        href="{{ route('client.show', Helpers::randomString(100) . '/' . $post->id . '/' . Helpers::randomString(100)) }}">
-                                        <img height="250" width="100%" src="{{ asset($post->foto_berita) }}"
+                                        href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">
+                                        <img height="250" width="100%" src="{{ asset($post->foto_berita) ?? asset('static/images/no-image-post.png') }}"
                                             alt="{{ substr($post->title, 0, 50) }}">
                                     </a>
                                 </div>
@@ -262,7 +262,7 @@
                                     {{ Helpers::getDate($post->created_at) }}
                                     <!--title-->
                                     <a
-                                        href="{{ route('client.show', Helpers::randomString(100) . '/' . $post->id . '/' . Helpers::randomString(100)) }}">
+                                        href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">
                                         <h4 class="h5 text-white my-1">
                                             {{ substr($post->title, 0, 50) }}...
                                             <span style="font-size: 16px;">Selengkapnya</span>
