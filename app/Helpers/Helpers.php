@@ -25,6 +25,7 @@ use App\Models\Slideitem;
 use App\Models\Social;
 use App\Models\SubPages;
 use App\Models\User;
+use App\Models\LokasiAset;
 use App\Models\PostsCategory;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
@@ -682,5 +683,11 @@ class Helpers
         }
 
         return $slug;
+    }
+
+    // hitung aset terdistribusi
+    public static function countAsetDistribusi($param)
+    {
+        return LokasiAset::where('aset_id', '=', $param)->count();
     }
 }

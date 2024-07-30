@@ -17,4 +17,14 @@ class Pegawai extends Model
     {
         return $this->hasOne(PPIDStruktur::class);
     }
+
+    public function lokasiAssets()
+    {
+        return $this->hasMany(LokasiAset::class, 'pegawai_id');
+    }
+
+    public function bidang()
+    {
+        return $this->belongsTo(Bidang::class, 'bidang_id');
+    }
 }

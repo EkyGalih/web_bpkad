@@ -1,7 +1,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="{{ route('admin') }}" class="logo d-flex align-items-center">
+        <a href="{{ route('sso.dashboard') }}" class="logo d-flex align-items-center">
             <img src="{{ asset('client/assets/img/favicon.png') }}" alt="">
             <span class="d-none d-lg-block">BPKAD NTB</span>
         </a>

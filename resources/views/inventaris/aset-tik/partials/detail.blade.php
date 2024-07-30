@@ -57,11 +57,25 @@
                         </div>
                     </div>
                     <div class="card-body pt-0">
-                        <div class="d-flex align-items-center justify-content-center">
-                            <div class="image-input-wrapper w-150px h-150px mb-2"
-                                style="background-image: url({{ $aset->gambar }})"></div>
-                        </div>
-                        <p class="fw-bold badge badge-light-success fa-2x">Eky Galih Gunanda, <span class="fw-semibold badge badge-light-danger"> Bidang Program</span></p>
+                        @php
+                            $pemegang = LokasiAset::getPegawaiByAsetId($aset->id);
+                        @endphp
+                        <ul class="list-group list-group-flush">
+                            @foreach ($pemegang as $item)
+                                <li class="list-group-item d-flex align-items-start justify-content-between">
+                                    <ul>
+                                        <li>
+                                            <a href="#" class="fw-bold">{{ $item->pegawai->bidang->nama_bidang }}</a>
+                                        </li>
+                                        <div class="d-flex align-items-start">
+                                            <p class="fw-semibold">{{ $item->pegawai->name }}
+                                                <small class="text-muted">{{ $item->pegawai->nip ?? '-' }}</small>
+                                            </p>
+                                        </div>
+                                    </ul>
+                                </li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -75,7 +89,8 @@
                     </div>
                     <div class="card-body pt-0">
                         <div class="mb-2 fv-row">
-                            <h2>{{ $aset->nama_aset }} (<span class="badge badge-light-secondary fw-light fa-5x">{{ $aset->kode_aset }}</span>)</h2>
+                            <h2>{{ $aset->nama_aset }} (<span
+                                    class="badge badge-light-secondary fw-light fa-5x">{{ $aset->kode_aset }}</span>)</h2>
                             <ul>
                                 <li>
                                     <p class="fw-semibold">Merek: <span class="fw-bold">{{ $aset->merek }}</span></p>
@@ -88,16 +103,21 @@
                                             class="fw-bold">{{ $aset->serial_number }}</span></p>
                                 </li>
                                 <li>
-                                    <p class="fw-semibold">Tanggal Perolehan: <span class="fw-bold">{{ \Carbon\Carbon::parse($aset->tanggal_perolehan)->format('d F Y') }}</span></p>
+                                    <p class="fw-semibold">Tanggal Perolehan: <span
+                                            class="fw-bold">{{ \Carbon\Carbon::parse($aset->tanggal_perolehan)->format('d F Y') }}</span>
+                                    </p>
                                 </li>
                                 <li>
-                                    <p class="fw-semibold">Kondisi: <span class="fw-bold">{{ ucfirst($aset->status) }}</span></p>
+                                    <p class="fw-semibold">Kondisi: <span
+                                            class="fw-bold">{{ ucfirst($aset->status) }}</span></p>
                                 </li>
                                 <li>
-                                    <p class="fw-semibold">Nilai Aset: <span class="fw-bold">Rp. {{ number_format($aset->nilai) }}</span></p>
+                                    <p class="fw-semibold">Nilai Aset: <span class="fw-bold">Rp.
+                                            {{ number_format($aset->nilai) }}</span></p>
                                 </li>
                                 <li>
-                                    <p class="fw-semibold">Jumlah Aset: <span class="fw-bold">{{ $aset->jumlah }} Unit</span></p>
+                                    <p class="fw-semibold">Jumlah Aset: <span class="fw-bold">{{ $aset->jumlah }}
+                                            Unit</span></p>
                                 </li>
                             </ul>
                         </div>

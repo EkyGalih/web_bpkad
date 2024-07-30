@@ -240,6 +240,7 @@ return [
         'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'MobileDetect' => Riverskies\Laravel\MobileDetect\Facades\MobileDetect::class,
+        'LokasiAset' => App\Models\LokasiAset::class,
     ],
 
 ];

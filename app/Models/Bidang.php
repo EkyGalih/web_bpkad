@@ -12,4 +12,9 @@ class Bidang extends Model
     public $incrementing = false;
     protected $table = 'bidang';
     protected $guarded = ['createdAt', 'updatedAt'];
+
+    public function pegawai()
+    {
+        return $this->hasMany(Pegawai::class, 'bidang_id');
+    }
 }

@@ -5,15 +5,15 @@
     <title>Inventaris - @yield('title')</title>
     <meta charset="utf-8" />
     <meta name="description"
-        content="The most advanced Bootstrap 5 Admin Theme with 40 unique prebuilt layouts on Themeforest trusted by 100,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue, Asp.Net Core, Rails, Spring, Blazor, Django, Express.js, Node.js, Flask, Symfony & Laravel versions. Grab your copy now and get life-time updates for free." />
+        content="Aplikasi inventarisasi perangkat daerah BPKAD Kabupaten Bandung" />
     <meta name="keywords"
-        content="metronic, bootstrap, bootstrap 5, angular, VueJs, React, Asp.Net Core, Rails, Spring, Blazor, Django, Express.js, Node.js, Flask, Symfony & Laravel starter kits, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
+        content="inventaris, bpkad, bandung, admin, perangkat daerah, perangkat, daerah, bandung, aplikasi, aplikasi inventaris" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="Metronic - The World's #1 Selling Bootstrap Admin Template by KeenThemes" />
-    <meta property="og:url" content="https://keenthemes.com/metronic" />
-    <meta property="og:site_name" content="Metronic by Keenthemes" />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Aplikasi Inventaris BPKAD BPKAD NTB" />
+    <meta property="og:url" content="https://bpkad.bandung.go.id" />
+    <meta property="og:site_name" content="Aplikasi Inventaris BPKAD Nusa Tenggara Barat" />
     @include('layouts.admin.inventaris.css')
 </head>
 
@@ -42,15 +42,11 @@
                             </i>
                         </div>
                     </div>
-                    <!--end::Sidebar mobile toggle-->
-                    <!--begin::Mobile logo-->
                     <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
                         <a href="index.html" class="d-lg-none">
-                            <img alt="Logo" src="assets/media/logos/default-small.svg" class="h-30px" />
+                            <img alt="Logo Inventaris" src="{{ asset('client/assets/img/invent.png') }}" class="h-30px" />
                         </a>
                     </div>
-                    <!--end::Mobile logo-->
-                    <!--begin::Header wrapper-->
                     <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1"
                         id="kt_app_header_wrapper">
                         @include('layouts.admin.inventaris.navbar')
@@ -70,11 +66,10 @@
                     <!--begin::Logo-->
                     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
                         <!--begin::Logo image-->
-                        <a href="index.html">
-                            <img alt="Logo" src="assets/media/logos/default-dark.svg"
-                                class="h-25px app-sidebar-logo-default" />
-                            <img alt="Logo" src="assets/media/logos/default-small.svg"
-                                class="h-20px app-sidebar-logo-minimize" />
+                        <a href="{{ route('sso.dashboard') }}">
+                                <h2 class="fw-bold ms-3 mt-3"
+                style="background: linear-gradient(to right, #fff, #00bfff);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
+                Inventaris BPKAD</h2>
                         </a>
                         <div id="kt_app_sidebar_toggle"
                             class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"

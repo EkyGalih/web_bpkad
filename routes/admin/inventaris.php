@@ -28,7 +28,7 @@ Route::group(['prefix' => 'admin/inventaris', 'middleware' => ['auth', 'admin']]
 
     Route::group(['prefix' => 'lokasi-aset'], function () {
         Route::get('/', [LokasiAsetController::class, 'index'])->name('inventaris.lokasi.index');
-        Route::get('/tambah-lokasi', [LokasiAsetController::class, 'create'])->name('inventaris.lokasi.create');
+        Route::get('/tambah-lokasi/{id?}', [LokasiAsetController::class, 'create'])->name('inventaris.lokasi.create');
         Route::post('store', [LokasiAsetController::class, 'store'])->name('inventaris.lokasi.store');
         Route::get('/ubah-lokasi/{id}', [LokasiAsetController::class, 'edit'])->name('inventaris.lokasi.edit');
         Route::put('update/{id}', [LokasiAsetController::class, 'update'])->name('inventaris.lokasi.update');

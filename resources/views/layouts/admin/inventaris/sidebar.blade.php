@@ -6,7 +6,7 @@
             <div class="menu menu-column menu-rounded menu-sub-indention fw-semibold fs-6" id="#kt_app_sidebar_menu"
                 data-kt-menu="true" data-kt-menu-expand="false">
                 <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
-                    <span class="menu-link @yield('dashboard')">
+                    <a class="menu-link @yield('dashboard')" href="{{ route('inventaris.dashboard') }}">
                         <span class="menu-icon">
                             <i class="ki-duotone ki-element-11 fs-2">
                                 <span class="path1"></span>
@@ -16,7 +16,7 @@
                             </i>
                         </span>
                         <span class="menu-title">Dashboards</span>
-                    </span>
+                    </a>
 
                 </div>
                 <div class="menu-item pt-5">

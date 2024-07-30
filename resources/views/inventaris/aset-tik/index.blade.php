@@ -104,8 +104,13 @@
                                         </div>
                                         <div class="d-flex my-4">
                                             <div class="me-0">
-                                                <a href="#" class="btn btn-sm btn-primary me-3" data-bs-toggle="modal"
-                                                    data-bs-target="#kt_modal_offer_a_deal">Distribusi</a>
+                                                @if ($aset->jumlah == Helpers::countAsetDistribusi($aset->id))
+                                                    <a href="#" class="btn btn-sm btn-primary me-3 disabled"
+                                                        aria-disabled="true">Distribusi</a>
+                                                @else
+                                                    <a href="{{ route('inventaris.lokasi.create', $aset->id) }}"
+                                                        class="btn btn-sm btn-primary me-3">Distribusi</a>
+                                                @endif
                                                 <button class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary"
                                                     data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                                                     <i class="ki-solid ki-dots-horizontal fs-2x"></i>
@@ -160,14 +165,11 @@
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3">
-                                            <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                                                <span class="fw-semibold fs-6 text-gray-500">Profile Compleation</span>
-                                                <span class="fw-bold fs-6">50%</span>
-                                            </div>
-                                            <div class="h-5px mx-3 w-100 bg-light mb-3">
-                                                <div class="bg-success rounded h-5px" role="progressbar"
-                                                    style="width: 50%;" aria-valuenow="50" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
+                                            <div class="d-flex justify-content-between w-75 mt-auto mb-2">
+                                                <span class="fw-semibold fs-6 text-gray-500">Distribusi Aset</span>
+                                                <span
+                                                    class="fw-bold fs-6">{{ Helpers::countAsetDistribusi($aset->id) }}/{{ $aset->jumlah }}
+                                                    Unit</span>
                                             </div>
                                         </div>
                                     </div>
@@ -175,7 +177,7 @@
                             </div>
                             <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold">
                                 <li class="nav-item mt-2">
-                                    <a class="nav-link text-active-primary ms-0 me-10 py-5" href="#">Lokasi Aset</a>
+                                    <a class="nav-link text-active-primary ms-0 me-10 py-5" href="#">Pemegang Aset</a>
                                 </li>
                             </ul>
                         </div>
