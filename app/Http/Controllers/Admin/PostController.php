@@ -10,6 +10,7 @@ use App\Models\Recent;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Webpatser\Uuid\Uuid;
 use Illuminate\Support\Str;
 
@@ -53,22 +54,15 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $foto       = $request->file('foto_berita');
-        $ext        = array('png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG');
-        $filename   = 'berita-' . md5($foto->getClientOriginalName()) . '.' . $foto->getClientOriginalExtension();
-        $id         = (string)Uuid::generate(4);
+        $request->validate([
+            'foto_berita' => 'required|mimes:jpg,png,jpeg|max:2048',
+        ]);
 
-        if (in_array($foto->getClientOriginalExtension(), $ext)) {
-            if ($foto->getSize() <= 5000000) {
-                if ($request->posts_category_id == '1') {
-                    $foto->move('uploads/berita/', $filename);
-                    $request->foto_berita = 'uploads/berita/' . $filename;
-                } elseif ($request->posts_category_id == '2') {
-                    $foto->move('uploads/artikel/', $filename);
-                    $request->foto_berita = 'uploads/artikel/' . $filename;
-                }
-            }
-        }
+        $file = $request->file('foto_berita');
+        $path = $file->store('uploads/berita', 'public');
+        $url = Storage::url($path);
+
+        $id         = (string)Uuid::generate(4);
 
         Posts::create([
             'id' => $id,
@@ -76,7 +70,7 @@ class PostController extends Controller
             'slug'  => $request->slug,
             'content' => $request->content,
             'content_type_id' => '1',
-            'foto_berita' => $request->foto_berita,
+            'foto_berita' => $url,
             'users_id' => Auth::user()->id,
             'caption' => $request->caption,
             'posts_category_id' => $request->posts_category_id || 1,
@@ -86,8 +80,8 @@ class PostController extends Controller
         ]);
 
         Helpers::_recentAdd($id, 'membuat Berita/Artikel', 'post');
-
-        return redirect()->route('post-admin.index')->with(['success' => 'Berita/Artikel berhasil diupload!']);
+        session()->flash('success', 'Berita/Artikel berhasil ditambahkan!');
+        return redirect()->route('post-admin.index');
     }
 
     /**
@@ -113,57 +107,41 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'foto_berita' => 'nullable|mimes:jpg,png,jpeg|max:2048',
+        ]);
+
         $posts      = Posts::findOrFail($id);
-        $foto       = $request->file('foto_berita');
 
-        if ($foto != null) {
-            // dd($foto->getSize());
-            $ext        = array('png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG');
-            $filename   = 'eky-' . md5($foto->getClientOriginalName()) . '.' . $foto->getClientOriginalExtension();
-
-            if (in_array($foto->getClientOriginalExtension(), $ext)) {
-                if ($foto->getSize() <= 5000000) {
-                    unlink($posts->foto_berita);
-                    if ($request->posts_category_id == '1') {
-                        $foto->move('uploads/berita/', $filename);
-                        $request->foto_berita = 'uploads/berita/' . $filename;
-                    } elseif ($request->posts_category_id == '2') {
-                        $foto->move('uploads/artikel/', $filename);
-                        $request->foto_berita = 'uploads/artikel/' . $filename;
-                    }
-                }
+        if ($request->hasFile('foto_berita')) {
+            if ($posts->foto_berita) {
+                $oldPath = str_replace('/storage/', '', $posts->foto_berita);
+                Storage::disk('public')->delete($oldPath);
             }
-            $posts->update([
-                'title' => $request->title,
-                'slug'  => $request->slug,
-                'content' => $request->content,
-                'content_type_id' => '1',
-                'foto_berita' => $request->foto_berita,
-                'users_id' => Auth::user()->id,
-                'posts_category_id' => $request->posts_category_id,
-                'tags' => $request->tags,
-                'caption' => $request->caption,
-                'agenda_kaban' => $request->agenda_kaban,
-                'created_at' => $request->date . ' ' . $request->time
-            ]);
-            Helpers::_recentAdd($id, 'mengubah posting', 'post');
-        } elseif ($foto == null) {
-            $posts->update([
-                'title' => $request->title,
-                'content' => $request->content,
-                'content_type_id' => '1',
-                'foto_berita' => $posts->foto_berita,
-                'users_id' => Auth::user()->id,
-                'posts_category_id' => $request->posts_category_id,
-                'tags' => $request->tags,
-                'caption' => $request->caption,
-                'agenda_kaban' => $request->agenda_kaban,
-                'created_at' => $request->date . ' ' . $request->time
-            ]);
-            Helpers::_recentAdd($id, 'mengubah Berita/Artikel', 'post');
+
+            $file = $request->file('foto_berita');
+            $path = $file->store('uploads/berita', 'public');
+            $url = Storage::url($path);
+        } else {
+            $url = $posts->foto_berita;
         }
 
-        return redirect()->route('post-admin.index')->with(['success' => 'Berita/Artikel berhasil diupload!']);
+        $posts->update([
+            'title' => $request->title,
+            'slug'  => $request->slug,
+            'content' => $request->content,
+            'content_type_id' => '1',
+            'foto_berita' => $url,
+            'users_id' => Auth::user()->id,
+            'posts_category_id' => $request->posts_category_id,
+            'tags' => $request->tags,
+            'caption' => $request->caption,
+            'agenda_kaban' => $request->agenda_kaban,
+            'created_at' => $request->date . ' ' . $request->time
+        ]);
+        Helpers::_recentAdd($id, 'mengubah posting', 'post');
+        session()->flash('success', 'Berita/Artikel berhasil diubah!');
+        return redirect()->route('post-admin.index');
     }
 
     public function restore($id)
@@ -223,8 +201,9 @@ class PostController extends Controller
         foreach ($recent as $item) {
             $item->delete();
         }
-        if (file_exists($post->foto_berita)) {
-            unlink($post->foto_berita);
+        if ($post->foto_berita) {
+            $oldPath = str_replace('/storage/', '', $post->foto_berita);
+            Storage::disk('public')->delete($oldPath);
         }
         $post->delete();
 
@@ -246,8 +225,9 @@ class PostController extends Controller
             if ($recent != NULL) {
                 $recent->delete();
             }
-            if ($post->foto_berita != NULL) {
-                unlink($post->foto_berita);
+            if ($post->foto_berita) {
+                $oldPath = str_replace('/storage/', '', $post->foto_berita);
+                Storage::disk('public')->delete($oldPath);
             }
             $post->delete();
         }

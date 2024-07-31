@@ -141,7 +141,7 @@
                                                         href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">
                                                         <img height="250" width="100%"
                                                             src="{{ asset($post->foto_berita) ?? asset('static/images/no-image-post.png') }}"
-                                                            alt="{{ substr($post->title, 0, 50) }}">
+                                                            alt="{{ substr($post->slug, 0, 50) }}">
                                                     </a>
                                                 </div>
                                                 <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
