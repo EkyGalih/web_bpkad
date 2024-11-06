@@ -1,22 +1,22 @@
 [
     {
         "id" : 1,
-        "nama_jabatan" : "Kaban"
+        "nama_jabatan" : "kaban"
     },
     {
         "id" : 2,
-        "nama_jabatan" : "Sekban"
+        "nama_jabatan" : "sekban"
     },
     {
         "id" : 3,
-        "nama_jabatan" : "Kabid"
+        "nama_jabatan" : "kabid"
     },
     {
         "id" : 4,
-        "nama_jabatan" : "KasuBid"
+        "nama_jabatan" : "kasubid"
     },
     {
         "id" : 5,
-        "nama_jabatan" : "Pegawai"
+        "nama_jabatan" : "pegawai"
     }
 ]

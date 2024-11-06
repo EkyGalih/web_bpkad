@@ -22,7 +22,7 @@
         @yield('content')
     </main>
     @include('layouts.partials.footer')
-    <div id="preloader"></div>
+    {{-- <div id="preloader"></div> --}}
     <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
     @include('layouts.partials.js')
 </body>

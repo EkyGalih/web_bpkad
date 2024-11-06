@@ -22,9 +22,9 @@
         @yield('content')
     </main>
     @include('layouts.client.footer')
-    <div id="preloader">
+    {{-- <div id="preloader">
         <h4 class="text-loader">BPKAD NTB</h4>
-    </div>
+    </div> --}}
     <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
     @include('layouts.client.js')
 </body>

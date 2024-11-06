@@ -44,9 +44,9 @@
         </div>
         <div class="bottom">
             @if (Auth::user()->role == 'superadmin' || Auth::user()->role == 'admin')
-            <a class="btn btn-warning btn-block btn-sm" href="{{ env('INVENTARIS_ADMIN') }}">
+            <a class="btn btn-secondary btn-block btn-sm" href="#">
             {{-- <a class="btn btn-primary btn-block btn-sm" href="{{ env('WEB_BPKAD_ADMIN') }}"> --}}
-                <i class="bx bx-log-in-circle"></i> Ke Aplikasi
+                <i class="bx bx-time"></i> Ongoing
             </a>
             @endif
         </div>

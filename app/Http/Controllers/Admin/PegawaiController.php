@@ -10,6 +10,7 @@ use App\Models\Pangkat;
 use App\Models\Pegawai;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PegawaiController extends Controller
 {
@@ -20,9 +21,9 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        $pegawais = Pegawai::where('deleted_at', '=', NULL)->orderBy('name', 'ASC')->paginate(12);
+        $pegawais = Pegawai::where('deleted_at', '=', NULL)->orderBy('created_at', 'DESC')->paginate(12);
 
-        return view('admin/pegawai/index', compact('pegawais'));
+        return view('admin.pegawai.index', compact('pegawais'));
     }
 
     /**
@@ -49,7 +50,44 @@ class PegawaiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pegawai = new Pegawai();
+        $pegawai->nip = $request->nip;
+        $pegawai->name = $request->name;
+        $pegawai->jenis_pegawai = $request->nip == '0' ? 'non asn' : 'asn';
+        $pegawai->pendidikan = $request->pendidikan;
+        $pegawai->tempat_lahir = $request->tempat_lahir;
+        $pegawai->tanggal_lahir = $request->tanggal_lahir;
+        $pegawai->jenis_kelamin = $request->jenis_kelamin;
+        $pegawai->agama = $request->agama;
+        $pegawai->no_sk = $request->no_sk;
+        $pegawai->nama_rekening = $request->nama_rekening;
+        $pegawai->no_rekening = $request->no_rekening;
+        $pegawai->golonganUuid = $request->golonganUuid;
+        $pegawai->pangkatUuid = $request->pangkatUuid;
+        $pegawai->nama_jabatan = $request->nama_jabatan;
+        $pegawai->initial_jabatan = $request->initial_jabatan;
+        $pegawai->jabatan = $request->jabatan;
+        $pegawai->masa_kerja_golongan = $request->masa_kerja_golongan;
+        $pegawai->diklat = $request->diklat;
+        $pegawai->umur = $request->umur;
+        $pegawai->batas_pensiun = $request->pensiun;
+        $pegawai->kenaikan_pangkat = $request->kenaikan_pangkat;
+        $pegawai->tanggal_sk = $request->tanggal_sk;
+        $pegawai->bidang_id = $request->bidangUuid;
+
+        // Jika ada file foto yang diunggah
+        if ($request->hasFile('foto')) {
+            // Menyimpan file ke dalam folder 'storage/app/public/foto'
+            $path = $request->file('foto')->store('public/pegawai');
+
+            // Simpan path foto di database
+            $pegawai->foto = str_replace('public/', 'storage/', $path);
+        }
+
+        // Menyimpan data ke dalam database
+        $pegawai->save();
+
+        return redirect()->route('admin-pegawai.index')->with('success', 'Data berhasil di simpan');
     }
 
     /**
@@ -60,7 +98,9 @@ class PegawaiController extends Controller
      */
     public function show($id)
     {
-        //
+        $pegawai = Pegawai::findOrFail($id);
+
+        return view('admin.pegawai.components.show', compact('pegawai'));
     }
 
     /**
@@ -71,7 +111,14 @@ class PegawaiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pegawai = Pegawai::findOrFail($id);
+        $bidang = Bidang::get();
+        $pangkat = Pangkat::get();
+        $golongan = Golongan::get();
+        $NamaJabatan = Helpers::_jsonDecode(asset('server/data/umum/NamaJabatan.json'));
+        $InitialJabatan = Helpers::_jsonDecode(asset('server/data/umum/InitialJabatan.json'));
+
+        return view('admin.pegawai.components.edit', compact('pegawai', 'golongan', 'pangkat', 'bidang', 'NamaJabatan', 'InitialJabatan'));
     }
 
     /**
@@ -83,7 +130,52 @@ class PegawaiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Cari pegawai berdasarkan ID
+        $pegawai = Pegawai::findOrFail($id);
+
+        // Memperbarui data pegawai
+        $pegawai->nip = $request->nip;
+        $pegawai->name = $request->name;
+        $pegawai->jenis_pegawai = $request->nip == '0' ? 'non asn' : 'asn';
+        $pegawai->pendidikan = $request->pendidikan;
+        $pegawai->tempat_lahir = $request->tempat_lahir;
+        $pegawai->tanggal_lahir = $request->tanggal_lahir;
+        $pegawai->jenis_kelamin = $request->jenis_kelamin;
+        $pegawai->agama = $request->agama;
+        $pegawai->no_sk = $request->no_sk;
+        $pegawai->nama_rekening = $request->nama_rekening;
+        $pegawai->no_rekening = $request->no_rekening;
+        $pegawai->golonganUuid = $request->golonganUuid;
+        $pegawai->pangkatUuid = $request->pangkatUuid;
+        $pegawai->nama_jabatan = $request->nama_jabatan;
+        $pegawai->initial_jabatan = $request->initial_jabatan;
+        $pegawai->jabatan = $request->jabatan;
+        $pegawai->masa_kerja_golongan = $request->masa_kerja_golongan;
+        $pegawai->diklat = $request->diklat;
+        $pegawai->umur = $request->umur;
+        $pegawai->batas_pensiun = $request->pensiun;
+        $pegawai->kenaikan_pangkat = $request->kenaikan_pangkat;
+        $pegawai->tanggal_sk = $request->tanggal_sk;
+        $pegawai->bidang_id = $request->bidangUuid;
+
+        // Jika ada file foto baru yang diunggah
+        if ($request->hasFile('foto')) {
+            // Hapus file foto lama dari storage jika ada
+            if ($pegawai->foto && Storage::exists(str_replace('storage/', 'public/', $pegawai->foto))) {
+                Storage::delete(str_replace('storage/', 'public/', $pegawai->foto));
+            }
+
+            // Simpan file foto baru ke dalam folder 'storage/app/public/pegawai'
+            $path = $request->file('foto')->store('public/pegawai');
+
+            // Update path foto di database
+            $pegawai->foto = str_replace('public/', 'storage/', $path);
+        }
+
+        // Menyimpan perubahan ke dalam database
+        $pegawai->save();
+
+        return redirect()->route('admin-pegawai.index')->with('success', 'Data berhasil diperbarui');
     }
 
     /**

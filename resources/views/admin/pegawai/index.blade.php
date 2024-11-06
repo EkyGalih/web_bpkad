@@ -43,14 +43,19 @@
                     @foreach ($pegawais as $pegawai)
                         <div class="col-lg-3">
                             <div class="card" style="width: 18rem;">
-                                <img src="{{ asset('uploads/pegawai/' . $pegawai->foto) }}" class="card-img-top"
-                                    alt="...">
+                                @if ($pegawai->jenis_kelamin == 'pria')
+                                <img src="{{ asset($pegawai->foto ?? 'uploads/profile/male.jpg') }}" class="card-img-top"
+                                alt="foto pegawai atas nama {{ $pegawai->name ?? '-' }}">
+                                @else
+                                <img src="{{ asset($pegawai->foto ?? 'uploads/profile/female.jpg') }}" class="card-img-top"
+                                alt="foto pegawai atas nama {{ $pegawai->name }}">
+                                @endif
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ $pegawai->name }}</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">{{ $pegawai->nip }}</h6>
-                                    <p class="card-text">{{ $pegawai->jabatan }}</p>
-                                    <a href="#" class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i> Ubah</a>
-                                    <a href="#" class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detail</a>
+                                    <h5 class="card-title">{{ Str::limit($pegawai->name, 20, '...') ?? '-' }}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{ $pegawai->nip ?? '-' }}</h6>
+                                    <p class="card-text">{{ Str::limit($pegawai->jabatan, 26, '...') ?? '-' }}</p>
+                                    <a href="{{ route('admin-pegawai.edit', $pegawai->id) }}" class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i> Ubah</a>
+                                    <a href="{{ route('admin-pegawai.show', $pegawai->id) }}" class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detail</a>
                                     <button type="button" data-bs-toggle="modal"
                                         data-bs-target="#HapusPegawai{{ $loop->iteration }}"
                                         class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Hapus</button>

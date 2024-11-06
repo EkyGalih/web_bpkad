@@ -5,14 +5,18 @@
     },
     {
         "id" : 2,
-        "initial_jabatan" : "Sekretariat - Umum"
+        "initial_jabatan" : "Sekertaris Badan"
     },
     {
         "id" : 3,
-        "initial_jabatan" : "Sekretariat - Keuangan"
+        "initial_jabatan" : "Kepala Bidang"
     },
     {
         "id" : 4,
-        "initial_jabatan" : "Sekretariat - Program"
+        "initial_jabatan" : "Kepala Sub Bidang"
+    },
+    {
+        "id" : 5,
+        "initial_jabatan" : "Pegawai"
     }
 ]

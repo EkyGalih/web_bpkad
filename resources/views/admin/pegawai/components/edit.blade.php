@@ -1,5 +1,5 @@
 @extends('admin.index')
-@section('title', 'Tambah Pegawai')
+@section('title', 'Update Pegawai')
 @section('db-menu', 'show')
 @section('db-pegawai', 'active')
 @section('additional-css')
@@ -19,7 +19,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('admin-pegawai.index') }}">Pegawai</a></li>
-                        <li class="breadcrumb-item active">Tambah Pegawai</li>
+                        <li class="breadcrumb-item active">Ubah Pegawai</li>
                     </ol>
                 </nav>
             </div>
@@ -29,10 +29,11 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="card-title">Tambah Pegawai</div>
+                            <div class="card-title">Update Data Pegawai</div>
                             <hr />
-                            <form action="{{ route('admin-pegawai.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('admin-pegawai.update', $pegawai->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <h4 style="text-align: center; font-weight: bold; color: #726e6e">DATA PRIBADI</h4>
@@ -40,36 +41,36 @@
                                         <div class="row mb-3">
                                             <label for="inputText" class="col-sm-3 col-form-label">NIP</label>
                                             <div class="col-sm-9">
-                                                <input type="text" name="nip" class="form-control" value="{{ old('nip') }}" placeholder="isi 0 jika tidak memiliki nip atau pegawai non asn">
+                                                <input type="text" name="nip" class="form-control" value="{{ $pegawai->nip ?? '0' }}">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <label for="inputText" class="col-sm-3 col-form-label">Nama Pegawai</label>
                                             <div class="col-sm-9">
-                                                <input type="text" name="name" class="form-control" value="{{ old('name') }}">
+                                                <input type="text" name="name" class="form-control" value="{{ $pegawai->name ?? '-' }}">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <label for="inputText" class="col-sm-3 col-form-label">Pendidikan</label>
                                             <div class="col-sm-9">
-                                                <input type="text" name="pendidikan" class="form-control" value="{{ old('pendidikan') }}">
+                                                <input type="text" name="pendidikan" class="form-control" value="{{ $pegawai->pendidikan ?? '' }}">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label for="inputText" class="col-sm-3 col-form-label">Tgl/Tempat Lahir</label>
+                                            <label for="inputText" class="col-sm-3 col-form-label">Tempat/Tanggal Lahir</label>
                                             <div class="col-sm-5">
-                                                <input type="text" name="tempat_lahir" class="form-control" value="{{ old('tempat_lahir') }}">
+                                                <input type="text" name="tempat_lahir" class="form-control" value="{{ $pegawai->tempat_lahir }}">
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="date" name="tanggal_lahir" id="birthday"
-                                                    class="form-control" value="{{ old('tanggal_lahir') }}">
+                                                <input type="date" name="tanggal_lahir" id="birthday" value="{{ $pegawai->tanggal_lahir }}"
+                                                    class="form-control">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <label for="inputText" class="col-sm-3 col-form-label">Usia</label>
                                             <div class="col-sm-9">
-                                                <input type="text" id="umur" name="umur" class="form-control"
-                                                    readonly value="{{ old('umur') }}" style="background-color: rgb(238, 236, 236)">
+                                                <input type="text" id="umur" name="umur" class="form-control" value="{{ $pegawai->umur }}"
+                                                    readonly style="background-color: rgb(238, 236, 236)">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -77,8 +78,8 @@
                                             <div class="col-sm-9">
                                                 <select name="jenis_kelamin" class="form-control">
                                                     <option value="">--Pilih--</option>
-                                                    <option value="pria" {{ old('jenis_kelamin') == 'pria' ? 'selected' : '' }}>Pria</option>
-                                                    <option value="wanita" {{ old('jenis_kelamin') == 'wanita' ? 'selected' : '' }}>Wanita</option>
+                                                    <option value="pria" {{$pegawai->jenis_kelamin == 'pria' ? 'selected' : ''}}>Pria</option>
+                                                    <option value="wanita" {{$pegawai->jenis_kelamin == 'wanita' ? 'selected' : ''}}>Wanita</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -87,11 +88,11 @@
                                             <div class="col-sm-9">
                                                 <select name="agama" class="form-control">
                                                     <option value="">--Pilih--</option>
-                                                    <option value="islam" {{ old('agama') == 'islam' ? 'selected' : '' }}>Islam</option>
-                                                    <option value="kristen" {{ old('agama') == 'kristen' ? 'selected' : '' }}>Kristen</option>
-                                                    <option value="hindu" {{ old('agama') == 'hindu' ? 'selected' : '' }}>Hindu</option>
-                                                    <option value="budha" {{ old('agama') == 'budha' ? 'selected' : '' }}>Budha</option>
-                                                    <option value="konghucu" {{ old('agama') == 'konghucu' ? 'selected' : '' }}>Konghucu</option>
+                                                    <option value="islam" {{$pegawai->agama == 'islam' ? 'selected' : ''}}>Islam</option>
+                                                    <option value="kristen" {{$pegawai->agama == 'kristen' ? 'selected' : ''}}>Kristen</option>
+                                                    <option value="hindu" {{$pegawai->agama == 'hindu' ? 'selected' : ''}}>Hindu</option>
+                                                    <option value="budha" {{$pegawai->agama == 'budha' ? 'selected' : ''}}>Budha</option>
+                                                    <option value="konghucu" {{$pegawai->agama == 'konghucu' ? 'selected' : ''}}>Konghucu</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -108,7 +109,7 @@
                                                 </p>
                                             </div>
                                             <div class="col-sm-8">
-                                                <img src="{{ asset('uploads/profile/male.jpg') }}" alt="Profile"
+                                                <img src="{{ asset($pegawai->foto) ?? asset('uploads/profile/male.jpg') }}" alt="Profile"
                                                     id="foto" style="max-width: 100%; height: 120px;">
                                             </div>
                                         </div>
@@ -116,11 +117,11 @@
                                             <label for="inputText" class="col-sm-3 col-form-label">Rekening</label>
                                             <div class="col-sm-4">
                                                 <input type="text" name="nama_rekening" class="form-control"
-                                                    placeholder="Nama Bank" value="{{ old('nama_rekening') }}">
+                                                    placeholder="Nama Bank" value="{{ $pegawai->nama_rekening ?? '' }}">
                                             </div>
                                             <div class="col-sm-5">
                                                 <input type="text" name="no_rekening" class="form-control"
-                                                    placeholder="Nomor Rekening" value="{{ old('no_rekening') }}">
+                                                    placeholder="Nomor Rekening" value="{{ $pegawai->no_rekening ?? '' }}">
                                             </div>
                                         </div>
                                     </div>
@@ -137,7 +138,7 @@
                                                     autocomplete="off">
                                                     <option value="">Cari..</option>
                                                     @foreach ($golongan as $gol)
-                                                        <option value="{{ $gol->uuid }}" {{ old('golonganUuid') == $gol->uuid ? 'selected' : '' }}>{{ $gol->nama_golongan }}
+                                                        <option value="{{ $gol->uuid }}" {{ $pegawai->golonganUuid == $gol->uuid ? 'selected' : '' }}>{{ $gol->nama_golongan }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -147,20 +148,20 @@
                                                     autocomplete="off">
                                                     <option value="">Cari..</option>
                                                     @foreach ($pangkat as $pang)
-                                                        <option value="{{ $pang->uuid }}" {{ old('pangkatUuid') == $pang->uuid ? 'selected' : '' }}>{{ $pang->nama_pangkat }}
+                                                        <option value="{{ $pang->uuid }}" {{ $pegawai->pangkatUuid == $pang->uuid ? 'selected' : '' }}>{{ $pang->nama_pangkat }}
                                                         </option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label for="inputText" class="col-sm-3 col-form-label">Jabatan/Inisial
-                                                Jabatan</label>
+                                            <label for="inputText" class="col-sm-3 col-form-label">Inisial
+                                                Jabatan/Jabatan</label>
                                             <select class="col-sm-4" name="nama_jabatan" id="jabatan"
                                                 autocomplete="off" placeholder="Cari..">
                                                 <option value="#">Cari..</option>
                                                 @foreach ($NamaJabatan as $nj)
-                                                    <option value="{{ $nj['nama_jabatan'] }}" {{ old('nama_jabatan') == $nj['nama_jabatan'] ? 'selected' : '' }}>{{ $nj['nama_jabatan'] }}
+                                                    <option value="{{ $nj['nama_jabatan'] }}" {{ $pegawai->nama_jabatan == $nj['nama_jabatan'] ? 'selected' : '' }}>{{ ucwords($nj['nama_jabatan']) }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -168,7 +169,7 @@
                                                 autocomplete="off" placeholder="Cari..">
                                                 <option value="#">Cari..</option>
                                                 @foreach ($InitialJabatan as $ij)
-                                                    <option value="{{ $ij['initial_jabatan'] }}" {{ old('initial_jabatan') == $ij['initial_jabatan'] ? 'selected' : '' }}>
+                                                    <option value="{{ $ij['initial_jabatan'] }}" {{ $pegawai->initial_jabatan == $ij['initial_jabatan'] ? 'selected' : '' }}>
                                                         {{ $ij['initial_jabatan'] }}</option>
                                                 @endforeach
                                             </select>
@@ -177,8 +178,7 @@
                                             <label for="inputText" class="col-sm-3 col-form-label">Nama jabatan</label>
                                             <div class="col-sm-9">
                                                 <input type="text" name="jabatan" class="form-control"
-                                                    placeholder="Contoh: Peng administrasi [Fungsional Umum]"
-                                                    value="{{ old('jabatan') }}">
+                                                    placeholder="Contoh: Peng administrasi [Fungsional Umum]" value="{{ $pegawai->jabatan ?? '' }}">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -186,12 +186,11 @@
                                                 Pengangkatan</label>
                                             <div class="col-sm-4">
                                                 <input type="date" id="masa-kerja" name="tanggal_sk" class="form-control"
-                                                    placeholder="Contoh: Jan, 2000"
-                                                    value="{{ old('masa_kerja_golongan') }}">
+                                                    placeholder="Contoh: Jan, 2000" value="{{ $pegawai->tanggal_sk }}">
                                             </div>
                                             <div class="col-sm-5">
                                                 <input type="text" name="masa_kerja_golongan" class="form-control"
-                                                    id="masa_kerja_golongan" readonly style="background-color: rgb(238, 236, 236)">
+                                                    value="{{ $pegawai->masa_kerja_golongan }}" id="masa_kerja_golongan" readonly style="background-color: rgb(238, 236, 236)">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -199,14 +198,13 @@
                                             <div class="col-sm-9">
                                                 <input type="text" name="no_sk" class="form-control"
                                                     placeholder="Contoh: 123/2021/PPD/II/01"
-                                                    value="{{ old('no_sk') }}">
+                                                    value="{{ $pegawai->no_sk ?? '-' }}">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <label for="inputText" class="col-sm-3 col-form-label">Diklat</label>
                                             <div class="col-sm-9">
-                                                <textarea name="diklat" class="form-control"
-                                                    placeholder="Contoh: Diklat keahlian A, B, C">{{ old('diklat') }}</textarea>
+                                                <textarea name="diklat" class="form-control">{{ $pegawai->diklat }}</textarea>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -214,18 +212,17 @@
                                                     title="Tahun Kenaikan pangkat hanya perkiraan berdasarkan tahun pengangkatan, tahun promosi bisa berubah tergantung jabatan yang diduduki"><i
                                                         class="bi bi-info-circle"></i></sup></label>
                                             <div class="col-sm-9">
-                                                <input type="text" name="kenaikan_pangkat" class="form-control"
-                                                    value="{{ old('kenaikan_pangkat') }}">
+                                                <input type="text" name="kenaikan_pangkat" class="form-control" value="{{ $pegawai->kenaikan_pangkat }}">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label for="inputText" class="col-sm-3 col-form-label">Tahun Pensiun <sup
+                                            <label for="inputText" class="col-sm-3 col-form-label">Pensiun <sup
                                                     data-bs-tooltip="tooltip" data-bs-placement="top"
                                                     title="Tahun pensiun hanya perkiraan berdasarkan tahun lahir, tahun pensiun bisa berubah berdasarkan jabatan terakhir yang diduduki"><i
                                                         class="bi bi-info-circle"></i></sup></label>
                                             <div class="col-sm-9">
-                                                <input type="text" id="pensiun" name="pensiun" class="form-control"
-                                                style="background-color: rgb(238, 236, 236)" readonly value="{{ old('pensiun') }}">
+                                                <input type="text" id="pensiun" name="pensiun" class="form-control" value="{{ $pegawai->batas_pensiun }}"
+                                                    readonly style="background-color: rgb(238, 236, 236)">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -236,7 +233,7 @@
                                                     autocomplete="off">
                                                     <option value="">Cari..</option>
                                                     @foreach ($bidang as $bid)
-                                                        <option value="{{ $bid->id }}" {{ old('bidangUuid') == $bid->id ? 'selected' : '' }}>{{ $bid->nama_bidang }}
+                                                        <option value="{{ $bid->id }}" {{ $pegawai->bidang_id == $bid->id ? 'selected' : '' }}>{{ $bid->nama_bidang }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -250,7 +247,7 @@
                                                 </button>
                                                 <button class="btn btn-success btn-md"
                                                     style="float: right; margin-right: 2px;" type="submit">
-                                                    <i class="bi bi-plus-square"></i> Tambah
+                                                    <i class="bi bi-save-fill"></i> Simpan
                                                 </button>
                                             </div>
                                         </div>
@@ -325,7 +322,7 @@
                 var age = Math.floor((today - dob) / (365.25 * 24 * 60 * 60 * 1000));
                 var pensiun = today.getFullYear() + (58 - age);
                 $('#umur').val(age + " Tahun");
-                $('#pensiun').val(pensiun);
+                $('#pensiun').val("Tahun " + pensiun);
             });
 
             // menghitung masa jabatan
@@ -340,4 +337,3 @@
         }
     </script>
 @endsection
-

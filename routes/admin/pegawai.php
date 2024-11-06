@@ -10,7 +10,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         Route::post('store', [PegawaiController::class, 'store'])->name('admin-pegawai.store');
         Route::get('edit/{id}', [PegawaiController::class, 'edit'])->name('admin-pegawai.edit');
         Route::put('update/{id}', [PegawaiController::class, 'update'])->name('admin-pegawai.update');
-        Route::get('show/{id}', [PegawaiController::class, 'show'])->name('admin-pegawai.show');
+        Route::get('detail-pegawai/{id}', [PegawaiController::class, 'show'])->name('admin-pegawai.show');
         Route::get('destroy/{id}', [PegawaiController::class, 'destroy'])->name('admin-pegawai.destroy');
     });
 });
