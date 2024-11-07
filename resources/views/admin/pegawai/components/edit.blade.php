@@ -131,6 +131,19 @@
                                         <h4 style="text-align: center; font-weight: bold; color: #726e6e">DATA PEGAWAI</h4>
                                         <hr />
                                         <div class="row mb-3">
+                                            <label for="inputText" class="col-sm-3 col-form-label">Status Pegawai</label>
+                                            <div class="col-sm-9">
+                                               <select name="status_pegawai" id="status_pegawai" placeholder="Cari..">
+                                                <option value="">Cari..</option>
+                                                <option value="aktif" {{ $pegawai->status_pegawai == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                                                <option value="pindah" {{ $pegawai->status_pegawai == 'pindah' ? 'selected' : '' }}>Pindah</option>
+                                                <option value="pensiun" {{ $pegawai->status_pegawai == 'pensiun' ? 'selected' : '' }}>Pensiun</option>
+                                                <option value="pihak ke 3" {{ $pegawai->status_pegawai == 'pihak ke 3' ? 'selected' : '' }}>Pihak Ke 3</option>
+                                                <option value="sementara" {{ $pegawai->status_pegawai == 'sementara' ? 'selected' : '' }}>Sementara</option>
+                                               </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
                                             <label for="inputText"
                                                 class="col-sm-3 col-form-label">Pangkat/Golongan</label>
                                             <div class="col-sm-5">
@@ -267,6 +280,11 @@
 @section('additional-js')
     <script src="{{ asset('server/vendor/tom-select/tom-select.js') }}"></script>
     <script>
+        new TomSelect("#status_pegawai", {
+            persist: false,
+            createOnBlur: true,
+            create: true
+        });
         new TomSelect("#jabatan", {
             persist: false,
             createOnBlur: true,

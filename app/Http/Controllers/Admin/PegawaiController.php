@@ -27,7 +27,7 @@ class PegawaiController extends Controller
             return $query->where('name', 'like', "%{$search}%")
                          ->orWhere('nip', 'like', "%{$search}%")
                          ->orWhere('jabatan', 'like', "%{$search}%");
-        })->orderBy('created_at', 'DESC')->paginate(12);
+        })->orderBy('updated_at', 'DESC')->paginate(12);
 
         return view('admin.pegawai.index', compact('pegawais'));
     }
@@ -162,6 +162,7 @@ class PegawaiController extends Controller
         $pegawai->batas_pensiun = $request->pensiun;
         $pegawai->kenaikan_pangkat = $request->kenaikan_pangkat;
         $pegawai->tanggal_sk = $request->tanggal_sk;
+        $pegawai->status_pegawai = $request->status_pegawai;
         $pegawai->bidang_id = $request->bidangUuid;
 
         // Jika ada file foto baru yang diunggah
