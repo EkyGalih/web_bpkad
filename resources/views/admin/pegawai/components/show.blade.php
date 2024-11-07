@@ -54,16 +54,21 @@
                                     <div class="card" style="width: 25rem;">
                                         <div style="position: relative;">
                                             @if ($pegawai->jenis_kelamin == 'pria')
-                                                <img src="{{ asset($pegawai->foto ?? 'uploads/profile/male.jpg') }}" class="card-img-top"
-                                                     alt="foto pegawai atas nama {{ $pegawai->name ?? '-' }}" style="height: auto; width: auto; object-fit: fill;">
+                                                <img src="{{ asset($pegawai->foto ?? 'uploads/profile/male.jpg') }}"
+                                                    class="card-img-top"
+                                                    alt="foto pegawai atas nama {{ $pegawai->name ?? '-' }}"
+                                                    style="height: auto; width: auto; object-fit: fill;">
                                             @else
-                                                <img src="{{ asset($pegawai->foto ?? 'uploads/profile/female.jpg') }}" class="card-img-top"
-                                                     alt="foto pegawai atas nama {{ $pegawai->name }}" style="height: auto; width: auto; object-fit: fill;">
+                                                <img src="{{ asset($pegawai->foto ?? 'uploads/profile/female.jpg') }}"
+                                                    class="card-img-top" alt="foto pegawai atas nama {{ $pegawai->name }}"
+                                                    style="height: auto; width: auto; object-fit: fill;">
                                             @endif
 
                                             <!-- Watermark -->
                                             @if ($pegawai->status_pegawai == 'pensiun')
                                                 <div class="watermark">PENSIUN</div>
+                                            @elseif ($pegawai->status_pegawai == 'pindah')
+                                                <div class="watermark">PINDAH</div>
                                             @endif
                                         </div>
                                     </div>
@@ -76,8 +81,10 @@
                                                 <td>{{ $pegawai->name }}</td>
                                             </tr>
                                             <tr>
-                                                <th class="bg-light text-secondary" style="width: 30%;">Tempat/ Tanggal Lahir</th>
-                                                <td>{{ $pegawai->tempat_lahir . ', ' . $pegawai->tanggal_lahir }} ({{ $pegawai->umur ?? '0' }} Tahun)</td>
+                                                <th class="bg-light text-secondary" style="width: 30%;">Tempat/ Tanggal
+                                                    Lahir</th>
+                                                <td>{{ $pegawai->tempat_lahir . ', ' . $pegawai->tanggal_lahir }}
+                                                    ({{ $pegawai->umur ?? '0' }} Tahun)</td>
                                             </tr>
                                             <tr>
                                                 <th class="bg-light text-secondary">NIP</th>
