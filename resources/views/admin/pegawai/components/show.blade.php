@@ -8,6 +8,24 @@
         .image_upload>input {
             display: none;
         }
+
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 70%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            font-size: 7rem;
+            /* Increase font size */
+            font-weight: bold;
+            color: rgba(255, 0, 0, 0.7);
+            /* Make color less transparent */
+            text-transform: uppercase;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            /* Add shadow for more visibility */
+            pointer-events: none;
+            /* Prevents watermark from being clicked */
+            z-index: 1;
+        }
     </style>
 @endsection
 @section('content')
@@ -33,13 +51,22 @@
                             <hr />
                             <div class="row">
                                 <div class="col-lg-6">
-                                    @if ($pegawai->jenis_kelamin == 'pria')
-                                        <img src="{{ asset($pegawai->foto ?? 'uploads/profile/male.jpg') }}"
-                                            alt="foto pegawai atas nama {{ $pegawai->name }}">
-                                    @else
-                                        <img src="{{ asset($pegawai->foto ?? 'uploads/profile/female.jpg') }}"
-                                            alt=" foto pegawai atas nama {{ $pegawai->name }}">
-                                    @endif
+                                    <div class="card" style="width: 25rem;">
+                                        <div style="position: relative;">
+                                            @if ($pegawai->jenis_kelamin == 'pria')
+                                                <img src="{{ asset($pegawai->foto ?? 'uploads/profile/male.jpg') }}" class="card-img-top"
+                                                     alt="foto pegawai atas nama {{ $pegawai->name ?? '-' }}" style="height: auto; width: auto; object-fit: fill;">
+                                            @else
+                                                <img src="{{ asset($pegawai->foto ?? 'uploads/profile/female.jpg') }}" class="card-img-top"
+                                                     alt="foto pegawai atas nama {{ $pegawai->name }}" style="height: auto; width: auto; object-fit: fill;">
+                                            @endif
+
+                                            <!-- Watermark -->
+                                            @if ($pegawai->status_pegawai == 'pensiun')
+                                                <div class="watermark">PENSIUN</div>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <table class="table table-hover table-striped mb-0">

@@ -10,8 +10,8 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2.5rem;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            font-size: 4rem;
             /* Increase font size */
             font-weight: bold;
             color: rgba(255, 0, 0, 0.7);
