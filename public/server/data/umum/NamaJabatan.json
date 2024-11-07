@@ -18,5 +18,9 @@
     {
         "id" : 5,
         "nama_jabatan" : "pegawai"
+    },
+    {
+        "id" : 6,
+        "nama_jabatan" : "kepala"
     }
 ]

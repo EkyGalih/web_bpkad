@@ -1,5 +1,5 @@
 @extends('admin.index')
-@section('title', 'Tambah Pegawai')
+@section('title', 'Detail Pegawai')
 @section('db-menu', 'show')
 @section('db-pegawai', 'active')
 @section('additional-css')
@@ -49,40 +49,58 @@
                                                 <td>{{ $pegawai->name }}</td>
                                             </tr>
                                             <tr>
+                                                <th class="bg-light text-secondary" style="width: 30%;">Tempat/ Tanggal Lahir</th>
+                                                <td>{{ $pegawai->tempat_lahir . ', ' . $pegawai->tanggal_lahir }} ({{ $pegawai->umur ?? '0' }} Tahun)</td>
+                                            </tr>
+                                            <tr>
                                                 <th class="bg-light text-secondary">NIP</th>
-                                                <td>{{ $pegawai->nip }}</td>
+                                                <td>{{ $pegawai->nip ?? '-' }}</td>
                                             </tr>
                                             <tr>
-                                                <th class="bg-light text-secondary">Jenis Kelamin</th>
-                                                <td>{{ ucfirst($pegawai->jenis_kelamin) }}</td>
+                                                <th class="bg-light text-secondary">Pendidikan</th>
+                                                <td>{{ $pegawai->pendidikan ?? '-' }}</td>
                                             </tr>
                                             <tr>
-                                                <th class="bg-light text-secondary">Agama</th>
-                                                <td>{{ ucfirst($pegawai->agama) }}</td>
+                                                <th class="bg-light text-secondary">Diklat Terakhir</th>
+                                                <td>{{ $pegawai->diklat ?? '-' }}</td>
                                             </tr>
                                             <tr>
-                                                <th class="bg-light text-secondary">Tempat Lahir</th>
-                                                <td>{{ ucfirst($pegawai->tempat_lahir) }}</td>
+                                                <th class="bg-light text-secondary">Jabatan</th>
+                                                <td>{{ $pegawai->nama_jabatan ?? '-' }}</td>
                                             </tr>
                                             <tr>
-                                                <th class="bg-light text-secondary">Tanggal Lahir</th>
-                                                <td>{{ \Carbon\Carbon::parse($pegawai->tanggal_lahir)->format('d-m-Y') }}
+                                                <th class="bg-light text-secondary">Nama Jabatan</th>
+                                                <td>{{ $pegawai->jabatan ?? '-' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="bg-light text-secondary">Tanggal SK</th>
+                                                <td>{{ $pegawai->tanggal_sk ?? '-' }}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th class="bg-light text-secondary">Alamat</th>
-                                                <td>{{ $pegawai->alamat }}</td>
+                                                <th class="bg-light text-secondary">Nomor SK</th>
+                                                <td>{{ $pegawai->no_sk ?? '-' }}</td>
                                             </tr>
                                             <tr>
-                                                <th class="bg-light text-secondary">No. Telepon</th>
-                                                <td>{{ $pegawai->no_telepon }}</td>
+                                                <th class="bg-light text-secondary">Masa Kerja Golongan</th>
+                                                <td>{{ ucfirst($pegawai->masa_kerja_golongan) }}</td>
                                             </tr>
                                             <tr>
-                                                <th class="bg-light text-secondary">Email</th>
-                                                <td>{{ $pegawai->email }}</td>
+                                                <th class="bg-light text-secondary">Kenaikan Pangkat berikutnya</th>
+                                                <td>{{ $pegawai->kenaikan_pangkat ?? '-' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="bg-light text-secondary">Tahun Pensiun</th>
+                                                <td>{{ $pegawai->batas_pensiun }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
+                                    <div class="d-flex justify-content-end mt-3">
+                                        <a href="{{ route('admin-pegawai.index') }}" class="btn btn-light btn-md">
+                                            <i class="bi bi-arrow-left"></i> Kembali
+                                        </a>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

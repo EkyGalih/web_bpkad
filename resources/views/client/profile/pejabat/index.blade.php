@@ -165,23 +165,23 @@
             @php
                 $kaban = Helpers::getPimpinan('select', 'kaban');
                 $sekban = Helpers::getPimpinan('select', 'sekban');
-                $kabag = Helpers::getKabag('select', 'kabag');
+                $kabag = Helpers::getKabag('select', 'kabid', 'kepala');
             @endphp
             <div class="row">
                 <ul id="tree-data" style="display:none">
                     <li id="root">
-                        <img class="img" src="{{ asset('uploads/pegawai/' . $kaban->foto) }}" />
+                        <img class="img" src="{{ asset($kaban->foto) }}" />
                         <h5 class="title label-title">{{ strtoupper($kaban->nama_jabatan) }}</h5>
                         <p class="name">{{ $kaban->name }}</p>
                         <ul>
                             <li id="node1">
-                                <img class="img" src="{{ asset('uploads/pegawai/' . $sekban->foto) }}" />
+                                <img class="img" src="{{ asset($sekban->foto) }}" />
                                 <h5 class="title label-title">{{ strtoupper($sekban->nama_jabatan) }}</h5>
                                 <p class="name">{{ $sekban->name }}</p>
                                 <ul>
                                     @foreach ($kabag as $kabag)
                                         <li id="node2">
-                                            <img class="img" src="{{ asset('uploads/pegawai/' . $kabag->foto) }}" />
+                                            <img class="img" src="{{ asset($kabag->foto) }}" />
                                             <h5 class="title label-title">
                                                 {{ strtoupper($kabag->nama_jabatan) . ' ' . $kabag->initial_jabatan }}</h5>
                                             <p class="name">{{ $kabag->name }}</p>

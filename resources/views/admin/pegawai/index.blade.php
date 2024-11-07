@@ -19,11 +19,14 @@
             </nav>
         </div>
         <div class="row">
-            <div class="col-lg-12" style="float: right; margin-bottom: 2%;">
-                <a href="{{ route('admin-pegawai.create') }}" class="btn btn-outline-primary btn-md"
-                    style="float: right; margin-top: 5px;">
-                    <i class="bi bi-person-add"></i> Tambah Pegawai
-                </a>
+            <div class="col-lg-12 d-flex justify-content-end">
+                <form action="{{ route('admin-pegawai.index') }}" method="GET" class="mb-3" style="width: 450px;">
+                    <div class="input-group input-group-sm">
+                        <input type="text" name="search" class="form-control" placeholder="Cari pegawai..." value="{{ request('search') }}">
+                        <button type="submit" class="btn btn-primary btn-sm">Cari</button>
+                        <a href="{{ route('admin-pegawai.index') }}" class="btn btn-secondary btn-sm">Reset</a>
+                    </div>
+                </form>
             </div>
         </div>
         <section class="section">
@@ -37,6 +40,14 @@
                                 {{ Session::get('success') }}
                             </div>
                         @endif
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12" style="float: right; margin-bottom: 2%;">
+                        <a href="{{ route('admin-pegawai.create') }}" class="btn btn-outline-primary btn-sm"
+                            style="float: right; margin-top: 5px;">
+                            <i class="bi bi-person-add"></i> Tambah Pegawai
+                        </a>
                     </div>
                 </div>
                 <div class="row">

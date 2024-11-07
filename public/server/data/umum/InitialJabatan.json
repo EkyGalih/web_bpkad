@@ -18,5 +18,9 @@
     {
         "id" : 5,
         "initial_jabatan" : "Pegawai"
+    },
+    {
+        "id" : 6,
+        "initial_jabatan" : "Kepala UPT"
     }
 ]

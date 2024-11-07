@@ -243,15 +243,18 @@
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <div class="col-sm-12">
-                                                <button class="btn btn-warning btn-md" style="float: right;"
-                                                    type="reset">
-                                                    <i class="bi bi-arrow-clockwise"></i> Reset
-                                                </button>
-                                                <button class="btn btn-success btn-md"
-                                                    style="float: right; margin-right: 2px;" type="submit">
-                                                    <i class="bi bi-plus-square"></i> Tambah
-                                                </button>
+                                            <div class="col-sm-12 text-end">
+                                                <div class="d-grid gap-2 d-md-block">
+                                                    <button class="btn btn-success btn-md" type="submit">
+                                                        <i class="bi bi-plus-square"></i> Tambah
+                                                    </button>
+                                                    <button class="btn btn-warning btn-md" type="reset">
+                                                        <i class="bi bi-arrow-clockwise"></i> Reset
+                                                    </button>
+                                                    <a href="{{ route('admin-pegawai.index') }}" class="btn btn-secondary btn-md">
+                                                        <i class="bi bi-skip-backward"></i> Kembali
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

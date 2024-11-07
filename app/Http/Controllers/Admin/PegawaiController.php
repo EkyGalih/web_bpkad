@@ -19,9 +19,15 @@ class PegawaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $pegawais = Pegawai::where('deleted_at', '=', NULL)->orderBy('created_at', 'DESC')->paginate(12);
+        $search = $request->input('search');
+
+        $pegawais = Pegawai::when($search, function ($query, $search) {
+            return $query->where('name', 'like', "%{$search}%")
+                         ->orWhere('nip', 'like', "%{$search}%")
+                         ->orWhere('jabatan', 'like', "%{$search}%");
+        })->orderBy('created_at', 'DESC')->paginate(12);
 
         return view('admin.pegawai.index', compact('pegawais'));
     }

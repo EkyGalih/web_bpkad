@@ -581,14 +581,16 @@ class Helpers
         }
     }
 
-    public static function getKabag($cat, $param)
+    public static function getKabag($cat, $param, $param2)
     {
         if ($cat == 'select') {
             return Pegawai::where('nama_jabatan', '=', $param)
+                ->orWhere('nama_jabatan', '=', $param2)
                 ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
                 ->get();
         } elseif ($cat == 'count') {
             return Pegawai::where('nama_jabatan', '=', $param)
+                ->orWhere('nama_jabatan', '=', $param2)
                 ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
                 ->count();
         }
