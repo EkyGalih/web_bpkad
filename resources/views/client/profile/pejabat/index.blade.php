@@ -183,7 +183,7 @@
                                         <li id="node2">
                                             <img class="img" src="{{ asset($kabag->foto) }}" />
                                             <h5 class="title label-title">
-                                                {{ strtoupper($kabag->nama_jabatan) . ' ' . $kabag->initial_jabatan }}</h5>
+                                                {{ strtoupper($kabag->nama_jabatan) . ' ' . $kabag->jabatan }}</h5>
                                             <p class="name">{{ $kabag->name }}</p>
                                         </li>
                                     @endforeach

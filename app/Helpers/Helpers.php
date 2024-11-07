@@ -573,10 +573,12 @@ class Helpers
         if ($cat == 'select') {
             return Pegawai::where('nama_jabatan', '=', $param)
                 ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+                ->where('status_pegawai', '=', 'aktif')
                 ->first();
         } elseif ($cat == 'count') {
             return Pegawai::where('nama_jabatan', '=', $param)
                 ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+                ->where('status_pegawai', '=', 'aktif')
                 ->count();
         }
     }
@@ -586,12 +588,14 @@ class Helpers
         if ($cat == 'select') {
             return Pegawai::where('nama_jabatan', '=', $param)
                 ->orWhere('nama_jabatan', '=', $param2)
-                ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+                ->select('name', 'jabatan', 'nama_jabatan', 'foto')
+                ->where('status_pegawai', '=', 'aktif')
                 ->get();
         } elseif ($cat == 'count') {
             return Pegawai::where('nama_jabatan', '=', $param)
                 ->orWhere('nama_jabatan', '=', $param2)
-                ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+                ->select('name', 'jabatan', 'nama_jabatan', 'foto')
+                ->where('status_pegawai', '=', 'aktif')
                 ->count();
         }
     }
@@ -602,11 +606,13 @@ class Helpers
             return Pegawai::where('nama_jabatan', '=', $param)
                 ->where('initial_jabatan', 'LIKE', $param2 . '%')
                 ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+                ->where('status_pegawai', '=', 'aktif')
                 ->get();
         } elseif ($cat == 'count') {
             return Pegawai::where('nama_jabatan', '=', $param)
                 ->where('initial_jabatan', 'LIKE', $param2 . '%')
                 ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+                ->where('status_pegawai', '=', 'aktif')
                 ->count();
         }
     }
