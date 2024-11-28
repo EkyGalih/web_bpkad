@@ -246,13 +246,18 @@ class Helpers
     {
         $years = [];
 
+        // Tambahkan tahun depan terlebih dahulu
+        array_push($years, date('Y') + 1);
+
+        // Tambahkan 10 tahun sebelumnya
         for ($i = 0; $i < 10; $i++) {
-            $year  = date('Y') - $i;
+            $year = date('Y') - $i;
             array_push($years, $year);
         }
 
         return $years;
     }
+
 
     public static function GetTime($param)
     {
