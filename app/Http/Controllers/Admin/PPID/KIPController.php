@@ -58,7 +58,7 @@ class KIPController extends Controller
 
         if ($request->jenis_file === 'upload') {
             $request->validate([
-                'upload_files' => 'required|file|mimes:pdf|max:5120',
+                'upload_files' => 'required|file|mimes:pdf|max:20480',
             ]);
 
             // Upload file ke storage
@@ -121,7 +121,7 @@ class KIPController extends Controller
     {
         if ($request->jenis_file === 'upload') {
             $request->validate([
-                'upload_files' => 'required|file|mimes:pdf|max:5120',
+                'upload_files' => 'required|file|mimes:pdf|max:20480',
             ]);
 
             // Upload file ke storage
