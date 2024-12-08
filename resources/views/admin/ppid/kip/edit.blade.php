@@ -97,7 +97,7 @@
                                         @error('jenis_file')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
-                                        <small class="text-muted">Agar file yang di upload bisa di lihat di situs PPID pusat, maka file ukuran di bawah 5MB bisa diupload ke server</small>
+                                        <small class="text-muted">Agar file yang di upload bisa di lihat di situs PPID pusat, maka file ukuran di bawah 20MB bisa diupload ke server</small>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -109,7 +109,7 @@
                                         @error('files')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
-                                        <small class="text-muted" id="desc_uplaod_file" hidden>Hanya file pdf dan ukuran maksimal 5MB</small>
+                                        <small class="text-muted" id="desc_uplaod_file" hidden>Hanya file pdf dan ukuran maksimal 20MB</small>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
