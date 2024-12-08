@@ -93,10 +93,23 @@
                                                         <i class="bx bx-download"></i> Download
                                                     </a>
                                                 @else
-                                                    <a href="{{ $berkala2['files'] }}" class="btn btn-info btn-sm"
+                                                    <button type="button" data-toggle="modal" data-target="#pdfModal{{ $loop->iteration }}" class="btn btn-info btn-sm"
                                                         target="_blank">
                                                         <i class="bx bx-show"></i> Lihat
-                                                    </a>
+                                                    </button>
+                                                    <div class="modal fade" id="pdfModal{{ $loop->iteration }}" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-xl">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="pdfModalLabel">PDF Viewer</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <iframe src="{{ route('ppid-kip.generate_pdf', $berkala2['id']) }}" width="100%" height="600px" frameborder="0"></iframe>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 @endif
                                             </td>
                                         </tr>

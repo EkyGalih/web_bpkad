@@ -78,6 +78,7 @@ Route::group(['prefix' => 'PPID'], function () {
     Route::group(['prefix' => 'Klasifikasi-Informasi-Publik'], function () {
         Route::get('/', [PpidKipController::class, 'index'])->name('ppid-kip');
         Route::get('info-berkala/{query?}', [PpidKipController::class, 'searchBerkala'])->name('ppid-kip.search_berkala');
+        Route::get('/generate-pdf/{id}', [PPidKipController::class, 'generatePDF'])->name('ppid-kip.generate_pdf');
     });
 
     Route::group(['prefix' => 'Profile-PPID'], function () {

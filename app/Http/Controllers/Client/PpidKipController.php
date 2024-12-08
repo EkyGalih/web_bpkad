@@ -115,4 +115,10 @@ class PpidKipController extends Controller
     {
         //
     }
+
+    public function generatePDF($id)
+    {
+       $files = KIP::select('files')->findOrFail($id);
+       return response()->file(storage_path($files->files));
+    }
 }

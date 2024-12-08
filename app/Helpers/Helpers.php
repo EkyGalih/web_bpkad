@@ -549,6 +549,7 @@ class Helpers
                 if (in_array($val->tahun, $data['tahun'])) {
                     if (!isset($data['data'][$val->tahun]['kip'])) {
                         $data['data'][$val->tahun]['kip'] = [
+                            'id' => $val->id,
                             'nama_informasi' => $val->nama_informasi,
                             'jenis_informasi' => $val->jenis_informasi,
                             'jenis_file' => $val->jenis_file,
@@ -557,6 +558,7 @@ class Helpers
                         ];
                     } else {
                         array_push($data['data'][$val->tahun]['kip'], [
+                            'id' => $val->id,
                             'nama_informasi' => $val->nama_informasi,
                             'jenis_informasi' => $val->jenis_informasi,
                             'jenis_file' => $val->jenis_file,

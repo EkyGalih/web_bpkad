@@ -51,25 +51,35 @@ class KIPController extends Controller
             'nama_informasi' => 'required',
             'jenis_informasi' => 'required',
             'jenis_file' => 'required',
-            'upload_files' => 'required',
             'date' => 'required',
             'time' => 'required',
             'tahun' => 'required'
         ]);
+
+        if ($request->jenis_file === 'upload') {
+            $request->validate([
+                'upload_files' => 'required|file|mimes:pdf,jpg,png,doc,docx|max:2048',
+            ]);
+
+            // Upload file ke storage
+            $filePath = $request->file('upload_files')->store('uploads/files', 'public');
+        } else {
+            // Jika jenis_file adalah "link", simpan link yang diinputkan
+            $filePath = $request->upload_files;
+        }
+
         $id = (string)Uuid::generate(4);
 
-        if ($request->jenis_file == 'link') {
-            KIP::create([
-                'id' => $id,
-                'nama_informasi' => $request->nama_informasi,
-                'jenis_informasi' => $request->jenis_informasi,
-                'jenis_file' => $request->jenis_file,
-                'upload_by' => Auth::user()->id,
-                'files' => $request->upload_files,
-                'tahun' => $request->tahun,
-                'created_at' => $request->date . ' ' . $request->time . ':' . date('s')
-            ]);
-        }
+        KIP::create([
+            'id' => $id,
+            'nama_informasi' => $request->nama_informasi,
+            'jenis_informasi' => $request->jenis_informasi,
+            'jenis_file' => $request->jenis_file,
+            'upload_by' => Auth::user()->id,
+            'files' => $filePath,
+            'tahun' => $request->tahun,
+            'created_at' => $request->date . ' ' . $request->time . ':' . date('s')
+        ]);
 
         Helpers::_recentAdd($id, 'mengupload file pada PPID informasi ' . $request->jenis_informasi, 'kip');
 
@@ -137,12 +147,11 @@ class KIPController extends Controller
     {
         $kip = KIP::findOrFail($id);
 
-        if ($kip->jenis_file == 'link') {
-            // $kip->delete();
-            $kip->update([
-                'deleted_at' => new DateTime()
-            ]);
-        }
+        // $kip->delete();
+        $kip->update([
+            'deleted_at' => new DateTime()
+        ]);
+
         Helpers::_recentAdd($id, 'menghapus file pada PPID informasi ' . $kip->jenis_informasi, 'kip');
 
         return redirect()->back()->with(['success' => 'Data berhasil dihapus!']);
