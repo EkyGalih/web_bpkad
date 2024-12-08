@@ -19,6 +19,9 @@
 
  <!-- Template Main CSS File -->
  <link href="{{ asset('server/css/style.css') }}" rel="stylesheet">
+
+ {{-- Livewire css --}}
+ @livewireStyles
  <style>
      @-webkit-keyframes blinker {
          from {
@@ -40,6 +43,23 @@
          -webkit-animation-iteration-count: infinite;
          -webkit-animation-timing-function: ease-in-out;
          -webkit-animation-direction: alternate;
+     }
+
+     .badge-new {
+         background-color: #ff0000;
+         color: #fff;
+         font-size: 0.50rem;
+         font-weight: bold;
+         padding: 0.2rem 0.5rem;
+         border-radius: 0.5rem;
+         margin-left: 0.5rem;
+         animation: blink 2s infinite;
+     }
+
+     @keyframes blink {
+         50% {
+             opacity: 0;
+         }
      }
  </style>
  @yield('additional-css')

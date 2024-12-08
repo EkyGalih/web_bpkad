@@ -180,7 +180,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Riverskies\Laravel\MobileDetect\MobileDetectServiceProvider::class,
-
+        Spatie\Analytics\AnalyticsServiceProvider::class,
     ],
 
     /*
@@ -241,6 +241,8 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'MobileDetect' => Riverskies\Laravel\MobileDetect\Facades\MobileDetect::class,
         'LokasiAset' => App\Models\LokasiAset::class,
+        'Analytics' => Spatie\Analytics\Facades\Analytics::class,
+
     ],
 
 ];

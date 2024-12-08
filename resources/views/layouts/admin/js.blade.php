@@ -11,6 +11,8 @@
  <script src="{{ asset('client/assets/js/sweet-alert.min.js') }}"></script>
  <!-- Template Main JS File -->
  <script src="{{ asset('server/js/main.js') }}"></script>
+ {{-- Livewire js --}}
+ @livewireScripts
  @yield('additional-js')
  <script>
      $(document).ready(function() {

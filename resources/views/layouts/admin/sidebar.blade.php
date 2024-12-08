@@ -171,6 +171,13 @@
             </ul>
         </li><!-- End F.A.Q Page Nav -->
 
+        {{-- <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('admin.analytics') }}">
+                <i class="bi bi-bar-chart"></i>
+                <span>Analytics</span>
+                <span class="badge-new">NEW</span>
+            </a>
+        </li> --}}
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('users') }}">
                 <i class="bi bi-people-fill"></i>

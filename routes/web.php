@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AnalyticsController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\PPID\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
@@ -87,5 +88,13 @@ Route::group(['prefix' => 'PPID'], function () {
 
     Route::group(['prefix' => 'agenda'], function () {
         Route::get('/{tahun?}', [PpidKipController::class, 'agenda'])->name('ppid.agenda');
+    });
+});
+
+
+// google analytycs
+Route::group(['prefix' => 'admin'], function () {
+    Route::group(['prefix' => 'analytycs'], function () {
+        Route::get('/statistik-pengunjung', [AnalyticsController::class, 'index'])->name('admin.analytics');
     });
 });
