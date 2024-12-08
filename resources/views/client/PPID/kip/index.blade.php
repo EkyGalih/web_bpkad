@@ -95,17 +95,23 @@
                                                 @else
                                                     <button type="button" data-toggle="modal" data-target="#pdfModal{{ $loop->iteration }}" class="btn btn-info btn-sm"
                                                         target="_blank">
-                                                        <i class="bx bx-show"></i> Lihat
+                                                        <i class="bx bx-show"></i> View
                                                     </button>
                                                     <div class="modal fade" id="pdfModal{{ $loop->iteration }}" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-xl">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="pdfModalLabel">PDF Viewer</h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    <h5 class="modal-title" id="pdfModalLabel">{{ $berkala2['nama_informasi'] }}</h5>
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">X</button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <iframe src="{{ route('ppid-kip.generate_pdf', $berkala2['id']) }}" width="100%" height="600px" frameborder="0"></iframe>
+                                                                    <iframe src="{{ route('ppid-kip.view_pdf', $berkala2['id']) }}" width="100%" height="600px" frameborder="0"></iframe>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <a href="{{ route('ppid-kip.download_pdf', $berkala2['id']) }}" class="btn btn-success btn-sm">
+                                                                        <i class="bx bx-download"></i> Download
+                                                                    </a>
+                                                                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
                                                                 </div>
                                                             </div>
                                                         </div>

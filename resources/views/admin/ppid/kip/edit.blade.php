@@ -97,6 +97,7 @@
                                         @error('jenis_file')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
+                                        <small class="text-muted">Agar file yang di upload bisa di lihat di situs PPID pusat, maka file ukuran di bawah 5MB bisa diupload ke server</small>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -108,6 +109,7 @@
                                         @error('files')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
+                                        <small class="text-muted" id="desc_uplaod_file" hidden>Hanya file pdf dan ukuran maksimal 5MB</small>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -155,8 +157,10 @@
 
             if (jenis_file == 'upload') {
                 $('#upload_file').prop('type', 'file');
+                $('#desc_uplaod_file').attr('hidden', false);
             } else {
                 $('#upload_file').prop('type', 'text');
+                $('#desc_uplaod_file').attr('hidden', true);
             }
         })
     </script>

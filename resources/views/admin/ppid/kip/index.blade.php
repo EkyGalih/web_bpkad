@@ -87,8 +87,18 @@
                                                     class="badge bg-{{ $item->jenis_file == 'link' ? 'secondary' : 'info' }}"><i
                                                         class="bi bi-{{ $item->jenis_file == 'link' ? 'link' : 'upload' }}"></i>
                                                     {{ ucfirst($item->jenis_file) }}</span></td>
-                                            <td><a href="#" class="btn btn-success btn-sm"><i
-                                                        class="bi bi-download"></i> Download</a></td>
+                                            <td>
+                                                @if ($item->jenis_file == 'link')
+                                                    <a href="{{ $item->files }}" target="_blank"
+                                                        class="btn btn-success btn-sm"><i class="bi bi-download"></i>
+                                                        Goto</a>
+                                                @else
+                                                    <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal"
+                                                        data-bs-target="#ShowFile{{ $loop->iteration }}"><i
+                                                            class="bi bi-eye"></i> View</button>
+                                                    @include('admin.ppid.kip.addons.show_pdf')
+                                                @endif
+                                            </td>
                                             <td>{{ Helpers::GetUser($item->upload_by) }}</td>
                                             <td>{{ $item->created_at == null ? 'None' : Helpers::GetDate($item->created_at) }}
                                             </td>
@@ -99,7 +109,8 @@
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
                                                 <button class="btn btn-warning btn-md" data-bs-toggle="modal"
-                                                    data-bs-tooltip="tooltip" data-bs-placement="top" title="Hapus Berkas"
+                                                    data-bs-tooltip="tooltip" data-bs-placement="top"
+                                                    title="Hapus Berkas"
                                                     data-bs-target="#DeletePost{{ $loop->iteration }}">
                                                     <i class="bi bi-recycle"></i>
                                                 </button>

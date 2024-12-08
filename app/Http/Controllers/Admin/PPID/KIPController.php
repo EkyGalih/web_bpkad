@@ -58,7 +58,7 @@ class KIPController extends Controller
 
         if ($request->jenis_file === 'upload') {
             $request->validate([
-                'upload_files' => 'required|file|mimes:pdf,jpg,png,doc,docx|max:2048',
+                'upload_files' => 'required|file|mimes:pdf|max:5120',
             ]);
 
             // Upload file ke storage
@@ -119,18 +119,28 @@ class KIPController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if ($request->jenis_file === 'upload') {
+            $request->validate([
+                'upload_files' => 'required|file|mimes:pdf|max:5120',
+            ]);
+
+            // Upload file ke storage
+            $filePath = $request->file('upload_files')->store('uploads/files', 'public');
+        } else {
+            // Jika jenis_file adalah "link", simpan link yang diinputkan
+            $filePath = $request->upload_files;
+        }
+
         $kip = KIP::findOrFail($id);
 
-        if ($kip->jenis_file == 'link') {
-            $kip->update([
-                'nama_informasi' => $request->nama_informasi,
-                'jenis_informasi' => $request->jenis_informasi,
-                'jenis_file' => $request->jenis_file,
-                'files' => $request->upload_files,
-                'tahun' => $request->tahun,
-                'created_at' => $request->date . ' ' . $request->time
-            ]);
-        }
+        $kip->update([
+            'nama_informasi' => $request->nama_informasi,
+            'jenis_informasi' => $request->jenis_informasi,
+            'jenis_file' => $request->jenis_file,
+            'files' => $filePath,
+            'tahun' => $request->tahun,
+            'created_at' => $request->date . ' ' . $request->time
+        ]);
 
         Helpers::_recentAdd($id, 'mengubah file pada PPID informasi ' . $request->jenis_informasi . ' menjadi', 'kip');
 

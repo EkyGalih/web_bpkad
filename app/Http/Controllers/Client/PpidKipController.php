@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\KIP;
 use App\Models\Posts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PpidKipController extends Controller
 {
@@ -116,9 +117,15 @@ class PpidKipController extends Controller
         //
     }
 
-    public function generatePDF($id)
+    public function viewPDF($id)
     {
-       $files = KIP::select('files')->findOrFail($id);
-       return response()->file(storage_path($files->files));
+        $files = KIP::select('files')->findOrFail($id);
+        return response()->file(public_path('storage/' . $files->files));
+    }
+
+    public function downloadPDF($id)
+    {
+        $files = KIP::select('files')->findOrFail($id);
+        return response()->download(public_path('storage/' . $files->files));
     }
 }
