@@ -216,6 +216,14 @@
     height: 135px;
   }
 
+  .card.hovercard .cardheader-simpeg {
+    background: url("{{ asset('client/assets/img/simpeg.jpg') }}");
+    background-size: cover;
+    filter: blur(1px);
+    -webkit-filter: blur(1px);
+    height: 135px;
+  }
+
   .card.hovercard .avatar {
     position: relative;
     top: -50px;

@@ -10,6 +10,7 @@ class Pegawai extends Model
 {
     use HasFactory;
 
+    protected $connection = 'simpeg';
     public $incrementing = false;
     protected $table = 'pegawai';
     protected $guarded = ['createdAt', 'updatedAt'];
@@ -36,5 +37,15 @@ class Pegawai extends Model
     public function bidang()
     {
         return $this->belongsTo(Bidang::class, 'bidang_id');
+    }
+
+    public function pangkat()
+    {
+        return $this->belongsTo(Pangkat::class, 'pangkat_id');
+    }
+
+    public function golongan()
+    {
+        return $this->belongsTo(Golongan::class, 'golongan_id');
     }
 }

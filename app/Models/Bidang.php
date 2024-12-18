@@ -9,6 +9,7 @@ class Bidang extends Model
 {
     use HasFactory;
 
+    protected $connection = 'simpeg';
     public $incrementing = false;
     protected $table = 'bidang';
     protected $guarded = ['createdAt', 'updatedAt'];

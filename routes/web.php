@@ -12,6 +12,7 @@ use App\Http\Controllers\Client\PegawaiController;
 use App\Http\Controllers\Client\PostsController;
 use App\Http\Controllers\Client\PpidKipController;
 use App\Http\Controllers\Operator\OperatorController;
+use App\Http\Controllers\Simpeg\Admin\AdminSimpegController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('dashboard');
@@ -31,6 +32,10 @@ Route::group(['prefix' => 'bpkad', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::group(['prefix' => 'web'], function () {
         Route::get('/', [AdminController::class, 'index'])->name('admin');
+    });
+
+    Route::group(['prefix' => 'simpeg'], function () {
+        Route::get('/', [AdminSimpegController::class, 'index'])->name('admin.simpeg');
     });
 });
 
