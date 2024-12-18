@@ -14,23 +14,27 @@ Route::group(['prefix' => 'pengguna', 'middleware' => ['auth', 'admin']], functi
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
-    Route::group(['prefix' => 'Users'], function () {
-        Route::get('/', [UsersController::class, 'index'])->name('users');
-        Route::get('create', [UsersController::class, 'create'])->name('users.create');
-        Route::post('store', [UsersController::class, 'store'])->name('users.store');
-        Route::get('edit/{id}', [UsersController::class, 'edit'])->name('users.edit');
-        Route::get('show/{id}', [UsersController::class, 'show'])->name('users.show');
-        Route::put('update/{id}', [UsersController::class, 'update'])->name('users.update');
-        Route::put('password/{id}', [UsersController::class, 'password'])->name('users.password');
-        Route::put('activated/{id}', [UsersController::class, 'activated'])->name('users.activated');
-        Route::get('destroy/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
+    Route::group(['prefix' => 'web'], function () {
+        Route::group(['prefix' => 'Users'], function () {
+            Route::get('/', [UsersController::class, 'index'])->name('users');
+            Route::get('create', [UsersController::class, 'create'])->name('users.create');
+            Route::post('store', [UsersController::class, 'store'])->name('users.store');
+            Route::get('edit/{id}', [UsersController::class, 'edit'])->name('users.edit');
+            Route::get('show/{id}', [UsersController::class, 'show'])->name('users.show');
+            Route::put('update/{id}', [UsersController::class, 'update'])->name('users.update');
+            Route::put('password/{id}', [UsersController::class, 'password'])->name('users.password');
+            Route::put('activated/{id}', [UsersController::class, 'activated'])->name('users.activated');
+            Route::get('destroy/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
+        });
     });
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
-    Route::group(['prefix' => 'profile'], function () {
-        Route::get('/{id}', [ProfileController::class, 'index'])->name('profile');
-        Route::put('update/{id}', [ProfileController::class, 'update'])->name('profile.update');
-        Route::put('password/{id}', [ProfileController::class, 'password'])->name('profile.password');
+    Route::group(['prefix' => 'web'], function () {
+        Route::group(['prefix' => 'profile'], function () {
+            Route::get('/{id}', [ProfileController::class, 'index'])->name('profile');
+            Route::put('update/{id}', [ProfileController::class, 'update'])->name('profile.update');
+            Route::put('password/{id}', [ProfileController::class, 'password'])->name('profile.password');
+        });
     });
 });

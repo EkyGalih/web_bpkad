@@ -29,7 +29,9 @@ Route::group(['prefix' => 'bpkad', 'middleware' => 'auth'], function () {
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
-    Route::get('/', [AdminController::class, 'index'])->name('admin');
+    Route::group(['prefix' => 'web'], function () {
+        Route::get('/', [AdminController::class, 'index'])->name('admin');
+    });
 });
 
 Route::group(['prefix' => 'operator', 'middleware' => ['auth', 'operator']], function () {
