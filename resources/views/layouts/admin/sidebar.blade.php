@@ -47,11 +47,11 @@
                         <i class="bi bi-circle"></i><span>Data Aset</span>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="{{ route('admin-pegawai.index') }}" class="@yield('db-pegawai')">
                         <i class="bi bi-circle"></i><span>Data Pegawai</span>
                     </a>
-                </li>
+                </li> --}}
                 <li>
                     <a href="#">
                         <i class="bi bi-circle"></i><span>Data Transparansi</span>

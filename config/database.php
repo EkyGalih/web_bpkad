@@ -65,11 +65,11 @@ return [
 
         'simpeg' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
+            'host' => env('DB_HOST_SIMPEG', '127.0.0.1'),
+            'port' => env('DB_PORT_SIMPEG', '3306'),
             'database' => env('DB_DATABASE_SIMPEG', 'pegawai_bpkad'),
-            'username' => env('DB_USERNAME', 'suru'),
-            'password' => env('DB_PASSWORD', 'suru'),
+            'username' => env('DB_USERNAME_SIMPEG', 'suru'),
+            'password' => env('DB_PASSWORD_SIMPEG', 'suru'),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',

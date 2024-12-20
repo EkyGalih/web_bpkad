@@ -11,16 +11,20 @@ class Pegawai extends Model
     use HasFactory;
 
     protected $connection = 'simpeg';
-    public $incrementing = false;
+    protected $primaryKey = 'id';
+    protected $keyType = 'string';
     protected $table = 'pegawai';
+    public $incrementing = false;
     protected $guarded = ['createdAt', 'updatedAt'];
 
-    public static function boot()
+    protected static function boot()
     {
         parent::boot();
 
         static::creating(function ($model) {
-            $model->id = (string)Uuid::generate(4);
+            if (empty($model->id)) {
+                $model->id = (string) Uuid::generate(4);
+            }
         });
     }
 

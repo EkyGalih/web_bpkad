@@ -12,7 +12,6 @@
 		<meta property="og:url" content="https://bpkad.ntbprov.go.id" />
 		<meta property="og:site_name" content="SimPeg BPKAD" />
         @include('layouts.admin.simpeg.css')
-		@yield('scripts')
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
@@ -34,7 +33,7 @@
 						@include('layouts.admin.simpeg.sidebar-primary')
 						<!--end::Sidebar primary-->
 						<!--begin::Sidebar secondary-->
-						@include('layouts.admin.simpeg.sidebar-secondary')
+						{{-- @include('layouts.admin.simpeg.sidebar-secondary') --}}
 						<!--end::Sidebar secondary-->
 					</div>
 					<!--end::Sidebar-->
@@ -42,48 +41,6 @@
 					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
 						<!--begin::Content wrapper-->
 						<div class="d-flex flex-column flex-column-fluid">
-							<!--begin::Toolbar-->
-							<div id="kt_app_toolbar" class="app-toolbar mb-5 mb-lg-0">
-								<!--begin::Toolbar container-->
-								<div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack flex-wrap">
-									<!--begin::Navs-->
-									<ul class="nav nav-stretch nav-line-tabs flex-grow-1 fs-5 fw-semibold mb-10">
-										<!--begin::Nav item-->
-										<li class="nav-item">
-											<a class="nav-link text-active-primary ms-0 me-5 me-lg-8 pt-2 pb-3 pt-lg-4 pb-lg-5 active" href="index.html">Overview</a>
-										</li>
-										<!--end::Nav item-->
-										<!--begin::Nav item-->
-										<li class="nav-item">
-											<a class="nav-link text-active-primary ms-0 me-5 me-lg-8 pt-2 pb-3 pt-lg-4 pb-lg-5" href="pages/user-profile/overview.html">Projects</a>
-										</li>
-										<!--end::Nav item-->
-										<!--begin::Nav item-->
-										<li class="nav-item">
-											<a class="nav-link text-active-primary ms-0 me-5 me-lg-8 pt-2 pb-3 pt-lg-4 pb-lg-5" href="pages/user-profile/campaigns.html">Campaigns</a>
-										</li>
-										<!--end::Nav item-->
-										<!--begin::Nav item-->
-										<li class="nav-item">
-											<a class="nav-link text-active-primary ms-0 me-5 me-lg-8 pt-2 pb-3 pt-lg-4 pb-lg-5" href="pages/user-profile/documents.html">Documents</a>
-										</li>
-										<!--end::Nav item-->
-										<!--begin::Nav item-->
-										<li class="nav-item">
-											<a class="nav-link text-active-primary ms-0 me-5 me-lg-8 pt-2 pb-3 pt-lg-4 pb-lg-5" href="pages/user-profile/followers.html">Followers</a>
-										</li>
-										<!--end::Nav item-->
-										<!--begin::Nav item-->
-										<li class="nav-item">
-											<a class="nav-link text-active-primary ms-0 me-5 me-lg-8 pt-2 pb-3 pt-lg-4 pb-lg-5" href="pages/user-profile/activity.html">Activity</a>
-										</li>
-										<!--end::Nav item-->
-									</ul>
-									<!--begin::Navs-->
-								</div>
-								<!--end::Toolbar container-->
-							</div>
-							<!--end::Toolbar-->
 							<!--begin::Content-->
 							<div id="kt_app_content" class="app-content flex-column-fluid">
 								<!--begin::Content container-->

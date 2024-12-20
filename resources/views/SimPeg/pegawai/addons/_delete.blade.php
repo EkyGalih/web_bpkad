@@ -6,13 +6,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Apakah anda yakin menghapus {{ $pegawai->name }}</p>
+                <p>Apakah anda yakin menghapus {{ $item->name }}</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i
                         class="bi bi-x-circle"></i>
                     Tidak</button>
-                <a href="{{ route('admin-pegawai.destroy', $pegawai->id) }}" class="btn btn-outline-success">
+                <a href="{{ route('pegawai.destroy', $item->id) }}" class="btn btn-outline-success">
                     <i class="bx bx-check"></i> Ya
                 </a>
             </div>

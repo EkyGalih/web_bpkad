@@ -48,7 +48,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapToolsAdmin();
         $this->mapPpidKipAdmin();
         $this->mapSliderAdmin();
-        $this->mapPegawaiAdmin();
         $this->mapBannerAdmin();
 
         // ROUTE OPERATOR
@@ -66,6 +65,10 @@ class RouteServiceProvider extends ServiceProvider
 
         // ROUTE INVENTARIS
         $this->mapInventarisRoutes();
+
+        // ROUTE SIMPEG
+        $this->mapBidangRoutes();
+        $this->mapPegawaiAdmin();
     }
 
     public function mapPostAdmin()
@@ -180,13 +183,6 @@ class RouteServiceProvider extends ServiceProvider
             ->group(base_path('routes/operator/slider.php'));
     }
 
-    public function mapPegawaiAdmin()
-    {
-        Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/admin/pegawai.php'));
-    }
-
     public function mapBannerAdmin()
     {
         Route::middleware('web')
@@ -220,6 +216,20 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/admin/inventaris.php'));
+    }
+
+    public function mapBidangRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/simpeg/bidang.php'));
+    }
+
+    public function mapPegawaiAdmin()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/simpeg/pegawai.php'));
     }
 
     public function mapApiRoutes()
