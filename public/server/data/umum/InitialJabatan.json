@@ -22,5 +22,9 @@
     {
         "id" : 6,
         "initial_jabatan" : "Kepala UPT"
+    },
+    {
+        "id" : 6,
+        "initial_jabatan" : "Fungsional"
     }
 ]

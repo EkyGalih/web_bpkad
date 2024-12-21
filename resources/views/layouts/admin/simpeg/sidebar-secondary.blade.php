@@ -115,56 +115,56 @@
                     <div class="tab-pane fade show active" id="kt_projects_active" role="tabpanel">
                         <div class="d-flex flex-column flex-grow-1 gap-1">
                             <a href="#" class="d-flex align-items-center p-3 gap-2 border border-transparent bg-hover-light-primary border-hover-primary-clarity rounded">
-                                <img src="assets/media//stock/600x600/img-29.jpg" class="h-40px rounded" />
+                                <img src="{{ asset('assets/media//stock/600x600/img-29.jpg') }}" class="h-40px rounded" />
                                 <div class="d-flex flex-column">
                                     <div class="text-gray-900 fs-6 fw-semibold">Operation Apex</div>
                                     <div class="text-gray-600 fs-7">Due: 02 Jan, 2024</div>
                                 </div>
                             </a>
                             <a href="#" class="d-flex align-items-center p-3 gap-2 border border-transparent bg-hover-light-primary border-hover-primary-clarity rounded">
-                                <img src="assets/media//stock/600x600/img-87.jpg" class="h-40px rounded" />
+                                <img src="{{ asset('assets/media//stock/600x600/img-87.jpg') }}" class="h-40px rounded" />
                                 <div class="d-flex flex-column">
                                     <div class="text-gray-900 fs-6 fw-semibold">Project Nebula</div>
                                     <div class="text-gray-600 fs-7">Due: 19 Feb, 2024</div>
                                 </div>
                             </a>
                             <a href="#" class="d-flex align-items-center p-3 gap-2 border border-transparent bg-hover-light-primary border-hover-primary-clarity rounded">
-                                <img src="assets/media//stock/600x600/img-26.jpg" class="h-40px rounded" />
+                                <img src="{{ asset('assets/media//stock/600x600/img-26.jpg') }}" class="h-40px rounded" />
                                 <div class="d-flex flex-column">
                                     <div class="text-gray-900 fs-6 fw-semibold">Task Infinity</div>
                                     <div class="text-gray-600 fs-7">Due: 16 Mar, 2024</div>
                                 </div>
                             </a>
                             <a href="#" class="d-flex align-items-center p-3 gap-2 border border-transparent bg-hover-light-primary border-hover-primary-clarity rounded">
-                                <img src="assets/media//stock/600x600/img-32.jpg" class="h-40px rounded" />
+                                <img src="{{ asset('assets/media//stock/600x600/img-32.jpg') }}" class="h-40px rounded" />
                                 <div class="d-flex flex-column">
                                     <div class="text-gray-900 fs-6 fw-semibold">Quantum</div>
                                     <div class="text-gray-600 fs-7">Due: 28 May, 2024</div>
                                 </div>
                             </a>
                             <a href="#" class="d-flex align-items-center p-3 gap-2 border border-transparent bg-hover-light-primary border-hover-primary-clarity rounded">
-                                <img src="assets/media//stock/600x600/img-16.jpg" class="h-40px rounded" />
+                                <img src="{{ asset('assets/media//stock/600x600/img-16.jpg') }}" class="h-40px rounded" />
                                 <div class="d-flex flex-column">
                                     <div class="text-gray-900 fs-6 fw-semibold">Phoenix</div>
                                     <div class="text-gray-600 fs-7">Due: 30 May, 2024</div>
                                 </div>
                             </a>
                             <a href="#" class="d-flex align-items-center p-3 gap-2 border border-transparent bg-hover-light-primary border-hover-primary-clarity rounded">
-                                <img src="assets/media//stock/600x600/img-3.jpg" class="h-40px rounded" />
+                                <img src="{{ asset('assets/media//stock/600x600/img-3.jpg') }}" class="h-40px rounded" />
                                 <div class="d-flex flex-column">
                                     <div class="text-gray-900 fs-6 fw-semibold">Task Infinity</div>
                                     <div class="text-gray-600 fs-7">Due: 10 June, 2024</div>
                                 </div>
                             </a>
                             <a href="#" class="d-flex align-items-center p-3 gap-2 border border-transparent bg-hover-light-primary border-hover-primary-clarity rounded">
-                                <img src="assets/media//stock/600x600/img-36.jpg" class="h-40px rounded" />
+                                <img src="{{ asset('assets/media//stock/600x600/img-36.jpg') }}" class="h-40px rounded" />
                                 <div class="d-flex flex-column">
                                     <div class="text-gray-900 fs-6 fw-semibold">Unity Harbor</div>
                                     <div class="text-gray-600 fs-7">Due: 10 Aug, 2024</div>
                                 </div>
                             </a>
                             <a href="#" class="d-flex align-items-center p-3 gap-2 border border-transparent bg-hover-light-primary border-hover-primary-clarity rounded">
-                                <img src="assets/media//stock/600x600/img-35.jpg" class="h-40px rounded" />
+                                <img src="{{ asset('assets/media//stock/600x600/img-35.jpg') }}" class="h-40px rounded" />
                                 <div class="d-flex flex-column">
                                     <div class="text-gray-900 fs-6 fw-semibold">Nexus</div>
                                     <div class="text-gray-600 fs-7">Due: 25 Sep, 2024</div>
@@ -175,42 +175,42 @@
                     <div class="tab-pane fade" id="kt_projects_completed" role="tabpanel">
                         <div class="d-flex flex-column flex-grow-1 gap-1">
                             <a href="#" class="d-flex align-items-center p-3 gap-2 border border-transparent bg-hover-light-primary border-hover-primary-clarity rounded">
-                                <img src="assets/media//stock/600x600/img-10.jpg" class="h-40px rounded" />
+                                <img src="{{ asset('assets/media//stock/600x600/img-10.jpg') }}" class="h-40px rounded" />
                                 <div class="d-flex flex-column">
                                     <div class="text-gray-900 fs-6 fw-semibold">Stock App</div>
                                     <div class="text-gray-600 fs-7">Due: 02 Jan, 2024</div>
                                 </div>
                             </a>
                             <a href="#" class="d-flex align-items-center p-3 gap-2 border border-transparent bg-hover-light-primary border-hover-primary-clarity rounded">
-                                <img src="assets/media//stock/600x600/img-87.jpg" class="h-40px rounded" />
+                                <img src="{{ asset('assets/media//stock/600x600/img-87.jpg') }}" class="h-40px rounded" />
                                 <div class="d-flex flex-column">
                                     <div class="text-gray-900 fs-6 fw-semibold">Project Nebula</div>
                                     <div class="text-gray-600 fs-7">Due: 19 Feb, 2024</div>
                                 </div>
                             </a>
                             <a href="#" class="d-flex align-items-center p-3 gap-2 border border-transparent bg-hover-light-primary border-hover-primary-clarity rounded">
-                                <img src="assets/media//stock/600x600/img-26.jpg" class="h-40px rounded" />
+                                <img src="{{ asset('assets/media//stock/600x600/img-26.jpg') }}" class="h-40px rounded" />
                                 <div class="d-flex flex-column">
                                     <div class="text-gray-900 fs-6 fw-semibold">Task Infinity</div>
                                     <div class="text-gray-600 fs-7">Due: 16 Mar, 2024</div>
                                 </div>
                             </a>
                             <a href="#" class="d-flex align-items-center p-3 gap-2 border border-transparent bg-hover-light-primary border-hover-primary-clarity rounded">
-                                <img src="assets/media//stock/600x600/img-32.jpg" class="h-40px rounded" />
+                                <img src="{{ asset('assets/media//stock/600x600/img-32.jpg') }}" class="h-40px rounded" />
                                 <div class="d-flex flex-column">
                                     <div class="text-gray-900 fs-6 fw-semibold">Quantum</div>
                                     <div class="text-gray-600 fs-7">Due: 28 May, 2024</div>
                                 </div>
                             </a>
                             <a href="#" class="d-flex align-items-center p-3 gap-2 border border-transparent bg-hover-light-primary border-hover-primary-clarity rounded">
-                                <img src="assets/media//stock/600x600/img-16.jpg" class="h-40px rounded" />
+                                <img src="{{ asset('assets/media//stock/600x600/img-16.jpg') }}" class="h-40px rounded" />
                                 <div class="d-flex flex-column">
                                     <div class="text-gray-900 fs-6 fw-semibold">Phoenix</div>
                                     <div class="text-gray-600 fs-7">Due: 30 May, 2024</div>
                                 </div>
                             </a>
                             <a href="#" class="d-flex align-items-center p-3 gap-2 border border-transparent bg-hover-light-primary border-hover-primary-clarity rounded">
-                                <img src="assets/media//stock/600x600/img-38.jpg" class="h-40px rounded" />
+                                <img src="{{ asset('assets/media//stock/600x600/img-38.jpg') }}" class="h-40px rounded" />
                                 <div class="d-flex flex-column">
                                     <div class="text-gray-900 fs-6 fw-semibold">UI/UX Rewamp</div>
                                     <div class="text-gray-600 fs-7">Due: 25 Sep, 2024</div>

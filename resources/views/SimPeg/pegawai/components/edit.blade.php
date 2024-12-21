@@ -246,7 +246,7 @@
                                     title="Tahun Kenaikan pangkat hanya perkiraan berdasarkan tahun pengangkatan, tahun promosi bisa berubah tergantung jabatan yang diduduki"><i
                                         class="bi bi-info-circle"></i></sup></label>
                             <div class="col-sm-9">
-                                <input type="text" name="kenaikan_pangkat" class="form-control"
+                                <input type="date" name="kenaikan_pangkat" class="form-control"
                                     value="{{ $pegawai->kenaikan_pangkat }}">
                             </div>
                         </div>
@@ -285,9 +285,6 @@
                                     <button class="btn btn-warning btn-md" type="reset">
                                         <i class="bi bi-arrow-clockwise"></i> Reset
                                     </button>
-                                    <a href="{{ route('pegawai.index') }}" class="btn btn-secondary btn-md">
-                                        <i class="bi bi-skip-backward"></i> Kembali
-                                    </a>
                                 </div>
                             </div>
                         </div>

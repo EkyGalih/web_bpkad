@@ -21,6 +21,74 @@
             /* Prevents watermark from being clicked */
             z-index: 1;
         }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #search {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .dropdown {
+            position: relative;
+            width: 100%;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #f1f1f1;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .dropdown-item img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10%;
+            margin-right: 15px;
+        }
+
+        .dropdown-item .details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dropdown-item .details .name {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .dropdown-item .details .nip {
+            font-size: 14px;
+            color: #888;
+        }
     </style>
 @endsection
 @section('header')
@@ -38,6 +106,11 @@
     </div>
 @endsection
 @section('content')
+    <div class="dropdown">
+        <input type="text" id="search" placeholder="Cari pegawai..." autocomplete="off">
+        <ul class="dropdown-menu" id="results"></ul>
+    </div>
+    <hr class="my-5" />
     @foreach ($pegawai as $item)
         <div class="card mb-6">
             <div class="card-body pt-9 pb-0">
@@ -77,8 +150,9 @@
                                         </i>{{ strtoupper($item->jenis_kelamin) ?? '-' }}</a>
                                     <a href="#"
                                         class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
-                                        <i class="ki-outline ki-barcode fs-4 me-1"></i>{{ $item->nip ?? '-' }}</a>
-                                    <a href="#"
+                                        <i
+                                            class="ki-outline ki-barcode fs-4 me-1"></i>{{ Helpers::NIP($item->nip) ?? '-' }}</a>
+                                    <a href="{{ route('bidang.getPegawai', $item->bidang->id) }}"
                                         class="d-flex align-items-center text-gray-500 text-hover-primary mb-2">
                                         <i class="ki-duotone ki-office-bag fs-4 me-1">
                                             <span class="path1"></span>
@@ -190,16 +264,21 @@
                             </div>
                             <!--end::Wrapper-->
                             <!--begin::Progress-->
-                            <div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3">
-                                <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                                    <span class="fw-semibold fs-6 text-gray-500">Kenaikan Pangkat</span>
-                                    <span class="fw-bold fs-6">50%</span>
+                            @if ($item->kenaikan_pangkat != null)
+                                <div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3">
+                                    <div class="d-flex justify-content-between w-100 mt-auto mb-2">
+                                        <span class="fw-semibold fs-6 text-gray-500">Kenaikan Pangkat</span>
+                                        <span
+                                            class="fw-bold fs-6">{{ Helpers::progressBarPangkat($item->kenaikan_pangkat) }}%</span>
+                                    </div>
+                                    <div class="h-5px mx-3 w-100 bg-light mb-3">
+                                        <div class="bg-success rounded h-5px" role="progressbar"
+                                            style="width: {{ Helpers::progressBarPangkat($item->kenaikan_pangkat) }}%;"
+                                            aria-valuenow="{{ Helpers::progressBarPangkat($item->kenaikan_pangkat) }}"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
                                 </div>
-                                <div class="h-5px mx-3 w-100 bg-light mb-3">
-                                    <div class="bg-success rounded h-5px" role="progressbar" style="width: 50%;"
-                                        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
+                            @endif
                             <!--end::Progress-->
                         </div>
                         <!--end::Stats-->
@@ -211,5 +290,59 @@
         </div>
         @include('SimPeg.pegawai.addons._delete')
     @endforeach
-    {{ $pegawai->links() }}
+    {{-- {{ $pegawai->links() }} --}}
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#search').on('input', function() {
+                let query = $(this).val();
+
+                if (query.length > 2) {
+                    $.ajax({
+                        url: '{{ route('pegawai.search') }}',
+                        type: 'GET',
+                        data: {
+                            query: query
+                        },
+                        success: function(data) {
+                            console.log(data);
+
+                            $('#results').empty().show();
+                            if (data.length > 0) {
+                                data.forEach(item => {
+                                    $('#results').append(`
+                                        <li class="dropdown-item" data-url="{{ route('pegawai.show', '') }}/${item.id}">
+                                            <img src="{{ Storage::url('${item.foto}') }}" alt="${item.name}">
+                                            <div class="details">
+                                                <span class="name">${item.name}</span>
+                                                <span class="nip">NIP: ${item.nip}</span>
+                                            </div>
+                                        </li>
+                                    `);
+                                });
+
+                                $('.dropdown-item').on('click', function() {
+                                    let url = $(this).data('url');
+                                    window.location.href = url;
+                                    $('#results').hide();
+                                });
+                            } else {
+                                $('#results').append(
+                                    '<li class="dropdown-item">No results found</li>');
+                            }
+                        }
+                    });
+                } else {
+                    $('#results').hide();
+                }
+            });
+
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('#search, .dropdown-menu').length) {
+                    $('#results').hide();
+                }
+            });
+        });
+    </script>
 @endsection

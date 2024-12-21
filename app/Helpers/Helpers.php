@@ -27,9 +27,12 @@ use App\Models\SubPages;
 use App\Models\User;
 use App\Models\LokasiAset;
 use App\Models\PostsCategory;
+use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use PhpParser\Node\Stmt\Static_;
+use stdClass;
 
 class Helpers
 {
@@ -444,6 +447,71 @@ class Helpers
             'activity' => $param2,
             'jenis' => $param3
         ]);
+    }
+
+    // data pns
+    public static function NIP($param)
+    {
+        if (strlen($param) != 18) {
+            return '0';
+        }
+
+        // Memecah NIP berdasarkan komponen
+        $tanggalLahir = substr($param, 0, 8);
+        $pengangkatan = substr($param, 8, 6);
+        $jenisKelamin = substr($param, 14, 1);
+        $nomorUrut = substr($param, 15, 3);
+
+        $nip = $tanggalLahir . ' ' . $pengangkatan . ' ' . $jenisKelamin . ' ' . $nomorUrut;
+        return $nip;
+    }
+
+    public static function hitungMasaKerja($param)
+    {
+        $tanggalSk = Carbon::parse($param);
+        $sekarang = Carbon::now();
+
+        $tahun = $sekarang->diffInYears($tanggalSk);
+        $bulan = $sekarang->diffInMonths($tanggalSk) % 12;
+        $hari = $sekarang->diffInDays($tanggalSk->addYears($tahun)->addMonths($bulan));
+
+        $mkg = $tahun . ' Tahun ' . $bulan . ' Bulan ' . $hari . ' Hari';
+        return $mkg;
+    }
+
+    public static function progressBarPangkat($param)
+    {
+        $tanggalKenaikan = Carbon::create($param);
+
+        $tanggalSekarang = Carbon::now();
+
+        $totalHari = $tanggalSekarang->diffInDays($tanggalKenaikan);
+
+        $totalHariDalamTahun = $tanggalSekarang->isLeapYear() ? 366 : 365;
+
+        $persentase = round(($totalHari / $totalHariDalamTahun) * 100);
+        if ($persentase > 100) {
+            $persentase = 100;
+        }
+        return $persentase;
+    }
+
+    public static function USIA($param)
+    {
+        $tanggalLahir = \Carbon\Carbon::createFromFormat('Y-m-d', $param);
+
+        $sekarang = \Carbon\Carbon::now();
+
+        $umurTahun = $tanggalLahir->diffInYears($sekarang);
+
+        $tanggalUlangTahunTerakhir = $tanggalLahir->addYears($umurTahun);
+        $hariBerlalu = $tanggalUlangTahunTerakhir->diffInDays($sekarang);
+
+        $result = new stdClass();
+        $result->umur = $umurTahun;
+        $result->hari = $hariBerlalu;
+
+        return $result;
     }
 
     public static function _recentShow($jenis, $uuid)

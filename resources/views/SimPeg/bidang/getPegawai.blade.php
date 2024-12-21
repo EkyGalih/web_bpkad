@@ -64,7 +64,7 @@
                             <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
                                 <div class="d-flex flex-column">
                                     <div class="d-flex align-items-center mb-2">
-                                        <a href="#"
+                                        <a href="{{ route('pegawai.show', $item->id) }}"
                                             class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{ $item->name }}</a>
                                         <a href="#">
                                             @if ($item->jenis_pegawai == 'asn')
@@ -83,10 +83,10 @@
                                                 <span class="path3"></span>
                                                 <span class="path4"></span>
                                             </i>{{ strtoupper($item->jenis_kelamin) ?? '-' }}</a>
-                                        <a href="#"
+                                        <a href="{{ route('pegawai.show', $item->id) }}"
                                             class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
                                             <i class="ki-outline ki-barcode fs-4 me-1"></i>{{ $item->nip ?? '-' }}</a>
-                                        <a href="#"
+                                        <a href="{{ route('bidang.getPegawai', $item->bidang->id) }}"
                                             class="d-flex align-items-center text-gray-500 text-hover-primary mb-2">
                                             <i class="ki-duotone ki-office-bag fs-4 me-1">
                                                 <span class="path1"></span>
@@ -178,16 +178,21 @@
                                 </div>
                                 <!--end::Wrapper-->
                                 <!--begin::Progress-->
-                                <div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3">
-                                    <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                                        <span class="fw-semibold fs-6 text-gray-500">Kenaikan Pangkat</span>
-                                        <span class="fw-bold fs-6">50%</span>
+                                @if ($item->kenaikan_pangkat != null)
+                                    <div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3">
+                                        <div class="d-flex justify-content-between w-100 mt-auto mb-2">
+                                            <span class="fw-semibold fs-6 text-gray-500">Kenaikan Pangkat</span>
+                                            <span
+                                                class="fw-bold fs-6">{{ Helpers::progressBarPangkat($item->kenaikan_pangkat) }}%</span>
+                                        </div>
+                                        <div class="h-5px mx-3 w-100 bg-light mb-3">
+                                            <div class="bg-success rounded h-5px" role="progressbar"
+                                                style="width: {{ Helpers::progressBarPangkat($item->kenaikan_pangkat) }}%;"
+                                                aria-valuenow="{{ Helpers::progressBarPangkat($item->kenaikan_pangkat) }}"
+                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
                                     </div>
-                                    <div class="h-5px mx-3 w-100 bg-light mb-3">
-                                        <div class="bg-success rounded h-5px" role="progressbar" style="width: 50%;"
-                                            aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
+                                @endif
                                 <!--end::Progress-->
                             </div>
                             <!--end::Stats-->

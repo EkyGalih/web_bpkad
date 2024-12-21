@@ -82,7 +82,8 @@
                             <a href="#"
                                 class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
                                 <i class="ki-outline ki-barcode fs-4 me-1"></i>{{ $pegawai->nip ?? '-' }}</a>
-                            <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary mb-2">
+                            <a href="{{ route('bidang.getPegawai', $pegawai->bidang->id) }}"
+                                class="d-flex align-items-center text-gray-500 text-hover-primary mb-2">
                                 <i class="ki-duotone ki-office-bag fs-4 me-1">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
@@ -130,16 +131,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3">
-                        <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                            <span class="fw-semibold fs-6 text-gray-500">Kenaikan Pangkat</span>
-                            <span class="fw-bold fs-6">50%</span>
+                    @if ($pegawai->kenaikan_pangkat != null)
+                        <div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3">
+                            <div class="d-flex justify-content-between w-100 mt-auto mb-2">
+                                <span class="fw-semibold fs-6 text-gray-500">Kenaikan Pangkat</span>
+                                <span
+                                    class="fw-bold fs-6">{{ Helpers::progressBarPangkat($pegawai->kenaikan_pangkat) }}%</span>
+                            </div>
+                            <div class="h-5px mx-3 w-100 bg-light mb-3">
+                                <div class="bg-success rounded h-5px" role="progressbar"
+                                    style="width: {{ Helpers::progressBarPangkat($pegawai->kenaikan_pangkat) }}%;"
+                                    aria-valuenow="{{ Helpers::progressBarPangkat($pegawai->kenaikan_pangkat) }}"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
                         </div>
-                        <div class="h-5px mx-3 w-100 bg-light mb-3">
-                            <div class="bg-success rounded h-5px" role="progressbar" style="width: 50%;"
-                                aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -165,21 +171,8 @@
             <div class="col-lg-8 fv-row">
                 <span
                     class="fw-semibold text-gray-800 fs-6">{{ \Carbon\Carbon::parse($pegawai->tanggal_lahir)->locale('id_ID')->translatedFormat('l, d F Y') }}</span>
-                @php
-                    // Tanggal lahir dalam format tahun-bulan-hari
-                    $tanggalLahir = \Carbon\Carbon::createFromFormat('Y-m-d', $pegawai->tanggal_lahir);
-
-                    // Mendapatkan tanggal sekarang
-                    $sekarang = \Carbon\Carbon::now();
-
-                    // Menghitung umur dalam tahun
-                    $umurTahun = $tanggalLahir->diffInYears($sekarang);
-
-                    // Menghitung jumlah hari setelah tahun penuh
-                    $tanggalUlangTahunTerakhir = $tanggalLahir->addYears($umurTahun);
-                    $hariBerlalu = $tanggalUlangTahunTerakhir->diffInDays($sekarang);
-                @endphp
-                ({{ $umurTahun }} Tahun, {{ $hariBerlalu }} Hari)</span>
+                ({{ Helpers::USIA($pegawai->tanggal_lahir)->umur . ' Tahun' }},
+                {{ Helpers::USIA($pegawai->tanggal_lahir)->hari . ' Hari' }})</span>
             </div>
         </div>
         <div class="row mb-7">
@@ -197,40 +190,39 @@
         <div class="row mb-7">
             <label class="col-lg-2 fw-semibold text-muted">Jabatan</label>
             <div class="col-lg-8 fv-row">
-                <span class="fw-bold fs-6 text-gray-800">{{ strtoupper($pegawai->nama_jabatan) }}</span>
-            </div>
-        </div>
-        <div class="row mb-7">
-            <label class="col-lg-2 fw-semibold text-muted">Nama Jabatan</label>
-            <div class="col-lg-8">
-                <span class="fw-bold fs-6 text-gray-800">{{ $pegawai->jabatan }}</span>
+                <span class="fw-bold fs-6 text-gray-800">{{ strtoupper($pegawai->nama_jabatan) }} -
+                    {{ $pegawai->jabatan }}</span>
             </div>
         </div>
         <div class="row mb-10">
             <label class="col-lg-2 fw-semibold text-muted">Tanggal/Nomor SK</label>
             <div class="col-lg-8">
                 <span
-                    class="fw-semibold fs-6 text-gray-800">{{ $pegawai->tgl_sk ?? '00-00-0000' . '/' . $pegawai->no_sk ?? '0' }}</span>
+                    class="fw-semibold fs-6 text-gray-800">{{ \Carbon\Carbon::parse($pegawai->tanggal_sk)->locale('id_ID')->translatedFormat('l, d F Y') ?? '-' }}
+                    / {{ $pegawai->no_sk ?? '-' }}</span>
             </div>
         </div>
-        <div class="row mb-10">
-            <label class="col-lg-2 fw-semibold text-muted">Masa Kerja Golongan</label>
-            <div class="col-lg-8">
-                <span class="fw-semibold fs-6 text-gray-800">{{ $pegawai->masa_kerja_golongan ?? '-' }}</span>
+        @if ($pegawai->jenis_pegawai == 'asn')
+            <div class="row mb-10">
+                <label class="col-lg-2 fw-semibold text-muted">Masa Kerja Golongan</label>
+                <div class="col-lg-8">
+                    <span class="fw-semibold fs-6 text-gray-800">{{ $pegawai->masa_kerja_golongan ?? '-' }}</span>
+                </div>
             </div>
-        </div>
-        <div class="row mb-10">
-            <label class="col-lg-2 fw-semibold text-muted">Kenaikan Pangkat Berikutnya</label>
-            <div class="col-lg-8">
-                <span class="fw-semibold fs-6 text-gray-800">{{ $pegawai->kenaikan_pangkat ?? '-' }}</span>
+            <div class="row mb-10">
+                <label class="col-lg-2 fw-semibold text-muted">Kenaikan Pangkat Berikutnya</label>
+                <div class="col-lg-8">
+                    <span
+                        class="fw-semibold fs-6 text-gray-800">{{ \Carbon\Carbon::parse($pegawai->kenaikan_pangkat)->locale('id_ID')->translatedFormat('l, d F Y') ?? '-' }}</span>
+                </div>
             </div>
-        </div>
-        <div class="row mb-10">
-            <label class="col-lg-2 fw-semibold text-muted">Tahun Pensiun</label>
-            <div class="col-lg-8">
-                <span class="fw-semibold fs-6 text-gray-800">Tahun {{ $pegawai->batas_pensiun }}</span>
+            <div class="row mb-10">
+                <label class="col-lg-2 fw-semibold text-muted">Tahun Pensiun</label>
+                <div class="col-lg-8">
+                    <span class="fw-semibold fs-6 text-gray-800">Tahun {{ $pegawai->batas_pensiun }}</span>
+                </div>
             </div>
-        </div>
+        @endif
     </div>
 </div>
 @endsection

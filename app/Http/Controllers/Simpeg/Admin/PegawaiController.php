@@ -36,6 +36,21 @@ class PegawaiController extends Controller
         return view('SimPeg.pegawai.pegawai', compact('pegawai'));
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->input('query');
+
+        $pegawai = Pegawai::whereNull('deleted_at')->when($search, function ($query, $search) {
+            return $query->where(function ($query) use ($search) {
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('nip', 'like', "%{$search}%")
+                    ->orWhere('jabatan', 'like', "%{$search}%");
+            });
+        })->orderBy('updated_at', 'DESC')->get();
+
+        return response()->json($pegawai);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -107,6 +122,15 @@ class PegawaiController extends Controller
     public function show($id)
     {
         $pegawai = Pegawai::findOrFail($id);
+        $umur = Helpers::USIA($pegawai->tanggal_lahir)->umur;
+        $mkg = Helpers::hitungMasaKerja($pegawai->tanggal_sk);
+
+        if ($pegawai->umur != $umur) {
+            $pegawai->update(['umur' => $umur]);
+        }
+        if ($pegawai->masa_kerja_golongan != $mkg) {
+            $pegawai->update(['masa_kerja_golongan' => $mkg]);
+        }
 
         return view('SimPeg.pegawai.components.show', compact('pegawai'));
     }

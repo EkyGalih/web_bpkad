@@ -27,7 +27,7 @@
         </div>
     </div>
 </div>
-{{-- <div class="col-lg-3 col-sm-6">
+<div class="col-lg-3 col-sm-6">
     <div class="card hovercard">
         <div class="cardheader-simpeg">
         </div>
@@ -42,16 +42,16 @@
                 <h4 class="badge badge-primary">{{ Auth::user()->role }}</h4>
             </div>
         </div>
-        <div class="bottom"> --}}
-            {{-- @if (Auth::user()->role == 'superadmin' || Auth::user()->role == 'admin') --}}
+        <div class="bottom">
+            @if (Auth::user()->role == 'superadmin' || Auth::user()->role == 'admin')
             {{-- <a class="btn btn-secondary btn-block btn-sm" href="#"> --}}
-            {{-- <a class="btn btn-primary btn-block btn-sm" href="{{ env('SIMPEG_ADMIN') }}"> --}}
-                {{-- <i class="bx bx-log-in-circle"></i> Ke Aplikasi --}}
-            {{-- </a> --}}
-            {{-- @endif --}}
-        {{-- </div> --}}
-    {{-- </div> --}}
-{{-- </div> --}}
+            <a class="btn btn-primary btn-block btn-sm" href="{{ env('SIMPEG_ADMIN') }}">
+                <i class="bx bx-log-in-circle"></i> Ke Aplikasi
+            </a>
+            @endif
+        </div>
+    </div>
+</div>
 {{-- <div class="col-lg-3 col-sm-6"> --}}
     {{-- <div class="card hovercard"> --}}
         {{-- <div class="cardheader-inv"> --}}

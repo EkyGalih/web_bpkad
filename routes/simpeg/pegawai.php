@@ -12,6 +12,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
             Route::get('edit/{id}', [PegawaiController::class, 'edit'])->name('pegawai.edit');
             Route::put('update/{id}', [PegawaiController::class, 'update'])->name('pegawai.update');
             Route::get('detail-pegawai/{id}', [PegawaiController::class, 'show'])->name('pegawai.show');
+            Route::get('/search', [PegawaiController::class, 'search'])->name('pegawai.search');
             Route::get('destroy/{id}', [PegawaiController::class, 'destroy'])->name('pegawai.destroy');
         });
     });
