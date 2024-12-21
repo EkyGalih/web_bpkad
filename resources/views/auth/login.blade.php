@@ -1,147 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
+<!--begin::Head-->
 
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-    <title>Login - WEB BPKAD</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
-
-    <!-- Favicons -->
-    <link href="{{ asset('server/img/favicon.png') }}" rel="icon">
-    <link href="{{ asset('server/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
-    <link href="{{ asset('server/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('server/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-    <link href="{{ asset('server/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('server/vendor/quill/quill.snow.css') }}" rel="stylesheet">
-    <link href="{{ asset('server/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
-    <link href="{{ asset('server/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
-    <link href="{{ asset('server/vendor/simple-datatables/style.css') }}" rel="stylesheet">
-
-    <!-- Template Main CSS File -->
-    <link href="{{ asset('server/css/style.css') }}" rel="stylesheet">
-
-    <!-- =======================================================
-  * Template Name: NiceAdmin - v2.5.0
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    <title>{{ ENV('APP_NAME') }} | Login</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Sistem Informasi BPKAD Provinsi NTB" />
+    <meta name="keywords" content="sistem informasi, bpkad, Provinsi NTB, mataram, bpkad ntb, website" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:type" content="sistem informasi" />
+    <meta property="og:title" content="@yield('title')" />
+    <meta property="og:url" content="https://bpkad.ntbprov.go.id" />
+    <meta property="og:site_name" content="BPKAD" />
+    @include('layouts.admin.simpeg.css')
 </head>
 
-<body>
+<body id="kt_body" class="app-blank bgi-size-cover bgi-attachment-fixed bgi-position-center bgi-no-repeat">
+    <div class="d-flex flex-column flex-root" id="kt_app_root">
+        <style>
+            body {
+                background-image: url({{ asset('assets/media/auth/bg4.jpg') }});
+            }
 
-    <main>
-        <div class="container">
-
-            <section
-                class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
-
-                            <div class="d-flex justify-content-center py-4">
-                                <a href="index.html" class="logo d-flex align-items-center w-auto">
-                                    <img src="assets/img/logo.png" alt="">
-                                    <span class="d-none d-lg-block">Form Login</span>
-                                </a>
-                            </div><!-- End Logo -->
-
-                            <div class="card mb-3">
-
-                                <div class="card-body">
-
-                                    <div class="pt-4 pb-2">
-                                        <h5 class="card-title text-center pb-0 fs-4">Masuk ke akun anda</h5>
-                                        <p class="text-center small">Masukkan username & password anda untuk login</p>
-                                    </div>
-                                    @if (Session::has('failed'))
-                                        <div class="alert alert-danger" role="alert">
-                                            {{ Session::get('failed') }}
-                                        </div>
-                                    @endif
-                                    <form method="POST" action="{{ route('login.store') }}"
-                                        class="row g-3 needs-validation" novalidate>
-                                        @csrf
-                                        <div class="col-12">
-                                            <label for="yourUsername" class="form-label">Email or Username</label>
-                                            <div class="input-group has-validation">
-                                                <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                <input type="text" name="email" class="form-control" id="email"
-                                                    required autofocus>
-                                                <div class="invalid-feedback">Silahkan masukkan username anda.</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <label for="yourPassword" class="form-label">Password</label>
-                                            <div class="input-group has-validation">
-                                                <span class="input-group-text" id="inputGroupPrepend"><i
-                                                        class="bi bi-lock"></i></span>
-                                                <input type="password" name="password" class="form-control"
-                                                    id="password" required>
-                                                <div class="invalid-feedback">silahkan masukkan password anda!</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="rememberme"
-                                                    value="true" id="rememberMe">
-                                                <label class="form-check-label" for="rememberMe">Remember me</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <button class="btn btn-primary w-100" type="submit"><i class="bi bi-sign-in"></i> Login</button>
-                                        </div>
-                                    </form>
-
+            [data-bs-theme="dark"] body {
+                background-image: url({{ asset('assets/media/auth/bg4-dark.jpg') }});
+            }
+        </style>
+        <div class="d-flex flex-column flex-column-fluid flex-lg-row">
+            <div class="d-flex flex-center w-lg-50 pt-15 pt-lg-0 px-10">
+                <div class="d-flex flex-center flex-lg-start flex-column">
+                    <a href="{{ route('login.index') }}" class="d-flex align-items-center mb-7">
+                        <img alt="Logo" src="{{ asset('client/assets/img/favicon.png') }}"
+                            style="width: 50px; height: 80px;" />
+                        <span class="text-white fw-bold fs-2 ms-5">BPKAD NTB</span>
+                    </a>
+                    <h2 class="text-white fw-normal m-0">Badan Pengelolaan Keuangan dan Aset Daerah Provinsi Nusa Tenggara Barat</h2>
+                </div>
+            </div>
+            <div
+                class="d-flex flex-column-fluid flex-lg-row-auto justify-content-center justify-content-lg-end p-12 p-lg-20">
+                <div class="bg-body d-flex flex-column align-items-stretch flex-center rounded-4 w-md-600px p-20">
+                    <div class="d-flex flex-center flex-column flex-column-fluid px-lg-10 pb-15 pb-lg-20">
+                        <form class="form w-100" novalidate="novalidate" method="POST"
+                            action="{{ route('login.store') }}">
+                            @csrf
+                            <div class="text-center mb-11">
+                                <h1 class="text-gray-900 fw-bolder mb-3">Masuk</h1>
+                            </div>
+                            @if (Session::has('failed'))
+                                <div class="alert alert-danger" role="alert">
+                                    {{ Session::get('failed') }}
                                 </div>
+                            @endif
+                            <div class="fv-row mb-8">
+                                <input type="text" placeholder="Email atau Username" name="email"
+                                    autocomplete="off"
+                                    class="form-control bg-transparent @error('email') is-invalid @enderror" />
+                                @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-
-                            <div class="credits">
-                                <!-- All the links in the footer should remain intact. -->
-                                <!-- You can delete the links only if you purchased the pro version. -->
-                                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-                                Designed by <a href="https://instagram.com/EkyGalih_" target="_blank">ITeam BPKAD</a>
+                            <div class="fv-row mb-3">
+                                <input type="password" placeholder="Kata Sandi" name="password" autocomplete="off"
+                                    class="form-control bg-transparent @error('password') is-invalid @enderror" />
+                                @error('password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-
-                        </div>
+                            <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
+                                <div></div>
+                                {{-- <a href="#" class="link-primary">Forgot Password ?</a> --}}
+                            </div>
+                            <div class="d-grid mb-10">
+                                <button type="submit" id="kt_sign_in_submit" class="btn btn-primary">
+                                    <span class="indicator-label">Login</span>
+                                    <span class="indicator-progress">Please wait...
+                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-
-            </section>
-
+            </div>
         </div>
-    </main><!-- End #main -->
-
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
-
-    <!-- Vendor JS Files -->
-    <script src="{{ asset('server/vendor/apexcharts/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('server/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('server/vendor/chart.js/chart.umd.js') }}"></script>
-    <script src="{{ asset('server/vendor/echarts/echarts.min.js') }}"></script>
-    <script src="{{ asset('server/vendor/quill/quill.min.js') }}"></script>
-    <script src="{{ asset('server/vendor/simple-datatables/simple-datatables.js') }}"></script>
-    <script src="{{ asset('server/vendor/tinymce/tinymce.min.js') }}"></script>
-    <script src="{{ asset('server/vendor/php-email-form/validate.js') }}"></script>
-
-    <!-- Template Main JS File -->
-    <script src="{{ asset('server/js/main.js') }}"></script>
-
+    </div>
+    @include('layouts.admin.simpeg.js')
 </body>
 
 </html>
