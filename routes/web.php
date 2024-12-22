@@ -11,6 +11,7 @@ use App\Http\Controllers\Client\LaporanPermohonanMasyarakatController;
 use App\Http\Controllers\Client\PegawaiController;
 use App\Http\Controllers\Client\PostsController;
 use App\Http\Controllers\Client\PpidKipController;
+use App\Http\Controllers\LKPD\Admin\AdminLkpdController;
 use App\Http\Controllers\Operator\OperatorController;
 use App\Http\Controllers\Simpeg\Admin\AdminSimpegController;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
 
     Route::group(['prefix' => 'simpeg'], function () {
         Route::get('/', [AdminSimpegController::class, 'index'])->name('admin.simpeg');
+    });
+
+    Route::group(['prefix' => 'lkpd'], function () {
+        Route::get('/', [AdminLkpdController::class, 'index'])->name('admin.lkpd');
     });
 });
 
