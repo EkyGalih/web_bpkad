@@ -6,7 +6,7 @@
     </div>
     <div class="app-sidebar-menu flex-grow-1 hover-scroll-y scroll-ms my-5" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer" data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px">
         <div id="kt_aside_menu" class="menu menu-column menu-title-gray-600 menu-state-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-semibold fs-6" data-kt-menu="true">
-            <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start" class="menu-item @yield('home') py-2">
+            <div class="menu-item @yield('home') py-2">
                 <a href="{{ route('admin.simpeg') }}" class="menu-link menu-center">
                     <span class="menu-icon me-0">
                         <i class="ki-outline ki-home-1 fs-2"></i>
@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start" class="menu-item @yield('bidang') py-2">
+            <div class="menu-item @yield('bidang') py-2">
                 <a href="{{ route('bidang.index') }}" class="menu-link menu-center">
                     <span class="menu-icon me-0">
                         <i class="ki-outline ki-bank fs-2"></i>
@@ -34,7 +34,7 @@
                     </div>
                 </div>
             </div>
-            <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start" class="menu-item @yield('pegawai') py-2">
+            <div class="menu-item @yield('pegawai') py-2">
                 <a href="{{ route('pegawai.index') }}" class="menu-link menu-center">
                     <span class="menu-icon me-0">
                         <i class="ki-outline ki-people fs-2"></i>

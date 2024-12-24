@@ -6,7 +6,7 @@
             </button>
             <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0 me-lg-15">
                 <a href="index.html">
-                    <img alt="Logo" src="{{ asset('assets/media/logos/demo50.svg') }}" class="h-30px" />
+                    <img alt="Logo" src="{{ asset('client/assets/img/pegawai.png') }}" class="h-30px" />
                 </a>
             </div>
             <div class="d-flex align-items-center d-lg-none ms-2" title="Show sidebar menu">
