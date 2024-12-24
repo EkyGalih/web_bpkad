@@ -1,5 +1,5 @@
 @extends('SimPeg.index')
-@section('title', env('APP_NAME') . ' - Pegawai')
+@section('title', 'Perbaharui Pegawai')
 @section('pegawai', 'here show')
 @section('styles')
     <link rel="stylesheet" href="{{ asset('server/vendor/tom-select/tom-select.css') }}">

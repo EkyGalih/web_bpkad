@@ -15,12 +15,12 @@
         </div>
         <div class="bottom">
             @if (Auth::user()->role == 'superadmin' || Auth::user()->role == 'admin')
-            <a class="btn btn-primary btn-block btn-sm" href="{{ env('WEB_BPKAD_ADMIN') }}">
+            <a class="btn btn-primary btn-block btn-sm" href="{{ ENV('WEB_BPKAD_ADMIN') }}">
             {{-- <a class="btn btn-primary btn-block btn-sm" href="{{ env('WEB_BPKAD_ADMIN') }}"> --}}
                 <i class="bx bx-log-in-circle"></i> Ke Aplikasi
             </a>
             @elseif (Auth::user()->role == 'operator')
-            <a class="btn btn-primary btn-block btn-sm" href="{{ env('WEB_BPKAD_OPERATOR') }}">
+            <a class="btn btn-primary btn-block btn-sm" href="{{ ENV('WEB_BPKAD_OPERATOR') }}">
                 <i class="bx bx-log-in-circle"></i> Ke Aplikasi
             </a>
             @endif
@@ -45,7 +45,7 @@
         <div class="bottom">
             @if (Auth::user()->role == 'superadmin' || Auth::user()->role == 'admin')
             {{-- <a class="btn btn-secondary btn-block btn-sm" href="#"> --}}
-            <a class="btn btn-primary btn-block btn-sm" href="{{ env('SIMPEG_ADMIN') }}">
+            <a class="btn btn-primary btn-block btn-sm" href="{{ ENV('SIMPEG_ADMIN') }}">
                 <i class="bx bx-log-in-circle"></i> Ke Aplikasi
             </a>
             @endif

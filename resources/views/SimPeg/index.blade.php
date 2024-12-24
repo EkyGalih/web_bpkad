@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
 	<head>
-		<title>@yield('title')</title>
+		<title>{{ ENV('APP_NAME') }} | @yield('title')</title>
 		<meta charset="utf-8" />
 		<meta name="description" content="Sistem Informasi Pegawai BPKAD Kabupaten NTB" />
 		<meta name="keywords" content="sistem informasi pegawai, bpkad, kabupaten NTB, mataram, bpkad ntb, simpeg" />
@@ -33,7 +33,7 @@
 						@include('layouts.admin.simpeg.sidebar-primary')
 						<!--end::Sidebar primary-->
 						<!--begin::Sidebar secondary-->
-						{{-- @include('layouts.admin.simpeg.sidebar-secondary') --}}
+						@include('layouts.admin.simpeg.sidebar-secondary')
 						<!--end::Sidebar secondary-->
 					</div>
 					<!--end::Sidebar-->

@@ -6,7 +6,7 @@
             <button type="button" data-kt-element="selected" class="btn btn-outline btn-outline-dashed h-50px d-flex text-start flex-stack w-100 ps-4 pe-8" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start" data-kt-menu-offset="0px, -1px">
                 <!--begin::Title-->
                 <span class="d-none d-md-flex flex-column pt-2" data-kt-element="title">
-                    <span class="fs-6 fw-bold lh-1 mb-1">Projects</span>
+                    <span class="fs-6 fw-bold lh-1 mb-1">Daftar Aplikasi</span>
                     <span class="text-primary fs-7">KeenThemes
                     <span class="text-gray-500">space</span></span>
                 </span>
@@ -28,8 +28,8 @@
                         <a href="#" class="menu-link px-3 py-2" data-kt-element="project">
                             <!--begin::Info-->
                             <span class="d-flex flex-column align-items-start">
-                                <span class="fs-7 fw-semibold text-primary" data-kt-element="title">KeenThemes
-                                <span class="text-gray-500">space</span></span>
+                                <span class="fs-7 fw-semibold text-primary" data-kt-element="title">Web
+                                <span class="text-gray-500">site</span></span>
                             </span>
                             <!--end::Info-->
                         </a>
@@ -41,47 +41,8 @@
                         <a href="#" class="menu-link px-3 py-2" data-kt-element="project">
                             <!--begin::Info-->
                             <span class="d-flex flex-column align-items-start">
-                                <span class="fs-7 fw-semibold text-primary" data-kt-element="title">Hero
-                                <span class="text-gray-500">design</span></span>
-                            </span>
-                            <!--end::Info-->
-                        </a>
-                    </div>
-                    <!--end::Menu item-->
-                    <!--begin::Menu item-->
-                    <div class="menu-item my-0 py-1">
-                        <!--begin::Menu link-->
-                        <a href="#" class="menu-link px-3 py-2" data-kt-element="project">
-                            <!--begin::Info-->
-                            <span class="d-flex flex-column align-items-start">
-                                <span class="fs-7 fw-semibold text-primary" data-kt-element="title">Craft
-                                <span class="text-gray-500">app</span></span>
-                            </span>
-                            <!--end::Info-->
-                        </a>
-                    </div>
-                    <!--end::Menu item-->
-                    <!--begin::Menu item-->
-                    <div class="menu-item my-0 py-1">
-                        <!--begin::Menu link-->
-                        <a href="#" class="menu-link px-3 py-2" data-kt-element="project">
-                            <!--begin::Info-->
-                            <span class="d-flex flex-column align-items-start">
-                                <span class="fs-7 fw-semibold text-primary" data-kt-element="title">Looper
-                                <span class="text-gray-500">cloud</span></span>
-                            </span>
-                            <!--end::Info-->
-                        </a>
-                    </div>
-                    <!--end::Menu item-->
-                    <!--begin::Menu item-->
-                    <div class="menu-item my-0 py-1">
-                        <!--begin::Menu link-->
-                        <a href="#" class="menu-link px-3 py-2" data-kt-element="project">
-                            <!--begin::Info-->
-                            <span class="d-flex flex-column align-items-start">
-                                <span class="fs-7 fw-semibold text-primary" data-kt-element="title">Smartbizz
-                                <span class="text-gray-500">crm</span></span>
+                                <span class="fs-7 fw-semibold text-primary" data-kt-element="title">Sim
+                                <span class="text-gray-500">peg</span></span>
                             </span>
                             <!--end::Info-->
                         </a>

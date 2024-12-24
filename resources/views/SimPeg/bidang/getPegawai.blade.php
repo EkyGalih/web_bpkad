@@ -1,5 +1,5 @@
 @extends('SimPeg.index')
-@section('title', ENV('APP_NAME') . ' - Pegawai Bidang')
+@section('title', 'Pegawai Bidang')
 @section('bidang', 'here show')
 @section('styles')
     <style>

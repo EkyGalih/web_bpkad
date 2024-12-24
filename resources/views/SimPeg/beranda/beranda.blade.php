@@ -1,10 +1,10 @@
 @extends('SimPeg.index')
-@section('title', env('APP_NAME') . ' - SIMPEG')
+@section('title', 'SIMPEG')
 @section('title_page', 'Beranda')
 @section('home', 'here show')
 
 @section('content')
-   <h1>Welcome {{ Auth::user()->nama }}</h1>
+    <h1>Welcome {{ Auth::user()->nama }}</h1>
     <div class="row g-5 g-xl-10">
         <div class="col-sm-6 col-xl-2 mb-xl-10">
             <div class="card h-lg-100">
