@@ -22,11 +22,6 @@
             z-index: 1;
         }
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
         #search {
             width: 100%;
             padding: 10px;

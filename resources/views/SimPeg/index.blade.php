@@ -33,7 +33,7 @@
 						@include('layouts.admin.simpeg.sidebar-primary')
 						<!--end::Sidebar primary-->
 						<!--begin::Sidebar secondary-->
-						{{-- @include('layouts.admin.simpeg.sidebar-secondary') --}}
+						@include('layouts.admin.simpeg.sidebar-secondary')
 						<!--end::Sidebar secondary-->
 					</div>
 					<!--end::Sidebar-->
@@ -44,7 +44,7 @@
 							<!--begin::Content-->
 							<div id="kt_app_content" class="app-content flex-column-fluid">
 								<!--begin::Content container-->
-								<div id="kt_app_content_container" class="app-container container-xxl">
+								<div id="kt_app_content_container" class="app-container container-fluid">
 									@yield('content')
 								</div>
 								<!--end::Content container-->
