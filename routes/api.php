@@ -23,4 +23,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::apiResource('/api/berita', BeritaController::class);
 Route::apiResource('/api/kip', KIPController::class);
-Route::apiResource('/api/pegawai', PegawaiController::class);
+Route::apiResource('/api/pegawais', PegawaiController::class);
