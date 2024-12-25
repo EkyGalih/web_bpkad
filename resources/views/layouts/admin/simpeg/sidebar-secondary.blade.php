@@ -24,7 +24,7 @@
                 data-kt-menu="true">
                 <div class="hover-scroll-y mh-200px my-3 pe-3 me-n1">
                     <div class="menu-item my-0 py-1">
-                        <a href="{{ ENV('APP_URL') }}/admin/web" class="menu-link px-3 py-2" data-kt-element="project">
+                        <a href="{{ ENV('APP_URL') }}admin/web" class="menu-link px-3 py-2" data-kt-element="project">
                             <span class="d-flex flex-column align-items-start">
                                 <span class="fs-7 fw-semibold text-primary" data-kt-element="title">Web
                                     <span class="text-gray-500">sistem informasi</span></span>
@@ -32,11 +32,20 @@
                         </a>
                     </div>
                     <div class="menu-item my-0 py-1">
-                        <a href="{{ ENV('APP_URL') }}/admin/simpeg" class="menu-link px-3 py-2"
+                        <a href="{{ ENV('APP_URL') }}admin/simpeg" class="menu-link px-3 py-2"
                             data-kt-element="project">
                             <span class="d-flex flex-column align-items-start">
                                 <span class="fs-7 fw-semibold text-primary" data-kt-element="title">Simpeg
                                     <span class="text-gray-500">sistem informasi pegawai</span></span>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="menu-item my-0 py-1">
+                        <a href="{{ ENV('APP_URL') }}bpkad/home" class="menu-link px-3 py-2" data-kt-element="project">
+                            <span class="d-flex flex-column align-items-start">
+                                <span class="fs-7 fw-semibold text-primary" data-kt-element="title">Landing Page
+                                    <span class="text-gray-500">Landing Page</span>
+                                </span>
                             </span>
                         </a>
                     </div>

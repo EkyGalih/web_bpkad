@@ -1,5 +1,57 @@
 <aside id="sidebar" class="sidebar">
 
+    <div id="kt_sidebar_secondary_project_select" style="border: 2px dashed #d1d5db; border-radius: 8px; padding: 10px; margin-bottom: 10px">
+        <button type="button"
+            class="btn btn-outline btn-outline-dashed h-60px d-flex text-start flex-stack w-100 ps-4 pe-8"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="d-none d-md-flex flex-column pt-2">
+                <span class="fs-6 fw-bold lh-1 mb-1">Daftar Aplikasi</span>
+                @if (request()->path() == 'admin/web')
+                    <span class="text-primary fs-7">Web -
+                        <span class="text-gray-500">sistem informasi</span>
+                    </span>
+                @elseif (request()->path() == 'admin/simpeg')
+                    <span class="text-primary fs-7">SimPeg -
+                        <span class="text-gray-500">sistem informasi pegawai</span>
+                    </span>
+                @endif
+            </span>
+            <span class="d-flex flex-column me-n4">
+                <i class="bi bi-chevron-down fs-5 text-gray-500"></i>
+            </span>
+        </button>
+        <ul class="dropdown-menu w-200px p-3">
+            <li class="mb-1">
+                <a href="{{ ENV('APP_URL') }}admin/web" class="dropdown-item px-3 py-2">
+                    <span class="d-flex flex-column align-items-start">
+                        <span class="fs-7 fw-semibold text-primary">Web -
+                            <span class="text-gray-500">sistem informasi</span>
+                        </span>
+                    </span>
+                </a>
+            </li>
+            <li class="mb-1">
+                <a href="{{ ENV('APP_URL') }}admin/simpeg" class="dropdown-item px-3 py-2">
+                    <span class="d-flex flex-column align-items-start">
+                        <span class="fs-7 fw-semibold text-primary">Simpeg -
+                            <span class="text-gray-500">sistem informasi pegawai</span>
+                        </span>
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ ENV('APP_URL') }}bpkad/home" class="dropdown-item px-3 py-2">
+                    <span class="d-flex flex-column align-items-start">
+                        <span class="fs-7 fw-semibold text-primary">Landing Page -
+                            <span class="text-gray-500">Landing Page</span>
+                        </span>
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
