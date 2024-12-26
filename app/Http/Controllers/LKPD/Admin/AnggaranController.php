@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\LKPD\Admin;
 
 use App\Helper\UserAccess;
-use App\Helpers\Helpers;
+use App\helpers\Math;
 use App\Http\Controllers\Controller;
-use App\Imports\APBD as ImportsAPBD;
-use App\Models\Apbd;
-use App\Models\KodeRekening;
+use App\Imports\Lkpd\APBD as ImportsAPBD;
+use App\Models\Lkpd\Apbd;
+use App\Models\Lkpd\KodeRekening;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -116,7 +116,7 @@ class AnggaranController extends Controller
         $get_tahun = $cek_data == null ? [] : $cek_data;
         $tahun_anggaran = isset($data['tahun_anggaran']) ? $data['tahun_anggaran'] : date('Y');
 
-        return view('admin.Apbd.apbd', compact('user', 'Apbd', 'kodeRekening', 'get_tahun', 'tahun_anggaran'));
+        return view('lkpd.Apbd.apbd', compact('user', 'Apbd', 'kodeRekening', 'get_tahun', 'tahun_anggaran'));
     }
 
     /**
@@ -168,10 +168,10 @@ class AnggaranController extends Controller
             if (isset($cekData)) {
                 return redirect()->back()->with(['warning' => 'Kode Rekening is already in use']);
             } else {
-                $jml_anggaran_sebelum = Helpers::CurrencyConvertComa($request->jml_anggaran_sebelum);
-                $jml_anggaran_setelah = Helpers::CurrencyConvertComa($request->jml_anggaran_setelah);
-                $selisih_anggaran = Helpers::CurrencyConvertComa($request->selisih);
-                $persen = Helpers::ConvertPersen($request->persen);
+                $jml_anggaran_sebelum = Math::CurrencyConvertComa($request->jml_anggaran_sebelum);
+                $jml_anggaran_setelah = Math::CurrencyConvertComa($request->jml_anggaran_setelah);
+                $selisih_anggaran = Math::CurrencyConvertComa($request->selisih);
+                $persen = Math::ConvertPersen($request->persen);
 
                 Apbd::create([
                     'kode_rekening' => $request->kode_rekening3,
@@ -195,7 +195,7 @@ class AnggaranController extends Controller
     public function edit($id)
     {
         $apbd = Apbd::findOrFail($id);
-        return view('admin.Apbd.Components.edit', compact('apbd'));
+        return view('lkpd.Apbd.Components.edit', compact('apbd'));
     }
 
     /**
@@ -209,9 +209,9 @@ class AnggaranController extends Controller
     {
         $apbd = Apbd::findOrFail($id);
         $apbd->update([
-            'jml_anggaran_setelah' => Helpers::CurrencyConvertComa($request->jml_anggaran_setelah),
-            'selisih' => Helpers::CurrencyConvertComa($request->selisih),
-            'persen' => Helpers::ConvertPersen($request->persen)
+            'jml_anggaran_setelah' => Math::CurrencyConvertComa($request->jml_anggaran_setelah),
+            'selisih' => Math::CurrencyConvertComa($request->selisih),
+            'persen' => Math::ConvertPersen($request->persen)
         ]);
 
         return redirect()->route('apbd')->with(['success' => 'Anggaran Berhasil Diubah!']);

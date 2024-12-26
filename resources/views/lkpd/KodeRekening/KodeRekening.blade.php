@@ -6,14 +6,25 @@
 @section('styles')
     <link rel="stylesheet" href="{{ asset('assets/plugins/custom/bootstrap-fileupload/bootstrap-fileupload.css') }}">
 @endsection
-
+@section('toolbar')
+    <div class="page-title me-5">
+        <h1 class="page-heading d-flex text-white fw-bold fs-2 flex-column justify-content-center my-0">
+            Kode Rekening
+        </h1>
+    </div>
+    <div class="d-flex align-self-center flex-center flex-shrink-0">
+        <a href="#" class="btn btn-flex btn-sm btn-outline btn-active-color-success btn-custom px-4" data-bs-toggle="modal" data-bs-target="#ModalImport">
+            <i class="ki-outline ki-cloud-add me-1"></i> Import Kode Rekening
+        </a>
+    </div>
+@endsection
 @section('content')
     <div class="row g-5 g-xl-8">
         <div class="col-xl-8">
             <div class="card card-flush p-5">
                 <div class="card-header p-5">
                     <div class="card-title">
-                        <i class="ki-outline ki-barcode fs-2 me-1"></i> Kode Rekening
+                        <i class="ki-outline ki-barcode fs-2 me-1"></i> Daftar Kode Rekening
                     </div>
                 </div>
                 <div class="card-body pt-0">
@@ -78,22 +89,6 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="card-toolbar">
-                            <button class="btn btn-icon btn-color-gray-500 btn-active-color-primary justify-content-end"
-                                data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end"
-                                data-kt-menu-overflow="true">
-                                <i class="ki-outline ki-dots-square fs-1 text-gray-500 me-n1"></i>
-                            </button>
-                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-200px"
-                                data-kt-menu="true">
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3" data-bs-toggle="modal"
-                                        data-bs-target="#ModalImport">
-                                        <i class="ki-outline ki-cloud-add me-1"></i> Import Data
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="card-body pt-0">
                         <div class="fv-row mb-3">
@@ -130,7 +125,8 @@
                 </form>
 
                 {{-- MODAL IMPORT KODE REKENING --}}
-                <div class="modal fade" id="ModalImport" tabindex="-1" aria-labelledby="ModalImport" aria-hidden="true">
+                <div class="modal fade" id="ModalImport" tabindex="-1" aria-labelledby="ModalImport"
+                    aria-hidden="true">
                     <div class="modal-dialog modal-md" style="margin-top: 14%">
                         <div class="modal-content">
                             <div class="modal-header">

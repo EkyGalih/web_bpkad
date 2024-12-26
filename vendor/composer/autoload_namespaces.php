@@ -7,5 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'URLify' => array($vendorDir . '/jbroadway/urlify'),
+    'HTMLPurifier' => array($vendorDir . '/ezyang/htmlpurifier/library'),
     'Detection' => array($vendorDir . '/mobiledetect/mobiledetectlib/namespaced'),
 );

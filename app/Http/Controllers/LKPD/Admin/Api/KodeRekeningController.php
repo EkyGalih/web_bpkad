@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Api;
+namespace App\Http\Controllers\LKPD\Admin\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\KodeRekening;
-use App\Models\SubKodeRekening;
+use App\Models\Lkpd\KodeRekening;
+use App\Models\Lkpd\SubKodeRekening;
 use App\ResponseHandle;
 use Illuminate\Http\Request;
 

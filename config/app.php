@@ -241,7 +241,8 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'MobileDetect' => Riverskies\Laravel\MobileDetect\Facades\MobileDetect::class,
         'LokasiAset' => App\Models\LokasiAset::class,
-        'Analytics' => Spatie\Analytics\Facades\Analytics::class,
+        'Apbd' => App\Helpers\Apbd::class,
+        'Math' => App\Helpers\Math::class,
 
     ],
 

@@ -72,6 +72,10 @@ class RouteServiceProvider extends ServiceProvider
 
         // ROUTE LKPD
         $this->mapKodeRekening();
+        $this->mapApbd();
+
+        // ROUTE API LKPD
+        $this->mapApiKodeRekening();
     }
 
     public function mapPostAdmin()
@@ -240,6 +244,20 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/lkpd/KodeRekening.php'));
+    }
+
+    public function mapApbd()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/lkpd/Anggaran.php'));
+    }
+
+    public function mapApiKodeRekening()
+    {
+        Route::middleware('api')
+        // ->namespace($this->namespace)
+            ->group(base_path('routes/lkpd/api/KodeRekening.php'));
     }
 
     public function mapApiRoutes()

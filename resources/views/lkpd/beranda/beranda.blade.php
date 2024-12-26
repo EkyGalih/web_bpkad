@@ -1,6 +1,15 @@
 @extends('lkpd.index')
 @section('title', env('APP_NAME') . ' - LKPD')
 @section('dashboard', 'here show')
+@section('toolbar')
+    <div class="page-title me-5">
+        <!--begin::Title-->
+        <h1 class="page-heading d-flex text-white fw-bold fs-2 flex-column justify-content-center my-0">Welcome back,
+            {{ Auth::user()->nama }}
+            <span class="page-desc text-gray-600 fw-semibold fs-6 pt-3">Silahkan lakukan apapun yang anda inginkan</span>
+        </h1>
+    </div>
+@endsection
 @section('breadcrumb')
     <ul class="breadcrumb breadcrumb-separatorless fw-semibold">
         <!--begin::Item-->
@@ -173,8 +182,8 @@
                                     <!--end::Label-->
                                     <!--begin::Switch-->
                                     <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="checkbox" value="" name="notifications"
-                                            checked="checked" />
+                                        <input class="form-check-input" type="checkbox" value=""
+                                            name="notifications" checked="checked" />
                                         <label class="form-check-label">Enabled</label>
                                     </div>
                                     <!--end::Switch-->
