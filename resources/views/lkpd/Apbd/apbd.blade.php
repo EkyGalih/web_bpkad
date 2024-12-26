@@ -59,9 +59,28 @@
         @include('lkpd.Apbd.Components.add')
     </div>
     <div class="row mt">
-        <div class="col-lg-6">
+        {{-- <div class="col-lg-6">
             <div class="content-panel">
                 <canvas id="RealisasiAnggaran-chart"></canvas>
+            </div>
+        </div> --}}
+        <div class="card card-xl-stretch mb-5 mb-xl-8">
+            <div class="card-header border-0 pt-5">
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label fw-bold fs-3 mb-1">APBD</span>
+                    <span class="text-muted fw-semibold fs-7">Tahun Anggaran {{ $tahun_anggaran }}</span>
+                </h3>
+                <div class="card-toolbar" data-kt-buttons="true">
+                    <a class="btn btn-sm btn-color-muted btn-active btn-active-primary active px-4 me-1"
+                        id="kt_charts_widget_2_year_btn">Year</a>
+                    <a class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4 me-1"
+                        id="kt_charts_widget_2_month_btn">Month</a>
+                    <a class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4"
+                        id="kt_charts_widget_2_week_btn">Week</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="kt_charts_widget_6_chart" style="height: 350px"></div>
             </div>
         </div>
     </div>
@@ -71,53 +90,56 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ asset('assets/plugins/custom/jquery-mask/jquery-mask.js') }}"></script>
     <script>
-        $('apbd-table').dataTable();
+        $(document).ready(function() {
+            $('apbd-table').dataTable();
 
-        tahun_anggaran = $('#get_ta').val();
+            tahun_anggaran = $('#get_ta').val();
 
-        function getApbd() {
-            ta = $('#tahun_anggaran').val();
-            window.location.href = window.location.origin + '/admin/lkpd/apbd/' + ta
-        }
+            function getApbd() {
+                ta = $('#tahun_anggaran').val();
+                window.location.href = window.location.origin + '/admin/lkpd/apbd/' + ta
+            }
 
-        // get years
+            // get years
 
-        years1 = $('#years1').val();
-        years2 = $('#years2').val();
-        years3 = $('#years3').val();
-        years4 = $('#years4').val();
+            years1 = $('#years1').val();
+            years2 = $('#years2').val();
+            years3 = $('#years3').val();
+            years4 = $('#years4').val();
 
-        // chart Apbd
-        jumlah_pendapatan1 = $('#jumlah_pendapatan1').val();
-        jumlah_pendapatan2 = $('#jumlah_pendapatan2').val();
-        selisih_pendapatan = Math.abs(jumlah_pendapatan1 - jumlah_pendapatan2);
-        data_pendapatan_years1 = $('#jumlah_pendapatan_' + years1).val();
+            // chart Apbd
+            jumlah_pendapatan1 = $('#jumlah_pendapatan1').val();
+            jumlah_pendapatan2 = $('#jumlah_pendapatan2').val();
+            selisih_pendapatan = Math.abs(jumlah_pendapatan1 - jumlah_pendapatan2);
+            data_pendapatan_years1 = $('#jumlah_pendapatan_' + years1).val();
 
-        data_pendapatan_years2 = $('#jumlah_pendapatan_' + years2).val();
-        data_pendapatan_years3 = $('#jumlah_pendapatan_' + years3).val();
-        data_pendapatan_years4 = $('#jumlah_pendapatan_' + years4).val();
+            data_pendapatan_years2 = $('#jumlah_pendapatan_' + years2).val();
+            data_pendapatan_years3 = $('#jumlah_pendapatan_' + years3).val();
+            data_pendapatan_years4 = $('#jumlah_pendapatan_' + years4).val();
 
-        jumlah_belanja1 = $('#jumlah_belanja1').val();
-        jumlah_belanja2 = $('#jumlah_belanja2').val();
-        selisih_belanja = Math.abs(jumlah_belanja1 - jumlah_belanja2);
-        data_belanja_years1 = $('#jumlah_belanja_' + years1).val();
-        data_belanja_years2 = $('#jumlah_belanja_' + years2).val();
-        data_belanja_years3 = $('#jumlah_belanja_' + years3).val();
-        data_belanja_years4 = $('#jumlah_belanja_' + years4).val();
+            jumlah_belanja1 = $('#jumlah_belanja1').val();
+            jumlah_belanja2 = $('#jumlah_belanja2').val();
+            selisih_belanja = Math.abs(jumlah_belanja1 - jumlah_belanja2);
+            data_belanja_years1 = $('#jumlah_belanja_' + years1).val();
+            data_belanja_years2 = $('#jumlah_belanja_' + years2).val();
+            data_belanja_years3 = $('#jumlah_belanja_' + years3).val();
+            data_belanja_years4 = $('#jumlah_belanja_' + years4).val();
 
-        jumlah_pembiayaan1 = $('#jumlah_pembiayaan1').val();
-        jumlah_pembiayaan2 = $('#jumlah_pembiayaan2').val();
-        selisih_pembiayaan = Math.abs(jumlah_pembiayaan1 - jumlah_pembiayaan2);
-        data_pembiayaan_years1 = $('#jumlah_pembiayaan_' + years1).val();
-        data_pembiayaan_years2 = $('#jumlah_pembiayaan_' + years2).val();
-        data_pembiayaan_years3 = $('#jumlah_pembiayaan_' + years3).val();
-        data_pembiayaan_years4 = $('#jumlah_pembiayaan_' + years4).val();
+            jumlah_pembiayaan1 = $('#jumlah_pembiayaan1').val();
+            jumlah_pembiayaan2 = $('#jumlah_pembiayaan2').val();
+            selisih_pembiayaan = Math.abs(jumlah_pembiayaan1 - jumlah_pembiayaan2);
+            data_pembiayaan_years1 = $('#jumlah_pembiayaan_' + years1).val();
+            data_pembiayaan_years2 = $('#jumlah_pembiayaan_' + years2).val();
+            data_pembiayaan_years3 = $('#jumlah_pembiayaan_' + years3).val();
+            data_pembiayaan_years4 = $('#jumlah_pembiayaan_' + years4).val();
 
-        data_pembiayaan2_years1 = $('#jumlah_pembiayaan2_' + years1).val();
-        data_pembiayaan2_years2 = $('#jumlah_pembiayaan2_' + years2).val();
-        data_pembiayaan2_years3 = $('#jumlah_pembiayaan2_' + years3).val();
-        data_pembiayaan2_years4 = $('#jumlah_pembiayaan2_' + years4).val();
+            data_pembiayaan2_years1 = $('#jumlah_pembiayaan2_' + years1).val();
+            data_pembiayaan2_years2 = $('#jumlah_pembiayaan2_' + years2).val();
+            data_pembiayaan2_years3 = $('#jumlah_pembiayaan2_' + years3).val();
+            data_pembiayaan2_years4 = $('#jumlah_pembiayaan2_' + years4).val();
+        });
     </script>
+    <script src="{{ asset('assets/js/lkpd/widgets.js') }}"></script>
     @include('layouts.admin.lkpd.Script.apbd.add-script')
     @include('layouts.admin.lkpd.Script.apbd-chart')
 @endsection

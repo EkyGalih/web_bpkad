@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\LKPD\Admin;
 
 use App\Helper\UserAccess;
 use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
-use App\Models\Apbd;
-use App\Models\KodeRekening;
-use App\Models\LaporanRealisasiAnggaran;
+use App\Models\Lkpd\Apbd;
+use App\Models\Lkpd\KodeRekening;
+use App\Models\Lkpd\LaporanRealisasiAnggaran;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,7 +42,7 @@ class RealisasiAnggaranController extends Controller
                 ->where('apbd.tahun_anggaran', '=', $tahun)
                 ->where('realisasi_anggaran.tahun_anggaran', '=', $tahun)
                 ->orderBy('apbd.kode_rekening', 'ASC')
-                ->groupBy('kode_rekening')
+                // ->groupBy('kode_rekening')
                 ->get();
         }
 
@@ -117,7 +117,7 @@ class RealisasiAnggaranController extends Controller
         $get_tahun = Apbd::select('tahun_anggaran')->groupBy('tahun_anggaran')->orderBy('tahun_anggaran', 'DESC')->get();
         $tahun_anggaran = isset($data['tahun_anggaran']) ? $data['tahun_anggaran'] : date('Y');
 
-        return view('admin.RealisasiAnggaran.realisasi-anggaran', compact('user', 'Apbd', 'kodeRekening', 'get_tahun', 'tahun_anggaran'));
+        return view('lkpd.RealisasiAnggaran.realisasi-anggaran', compact('user', 'Apbd', 'kodeRekening', 'get_tahun', 'tahun_anggaran'));
     }
 
     /**

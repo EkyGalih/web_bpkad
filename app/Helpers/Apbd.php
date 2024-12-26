@@ -3,6 +3,8 @@
 namespace App\Helpers;
 
 use App\Models\Lkpd\Apbd as LkpdApbd;
+use App\Models\Lkpd\KodeRekening;
+use App\Models\Lkpd\LaporanRealisasiAnggaran;
 
 class Apbd
 {
@@ -23,9 +25,9 @@ class Apbd
     {
 
         $Apbd = LkpdApbd::where('tahun_anggaran', '=', $TahunAnggaran)
-                    ->where('kode_rekening', 'LIKE', $KodeRekening.'%')
-                    ->select('jml_anggaran_setelah','kode_rekening')
-                    ->get();
+            ->where('kode_rekening', 'LIKE', $KodeRekening . '%')
+            ->select('jml_anggaran_setelah', 'kode_rekening')
+            ->get();
         $sum = [];
 
         foreach ($Apbd as $item) {
@@ -39,11 +41,11 @@ class Apbd
 
     public static function GetSumSubAPBD($TahunAnggaran, $KodeRekening)
     {
-        $Apbd = LkpdApbd::select('jml_anggaran_setelah','kode_rekening', 'nama_rekening', 'tahun_anggaran')
-                ->where('tahun_anggaran', '=', $TahunAnggaran)
-                ->where('kode_rekening', 'LIKE', $KodeRekening.'%')
-                ->orderBy('tahun_anggaran', 'ASC')
-                ->get();
+        $Apbd = LkpdApbd::select('jml_anggaran_setelah', 'kode_rekening', 'nama_rekening', 'tahun_anggaran')
+            ->where('tahun_anggaran', '=', $TahunAnggaran)
+            ->where('kode_rekening', 'LIKE', $KodeRekening . '%')
+            ->orderBy('tahun_anggaran', 'ASC')
+            ->get();
 
         $sum = [];
 
@@ -54,5 +56,34 @@ class Apbd
         }
 
         return array_sum($sum);
+    }
+
+    public static function GetKodeRekening()
+    {
+        return KodeRekening::select('id', 'kode_rekening', 'nama_rekening')->orderBy('kode_rekening', 'ASC')->get();
+    }
+
+    public static function GetSubKode()
+    {
+        $KodeRekening = [
+            "kode_rekening" => array(),
+            "nama_rekening" => array()
+        ];
+        $Get = KodeRekening::select('id', 'kode_rekening', 'nama_rekening')->orderBy('kode_rekening', 'ASC')->get();
+
+        foreach ($Get as $item) {
+            if (strlen($item->kode_rekening) > 3) {
+                array_push($KodeRekening["kode_rekening"], $item->kode_rekening);
+                array_push($KodeRekening["nama_rekening"], $item->nama_rekening);
+            }
+        }
+        return $KodeRekening;
+    }
+
+    public static function SumSubLRA($kode_rekening)
+    {
+        return LaporanRealisasiAnggaran::where('kode_rekening', 'Like', $kode_rekening . '%')
+            ->select('anggaran_terealisasi')
+            ->sum('anggaran_terealisasi');
     }
 }

@@ -143,7 +143,7 @@
                             <!--begin:Menu item-->
                             <div class="menu-item">
                                 <!--begin:Menu link-->
-                                <a class="menu-link" href="#" title="Laporan Realisasi anggaran BPKAD NTB" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                                <a class="menu-link" href="{{ route('lkpd.realisasi-anggaran') }}" title="Laporan Realisasi anggaran BPKAD NTB" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                                     <span class="menu-icon">
                                         <i class="ki-outline ki-graph-up fs-2"></i>
                                     </span>
