@@ -23,17 +23,17 @@
                 <!--begin::Menu-->
                 <div class="menu menu-rounded menu-active-bg menu-state-primary menu-column menu-lg-row menu-title-gray-700 menu-icon-gray-500 menu-arrow-gray-500 menu-bullet-gray-500 my-5 my-lg-0 align-items-stretch fw-semibold px-2 px-lg-0" id="kt_app_header_menu" data-kt-menu="true">
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2">
+                    <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item @yield('dashboard') menu-here-bg menu-lg-down-accordion me-0 me-lg-2">
                         <!--begin:Menu link-->
-                        <span class="menu-link">
+                        <a href="{{ route('admin.lkpd') }}" class="menu-link">
                             <span class="menu-title">Dashboards</span>
                             <span class="menu-arrow d-lg-none"></span>
-                        </span>
+                        </a>
                         <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
+                    <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item @yield('iku') menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-title">Iku & Realisasi</span>
@@ -45,11 +45,11 @@
                             <!--begin:Menu item-->
                             <div class="menu-item">
                                 <!--begin:Menu link-->
-                                <a class="menu-link" href="https://preview.keenthemes.com/html/metronic/docs/base/utilities" target="_blank" title="Check out over 200 in-house components, plugins and ready for use solutions" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                                <a class="menu-link" href="#" title="Daftar Indikator Kinerja" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                                     <span class="menu-icon">
-                                        <i class="ki-outline ki-rocket fs-2"></i>
+                                        <i class="ki-outline ki-tablet-book fs-2"></i>
                                     </span>
-                                    <span class="menu-title">Components</span>
+                                    <span class="menu-title">Daftar Iku</span>
                                 </a>
                                 <!--end:Menu link-->
                             </div>
@@ -57,11 +57,11 @@
                             <!--begin:Menu item-->
                             <div class="menu-item">
                                 <!--begin:Menu link-->
-                                <a class="menu-link" href="https://preview.keenthemes.com/html/metronic/docs" target="_blank" title="Check out the complete documentation" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                                <a class="menu-link" href="#" title="Sasaran Strategis tahun {{ date('Y') }}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                                     <span class="menu-icon">
-                                        <i class="ki-outline ki-abstract-26 fs-2"></i>
+                                        <i class="ki-outline ki-questionnaire-tablet fs-2"></i>
                                     </span>
-                                    <span class="menu-title">Documentation</span>
+                                    <span class="menu-title">Sasaran Strategis</span>
                                 </a>
                                 <!--end:Menu link-->
                             </div>
@@ -69,11 +69,11 @@
                             <!--begin:Menu item-->
                             <div class="menu-item">
                                 <!--begin:Menu link-->
-                                <a class="menu-link" href="https://preview.keenthemes.com/metronic8/demo34/layout-builder.html" title="Build your layout and export HTML for server side integration" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                                <a class="menu-link" href="#" title="Indikator Kinerja BPKAD" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                                     <span class="menu-icon">
-                                        <i class="ki-outline ki-switch fs-2"></i>
+                                        <i class="ki-outline ki-filter-tablet fs-2"></i>
                                     </span>
-                                    <span class="menu-title">Layout Builder</span>
+                                    <span class="menu-title">Indikator Kinerja</span>
                                 </a>
                                 <!--end:Menu link-->
                             </div>
@@ -81,11 +81,23 @@
                             <!--begin:Menu item-->
                             <div class="menu-item">
                                 <!--begin:Menu link-->
-                                <a class="menu-link" href="https://preview.keenthemes.com/html/metronic/docs/getting-started/changelog" target="_blank">
+                                <a class="menu-link" href="#">
                                     <span class="menu-icon">
-                                        <i class="ki-outline ki-code fs-2"></i>
+                                        <i class="ki-outline ki-flask fs-2"></i>
                                     </span>
-                                    <span class="menu-title">Changelog v8.2.9</span>
+                                    <span class="menu-title">Formulasi</span>
+                                </a>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                            <!--begin:Menu item-->
+                            <div class="menu-item">
+                                <!--begin:Menu link-->
+                                <a class="menu-link" href="#">
+                                    <span class="menu-icon">
+                                        <i class="ki-outline ki-text-number fs-2"></i>
+                                    </span>
+                                    <span class="menu-title">Data Kinerja</span>
                                 </a>
                                 <!--end:Menu link-->
                             </div>
@@ -95,7 +107,7 @@
                     </div>
                     <!--end:Menu item-->
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
+                    <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item @yield('apbd') menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-title">APBD</span>
@@ -107,11 +119,11 @@
                             <!--begin:Menu item-->
                             <div class="menu-item">
                                 <!--begin:Menu link-->
-                                <a class="menu-link" href="https://preview.keenthemes.com/html/metronic/docs/base/utilities" target="_blank" title="Check out over 200 in-house components, plugins and ready for use solutions" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                                <a class="menu-link" href="{{ route('lkpk.kode-rekening') }}" title="Kelola Kode Rekening" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                                     <span class="menu-icon">
-                                        <i class="ki-outline ki-rocket fs-2"></i>
+                                        <i class="ki-outline ki-barcode fs-2"></i>
                                     </span>
-                                    <span class="menu-title">Components</span>
+                                    <span class="menu-title">Kode Rekening</span>
                                 </a>
                                 <!--end:Menu link-->
                             </div>
@@ -119,11 +131,11 @@
                             <!--begin:Menu item-->
                             <div class="menu-item">
                                 <!--begin:Menu link-->
-                                <a class="menu-link" href="https://preview.keenthemes.com/html/metronic/docs" target="_blank" title="Check out the complete documentation" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                                <a class="menu-link" href="#" title="Daftar APBD miliki BPKAD NTB" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                                     <span class="menu-icon">
-                                        <i class="ki-outline ki-abstract-26 fs-2"></i>
+                                        <i class="ki-outline ki-book-open fs-2"></i>
                                     </span>
-                                    <span class="menu-title">Documentation</span>
+                                    <span class="menu-title">APBD</span>
                                 </a>
                                 <!--end:Menu link-->
                             </div>
@@ -131,23 +143,11 @@
                             <!--begin:Menu item-->
                             <div class="menu-item">
                                 <!--begin:Menu link-->
-                                <a class="menu-link" href="https://preview.keenthemes.com/metronic8/demo34/layout-builder.html" title="Build your layout and export HTML for server side integration" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                                <a class="menu-link" href="#" title="Laporan Realisasi anggaran BPKAD NTB" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                                     <span class="menu-icon">
-                                        <i class="ki-outline ki-switch fs-2"></i>
+                                        <i class="ki-outline ki-graph-up fs-2"></i>
                                     </span>
-                                    <span class="menu-title">Layout Builder</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="https://preview.keenthemes.com/html/metronic/docs/getting-started/changelog" target="_blank">
-                                    <span class="menu-icon">
-                                        <i class="ki-outline ki-code fs-2"></i>
-                                    </span>
-                                    <span class="menu-title">Changelog v8.2.9</span>
+                                    <span class="menu-title">Realisasi Anggaran</span>
                                 </a>
                                 <!--end:Menu link-->
                             </div>
@@ -157,127 +157,13 @@
                     </div>
                     <!--end:Menu item-->
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
-                        <!--begin:Menu link-->
-                        <span class="menu-link">
-                            <span class="menu-title">Realisasi Anggaran</span>
-                            <span class="menu-arrow d-lg-none"></span>
-                        </span>
-                        <!--end:Menu link-->
-                        <!--begin:Menu sub-->
-                        <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-200px">
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="https://preview.keenthemes.com/html/metronic/docs/base/utilities" target="_blank" title="Check out over 200 in-house components, plugins and ready for use solutions" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-                                    <span class="menu-icon">
-                                        <i class="ki-outline ki-rocket fs-2"></i>
-                                    </span>
-                                    <span class="menu-title">Components</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="https://preview.keenthemes.com/html/metronic/docs" target="_blank" title="Check out the complete documentation" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-                                    <span class="menu-icon">
-                                        <i class="ki-outline ki-abstract-26 fs-2"></i>
-                                    </span>
-                                    <span class="menu-title">Documentation</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="https://preview.keenthemes.com/metronic8/demo34/layout-builder.html" title="Build your layout and export HTML for server side integration" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-                                    <span class="menu-icon">
-                                        <i class="ki-outline ki-switch fs-2"></i>
-                                    </span>
-                                    <span class="menu-title">Layout Builder</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="https://preview.keenthemes.com/html/metronic/docs/getting-started/changelog" target="_blank">
-                                    <span class="menu-icon">
-                                        <i class="ki-outline ki-code fs-2"></i>
-                                    </span>
-                                    <span class="menu-title">Changelog v8.2.9</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                        </div>
-                        <!--end:Menu sub-->
-                    </div>
-                    <!--end:Menu item-->
-                    <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
+                    <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item @yield('jadwal') menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-title">Jadwal Pimpinan</span>
                             <span class="menu-arrow d-lg-none"></span>
                         </span>
                         <!--end:Menu link-->
-                        <!--begin:Menu sub-->
-                        <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-200px">
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="https://preview.keenthemes.com/html/metronic/docs/base/utilities" target="_blank" title="Check out over 200 in-house components, plugins and ready for use solutions" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-                                    <span class="menu-icon">
-                                        <i class="ki-outline ki-rocket fs-2"></i>
-                                    </span>
-                                    <span class="menu-title">Components</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="https://preview.keenthemes.com/html/metronic/docs" target="_blank" title="Check out the complete documentation" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-                                    <span class="menu-icon">
-                                        <i class="ki-outline ki-abstract-26 fs-2"></i>
-                                    </span>
-                                    <span class="menu-title">Documentation</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="https://preview.keenthemes.com/metronic8/demo34/layout-builder.html" title="Build your layout and export HTML for server side integration" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-                                    <span class="menu-icon">
-                                        <i class="ki-outline ki-switch fs-2"></i>
-                                    </span>
-                                    <span class="menu-title">Layout Builder</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="https://preview.keenthemes.com/html/metronic/docs/getting-started/changelog" target="_blank">
-                                    <span class="menu-icon">
-                                        <i class="ki-outline ki-code fs-2"></i>
-                                    </span>
-                                    <span class="menu-title">Changelog v8.2.9</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                        </div>
-                        <!--end:Menu sub-->
                     </div>
                     <!--end:Menu item-->
                 </div>

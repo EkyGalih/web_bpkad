@@ -79,11 +79,11 @@ return [
 
         'apbd' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST_SIMPEG', '127.0.0.1'),
-            'port' => env('DB_PORT_SIMPEG', '3306'),
-            'database' => env('DB_DATABASE_SIMPEG', 'apbd'),
-            'username' => env('DB_USERNAME_SIMPEG', 'root'),
-            'password' => env('DB_PASSWORD_SIMPEG', ''),
+            'host' => env('DB_HOST_APBD', '127.0.0.1'),
+            'port' => env('DB_PORT_APBD', '3306'),
+            'database' => env('DB_DATABASE_APBD', 'apbd'),
+            'username' => env('DB_USERNAME_APBD', 'root'),
+            'password' => env('DB_PASSWORD_APBD', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',

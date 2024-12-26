@@ -11,7 +11,6 @@ use App\Models\Pangkat;
 use App\Models\Pegawai;
 use DateTime;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class PegawaiController extends Controller

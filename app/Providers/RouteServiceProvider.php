@@ -69,6 +69,9 @@ class RouteServiceProvider extends ServiceProvider
         // ROUTE SIMPEG
         $this->mapBidangRoutes();
         $this->mapPegawaiAdmin();
+
+        // ROUTE LKPD
+        $this->mapKodeRekening();
     }
 
     public function mapPostAdmin()
@@ -230,6 +233,13 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/simpeg/pegawai.php'));
+    }
+
+    public function mapKodeRekening()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/lkpd/KodeRekening.php'));
     }
 
     public function mapApiRoutes()
