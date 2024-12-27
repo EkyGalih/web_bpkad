@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin\IkuRealisasi;
+namespace App\Http\Controllers\LKPD\Admin\IkuRealisasi;
 
 use App\Http\Controllers\Controller;
 use App\Imports\RincianIkuImports;
-use App\Models\FileIku;
-use App\Models\KegiatanIku;
-use App\Models\SubKegiatanIku;
+use App\Models\Lkpd\FileIku;
+use App\Models\Lkpd\KegiatanIku;
+use App\Models\Lkpd\SubKegiatanIku;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 

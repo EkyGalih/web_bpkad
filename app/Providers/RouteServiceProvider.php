@@ -74,6 +74,11 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapKodeRekening();
         $this->mapApbd();
         $this->mapRealisasiAnggaran();
+        $this->mapIkuRealisasi();
+        $this->mapSasaranStrategis();
+        $this->mapIndikatorKinerja();
+        $this->mapDataKinerja();
+        $this->mapFormulasi();
 
         // ROUTE API LKPD
         $this->mapApiKodeRekening();
@@ -259,6 +264,41 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/lkpd/RealisasiAnggaran.php'));
+    }
+
+    public function mapIkuRealisasi()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/lkpd/iku-realisasi/IkuRealisasi.php'));
+    }
+
+    public function mapIndikatorKinerja()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/lkpd/iku-realisasi/indikator-kinerja.php'));
+    }
+
+    public function mapDataKinerja()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/lkpd/iku-realisasi/rincian-iku.php'));
+    }
+
+    public function mapFormulasi()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/lkpd/iku-realisasi/formulasi.php'));
+    }
+
+    public function mapSasaranStrategis()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/lkpd/iku-realisasi/sasaran-strategis.php'));
     }
 
     public function mapApiKodeRekening()

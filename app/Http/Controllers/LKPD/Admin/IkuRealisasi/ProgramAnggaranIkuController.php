@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin\IkuRealisasi;
+namespace App\Http\Controllers\LKPD\Admin\IkuRealisasi;
 
-use App\Helper\UserAccess;
+use App\Helpers\Math;
 use App\Http\Controllers\Controller;
-use App\Models\ProgramAnggaran;
+use App\Models\Lkpd\ProgramAnggaran;
 use Illuminate\Http\Request;
 
 class ProgramAnggaranIkuController extends Controller
@@ -19,7 +19,7 @@ class ProgramAnggaranIkuController extends Controller
     {
         ProgramAnggaran::create([
             'program' => $request->program,
-            'anggaran' => UserAccess::CurrencyConvertComa($request->anggaran),
+            'anggaran' => Math::CurrencyConvertComa($request->anggaran),
             'anggaran_terpakai' => 0,
             'persentase_anggaran' => 0,
             'keterangan' => $request->keterangan
@@ -39,10 +39,10 @@ class ProgramAnggaranIkuController extends Controller
     {
         $ProgramAnggaran = ProgramAnggaran::findOrFail($id);
 
-        $getPersentase = (UserAccess::CurrencyConvertComa($request->anggaran_terpakai) / UserAccess::CurrencyConvertComa($request->anggaran)) * 100;
+        $getPersentase = (Math::CurrencyConvertComa($request->anggaran_terpakai) / Math::CurrencyConvertComa($request->anggaran)) * 100;
 
         $ProgramAnggaran->update([
-            'anggaran_terpakai' => UserAccess::CurrencyConvertComa($request->anggaran_terpakai),
+            'anggaran_terpakai' => Math::CurrencyConvertComa($request->anggaran_terpakai),
             'persentase_anggaran' => $getPersentase
         ]);
 

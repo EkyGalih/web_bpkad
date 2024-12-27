@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin\IkuRealisasi;
+namespace App\Http\Controllers\LKPD\Admin\IkuRealisasi;
 
 use App\Http\Controllers\Controller;
-use App\Models\IndikatorKinerja;
+use App\Models\Lkpd\IndikatorKinerja;
 use Illuminate\Http\Request;
 
 class IndikatorKinerjaController extends Controller

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\LKPD\Admin;
 
 use App\Helper\UserAccess;
-use App\Helpers\Helpers;
+use App\Helpers\Math;
 use App\Http\Controllers\Controller;
 use App\Models\Lkpd\Apbd;
 use App\Models\Lkpd\KodeRekening;
@@ -129,10 +129,11 @@ class RealisasiAnggaranController extends Controller
      */
     public function update(Request $request)
     {
+        dd($request);
         $Apbd = Apbd::where('kode_rekening', '=', $request->kode_rekening)->where('tahun_anggaran', '=', $request->tahun_anggaran)->select('jml_anggaran_setelah', 'tahun_anggaran')->first();
         $Anggaran = LaporanRealisasiAnggaran::where('kode_rekening', '=', $request->kode_rekening)->where('tahun_anggaran', '=', $request->tahun_anggaran)->first();
-        $AnggaranBaru = Helpers::CurrencyConvertComa($request->anggaran_terealisasi);
-        $SumAnggaran = $AnggaranBaru + $Anggaran->anggaran_terealisasi;
+        $AnggaranBaru = Math::CurrencyConvertComa($request->anggaran_terealisasi);
+        $SumAnggaran = $AnggaranBaru + $Anggaran->anggaran_terealisasi ?? 0;
 
         if ($Apbd->jml_anggaran_setelah >= $SumAnggaran) {
             $Anggaran->update([

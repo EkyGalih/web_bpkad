@@ -7,8 +7,9 @@
                 {{-- <th>MURNI [HAPUS]</th> --}}
                 {{-- murni hapus --}}
                 <th style="text-align: center; font-size: 16px;">ANGGARAN</th>
-                <th style="text-align: center; font-size: 16px;">REALISASI ({{ date('Y') }})</th>
-                <th style="text-align: center; font-size: 16px;">% ({{ date('Y') }})</th>
+                <th style="text-align: center; font-size: 16px;">REALISASI ({{ $get_tahun->isEmpty() ? date('Y') : $tahun_anggaran }})</th>
+                <th style="text-align: center; font-size: 16px;">% ({{ $get_tahun->isEmpty() ? date('Y') : $tahun_anggaran }})</th>
+                <th></th>
             </tr>
             <tr>
                 <th style="text-align: center;">1</th>
@@ -16,6 +17,7 @@
                 <th style="text-align: center;">3</th>
                 <th style="text-align: center;">4</th>
                 <th style="text-align: center;">5 = (4 / 3) * 100</th>
+                <th style="text-align: center;"></th>
             </tr>
         </thead>
         <tbody>
@@ -75,28 +77,54 @@
                                     {{ number_format($item['anggaran_terealisasi']) }}</td>
                                 <td style="text-align: right; font-size: 12px;">
                                     @php
-                                        $persen = $item['anggaran_terealisasi'] == 0 ? 0 : ($item['jml_anggaran_setelah'] == 0 ? 0 : $item['anggaran_terealisasi'] / $item['jml_anggaran_setelah']) * 100;
+                                        $persen =
+                                            $item['anggaran_terealisasi'] == 0
+                                                ? 0
+                                                : ($item['jml_anggaran_setelah'] == 0
+                                                        ? 0
+                                                        : $item['anggaran_terealisasi'] /
+                                                            $item['jml_anggaran_setelah']) * 100;
                                     @endphp
                                     {{ round($persen, 2) }} %
                                 </td>
                             @endif
+                            <td>
+                                @if (strlen($item['kode_rekening']) == 6)
+                                    <button type="button" class="btn btn-icon btn-warning btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#modalEdit">
+                                        <i class="ki-outline ki-file-sheet"></i>
+                                    </button>
+                                @endif
+                            </td>
                         </tr>
                     @endif
                     @php
                         // push data when get 3 digit kode rekening
-                        if (strlen($item['kode_rekening']) == 3 && $item['nama_rekening'] == strtoupper('pendapatan daerah')) {
+                        if (
+                            strlen($item['kode_rekening']) == 3 &&
+                            $item['nama_rekening'] == strtoupper('pendapatan daerah')
+                        ) {
                             array_push($jumlah_pendapatan1, $item['jml_anggaran_setelah']);
                             $sumLRA = Apbd::SumSubLRA($item['kode_rekening']);
                             array_push($jumlah_pendapatan2, $sumLRA);
-                        } elseif (strlen($item['kode_rekening']) == 3 && $item['nama_rekening'] == strtoupper('belanja')) {
+                        } elseif (
+                            strlen($item['kode_rekening']) == 3 &&
+                            $item['nama_rekening'] == strtoupper('belanja')
+                        ) {
                             array_push($jumlah_belanja1, $item['jml_anggaran_setelah']);
                             $sumLRA = Apbd::SumSubLRA($item['kode_rekening']);
                             array_push($jumlah_belanja2, $sumLRA);
-                        } elseif (strlen($item['kode_rekening']) == 6 && $item['uraian'] == strtoupper('penerimaan pembiayaan')) {
+                        } elseif (
+                            strlen($item['kode_rekening']) == 6 &&
+                            $item['uraian'] == strtoupper('penerimaan pembiayaan')
+                        ) {
                             array_push($jumlah_pembiayaan1, $item['jml_anggaran_setelah']);
                             $sumLRA = Apbd::SumSubLRA($item['kode_rekening']);
                             array_push($jumlah_pembiayaan2, $sumLRA);
-                        } elseif (strlen($item['kode_rekening']) == 6 && $item['uraian'] == strtoupper('pengeluaran pembiayaan')) {
+                        } elseif (
+                            strlen($item['kode_rekening']) == 6 &&
+                            $item['uraian'] == strtoupper('pengeluaran pembiayaan')
+                        ) {
                             array_push($jumlah_pembiayaan3, $item['jml_anggaran_setelah']);
                             $sumLRA = Apbd::SumSubLRA($item['kode_rekening']);
                             array_push($jumlah_pembiayaan4, $sumLRA);
@@ -108,6 +136,7 @@
                         // } elseif (strlen($item['kode_rekening']) > 3 && $item['nama_rekening'] == strtoupper('belanja')) {
                         //     array_push($realisasi_belanja, $item['anggaran_terealisasi']);
                         // }
+
                     @endphp
                 @endforeach
                 <tr>
@@ -126,7 +155,8 @@
                         <input type="hidden" value="{{ array_sum($jumlah_pendapatan2) }}" id="jumlah_pendapatan2">
                         @php
                             if (array_sum($jumlah_pendapatan2) > 0) {
-                                $persen_pendapatan1 = (array_sum($jumlah_pendapatan2) / array_sum($jumlah_pendapatan1)) * 100;
+                                $persen_pendapatan1 =
+                                    (array_sum($jumlah_pendapatan2) / array_sum($jumlah_pendapatan1)) * 100;
                             } elseif (array_sum($jumlah_pendapatan2) <= 0) {
                                 $persen_pendapatan1 = 0;
                             }
@@ -212,7 +242,8 @@
                         <input type="hidden" value="{{ array_sum($jumlah_pembiayaan2) }}" id="jumlah_pembiayaan2">
                         @php
                             if (array_sum($jumlah_pembiayaan2) > 0) {
-                                $persen_pembiayaan1 = (array_sum($jumlah_pembiayaan2) / array_sum($jumlah_pembiayaan1)) * 100;
+                                $persen_pembiayaan1 =
+                                    (array_sum($jumlah_pembiayaan2) / array_sum($jumlah_pembiayaan1)) * 100;
                             } elseif (array_sum($jumlah_pembiayaan2) <= 0) {
                                 $persen_pembiayaan1 = 0;
                             }
@@ -233,7 +264,8 @@
                         </td>
                         @php
                             if (array_sum($jumlah_pembiayaan4) > 0) {
-                                $persen_pembiayaan2 = (array_sum($jumlah_pembiayaan4) / array_sum($jumlah_pembiayaan3)) * 100;
+                                $persen_pembiayaan2 =
+                                    (array_sum($jumlah_pembiayaan4) / array_sum($jumlah_pembiayaan3)) * 100;
                             } elseif (array_sum($jumlah_pembiayaan4) <= 0) {
                                 $persen_pembiayaan2 = 0;
                             }

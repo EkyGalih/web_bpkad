@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin\IkuRealisasi;
+namespace App\Http\Controllers\LKPD\Admin\IkuRealisasi;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RequestSasaranStrategis;
-use App\Models\SasaranStrategis;
+use App\Models\Lkpd\SasaranStrategis;
 use Illuminate\Http\Request;
 
 class SasaranStrategisController extends Controller

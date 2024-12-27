@@ -52,6 +52,31 @@
         </div>
     </div>
 </div>
+<div class="col-lg-3 col-sm-6">
+    <div class="card hovercard">
+        <div class="cardheader-lkpd">
+        </div>
+        <div class="avatar">
+            <img alt="" src="{{ asset('client/assets/img/lkpd-logo.png') }}">
+        </div>
+        <div class="info">
+            <div class="title">
+                <h4>LKPD</h4>
+            </div>
+            <div class="desc">
+                <h4 class="badge badge-primary">{{ Auth::user()->role }}</h4>
+            </div>
+        </div>
+        <div class="bottom">
+            @if (Auth::user()->role == 'superadmin' || Auth::user()->role == 'admin')
+            {{-- <a class="btn btn-secondary btn-block btn-sm" href="#"> --}}
+            <a class="btn btn-primary btn-block btn-sm" href="{{ ENV('APBD_ADMIN') }}">
+                <i class="bx bx-log-in-circle"></i> Ke Aplikasi
+            </a>
+            @endif
+        </div>
+    </div>
+</div>
 {{-- <div class="col-lg-3 col-sm-6"> --}}
     {{-- <div class="card hovercard"> --}}
         {{-- <div class="cardheader-inv"> --}}

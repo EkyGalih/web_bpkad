@@ -12,18 +12,14 @@
             <i class="ki-outline ki-book-open fs-1 me-2"></i>LAPORAN REALISASI ANGGARAN APBD (NTB)
         </h1>
     </div>
-    <div class="d-flex align-self-center flex-center flex-shrink-0 w-50">
-        <select id="tahun_anggaran" class="form-control w-50 me-2" onchange="getApbd()">
-            <option>Pilih Tahun Anggaran</option>
+    <div class="d-flex justify-content-end">
+        <select id="tahun_anggaran" class="form-control w-100 me-2" onchange="getApbd()">
+            <option value="">Pilih Tahun Anggaran</option>
             @foreach ($get_tahun as $ta)
                 <option value="{{ $ta->tahun_anggaran }}" {{ $ta->tahun_anggaran == $tahun_anggaran ? 'selected' : '' }}>
                     {{ $ta->tahun_anggaran }}</option>
             @endforeach
         </select>
-        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit">
-        <i class="fas fa-edit"></i> Update Anggaran
-    </button>
-    @include('lkpd.RealisasiAnggaran.Components.edit')
     </div>
 @endsection
 @section('content')
@@ -33,14 +29,16 @@
                 <div class="card-header p-0">
                     <div class="card-title text-center">
                         <h4 class="fw-bold mb-5">LAPORAN REALISASI ANGGARAN PENDAPATAN
-                            DAN BELANJA DAERAH (KONSOLIDASI)<br /><span class="d-block">{{ date('Y') }}</span><br />01 Januari
-                            {{ date('Y') }} Sampai {{ date('d F Y') }}</h4>
+                            DAN BELANJA DAERAH (KONSOLIDASI)<br /><span class="d-block">{{ $tahun_anggaran }}</span><br />01
+                            Januari
+                            {{ $get_tahun->isEmpty() ? date('Y') : $tahun_anggaran }} Sampai {{ $get_tahun->isEmpty() ? date('d F Y') : '31 Desember ' . $tahun_anggaran }}</h4>
                     </div>
-                    <input type="hidden" value="{{ $get_tahun == null ? date('Y') : $tahun_anggaran }}" id="get_ta">
+                    <input type="hidden" value="{{ $get_tahun->isEmpty() ? date('Y') : $tahun_anggaran }}" id="get_ta">
                 </div>
                 <div class="card-body p-0">
                     <div class="col-lg-12">
                         @include('lkpd.RealisasiAnggaran.Components.table')
+                        @include('lkpd.RealisasiAnggaran.Components.edit')
                     </div>
                 </div>
             </div>

@@ -45,7 +45,7 @@
                             <!--begin:Menu item-->
                             <div class="menu-item">
                                 <!--begin:Menu link-->
-                                <a class="menu-link" href="#" title="Daftar Indikator Kinerja" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                                <a class="menu-link" href="{{ route('iku-realisasi.index') }}" title="Daftar Indikator Kinerja" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                                     <span class="menu-icon">
                                         <i class="ki-outline ki-tablet-book fs-2"></i>
                                     </span>

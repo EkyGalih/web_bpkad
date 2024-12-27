@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin\IkuRealisasi;
+namespace App\Http\Controllers\LKPD\Admin\IkuRealisasi;
 
 use App\Http\Controllers\Controller;
-use App\Models\IkuRealisasi;
+use App\Models\Lkpd\IkuRealisasi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +24,7 @@ class IkuRealisasiController extends Controller
                         ->where('created_at', 'LIKE', date('Y').'%')
                         ->paginate(10);
 
-        return view('admin.iku_realisasi.Components.iku_realisasi', compact('IkuRealisasi', 'user'));
+        return view('lkpd.iku_realisasi.Components.iku_realisasi', compact('IkuRealisasi', 'user'));
     }
 
 

@@ -224,6 +224,14 @@
     height: 135px;
   }
 
+  .card.hovercard .cardheader-lkpd {
+    background: url("{{ asset('client/assets/img/lkpd-bg.png') }}");
+    background-size: cover;
+    filter: blur(1px);
+    -webkit-filter: blur(1px);
+    height: 135px;
+  }
+
   .card.hovercard .avatar {
     position: relative;
     top: -50px;
