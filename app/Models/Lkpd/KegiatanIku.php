@@ -10,6 +10,7 @@ use Webpatser\Uuid\Uuid;
 class KegiatanIku extends Model
 {
     use HasFactory;
+    protected $connection = 'apbd';
     public $incrementing = false;
     protected $table = 'kegiatan_iku';
     protected $guarded = ['created_at', 'updated_at'];

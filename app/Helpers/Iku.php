@@ -52,11 +52,19 @@ class Iku
 
     public static function GetAllPersentase($kode_kegiatan)
     {
-        $persentases   = SubKegiatanIku::where('kode_kegiatan_iku', '=', $kode_kegiatan)->select('persentase')->count();
-        $persentase    = SubKegiatanIku::where('kode_kegiatan_iku', '=', $kode_kegiatan)->where('persentase', '=', 100)->select('persentase')->count();
+        $persentases = SubKegiatanIku::where('kode_kegiatan_iku', '=', $kode_kegiatan)->count();
+
+        if ($persentases === 0) {
+            return 0; // Menghindari division by zero
+        }
+
+        $persentase = SubKegiatanIku::where('kode_kegiatan_iku', '=', $kode_kegiatan)
+            ->where('persentase', '=', 100)
+            ->count();
 
         return round(($persentase / $persentases) * 100, 2);
     }
+
 
     public static function GetListFile($id)
     {

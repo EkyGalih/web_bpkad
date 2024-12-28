@@ -93,7 +93,7 @@
                             <!--begin:Menu item-->
                             <div class="menu-item">
                                 <!--begin:Menu link-->
-                                <a class="menu-link" href="#">
+                                <a class="menu-link" href="{{ route('rincian-iku') }}" title="Data Kinerja" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                                     <span class="menu-icon">
                                         <i class="ki-outline ki-text-number fs-2"></i>
                                     </span>
@@ -154,16 +154,6 @@
                             <!--end:Menu item-->
                         </div>
                         <!--end:Menu sub-->
-                    </div>
-                    <!--end:Menu item-->
-                    <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item @yield('jadwal') menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
-                        <!--begin:Menu link-->
-                        <span class="menu-link">
-                            <span class="menu-title">Jadwal Pimpinan</span>
-                            <span class="menu-arrow d-lg-none"></span>
-                        </span>
-                        <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->
                 </div>
