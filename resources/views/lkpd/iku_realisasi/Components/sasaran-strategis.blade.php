@@ -20,24 +20,24 @@
             <div class="card card-flush p-5">
                 <div class="card-header p-0">
                     <div class="card-title">
-                        <h4>Sasaran Strategis</h4>
+                        <h4>Daftar Sasaran Strategis</h4>
                     </div>
                 </div>
                 <div class="card-body p-0">
                     <table class="table table-hover table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th class="text-center">#</th>
                                 <th>Sasaran Strategis</th>
-                                <th>Aksi</th>
+                                <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($SasaranStrategis as $sasaran)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td class="text-center">{{ $loop->iteration }}</td>
                                     <td>{{ $sasaran->sasaran_strategis }}</td>
-                                    <td>
+                                    <td class="text-center">
                                         <button type="button" class="btn btn-icon btn-warning btn-sm"
                                             data-bs-toggle="modal" data-bs-target="#EditData{{ $loop->iteration }}"
                                             data-bs-tooltip="tooltip" data-bs-placement="left" title="Ubah Sasaran">

@@ -20,7 +20,7 @@
                     </button>
                 </td>
             </tr>
-            @include('admin.iku_realisasi.Addons.IndikatorKinerja.edit')
+            @include('lkpd.iku_realisasi.Addons.IndikatorKinerja.edit')
         @endforeach
     </tbody>
 </table>
