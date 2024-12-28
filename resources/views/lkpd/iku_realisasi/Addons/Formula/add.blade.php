@@ -2,58 +2,56 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="row">
-                    <div class="col-md-8">
-                        <h5 class="modal-title"><i class="fas fa-plus-square"></i> Tambah Formulasi</h5>
-                    </div>
-                    <div class="col-md-4">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </div>
+                <h5 class="modal-title"><i class="ki-outline ki-plus-square fs-3"></i> Tambah Formulasi</h5>
             </div>
             <div class="modal-body">
                 <form action="{{ route('iku-formulasi.store') }}" method="POST">
                     @csrf
-                    <div class="form-group">
-                        <label for="ik_id">Indikator Kinerja</label>
-                        <select name="indikator_kinerja_id" class="form-control">
+                    <div class="fv-row mb-3">
+                        <label class="form-label" for="ik_id">Indikator Kinerja</label>
+                        <select name="indikator_kinerja_id" class="form-control mb-3">
                             <option>-----</option>
-                            @php $indikatorKinerja = Helpers::GetIK() @endphp
-                            @foreach ($indikatorKinerja as $ik)
-                                <option value="{{ $ik->ik_id }}">{{ $ik->indikator_kinerja }}</option>
-                            @endforeach
+                            @php $indikatorKinerja = Iku::GetIK() @endphp
+                            @if ($indikatorKinerja->isEmpty())
+                                <option disabled>Tidak ada data</option>
+                            @else
+                                @foreach ($indikatorKinerja as $ik)
+                                    <option value="{{ $ik->ik_id }}">{{ $ik->indikator_kinerja }}</option>
+                                @endforeach
+                            @endif
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="formulasi">Formulasi</label>
-                        <textarea name="formulasi" class="form-control"></textarea>
+                    <div class="fv-row mb-3">
+                        <label class="form-label" for="formulasi">Formulasi</label>
+                        <textarea name="formulasi" class="form-control mb-3"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="tipe_penghitungan">Tipe Perhitungan</label>
-                        <input type="text" name="tipe_penghitungan" class="form-control">
+                    <div class="fv-row mb-3">
+                        <label class="form-label" for="tipe_penghitungan">Tipe Perhitungan</label>
+                        <input type="text" name="tipe_penghitungan" class="form-control mb-3">
                     </div>
-                    <div class="form-group">
-                        <label for="sumber_data">Sumber Data</label>
-                        <select name="divisi_id" class="form-control">
+                    <div class="fv-row mb-3">
+                        <label class="form-label" for="sumber_data">Sumber Data</label>
+                        <select name="bidang_id" class="form-control mb-3">
                             <option value="">-------</option>
-                            @php $Divisi = Helpers::GetDivisi() @endphp
+                            @php $Divisi = Helpers::GetAllBidang() @endphp
                             @foreach ($Divisi as $div)
-                            <option value="{{ $div->divisi_id }}">{{ $div->nama_divisi }}</option>
+                                <option value="{{ $div->bidang_id }}">{{ strtoupper($div->nama_bidang) }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="alasan">Alasan</label>
-                        <textarea name="alasan" class="form-control"></textarea>
+                    <div class="fv-row mb-3">
+                        <label class="form-label" for="alasan">Alasan</label>
+                        <textarea name="alasan" class="form-control mb-3"></textarea>
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-theme04" data-dismiss="modal"><i class="fas fa-times"></i>
+                <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">
+                    <i class="ki-outline ki-cross fs-2"></i>
                     Close</button>
-                <button type="submit" class="btn btn-theme"><i class="fas fa-plus"></i>
-                    Tambah</button>
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <i class="ki-outline ki-plus fs-2"></i>
+                    Tambah
+                </button>
             </div>
             </form>
         </div>

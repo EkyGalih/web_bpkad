@@ -15,7 +15,9 @@ class IndikatorKinerjaController extends Controller
      */
     public function index()
     {
-        $indikatorKinerja = IndikatorKinerja::select('id as ik_id', 'indikator_kinerja.indikator_kinerja')->paginate(10);
+        $indikatorKinerja = IndikatorKinerja::select('id as ik_id', 'indikator_kinerja.indikator_kinerja')
+        ->where('created_at', 'like', date('Y-m-d') . '%')
+        ->paginate(10);
         return view('lkpd.iku_realisasi.Components.indikator-kinerja', compact('indikatorKinerja'));
     }
 

@@ -16,9 +16,11 @@ class FormulaController extends Controller
      */
     public function index()
     {
-        $Formulasi = Formulasi::select('id as formula_id', 'formulasi.*')->paginate(10);
+        $Formulasi = Formulasi::select('id as formula_id', 'formulasi.*')
+            ->where('created_at', 'like', date('Y-m-d') . '%')
+            ->paginate(10);
 
-        return view('admin.iku_realisasi.Components.formula', compact('Formulasi'));
+        return view('lkpd.iku_realisasi.Components.formula', compact('Formulasi'));
     }
 
     /**
@@ -33,7 +35,7 @@ class FormulaController extends Controller
             'indikator_kinerja_id' => $request->indikator_kinerja_id,
             'formulasi' => $request->formulasi,
             'tipe_penghitungan' => $request->tipe_penghitungan,
-            'divisi_id' => $request->divisi_id,
+            'bidang_id' => $request->bidang_id,
             'alasan' => $request->alasan
         ]);
 
@@ -55,7 +57,7 @@ class FormulaController extends Controller
             'indikator_kinerja_id' => $request->indikator_kinerja_id,
             'formulasi' => $request->formulasi,
             'tipe_penghitungan' => $request->tipe_penghitungan,
-            'divisi_id' => $request->divisi_id,
+            'bidang_id' => $request->bidang_id,
             'alasan' => $request->alasan
         ]);
 
