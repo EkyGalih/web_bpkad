@@ -18,15 +18,23 @@
         }
     ],
     "require": {
-        "php": ">=7.3",
-        "illuminate/support": "^6.0|^7.0|^8.0|^9.0",
-        "illuminate/cache": "^6.0|^7.0|^8.0|^9.0",
-        "intervention/image": "^2.5"
+        "php": ">=8.1",
+        "illuminate/support": "^10.0|^11.0",
+        "illuminate/cache": "^10.0|^11.0",
+        "intervention/image": "^3.4"
     },
+    "suggest": {
+        "ext-gd": "Needed to support image manipulation",
+        "ext-imagick": "Needed to support image manipulation, better than GD"
+    },
+
     "require-dev": {
-        "phpunit/phpunit": "~9.0",
+        "roave/security-advisories": "dev-latest",
+        "phpunit/phpunit": "^10.5",
         "mockery/mockery": "~1.3",
-        "php-coveralls/php-coveralls": "^2.1"
+        "php-coveralls/php-coveralls": "^2.1",
+        "pestphp/pest": "^2.34",
+        "pestphp/pest-plugin-type-coverage": "^2.8"
     },
     "autoload": {
         "psr-4": {
@@ -43,7 +51,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "5.0-dev"
+            "dev-master": "6.0-dev"
         },
         "laravel": {
             "providers": [
@@ -52,6 +60,11 @@
             "aliases": {
                 "Avatar": "Laravolt\\Avatar\\Facade"
             }
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
         }
     }
 }

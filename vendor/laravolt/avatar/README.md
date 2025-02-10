@@ -1,9 +1,9 @@
 # laravolt/avatar
 
-[![Total Downloads](http://poser.pugx.org/laravolt/avatar/downloads)](https://packagist.org/packages/laravolt/avatar)
-[![Monthly Downloads](http://poser.pugx.org/laravolt/avatar/d/monthly)](https://packagist.org/packages/laravolt/avatar)
-[![Travis](https://img.shields.io/travis/laravolt/avatar.svg)](https://travis-ci.org/laravolt/avatar)
-[![Coverage Status](https://coveralls.io/repos/github/laravolt/avatar/badge.svg?branch=master)](https://coveralls.io/github/laravolt/avatar?branch=master)
+[![Total Downloads](https://img.shields.io/packagist/dt/laravolt/avatar.svg?style=flat)](https://packagist.org/packages/laravolt/avatar)
+[![Monthly Downloads](https://img.shields.io/packagist/dm/laravolt/avatar.svg?style=flat)](https://packagist.org/packages/laravolt/avatar)
+[![Daily Downloads](https://img.shields.io/packagist/dd/laravolt/avatar.svg?style=flat)](https://packagist.org/packages/laravolt/avatar)
+[![Run Tests](https://github.com/laravolt/avatar/workflows/run-tests/badge.svg)](https://github.com/laravolt/avatar/workflows/run-tests/badge.svg)
 
 ![Preview](https://user-images.githubusercontent.com/149716/29503524-840ccd0c-8662-11e7-92f9-9ec3ed8a24af.png)
 
@@ -11,6 +11,8 @@ Display unique avatar for any user based on their (initials) name.
 
 ## Preview
 ![Preview](https://cloud.githubusercontent.com/assets/149716/26735022/6dbd77e2-47ea-11e7-8a05-7772465309c5.png)
+## :film_strip: Video Tutorial 
+[<img src="https://img.youtube.com/vi/jD0wu88c5kw/0.jpg" width="250">](https://youtu.be/jD0wu88c5kw)
 
 ## Installation
 This package originally built for Laravel, but can also be used in any PHP project.

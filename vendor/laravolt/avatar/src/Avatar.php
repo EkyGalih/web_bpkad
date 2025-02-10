@@ -4,9 +4,12 @@ namespace Laravolt\Avatar;
 
 use Illuminate\Cache\ArrayStore;
 use Illuminate\Contracts\Cache\Repository;
-use Intervention\Image\AbstractFont;
-use Intervention\Image\AbstractShape;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\Drivers\Imagick\Driver as ImagickDriver;
+use Intervention\Image\Geometry\Factories\CircleFactory;
+use Intervention\Image\Geometry\Factories\RectangleFactory;
 use Intervention\Image\ImageManager;
+use Intervention\Image\Typography\FontFactory;
 use Laravolt\Avatar\Concerns\AttributeGetter;
 use Laravolt\Avatar\Concerns\AttributeSetter;
 use Laravolt\Avatar\Generator\DefaultGenerator;
@@ -17,64 +20,61 @@ class Avatar
     use AttributeGetter;
     use AttributeSetter;
 
-    protected $name;
+    protected ?string $name = "";
 
-    protected $chars;
+    protected int $chars;
 
-    protected $shape;
+    protected string $shape;
 
-    protected $width;
+    protected int $width;
 
-    protected $height;
+    protected int $height;
 
-    protected $availableBackgrounds = [];
+    protected array $availableBackgrounds = [];
 
-    protected $availableForegrounds = [];
+    protected array $availableForegrounds = [];
 
-    protected $fonts = [];
+    protected array $fonts = [];
 
-    protected $fontSize;
+    protected float $fontSize;
 
-    protected $fontFamily;
+    protected ?string $fontFamily = null;
 
-    protected $borderSize = 0;
+    protected int $borderSize = 0;
 
-    protected $borderColor;
+    protected string $borderColor;
 
-    protected $borderRadius = 0;
+    protected int $borderRadius = 0;
 
-    protected $ascii = false;
+    protected bool $ascii = false;
 
-    protected $uppercase = false;
+    protected bool $uppercase = false;
 
-    protected $rtl = false;
+    protected bool $rtl = false;
 
-    /**
-     * @var \Intervention\Image\Image
-     */
-    protected $image;
+    protected \Intervention\Image\Image $image;
 
-    protected $font = null;
+    protected ?string $font;
 
-    protected $background = '#CCCCCC';
+    protected string $background = '#CCCCCC';
 
-    protected $foreground = '#FFFFFF';
+    protected string $foreground = '#FFFFFF';
 
-    protected $initials = '';
+    protected string $initials = '';
 
-    protected $cache;
+    protected Repository|ArrayStore $cache;
 
-    protected $driver;
+    protected mixed $driver;
 
-    protected $initialGenerator;
+    protected GeneratorInterface $initialGenerator;
 
-    protected $defaultFont = __DIR__.'/../fonts/OpenSans-Bold.ttf';
+    protected string $defaultFont = __DIR__.'/../fonts/OpenSans-Bold.ttf';
 
-    protected $themes = [];
+    protected array $themes = [];
 
-    protected $theme;
+    protected string|array|null $theme;
 
-    protected $defaultTheme = [];
+    protected array $defaultTheme = [];
 
     /**
      * Avatar constructor.
@@ -89,11 +89,12 @@ class Avatar
         $this->theme = $config['theme'] ?? null;
         $this->defaultTheme = $this->validateConfig($config);
         $this->applyTheme($this->defaultTheme);
+        $this->initialGenerator = new DefaultGenerator();
 
         // Add any additional themes for further use
         $themes = $this->resolveTheme('*', $config['themes'] ?? []);
-        foreach ($themes as $name => $config) {
-            $this->addTheme($name, $config);
+        foreach ($themes as $name => $conf) {
+            $this->addTheme($name, $conf);
         }
 
         $this->initTheme();
@@ -107,12 +108,12 @@ class Avatar
         return (string) $this->toBase64();
     }
 
-    public function setGenerator(GeneratorInterface $generator)
+    public function setGenerator(GeneratorInterface $generator): void
     {
         $this->initialGenerator = $generator;
     }
 
-    public function create($name)
+    public function create(string $name): static
     {
         $this->name = $name;
 
@@ -121,7 +122,7 @@ class Avatar
         return $this;
     }
 
-    public function applyTheme(array $config)
+    public function applyTheme(array $config): void
     {
         $config = $this->validateConfig($config);
         $this->shape = $config['shape'];
@@ -141,14 +142,14 @@ class Avatar
         $this->borderRadius = $config['border']['radius'];
     }
 
-    public function addTheme(string $name, array $config)
+    public function addTheme(string $name, array $config): static
     {
         $this->themes[$name] = $this->validateConfig($config);
 
         return $this;
     }
 
-    protected function setRandomTheme()
+    protected function setRandomTheme(): void
     {
         $themes = $this->resolveTheme($this->theme, $this->themes);
         if (!empty($themes)) {
@@ -156,9 +157,9 @@ class Avatar
         }
     }
 
-    protected function resolveTheme($theme, $config)
+    protected function resolveTheme(array|string|null $theme, array $cfg): array
     {
-        $config = collect($config);
+        $config = collect($cfg);
         $themes = [];
 
         foreach ((array) $theme as $themeName) {
@@ -177,7 +178,7 @@ class Avatar
         return $themes;
     }
 
-    public function toBase64()
+    public function toBase64(): string
     {
         $key = $this->cacheKey();
         if ($base64 = $this->cache->get($key)) {
@@ -186,21 +187,21 @@ class Avatar
 
         $this->buildAvatar();
 
-        $base64 = (string)$this->image->encode('data-url');
+        $base64 = $this->image->toPng()->toDataUri();
 
         $this->cache->forever($key, $base64);
 
         return $base64;
     }
 
-    public function save($path, $quality = 90)
+    public function save(?string $path, int $quality = 90): \Intervention\Image\Interfaces\ImageInterface
     {
         $this->buildAvatar();
 
         return $this->image->save($path, $quality);
     }
 
-    public function toSvg()
+    public function toSvg(): string
     {
         $this->buildInitial();
 
@@ -211,7 +212,7 @@ class Avatar
 
         $svg = '<svg xmlns="http://www.w3.org/2000/svg" width="'.$this->width.'" height="'.$this->height.'" viewBox="0 0 '.$this->width.' '.$this->height.'">';
 
-        if ($this->shape == 'square') {
+        if ($this->shape === 'square') {
             $svg .= '<rect x="'.$x
                 .'" y="'.$y
                 .'" width="'.$width.'" height="'.$height
@@ -219,7 +220,7 @@ class Avatar
                 .'" stroke-width="'.$this->borderSize
                 .'" rx="'.$this->borderRadius
                 .'" fill="'.$this->background.'" />';
-        } elseif ($this->shape == 'circle') {
+        } elseif ($this->shape === 'circle') {
             $svg .= '<circle cx="'.$center
                 .'" cy="'.$center
                 .'" r="'.$radius
@@ -243,7 +244,7 @@ class Avatar
         return $svg;
     }
 
-    public function toGravatar(array $param = null)
+    public function toGravatar(array $param = null): string
     {
         // Hash generation taken from https://en.gravatar.com/site/implement/images/php/
         $hash = md5(strtolower(trim($this->name)));
@@ -271,54 +272,55 @@ class Avatar
         return $url;
     }
 
-    public function getInitial()
+    public function getInitial(): string
     {
         return $this->initials;
     }
 
-    public function getImageObject()
+    public function getImageObject(): \Intervention\Image\Image
     {
         $this->buildAvatar();
 
         return $this->image;
     }
 
-    protected function getRandomBackground()
+    protected function getRandomBackground(): string
     {
         return $this->getRandomElement($this->availableBackgrounds, $this->background);
     }
 
-    protected function getRandomForeground()
+    protected function getRandomForeground(): string
     {
         return $this->getRandomElement($this->availableForegrounds, $this->foreground);
     }
 
-    protected function getRandomFont()
+    protected function getRandomFont(): string
     {
         return $this->getRandomElement($this->fonts, $this->defaultFont);
     }
 
-    protected function getBorderColor()
+    protected function getBorderColor(): string
     {
-        if ($this->borderColor == 'foreground') {
+        if ($this->borderColor === 'foreground') {
             return $this->foreground;
         }
-        if ($this->borderColor == 'background') {
+        if ($this->borderColor === 'background') {
             return $this->background;
         }
 
         return $this->borderColor;
     }
 
-    public function buildAvatar()
+    public function buildAvatar(): static
     {
         $this->buildInitial();
 
         $x = $this->width / 2;
         $y = $this->height / 2;
 
-        $manager = new ImageManager(['driver' => $this->driver]);
-        $this->image = $manager->canvas($this->width, $this->height);
+        $driver = $this->driver === 'gd' ? new Driver() : new ImagickDriver();
+        $manager = new ImageManager($driver);
+        $this->image = $manager->create($this->width, $this->height);
 
         $this->createShape();
 
@@ -328,9 +330,9 @@ class Avatar
 
         $this->image->text(
             $this->initials,
-            $x,
-            $y,
-            function (AbstractFont $font) {
+            (int) $x,
+            (int) $y,
+            function (FontFactory $font) {
                 $font->file($this->font);
                 $font->size($this->fontSize);
                 $font->color($this->foreground);
@@ -342,53 +344,52 @@ class Avatar
         return $this;
     }
 
-    protected function createShape()
+    protected function createShape(): void
     {
         $method = 'create'.ucfirst($this->shape).'Shape';
         if (method_exists($this, $method)) {
-            return $this->$method();
+            $this->$method();
+        } else {
+            throw new \InvalidArgumentException("Shape [$this->shape] currently not supported.");
         }
-
-        throw new \InvalidArgumentException("Shape [$this->shape] currently not supported.");
     }
 
-    protected function createCircleShape()
+    protected function createCircleShape(): void
     {
-        $circleDiameter = $this->width - $this->borderSize;
-        $x = $this->width / 2;
-        $y = $this->height / 2;
+        $circleDiameter = (int) ($this->width - $this->borderSize);
+        $x = (int) ($this->width / 2);
+        $y = (int) ($this->height / 2);
 
-        $this->image->circle(
-            $circleDiameter,
+        $this->image->drawCircle(
             $x,
             $y,
-            function (AbstractShape $draw) {
-                $draw->background($this->background);
-                $draw->border($this->borderSize, $this->getBorderColor());
+            function (CircleFactory $circle) use ($circleDiameter) {
+                $circle->diameter($circleDiameter);
+                $circle->border($this->getBorderColor(), $this->borderSize);
+                $circle->background($this->background);
             }
         );
     }
 
-    protected function createSquareShape()
+    protected function createSquareShape(): void
     {
         $edge = (ceil($this->borderSize / 2));
         $x = $y = $edge;
         $width = $this->width - $edge;
         $height = $this->height - $edge;
 
-        $this->image->rectangle(
+        $this->image->drawRectangle(
             $x,
             $y,
-            $width,
-            $height,
-            function (AbstractShape $draw) {
+            function (RectangleFactory $draw) use ($width, $height) {
+                $draw->size($width, $height);
                 $draw->background($this->background);
-                $draw->border($this->borderSize, $this->getBorderColor());
+                $draw->border($this->getBorderColor(), $this->borderSize);
             }
         );
     }
 
-    protected function cacheKey()
+    protected function cacheKey(): string
     {
         $keys = [];
         $attributes = [
@@ -410,17 +411,20 @@ class Avatar
         return md5(implode('-', $keys));
     }
 
-    protected function getRandomElement($array, $default)
+    /**
+     * @throws \Random\RandomException
+     */
+    protected function getRandomElement(array $array, mixed $default): mixed
     {
         // Make it work for associative array
         $array = array_values($array);
 
         $name = $this->name;
-        if ($name === null || strlen($name) === 0) {
-            $name = chr(rand(65, 90));
+        if ($name === null || $name === '') {
+            $name = chr(random_int(65, 90));
         }
 
-        if (count($array) == 0) {
+        if (empty($array)) {
             return $default;
         }
 
@@ -435,17 +439,12 @@ class Avatar
         return $array[$number % count($array)];
     }
 
-    protected function buildInitial()
+    protected function buildInitial(): void
     {
-        // fallback to default
-        if (!$this->initialGenerator) {
-            $this->initialGenerator = new DefaultGenerator();
-        }
-
         $this->initials = $this->initialGenerator->make($this->name, $this->chars, $this->uppercase, $this->ascii, $this->rtl);
     }
 
-    protected function validateConfig($config)
+    protected function validateConfig(array $config): array
     {
         $fallback = [
             'shape' => 'circle',
@@ -472,7 +471,7 @@ class Avatar
         return $config + $this->defaultTheme + $fallback;
     }
 
-    protected function initTheme()
+    protected function initTheme(): void
     {
         $this->setRandomTheme();
         $this->setForeground($this->getRandomForeground());

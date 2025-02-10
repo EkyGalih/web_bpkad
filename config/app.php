@@ -163,12 +163,11 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Laravolt\Avatar\ServiceProvider::class,
         GoogleMaps\ServiceProvider\GoogleMapsServiceProvider::class,
-        Cornford\Googlmapper\MapperServiceProvider::class,
+        // Cornford\Googlmapper\MapperServiceProvider::class,
 
         /*
          * Package Service Providers...
          */
-        Jorenvh\Share\Providers\ShareServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -178,7 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
+        // Intervention\Image\ImageServiceProvider::class,
         Riverskies\Laravel\MobileDetect\MobileDetectServiceProvider::class,
         Spatie\Analytics\AnalyticsServiceProvider::class,
     ],
@@ -235,10 +234,9 @@ return [
         'Avatar' => Laravolt\Avatar\Facade::class,
         'Helpers' => App\Helpers\Helpers::class,
         'GoogleMaps' => GoogleMaps\Facade\GoogleMapsFacade::class,
-        'Mapper'         => Cornford\Googlmapper\Facades\MapperFacade::class,
-        'Share' => Jorenvh\Share\ShareFacade::class,
+        // 'Mapper'         => Cornford\Googlmapper\Facades\MapperFacade::class,
         'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
-        'Image' => Intervention\Image\Facades\Image::class,
+        // 'Image' => Intervention\Image\Facades\Image::class,
         'MobileDetect' => Riverskies\Laravel\MobileDetect\Facades\MobileDetect::class,
         'LokasiAset' => App\Models\LokasiAset::class,
         'Apbd' => App\Helpers\Apbd::class,
