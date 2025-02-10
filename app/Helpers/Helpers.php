@@ -6,6 +6,7 @@ use App\Models\Address;
 use App\Models\Apps;
 use App\Models\Assets;
 use App\Models\Bender;
+use App\Models\Bidang;
 use App\Models\ContentType;
 use App\Models\Galery;
 use App\Models\KIP;
@@ -772,5 +773,15 @@ class Helpers
     public static function countAsetDistribusi($param)
     {
         return LokasiAset::where('aset_id', '=', $param)->count();
+    }
+
+    public static function GetAllBidang()
+    {
+        return Bidang::select('id as bidang_id', 'bidang.*')->orderBy('nama_bidang', 'asc')->get();
+    }
+
+    public static function GetBidang($param)
+    {
+        return Bidang::where('id', $param)->value('nama_bidang');
     }
 }

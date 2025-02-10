@@ -27,4 +27,9 @@ class Math
         }
         return $persen;
     }
+
+    public static function GenerateString($param)
+    {
+        return bin2hex(random_bytes($param));
+    }
 }

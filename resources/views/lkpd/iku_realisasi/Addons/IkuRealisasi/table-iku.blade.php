@@ -28,18 +28,18 @@
                     <td><strong>Tipe Penghitungan : </strong>{{ $data->formula->tipe_penghitungan }}</td>
                 </tr>
                 <tr>
-                    <td><strong>Sumber Data : </strong>{{ $data->formula->divisi->nama_divisi }}</td>
+                    <td><strong>Sumber Data : </strong>-</td>
                 </tr>
                 <tr>
                     <td><strong>Alasan : </strong>{{ $data->formula->alasan }}</td>
                 </tr>
-                @include('admin.iku_realisasi.Addons.IkuRealisasi.edit')
+                @include('lkpd.iku_realisasi.Addons.IkuRealisasi.edit')
             @endforeach
         </tbody>
     </table>
 </div>
 {{ $IkuRealisasi->links() }}
-@section('js-additional')
+@section('scripts')
     <script>
 
         function enableForm() {

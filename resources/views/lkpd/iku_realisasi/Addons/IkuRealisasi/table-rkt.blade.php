@@ -1,9 +1,9 @@
 <h2 style="text-align: center;">RENCANAN KINERJA TAHUNAN (RKT) {{ date('Y') }}<br />TINGKAT ORGANISASI PERANGKAT
     DAERAH</h2>
 <div class="table-responsive">
-    <button type="button" class="btn btn-theme btn-sm" data-toggle="modal" data-target="#TambahData"
+    <button type="button" class="btn btn-primary btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#TambahData"
         style="float: right; margin-bottom: 5px;">
-        <i class="fas fa-plus"></i> Tambah Data
+        <i class="ki-outline ki-plus-square fs-2 me-1"></i> Tambah Data
     </button>
     <table class="table table-hover table-striped table-bordered">
         <thead>
@@ -23,21 +23,19 @@
                     <td>{{ $data->IK->indikator_kinerja }}</td>
                     <td style="text-align: center;">{{ $data->target }}%</td>
                     <td style="text-align: center;">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-link btn-xs" data-toggle="modal"
-                                data-target="#EditData{{ $loop->iteration }}" data-tooltip="tooltip"
-                                data-placement="top" title="Ubah Iku">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button type="button" class="btn btn-link btn-xs"
-                                onclick="deleteData('{{ route('iku-realisasi.destroy', $data->iku_realisasi_id) }}')"
-                                data-tooltip="tooltip" data-placement="top" title="Hapus Iku">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
+                        <button type="button" class="btn btn-icon btn-warning" data-bs-toggle="modal"
+                            data-bs-target="#EditData{{ $loop->iteration }}" data-bs-tooltip="tooltip" data-bs-placement="top"
+                            title="Ubah Iku">
+                            <i class="ki-outline ki-notepad-edit fs-2 me-1"></i>
+                        </button>
+                        <button type="button" class="btn btn-icon btn-danger"
+                            onclick="deleteData('{{ route('iku-realisasi.destroy', $data->iku_realisasi_id) }}')"
+                            data-bs-tooltip="tooltip" data-bs-placement="top" title="Hapus Iku">
+                            <i class="ki-outline ki-trash fs-2 me-1"></i>
+                        </button>
                     </td>
                 </tr>
-                @include('admin.iku_realisasi.Addons.IkuRealisasi.edit')
+                @include('lkpd.iku_realisasi.Addons.IkuRealisasi.edit')
             @endforeach
         </tbody>
     </table>

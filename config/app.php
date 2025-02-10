@@ -241,6 +241,7 @@ return [
         'LokasiAset' => App\Models\LokasiAset::class,
         'Apbd' => App\Helpers\Apbd::class,
         'Math' => App\Helpers\Math::class,
+        'Iku' => App\Helpers\Iku::class,
 
     ],
 

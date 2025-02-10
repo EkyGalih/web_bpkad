@@ -16,9 +16,11 @@ class SasaranStrategisController extends Controller
      */
     public function index()
     {
-        $SasaranStrategis = SasaranStrategis::select('id as sasaran_id', 'sasaran_strategis.sasaran_strategis')->paginate(10);
+        $SasaranStrategis = SasaranStrategis::select('id as sasaran_id', 'sasaran_strategis.sasaran_strategis')
+        ->where('created_at', 'like', date('Y-m-d') . '%')
+        ->paginate(10);
 
-        return view('admin.iku_realisasi.Components.sasaran-strategis', compact('SasaranStrategis'));
+        return view('lkpd.iku_realisasi.Components.sasaran-strategis', compact('SasaranStrategis'));
     }
 
     /**
@@ -29,9 +31,7 @@ class SasaranStrategisController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
         SasaranStrategis::create(['sasaran_strategis' => $request->sasaran_strategis]);
-
 
         return redirect()->route('iku-sasaran')->with(['success' => 'Data Berhasil Disimpan!']);
     }

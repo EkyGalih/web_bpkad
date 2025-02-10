@@ -15,8 +15,10 @@ class IndikatorKinerjaController extends Controller
      */
     public function index()
     {
-        $indikatorKinerja = IndikatorKinerja::select('id as ik_id', 'indikator_kinerja.indikator_kinerja')->paginate(10);
-        return view('admin.iku_realisasi.Components.indikator-kinerja', compact('indikatorKinerja'));
+        $indikatorKinerja = IndikatorKinerja::select('id as ik_id', 'indikator_kinerja.indikator_kinerja')
+        ->where('created_at', 'like', date('Y-m-d') . '%')
+        ->paginate(10);
+        return view('lkpd.iku_realisasi.Components.indikator-kinerja', compact('indikatorKinerja'));
     }
 
     /**
@@ -27,7 +29,11 @@ class IndikatorKinerjaController extends Controller
      */
     public function store(Request $request)
     {
-        IndikatorKinerja::create(['indikator_kinerja' => $request->indikator_kinerja]);
+        $lastData = IndikatorKinerja::latest()->first();
+        $lastNumber = $lastData ? (int)substr($lastData->kode_indikator, 8) : 0;
+        $newNumber = $lastNumber + 1;
+        $kode_indikator = 'INDBPKAD' . str_pad($newNumber, 2, '0', STR_PAD_LEFT);
+        IndikatorKinerja::create(['kode_indikator' => $kode_indikator, 'indikator_kinerja' => $request->indikator_kinerja]);
 
         return redirect()->route('iku-indikator')->with(['success' => 'Data berhasil disimpan!']);
     }

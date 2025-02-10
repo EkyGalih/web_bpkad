@@ -21,7 +21,7 @@ class IkuRealisasiController extends Controller
 
         $IkuRealisasi = IkuRealisasi::select('id as iku_realisasi_id', 'iku_realisasi.*')
                         ->orderBy('created_at', 'ASC')
-                        ->where('created_at', 'LIKE', date('Y').'%')
+                        ->where('created_at', 'like', date('Y-m-d') . '%')
                         ->paginate(10);
 
         return view('lkpd.iku_realisasi.Components.iku_realisasi', compact('IkuRealisasi', 'user'));

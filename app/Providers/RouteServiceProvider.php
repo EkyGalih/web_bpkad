@@ -79,6 +79,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapIndikatorKinerja();
         $this->mapDataKinerja();
         $this->mapFormulasi();
+        $this->mapProgramAnggaranIku();
 
         // ROUTE API LKPD
         $this->mapApiKodeRekening();
@@ -299,6 +300,13 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/lkpd/iku-realisasi/sasaran-strategis.php'));
+    }
+
+    public function mapProgramAnggaranIku()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/lkpd/iku-realisasi/program-anggaran.php'));
     }
 
     public function mapApiKodeRekening()

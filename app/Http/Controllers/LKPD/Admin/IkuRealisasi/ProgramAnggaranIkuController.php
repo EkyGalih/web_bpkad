@@ -19,6 +19,7 @@ class ProgramAnggaranIkuController extends Controller
     {
         ProgramAnggaran::create([
             'program' => $request->program,
+            'kode_program' => 'PR-BPKAD' . mt_rand(10000, 99999),
             'anggaran' => Math::CurrencyConvertComa($request->anggaran),
             'anggaran_terpakai' => 0,
             'persentase_anggaran' => 0,

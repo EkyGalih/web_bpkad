@@ -20,7 +20,7 @@
                     @method('PUT')
                     <div class="form-group">
                         <label for="sasaran_strategis">Sasaran Strategis</label>
-                        @php $SasaranStrategis = Helpers::GetSasaran() @endphp
+                        @php $SasaranStrategis = Iku::GetSasaran() @endphp
                         <select name="sasaran_strategis_id" class="form-control" onclick="enableForm()">
                             <option value="">------</option>
                             @foreach ($SasaranStrategis as $sasaran)
@@ -30,7 +30,7 @@
                     </div>
                     <div class="form-group">
                         <label for="indikator_kinerja">Indikator Kinerja</label>
-                        @php $IndikatorKinerja = Helpers::GetIK() @endphp
+                        @php $IndikatorKinerja = Iku::GetIK() @endphp
                         <select name="indikator_kinerja_id" id="indikator_kinerja_id_edit" onchange="editData()" class="form-control">
                             <option value="">------</option>
                             @foreach ($IndikatorKinerja as $ik)
@@ -49,7 +49,7 @@
                     </div>
                     <div class="form-group">
                         <label for="divisi_id">Sumber Data</label>
-                        <input type="text" id="divisi_id_edit" class="form-control" value="{{ $data->formula->divisi->nama_divisi }}" readonly="readonly">
+                        <input type="text" id="divisi_id_edit" class="form-control" value="}" readonly="readonly">
                     </div>
                     <input type="hidden" name="user_id" value="{{ $user->user_id }}">
                     <div class="row">
@@ -65,7 +65,7 @@
                             <div class="form-group">
                                 <label for="target">Target Tercapai</label>
                                 <input type="text" name="target_tercapai" class="form-control" value="{{ $data->target_tercapai }}">
-                                <input type="hidden" class="form-control" name="kode_iku" value="IkuBpkad-{{ Helpers::GenerateString(3) }}-{{ date('Y') }}-{{ Helpers::GenerateString(3) }}">
+                                <input type="hidden" class="form-control" name="kode_iku" value="IkuBpkad-{{ Math::GenerateString(3) }}-{{ date('Y') }}-{{ Math::GenerateString(3) }}">
                             </div>
                         </div>
                     </div>

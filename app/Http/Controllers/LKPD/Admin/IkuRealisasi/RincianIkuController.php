@@ -8,6 +8,7 @@ use App\Models\Lkpd\FileIku;
 use App\Models\Lkpd\KegiatanIku;
 use App\Models\Lkpd\SubKegiatanIku;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class RincianIkuController extends Controller
@@ -19,8 +20,16 @@ class RincianIkuController extends Controller
      */
     public function index()
     {
-        $KegiatanIku = KegiatanIku::where('tahun', '=', date('Y'))->groupby('divisi_id')->orderBy('divisi_id', 'DESC')->get();
-        return view('admin.iku_realisasi.Components.rincian_iku', compact('KegiatanIku'));
+        $KegiatanIku = KegiatanIku::whereIn('id', function($query) {
+            $query->select(DB::raw('MAX(id)'))
+                ->from('kegiatan_iku')
+                ->where('tahun', '=', '2022')
+                ->groupBy('bidang_id');
+        })
+        ->orderBy('bidang_id', 'DESC')
+        ->get();
+
+        return view('lkpd.iku_realisasi.Components.rincian_iku', compact('KegiatanIku'));
     }
 
     /**
@@ -54,7 +63,7 @@ class RincianIkuController extends Controller
     {
         $SubKegiatan = SubKegiatanIku::findOrFail($id);
 
-        return view('admin.iku_realisasi.Components.detail_rincian_iku', compact('SubKegiatan'));
+        return view('lkpd.iku_realisasi.Components.detail_rincian_iku', compact('SubKegiatan'));
     }
 
     /**
