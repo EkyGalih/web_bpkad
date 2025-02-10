@@ -101,7 +101,7 @@
                                                             href="{{ route('post.show', [Helpers::PostCategory($carousel[0]->posts_category_id), $carousel[0]->slug]) }}">
                                                             <img height="437" width="100%"
                                                                 src="{{ asset($carousel[0]->foto_berita) }}"
-                                                                alt="Bootstrap news template">
+                                                                alt="{{ $carousel[0]->slug }}">
                                                         </a>
                                                     </div>
                                                     <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
@@ -136,7 +136,7 @@
                                                             href="{{ route('post.show', [Helpers::PostCategory($carousel[1]->posts_category_id), $carousel[1]->slug]) }}">
                                                             <img height="437" width="100%"
                                                                 src="{{ asset($carousel[1]->foto_berita) }}"
-                                                                alt="Bootstrap news template">
+                                                                alt="{{ $carousel[1]->slug }}">
                                                         </a>
                                                     </div>
                                                     <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
@@ -171,7 +171,7 @@
                                                             href="{{ route('post.show', [Helpers::PostCategory($carousel[2]->posts_category_id), $carousel[2]->slug]) }}">
                                                             <img height="437" width="100%"
                                                                 src="{{ asset($carousel[2]->foto_berita) }}"
-                                                                alt="Bootstrap news template">
+                                                                alt="{{ $carousel[2]->slug }}">
                                                         </a>
                                                     </div>
                                                     <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
@@ -206,7 +206,7 @@
                                                             href="{{ route('post.show', [Helpers::PostCategory($carousel[3]->posts_category_id), $carousel[3]->slug]) }}">
                                                             <img height="437" width="100%"
                                                                 src="{{ asset($carousel[3]->foto_berita) }}"
-                                                                alt="Bootstrap news template">
+                                                                alt="{{ $carousel[3]->slug }}">
                                                         </a>
                                                     </div>
                                                     <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
@@ -574,7 +574,7 @@
                                     <a
                                         href="{{ route('post.show', [Helpers::PostCategory($carousel[0]->posts_category_id), $carousel[0]->slug]) }}">
                                         <img height="437" src="{{ asset($carousel[0]->foto_berita) }}"
-                                            alt="Bootstrap news template">
+                                            alt="{{ $carousel[0]->slug }}">
                                     </a>
                                 </div>
                                 <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
@@ -606,7 +606,7 @@
                                     <a
                                         href="{{ route('post.show', [Helpers::PostCategory($carousel[1]->posts_category_id), $carousel[1]->slug]) }}">
                                         <img height="437" src="{{ asset($carousel[1]->foto_berita) }}"
-                                            alt="Bootstrap news template">
+                                            alt="{{ $carousel[1]->slug }}">
                                     </a>
                                 </div>
                                 <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
@@ -638,7 +638,7 @@
                                     <a
                                         href="{{ route('post.show', [Helpers::PostCategory($carousel[2]->posts_category_id), $carousel[2]->slug]) }}">
                                         <img height="437" src="{{ asset($carousel[2]->foto_berita) }}"
-                                            alt="Bootstrap news template">
+                                            alt="{{ $carousel[2]->slug }}">
                                     </a>
                                 </div>
                                 <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
@@ -670,7 +670,7 @@
                                     <a
                                         href="{{ route('post.show', [Helpers::PostCategory($carousel[3]->posts_category_id), $carousel[3]->slug]) }}">
                                         <img height="437" src="{{ asset($carousel[3]->foto_berita) }}"
-                                            alt="Bootstrap news template">
+                                            alt="{{ $carousel[3]->slug }}">
                                     </a>
                                 </div>
                                 <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">

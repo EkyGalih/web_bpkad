@@ -62,27 +62,27 @@
                         <div class="col-10">
                             {{-- <div class="row">
                                 <div class="col-6"> --}}
-                                    <form action="{{ route('post.search') }}" method="POST">
-                                        @csrf
-                                        <div class="form-row align-items-center">
-                                            <div class="col-6">
-                                                <div class="input-group mb-4">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            <i class="bx bx-search"></i>
-                                                        </div>
-                                                    </div>
-                                                    <input type="text" name="cari" class="form-control"
-                                                        id="inlineFormInputGroup" placeholder="Cari Berita ...">
+                            <form action="{{ route('post.search') }}" method="POST">
+                                @csrf
+                                <div class="form-row align-items-center">
+                                    <div class="col-6">
+                                        <div class="input-group mb-4">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="bx bx-search"></i>
                                                 </div>
                                             </div>
-                                            <div class="col-auto" style="margin-bottom: 2%;">
-                                                <button type="submit" class="btn btn-primary mb-2">Cari</button>
-                                            </div>
+                                            <input type="text" name="cari" class="form-control" id="inlineFormInputGroup"
+                                                placeholder="Cari Berita ...">
                                         </div>
-                                    </form>
-                                {{-- </div> --}}
-                                {{-- <div class="col-6">
+                                    </div>
+                                    <div class="col-auto" style="margin-bottom: 2%;">
+                                        <button type="submit" class="btn btn-primary mb-2">Cari</button>
+                                    </div>
+                                </div>
+                            </form>
+                            {{-- </div> --}}
+                            {{-- <div class="col-6">
                                     <div class="row">
                                         <div class="col-2">
                                             <p style="margin-top: 5%;">short by :</p>
@@ -139,8 +139,17 @@
                                                 <div class="ratio_right-cover-2 image-wrapper">
                                                     <a
                                                         href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">
+                                                        @php
+                                                            $defaultImage = asset('static/images/no-image-post.png');
+                                                            $imageUrl = Str::contains(
+                                                                $post->foto_berita,
+                                                                'https://storage.ntbprov.go.id/bpkad/uploads/berita',
+                                                            )
+                                                                ? $post->foto_berita
+                                                                : asset($post->foto_berita);
+                                                        @endphp
                                                         <img height="250" width="100%"
-                                                            src="{{ asset($post->foto_berita) ?? asset('static/images/no-image-post.png') }}"
+                                                            src="{{ $imageUrl ?: $defaultImage }}"
                                                             alt="{{ substr($post->slug, 0, 50) }}">
                                                     </a>
                                                 </div>
@@ -251,7 +260,8 @@
                                 <div class="ratio_right-cover-2 image-wrapper">
                                     <a
                                         href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">
-                                        <img height="250" width="100%" src="{{ asset($post->foto_berita) ?? asset('static/images/no-image-post.png') }}"
+                                        <img height="250" width="100%"
+                                            src="{{ asset($post->foto_berita) ?? asset('static/images/no-image-post.png') }}"
                                             alt="{{ substr($post->title, 0, 50) }}">
                                     </a>
                                 </div>

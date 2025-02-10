@@ -59,8 +59,8 @@ class PostController extends Controller
         ]);
 
         $file = $request->file('foto_berita');
-        $path = $file->store('uploads/berita', 'public');
-        $url = Storage::url($path);
+        $path = $file->store('uploads/berita', 's3');
+        $url = config('filesystems.disks.s3.url') . '/' . $path;
 
         $id         = (string)Uuid::generate(4);
 
@@ -76,7 +76,7 @@ class PostController extends Controller
             'posts_category_id' => $request->posts_category_id || 1,
             'tags' => $request->tags,
             'agenda_kaban' => $request->agenda_kaban,
-            'created_at' => $request->date . ' ' . $request->time . ':' . date('s')
+            'created_at' => $request->date . ' ' . $request->time . ':' . now()->format('s')
         ]);
 
         Helpers::_recentAdd($id, 'membuat Berita/Artikel', 'post');
@@ -111,34 +111,38 @@ class PostController extends Controller
             'foto_berita' => 'nullable|mimes:jpg,png,jpeg|max:2048',
         ]);
 
-        $posts      = Posts::findOrFail($id);
+        $posts = Posts::findOrFail($id);
+        $url = $posts->foto_berita; // Gunakan foto lama jika tidak ada yang diunggah
 
         if ($request->hasFile('foto_berita')) {
-            if ($posts->foto_berita) {
-                $oldPath = str_replace('/storage/', '', $posts->foto_berita);
-                Storage::disk('public')->delete($oldPath);
+            // Hapus file lama dari S3 jika ada
+            if ($posts->foto_berita && Str::contains($posts->foto_berita, env('AWS_URL'))) {
+                $oldPath = str_replace(env('AWS_URL') . '/', '', $posts->foto_berita);
+                Storage::disk('s3')->delete($oldPath);
             }
 
+            // Upload file baru ke S3
             $file = $request->file('foto_berita');
-            $path = $file->store('uploads/berita', 'public');
-            $url = Storage::url($path);
-        } else {
-            $url = $posts->foto_berita;
+            $path = $file->store('uploads/berita', 's3');
+            $url = config('filesystems.disks.s3.url') . '/' . $path;
         }
 
         $posts->update([
             'title' => $request->title,
-            'slug'  => $request->slug,
+            'slug' => $request->slug,
             'content' => $request->content,
             'content_type_id' => '1',
             'foto_berita' => $url,
-            'users_id' => Auth::user()->id,
-            'posts_category_id' => $request->posts_category_id,
+            'users_id' => Auth::id(),
+            'posts_category_id' => $request->posts_category_id ?? 1, // Default kategori jika kosong
             'tags' => $request->tags,
             'caption' => $request->caption,
             'agenda_kaban' => $request->agenda_kaban,
-            'created_at' => $request->date . ' ' . $request->time
+            'created_at' => ($request->date && $request->time)
+                ? $request->date . ' ' . $request->time . ':' . now()->format('s')
+                : now(),
         ]);
+
         Helpers::_recentAdd($id, 'mengubah posting', 'post');
         session()->flash('success', 'Berita/Artikel berhasil diubah!');
         return redirect()->route('post-admin.index');
@@ -197,14 +201,17 @@ class PostController extends Controller
     public function delete($id)
     {
         $post = Posts::findOrFail($id);
-        $recent = Recent::where('uuid_activity', '=', $id)->get();
-        foreach ($recent as $item) {
-            $item->delete();
+
+        // Hapus data Recent terkait
+        Recent::where('uuid_activity', $id)->delete();
+
+        // Hapus foto dari S3 jika ada
+        if ($post->foto_berita && Str::contains($post->foto_berita, env('AWS_URL'))) {
+            $oldPath = str_replace(env('AWS_URL') . '/', '', $post->foto_berita);
+            Storage::disk('s3')->delete($oldPath);
         }
-        if ($post->foto_berita) {
-            $oldPath = str_replace('/storage/', '', $post->foto_berita);
-            Storage::disk('public')->delete($oldPath);
-        }
+
+        // Hapus postingan dari database
         $post->delete();
 
         return redirect()->route('post-admin.index')->with(['success' => 'Berita/Artikel dihapus permanen!']);
@@ -225,9 +232,9 @@ class PostController extends Controller
             if ($recent != NULL) {
                 $recent->delete();
             }
-            if ($post->foto_berita) {
-                $oldPath = str_replace('/storage/', '', $post->foto_berita);
-                Storage::disk('public')->delete($oldPath);
+            if ($post->foto_berita && Str::contains($post->foto_berita, env('AWS_URL'))) {
+                $oldPath = str_replace(env('AWS_URL') . '/', '', $post->foto_berita);
+                Storage::disk('s3')->delete($oldPath);
             }
             $post->delete();
         }
