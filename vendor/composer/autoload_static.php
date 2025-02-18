@@ -4,20 +4,20 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit3609341398097049f1e70392fec2a5bd
+class ComposerStaticInita1bc0492010999fe22c9a4d2e2f69679
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
-        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         '662a729f963d39afe703c9d9b7ab4a8c' => __DIR__ . '/..' . '/symfony/polyfill-php83/bootstrap.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
-        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
+        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
         '2203a247e6fda86070a5e4e07aed533a' => __DIR__ . '/..' . '/symfony/clock/Resources/now.php',
@@ -26,8 +26,6 @@ class ComposerStaticInit3609341398097049f1e70392fec2a5bd
         '35a6ad97d21e794e7e22a17d806652e4' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Functions.php',
         '09f6b20656683369174dd6fa83b7e5fb' => __DIR__ . '/..' . '/symfony/polyfill-uuid/bootstrap.php',
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
-        'b067bc7112e384b61c701452d53a14a8' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/JmesPath.php',
-        '8a9dc1de0ca7e01f3e08231539562f61' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/functions.php',
         '476ca15b8d69b04665cd879be9cb4c68' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections/functions.php',
         '265b4faa2b3a9766332744949e83bf97' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections/helpers.php',
         'c7a3c339e7e14b60e06a2d7fcce9476b' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Events/functions.php',
@@ -36,9 +34,12 @@ class ComposerStaticInit3609341398097049f1e70392fec2a5bd
         '7f7ac2ddea9cc3fb4b2cc201d63dbc10' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Log/functions.php',
         '493c6aea52f6009bab023b26c21a386a' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/functions.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        'b067bc7112e384b61c701452d53a14a8' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/JmesPath.php',
+        '8a9dc1de0ca7e01f3e08231539562f61' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/functions.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '4a1f389d6ce373bda9e57857d3b61c84' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/helpers.php',
+        '98caa11a197f6516a8e48aa4abb5ccc6' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/helpers.php',
         '40275907c8566c390185147049ef6e5d' => __DIR__ . '/..' . '/livewire/livewire/src/helpers.php',
         'c72349b1fe8d0deeedd3a52e8aa814d8' => __DIR__ . '/..' . '/mockery/mockery/library/helpers.php',
         'ce9671a430e4846b44e1c68c7611f9f5' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
@@ -166,6 +167,7 @@ class ComposerStaticInit3609341398097049f1e70392fec2a5bd
         array (
             'Intervention\\Image\\' => 19,
             'Intervention\\Gif\\' => 17,
+            'Inertia\\' => 8,
             'Illuminate\\Support\\' => 19,
             'Illuminate\\Foundation\\Auth\\' => 27,
             'Illuminate\\' => 11,
@@ -248,8 +250,8 @@ class ComposerStaticInit3609341398097049f1e70392fec2a5bd
     public static $prefixDirsPsr4 = array (
         'voku\\' => 
         array (
-            0 => __DIR__ . '/..' . '/voku/portable-ascii/src/voku',
-            1 => __DIR__ . '/..' . '/voku/stop-words/src/voku',
+            0 => __DIR__ . '/..' . '/voku/stop-words/src/voku',
+            1 => __DIR__ . '/..' . '/voku/portable-ascii/src/voku',
         ),
         'ZipStream\\' => 
         array (
@@ -572,6 +574,10 @@ class ComposerStaticInit3609341398097049f1e70392fec2a5bd
         'Intervention\\Gif\\' => 
         array (
             0 => __DIR__ . '/..' . '/intervention/gif/src',
+        ),
+        'Inertia\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src',
         ),
         'Illuminate\\Support\\' => 
         array (
@@ -3199,18 +3205,12 @@ class ComposerStaticInit3609341398097049f1e70392fec2a5bd
         'GoogleMaps\\Parameters' => __DIR__ . '/..' . '/alexpechkarev/google-maps/src/Parameters.php',
         'GoogleMaps\\ServiceProvider\\GoogleMapsServiceProvider' => __DIR__ . '/..' . '/alexpechkarev/google-maps/src/ServiceProvider/GoogleMapsServiceProvider.php',
         'GoogleMaps\\WebService' => __DIR__ . '/..' . '/alexpechkarev/google-maps/src/WebService.php',
-        'Google\\Analytics\\Data\\V1alpha\\AlphaAnalyticsDataClient' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/AlphaAnalyticsDataClient.php',
-        'Google\\Analytics\\Data\\V1alpha\\AlphaAnalyticsDataGrpcClient' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/AlphaAnalyticsDataGrpcClient.php',
         'Google\\Analytics\\Data\\V1alpha\\AudienceDimension' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/AudienceDimension.php',
         'Google\\Analytics\\Data\\V1alpha\\AudienceDimensionValue' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/AudienceDimensionValue.php',
         'Google\\Analytics\\Data\\V1alpha\\AudienceList' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/AudienceList.php',
         'Google\\Analytics\\Data\\V1alpha\\AudienceListMetadata' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/AudienceListMetadata.php',
         'Google\\Analytics\\Data\\V1alpha\\AudienceList\\State' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/AudienceList/State.php',
         'Google\\Analytics\\Data\\V1alpha\\AudienceRow' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/AudienceRow.php',
-        'Google\\Analytics\\Data\\V1alpha\\BatchRunPivotReportsRequest' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/BatchRunPivotReportsRequest.php',
-        'Google\\Analytics\\Data\\V1alpha\\BatchRunPivotReportsResponse' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/BatchRunPivotReportsResponse.php',
-        'Google\\Analytics\\Data\\V1alpha\\BatchRunReportsRequest' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/BatchRunReportsRequest.php',
-        'Google\\Analytics\\Data\\V1alpha\\BatchRunReportsResponse' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/BatchRunReportsResponse.php',
         'Google\\Analytics\\Data\\V1alpha\\BetweenFilter' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/BetweenFilter.php',
         'Google\\Analytics\\Data\\V1alpha\\Client\\AlphaAnalyticsDataClient' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/Client/AlphaAnalyticsDataClient.php',
         'Google\\Analytics\\Data\\V1alpha\\Cohort' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/Cohort.php',
@@ -3227,10 +3227,8 @@ class ComposerStaticInit3609341398097049f1e70392fec2a5bd
         'Google\\Analytics\\Data\\V1alpha\\DimensionExpression\\CaseExpression' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/DimensionExpression/CaseExpression.php',
         'Google\\Analytics\\Data\\V1alpha\\DimensionExpression\\ConcatenateExpression' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/DimensionExpression/ConcatenateExpression.php',
         'Google\\Analytics\\Data\\V1alpha\\DimensionHeader' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/DimensionHeader.php',
-        'Google\\Analytics\\Data\\V1alpha\\DimensionMetadata' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/DimensionMetadata.php',
         'Google\\Analytics\\Data\\V1alpha\\DimensionValue' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/DimensionValue.php',
         'Google\\Analytics\\Data\\V1alpha\\EmptyFilter' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/EmptyFilter.php',
-        'Google\\Analytics\\Data\\V1alpha\\Entity' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/Entity.php',
         'Google\\Analytics\\Data\\V1alpha\\EventCriteriaScoping' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/EventCriteriaScoping.php',
         'Google\\Analytics\\Data\\V1alpha\\EventExclusionDuration' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/EventExclusionDuration.php',
         'Google\\Analytics\\Data\\V1alpha\\EventSegment' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/EventSegment.php',
@@ -3240,12 +3238,6 @@ class ComposerStaticInit3609341398097049f1e70392fec2a5bd
         'Google\\Analytics\\Data\\V1alpha\\Filter' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/Filter.php',
         'Google\\Analytics\\Data\\V1alpha\\FilterExpression' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/FilterExpression.php',
         'Google\\Analytics\\Data\\V1alpha\\FilterExpressionList' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/FilterExpressionList.php',
-        'Google\\Analytics\\Data\\V1alpha\\Filter\\BetweenFilter' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/Filter/BetweenFilter.php',
-        'Google\\Analytics\\Data\\V1alpha\\Filter\\InListFilter' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/Filter/InListFilter.php',
-        'Google\\Analytics\\Data\\V1alpha\\Filter\\NumericFilter' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/Filter/NumericFilter.php',
-        'Google\\Analytics\\Data\\V1alpha\\Filter\\NumericFilter\\Operation' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/Filter/NumericFilter/Operation.php',
-        'Google\\Analytics\\Data\\V1alpha\\Filter\\StringFilter' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/Filter/StringFilter.php',
-        'Google\\Analytics\\Data\\V1alpha\\Filter\\StringFilter\\MatchType' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/Filter/StringFilter/MatchType.php',
         'Google\\Analytics\\Data\\V1alpha\\Funnel' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/Funnel.php',
         'Google\\Analytics\\Data\\V1alpha\\FunnelBreakdown' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/FunnelBreakdown.php',
         'Google\\Analytics\\Data\\V1alpha\\FunnelEventFilter' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/FunnelEventFilter.php',
@@ -3259,9 +3251,7 @@ class ComposerStaticInit3609341398097049f1e70392fec2a5bd
         'Google\\Analytics\\Data\\V1alpha\\FunnelResponseMetadata' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/FunnelResponseMetadata.php',
         'Google\\Analytics\\Data\\V1alpha\\FunnelStep' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/FunnelStep.php',
         'Google\\Analytics\\Data\\V1alpha\\FunnelSubReport' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/FunnelSubReport.php',
-        'Google\\Analytics\\Data\\V1alpha\\Gapic\\AlphaAnalyticsDataGapicClient' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/Gapic/AlphaAnalyticsDataGapicClient.php',
         'Google\\Analytics\\Data\\V1alpha\\GetAudienceListRequest' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/GetAudienceListRequest.php',
-        'Google\\Analytics\\Data\\V1alpha\\GetMetadataRequest' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/GetMetadataRequest.php',
         'Google\\Analytics\\Data\\V1alpha\\GetPropertyQuotasSnapshotRequest' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/GetPropertyQuotasSnapshotRequest.php',
         'Google\\Analytics\\Data\\V1alpha\\GetRecurringAudienceListRequest' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/GetRecurringAudienceListRequest.php',
         'Google\\Analytics\\Data\\V1alpha\\GetReportTaskRequest' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/GetReportTaskRequest.php',
@@ -3272,11 +3262,9 @@ class ComposerStaticInit3609341398097049f1e70392fec2a5bd
         'Google\\Analytics\\Data\\V1alpha\\ListRecurringAudienceListsResponse' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/ListRecurringAudienceListsResponse.php',
         'Google\\Analytics\\Data\\V1alpha\\ListReportTasksRequest' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/ListReportTasksRequest.php',
         'Google\\Analytics\\Data\\V1alpha\\ListReportTasksResponse' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/ListReportTasksResponse.php',
-        'Google\\Analytics\\Data\\V1alpha\\Metadata' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/Metadata.php',
         'Google\\Analytics\\Data\\V1alpha\\Metric' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/Metric.php',
         'Google\\Analytics\\Data\\V1alpha\\MetricAggregation' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/MetricAggregation.php',
         'Google\\Analytics\\Data\\V1alpha\\MetricHeader' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/MetricHeader.php',
-        'Google\\Analytics\\Data\\V1alpha\\MetricMetadata' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/MetricMetadata.php',
         'Google\\Analytics\\Data\\V1alpha\\MetricType' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/MetricType.php',
         'Google\\Analytics\\Data\\V1alpha\\MetricValue' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/MetricValue.php',
         'Google\\Analytics\\Data\\V1alpha\\NumericFilter' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/NumericFilter.php',
@@ -3286,11 +3274,6 @@ class ComposerStaticInit3609341398097049f1e70392fec2a5bd
         'Google\\Analytics\\Data\\V1alpha\\OrderBy\\DimensionOrderBy' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/OrderBy/DimensionOrderBy.php',
         'Google\\Analytics\\Data\\V1alpha\\OrderBy\\DimensionOrderBy\\OrderType' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/OrderBy/DimensionOrderBy/OrderType.php',
         'Google\\Analytics\\Data\\V1alpha\\OrderBy\\MetricOrderBy' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/OrderBy/MetricOrderBy.php',
-        'Google\\Analytics\\Data\\V1alpha\\OrderBy\\PivotOrderBy' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/OrderBy/PivotOrderBy.php',
-        'Google\\Analytics\\Data\\V1alpha\\OrderBy\\PivotOrderBy\\PivotSelection' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/OrderBy/PivotOrderBy/PivotSelection.php',
-        'Google\\Analytics\\Data\\V1alpha\\Pivot' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/Pivot.php',
-        'Google\\Analytics\\Data\\V1alpha\\PivotDimensionHeader' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/PivotDimensionHeader.php',
-        'Google\\Analytics\\Data\\V1alpha\\PivotHeader' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/PivotHeader.php',
         'Google\\Analytics\\Data\\V1alpha\\PropertyQuota' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/PropertyQuota.php',
         'Google\\Analytics\\Data\\V1alpha\\PropertyQuotasSnapshot' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/PropertyQuotasSnapshot.php',
         'Google\\Analytics\\Data\\V1alpha\\QueryAudienceListRequest' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/QueryAudienceListRequest.php',
@@ -3312,12 +3295,6 @@ class ComposerStaticInit3609341398097049f1e70392fec2a5bd
         'Google\\Analytics\\Data\\V1alpha\\RunFunnelReportRequest' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/RunFunnelReportRequest.php',
         'Google\\Analytics\\Data\\V1alpha\\RunFunnelReportRequest\\FunnelVisualizationType' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/RunFunnelReportRequest/FunnelVisualizationType.php',
         'Google\\Analytics\\Data\\V1alpha\\RunFunnelReportResponse' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/RunFunnelReportResponse.php',
-        'Google\\Analytics\\Data\\V1alpha\\RunPivotReportRequest' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/RunPivotReportRequest.php',
-        'Google\\Analytics\\Data\\V1alpha\\RunPivotReportResponse' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/RunPivotReportResponse.php',
-        'Google\\Analytics\\Data\\V1alpha\\RunRealtimeReportRequest' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/RunRealtimeReportRequest.php',
-        'Google\\Analytics\\Data\\V1alpha\\RunRealtimeReportResponse' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/RunRealtimeReportResponse.php',
-        'Google\\Analytics\\Data\\V1alpha\\RunReportRequest' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/RunReportRequest.php',
-        'Google\\Analytics\\Data\\V1alpha\\RunReportResponse' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/RunReportResponse.php',
         'Google\\Analytics\\Data\\V1alpha\\SamplingLevel' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/SamplingLevel.php',
         'Google\\Analytics\\Data\\V1alpha\\SamplingMetadata' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/SamplingMetadata.php',
         'Google\\Analytics\\Data\\V1alpha\\Segment' => __DIR__ . '/..' . '/google/analytics-data/src/V1alpha/Segment.php',
@@ -3359,8 +3336,6 @@ class ComposerStaticInit3609341398097049f1e70392fec2a5bd
         'Google\\Analytics\\Data\\V1beta\\BatchRunPivotReportsResponse' => __DIR__ . '/..' . '/google/analytics-data/src/V1beta/BatchRunPivotReportsResponse.php',
         'Google\\Analytics\\Data\\V1beta\\BatchRunReportsRequest' => __DIR__ . '/..' . '/google/analytics-data/src/V1beta/BatchRunReportsRequest.php',
         'Google\\Analytics\\Data\\V1beta\\BatchRunReportsResponse' => __DIR__ . '/..' . '/google/analytics-data/src/V1beta/BatchRunReportsResponse.php',
-        'Google\\Analytics\\Data\\V1beta\\BetaAnalyticsDataClient' => __DIR__ . '/..' . '/google/analytics-data/src/V1beta/BetaAnalyticsDataClient.php',
-        'Google\\Analytics\\Data\\V1beta\\BetaAnalyticsDataGrpcClient' => __DIR__ . '/..' . '/google/analytics-data/src/V1beta/BetaAnalyticsDataGrpcClient.php',
         'Google\\Analytics\\Data\\V1beta\\CheckCompatibilityRequest' => __DIR__ . '/..' . '/google/analytics-data/src/V1beta/CheckCompatibilityRequest.php',
         'Google\\Analytics\\Data\\V1beta\\CheckCompatibilityResponse' => __DIR__ . '/..' . '/google/analytics-data/src/V1beta/CheckCompatibilityResponse.php',
         'Google\\Analytics\\Data\\V1beta\\Client\\BetaAnalyticsDataClient' => __DIR__ . '/..' . '/google/analytics-data/src/V1beta/Client/BetaAnalyticsDataClient.php',
@@ -3392,7 +3367,6 @@ class ComposerStaticInit3609341398097049f1e70392fec2a5bd
         'Google\\Analytics\\Data\\V1beta\\Filter\\NumericFilter\\Operation' => __DIR__ . '/..' . '/google/analytics-data/src/V1beta/Filter/NumericFilter/Operation.php',
         'Google\\Analytics\\Data\\V1beta\\Filter\\StringFilter' => __DIR__ . '/..' . '/google/analytics-data/src/V1beta/Filter/StringFilter.php',
         'Google\\Analytics\\Data\\V1beta\\Filter\\StringFilter\\MatchType' => __DIR__ . '/..' . '/google/analytics-data/src/V1beta/Filter/StringFilter/MatchType.php',
-        'Google\\Analytics\\Data\\V1beta\\Gapic\\BetaAnalyticsDataGapicClient' => __DIR__ . '/..' . '/google/analytics-data/src/V1beta/Gapic/BetaAnalyticsDataGapicClient.php',
         'Google\\Analytics\\Data\\V1beta\\GetAudienceExportRequest' => __DIR__ . '/..' . '/google/analytics-data/src/V1beta/GetAudienceExportRequest.php',
         'Google\\Analytics\\Data\\V1beta\\GetMetadataRequest' => __DIR__ . '/..' . '/google/analytics-data/src/V1beta/GetMetadataRequest.php',
         'Google\\Analytics\\Data\\V1beta\\ListAudienceExportsRequest' => __DIR__ . '/..' . '/google/analytics-data/src/V1beta/ListAudienceExportsRequest.php',
@@ -4658,6 +4632,7 @@ class ComposerStaticInit3609341398097049f1e70392fec2a5bd
         'Illuminate\\Database\\Capsule\\Manager' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Capsule/Manager.php',
         'Illuminate\\Database\\ClassMorphViolationException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/ClassMorphViolationException.php',
         'Illuminate\\Database\\Concerns\\BuildsQueries' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Concerns/BuildsQueries.php',
+        'Illuminate\\Database\\Concerns\\BuildsWhereDateClauses' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Concerns/BuildsWhereDateClauses.php',
         'Illuminate\\Database\\Concerns\\CompilesJsonPaths' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Concerns/CompilesJsonPaths.php',
         'Illuminate\\Database\\Concerns\\ExplainsQueries' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Concerns/ExplainsQueries.php',
         'Illuminate\\Database\\Concerns\\ManagesTransactions' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Concerns/ManagesTransactions.php',
@@ -5562,6 +5537,7 @@ class ComposerStaticInit3609341398097049f1e70392fec2a5bd
         'Illuminate\\Validation\\Rules\\ImageFile' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Validation/Rules/ImageFile.php',
         'Illuminate\\Validation\\Rules\\In' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Validation/Rules/In.php',
         'Illuminate\\Validation\\Rules\\NotIn' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Validation/Rules/NotIn.php',
+        'Illuminate\\Validation\\Rules\\Numeric' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Validation/Rules/Numeric.php',
         'Illuminate\\Validation\\Rules\\Password' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Validation/Rules/Password.php',
         'Illuminate\\Validation\\Rules\\ProhibitedIf' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Validation/Rules/ProhibitedIf.php',
         'Illuminate\\Validation\\Rules\\RequiredIf' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Validation/Rules/RequiredIf.php',
@@ -5625,6 +5601,38 @@ class ComposerStaticInit3609341398097049f1e70392fec2a5bd
         'Illuminate\\View\\ViewFinderInterface' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewFinderInterface.php',
         'Illuminate\\View\\ViewName' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewName.php',
         'Illuminate\\View\\ViewServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
+        'Inertia\\AlwaysProp' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/AlwaysProp.php',
+        'Inertia\\Commands\\CreateMiddleware' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/Commands/CreateMiddleware.php',
+        'Inertia\\Commands\\StartSsr' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/Commands/StartSsr.php',
+        'Inertia\\Commands\\StopSsr' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/Commands/StopSsr.php',
+        'Inertia\\Controller' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/Controller.php',
+        'Inertia\\DeferProp' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/DeferProp.php',
+        'Inertia\\Directive' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/Directive.php',
+        'Inertia\\EncryptHistoryMiddleware' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/EncryptHistoryMiddleware.php',
+        'Inertia\\IgnoreFirstLoad' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/IgnoreFirstLoad.php',
+        'Inertia\\Inertia' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/Inertia.php',
+        'Inertia\\LazyProp' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/LazyProp.php',
+        'Inertia\\MergeProp' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/MergeProp.php',
+        'Inertia\\Mergeable' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/Mergeable.php',
+        'Inertia\\MergesProps' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/MergesProps.php',
+        'Inertia\\Middleware' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/Middleware.php',
+        'Inertia\\OptionalProp' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/OptionalProp.php',
+        'Inertia\\Response' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/Response.php',
+        'Inertia\\ResponseFactory' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/ResponseFactory.php',
+        'Inertia\\ServiceProvider' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/ServiceProvider.php',
+        'Inertia\\Ssr\\BundleDetector' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/Ssr/BundleDetector.php',
+        'Inertia\\Ssr\\Gateway' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/Ssr/Gateway.php',
+        'Inertia\\Ssr\\HttpGateway' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/Ssr/HttpGateway.php',
+        'Inertia\\Ssr\\Response' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/Ssr/Response.php',
+        'Inertia\\Ssr\\SsrException' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/Ssr/SsrException.php',
+        'Inertia\\Support\\Header' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/Support/Header.php',
+        'Inertia\\Testing\\AssertableInertia' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/Testing/AssertableInertia.php',
+        'Inertia\\Testing\\Concerns\\Debugging' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/Testing/Concerns/Debugging.php',
+        'Inertia\\Testing\\Concerns\\Has' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/Testing/Concerns/Has.php',
+        'Inertia\\Testing\\Concerns\\Interaction' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/Testing/Concerns/Interaction.php',
+        'Inertia\\Testing\\Concerns\\Matching' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/Testing/Concerns/Matching.php',
+        'Inertia\\Testing\\Concerns\\PageObject' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/Testing/Concerns/PageObject.php',
+        'Inertia\\Testing\\TestResponseMacros' => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src/Testing/TestResponseMacros.php',
         'Intervention\\Gif\\AbstractEntity' => __DIR__ . '/..' . '/intervention/gif/src/AbstractEntity.php',
         'Intervention\\Gif\\AbstractExtension' => __DIR__ . '/..' . '/intervention/gif/src/AbstractExtension.php',
         'Intervention\\Gif\\Blocks\\ApplicationExtension' => __DIR__ . '/..' . '/intervention/gif/src/Blocks/ApplicationExtension.php',
@@ -10983,10 +10991,10 @@ class ComposerStaticInit3609341398097049f1e70392fec2a5bd
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit3609341398097049f1e70392fec2a5bd::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit3609341398097049f1e70392fec2a5bd::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit3609341398097049f1e70392fec2a5bd::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit3609341398097049f1e70392fec2a5bd::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInita1bc0492010999fe22c9a4d2e2f69679::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInita1bc0492010999fe22c9a4d2e2f69679::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInita1bc0492010999fe22c9a4d2e2f69679::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInita1bc0492010999fe22c9a4d2e2f69679::$classMap;
 
         }, null, ClassLoader::class);
     }

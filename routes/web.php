@@ -14,6 +14,7 @@ use App\Http\Controllers\Client\PpidKipController;
 use App\Http\Controllers\LKPD\Admin\AdminLkpdController;
 use App\Http\Controllers\Operator\OperatorController;
 use App\Http\Controllers\Simpeg\Admin\AdminSimpegController;
+use App\Http\Controllers\SimpegController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('dashboard');
@@ -36,7 +37,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     });
 
     Route::group(['prefix' => 'simpeg'], function () {
-        Route::get('/', [AdminSimpegController::class, 'index'])->name('admin.simpeg');
+        Route::get('/', [SimpegController::class, 'index'])->name('admin.simpeg');
+        // Route::get('/', [AdminSimpegController::class, 'index'])->name('admin.simpeg');
     });
 
     Route::group(['prefix' => 'lkpd'], function () {

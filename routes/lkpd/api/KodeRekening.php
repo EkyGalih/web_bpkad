@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Lkpd\Admin\Api\KodeRekeningController;
+use App\Http\Controllers\LKPD\Admin\Api\KodeRekeningController;
 use Illuminate\Support\Facades\Route;
 
 
