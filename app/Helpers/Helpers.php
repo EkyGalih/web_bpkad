@@ -582,7 +582,7 @@ class Helpers
                 $data = '';
         }
 
-        return $data->nama;
+        return $data->nama ?? '';
     }
 
     public static function _KipPPID($param, $param2)
