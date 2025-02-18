@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\KIP;
 use App\Models\Posts;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PpidKipController extends Controller
 {
@@ -120,12 +120,22 @@ class PpidKipController extends Controller
     public function viewPDF($id)
     {
         $files = KIP::select('files')->findOrFail($id);
-        return response()->file(public_path('storage/' . $files->files));
+        if ($files->files && Str::contains($files->files, env('AWS_URL'))) {
+            return redirect($files->files);
+        } else {
+            return response()->file(public_path('storage/' . $files->files));
+        }
     }
 
     public function downloadPDF($id)
     {
         $files = KIP::select('files')->findOrFail($id);
-        return response()->download(public_path('storage/' . $files->files));
+        if ($files->files && Str::contains($files->files, env('AWS_URL'))) {
+            // Mengunduh file dari URL eksternal
+            return redirect($files->files);
+        } else {
+            // Mengunduh file dari penyimpanan lokal
+            return response()->download(public_path('storage/' . $files->files));
+        }
     }
 }

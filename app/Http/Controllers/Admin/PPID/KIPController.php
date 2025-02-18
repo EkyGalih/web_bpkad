@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Admin\PPID;
 use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\KIP;
+use App\Models\Recent;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Webpatser\Uuid\Uuid;
+use Illuminate\Support\Str;
 
 class KIPController extends Controller
 {
@@ -58,14 +61,16 @@ class KIPController extends Controller
 
         if ($request->jenis_file === 'upload') {
             $request->validate([
-                'upload_files' => 'required|file|mimes:pdf|max:20480',
+            'upload_files' => 'required|file|mimes:pdf|max:20480',
             ]);
 
-            // Upload file ke storage
-            $filePath = $request->file('upload_files')->store('uploads/files', 'public');
+            // Upload file ke storage S3
+            $file = $request->file('upload_files');
+            $path = $file->store('uploads/files', 's3');
+            $url = config('filesystems.disks.s3.url') . '/' . $path;
         } else {
             // Jika jenis_file adalah "link", simpan link yang diinputkan
-            $filePath = $request->upload_files;
+            $url = $request->upload_files;
         }
 
         $id = (string)Uuid::generate(4);
@@ -76,9 +81,9 @@ class KIPController extends Controller
             'jenis_informasi' => $request->jenis_informasi,
             'jenis_file' => $request->jenis_file,
             'upload_by' => Auth::user()->id,
-            'files' => $filePath,
+            'files' => $url,
             'tahun' => $request->tahun,
-            'created_at' => $request->date . ' ' . $request->time . ':' . date('s')
+            'created_at' => $request->date . ' ' . $request->time . ':' . now()->format('s')
         ]);
 
         Helpers::_recentAdd($id, 'mengupload file pada PPID informasi ' . $request->jenis_informasi, 'kip');
@@ -119,25 +124,30 @@ class KIPController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if ($request->jenis_file === 'upload') {
-            $request->validate([
-                'upload_files' => 'required|file|mimes:pdf|max:20480',
-            ]);
+        $kip = KIP::findOrFail($id);
 
-            // Upload file ke storage
-            $filePath = $request->file('upload_files')->store('uploads/files', 'public');
+        if ($request->jenis_file === 'upload') {
+            // Hapus file lama dari S3 jika ada
+            if ($kip->files && Str::contains($kip->files, env('AWS_URL'))) {
+                $oldPath = str_replace(env('AWS_URL') . '/', '', $kip->files);
+                Storage::disk('s3')->delete($oldPath);
+            }
+
+            // Upload file baru ke S3
+            $file = $request->file('upload_files');
+            $path = $file->store('uploads/files', 's3');
+            $url = config('filesystems.disks.s3.url') . '/' . $path;
         } else {
             // Jika jenis_file adalah "link", simpan link yang diinputkan
-            $filePath = $request->upload_files;
+            $url = $request->upload_files;
         }
 
-        $kip = KIP::findOrFail($id);
 
         $kip->update([
             'nama_informasi' => $request->nama_informasi,
             'jenis_informasi' => $request->jenis_informasi,
             'jenis_file' => $request->jenis_file,
-            'files' => $filePath,
+            'files' => $url,
             'tahun' => $request->tahun,
             'created_at' => $request->date . ' ' . $request->time
         ]);
@@ -165,5 +175,43 @@ class KIPController extends Controller
         Helpers::_recentAdd($id, 'menghapus file pada PPID informasi ' . $kip->jenis_informasi, 'kip');
 
         return redirect()->back()->with(['success' => 'Data berhasil dihapus!']);
+    }
+
+    public function delete($id)
+    {
+        $kip = KIP::findOrFail($id);
+
+        if ($kip->files && Str::contains($kip->files, env('AWS_URL'))) {
+            $oldPath = str_replace(env('AWS_URL') . '/', '', $kip->files);
+            Storage::disk('s3')->delete($oldPath);
+        } else {
+            Storage::disk('public')->delete($kip->files);
+        }
+
+        $kip->delete();
+
+        Helpers::_recentAdd($id, 'menghapus permanent file pada PPID informasi ' . $kip->jenis_informasi, 'kip');
+
+        return redirect()->back()->with(['success' => 'Data berhasil dihapus permanent!']);
+    }
+
+    public function clear()
+    {
+        $kip = KIP::whereNotNull('deleted_at')->get();
+        foreach ($kip as $item) {
+            $recent = Recent::where('uuid_activity', '=', $item->id)->first();
+            if ($recent != NULL) {
+                $recent->delete();
+            }
+            if ($item->files && Str::contains($item->files, env('AWS_URL'))) {
+                $oldPath = str_replace(env('AWS_URL') . '/', '', $item->files);
+                Storage::disk('s3')->delete($oldPath);
+            } else {
+                Storage::disk('public')->delete($item->files);
+            }
+            $item->delete();
+        }
+
+        return redirect()->route('ppid-kip.index')->with(['success' => 'File Sampah berhasil dibersihkan!']);
     }
 }

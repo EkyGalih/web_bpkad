@@ -588,9 +588,9 @@ class Helpers
     public static function _KipPPID($param, $param2)
     {
         if ($param2 == "") {
-            $KIP = KIP::where('jenis_informasi', '=', $param)->orderBy('tahun', 'DESC')->get();
+            $KIP = KIP::where('jenis_informasi', '=', $param)->whereNull('deleted_at')->orderBy('tahun', 'DESC')->get();
         } else {
-            $KIP = KIP::where('jenis_informasi', '=', $param)->where('nama_informasi', 'LIKE', '%' . $param2 . '%')->orderBy('tahun', 'DESC')->get();
+            $KIP = KIP::where('jenis_informasi', '=', $param)->whereNull('deleted_at')->where('nama_informasi', 'LIKE', '%' . $param2 . '%')->orderBy('tahun', 'DESC')->get();
         }
 
         $data = [

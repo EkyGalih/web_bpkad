@@ -103,13 +103,14 @@
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Files</label>
                                     <div class="col-sm-10">
-                                        <input id="upload_file" type="text" name="upload_files"
+                                        <input id="upload_file" type="{{ $kip->files && str_contains($kip->files, ENV('aws_url')) ? 'file' : 'text' }}" name="upload_files"
                                             value="{{ $kip->files }}"
                                             class="form-control @error('files') is-invalid @enderror">
                                         @error('files')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
-                                        <small class="text-muted" id="desc_uplaod_file" hidden>Hanya file pdf dan ukuran maksimal 20MB</small>
+                                        <small>File Sekarang : <a href="{{ $kip->files }}" target="_blank">{{ $kip->files }}</a></small><br/>
+                                        <small class="text-muted" id="desc_uplaod_file" {{ $kip->files && str_contains($kip->files, ENV('aws_url')) ? '' : 'hidden' }}>Hanya file pdf dan ukuran maksimal 20MB</small>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
