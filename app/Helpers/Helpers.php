@@ -31,6 +31,7 @@ use App\Models\PostsCategory;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 use PhpParser\Node\Stmt\Static_;
 use stdClass;
@@ -783,5 +784,16 @@ class Helpers
     public static function GetBidang($param)
     {
         return Bidang::where('id', $param)->value('nama_bidang');
+    }
+
+    // Enkripsi data api
+    public static function encrypt($data)
+    {
+        return Crypt::encryptString($data);
+    }
+
+    public static function decrypt($data)
+    {
+        return Crypt::decryptString($data);
     }
 }

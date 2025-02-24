@@ -234,8 +234,8 @@ class RouteServiceProvider extends ServiceProvider
 
     public function mapBidangRoutes()
     {
-        Route::middleware('web')
-            ->namespace($this->namespace)
+        Route::middleware('api')
+            // ->namespace($this->namespace)
             ->group(base_path('routes/simpeg/bidang.php'));
     }
 

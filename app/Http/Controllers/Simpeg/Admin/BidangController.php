@@ -2,13 +2,23 @@
 
 namespace App\Http\Controllers\Simpeg\Admin;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Bidang;
 use App\Models\Pegawai;
+use App\ResponseHandle;
 use Illuminate\Http\Request;
 
 class BidangController extends Controller
 {
+    private $bidang;
+    private $respHandler;
+
+    public function __construct()
+    {
+        $this->bidang = new Bidang();
+        $this->respHandler = new ResponseHandle();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +26,17 @@ class BidangController extends Controller
      */
     public function index()
     {
-        $bidang = Bidang::orderBy('updated_at', 'desc')->get();
-        return view('SimPeg.bidang.bidang', compact('bidang'));
+        $bidang = Bidang::orderBy('updated_at', 'desc')->latest()->get();
+
+        $enc = Helpers::encrypt(json_encode($bidang));
+        // cara decrypt
+        $dec = json_decode(Helpers::decrypt($enc), true);
+
+        return response()->json([
+            'status' => 200,
+            'data' => Helpers::encrypt(json_encode($bidang)),
+            'data_dec' => $dec
+        ]);
     }
 
     /**
