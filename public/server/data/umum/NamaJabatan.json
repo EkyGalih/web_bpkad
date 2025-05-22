@@ -1,0 +1,26 @@
+[
+    {
+        "id" : 1,
+        "nama_jabatan" : "kaban"
+    },
+    {
+        "id" : 2,
+        "nama_jabatan" : "sekban"
+    },
+    {
+        "id" : 3,
+        "nama_jabatan" : "kabid"
+    },
+    {
+        "id" : 4,
+        "nama_jabatan" : "kasubid"
+    },
+    {
+        "id" : 5,
+        "nama_jabatan" : "pegawai"
+    },
+    {
+        "id" : 6,
+        "nama_jabatan" : "kepala"
+    }
+]

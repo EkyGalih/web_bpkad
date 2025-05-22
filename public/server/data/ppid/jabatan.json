@@ -1,0 +1,42 @@
+[
+    {
+        "id" : 1,
+        "jabatan": "atasan",
+        "nama_jabatan" : "Atasan PPID"
+    },
+    {
+        "id" : 2,
+        "jabatan": "ketua",
+        "nama_jabatan" : "Ketua PPID"
+    },
+    {
+        "id" : 3,
+        "jabatan": "kepala_pengelola",
+        "nama_jabatan" : "Kepala Pengelola"
+    },
+    {
+        "id" : 4,
+        "jabatan": "kepala_pelayanan",
+        "nama_jabatan" : "Kepala Pelayanan"
+    },
+    {
+        "id" : 5,
+        "jabatan": "kepala_pengaduan",
+        "nama_jabatan" : "Kepala Pengaduan"
+    },
+    {
+        "id" : 6,
+        "jabatan": "anggota_pengelola",
+        "nama_jabatan" : "Anggota Pengelola"
+    },
+    {
+        "id" : 7,
+        "jabatan": "anggota_pelayanan",
+        "nama_jabatan" : "Anggota Pelayanan"
+    },
+    {
+        "id" : 8,
+        "jabatan": "anggota_pengaduan",
+        "nama_jabatan" : "Anggota Pengaduan"
+    }
+]
