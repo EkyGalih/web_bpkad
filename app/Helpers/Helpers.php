@@ -720,7 +720,7 @@ class Helpers
         if ($act == 'pendidikan') {
             return Pegawai::where('pendidikan', 'LIKE', '%' . $param . '%')->count();
         } elseif ($act == 'golongan') {
-            return Pegawai::join('pangkat', 'pegawai.pangkatUuid', '=', 'pangkat.uuid')
+            return Pegawai::join('pangkat', 'pegawai.pangkat_id', '=', 'pangkat.id')
                 ->where('nama_pangkat', 'LIKE', $param . '%')
                 ->count();
         }
@@ -738,7 +738,7 @@ class Helpers
         return PPIDStruktur::join('pegawai', 'ppid_struktur.pegawai_id', '=', 'pegawai.id')
             ->where('ppid_struktur.jabatan', '=', $jabatan)
             ->where('ppid_struktur.deleted_at', '=', NULL)
-            ->select('ppid_struktur.jabatan', 'ppid_struktur.nama_jabatan', 'pegawai.name', 'pegawai.foto')
+            ->select('ppid_struktur.jabatan', 'ppid_struktur.nama_jabatan', 'pegawai.name', 'pegawai.foto', 'pegawai.jenis_kelamin')
             ->first();
     }
 

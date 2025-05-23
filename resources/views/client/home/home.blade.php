@@ -1,944 +1,504 @@
 @extends('client.index')
 @section('menu-home', 'active')
 @section('additional-css')
-    <!-- Basic stylesheet -->
-    <link rel="stylesheet" href="{{ asset('client/plugins/owl-carousel/owl.carousel.css') }}">
+<!-- Basic stylesheet -->
+<link rel="stylesheet" href="{{ asset('client/plugins/owl-carousel/owl.carousel.css') }}">
 
-    <!-- Default Theme -->
-    <link rel="stylesheet" href="{{ asset('client/plugins/owl-carousel/owl.theme.css') }}">
-    <style>
-        #owl-video .item {
-            margin: 3px;
-        }
+<!-- Default Theme -->
+<link rel="stylesheet" href="{{ asset('client/plugins/owl-carousel/owl.theme.css') }}">
+<style>
+    #owl-video .item {
+        margin: 3px;
+    }
 
-        #owl-video .item img {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
+    #owl-video .item img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
 
-        @media screen and (max-width: 50px) {
-            .list-group {
-                width: 50%;
-            }
+    @media screen and (max-width: 50px) {
+        .list-group {
+            width: 50%;
         }
-    </style>
+    }
+</style>
 @endsection
 @section('content_home')
-    @desktop
-        <section id="hero" class="d-flex align-items-center">
-        </section>
-        <div class="row py-2">
-            <!--Breaking box-->
-            <div class="col-1 col-md-3 col-lg-2 py-1 pr-md-0 mb-md-1">
-                <div class="d-inline-block d-md-block bg-primary text-white text-center breaking-caret py-1 px-2">
-                    <span class="d-none d-md-inline-block">Informasi</span>
-                </div>
+<section class="wrapper image-wrapper bg-image bg-overlay bg-overlay-300"
+    data-image-src="{{ asset('client/assets/img/photos/bg3.jpg') }}">
+    <div class="container pt-17 pb-19 pt-md-18 pb-md-17 text-center">
+        <div class="row">
+            <div class="col-lg-8 col-xl-7 col-xxl-6 mx-auto" data-cues="slideInDown" data-group="page-title">
+                <h1 class="display-1 text-white fs-60 mb-4 px-md-15 px-lg-0">Selamat Datang di website <span
+                        class="underline-3 style-2 blue">{{ ENV('APP_NAME') }}</span></h1>
             </div>
-            <!--Breaking content-->
-            <div class="col-11 col-md-9 col-lg-10 pl-1 pl-md-2">
-                <div class="breaking-box pt-2 pb-1">
-                    <!--marque-->
-                    <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseleave="this.start();">
-                        @foreach ($slidesInformasi as $info)
-                            <a class="h6 font-weight-light" href="{{ $info->url }}"><span
-                                    class="position-relative mx-2 badge badge-primary rounded-0">{{ $info->title }}</span>
-                                {{ $info->keterangan }}
-                            </a>
-                        @endforeach
-                    </marquee>
-                </div>
-            </div>
+            <!-- /column -->
         </div>
-        <section id="news" class="news">
-            <div style="padding-left: 8%; padding-right: 8%;" data-aos="fade-up">
-
-                <div class="row">
-                    <div class="col-3">
-                        <div class="list-group">
-                            <button type="button" class="list-group-item list-group-item-action active tes"
-                                aria-current="true">
-                                <i class="bx bx-news"></i> Download Informasi Terbuka
-                            </button>
-                            @foreach ($informasi as $berkala)
-                                <a href="{{ $berkala->files }}" type="button" data-bs-tooltip="tooltip" target="_blank"
-                                    data-bs-placement="top"
-                                    title="{{ $berkala->jenis_file == 'link' ? 'Download' : 'Lihat File' }}"
-                                    class="list-group-item list-group-item-action"><span style="color: #0844c5;">#</span>
-                                    {{ $berkala->nama_informasi }}</a>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+    <div class="overflow-hidden">
+        <div class="divider text-light mx-n2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60">
+                <path fill="currentColor" d="M0,0V60H1440V0A5771,5771,0,0,1,0,0Z" />
+            </svg>
+        </div>
+    </div>
+</section>
+<section class="wrapper bg-light-dark">
+    <div class="container pb-15 pb-md-17">
+        <div class="row gx-md-5 gy-5 mt-n19 mb-14 mb-md-17">
+            <div class="col-md-6 col-xl-3">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <img src="{{ asset('client/assets/img/icons/solid/clipboard.svg') }}"
+                            class="svg-inject icon-svg icon-svg-sm solid-mono text-fuchsia mb-3" alt="" />
+                        <h4>Informasi Berkala</h4>
+                        <p class="mb-2">Informasi yang diperbarui secara reguler atau periodik.</p>
+                        <a href="#" class="more hover link-fuchsia">Lihat Daftar</a>
+                    </div>
+                    <!--/.card-body -->
+                </div>
+                <!--/.card -->
+            </div>
+            <!--/column -->
+            <div class="col-md-6 col-xl-3">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <img src="{{ asset('client/assets/img/icons/solid/clipboard.svg') }}"
+                            class="svg-inject icon-svg icon-svg-sm solid-mono text-violet mb-3" alt="" />
+                        <h4>Informasi Serta Merta</h4>
+                        <p class="mb-2">Informasi yang diperbarui atau disajikan secara instan.</p>
+                        <a href="#" class="more hover link-violet">Lihat Daftar</a>
+                    </div>
+                    <!--/.card-body -->
+                </div>
+                <!--/.card -->
+            </div>
+            <!--/column -->
+            <div class="col-md-6 col-xl-3">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <img src="{{ asset('client/assets/img/icons/solid/clipboard.svg') }}"
+                            class="svg-inject icon-svg icon-svg-sm solid-mono text-orange mb-3" alt="" />
+                        <h4>Informasi Setiap Saat</h4>
+                        <p class="mb-2">Informasi yang diperbarui atau disajikan setiap saat.</p>
+                        <a href="#" class="more hover link-orange">Lihat Daftar</a>
+                    </div>
+                    <!--/.card-body -->
+                </div>
+                <!--/.card -->
+            </div>
+            <!--/column -->
+            <div class="col-md-6 col-xl-3">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <img src="{{ asset('client/assets/img/icons/solid/clipboard.svg') }}"
+                            class="svg-inject icon-svg icon-svg-sm solid-mono text-green mb-3" alt="" />
+                        <h4>Informasi Dikecualikan</h4>
+                        <p class="mb-2">Informasi yang dikecualikan untuk disediakan ke publik.</p>
+                        <a href="#" class="more hover link-green">Lihat Daftar</a>
+                    </div>
+                    <!--/.card-body -->
+                </div>
+                <!--/.card -->
+            </div>
+            <!--/column -->
+        </div>
+        <!--/.row -->
+        <div class="row">
+            <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2 mx-auto text-center">
+                <h3 class="display-3 mb-10 px-xl-10 px-xxl-15"><span class="underline-3 style-2 blue">Berita</span></h3>
+            </div>
+            <!-- /column -->
+        </div>
+        <!-- /.row -->
+        <ul
+            class="nav nav-tabs nav-tabs-bg nav-tabs-shadow-lg d-flex justify-content-between nav-justified flex-lg-row flex-column">
+            <li class="nav-item"> <a class="nav-link d-flex flex-row active" data-bs-toggle="tab" href="#tab2-1">
+                    <div><img src="{{ asset('client/assets/img/icons/lineal/paper.svg') }}"
+                            class="svg-inject icon-svg icon-svg-sm solid-mono text-fuchsia me-4" alt="" /></div>
+                    <div>
+                        <h4>Berita Terkini</h4>
+                        <p>Berita seputar kegiatan BPKAD NTB.</p>
+                    </div>
+                </a> </li>
+            <li class="nav-item"> <a class="nav-link d-flex flex-row" data-bs-toggle="tab" href="#tab2-2">
+                    <div><img src="{{ asset('client/assets/img/icons/lineal/user.svg') }}"
+                            class="svg-inject icon-svg icon-svg-sm solid-mono text-violet me-4" alt="" /></div>
+                    <div>
+                        <h4>Agenda Pimpinan</h4>
+                        <p>Berita agenda pimpinan BPKAD NTB.</p>
+                    </div>
+                </a> </li>
+            <li class="nav-item"> <a class="nav-link d-flex flex-row" data-bs-toggle="tab" href="#tab2-3">
+                    <div><img src="{{ asset('client/assets/img/icons/lineal/list.svg') }}"
+                            class="svg-inject icon-svg icon-svg-sm solid-mono text-green me-4" alt="" /></div>
+                    <div>
+                        <h4>Berita NTB</h4>
+                        <p>Berita seputar Nusa Tenggara Barat.</p>
+                    </div>
+                </a> </li>
+        </ul>
+        <!-- /.nav-tabs -->
+        <div class="tab-content mt-6 mt-lg-8">
+            <div class="tab-pane fade show active" id="tab2-1">
+                <div class="projects-tiles">
+                    <div class="project grid grid-view">
+                        <div class="row gx-md-8 gx-xl-12 gy-10 gy-md-12 isotope">
+                            <div class="item col-md-6 mt-md-7 mt-lg-15">
+                                <div
+                                    class="project-details d-flex justify-content-center align-self-end flex-column ps-0 pb-0">
+                                    <div class="post-header">
+                                        <h2 class="display-4 mb-4 pe-xxl-15">Berita Terkini.</h2>
+                                        <a href="{{ route('post.index') }}" class="lead fs-lg mb-0">Lihat Semua Berita
+                                            Terkini</a>
+                                    </div>
+                                    <!-- /.post-header -->
+                                </div>
+                                <!-- /.project-details -->
+                            </div>
+                            <!-- /.item -->
+                            @foreach ($new_posts as $post)
+                            <div class="item col-md-6">
+                                <figure class="lift rounded mb-6"><a
+                                        href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">
+                                        <img src="{{ asset($post->foto_berita) }}"
+                                            srcset="{{ asset($post->foto_berita) }}"
+                                            alt="{{ substr($post->title, 0, 50) }}" /></a></figure>
+                                <div class="post-category text-line mb-2 text-violet">{{
+                                    Helpers::PostCategory($post->posts_category_id) }}</div>
+                                <h2 class="post-title h3">{{ substr($post->title, 0, 50) }}...</h2>
+                            </div>
                             @endforeach
-                            <a href="PPID/Klasifikasi-Informasi-Publik" type="button"
-                                class="list-group-item list-group-item-action"><strong>Lihat Semua</strong></a>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.project -->
+                </div>
+                <!--/.row -->
+            </div>
+            <!--/.tab-pane -->
+            <div class="tab-pane fade" id="tab2-2">
+                <div class="row">
+                    <div class="col-lg-10 col-xl-9 col-xxl-8 mx-auto text-center">
+                        <h3 class="display-3 mb-10"><span class="underline-3 style-2 yellow">Agenda Pimpinan</span></h3>
+                        <h2 class="fs-16 text-uppercase text-muted mb-3"><a href="#">Lihat Semua</a></h2>
+                    </div>
+                    <!-- /column -->
+                </div>
+                <!-- /.row -->
+                <div class="swiper-container grid-view" data-margin="30" data-dots="true" data-items-xl="3"
+                    data-items-md="2" data-items-xs="1">
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            @foreach ($agendas as $agenda)
+                            <div class="swiper-slide">
+                                <figure class="rounded mb-6"><img src="{{ $agenda->foto_berita }}"
+                                        srcset="{{ $agenda->foto_berita }}" alt="{{ $agenda->title }}"
+                                        style="max-width: 500px; max-height: 700px;" /><a class="item-link"
+                                        href="{{ $agenda->foto_berita }}" data-glightbox
+                                        data-gallery="projects-group"><i class="uil uil-focus-add"></i></a></figure>
+                                <div class="project-details d-flex justify-content-center flex-column">
+                                    <div class="post-header">
+                                        <h2 class="post-title h3"><a
+                                                href="{{ route('post.show', [Helpers::PostCategory($agenda->posts_category_id), $agenda->slug]) }}"
+                                                class="link-dark">{{ $agenda->title }}</a></h2>
+                                        <div class="post-category text-ash">
+                                            {{
+                                            Helpers::PostCategory($agenda->posts_category_id) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
                         </div>
                     </div>
-                    <div class="col-9 pb-5">
-                        <div class="section-title">
-                            <h3><span>Blog</span></h3>
-                            <hr />
+                </div>
+            </div>
+            <!--/.tab-pane -->
+            <div class="tab-pane fade" id="tab2-3">
+                <div class="row gx-lg-8 gx-xl-12 gy-10 align-items-center">
+                    <div class="row mb-5">
+                        <div class="col-md-10 col-xl-8 col-xxl-7 mx-auto text-center">
+                            <img src="{{ asset('client/assets/img/icons/lineal/list.svg') }}"
+                                class="svg-inject icon-svg icon-svg-md mb-4" alt="" />
+                            <h2 class="display-4 mb-4 px-lg-14">Berita NTB</h2>
                         </div>
-                        <!--SECTION START-->
-                        <section class="row">
-                            <!--Start slider news-->
-                            <div class="col-12 col-md-6 pb-0 pb-md-3 pt-2 pr-md-1">
-                                <div id="featured" class="carousel slide carousel" data-ride="carousel">
-                                    <!--dots navigate-->
-                                    <ol class="carousel-indicators top-indicator">
-                                        <li data-target="#featured" data-slide-to="0" class="active"></li>
-                                        <li data-target="#featured" data-slide-to="1"></li>
-                                        <li data-target="#featured" data-slide-to="2"></li>
-                                        <li data-target="#featured" data-slide-to="3"></li>
-                                    </ol>
-
-                                    <!--carousel inner-->
-                                    <div class="carousel-inner">
-                                        <!--Item slider-->
-                                        <div class="carousel-item active">
-                                            <div class="card border-0 rounded-0 text-light overflow zoom">
-                                                <div class="position-relative">
-                                                    <!--thumbnail img-->
-                                                    <div class="ratio_left-cover-2 image-wrapper">
-                                                        <a
-                                                            href="{{ route('post.show', [Helpers::PostCategory($carousel[0]->posts_category_id), $carousel[0]->slug]) }}">
-                                                            <img height="437" width="100%"
-                                                                src="{{ asset($carousel[0]->foto_berita) }}"
-                                                                alt="{{ $carousel[0]->slug }}">
-                                                        </a>
-                                                    </div>
-                                                    <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
-                                                        <a class="p-1 badge badge-info rounded-0"
-                                                            href="#">{{ Helpers::PostCategory($carousel[0]->posts_category_id) }}</a>
-                                                        <!--title-->
-                                                        <a
-                                                            href="{{ route('post.show', [Helpers::PostCategory($carousel[0]->posts_category_id), $carousel[0]->slug]) }}">
-                                                            <h2 class="h3 post-title text-white my-1">
-                                                                {{ substr($carousel[0]->title, 0, 50) }}... <span
-                                                                    style="font-size: 20px;">Selengkapnya</span></h2>
-                                                        </a>
-                                                        <!-- meta title -->
-                                                        <div class="news-meta">by
-                                                            <span class="news-author badge badge-success"><a
-                                                                    class="text-white font-weight-bold"
-                                                                    href="#">{{ $carousel[0]->users->nama }}</a></span>
-                                                            <span
-                                                                class="news-date">{{ Helpers::GetDate($carousel[0]->created_at) }}</span>
+                        <!-- /column -->
+                    </div>
+                    <div class="position-relative">
+                        <div class="shape bg-dot primary rellax w-17 h-20" data-rellax-speed="1"
+                            style="top: 0; left: -1.7rem;"></div>
+                        <div class="swiper-container dots-closer blog grid-view mb-6" data-margin="0" data-dots="true"
+                            data-items-xl="3" data-items-md="2" data-items-xs="1">
+                            <div class="swiper">
+                                <div class="swiper-wrapper">
+                                    @foreach (array_slice($data, 0, 6) as $item)
+                                    <div class="swiper-slide">
+                                        <div class="item-inner">
+                                            <article>
+                                                <div class="card">
+                                                    <figure class="card-img-top overlay overlay-1 hover-scale"><a
+                                                            href="https://ntbprov.go.id/post/{{ $item->seotitle }}">
+                                                            <img src="{{$item->thumbnail }}"
+                                                                alt="{{ $item->desc == null ? $item->seotitle : $item->desc->title }}" /></a>
+                                                        <figcaption>
+                                                            <h5 class="from-top mb-0">Read More</h5>
+                                                        </figcaption>
+                                                    </figure>
+                                                    <div class="card-body">
+                                                        <div class="post-header">
+                                                            <h2 class="post-title h3 mt-1 mb-3"><a class="link-dark"
+                                                                    href="https://ntbprov.go.id/post/{{ $item->seotitle }}">
+                                                                    {{ $item->desc->title }}</a></h2>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="carousel-item">
-                                            <div class="card border-0 rounded-0 text-light overflow zoom">
-                                                <div class="position-relative">
-                                                    <!--thumbnail img-->
-                                                    <div class="ratio_left-cover-1 image-wrapper">
-                                                        <a
-                                                            href="{{ route('post.show', [Helpers::PostCategory($carousel[1]->posts_category_id), $carousel[1]->slug]) }}">
-                                                            <img height="437" width="100%"
-                                                                src="{{ asset($carousel[1]->foto_berita) }}"
-                                                                alt="{{ $carousel[1]->slug }}">
-                                                        </a>
-                                                    </div>
-                                                    <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
-                                                        <a class="p-1 badge badge-info rounded-0"
-                                                            href="#">{{ Helpers::PostCategory($carousel[1]->posts_category_id) }}</a>
-                                                        <!--title-->
-                                                        <a
-                                                            href="{{ route('post.show', [Helpers::PostCategory($carousel[1]->posts_category_id), $carousel[1]->slug]) }}">
-                                                            <h2 class="h3 post-title text-white my-1">
-                                                                {{ substr($carousel[1]->title, 0, 50) }}... <span
-                                                                    style="font-size: 20px;">Selengkapnya</span></h2>
-                                                        </a>
-                                                        <!-- meta title -->
-                                                        <div class="news-meta">by
-                                                            <span class="news-author badge badge-success"><a
-                                                                    class="text-white font-weight-bold"
-                                                                    href="#">{{ $carousel[1]->users->nama }}</a></span>
-                                                            <span
-                                                                class="news-date">{{ Helpers::GetDate($carousel[1]->created_at) }}</span>
+                                                        <!-- /.post-header -->
+                                                        <div class="post-content">
+                                                            <p>{!! $item->desc == null ? $item->picture_description :
+                                                                substr($item->desc->content, 0, 100).'...' !!}</p>
                                                         </div>
+                                                        <!-- /.post-content -->
                                                     </div>
+                                                    <!--/.card-body -->
+                                                    <div class="card-footer">
+                                                        <ul class="post-meta d-flex mb-0">
+                                                            <li class="post-date"><i
+                                                                    class="uil uil-calendar-alt"></i><span>{{
+                                                                    \Carbon\Carbon::parse($item->publishdate)->locale('id')->translatedFormat('l,
+                                                                    d F Y') }}</span></li>
+                                                            <li class="post-comments"><a href="#"><i
+                                                                        class="uil uil-file-alt fs-15"></i>{{
+                                                                    $item->author->name }}</a>
+                                                            </li>
+                                                        </ul>
+                                                        <!-- /.post-meta -->
+                                                    </div>
+                                                    <!-- /.card-footer -->
                                                 </div>
-                                            </div>
+                                                <!-- /.card -->
+                                            </article>
+                                            <!-- /article -->
                                         </div>
-
-                                        <div class="carousel-item">
-                                            <div class="card border-0 rounded-0 text-light overflow zoom">
-                                                <div class="position-relative">
-                                                    <!--thumbnail img-->
-                                                    <div class="ratio_left-cover-1 image-wrapper">
-                                                        <a
-                                                            href="{{ route('post.show', [Helpers::PostCategory($carousel[2]->posts_category_id), $carousel[2]->slug]) }}">
-                                                            <img height="437" width="100%"
-                                                                src="{{ asset($carousel[2]->foto_berita) }}"
-                                                                alt="{{ $carousel[2]->slug }}">
-                                                        </a>
-                                                    </div>
-                                                    <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
-                                                        <a class="p-1 badge badge-info rounded-0"
-                                                            href="#">{{ Helpers::PostCategory($carousel[2]->posts_category_id) }}</a>
-                                                        <!--title-->
-                                                        <a
-                                                            href="{{ route('post.show', [Helpers::PostCategory($carousel[2]->posts_category_id), $carousel[2]->slug]) }}">
-                                                            <h2 class="h3 post-title text-white my-1">
-                                                                {{ substr($carousel[2]->title, 0, 50) }}... <span
-                                                                    style="font-size: 20px;">Selengkapnya</span></h2>
-                                                        </a>
-                                                        <!-- meta title -->
-                                                        <div class="news-meta">by
-                                                            <span class="news-author badge badge-success"><a
-                                                                    class="text-white font-weight-bold"
-                                                                    href="#">{{ $carousel[2]->users->nama }}</a></span>
-                                                            <span
-                                                                class="news-date">{{ Helpers::GetDate($carousel[2]->created_at) }}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="carousel-item">
-                                            <div class="card border-0 rounded-0 text-light overflow zoom">
-                                                <div class="position-relative">
-                                                    <!--thumbnail img-->
-                                                    <div class="ratio_left-cover-1 image-wrapper">
-                                                        <a
-                                                            href="{{ route('post.show', [Helpers::PostCategory($carousel[3]->posts_category_id), $carousel[3]->slug]) }}">
-                                                            <img height="437" width="100%"
-                                                                src="{{ asset($carousel[3]->foto_berita) }}"
-                                                                alt="{{ $carousel[3]->slug }}">
-                                                        </a>
-                                                    </div>
-                                                    <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
-                                                        <a class="p-1 badge badge-info rounded-0"
-                                                            href="#">{{ Helpers::PostCategory($carousel[3]->posts_category_id) }}</a>
-                                                        <!--title-->
-                                                        <a
-                                                            href="{{ route('post.show', [Helpers::PostCategory($carousel[3]->posts_category_id), $carousel[3]->slug]) }}">
-                                                            <h2 class="h3 post-title text-white my-1">
-                                                                {{ substr($carousel[3]->title, 0, 50) }}... <span
-                                                                    style="font-size: 20px;">Selengkapnya</span></h2>
-                                                        </a>
-                                                        <!-- meta title -->
-                                                        <div class="news-meta">by
-                                                            <span class="news-author badge badge-success"><a
-                                                                    class="text-white font-weight-bold"
-                                                                    href="#">{{ $carousel[3]->users->nama }}</a></span>
-                                                            <span
-                                                                class="news-date">{{ Helpers::GetDate($carousel[3]->created_at) }}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                        <!-- /.item-inner -->
                                     </div>
-                                    <!--end carousel inner-->
-                                </div>
-
-                                <!--navigation-->
-                                <a class="carousel-control-prev" href="#featured" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#featured" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </div>
-                            <!--End slider news-->
-
-                            <!--Start box news-->
-                            <div class="col-12 col-md-6 pt-2 pl-md-1 mb-3 mb-lg-4">
-                                <div class="row">
-                                    <!--news box-->
-                                    @foreach ($new_posts as $post)
-                                        <div class="col-6 pb-1 pt-0 pr-1">
-                                            <div class="card border-0 rounded-0 text-white overflow zoom">
-                                                <div class="position-relative">
-                                                    <!--thumbnail img-->
-                                                    <div class="ratio_right-cover-2 image-wrapper">
-                                                        <a
-                                                            href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">
-                                                            <img height="250" width="100%"
-                                                                src="{{ asset($post->foto_berita) }}"
-                                                                alt="{{ substr($post->title, 0, 50) }}">
-                                                        </a>
-                                                    </div>
-                                                    <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
-                                                        <!-- category -->
-                                                        <a class="p-1 badge badge-primary rounded-0"
-                                                            href="{{ route('post.index') }}">{{ Helpers::PostCategory($post->posts_category_id) }}</a>
-
-                                                        <!--title-->
-                                                        <a
-                                                            href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">
-                                                            <h4 class="h5 text-white my-1">
-                                                                {{ substr($post->title, 0, 50) }}...
-                                                                <span style="font-size: 16px;">Selengkapnya</span>
-                                                            </h4>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     @endforeach
                                 </div>
                             </div>
-                            <!--End box news-->
-                            <a class="btn btn-primary btn-block" href="{{ route('post.index') }}">Selengkapnya</a>
-                        </section>
-                        <!--END SECTION-->
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section class="section">
-            <div style="padding-left: 8%; padding-right: 8%;" data-aos="fade-up">
-                <div class="row">
-                    <div class="col-3">
-                        <div class="list-group">
-                            <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-                                Berita NTB
-                            </button>
-                            <ul class="list-unstyled" style="margin-top: 5%;">
-                                @foreach (array_slice($data, 0, 6) as $item)
-                                {{-- {{ dd($item->desc->content) }} --}}
-                                    <div class="media">
-                                        <img src="{{$item->thumbnail }}" class="mr-3" alt="{{ $item->desc == null ? $item->seotitle : $item->desc->title }}"
-                                            style="max-width: 80px; max-height: 80px;">
-                                        <div class="media-body">
-                                            <p class="mt-0"><a target="_blank"
-                                                    href="https://ntbprov.go.id/post/{{ $item->seotitle }}">{!! $item->desc == null ? $item->picture_description : substr($item->desc->content, 0, 100).'...' !!}</a></p>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </ul>
                         </div>
                     </div>
-                    <div class="col-9">
-                        <div class="section-title">
-                            <h3>Agenda <span>Pimpinan</span></h3>
-                            <hr />
-                        </div>
-                        <div class="row">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="list-group">
-                                        <ul class="list-unstyled">
-                                            @foreach ($agenda as $item)
-                                                <li class="media">
-                                                    <img src="{{ $item->foto_berita }}" class="mr-3"
-                                                        alt="{{ $item->title }}" style="max-width: 80px; max-height: 80px;">
-                                                    <div class="media-body">
-                                                        <h5 class="mt-0 mb-1">
-                                                            <a style="color: black;"
-                                                                href="{{ route('post.show', [Helpers::PostCategory($item->posts_category_id), $item->slug]) }}">
-                                                                {{ $item->title }}
-                                                            </a>
-                                                        </h5>
-                                                        <p>
-                                                            <a style="color: black;"
-                                                                href="{{ route('post.show', [Helpers::PostCategory($item->posts_category_id), $item->slug]) }}">
-                                                                {!! substr($item->content, 0, 150) !!} ...
-                                                            </a> <br />
-                                                            <sub>
-                                                                {{ Helpers::getDate($item->created_at) . ' - ' . Helpers::getTime($item->created_at) }}</sub>
-                                                        </p>
-                                                    </div>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--news box-->
-                            {{-- @foreach ($artikels as $artikel)
-                                <div class="col-4 pb-1 pt-0 pr-1">
-                                    <div class="card border-0 rounded-0 text-white overflow zoom">
-                                        <div class="position-relative">
-                                            <!--thumbnail img-->
-                                            <div class="ratio_right-cover-2 image-wrapper">
-                                                <a
-                                                    href="{{ route('artikel.show', Helpers::randomString(120) . '/' . $artikel->id . '/' . Helpers::randomString(100)) }}">
-                                                    <img height="200" src="{{ asset($artikel->foto_berita) }}"
-                                                        alt="{{ substr($post->title, 0, 50) }}">
-                                                </a>
-                                            </div>
-                                            <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
-                                                <!-- category -->
-                                                <a class="p-1 badge badge-primary rounded-0"
-                                                    href="#">{{ Helpers::PostCategory($artikel->posts_category_id) }}</a>
-
-                                                <!--title-->
-                                                <a
-                                                    href="{{ route('artikel.show', Helpers::randomString(120) . '/' . $artikel->id . '/' . Helpers::randomString(100)) }}">
-                                                    <h4 class="h5 text-white my-1">
-                                                        {{ substr($artikel->title, 0, 50) }}...
-                                                        <span style="font-size: 16px;">Selengkapnyaaa</span>
-                                                    </h4>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach --}}
-                        </div>
-                        <a href="PPID/agenda" type="button" class="btn btn-primary btn-block">Lihat Semua</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="about" class="about section">
-            <div class="container">
-                <div class="section-title">
-                    <h3>Video <span>BPKAD</span></h3>
-                    <hr />
-                </div>
-                <div class="owl-carousel owl-theme" id="owl-video">
-                    @foreach ($banners as $banner)
-                        <iframe width="350" height="250" src="{{ $banner->path }}"></iframe>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-        <section id="testimonials" class="testimonials">
-            <div class="container" data-aos="zoom-in">
-                <div class="owl-carousel testimonials-carousel">
-                    @foreach ($apps as $app)
-                        <div class="testimonial-item">
-                            <a href="{{ $app->url }}"><img src="{{ $app->icon }}" class="testimonial-img"
-                                    alt=""></a>
-                            <h3>{{ $app->name }}</h3>
-                            <p>
-                                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                {{ $app->deskripsi }}
-                                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                            </p>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-        <section id="contact" class="contact">
-            <div class="container" data-aos="fade-up">
-
-                <div class="section-title">
-                    <h3>Kontak <span>BPKAD</span></h3>
-                    <hr />
-                </div>
-
-                @php $address = Helpers::__address() @endphp
-                <div class="row" data-aos="fade-up" data-aos-delay="100">
-                    <div class="col-lg-6">
-                        <div class="info-box mb-4">
-                            <i class="bx bx-map"></i>
-                            <h3>Alamat Kantor</h3>
-                            <p>{{ $address->address }}</p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6">
-                        <div class="info-box  mb-4">
-                            <i class="bx bx-envelope"></i>
-                            <h3>Email</h3>
-                            <p>bpkad@ntbprov.go.id</p>
-                            <p>{{ $address->email }}</p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6">
-                        <div class="info-box  mb-4">
-                            <i class="bx bx-phone-call"></i>
-                            <h3>Telepon</h3>
-                            <p>{{ Helpers::__phone($address->phone) }}</p>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="row" data-aos="fade-up" data-aos-delay="100">
-                    <div class="col-lg-6 ">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.135917515381!2d116.1083764142942!3d-8.58292808948207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dcdc09f19da683b%3A0x9f800d0a99b1a506!2sKantor%20BPKAD%20NTB!5e0!3m2!1sen!2sid!4v1659492989350!5m2!1sen!2sid"
-                            width="550" height="370" style="border:0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <form action="#" method="post" role="form" class="php-email-form">
-                            <div class="form-row">
-                                <div class="col form-group">
-                                    <input type="text" name="name" class="form-control" id="name"
-                                        placeholder="Nama Lengkap" data-rule="minlen:4"
-                                        data-msg="Please enter at least 4 chars" />
-                                    <div class="validate"></div>
-                                </div>
-                                <div class="col form-group">
-                                    <input type="email" class="form-control" name="email" id="email"
-                                        placeholder="Alamat Email" data-rule="email" data-msg="Please enter a valid email" />
-                                    <div class="validate"></div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="subject" id="subject"
-                                    placeholder="Judul" data-rule="minlen:4"
-                                    data-msg="Please enter at least 8 chars of subject" />
-                                <div class="validate"></div>
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control" name="message" rows="5" data-rule="required"
-                                    data-msg="Please write something for us" placeholder="Pesan Anda"></textarea>
-                                <div class="validate"></div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="loading">Loading</div>
-                                <div class="error-message"></div>
-                                <div class="sent-message">Your message has been sent. Thank you!</div>
-                            </div>
-                            <div class="text-center">
-                                <button type="button" class="btn btn-primary btn-md">Kirim Pesan</button>
-                            </div>
-                        </form>
-                    </div>
-
-                </div>
-
-            </div>
-        </section>
-    @elsedesktop
-        <section id="testimonials" class="testimonials">
-        </section>
-        <div class="row py-2">
-            <!--Breaking box-->
-            <div class="col-1 col-md-3 col-lg-2 py-1 pr-md-0 mb-md-1">
-                <div class="d-inline-block d-md-block bg-primary text-white text-center breaking-caret py-1 px-2">
-                    <span class="d-none d-md-inline-block">Informasi</span>
-                </div>
-            </div>
-            <!--Breaking content-->
-            <div class="col-11 col-md-9 col-lg-10 pl-1 pl-md-2">
-                <div class="breaking-box pt-2 pb-1">
-                    <!--marque-->
-                    <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseleave="this.start();">
-                        @foreach ($slidesInformasi as $info)
-                            <a class="h6 font-weight-light" href="{{ $info->url }}"><span
-                                    class="position-relative mx-2 badge badge-primary rounded-0">{{ $info->title }}</span>
-                                {{ $info->keterangan }}
-                            </a>
-                        @endforeach
-                    </marquee>
                 </div>
             </div>
         </div>
-        <div style="padding-left: 8%; padding-right: 8%;" data-aos="fade-up">
-            <div class="list-group">
-                <button type="button" class="list-group-item list-group-item-action active tes" aria-current="true">
-                    <i class="bx bx-news"></i> Download Informasi Terbuka
-                </button>
-                @foreach ($informasi as $berkala)
-                    <a href="{{ $berkala->files }}" type="button" data-bs-tooltip="tooltip" target="_blank"
-                        data-bs-placement="top" title="{{ $berkala->jenis_file == 'link' ? 'Download' : 'Lihat File' }}"
-                        class="list-group-item list-group-item-action"><span style="color: #0844c5;">#</span>
-                        {{ $berkala->nama_informasi }}</a>
-                @endforeach
-                <a href="PPID/Klasifikasi-Informasi-Publik" type="button"
-                    class="list-group-item list-group-item-action"><strong>Lihat Semua</strong></a>
+    </div>
+</section>
+<section class="wrapper bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2 mt-5 mx-auto text-center">
+                <h3 class="display-3 mb-10 px-xl-10 px-xxl-15"><span class="underline-3 style-2 blue">Struktur
+                        PPID</span></h3>
+            </div>
+            <!-- /column -->
+        </div>
+        @php
+        $atasan = Helpers::getPejabatPPID('atasan');
+        $ketua = Helpers::getPejabatPPID('ketua');
+
+        $kepala_pengelola = Helpers::getPejabatPPID('kepala_pengelola');
+        $kepala_pengaduan = Helpers::getPejabatPPID('kepala_pengaduan');
+        $kepala_pelayanan = Helpers::getPejabatPPID('kepala_pelayanan');
+        @endphp
+        <div class="card bg-soft-primary rounded-4 mb-14 mb-md-18">
+            <div class="card-body p-md-10 mt-8 py-xxl-16 position-relative">
+                <div class="position-absolute d-none d-lg-block" style="bottom:30%; left:10%; width: 28%; z-index:2">
+                    <figure class="card-img-top overflow-hidden" style="width: 300px; height: 300px; margin: auto;">
+                        <img class="w-100 h-100 object-fit-cover"
+                            src="{{ asset($atasan->foto ?? ($atasan->jenis_kelamin == 'pria' ? 'static/images/male.jpg' : 'static/images/female.jpg')) }}"
+                            alt="{{ $atasan->name }}" />
+                    </figure>
+                </div>
+                <div class="row gx-md-0 gx-xl-12 text-center">
+                    <div class="col-lg-7 offset-lg-5 col-xl-6">
+                        <blockquote class="border-0 fs-lg mb-0">
+                            <p>“Keterbukaan informasi publik merupakan wujud nyata dari tata kelola pemerintahan yang
+                                transparan, partisipatif, dan akuntabel. Kami berkomitmen untuk memberikan akses
+                                informasi yang cepat, tepat, dan mudah bagi seluruh masyarakat”</p>
+                            <div class="blockquote-details justify-content-center text-center">
+                                <div class="info p-0">
+                                    <h5 class="mb-1">{{ $atasan->name }}</h5>
+                                    <div class="meta mb-0">{{ strtoupper($atasan->nama_jabatan) }}</div>
+                                </div>
+                            </div>
+                        </blockquote>
+                    </div>
+                    <!-- /column -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!--/.card-body -->
+        </div>
+        <!--/.card -->
+        <div class="row gx-lg-8 gx-xl-12 gy-10 gy-lg-0 mb-11">
+            <!-- /column -->
+            <div class="col-lg-12 mt-lg-2">
+                <div class="row align-items-center counter-wrapper gy-6 text-center">
+                    <div class="col-md-3">
+                        <img src="{{ asset('client/assets/img/icons/lineal/user.svg') }}"
+                            class="svg-inject icon-svg icon-svg-md text-primary mb-3" alt="" />
+                        <h3 class="counter">{{ Helpers::getPegawais('IV', 'golongan') }}</h3>
+                        <p>Pegawai Eselon</p>
+                    </div>
+                    <!--/column -->
+                    <div class="col-md-3">
+                        <img src="{{ asset('client/assets/img/icons/lineal/user.svg') }}"
+                            class="svg-inject icon-svg icon-svg-md text-primary mb-3" alt="" />
+                        <h3 class="counter">{{ Helpers::getPegawais('III', 'golongan') }}</h3>
+                        <p>Pegawai Golongan III</p>
+                    </div>
+                    <!--/column -->
+                    <div class="col-md-3">
+                        <img src="{{ asset('client/assets/img/icons/lineal/user.svg') }}"
+                            class="svg-inject icon-svg icon-svg-md text-primary mb-3" alt="" />
+                        <h3 class="counter">{{ Helpers::getPegawais('II', 'golongan') }}</h3>
+                        <p>Pegawai Golongan II</p>
+                    </div>
+                    <div class="col-md-3">
+                        <img src="{{ asset('client/assets/img/icons/lineal/user.svg') }}"
+                            class="svg-inject icon-svg icon-svg-md text-primary mb-3" alt="" />
+                        <h3 class="counter">{{ Helpers::getPegawais('I', 'golongan') }}</h3>
+                        <p>Pegawai Golongan I</p>
+                    </div>
+                    <!--/column -->
+                </div>
+                <!--/.row -->
+            </div>
+            <!-- /column -->
+        </div>
+        <div class="row grid-view gx-md-8 gx-xl-10 gy-8 gy-lg-0 mb-16 mb-md-19">
+            <div class="col-md-6 col-lg-3 mt-5">
+                <div class="position-relative">
+                    <div class="shape rounded bg-soft-primary rellax d-md-block" data-rellax-speed="0"
+                        style="bottom: -0.75rem; right: -0.75rem; width: 98%; height: 98%; z-index:0"></div>
+                    <div class="card shadow-lg">
+                        <figure class="card-img-top overflow-hidden" style="width: auto; height: auto; margin: auto;">
+                            <img class="w-100 h-100 object-fit-cover"
+                                src="{{ asset($ketua->foto ?? ($ketua->jenis_kelamin == 'pria' ? 'static/images/male.jpg' : 'static/images/female.jpg')) }}"
+                                alt="{{ $ketua->name }}" />
+                        </figure>
+                        <div class="card-body px-6 py-5">
+                            <p class="mb-1 fw-bold">{{ $ketua->name }}</p>
+                            <p class="mb-0 fs-12">{{ strtoupper($ketua->nama_jabatan) }}</p>
+                        </div>
+                        <!--/.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /div -->
+            </div>
+            <div class="col-md-6 col-lg-3 mt-5">
+                <div class="position-relative">
+                    <div class="shape rounded bg-soft-primary rellax d-md-block" data-rellax-speed="0"
+                        style="bottom: -0.75rem; right: -0.75rem; width: 98%; height: 98%; z-index:0"></div>
+                    <div class="card shadow-lg">
+                        <figure class="card-img-top overflow-hidden" style="width: auto; height: auto; margin: auto;">
+                            <img class="w-100 h-100 object-fit-cover"
+                                src="{{ asset($kepala_pengelola->foto ?? ($kepala_pengelola->jenis_kelamin == 'pria' ? 'static/images/male.jpg' : 'static/images/female.jpg')) }}"
+                                alt="{{ $kepala_pengelola->name }}" />
+
+                        </figure>
+                        <div class="card-body px-6 py-5">
+                            <p class="mb-1 fw-bold">{{ $kepala_pengelola->name }}</p>
+                            <p class="mb-0 fs-12">{{ strtoupper($kepala_pengelola->nama_jabatan) }}</p>
+                        </div>
+                        <!--/.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /div -->
+            </div>
+            <div class="col-md-6 col-lg-3 mt-5">
+                <div class="position-relative">
+                    <div class="shape rounded bg-soft-primary rellax d-md-block" data-rellax-speed="0"
+                        style="bottom: -0.75rem; right: -0.75rem; width: 98%; height: 98%; z-index:0"></div>
+                    <div class="card shadow-lg">
+                        <figure class="card-img-top overflow-hidden" style="width: auto; height: auto; margin: auto;">
+                            <img class="w-100 h-100 object-fit-cover"
+                                src="{{ asset($kepala_pengaduan->foto ?? ($kepala_pengaduan->jenis_kelamin == 'pria' ? 'static/images/male.jpg' : 'static/images/female.jpg')) }}"
+                                alt="{{ $kepala_pengaduan->name }}" />
+                        </figure>
+                        <div class="card-body px-6 py-5">
+                            <p class="mb-1 fw-bold">{{ $kepala_pengaduan->name }}</p>
+                            <p class="mb-0 fs-12">{{ strtoupper($kepala_pengaduan->nama_jabatan) }}</p>
+                        </div>
+                        <!--/.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /div -->
+            </div>
+            <div class="col-md-6 col-lg-3 mt-5">
+                <div class="position-relative">
+                    <div class="shape rounded bg-soft-primary rellax d-md-block" data-rellax-speed="0"
+                        style="bottom: -0.75rem; right: -0.75rem; width: 98%; height: 98%; z-index:0"></div>
+                    <div class="card shadow-lg">
+                        <figure class="card-img-top overflow-hidden" style="width: auto; height: auto; margin: auto;">
+                            <img class="w-100 h-100 object-fit-cover"
+                                src="{{ asset($kepala_pelayanan->foto ?? ($kepala_pelayanan->jenis_kelamin == 'pria' ? 'static/images/male.jpg' : 'static/images/female.jpg')) }}"
+                                alt="{{ $kepala_pelayanan->name }}" />
+                        </figure>
+                        <div class="card-body px-6 py-5">
+                            <p class="mb-1 fw-bold">{{ $kepala_pelayanan->name }}</p>
+                            <p class="mb-0 fs-12">{{ strtoupper($kepala_pelayanan->nama_jabatan) }}</p>
+                        </div>
+                        <!--/.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /div -->
             </div>
         </div>
-        <div style="padding-left: 8%; padding-right: 8%;" data-aos="fade-up">
-            <div class="section-title">
-                <h3><span>Blog</span></h3>
-                <hr />
-            </div>
-            <div id="featured" class="carousel slide carousel" data-ride="carousel">
-                <!--dots navigate-->
-                <ol class="carousel-indicators top-indicator">
-                    <li data-target="#featured" data-slide-to="0" class="active"></li>
-                    <li data-target="#featured" data-slide-to="1"></li>
-                    <li data-target="#featured" data-slide-to="2"></li>
-                    <li data-target="#featured" data-slide-to="3"></li>
-                </ol>
-
-                <!--carousel inner-->
-                <div class="carousel-inner">
-                    <!--Item slider-->
-                    <div class="carousel-item active">
-                        <div class="card border-0 rounded-0 text-light overflow zoom">
-                            <div class="position-relative">
-                                <!--thumbnail img-->
-                                <div class="ratio_left-cover-1 image-wrapper">
-                                    <a
-                                        href="{{ route('post.show', [Helpers::PostCategory($carousel[0]->posts_category_id), $carousel[0]->slug]) }}">
-                                        <img height="437" src="{{ asset($carousel[0]->foto_berita) }}"
-                                            alt="{{ $carousel[0]->slug }}">
-                                    </a>
-                                </div>
-                                <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
-                                    <a class="p-1 badge badge-info rounded-0"
-                                        href="#">{{ Helpers::PostCategory($carousel[0]->posts_category_id) }}</a>
-                                    <!--title-->
-                                    <a
-                                        href="{{ route('post.show', [Helpers::PostCategory($carousel[0]->posts_category_id), $carousel[0]->slug]) }}">
-                                        <h2 class="h3 post-title text-white my-1">
-                                            {{ substr($carousel[0]->title, 0, 50) }}... <span
-                                                style="font-size: 20px;">Selengkapnya</span></h2>
-                                    </a>
-                                    <!-- meta title -->
-                                    <div class="news-meta">by
-                                        <span class="news-author badge badge-success"><a class="text-white font-weight-bold"
-                                                href="#">{{ $carousel[0]->users->nama }}</a></span>
-                                        <span class="news-date">{{ Helpers::GetDate($carousel[0]->created_at) }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="carousel-item">
-                        <div class="card border-0 rounded-0 text-light overflow zoom">
-                            <div class="position-relative">
-                                <!--thumbnail img-->
-                                <div class="ratio_left-cover-1 image-wrapper">
-                                    <a
-                                        href="{{ route('post.show', [Helpers::PostCategory($carousel[1]->posts_category_id), $carousel[1]->slug]) }}">
-                                        <img height="437" src="{{ asset($carousel[1]->foto_berita) }}"
-                                            alt="{{ $carousel[1]->slug }}">
-                                    </a>
-                                </div>
-                                <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
-                                    <a class="p-1 badge badge-info rounded-0"
-                                        href="#">{{ Helpers::PostCategory($carousel[1]->posts_category_id) }}</a>
-                                    <!--title-->
-                                    <a
-                                        href="{{ route('post.show', [Helpers::PostCategory($carousel[1]->posts_category_id), $carousel[1]->slug]) }}">
-                                        <h2 class="h3 post-title text-white my-1">
-                                            {{ substr($carousel[1]->title, 0, 50) }}... <span
-                                                style="font-size: 20px;">Selengkapnya</span></h2>
-                                    </a>
-                                    <!-- meta title -->
-                                    <div class="news-meta">by
-                                        <span class="news-author badge badge-success"><a class="text-white font-weight-bold"
-                                                href="#">{{ $carousel[1]->users->nama }}</a></span>
-                                        <span class="news-date">{{ Helpers::GetDate($carousel[1]->created_at) }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="carousel-item">
-                        <div class="card border-0 rounded-0 text-light overflow zoom">
-                            <div class="position-relative">
-                                <!--thumbnail img-->
-                                <div class="ratio_left-cover-1 image-wrapper">
-                                    <a
-                                        href="{{ route('post.show', [Helpers::PostCategory($carousel[2]->posts_category_id), $carousel[2]->slug]) }}">
-                                        <img height="437" src="{{ asset($carousel[2]->foto_berita) }}"
-                                            alt="{{ $carousel[2]->slug }}">
-                                    </a>
-                                </div>
-                                <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
-                                    <a class="p-1 badge badge-info rounded-0"
-                                        href="#">{{ Helpers::PostCategory($carousel[2]->posts_category_id) }}</a>
-                                    <!--title-->
-                                    <a
-                                        href="{{ route('post.show', [Helpers::PostCategory($carousel[2]->posts_category_id), $carousel[2]->slug]) }}">
-                                        <h2 class="h3 post-title text-white my-1">
-                                            {{ substr($carousel[2]->title, 0, 50) }}... <span
-                                                style="font-size: 20px;">Selengkapnya</span></h2>
-                                    </a>
-                                    <!-- meta title -->
-                                    <div class="news-meta">by
-                                        <span class="news-author badge badge-success"><a class="text-white font-weight-bold"
-                                                href="#">{{ $carousel[2]->users->nama }}</a></span>
-                                        <span class="news-date">{{ Helpers::GetDate($carousel[2]->created_at) }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="carousel-item">
-                        <div class="card border-0 rounded-0 text-light overflow zoom">
-                            <div class="position-relative">
-                                <!--thumbnail img-->
-                                <div class="ratio_left-cover-1 image-wrapper">
-                                    <a
-                                        href="{{ route('post.show', [Helpers::PostCategory($carousel[3]->posts_category_id), $carousel[3]->slug]) }}">
-                                        <img height="437" src="{{ asset($carousel[3]->foto_berita) }}"
-                                            alt="{{ $carousel[3]->slug }}">
-                                    </a>
-                                </div>
-                                <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
-                                    <a class="p-1 badge badge-info rounded-0"
-                                        href="#">{{ Helpers::PostCategory($carousel[3]->posts_category_id) }}</a>
-                                    <!--title-->
-                                    <a
-                                        href="{{ route('post.show', [Helpers::PostCategory($carousel[3]->posts_category_id), $carousel[3]->slug]) }}">
-                                        <h2 class="h3 post-title text-white my-1">
-                                            {{ substr($carousel[3]->title, 0, 50) }}... <span
-                                                style="font-size: 20px;">Selengkapnya</span></h2>
-                                    </a>
-                                    <!-- meta title -->
-                                    <div class="news-meta">by
-                                        <span class="news-author badge badge-success"><a class="text-white font-weight-bold"
-                                                href="#">{{ $carousel[3]->users->nama }}</a></span>
-                                        <span class="news-date">{{ Helpers::GetDate($carousel[3]->created_at) }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <!--end carousel inner-->
-            </div>
-
-            <!--navigation-->
-            <a class="carousel-control-prev" href="#featured" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#featured" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-            @foreach ($new_posts as $post)
-                <div class="card border-0 rounded-0 text-white overflow zoom">
-                    <div class="position-relative">
-                        <!--thumbnail img-->
-                        <div class="ratio_right-cover-2 image-wrapper">
-                            <a
-                                href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">
-                                <img height="250" width="100%" src="{{ asset($post->foto_berita) }}"
-                                    alt="{{ substr($post->title, 0, 50) }}">
-                            </a>
-                        </div>
-                        <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
-                            <!-- category -->
-                            <a class="p-1 badge badge-primary rounded-0"
-                                href="">{{ Helpers::PostCategory($post->posts_category_id) }}</a>
-
-                            <!--title-->
-                            <a
-                                href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">
-                                <h4 class="h5 text-white my-1">
-                                    {{ substr($post->title, 0, 50) }}...
-                                    <span style="font-size: 16px;">Selengkapnya</span>
-                                </h4>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-            <a class="btn btn-primary btn-block" href="{{ route('post.index') }}">Selengkapnya</a>
-        </div> <br />
-        <hr />
-        <div style="padding-left: 8%; padding-right: 8%;" data-aos="fade-up">
-            <div class="list-group">
-                <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-                    Berita NTB
-                </button>
-                <ul class="list-unstyled" style="margin-top: 5%;">
-                    @foreach ($data as $item)
-                    {{-- {{ dd($item->desc->content) }} --}}
-                        <div class="media">
-                            <img src="{{$item->thumbnail }}" class="mr-3" alt="{{ $item->desc == null ? $item->seotitle : $item->desc->title }}"
-                                style="max-width: 80px; max-height: 80px;">
-                            <div class="media-body">
-                                <p class="mt-0"><a target="_blank"
-                                        href="https://ntbprov.go.id/post/{{ $item->seotitle }}">{!! $item->desc == null ? $item->picture_description : substr($item->desc->content, 0, 100).'...' !!}</a></p>
-                            </div>
-                        </div>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
-        <div style="padding-left: 8%; padding-right: 8%;" data-aos="fade-up">
-            <div class="section-title">
-                <h3>Agenda<span>Pimpinan</span></h3>
-                <hr />
-            </div>
-            <div class="row">
-                <!--news box-->
-                <div class="col-12">
-                    <div class="list-group">
-                        <ul class="list-unstyled">
-                            @foreach ($agenda as $item)
-                                <li class="media">
-                                    <img src="{{ $item->foto_berita }}" class="mr-3" alt="{{ $item->title }}"
-                                        style="max-width: 80px; max-height: 80px;">
-                                    <div class="media-body">
-                                        <h5 class="mt-0 mb-1">
-                                            <a style="color: black;"
-                                                href="{{ route('post.show', [Helpers::PostCategory($item->posts_category_id), $item->slug]) }}">
-                                                {{ $item->title }}
-                                            </a>
-                                        </h5>
-                                        <p>
-                                            <a style="color: black;"
-                                                href="{{ route('post.show', [Helpers::PostCategory($item->posts_category_id), $item->slug]) }}">
-                                                {!! substr($item->content, 0, 150) !!} ...
-                                            </a> <br />
-                                            <sub>
-                                                {{ Helpers::getDate($item->created_at) . ' - ' . Helpers::getTime($item->created_at) }}</sub>
-                                        </p>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <a class="btn btn-primary btn-block" href="{{ route('artikel.index') }}">Selengkapnya</a>
-        </div>
-
-        <section id="about" class="about section">
-            <div class="container">
-                <div class="section-title">
-                    <h3>Video <span>BPKAD</span></h3>
-                    <hr />
-                </div>
-                <div class="owl-carousel owl-theme" id="owl-video">
-                    @foreach ($banners as $banner)
-                        <iframe width="350" height="250" src="{{ $banner->path }}"></iframe>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-        <section id="testimonials" class="testimonials">
-            <div class="container" data-aos="zoom-in">
-                <div class="owl-carousel testimonials-carousel">
-                    @foreach ($apps as $app)
-                        <div class="testimonial-item">
-                            <a href="{{ $app->url }}"><img src="{{ $app->icon }}" class="testimonial-img"
-                                    alt=""></a>
-                            <h3>{{ $app->name }}</h3>
-                            <p>
-                                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                {{ $app->deskripsi }}
-                                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                            </p>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-        <section id="contact" class="contact">
-            <div class="container" data-aos="fade-up">
-
-                <div class="section-title">
-                    <h3>Kontak <span>BPKAD</span></h3>
-                    <hr />
-                </div>
-
-                @php $address = Helpers::__address() @endphp
-                <div class="row" data-aos="fade-up" data-aos-delay="100">
-                    <div class="col-lg-6">
-                        <div class="info-box mb-4">
-                            <i class="bx bx-map"></i>
-                            <h3>Alamat Kantor</h3>
-                            <p>{{ $address->address }}</p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6">
-                        <div class="info-box  mb-4">
-                            <i class="bx bx-envelope"></i>
-                            <h3>Email</h3>
-                            <p>bpkad@ntbprov.go.id</p>
-                            <p>{{ $address->email }}</p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6">
-                        <div class="info-box  mb-4">
-                            <i class="bx bx-phone-call"></i>
-                            <h3>Telepon</h3>
-                            <p>{{ Helpers::__phone($address->phone) }}</p>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="row" data-aos="fade-up" data-aos-delay="100">
-                    <div class="col-lg-6 ">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.135917515381!2d116.1083764142942!3d-8.58292808948207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dcdc09f19da683b%3A0x9f800d0a99b1a506!2sKantor%20BPKAD%20NTB!5e0!3m2!1sen!2sid!4v1659492989350!5m2!1sen!2sid"
-                            width="550" height="370" style="border:0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <form action="#" method="post" role="form" class="php-email-form">
-                            <div class="form-row">
-                                <div class="col form-group">
-                                    <input type="text" name="name" class="form-control" id="name"
-                                        placeholder="Nama Lengkap" data-rule="minlen:4"
-                                        data-msg="Please enter at least 4 chars" />
-                                    <div class="validate"></div>
-                                </div>
-                                <div class="col form-group">
-                                    <input type="email" class="form-control" name="email" id="email"
-                                        placeholder="Alamat Email" data-rule="email" data-msg="Please enter a valid email" />
-                                    <div class="validate"></div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="subject" id="subject"
-                                    placeholder="Judul" data-rule="minlen:4"
-                                    data-msg="Please enter at least 8 chars of subject" />
-                                <div class="validate"></div>
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control" name="message" rows="5" data-rule="required"
-                                    data-msg="Please write something for us" placeholder="Pesan Anda"></textarea>
-                                <div class="validate"></div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="loading">Loading</div>
-                                <div class="error-message"></div>
-                                <div class="sent-message">Your message has been sent. Thank you!</div>
-                            </div>
-                            <div class="text-center">
-                                <button type="button" class="btn btn-primary btn-md">Kirim Pesan</button>
-                            </div>
-                        </form>
-                    </div>
-
-                </div>
-
-            </div>
-        </section>
-    @enddesktop
+    </div>
+</section>
 @endsection
 @section('additional-js')
-    <script src="{{ asset('client/plugins/owl-carousel/owl.carousel.js') }}"></script>
-    <script>
-        //FEATURED HOVER
-        $(document).ready(function() {
-            $(".linkfeat").hover(
-                function() {
-                    $(".textfeat").show(500);
-                },
-                function() {
-                    $(".textfeat").hide(500);
-                }
-            );
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var swiperAgenda = new Swiper('[data-items-xl="3"]:nth-of-type(1) .swiper', {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                992: { slidesPerView: 3 },
+                768: { slidesPerView: 2 },
+                0: { slidesPerView: 1 }
+            }
+        });
 
-            $("#owl-video").owlCarousel({
+        var swiperBeritaNTB = new Swiper('[data-items-xl="3"]:nth-of-type(2) .swiper', {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                992: { slidesPerView: 3 },
+                768: { slidesPerView: 2 },
+                0: { slidesPerView: 1 }
+            }
+        });
 
-                autoPlay: 3000, //Set AutoPlay to 3 seconds
-
-                items: 3,
-                itemsDesktop: [1199, 3],
-                itemsDesktopSmall: [979, 3]
-
+        document.querySelectorAll('a[data-bs-toggle="tab"]').forEach(function (tab) {
+            tab.addEventListener('shown.bs.tab', function (event) {
+                swiperAgenda.update();
+                swiperBeritaNTB.update();
             });
         });
-    </script>
+    });
+</script>
 @endsection

@@ -1,315 +1,158 @@
 @extends('client.index')
 @section('title', 'Semua Berita |')
 @section('menu-berita', 'active')
-@section('additional-css')
-    <style>
-        html,
-        .tags {
-            font-weight: bold;
-            border-radius: 2px;
-            color: #fff;
-            font-size: 14px;
-            padding: 4px;
-            margin-right: 4px;
-            background-color: #3f8bee;
-        }
-    </style>
-@endsection
 @section('content_home')
-    <main id="main" data-aos="fade-up">
-        @desktop
-            <!-- ======= Berita ======= -->
-            <section class="portfolio-details" style="margin-top: 5%;">
-
-                <div class="portfolio-details" style="margin: 2%;">
-                    <div class="row">
-                        <div class="col-2">
-                            <ul class="list-group">
-                                <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-                                    <i class="bx bx-border-all"></i> Kategori
-                                </button>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <a href="{{ route('post.index') }}"> Berita
-                                    </a>
-                                    <span class="badge badge-primary badge-pill">({{ Helpers::countCategoryPost('1') }})</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <a href="{{ route('artikel.index') }}"> Artikel
-                                    </a>
-                                    <span class="badge badge-primary badge-pill">({{ Helpers::countCategoryPost('2') }})</span>
-                                </li>
-                            </ul>
-                            <br /><br />
-                            @php
-                                $tags = array_unique(Helpers::countTag());
-                            @endphp
-                            <ul class="list-group">
-                                <button type="button" class="list-group-item list-group-item-action active"
-                                    aria-current="true">
-                                    <i class="bx bx-purchase-tag-alt"></i> Tags
-                                </button>
-                                @foreach ($tags as $key => $tag)
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <a href="{{ route('post.tags', $tags[$key]) }}">{{ $tag }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <a href="#"><strong>Lihat Semua Tags</strong></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-10">
-                            {{-- <div class="row">
-                                <div class="col-6"> --}}
-                            <form action="{{ route('post.search') }}" method="POST">
-                                @csrf
-                                <div class="form-row align-items-center">
-                                    <div class="col-6">
-                                        <div class="input-group mb-4">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <i class="bx bx-search"></i>
-                                                </div>
-                                            </div>
-                                            <input type="text" name="cari" class="form-control" id="inlineFormInputGroup"
-                                                placeholder="Cari Berita ...">
-                                        </div>
-                                    </div>
-                                    <div class="col-auto" style="margin-bottom: 2%;">
-                                        <button type="submit" class="btn btn-primary mb-2">Cari</button>
-                                    </div>
-                                </div>
-                            </form>
-                            {{-- </div> --}}
-                            {{-- <div class="col-6">
-                                    <div class="row">
-                                        <div class="col-2">
-                                            <p style="margin-top: 5%;">short by :</p>
-                                        </div>
-                                        <div class="col-5">
-                                            <select name="bulan" id="bulan" class="form-control">
-                                                <option value="">Bulan</option>
-                                                <option value="01">Jan</option>
-                                                <option value="02">Feb</option>
-                                                <option value="03">Mar</option>
-                                                <option value="04">Apr</option>
-                                                <option value="05">Mei</option>
-                                                <option value="06">Jun</option>
-                                                <option value="07">Jul</option>
-                                                <option value="08">Agu</option>
-                                                <option value="09">Sep</option>
-                                                <option value="10">Okt</option>
-                                                <option value="11">Nov</option>
-                                                <option value="12">Des</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-5">
-                                            @php
-                                                $years = [
-                                                    date('Y'),
-                                                    date('Y') - 1,
-                                                    date('Y') - 2,
-                                                    date('Y') - 3,
-                                                    date('Y') - 4,
-                                                ];
-                                            @endphp
-                                            <select name="tahun" id="tahun" class="form-control">
-                                                <option value="">Tahun</option>
-                                                @foreach ($years as $year)
-                                                    <option value="{{ $year }}">{{ $year }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div> --}}
-                            {{-- </div> --}}
-                            @if ($cari != 'Seluruh Berita')
-                                <p>Menampilkan hasil pencarian : <strong>{{ $cari }}</strong></p>
-                                <a href="{{ route('post.index') }}">Lihat Seluruh Berita</a>
-                                <hr />
-                            @endif
-                            <div class="row">
-                                <!--news box-->
-                                @foreach ($posts as $post)
-                                    <div class="col-3 pb-1 pt-0 pr-1">
-                                        <div class="card border-0 rounded-0 text-white overflow zoom">
-                                            <div class="position-relative">
-                                                <!--thumbnail img-->
-                                                <div class="ratio_right-cover-2 image-wrapper">
-                                                    <a
-                                                        href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">
-                                                        @php
-                                                            $defaultImage = asset('static/images/no-image-post.png');
-                                                            $imageUrl = Str::contains(
-                                                                $post->foto_berita,
-                                                                'https://storage.ntbprov.go.id/bpkad/uploads/berita',
-                                                            )
-                                                                ? $post->foto_berita
-                                                                : asset($post->foto_berita);
-                                                        @endphp
-                                                        <img height="250" width="100%"
-                                                            src="{{ $imageUrl ?: $defaultImage }}"
-                                                            alt="{{ substr($post->slug, 0, 50) }}">
-                                                    </a>
-                                                </div>
-                                                <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
-                                                    <!-- category -->
-                                                    <div class="p-1 badge badge-primary rounded-0"
-                                                        >{{ Helpers::PostCategory($post->posts_category_id) }}</div>
-                                                    <span>{{ Helpers::getDate($post->created_at) }}</span>
-													<br/>
-                                                    <!--title-->
-                                                    <a class="h5 text-white my-1"
-                                                        href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">
-                                                       {{ $post->title }}
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                            {{ $posts->links() }}
-                        </div>
-                    </div>
-                </div>
-            </section><!-- End Portfolio Details Section -->
-        @elsedesktop
-            <section class="portfolio-details" style="margin-top: 5%;">
-
-                <div class="portfolio-details" style="margin: 2%;">
-                    <ul class="list-group">
-                        <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-                            <i class="bx bx-border-all"></i> Kategori
-                        </button>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <a href="{{ route('post.index') }}"> Berita
-                            </a>
-                            <span class="badge badge-primary badge-pill">({{ Helpers::countCategoryPost('1') }})</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <a href="{{ route('artikel.index') }}"> Artikel
-                            </a>
-                            <span class="badge badge-primary badge-pill">({{ Helpers::countCategoryPost('2') }})</span>
-                        </li>
-                    </ul> <br />
-                    <form action="{{ route('post.search') }}" method="POST">
-                        @csrf
-                        <div class="form-row align-items-center">
-                            <div class="col-10">
-                                <div class="input-group mb-4">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="bx bx-search"></i>
-                                        </div>
-                                    </div>
-                                    <input type="text" name="cari" class="form-control" id="inlineFormInputGroup"
-                                        placeholder="Cari Berita ...">
-                                </div>
-                            </div>
-                            <div class="col-auto" style="margin-bottom: 1%;">
-                                <button type="submit" class="btn btn-primary mb-2">Cari</button>
-                            </div>
-                        </div>
-                    </form>
-                    {{-- <div class="row">
-                        <div class="col-2">
-                            <p style="margin-top: 5%;">short by :</p>
-                        </div>
-                        <div class="col-5">
-                            <select name="bulan" id="bulan" class="form-control">
-                                <option value="">Bulan</option>
-                                <option value="01">Jan</option>
-                                <option value="02">Feb</option>
-                                <option value="03">Mar</option>
-                                <option value="04">Apr</option>
-                                <option value="05">Mei</option>
-                                <option value="06">Jun</option>
-                                <option value="07">Jul</option>
-                                <option value="08">Agu</option>
-                                <option value="09">Sep</option>
-                                <option value="10">Okt</option>
-                                <option value="11">Nov</option>
-                                <option value="12">Des</option>
-                            </select>
-                        </div>
-                        <div class="col-5">
-                            @php
-                                $years = [date('Y'), date('Y') - 1, date('Y') - 2, date('Y') - 3, date('Y') - 4];
-                            @endphp
-                            <select name="tahun" id="tahun" class="form-control">
-                                <option value="">Tahun</option>
-                                @foreach ($years as $year)
-                                    <option value="{{ $year }}">{{ $year }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div> --}}
-                    @if ($cari != 'Seluruh Berita')
-                        <p>Menampilkan hasil pencarian : <strong>{{ $cari }}</strong></p>
-                        <a href="{{ route('post.index') }}">Lihat Seluruh Berita</a>
-                        <hr />
-                    @endif
-                    @foreach ($posts as $post)
-                        <div class="card border-0 rounded-0 text-white overflow zoom">
-                            <div class="position-relative">
-                                <!--thumbnail img-->
-                                <div class="ratio_right-cover-2 image-wrapper">
-                                    <a
-                                        href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">
-                                        <img height="250" width="100%"
-                                            src="{{ asset($post->foto_berita) ?? asset('static/images/no-image-post.png') }}"
-                                            alt="{{ substr($post->title, 0, 50) }}">
-                                    </a>
-                                </div>
-                                <div class="position-absolute p-2 p-lg-3 b-0 w-100 bg-shadow">
-                                    <!-- category -->
-                                    <div class="p-1 badge badge-primary rounded-0"
-                                        >{{ Helpers::PostCategory($post->posts_category_id) }}</div>
-									<span>{{ Helpers::getDate($post->created_at) }}</span>
-									<br/>
-                                    <!--title-->
-                                    <a class="h5 text-white my-1"
-                                        href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">
-                                        {{ $post->title }}
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                    <p style="max-width: 50px">{{ $posts->links() }}</p>
-                    <br />
-                    @php
-                        $tags = array_unique(Helpers::countTag());
-                    @endphp
-                    <ul class="list-group">
-                        <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-                            <i class="bx bx-purchase-tag-alt"></i> Tags
-                        </button>
-                        @foreach ($tags as $key => $tag)
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <a href="{{ route('post.tags', $tags[$key]) }}">{{ $tag }}
-                                </a>
-                            </li>
-                        @endforeach
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <a href="#"><strong>Lihat Semua Tags</strong></a>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-        @enddesktop
-    </main><!-- End #main -->
-    <footer id="footer">
-        <div class="footer-newsletter">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6">
-
-                    </div>
+<section class="section-frame overflow-hidden">
+    <div class="wrapper bg-info">
+        <div class="container py-12 py-md-16 text-center">
+            <div class="row">
+                <div class="col-md-7 col-lg-6 col-xl-5 mx-auto">
+                    <h1 class="display-1 mb-3 text-white">Semua Berita</h1>
+                    <p class="lead px-lg-5 px-xxl-8 mb-1 text-white">Semua berita terkait agenda & kegiatan BPKAD Provinsi NTB.</p>
                 </div>
             </div>
         </div>
-    </footer>
+    </div>
+</section>
+<section class="wrapper bg-active-primary">
+    <div class="container py-14 py-md-16">
+        <div class="row gx-lg-8 gx-xl-12">
+            <div class="col-lg-8">
+                <div class="blog classic-view">
+                    @foreach ($posts->take(3) as $post)
+                    <article class="post">
+                        <div class="card">
+                            @php
+                            $defaultImage = asset('static/images/no-image-post.png');
+                            $imageUrl = Str::contains(
+                            $post->foto_berita,
+                            'https://storage.ntbprov.go.id/bpkad/uploads/berita',
+                            )
+                            ? $post->foto_berita
+                            : asset($post->foto_berita);
+                            @endphp
+                            <figure class="card-img-top overlay overlay-1 hover-scale"><a
+                                    href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}"><img
+                                        src="{{ $imageUrl ?: $defaultImage }}"
+                                        alt="{{ substr($post->slug, 0, 50) }}" /></a>
+                                <figcaption>
+                                    <h5 class="from-top mb-0">Selengkapnya</h5>
+                                </figcaption>
+                            </figure>
+                            <div class="card-body">
+                                <div class="post-header">
+                                    <div class="post-category text-line">
+                                        <a href="#" class="hover" rel="category">{{
+                                            Helpers::PostCategory($post->posts_category_id) }}</a>
+                                    </div>
+                                    <h2 class="post-title mt-1 mb-0"><a class="link-dark"
+                                            href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">{{
+                                            $post->title }}</a></h2>
+                                </div>
+                                <div class="post-content">
+                                    <p>{!! substr($post->content, 0, 500) !!}...</p>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <ul class="post-meta d-flex mb-0">
+                                    <li class="post-date"><i class="uil uil-calendar-alt"></i><span>{{
+                                            Helpers::getDate($post->created_at) }}</span>
+                                    </li>
+                                    <li class="post-author"><a href="#"><i class="uil uil-user"></i><span>By
+                                                {{ $post->users->nama }}</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+                    @endforeach
+                </div>
+                <div class="blog grid grid-view">
+                    <div class="row isotope gx-md-8 gy-8 mb-8">
+                        @foreach ($posts->skip(3)->take(4) as $post)
+                        <article class="item post col-md-6">
+                            <div class="card">
+                                @php
+                                $defaultImage = asset('static/images/no-image-post.png');
+                                $imageUrl = Str::contains(
+                                $post->foto_berita,
+                                'https://storage.ntbprov.go.id/bpkad/uploads/berita',
+                                )
+                                ? $post->foto_berita
+                                : asset($post->foto_berita);
+                                @endphp
+                                <figure class="card-img-top overlay overlay-1 hover-scale"><a
+                                        href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">
+                                        <img src="{{ $imageUrl ?: $defaultImage }}"
+                                            alt="{{ substr($post->slug, 0, 50) }}" /></a>
+                                    <figcaption>
+                                        <h5 class="from-top mb-0">Selengkapnya</h5>
+                                    </figcaption>
+                                </figure>
+                                <div class="card-body">
+                                    <div class="post-header">
+                                        <div class="post-category text-line">
+                                            <a href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}"
+                                                class="hover" rel="category">{{
+                                                Helpers::PostCategory($post->posts_category_id) }}</a>
+                                        </div>
+                                        <h2 class="post-title h3 mt-1 mb-3"><a class="link-dark"
+                                                href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">{{
+                                                substr($post->title, 0, 50) }}</a></h2>
+                                    </div>
+                                    <div class="post-content">
+                                        <p>{!! substr($post->content, 0, 100) !!}...</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <ul class="post-meta d-flex mb-0">
+                                        <li class="post-date"><i class="uil uil-calendar-alt"></i><span>{{
+                                                Helpers::getDate($post->created_at) }}</span>
+                                        </li>
+                                        <li class="post-author"><a href="#"><i class="uil uil-user"></i><span>By
+                                                    {{ $post->users->nama }}</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </article>
+                        @endforeach
+                    </div>
+                </div>
+                {{ $posts->links() }}
+            </div>
+            <aside class="col-lg-4 sidebar mt-8 mt-lg-6">
+                <div class="widget">
+                    <form action="{{ route('post.search') }}" class="search-form" method="POST">
+                        @csrf
+                        <div class="form-floating mb-0">
+                            <input id="search-form" name="cari" type="text" class="form-control" placeholder="Search">
+                            <label for="search-form">Cari Berita</label>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.widget -->
+                <div class="widget">
+                    <h4 class="widget-title mb-3">Categories</h4>
+                    <ul class="unordered-list bullet-primary text-reset">
+                        <li><a href="{{ route('post.index') }}">Berita ({{ Helpers::countCategoryPost('1') }})</a></li>
+                        <li><a href="{{ route('artikel.index') }}">Artikel ({{ Helpers::countCategoryPost('2') }})</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.widget -->
+                <div class="widget">
+                    <h4 class="widget-title mb-3">Tags</h4>
+                    @php
+                    $tags = array_unique(Helpers::countTag());
+                    @endphp
+                    <ul class="list-unstyled tag-list">
+                        @foreach ($tags as $key => $tag)
+                        <li><a href="{{ route('post.tags', $tags[$key]) }}"
+                                class="btn btn-soft-ash btn-sm rounded-pill">{{ $tag }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
 @endsection

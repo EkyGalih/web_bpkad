@@ -2,29 +2,43 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>@yield('title') BPKAD Prov. NTB</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
     @include('layouts.client.css')
 </head>
 
 <body>
-    <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
-        <div class="container d-flex">
-
-        </div>
+    <div class="content-wrapper">
+        <header class="wrapper bg-soft-primary">
+            <nav class="navbar navbar-expand-lg center-logo transparent position-absolute navbar-dark">
+                <div class="container justify-content-between align-items-center">
+                    <div class="container justify-content-between align-items-center">
+                        <div class="d-flex flex-row w-100 justify-content-between align-items-center d-lg-none">
+                            <div class="navbar-brand"><a href="{{ url('/') }}">
+                                    <img class="logo-dark" src="{{ asset('client/assets/img/logo-dark.png') }}"
+                                        srcset="{{ asset('client/assets/img/logo-dark@2x.png 2x') }}" alt="" />
+                                    <img class="logo-light" src="{{ asset('client/assets/img/logo-light.png') }}"
+                                        srcset="{{ asset('client/assets/img/logo-light@2x.png 2x') }}" alt="" />
+                                </a></div>
+                            <div class="navbar-other ms-auto">
+                                <ul class="navbar-nav flex-row align-items-center">
+                                    <li class="nav-item d-lg-none">
+                                        <button class="hamburger offcanvas-nav-btn"><span></span></button>
+                                    </li>
+                                </ul>
+                                <!-- /.navbar-nav -->
+                            </div>
+                            <!-- /.navbar-other -->
+                        </div>
+                        @include('layouts.client.header')
+                    </div>
+            </nav>
+            @yield('content_home')
+            {{-- <main id="main">
+                @yield('content')
+            </main> --}}
+        </header>
     </div>
-    @include('layouts.client.header')
-    @yield('content_home')
-    <main id="main">
-        @yield('content')
-    </main>
     @include('layouts.client.footer')
-    {{-- <div id="preloader">
-        <h4 class="text-loader">BPKAD NTB</h4>
-    </div> --}}
     <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
     @include('layouts.client.js')
 </body>
