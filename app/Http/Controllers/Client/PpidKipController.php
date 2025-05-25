@@ -8,6 +8,8 @@ use App\Models\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
+use function App\Helpers\getKlasifikasiEnumFromInput;
+
 class PpidKipController extends Controller
 {
     /**
@@ -15,13 +17,37 @@ class PpidKipController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($klasifikasi, Request $request)
     {
-        $kip_title = KIP::select('jenis_informasi')->groupBy('jenis_informasi')->get();
-        $kip_content = KIP::get();
-        $query = "";
+        $query = $request->input('search', '');
 
-        return view('client.PPID.kip.index', compact('kip_title', 'kip_content', 'query'));
+        $data_kip = KIP::where('jenis_informasi', getKlasifikasiEnumFromInput($klasifikasi)->value)
+            ->whereNull('deleted_at')
+            ->where('nama_informasi', 'LIKE', '%' . $query . '%')
+            ->orderByDesc('tahun')
+            ->orderByDesc('updated_at')
+            ->get()
+            ->groupBy('tahun');
+
+        $data = [];
+
+        foreach ($data_kip as $tahun => $items) {
+            $data[$tahun] = [
+                'tahun' => $tahun,
+                'kip' => $items->map(function ($item) {
+                    return [
+                        'id' => $item->id,
+                        'nama_informasi' => $item->nama_informasi,
+                        'jenis_informasi' => $item->jenis_informasi,
+                        'jenis_file' => $item->jenis_file,
+                        'files' => $item->files,
+                        'created_at' => $item->created_at,
+                    ];
+                })->toArray()
+            ];
+        }
+        
+        return view('client.PPID.kip.' . $klasifikasi, compact('data', 'query'));
     }
 
     /**

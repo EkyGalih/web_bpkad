@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Enum\KlasifikasiEnum;
 use App\Models\Address;
 use App\Models\Apps;
 use App\Models\Assets;
@@ -585,63 +586,6 @@ class Helpers
         return $data->nama ?? '';
     }
 
-    public static function _KipPPID($param, $param2)
-    {
-        if ($param2 == "") {
-            $KIP = KIP::where('jenis_informasi', '=', $param)->whereNull('deleted_at')->orderBy('tahun', 'DESC')->orderBy('updated_at', 'DESC')->get();
-        } else {
-            $KIP = KIP::where('jenis_informasi', '=', $param)->whereNull('deleted_at')->where('nama_informasi', 'LIKE', '%' . $param2 . '%')->orderBy('tahun', 'DESC')->orderBy('updated_at', 'DESC')->get();
-        }
-
-        $data = [
-            'tahun' => array(),
-            'data' => array()
-        ];
-        $tahun = [];
-
-        foreach ($KIP as $k => $val) {
-            if (!isset($tahun[$val->tahun])) {
-                $tahun[$val->tahun] = [];
-            }
-        }
-        $c_sort = count($tahun);
-        $i = 0;
-        if (is_array($tahun) && ($c_sort > 0)) {
-            foreach ($tahun as $k => $v) {
-                array_push($data['tahun'], $k);
-                $data['data'][$k] = array(
-                    'tahun' => $k,
-                    'kip' => array()
-                );
-            }
-            foreach ($KIP as $key => $val) {
-                if (in_array($val->tahun, $data['tahun'])) {
-                    if (!isset($data['data'][$val->tahun]['kip'])) {
-                        $data['data'][$val->tahun]['kip'] = [
-                            'id' => $val->id,
-                            'nama_informasi' => $val->nama_informasi,
-                            'jenis_informasi' => $val->jenis_informasi,
-                            'jenis_file' => $val->jenis_file,
-                            'files' => $val->files,
-                            'created_at' => $val->created_at
-                        ];
-                    } else {
-                        array_push($data['data'][$val->tahun]['kip'], [
-                            'id' => $val->id,
-                            'nama_informasi' => $val->nama_informasi,
-                            'jenis_informasi' => $val->jenis_informasi,
-                            'jenis_file' => $val->jenis_file,
-                            'files' => $val->files,
-                            'created_at' => $val->created_at
-                        ]);
-                    }
-                }
-            }
-        }
-        $kip = $data['data'];
-        return $kip;
-    }
-
     // Pegawai Function
 
     public static function getPimpinan($cat, $param)
@@ -783,5 +727,13 @@ class Helpers
     public static function GetBidang($param)
     {
         return Bidang::where('id', $param)->value('nama_bidang');
+    }
+}
+
+if (!function_exists('get_klasifikasi_enum')) {
+    function getKlasifikasiEnumFromInput(string $input): ?KlasifikasiEnum
+    {
+        $normalized = str_replace('_', ' ', strtolower($input));
+        return KlasifikasiEnum::tryFrom($normalized);
     }
 }

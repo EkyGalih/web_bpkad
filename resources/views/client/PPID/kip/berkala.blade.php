@@ -1,87 +1,139 @@
 @extends('client.index')
 @section('title', 'PPID | Klasifikasi Informasi Publik')
+@section('additional-css')
+    <style>
+        .table-responsive-scroll {
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #dee2e6;
+        }
+
+        .table-responsive-scroll thead th {
+            position: sticky;
+            top: 0;
+            background-color: #f8f9fa;
+            z-index: 1;
+        }
+    </style>
+@endsection
 @section('content_home')
-<section class="section-frame overflow-hidden">
-    <div class="wrapper bg-info">
-        <div class="container py-12 py-md-16 text-center">
-            <div class="row">
-                <div class="col-md-7 col-lg-6 col-xl-5 mx-auto">
-                    <h1 class="display-1 mb-3 text-white">Informasi Publik</h1>
-                    <p class="lead px-lg-5 px-xxl-8 mb-1 text-white">Daftar Informasi yang dapat di lihat dan unduh.</p>
+    <section class="section-frame overflow-hidden">
+        <div class="wrapper bg-info">
+            <div class="container py-12 py-md-16 text-center">
+                <div class="row">
+                    <div class="col-md-7 col-lg-6 col-xl-5 mx-auto">
+                        <h1 class="display-1 mb-3 text-white">Informasi Publik</h1>
+                        <p class="lead px-lg-5 px-xxl-8 mb-1 text-white">Daftar Informasi
+                            {{ strtoupper(App\Enum\KlasifikasiEnum::BERKALA->value) }}.</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<section class="wrapper bg-active-primary">
-    <div class="container py-14 py-md-16">
-        <div class="row gx-lg-12 gx-xl-12">
-            <div class="card" style="padding: 1%; margin: 1% 5%;">
-                <h1 class="text-center mb-4">Daftar Informasi Publik</h1>
-                @php
-                $KipBerkala = Helpers::_KipPPID('berkala', $query);
-                $KipSetiapSaat = Helpers::_KipPPID('setiap saat', $query);
-                $KipDikecualikan = Helpers::_KipPPID('dikecualikan', $query);
-                $KipSertaMerta = Helpers::_KipPPID('serta merta', $query);
-                @endphp
-                <div class="d-flex">
-                    <ul class="nav nav-tabs" id="kipTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="berkala-tab" data-bs-toggle="tab"
-                                data-bs-target="#berkala" type="button" role="tab">Berkala</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="serta-tab" data-bs-toggle="tab" data-bs-target="#serta"
-                                type="button" role="tab">Serta Merta</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="setiap-tab" data-bs-toggle="tab" data-bs-target="#setiap"
-                                type="button" role="tab">Setiap Saat</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="dikecualikan-tab" data-bs-toggle="tab"
-                                data-bs-target="#dikecualikan" type="button" role="tab">Dikecualikan</button>
-                        </li>
-                    </ul>
-                    <form action="{{ route('ppid-kip.search_berkala') }}">
-                        <div class="form-row align-items-center">
-                            <div class="input-group mb-4">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text"><i class="bx bx-search"></i></div>
-                                </div>
-                                <input type="text" name="search" class="form-control" placeholder="Cari Data .."
-                                    value="{{ old('search') ?? $query }}">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Cari</button>
+    </section>
+    <section class="wrapper bg-active-primary">
+        <div class="container py-3 py-md-3">
+            <div class="row gx-lg-12 gx-xl-12">
+                <div class="card" style="padding: 1%; margin: 1% 5%;">
+                    @include('client.PPID.kip.partials._header')
+                    <div class="card-body">
+                        <div class="table-responsive-scroll">
+                            <table class="table table-hover table-bordered">
+                                @if (empty($data))
+                                    <tr>
+                                        <td colspan="4" class="text-center">Tidak ada data dengan pencarian
+                                            <strong>{{ $query }}</strong>
+                                        </td>
+                                    </tr>
+                                @else
+                                    @foreach ($data as $val => $berkala)
+                                        <thead>
+                                            <tr>
+                                                <th colspan="4" style="text-align: center; font-size: 25px;">Tahun
+                                                    {{ $berkala['tahun'] }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($berkala['kip'] as $key => $berkala2)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $berkala2['nama_informasi'] }}</td>
+                                                    <td>{{ Helpers::GetDate($berkala2['created_at']) . ' ' . Helpers::GetTime($berkala2['created_at']) }}
+                                                    </td>
+                                                    <td>
+                                                        @if ($berkala2['jenis_file'] == 'link')
+                                                            <a href="{{ $berkala2['files'] }}"
+                                                                class="btn btn-success btn-sm" target="_blank">
+                                                                <i class="bx bx-download"></i> Download
+                                                            </a>
+                                                        @else
+                                                            <button type="button" data-toggle="modal"
+                                                                data-target="#pdfModal{{ $loop->iteration }}"
+                                                                class="btn btn-info btn-sm" target="_blank">
+                                                                <i class="bx bx-show"></i> View
+                                                            </button>
+                                                            <div class="modal fade" id="pdfModal{{ $loop->iteration }}"
+                                                                tabindex="-1" aria-labelledby="pdfModalLabel"
+                                                                aria-hidden="true">
+                                                                <div class="modal-dialog modal-xl">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="pdfModalLabel">
+                                                                                {{ $berkala2['nama_informasi'] }}</h5>
+                                                                            <button type="button" class="btn btn-default"
+                                                                                data-dismiss="modal"
+                                                                                aria-label="Close">X</button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <iframe
+                                                                                src="{{ route('ppid-kip.view_pdf', $berkala2['id']) }}"
+                                                                                width="100%" height="600px"
+                                                                                frameborder="0"></iframe>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <a href="{{ route('ppid-kip.download_pdf', $berkala2['id']) }}"
+                                                                                class="btn btn-success btn-sm">
+                                                                                <i class="bx bx-download"></i> Download
+                                                                            </a>
+                                                                            <button type="button"
+                                                                                class="btn btn-secondary btn-sm"
+                                                                                data-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    @endforeach
+                                @endif
+                            </table>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 @endsection
 @section('additional-js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
-<script type="text/javascript">
-    // var route = "{{ route('ppid-kip.search_berkala') }}";
-        // http://web_bpkad.suru.test/PPID/Klasifikasi-Informasi-Publik/info-berkala?search=tes
-        // pencarian dengan tekan enter untuk jquery
-        // $('#search_berkala').on('keyup', function(e) {
-        //     if (e.keyCode === 13) {
-        //         var query = $('#search_berkala').val();
-        //         console.log(route);
-        //     }
-        // });
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const clearBtn = document.getElementById('clearSearch');
+        const form = document.getElementById('searchForm');
 
-        $('#search_berkala').typeahead({
-            source: function(query, process) {
-                return $.get(route, {
-                    query: query
-                }, function(data) {
-                    return process(data);
-                });
-            }
+        function toggleClearBtn() {
+            clearBtn.style.display = searchInput.value.trim() ? 'inline' : 'none';
+        }
+
+        searchInput.addEventListener('input', toggleClearBtn);
+
+        clearBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            toggleClearBtn();
+            form.submit();
         });
-</script>
+
+        toggleClearBtn();
+    </script>
 @endsection
