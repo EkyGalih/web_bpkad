@@ -586,23 +586,6 @@ class Helpers
         return $data->nama ?? '';
     }
 
-    // Pegawai Function
-
-    public static function getPimpinan($cat, $param)
-    {
-        if ($cat == 'select') {
-            return Pegawai::where('nama_jabatan', '=', $param)
-                ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
-                ->where('status_pegawai', '=', 'aktif')
-                ->first();
-        } elseif ($cat == 'count') {
-            return Pegawai::where('nama_jabatan', '=', $param)
-                ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
-                ->where('status_pegawai', '=', 'aktif')
-                ->count();
-        }
-    }
-
     public static function getKabag($cat, $param, $param2)
     {
         if ($cat == 'select') {
@@ -634,28 +617,6 @@ class Helpers
                 ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
                 ->where('status_pegawai', '=', 'aktif')
                 ->count();
-        }
-    }
-
-    public static function getPegawai($cat, $act, $param, $param2)
-    {
-        if ($cat == 'select') {
-            return Pegawai::where('nama_jabatan', '=', $param)
-                ->where('jabatan', 'LIKE', '%' . $param2 . '%')
-                ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
-                ->get();
-        } elseif ($cat == 'count') {
-            if ($act == 'not') {
-                return Pegawai::where('nama_jabatan', '=', $param)
-                    ->where('jabatan', 'NOT LIKE', '%' . $param2 . '%')
-                    ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
-                    ->count();
-            } elseif ($act == 'like') {
-                return Pegawai::where('nama_jabatan', '=', $param)
-                    ->where('jabatan', 'LIKE', '%' . $param2 . '%')
-                    ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
-                    ->count();
-            }
         }
     }
 
@@ -735,5 +696,48 @@ if (!function_exists('get_klasifikasi_enum')) {
     {
         $normalized = str_replace('_', ' ', strtolower($input));
         return KlasifikasiEnum::tryFrom($normalized);
+    }
+}
+
+// Pegawai Function
+
+if (!function_exists('get_data_pimpinan')) {
+    function getPimpinan($cat, $param)
+    {
+        if ($cat == 'select') {
+            return Pegawai::where('nama_jabatan', '=', $param)
+                ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+                ->where('status_pegawai', '=', 'aktif')
+                ->first();
+        } elseif ($cat == 'count') {
+            return Pegawai::where('nama_jabatan', '=', $param)
+                ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+                ->where('status_pegawai', '=', 'aktif')
+                ->count();
+        }
+    }
+}
+
+if (!function_exists('get_pegawai')) {
+    function getPegawai($cat, $act, $param, $param2)
+    {
+        if ($cat == 'select') {
+            return Pegawai::where('nama_jabatan', '=', $param)
+                ->where('jabatan', 'LIKE', '%' . $param2 . '%')
+                ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+                ->get();
+        } elseif ($cat == 'count') {
+            if ($act == 'not') {
+                return Pegawai::where('nama_jabatan', '=', $param)
+                    ->where('jabatan', 'NOT LIKE', '%' . $param2 . '%')
+                    ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+                    ->count();
+            } elseif ($act == 'like') {
+                return Pegawai::where('nama_jabatan', '=', $param)
+                    ->where('jabatan', 'LIKE', '%' . $param2 . '%')
+                    ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+                    ->count();
+            }
+        }
     }
 }

@@ -159,112 +159,26 @@
         sumber: https: //www.posciety.com/cara-membuat-gambar-bulat-melingkar-bundar-html-css/
     </style>
 @endsection
-@section('content')
-    <!-- ======= Breadcrumbs Section ======= -->
-    <section class="breadcrumbs">
-        <div class="container">
-            @php
-                $atasan = Helpers::getPejabatPPID('atasan');
-                $ketua = Helpers::getPejabatPPID('ketua');
-
-                $kepala_pengelola = Helpers::getPejabatPPID('kepala_pengelola');
-                $kepala_pengaduan = Helpers::getPejabatPPID('kepala_pengaduan');
-                $kepala_pelayanan = Helpers::getPejabatPPID('kepala_pelayanan');
-            @endphp
-            <div class="row">
-                <ul id="tree-data" style="display:none">
-                    <li id="root">
-                        <img class="img" src="{{ asset('uploads/pegawai/' . $atasan->foto) }}" />
-                        <h5 class="title label-title">{{ strtoupper($atasan->nama_jabatan) }}</h5>
-                        <p class="name">{{ $atasan->name }}</p>
-                        <ul>
-                            <li id="node1">
-                                <img class="img" src="{{ asset('uploads/pegawai/' . $ketua->foto) }}" />
-                                <h5 class="title label-title">{{ strtoupper($ketua->nama_jabatan) }}</h5>
-                                <p class="name">{{ $ketua->name }}</p>
-                                <ul>
-                                    <li id="node2">
-                                        <img class="img"
-                                            src="{{ asset('uploads/pegawai/' . $kepala_pengelola->foto) }}" />
-                                        <h5 class="title label-title">
-                                            {{ strtoupper($kepala_pengelola->nama_jabatan) . ' ' . $kepala_pengelola->initial_jabatan }}
-                                        </h5>
-                                        <p class="name">{{ $kepala_pengelola->name }}</p>
-                                        <ul>
-                                            @php
-                                                $anggota_pengelola = Helpers::getAnggotaPPID('anggota_pengelola');
-                                            @endphp
-                                            @foreach ($anggota_pengelola as $pengelola)
-                                                <li id="node3">
-                                                    <img class="img"
-                                                        src="{{ asset('uploads/pegawai/' . $pengelola->foto) }}" />
-                                                    <h5 class="title label-title">
-                                                        {{ strtoupper($pengelola->nama_jabatan) . ' ' . $pengelola->initial_jabatan }}
-                                                    </h5>
-                                                    <p class="name">{{ $pengelola->name }}</p>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
-                                    <li id="node2">
-                                        <img class="img"
-                                            src="{{ asset('uploads/pegawai/' . $kepala_pelayanan->foto) }}" />
-                                        <h5 class="title label-title">
-                                            {{ strtoupper($kepala_pelayanan->nama_jabatan) . ' ' . $kepala_pelayanan->initial_jabatan }}
-                                        </h5>
-                                        <p class="name">{{ $kepala_pelayanan->name }}</p>
-                                        <ul>
-                                            @php
-                                                $anggota_pelayanan = Helpers::getAnggotaPPID('anggota_pelayanan');
-                                            @endphp
-                                            @foreach ($anggota_pelayanan as $pelayanan)
-                                                <li id="node3">
-                                                    <img class="img"
-                                                        src="{{ asset('uploads/pegawai/' . $pelayanan->foto) }}" />
-                                                    <h5 class="title label-title">
-                                                        {{ strtoupper($pelayanan->nama_jabatan) . ' ' . $pelayanan->initial_jabatan }}
-                                                    </h5>
-                                                    <p class="name">{{ $pelayanan->name }}</p>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
-                                    <li id="node2">
-                                        <img class="img"
-                                            src="{{ asset('uploads/pegawai/' . $kepala_pengaduan->foto) }}" />
-                                        <h5 class="title label-title">
-                                            {{ strtoupper($kepala_pengaduan->nama_jabatan) . ' ' . $kepala_pengaduan->initial_jabatan }}
-                                        </h5>
-                                        <p class="name">{{ $kepala_pengaduan->name }}</p>
-                                        <ul>
-                                            @php
-                                                $anggota_pengaduan = Helpers::getAnggotaPPID('anggota_pengaduan');
-                                            @endphp
-                                            @foreach ($anggota_pengaduan as $pengaduan)
-                                                <li id="node3">
-                                                    <img class="img"
-                                                        src="{{ asset('uploads/pegawai/' . $pengaduan->foto) }}" />
-                                                    <h5 class="title label-title">
-                                                        {{ strtoupper($pengaduan->nama_jabatan) . ' ' . $pengaduan->initial_jabatan }}
-                                                    </h5>
-                                                    <p class="name">{{ $pengaduan->name }}</p>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                    </li>
-                </ul>
-                <div id="tree-view"></div>
+@section('content_home')
+    <section class="section-frame overflow-hidden">
+        <div class="wrapper bg-info">
+            <div class="container py-12 py-md-16 text-center">
+                <div class="row">
+                    <div class="col-md-7 col-lg-6 col-xl-5 mx-auto">
+                        <h1 class="display-1 mb-3 text-white">PPID</h1>
+                        <p class="lead px-lg-5 px-xxl-8 mb-1 text-white">Struktur Organisasi PPID</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-    <section id="portfolio" class="portfolio">
-        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+    <section class="wrapper bg-active-primary">
+        <div class="container py-14 py-md-16">
+            <div class="row gx-lg-12 gx-xl-12">
+                <div class="col-lg-12">
 
+                </div>
+            </div>
         </div>
     </section>
 @endsection

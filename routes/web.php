@@ -89,9 +89,6 @@ Route::group(['prefix' => 'Profile/Data-Pegawai-Bpkad'], function () {
 Route::group(['prefix' => 'PPID'], function () {
     Route::group(['prefix' => 'Klasifikasi-Informasi-Publik'], function () {
         Route::get('/{klasifikasi}/{query?}', [PpidKipController::class, 'index'])->name('ppid-kip');
-        // Route::get('/serta-merta{query?}', [PpidKipController::class, 'serta_merta'])->name('ppid-kip.serta-merta');
-        // Route::get('/setiap-saat{query?}', [PpidKipController::class, 'setiap_saat'])->name('ppid-kip.setiap-saat');
-        // Route::get('/dikecualikan{query?}', [PpidKipController::class, 'dikecualikan'])->name('ppid-kip.dikecualikan');
         Route::get('/generate-pdf/{id}', [PPidKipController::class, 'viewPDF'])->name('ppid-kip.view_pdf');
         Route::get('/download-pdf/{id}', [PPidKipController::class, 'downloadPDF'])->name('ppid-kip.download_pdf');
     });

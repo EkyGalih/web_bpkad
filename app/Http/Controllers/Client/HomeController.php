@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\CategoryEnum;
+use App\Enum\CategoryEnum;
 use App\Http\Controllers\Controller;
-use App\Models\DaftarApp;
-use App\Models\GaleryVideo;
-use App\Models\KIP;
 use App\Models\Olympic;
 use App\Models\Pages;
 use App\Models\Posts;
-use App\Models\Slideitem;
 use App\Models\SubPages;
 use Illuminate\Http\Request;
 

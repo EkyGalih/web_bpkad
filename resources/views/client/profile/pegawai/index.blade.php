@@ -29,42 +29,42 @@
                                 <td>1</td>
                                 <td>Kepala Badan</td>
                                 <td>II</td>
-                                <td>{{ Helpers::getPimpinan('count', 'kaban') }}</td>
+                                <td>{{ getPimpinan('count', 'kaban') }}</td>
                                 <td>Orang</td>
                             </tr>
                             <tr>
                                 <td>2</td>
                                 <td>Sekretaris</td>
                                 <td>III</td>
-                                <td>{{ Helpers::getPimpinan('count', 'sekban') }}</td>
+                                <td>{{ getPimpinan('count', 'sekban') }}</td>
                                 <td>Orang</td>
                             </tr>
                             <tr>
                                 <td>3</td>
                                 <td>Kepala Bidang/Kepala UPTB</td>
                                 <td>III</td>
-                                <td>{{ Helpers::getPimpinan('count', 'kabag') }}</td>
+                                <td>{{ getPimpinan('count', 'kabag') }}</td>
                                 <td>Orang</td>
                             </tr>
                             <tr>
                                 <td>4</td>
                                 <td>Kepala Sub. Bagian/Sub.Bidang</td>
                                 <td>IV</td>
-                                <td>{{ Helpers::getPimpinan('count', 'kasubag') }}</td>
+                                <td>{{ getPimpinan('count', 'kasubag') }}</td>
                                 <td>Orang</td>
                             </tr>
                             <tr>
                                 <td>5</td>
                                 <td>Fungsional Umum</td>
                                 <td></td>
-                                <td>{{ Helpers::getPegawai('count', 'like', 'pegawai', 'Fungsional Umum') }}</td>
+                                <td>{{ getPegawai('count', 'like', 'pegawai', 'Fungsional Umum') }}</td>
                                 <td>Orang</td>
                             </tr>
                             <tr>
                                 <td>6</td>
                                 <td>Fungsional Tertentu</td>
                                 <td></td>
-                                <td>{{ Helpers::getPegawai('count', 'not', 'pegawai', 'Fungsional Umum') }}</td>
+                                <td>{{ getPegawai('count', 'not', 'pegawai', 'Fungsional Umum') }}</td>
                                 <td>Orang</td>
                             </tr>
                         </tbody>
@@ -86,43 +86,43 @@
                             <tr>
                                 <td>1</td>
                                 <td>Doktor(S3)</td>
-                                <td>{{ Helpers::getPegawais('Doctor', 'pendidikan') }}</td>
+                                <td>{{ getPegawais('Doctor', 'pendidikan') }}</td>
                                 <td>Orang</td>
                             </tr>
                             <tr>
                                 <td>2</td>
                                 <td>Magister/Strata 2 (S2)</td>
-                                <td>{{ Helpers::getPegawais('Pasca Sarjana', 'pendidikan') }}</td>
+                                <td>{{ getPegawais('Pasca Sarjana', 'pendidikan') }}</td>
                                 <td>Orang</td>
                             </tr>
                             <tr>
                                 <td>3</td>
                                 <td>Sarjana/Strata 1 (S1)</td>
-                                <td>{{ Helpers::getPegawais('Sarjana', 'pendidikan') }}</td>
+                                <td>{{ getPegawais('Sarjana', 'pendidikan') }}</td>
                                 <td>Orang</td>
                             </tr>
                             <tr>
                                 <td>4</td>
                                 <td>Ahli Madya/Diploma 3 (D1/D2/D3)</td>
-                                <td>{{ Helpers::getPegawais('Diploma', 'pendidikan') }}</td>
+                                <td>{{ getPegawais('Diploma', 'pendidikan') }}</td>
                                 <td>Orang</td>
                             </tr>
                             <tr>
                                 <td>5</td>
                                 <td>Pendidikan Atas (SMA/SMK)</td>
-                                <td>{{ Helpers::getPegawais('SMA', 'pendidikan') }}</td>
+                                <td>{{ getPegawais('SMA', 'pendidikan') }}</td>
                                 <td>Orang</td>
                             </tr>
                             <tr>
                                 <td>6</td>
                                 <td>Pendidikan Menengah (SMP/SMPK)</td>
-                                <td>{{ Helpers::getPegawais('SMP', 'pendidikan') }}</td>
+                                <td>{{ getPegawais('SMP', 'pendidikan') }}</td>
                                 <td>Orang</td>
                             </tr>
                             <tr>
                                 <td>6</td>
                                 <td>Pendidikan Dasar (SD)</td>
-                                <td>{{ Helpers::getPegawais('SD', 'pendidikan') }}</td>
+                                <td>{{ getPegawais('SD', 'pendidikan') }}</td>
                                 <td>Orang</td>
                             </tr>
                         </tbody>
@@ -144,31 +144,31 @@
                             <tr>
                                 <td>1</td>
                                 <td>Golongan IV</td>
-                                <td>{{ Helpers::getPegawais('IV', 'golongan') }}</td>
+                                <td>{{ getPegawais('IV', 'golongan') }}</td>
                                 <td>Orang</td>
                             </tr>
                             <tr>
                                 <td>2</td>
                                 <td>Golongan III</td>
-                                <td>{{ Helpers::getPegawais('III', 'golongan') }}</td>
+                                <td>{{ getPegawais('III', 'golongan') }}</td>
                                 <td>Orang</td>
                             </tr>
                             <tr>
                                 <td>3</td>
                                 <td>Golongan II</td>
-                                <td>{{ Helpers::getPegawais('II', 'golongan') }}</td>
+                                <td>{{ getPegawais('II', 'golongan') }}</td>
                                 <td>Orang</td>
                             </tr>
                             <tr>
                                 <td>4</td>
                                 <td>Golongan I</td>
-                                <td>{{ Helpers::getPegawais('I', 'golongan') }}</td>
+                                <td>{{ getPegawais('I', 'golongan') }}</td>
                                 <td>Orang</td>
                             </tr>
                             <tr>
                                 <td>5</td>
                                 <td>PTT/Kontrak</td>
-                                <td>{{ Helpers::getPegawaiKontrak('count') }}</td>
+                                <td>{{ getPegawaiKontrak('count') }}</td>
                                 <td>Orang</td>
                             </tr>
                         </tbody>

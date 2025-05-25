@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use function App\Helpers\getPimpinan;
+
 class PegawaiController extends Controller
 {
     /**

@@ -46,7 +46,7 @@ class PpidKipController extends Controller
                 })->toArray()
             ];
         }
-        
+
         return view('client.PPID.kip.' . $klasifikasi, compact('data', 'query'));
     }
 
@@ -77,7 +77,7 @@ class PpidKipController extends Controller
                     ->paginate(10);
                 break;
         }
-
+        
         return view('client.PPID.agenda.index', compact('agenda', 'tahun'));
     }
 
@@ -90,23 +90,6 @@ class PpidKipController extends Controller
     public function store(Request $request)
     {
         //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function searchBerkala(Request $request)
-    {
-        $query = $request->search;
-
-        $kip_title = KIP::select('jenis_informasi')->groupBy('jenis_informasi')->get();
-        $kip_content = KIP::get();
-
-        return view('client.PPID.kip.index', compact('kip_title', 'kip_content', 'query'));
-        // return response()->json($filterResult);
     }
 
     /**

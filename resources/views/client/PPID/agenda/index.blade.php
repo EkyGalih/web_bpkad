@@ -14,75 +14,98 @@
     </style>
 @endsection
 @section('content_home')
-    <main id="main" data-aos="fade-up">
-        <!-- ======= Berita ======= -->
-        <section class="breadcrumbs" style="margin-top: 5%;">
-
-            <div class="card" style="padding: 5%; margin-right: 5%; margin-left: 5%; margin-top: 1%;">
-                <div class="fortofolio-description">
-                    @php
-                        $years = [
-                            date('Y'),
-                            date('Y')-1,
-                            date('Y')-2,
-                            date('Y')-3,
-                            date('Y')-4,
-                        ]
-                    @endphp
-                    <h1 style="margin-bottom: 5%; text-align: center;">
-                        AGENDA PIMPINAN TAHUN
-                        <select name="tahun" id="filter_tahun">
-                            @foreach ($years as $year)
-                                <option value="{{ $year }}" {{ $year == $tahun ? 'selected' : '' }}>{{ $year }}</option>
-                            @endforeach
-                        </select>
-                    </h1>
-                    <div class="col-12">
-                        <div class="row">
-                            <!--news box-->
-                            @foreach ($agenda as $item)
-                                <div class="col-3 pb-1 pt-0 pr-1">
-                                    <div class="card" style="width: 18rem;">
-                                        <img src="{{ asset($item->foto_berita) }}" class="card-img-top"
-                                            alt="{{ $item->title }}" style="height: 280px;">
-                                        <div class="card-body">
-                                            <h5 class="card-title">
-                                                {{ Helpers::getDate($item->created_at) . ' - ' . Helpers::getTime($item->created_at) }}
-                                            </h5>
-                                            <p class="card-text">{{ substr($item->title, 0, 50) }}...</p>
-                                            <a href="{{ route('post.show', [Helpers::PostCategory($item->posts_category_id), $item->slug]) }}"
-                                                class="btn btn-primary">
-                                                <i class="bx bx-link"></i> Link Berita
-                                            </a>
-                                        </div>
-                                    </div>
+    <section class="wrapper image-wrapper bg-image bg-overlay text-white"
+        data-image-src="{{ asset('client/assets/img/photos/bg3.jpg') }}">
+        <div class="container pt-18 pb-15 pt-md-20 pb-md-19 text-center">
+            <div class="row">
+                <div class="col-md-10 col-xl-8 mx-auto">
+                    <div class="post-header">
+                        <div class="post-category text-line text-white">
+                            <a href="#" class="text-reset" rel="category">Agenda</a>
+                        </div>
+                        <!-- /.post-category -->
+                        <h1 class="display-1 mb-4 text-white">Agenda Pimpinan</h1>
+                    </div>
+                    <!-- /.post-header -->
+                </div>
+                <!-- /column -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+    <section class="wrapper bg-light">
+        <div class="container py-14 py-md-16">
+            <div class="row gx-lg-12 gx-xl-12">
+                <div class="col-lg-12">
+                    <div class="blog single">
+                        <div class="card">
+                            <div class="card-header">
+                                @php
+                                    $years = [date('Y'), date('Y') - 1, date('Y') - 2, date('Y') - 3, date('Y') - 4];
+                                @endphp
+                                <div style="text-align: center; margin-bottom: 5%;">
+                                    <h1 style="display: inline-block; margin: 0;">
+                                        AGENDA PIMPINAN TAHUN
+                                    </h1>
+                                    <select name="tahun" id="filter_tahun"
+                                        style="padding: 5px 10px; margin-left: 10px; font-size: 18px; border-radius: 6px; border: 1px solid #ccc;">
+                                        @foreach ($years as $year)
+                                            <option value="{{ $year }}" {{ $year == $tahun ? 'selected' : '' }}>
+                                                {{ $year }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                            @endforeach
+                                <div class="row grid-view" data-margin="30" data-dots="true" data-items-xl="3"
+                                    data-items-md="2" data-items-xs="1">
+                                    <!--news box-->
+                                    @foreach ($agenda as $item)
+                                        <div class="col-4 pb-1 pt-0 pr-1">
+                                            <figure class="rounded mb-6">
+                                                <a class="item-link" href="{{ $item->foto_berita }}" data-glightbox
+                                                    data-gallery="projects-group">
+                                                    <img src="{{ $item->foto_berita }}"
+                                                        onerror="this.onerror=null;this.src='{{ asset('static/images/no-image-post.png') }}';"
+                                                        srcset="{{ $item->foto_berita }}" alt="{{ $item->title }}"
+                                                        style="max-width: 500px; max-height: 700px;" />
+                                                    <i class="uil uil-focus-add"
+                                                        style="position: absolute; top: 10px; right: 10px; color: white;"></i>
+                                                </a>
+                                            </figure>
+                                            <div class="project-details d-flex justify-content-center flex-column">
+                                                <div class="post-header">
+                                                    <h2 class="post-title h3"><a
+                                                            href="{{ route('post.show', [Helpers::PostCategory($item->posts_category_id), $item->slug]) }}"
+                                                            class="link-dark">{{ substr($item->title, 0, 50) }}</a></h2>
+                                                    <div class="post-category text-ash">
+                                                        {{ Helpers::PostCategory($item->posts_category_id) }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    {{ $agenda->links() }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section><!-- End Portfolio Details Section -->
-
-    </main><!-- End #main -->
-
-    <footer id="footer">
-        <div class="footer-newsletter">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6">
-
-                    </div>
-                </div>
-            </div>
         </div>
-    </footer>
+    </section>
 @endsection
 @section('additional-js')
     <script>
-        $('#filter_tahun').on('change', function () {
-            var tahun = $('#filter_tahun').val();
-            window.location.href = window.location.origin + '/PPID/agenda/' + tahun
+        document.addEventListener("DOMContentLoaded", function() {
+            const selectTahun = document.getElementById("filter_tahun");
+
+            if (selectTahun) {
+                selectTahun.addEventListener("change", function() {
+                    const tahun = selectTahun.value;
+                    window.location.href = window.location.origin + '/PPID/agenda/' + tahun;
+                });
+            }
         });
     </script>
 @endsection

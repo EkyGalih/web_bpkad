@@ -163,9 +163,9 @@
     <section class="breadcrumbs">
         <div class="container">
             @php
-                $kaban = Helpers::getPimpinan('select', 'kaban');
-                $sekban = Helpers::getPimpinan('select', 'sekban');
-                $kabag = Helpers::getKabag('select', 'kabid', 'kepala');
+                $kaban = getPimpinan('select', 'kaban');
+                $sekban = getPimpinan('select', 'sekban');
+                $kabag = getKabag('select', 'kabid', 'kepala');
             @endphp
             <div class="row">
                 <ul id="tree-data" style="display:none">
