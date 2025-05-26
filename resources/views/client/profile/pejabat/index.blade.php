@@ -1,223 +1,103 @@
 @extends('client.index')
 @section('title', 'Profile | Profile Pejabat')
-@section('additional-css')
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <link rel="stylesheet" href="{{ asset('client/plugins/orgchart/orgchart.css') }}">
-    <style type="text/css">
-        .navbar-default .navbar-nav>li.clr1 a {
-            color: #ffffff;
-        }
-
-        .navbar-default .navbar-nav>li.clr2 a {
-            color: #FFEB3B;
-            ;
-        }
-
-        .navbar-default .navbar-nav>li.clr3 a {
-            color: #5EC64D;
-        }
-
-        .navbar-default .navbar-nav>li.clr4 a {
-            color: #29AAE2;
-        }
-
-        .navbar-default .navbar-nav>li.clr1 a:hover,
-        .navbar-default .navbar-nav>li.clr1.active a {
-            color: #fff;
-            background: #F55;
-        }
-
-        .navbar-default .navbar-nav>li.clr2 a:hover,
-        .navbar-default .navbar-nav>li.clr2.active a {
-            color: #fff;
-            background: #973CB6;
-        }
-
-        .navbar-default .navbar-nav>li.clr3 a:hover,
-        .navbar-default .navbar-nav>li.clr3.active a {
-            color: #fff;
-            background: #5EC64D;
-        }
-
-        .navbar-default .navbar-nav>li.clr4 a:hover,
-        .navbar-default .navbar-nav>li.clr4.active a {
-            color: #fff;
-            background: #29AAE2;
-        }
-
-        .navbar-default {
-            background-color: #3b5998;
-            font-size: 18px;
-        }
-
-        .navbar-default .navbar-brand {
-            color: #ffffff;
-            font-weight: bold;
-        }
-
-        .navbar-default .navbar-text {
-            color: #ffffff;
-        }
-
-        a {
-            color: #FFC107;
-            text-decoration: none;
-        }
-
-        .img {
-            width: 180px;
-            height: 170px;
-            margin-bottom: 5px;
-        }
-
-        .title {
-            font-size: 18px;
-            margin-bottom: 0%;
-            font-family: 'Times New Roman', Times, serif;
-            -webkit-animation: text-flicker-in-glow 3s linear both;
-            animation: text-flicker-in-glow 3s linear both;
-            both;
-            animation: title 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.5s both;
-        }
-
-        @-webkit-keyframes title {
-            0% {
-                letter-spacing: -0.5em;
-                opacity: 0;
-            }
-
-            40% {
-                opacity: 0.6;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-
-        @keyframes title {
-            0% {
-                letter-spacing: -0.5em;
-                opacity: 0;
-            }
-
-            40% {
-                opacity: 0.6;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-
-
-        .label-title {
-            background-color: #ffffff;
-            margin-left: 1.5%;
-            margin-right: 1.5%;
-        }
-
-        .name {
-            font-size: 14px;
-            color: #fff;
-            font-weight: bold;
-            font-family: 'Times New Roman';
-            -webkit-animation: name 2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-            animation: name 2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-        }
-
-        @-webkit-keyframes name {
-            0% {
-                -webkit-filter: blur(12px);
-                filter: blur(12px);
-                opacity: 0;
-            }
-
-            100% {
-                -webkit-filter: blur(0px);
-                filter: blur(0px);
-                opacity: 1;
-            }
-        }
-
-        @keyframes name {
-            0% {
-                -webkit-filter: blur(12px);
-                filter: blur(12px);
-                opacity: 0;
-            }
-
-            100% {
-                -webkit-filter: blur(0px);
-                filter: blur(0px);
-                opacity: 1;
-            }
-        }
-
-
-        sumber: https: //www.posciety.com/cara-membuat-gambar-bulat-melingkar-bundar-html-css/
-    </style>
-@endsection
-@section('content')
-    <!-- ======= Breadcrumbs Section ======= -->
-    <section class="breadcrumbs">
-        <div class="container">
-            @php
-                $kaban = getPimpinan('select', 'kaban');
-                $sekban = getPimpinan('select', 'sekban');
-                $kabag = getKabag('select', 'kabid', 'kepala');
-            @endphp
-            <div class="row">
-                <ul id="tree-data" style="display:none">
-                    <li id="root">
-                        <img class="img" src="{{ asset($kaban->foto) }}" />
-                        <h5 class="title label-title">{{ strtoupper($kaban->nama_jabatan) }}</h5>
-                        <p class="name">{{ $kaban->name }}</p>
-                        <ul>
-                            <li id="node1">
-                                <img class="img" src="{{ asset($sekban->foto) }}" />
-                                <h5 class="title label-title">{{ strtoupper($sekban->nama_jabatan) }}</h5>
-                                <p class="name">{{ $sekban->name }}</p>
-                                <ul>
-                                    @foreach ($kabag as $kabag)
-                                        <li id="node2">
-                                            <img class="img" src="{{ asset($kabag->foto) }}" />
-                                            <h5 class="title label-title">
-                                                {{ strtoupper($kabag->nama_jabatan) . ' ' . $kabag->jabatan }}</h5>
-                                            <p class="name">{{ $kabag->name }}</p>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                        </ul>
-
-                    </li>
-                </ul>
-                <div id="tree-view"></div>
+@section('content_home')
+<section class="wrapper image-wrapper bg-image bg-overlay text-white"
+    data-image-src="{{  asset('client/assets/img/photos/bg3.jpg') }}">
+    <div class="container pt-18 pb-15 pt-md-20 pb-md-19 text-center">
+        <div class="row">
+            <div class="col-md-10 col-xl-8 mx-auto">
+                <div class="post-header">
+                    <h1 class="display-1 mb-4 text-white">Data Pejabat BPKAD</h1>
+                </div>
             </div>
         </div>
-    </section>
-    <section id="portfolio" class="portfolio">
-        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-
+    </div>
+</section>
+@php
+$kaban = get_pimpinan('select', 'kaban');
+$sekban = get_pimpinan('select', 'sekban');
+$kabag = getKabag('select', 'kabid', 'kepala');
+@endphp
+<section class="wrapper bg-soft-primary">
+    <div class="container pt-16 pb-14 pb-md-0">
+        <div class="row gx-lg-8 gx-xl-0 align-items-center">
+            <div class="col-md-5 col-lg-5 col-xl-4 offset-xl-1 d-none d-md-flex position-relative align-self-end">
+                <div class="shape rounded-circle bg-pale-primary rellax w-21 h-21 d-md-none d-lg-block"
+                    data-rellax-speed="1" style="top: 7rem; left: 1rem"></div>
+                <figure><img src="{{ asset($kaban->foto) }}" srcset="{{ asset($kaban->foto) }}"
+                        alt="{{ $kaban->name }}">
+                </figure>
+            </div>
+            <div class="col-md-7 col-lg-6 col-xl-6 col-xxl-5 offset-xl-1">
+                <div class="swiper-container dots-start dots-closer mt-md-10 mb-md-15" data-margin="30"
+                    data-dots="true">
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="blockquote-details">
+                                    <div class="info ps-0">
+                                        <h5 class="mb-1">{{ $kaban->name }}</h5>
+                                        <p class="mb-0">{{ strtoupper($kaban->initial_jabatan) }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
-@endsection
-@section('additional-js')
-    <script src="{{ asset('client/plugins/orgchart/orgchart.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            // create a tree
-            $("#tree-data").jOrgChart({
-                chartElement: $("#tree-view"),
-                nodeClicked: nodeClicked
-            });
-            // lighting a node in the selection
-            function nodeClicked(node, type) {
-                node = node || $(this);
-                $('.jOrgChart .selected').removeClass('selected');
-                node.addClass('selected');
-            }
-        });
-    </script>
+    </div>
+</section>
+<section class="wrapper bg-light">
+    <div class="container py-14 py-md-16">
+        <div class="row mb-3">
+            <div class="col-md-10 col-xl-9 col-xxl-7 mx-auto text-center">
+                <img src="{{ asset('client/assets/img/icons/lineal/team.svg') }}"
+                    class="svg-inject icon-svg icon-svg-md mb-4" alt="" />
+                <h2 class="display-4 mb-3 px-lg-14">Jajaran Pimpinan BPKAD NTB</h2>
+            </div>
+        </div>
+        <div class="position-relative">
+            <div class="shape rounded-circle bg-soft-yellow rellax w-16 h-16" data-rellax-speed="1"
+                style="bottom: 0.5rem; right: -1.7rem;"></div>
+            <div class="shape rounded-circle bg-line red rellax w-16 h-16" data-rellax-speed="1"
+                style="top: 0.5rem; left: -1.7rem;"></div>
+            <div class="swiper-container dots-closer mb-6" data-margin="0" data-dots="true" data-items-xxl="4"
+                data-items-lg="3" data-items-md="2" data-items-xs="1">
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="item-inner">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <img class="img-thumbnail w-35 mb-4" src="{{ asset($sekban->foto) }}"
+                                            srcset="{{ asset($sekban->foto) }}" alt="{{ $sekban->name }}" />
+                                        <p class="fw-bold text-black fs-16 mb-1">{{ $sekban->name }}</p>
+                                        <div class="meta fs-14 mb-2">{{ $sekban->nama_jabatan }}</div>
+                                        <p class="fs-14 mb-2">{{ $sekban->initial_jabatan }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @foreach ($kabag as $item)
+                        <div class="swiper-slide">
+                            <div class="item-inner">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <img class="img-thumbnail w-35 mb-4" src="{{ asset($item->foto) }}"
+                                            srcset="{{ asset($item->foto) }}" alt="{{ $item->name }}" />
+                                        <p class="fw-bold text-black fs-16 mb-1">{{ $item->name }}</p>
+                                        <div class="meta fs-14 mb-2">{{ $item->nama_jabatan }}</div>
+                                        <p class="fs-14 mb-2">{{ $item->jabatan }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 @endsection

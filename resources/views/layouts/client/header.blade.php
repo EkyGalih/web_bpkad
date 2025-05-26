@@ -16,12 +16,12 @@
                     <a class="nav-link" href="{{ route('post.index') }}">Berita</a>
                 </li>
                 @php
-                    $menus = Helpers::Menu();
+                    $menus = Menu();
                 @endphp
                 <ul class="navbar-nav ms-lg-auto">
                     @foreach ($menus as $menu)
                         @php
-                            $sub_menu = Helpers::Pages($menu->menu_id);
+                            $sub_menu = Pages($menu->menu_id);
                         @endphp
                         @if (count($sub_menu) > 0)
                             <li class="nav-item dropdown">
@@ -32,7 +32,7 @@
                                 <ul class="dropdown-menu">
                                     @foreach ($sub_menu as $item)
                                         @php
-                                            $sub_item = Helpers::SubPages($item->sub_menu_id);
+                                            $sub_item = SubPages($item->sub_menu_id);
                                         @endphp
                                         @if (count($sub_item) > 0)
                                             <li class="dropdown-submenu dropend">

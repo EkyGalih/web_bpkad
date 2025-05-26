@@ -8,8 +8,6 @@ use App\Models\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-use function App\Helpers\getKlasifikasiEnumFromInput;
-
 class PpidKipController extends Controller
 {
     /**
@@ -21,7 +19,7 @@ class PpidKipController extends Controller
     {
         $query = $request->input('search', '');
 
-        $data_kip = KIP::where('jenis_informasi', getKlasifikasiEnumFromInput($klasifikasi)->value)
+        $data_kip = KIP::where('jenis_informasi', get_klasifikasi_enum($klasifikasi)->value)
             ->whereNull('deleted_at')
             ->where('nama_informasi', 'LIKE', '%' . $query . '%')
             ->orderByDesc('tahun')
@@ -77,7 +75,7 @@ class PpidKipController extends Controller
                     ->paginate(10);
                 break;
         }
-        
+
         return view('client.PPID.agenda.index', compact('agenda', 'tahun'));
     }
 

@@ -43,9 +43,9 @@
             <div class="col-md-4 col-lg-3">
                 <div class="widget">
                     <h4 class="widget-title text-white mb-3">Kontak & Alamat</h4>
-                    @php $address = Helpers::__address() @endphp
+                    @php $address = __address() @endphp
                     <address class="pe-xl-15 pe-xxl-17">{{ $address->address }}</address>
-                    <a href="mailto:#" class="link-body">{{ $address->email }}</a><br /> {{ Helpers::__phone($address->phone) }}
+                    <a href="mailto:#" class="link-body">{{ $address->email }}</a><br /> {{ __phone($address->phone) }}
                 </div>
                 <!-- /.widget -->
             </div>
