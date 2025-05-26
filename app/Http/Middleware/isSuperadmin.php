@@ -19,7 +19,7 @@ class isSuperadmin
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
-            if (Helpers::getRole() == 'admin') {
+            if (getRole() == 'admin') {
                 return $next($request);
             }
         }

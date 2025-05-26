@@ -175,42 +175,49 @@ if (!function_exists('_jsonDecode')) {
     }
 }
 
-if (!function_exists('GetDate')) {
-    function GetDate($param)
+if (!function_exists('get_date')) {
+    function get_date($param)
     {
-        if ($param == NULL) {
+        if (empty($param)) {
             return "-";
-        } else {
-            $explode    = explode(" ", $param);
-            $date       = explode("-", $explode[0]);
-
-            if ($date[1] == '01') {
-                $date = 'Jan ' . $date[2] . ", " . $date[0];
-            } elseif ($date[1] == '02') {
-                $date = 'Feb ' . $date[2] . ", " . $date[0];
-            } elseif ($date[1] == '03') {
-                $date = 'Mar ' . $date[2] . ", " . $date[0];
-            } elseif ($date[1] == '04') {
-                $date = 'Apr ' . $date[2] . ", " . $date[0];
-            } elseif ($date[1] == '05') {
-                $date = 'Mei ' . $date[2] . ", " . $date[0];
-            } elseif ($date[1] == '06') {
-                $date = 'Jun ' . $date[2] . ", " . $date[0];
-            } elseif ($date[1] == '07') {
-                $date = 'Jul ' . $date[2] . ", " . $date[0];
-            } elseif ($date[1] == '08') {
-                $date = 'Aug ' . $date[2] . ", " . $date[0];
-            } elseif ($date[1] == '09') {
-                $date = 'Sep ' . $date[2] . ", " . $date[0];
-            } elseif ($date[1] == '10') {
-                $date = 'Oct ' . $date[2] . ", " . $date[0];
-            } elseif ($date[1] == '11') {
-                $date = 'Nov ' . $date[2] . ", " . $date[0];
-            } elseif ($date[1] == '12') {
-                $date = 'Dec ' . $date[2] . ", " . $date[0];
-            }
-            return $date;
         }
+
+        // Pastikan formatnya bisa dibaca dengan strtotime
+        $timestamp = strtotime($param);
+        if (!$timestamp) {
+            return "-";
+        }
+
+        // Gunakan Carbon jika tersedia
+        if (class_exists(\Carbon\Carbon::class)) {
+            $date = \Carbon\Carbon::parse($param);
+            $month = $date->format('m');
+            $day = $date->format('d');
+            $year = $date->format('Y');
+        } else {
+            // fallback
+            $month = date('m', $timestamp);
+            $day = date('d', $timestamp);
+            $year = date('Y', $timestamp);
+        }
+
+        // Nama bulan dalam Bahasa Indonesia (atau Inggris sesuai keinginan)
+        $months = [
+            '01' => 'Jan',
+            '02' => 'Feb',
+            '03' => 'Mar',
+            '04' => 'Apr',
+            '05' => 'Mei',
+            '06' => 'Jun',
+            '07' => 'Jul',
+            '08' => 'Aug',
+            '09' => 'Sep',
+            '10' => 'Oct',
+            '11' => 'Nov',
+            '12' => 'Dec',
+        ];
+
+        return ($months[$month] ?? $month) . " $day, $year";
     }
 }
 

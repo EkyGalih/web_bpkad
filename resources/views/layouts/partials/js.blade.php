@@ -1,14 +1,12 @@
-<script src="{{ asset('client/assets/vendor/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('client/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('client/assets/vendor/jquery.easing/jquery.easing.min.js') }}"></script>
-<script src="{{ asset('client/assets/vendor/php-email-form/validate.js') }}"></script>
-<script src="{{ asset('client/assets/vendor/waypoints/jquery.waypoints.min.js') }}"></script>
-<script src="{{ asset('client/assets/vendor/counterup/counterup.min.js') }}"></script>
-<script src="{{ asset('client/assets/vendor/owl.carousel/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('client/assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
-<script src="{{ asset('client/assets/vendor/venobox/venobox.min.js') }}"></script>
-<script src="{{ asset('client/assets/vendor/aos/aos.js') }}"></script>
-<script src="{{ asset('client/assets/js/main.js') }}"></script>
+<script src="{{ asset('server/assets/vendor/libs/popper/popper.js') }}"></script>
+<script src="{{ asset('server/assets/vendor/js/bootstrap.js') }}"></script>
+<script src="{{ asset('server/assets/vendor/libs/node-waves/node-waves.js') }}"></script>
+<script src="{{ asset('server/assets/vendor/libs/@algolia/autocomplete-js.js') }}"></script>
+<script src="{{ asset('server/assets/vendor/libs/pickr/pickr.js') }}"></script>
+<script src="{{ asset('server/assets/vendor/libs/nouislider/nouislider.js') }}"></script>
+<script src="{{ asset('server/assets/vendor/libs/swiper/swiper.js') }}"></script>
+<script src="{{ asset('server/assets/js/front-main.js') }}"></script>
+<script src="{{ asset('server/assets/js/front-page-landing.js') }}"></script>
 <script src="{{ asset('client/assets/js/sweet-alert.min.js') }}"></script>
 @yield('addtional-js')
 <script>

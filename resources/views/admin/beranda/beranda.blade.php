@@ -160,11 +160,11 @@
                                     <!-- Line Chart -->
                                     <div id="reportsChart"></div>
                                     @php
-                                        $_post = Helpers::_PostMonth(date('Y-m'));
+                                        $_post = _PostMonth(date('Y-m'));
                                         $data = implode(',', $_post);
-                                        $month1 = Helpers::NameMonth(date('m'));
-                                        $month2 = Helpers::NameMonth(date('m') - 1);
-                                        $month3 = Helpers::NameMonth(date('m') - 2);
+                                        $month1 = NameMonth(date('m'));
+                                        $month2 = NameMonth(date('m') - 1);
+                                        $month3 = NameMonth(date('m') - 2);
                                     @endphp
 
                                     <script>
@@ -262,7 +262,7 @@
                                                     <td>{{ $report->nama_pelapor }}</td>
                                                     <td class="fw-bold">
                                                         {{ $report->jawaban_dari != null ? 'Terjawab' : '-' }}</td>
-                                                    <td>{{ Helpers::GetDate($report->created_at) }}</td>
+                                                    <td>{{ GetDate($report->created_at) }}</td>
                                                 </tr>
                                             @endforeach
                                             @if ($lap->isEmpty())
@@ -307,7 +307,7 @@
                             <div class="activity">
                                 @foreach ($recents as $recent)
                                     <div class="activity-item d-flex">
-                                        <div class="activite-label">{{ Helpers::RangeTime($recent->created_at) }}</div>
+                                        <div class="activite-label">{{ RangeTime($recent->created_at) }}</div>
                                         @if ($recent->jenis == 'post')
                                             @php $badge = 'primary' @endphp
                                         @elseif ($recent->jenis == 'users')
@@ -332,9 +332,9 @@
                                         <i
                                             class='bi bi-circle-fill activity-badge text-{{ $badge }} align-self-start'></i>
                                         <div class="activity-content">
-                                            <strong>{{ Helpers::GetUser($recent->user_id) }}</strong>
+                                            <strong>{{ GetUser($recent->user_id) }}</strong>
                                             {{ $recent->activity }} <a href="#"
-                                                class="fw-bold text-dark">{{ Helpers::_recentShow($recent->jenis, $recent->uuid_activity) }}</a>
+                                                class="fw-bold text-dark">{{ _recentShow($recent->jenis, $recent->uuid_activity) }}</a>
                                         </div>
                                     </div><!-- End activity item-->
                                 @endforeach
@@ -357,10 +357,10 @@
                                 @foreach ($posts as $berita)
                                     <div class="post-item clearfix">
                                         <img src="{{ $berita->foto_berita }}" alt="">
-                                        <h4><a href="{{ route('post.show', [Helpers::GetCategoryContent($berita->posts_category_id), $berita->slug]) }}"
+                                        <h4><a href="{{ route('post.show', [GetCategoryContent($berita->posts_category_id), $berita->slug]) }}"
                                                 target="_blank">{{ substr($berita->title, 0, 50) }}...Selengkapnya</a>
                                         </h4>
-                                        <p>{{ Helpers::GetDate($berita->created_at) }}</p>
+                                        <p>{{ get_date($berita->created_at) }}</p>
                                     </div>
                                 @endforeach
 

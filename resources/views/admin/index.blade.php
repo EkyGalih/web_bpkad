@@ -12,10 +12,16 @@
 </head>
 
 <body>
-    @include('layouts.admin.header')
-    @include('layouts.admin.sidebar')
-    @include('layouts.admin.content')
-    @include('layouts.admin.footer')
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            @include('layouts.admin.sidebar')
+            <div class="layout-page">
+                @include('layouts.admin.header')
+                @yield('content')
+                @include('layouts.admin.footer')
+            </div>
+        </div>
+    </div>
     @include('layouts.admin.js')
 </body>
 

@@ -19,7 +19,7 @@ class isOperator
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
-            if (Helpers::getRole() == 'operator') {
+            if (getRole() == 'operator') {
                 return $next($request);
             }
         }

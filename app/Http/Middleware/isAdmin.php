@@ -18,7 +18,7 @@ class isAdmin
     public function handle($request, Closure $next)
     {
         if (Auth::check()) {
-            if (Helpers::getRole() == 'admin') {
+            if (getRole() == 'admin') {
                 return $next($request);
             }
         }
