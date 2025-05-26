@@ -163,12 +163,12 @@
                                 @foreach ($new_posts as $post)
                                     <div class="item col-md-6">
                                         <figure class="lift rounded mb-6"><a
-                                                href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">
+                                                href="{{ route('post.show', [PostCategory($post->posts_category_id), $post->slug]) }}">
                                                 <img src="{{ asset($post->foto_berita) }}"
                                                     srcset="{{ asset($post->foto_berita) }}"
                                                     alt="{{ substr($post->title, 0, 50) }}" /></a></figure>
                                         <div class="post-category text-line mb-2 text-violet">
-                                            {{ Helpers::PostCategory($post->posts_category_id) }}</div>
+                                            {{ PostCategory($post->posts_category_id) }}</div>
                                         <h2 class="post-title h3">{{ substr($post->title, 0, 50) }}...</h2>
                                     </div>
                                 @endforeach
@@ -205,10 +205,10 @@
                                         <div class="project-details d-flex justify-content-center flex-column">
                                             <div class="post-header">
                                                 <h2 class="post-title h3"><a
-                                                        href="{{ route('post.show', [Helpers::PostCategory($agenda->posts_category_id), $agenda->slug]) }}"
+                                                        href="{{ route('post.show', [PostCategory($agenda->posts_category_id), $agenda->slug]) }}"
                                                         class="link-dark">{{ $agenda->title }}</a></h2>
                                                 <div class="post-category text-ash">
-                                                    {{ Helpers::PostCategory($agenda->posts_category_id) }}
+                                                    {{ PostCategory($agenda->posts_category_id) }}
                                                 </div>
                                             </div>
                                         </div>
@@ -303,12 +303,12 @@
                 <!-- /column -->
             </div>
             @php
-                $atasan = Helpers::getPejabatPPID('atasan');
-                $ketua = Helpers::getPejabatPPID('ketua');
+                $atasan = getPejabatPPID('atasan');
+                $ketua = getPejabatPPID('ketua');
 
-                $kepala_pengelola = Helpers::getPejabatPPID('kepala_pengelola');
-                $kepala_pengaduan = Helpers::getPejabatPPID('kepala_pengaduan');
-                $kepala_pelayanan = Helpers::getPejabatPPID('kepala_pelayanan');
+                $kepala_pengelola = getPejabatPPID('kepala_pengelola');
+                $kepala_pengaduan = getPejabatPPID('kepala_pengaduan');
+                $kepala_pelayanan = getPejabatPPID('kepala_pelayanan');
             @endphp
             <div class="card bg-soft-primary rounded-4 mb-14 mb-md-18">
                 <div class="card-body p-md-10 mt-8 py-xxl-16 position-relative">
@@ -347,27 +347,27 @@
                         <div class="col-md-3">
                             <img src="{{ asset('client/assets/img/icons/lineal/user.svg') }}"
                                 class="svg-inject icon-svg icon-svg-md text-primary mb-3" alt="" />
-                            <h3 class="counter">{{ Helpers::getPegawais('IV', 'golongan') }}</h3>
+                            <h3 class="counter">{{ get_pegawais('IV', 'golongan') }}</h3>
                             <p>Pegawai Eselon</p>
                         </div>
                         <!--/column -->
                         <div class="col-md-3">
                             <img src="{{ asset('client/assets/img/icons/lineal/user.svg') }}"
                                 class="svg-inject icon-svg icon-svg-md text-primary mb-3" alt="" />
-                            <h3 class="counter">{{ Helpers::getPegawais('III', 'golongan') }}</h3>
+                            <h3 class="counter">{{ get_pegawais('III', 'golongan') }}</h3>
                             <p>Pegawai Golongan III</p>
                         </div>
                         <!--/column -->
                         <div class="col-md-3">
                             <img src="{{ asset('client/assets/img/icons/lineal/user.svg') }}"
                                 class="svg-inject icon-svg icon-svg-md text-primary mb-3" alt="" />
-                            <h3 class="counter">{{ Helpers::getPegawais('II', 'golongan') }}</h3>
+                            <h3 class="counter">{{ get_pegawais('II', 'golongan') }}</h3>
                             <p>Pegawai Golongan II</p>
                         </div>
                         <div class="col-md-3">
                             <img src="{{ asset('client/assets/img/icons/lineal/user.svg') }}"
                                 class="svg-inject icon-svg icon-svg-md text-primary mb-3" alt="" />
-                            <h3 class="counter">{{ Helpers::getPegawais('I', 'golongan') }}</h3>
+                            <h3 class="counter">{{ get_pegawais('I', 'golongan') }}</h3>
                             <p>Pegawai Golongan I</p>
                         </div>
                         <!--/column -->
