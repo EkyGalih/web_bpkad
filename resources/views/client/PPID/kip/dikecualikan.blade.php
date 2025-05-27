@@ -57,7 +57,7 @@
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $berkala2['nama_informasi'] }}</td>
-                                                    <td>{{ Helpers::GetDate($berkala2['created_at']) . ' ' . Helpers::GetTime($berkala2['created_at']) }}
+                                                    <td>{{ get_date($berkala2['created_at']) . ' ' . GetTime($berkala2['created_at']) }}
                                                     </td>
                                                     <td>
                                                         @if ($berkala2['jenis_file'] == 'link')

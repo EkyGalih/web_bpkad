@@ -56,7 +56,7 @@
                                 class="svg-inject icon-svg icon-svg-sm solid-mono text-fuchsia mb-3" alt="" />
                             <h4>Informasi Berkala</h4>
                             <p class="mb-2">Informasi yang diperbarui secara reguler atau periodik.</p>
-                            <a href="#" class="more hover link-fuchsia">Lihat Daftar</a>
+                            <a href="{{ route('ppid-kip', strtolower(App\Enum\KlasifikasiEnum::BERKALA->name)) }}" class="more hover link-fuchsia">Lihat Daftar</a>
                         </div>
                         <!--/.card-body -->
                     </div>
@@ -70,7 +70,7 @@
                                 class="svg-inject icon-svg icon-svg-sm solid-mono text-violet mb-3" alt="" />
                             <h4>Informasi Serta Merta</h4>
                             <p class="mb-2">Informasi yang diperbarui atau disajikan secara instan.</p>
-                            <a href="#" class="more hover link-violet">Lihat Daftar</a>
+                            <a href="{{ route('ppid-kip', strtolower(App\Enum\KlasifikasiEnum::SERTA_MERTA->name)) }}" class="more hover link-violet">Lihat Daftar</a>
                         </div>
                         <!--/.card-body -->
                     </div>
@@ -84,7 +84,7 @@
                                 class="svg-inject icon-svg icon-svg-sm solid-mono text-orange mb-3" alt="" />
                             <h4>Informasi Setiap Saat</h4>
                             <p class="mb-2">Informasi yang diperbarui atau disajikan setiap saat.</p>
-                            <a href="#" class="more hover link-orange">Lihat Daftar</a>
+                            <a href="{{ route('ppid-kip', strtolower(App\Enum\KlasifikasiEnum::SETIAP_SAAT->name)) }}" class="more hover link-orange">Lihat Daftar</a>
                         </div>
                         <!--/.card-body -->
                     </div>
@@ -98,7 +98,7 @@
                                 class="svg-inject icon-svg icon-svg-sm solid-mono text-green mb-3" alt="" />
                             <h4>Informasi Dikecualikan</h4>
                             <p class="mb-2">Informasi yang dikecualikan untuk disediakan ke publik.</p>
-                            <a href="#" class="more hover link-green">Lihat Daftar</a>
+                            <a href="{{ route('ppid-kip', strtolower(App\Enum\KlasifikasiEnum::DIKECUALIKAN->name)) }}" class="more hover link-green">Lihat Daftar</a>
                         </div>
                         <!--/.card-body -->
                     </div>
