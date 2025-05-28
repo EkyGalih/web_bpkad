@@ -23,8 +23,8 @@ class PostsCategory extends Model
         });
     }
 
-    public function Posts()
+    public function posts()
     {
-        return $this->hasOne(Posts::class);
+        return $this->hasMany(Posts::class, 'posts_category_id');
     }
 }

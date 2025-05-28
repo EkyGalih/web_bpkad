@@ -13,7 +13,6 @@ enum CategoryEnum: string
         return $this == self::BERITA;
     }
 
-
     public function isArtikel(): bool
     {
         return $this == self::ARTIKEL;
@@ -22,6 +21,15 @@ enum CategoryEnum: string
     public function isAgendaPimpinan(): bool
     {
         return $this == self::AGENDAPIMPINAN;
+    }
+
+    public function getColor(): string
+    {
+        return match ($this) {
+            self::BERITA => 'success',
+            self::ARTIKEL => 'info',
+            self::AGENDAPIMPINAN => 'primary'
+        };
     }
 
 }

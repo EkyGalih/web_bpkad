@@ -79,7 +79,7 @@ class PostController extends Controller
             'created_at' => $request->date . ' ' . $request->time . ':' . now()->format('s')
         ]);
 
-        Helpers::_recentAdd($id, 'membuat Berita/Artikel', 'post');
+        _recentAdd($id, 'membuat Berita/Artikel', 'post');
         session()->flash('success', 'Berita/Artikel berhasil ditambahkan!');
         return redirect()->route('post-admin.index');
     }
@@ -143,7 +143,7 @@ class PostController extends Controller
                 : now(),
         ]);
 
-        Helpers::_recentAdd($id, 'mengubah posting', 'post');
+        _recentAdd($id, 'mengubah posting', 'post');
         session()->flash('success', 'Berita/Artikel berhasil diubah!');
         return redirect()->route('post-admin.index');
     }
@@ -155,7 +155,7 @@ class PostController extends Controller
             'deleted_at' => NULL
         ]);
 
-        Helpers::_recentAdd($id, 'memulihkan berita/artikel yang dihapus', 'post');
+        _recentAdd($id, 'memulihkan berita/artikel yang dihapus', 'post');
 
         return redirect()->route('post-admin.index')->with(['success' => 'Berita/Artikel berhasil dipulihkan!']);
     }

@@ -2,10 +2,10 @@
     <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
         <div class="offcanvas-header mx-lg-auto order-0 order-lg-1 d-lg-flex px-lg-15">
             <a href="./index.html" class="transition-none d-none d-lg-flex"><img class="logo-dark"
-                    src="{{ asset('client/assets/img/logo-dark.png') }}"
-                    srcset="{{ asset('client/assets/img/logo-dark@2x.png 2x') }}" alt="" />
+                    src="{{ asset('client/assets/img/logo.png') }}"
+                    srcset="{{ asset('client/assets/img/logo.png') }}" alt="" />
                 <img class="logo-light" src="{{ asset('client/assets/img/logo-light.png') }}"
-                    srcset="{{ asset('client/assets/img/logo-light@2x.png 2x') }}" alt="" /></a>
+                    srcset="{{ asset('client/assets/img/logo-light.png ') }}" alt="" /></a>
             <h3 class="text-white fs-30 mb-0 d-lg-none">BPKAD NTB</h3>
             <button type="button" class="btn-close btn-close-white d-lg-none" data-bs-dismiss="offcanvas"
                 aria-label="Close"></button>

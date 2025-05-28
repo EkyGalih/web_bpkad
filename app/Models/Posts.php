@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enum\CategoryEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 // use Webpatser\Uuid\Uuid;
@@ -30,7 +31,7 @@ class Posts extends Model
 
     public function category()
     {
-        return $this->belongsTo(PostsCategory::class);
+        return $this->belongsTo(PostsCategory::class, 'posts_category_id');
     }
 
     public function TypeContent()

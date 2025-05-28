@@ -17,7 +17,9 @@
             @include('layouts.admin.sidebar')
             <div class="layout-page">
                 @include('layouts.admin.header')
-                @yield('content')
+                <div class="content-wrapper">
+                    @yield('content')
+                </div>
                 @include('layouts.admin.footer')
             </div>
         </div>

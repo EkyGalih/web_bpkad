@@ -7,17 +7,14 @@
 <link rel="stylesheet" href="{{ asset('server/assets/vendor/css/core.css') }}" />
 <link rel="stylesheet" href="{{ asset('server/assets/css/demo.css') }}" />
 <link rel="stylesheet" href="{{ asset('server/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
-<link rel="stylesheet" href="{{ asset('server/assets/vendor/libs/apex-charts/apex-charts.css') }}" />
-<link rel="stylesheet" href="{{ asset('server/assets/vendor/libs/swiper/swiper.css') }}" />
-<link rel="stylesheet" href="{{ asset('server/assets/vendor/css/pages/cards-statistics.css') }}" />
+{{-- PAGE --}}
+@yield('styles')
 <script src="{{ asset('server/assets/vendor/js/helpers.js') }}"></script>
 <script src="{{ asset('server/assets/vendor/js/template-customizer.js') }}"></script>
 <script src="{{ asset('server/assets/js/config.js') }}"></script>
-<link href="{{ asset('server/css/style.css') }}" rel="stylesheet">
-
 {{-- Livewire css --}}
 @livewireStyles
-<style>
+{{-- <style>
     @-webkit-keyframes blinker {
         from {
             opacity: 1.0;
@@ -56,5 +53,4 @@
             opacity: 0;
         }
     }
-</style>
-@yield('additional-css')
+</style> --}}

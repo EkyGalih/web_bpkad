@@ -8,14 +8,10 @@
 <script src="{{ asset('server/assets/vendor/libs/hammer/hammer.js') }}"></script>
 <script src="{{ asset('server/assets/vendor/libs/i18n/i18n.js') }}"></script>
 <script src="{{ asset('server/assets/vendor/js/menu.js') }}"></script>
-<script src="{{ asset('server/assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
-<script src="{{ asset('server/assets/vendor/libs/swiper/swiper.js') }}"></script>
+@yield('scripts')
 <script src="{{ asset('server/assets/js/main.js') }}"></script>
-<script src="{{ asset('server/assets/js/dashboards-analytics.js') }}"></script>
-<script src="{{ asset('server/js/main.js') }}"></script>
 {{-- Livewire js --}}
 @livewireScripts
-@yield('additional-js')
 <script>
     $(document).ready(function() {
          $('.datatables').DataTable();
@@ -23,5 +19,17 @@
      $(function() {
          $("[data-bs-tooltip='tooltip']").tooltip();
      });
+    document.addEventListener("DOMContentLoaded", function () {
+        const layoutPage = document.querySelector('.layout-page');
+
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 0) {
+                layoutPage.classList.add('window-scrolled');
+            } else {
+                layoutPage.classList.remove('window-scrolled');
+            }
+        });
+    });
+
 </script>
 @include('layouts.sweet-alert-notification')
