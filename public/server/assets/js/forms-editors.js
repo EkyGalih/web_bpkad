@@ -70,7 +70,7 @@
         theme: 'snow'
     });
 
-    const form = document.getElementById('form-post');
+    const form = document.getElementById('form');
     const quillContentInput = document.getElementById('quill-content');
 
     form.addEventListener('submit', function (e) {

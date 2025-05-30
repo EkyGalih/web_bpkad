@@ -26,13 +26,6 @@ class PagesController extends Controller
             ->orderBy('created_at', 'DESC')
             ->get();
 
-            // foreach ($pages as $page) {
-            //     $hal = Pages::findOrFail($page->id);
-            //     $hal->update([
-            //         'slug' => Str::slug($page->title),
-            //     ]);
-            // }
-
         $DeletedPages = Pages::where('deleted_at', '!=', NULL)
             ->orderBy('created_at', 'DESC')
             ->get();
@@ -61,7 +54,7 @@ class PagesController extends Controller
     public function store(Request $request)
     {
         $id = (string)Uuid::generate(4);
-
+        // dd($request->all());
         if ($request->jenis_link == 'non-link') {
             Pages::create([
                 'id' => $id,
@@ -86,9 +79,9 @@ class PagesController extends Controller
                 'menu_id' => $request->menu_id
             ]);
         }
-        Helpers::_recentAdd($id, 'membuat halaman', 'pages');
+        _recentAdd($id, 'membuat halaman', 'pages');
 
-        return redirect()->route('pages-admin.index')->with(['success' => 'Pages berhasil ditambahkan!']);
+        return redirect()->route('pages-admin.index')->with('success', 'Pages berhasil ditambahkan!');
     }
 
     /**
@@ -108,12 +101,11 @@ class PagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Pages $page)
     {
         $menus = Menu::orderBy('name', 'ASC')->get();
-        $pages = Pages::findOrFail($id);
 
-        return view('admin.pages.page.edit', compact('pages', 'menus'));
+        return view('admin.pages.page.edit', compact('page', 'menus'));
     }
 
     /**
@@ -123,11 +115,10 @@ class PagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Pages $page)
     {
-        $pages = Pages::findOrFail($id);
 
-        $pages->update([
+        $page->update([
             'title' => $request->title,
             'slug' => $request->slug,
             'content' => $request->content,
@@ -136,9 +127,9 @@ class PagesController extends Controller
             'menu_id' => $request->menu_id
         ]);
 
-        Helpers::_recentAdd($id, 'memperbaharui halaman', 'pages');
+        _recentAdd($page->id, 'memperbaharui halaman', 'pages');
 
-        return redirect()->route('pages-admin.index')->with(['success' => 'Pages berhasil diubah!']);
+        return redirect()->route('pages-admin.index')->with('success', 'Pages berhasil diubah!');
     }
 
     /**
@@ -148,16 +139,15 @@ class PagesController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function restore($id)
+    public function restore(Pages $page)
     {
-        $page = Pages::findOrFail($id);
         $page->update([
             'deleted_at' => NULL
         ]);
 
-        Helpers::_recentAdd($id, 'mengembalikan halaman yang dihapus', 'pages');
+        _recentAdd($page->id, 'mengembalikan halaman yang dihapus', 'pages');
 
-        return redirect()->route('pages-admin.index')->with(['success' => 'Halaman berhasil dipulihkan1!']);
+        return redirect()->route('pages-admin.index')->with('success', 'Halaman berhasil dipulihkan1!');
     }
 
     /**
@@ -166,16 +156,15 @@ class PagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Pages $page)
     {
-        $pages = Pages::findOrFail($id);
-        $pages->update([
+        $page->update([
             'deleted_at' => new DateTime()
         ]);
 
-        Helpers::_recentAdd($id, 'menghapus halaman', 'pages');
+        _recentAdd($page->id, 'menghapus halaman', 'pages');
 
-        return redirect()->route('pages-admin.index')->with(['success' => 'Halaman ditaruh ke tong sampah!']);
+        return redirect()->route('pages-admin.index')->with('success', 'Halaman ditaruh ke tong sampah!');
     }
 
     /**
@@ -184,16 +173,15 @@ class PagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function delete(Pages $page)
     {
-        $pages = Pages::findOrFail($id);
-        $recent = Recent::where('uuid_activity', '=', $id)->get();
+        $recent = Recent::where('uuid_activity', '=', $page->id)->get();
         foreach ($recent as $item) {
             $item->delete();
         }
-        $pages->delete();
+        $page->delete();
 
-        return redirect()->route('pages-admin.index')->with(['success' => 'Halaman dihapus permanen!']);
+        return redirect()->route('pages-admin.index')->with('success', 'Halaman dihapus permanen!');
     }
 
     /**

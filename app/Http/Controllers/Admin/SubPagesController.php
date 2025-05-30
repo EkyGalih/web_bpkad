@@ -26,13 +26,6 @@ class SubPagesController extends Controller
             ->orderBy('created_at', 'DESC')
             ->get();
 
-            // foreach ($subpages as $page) {
-            //     $hal = SubPages::where('id', $page->id);
-            //     $hal->update([
-            //         'slug' => Str::slug($page->title),
-            //     ]);
-            // }
-
         $DeletedSubPages = SubPages::where('deleted_at', '!=', NULL)
             ->orderBy('created_at', 'DESC')
             ->get();
@@ -102,8 +95,8 @@ class SubPagesController extends Controller
                     'sub_pages_id' => $request->sub_pages_id
                 ]);
             }
-            Helpers::_recentAdd($id, 'menambahkan sub halaman', 'sub_pages');
-            return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Pages berhasil ditambahkan!']);
+            _recentAdd($id, 'menambahkan sub halaman', 'sub_pages');
+            return redirect()->route('subpages-admin.index')->with('success', 'Sub Pages berhasil ditambahkan!');
         } elseif ($request->jenis_link == 'link') {
             SubPages::create([
                 'id' => $id,
@@ -115,8 +108,8 @@ class SubPagesController extends Controller
                 'create_by_id' => Auth::user()->id,
                 'sub_pages_id' => $request->sub_pages_id
             ]);
-            Helpers::_recentAdd($id, 'menambahkan sub halaman', 'sub_pages');
-            return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Pages berhasil ditambahkan!']);
+            _recentAdd($id, 'menambahkan sub halaman', 'sub_pages');
+            return redirect()->route('subpages-admin.index')->with('success', 'Sub Pages berhasil ditambahkan!');
         }
     }
 
@@ -126,12 +119,11 @@ class SubPagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(SubPages $subpage)
     {
         $pages = Pages::orderBy('title', 'ASC')->get();
-        $subpages = SubPages::findOrFail($id);
 
-        return view('admin.pages.subpage.edit', compact('pages', 'subpages'));
+        return view('admin.pages.subpage.edit', compact('pages', 'subpage'));
     }
 
     /**
@@ -155,7 +147,7 @@ class SubPagesController extends Controller
             'create_by_id' => Auth::user()->id,
             'sub_pages_id' => $request->sub_pages_id
         ]);
-        Helpers::_recentAdd($id, 'mengubah halaman', 'sub_pages');
+        _recentAdd($id, 'mengubah halaman', 'sub_pages');
 
         return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Pages berhasil diubah!']);
     }
@@ -167,7 +159,7 @@ class SubPagesController extends Controller
             'deleted_at' => NULL
         ]);
 
-        Helpers::_recentAdd($id, 'mengembalikan sub halaman yang dihapus', 'sub_pages');
+        _recentAdd($id, 'mengembalikan sub halaman yang dihapus', 'sub_pages');
 
         return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Halaman berhasil dipulihkan1!']);
     }
@@ -188,7 +180,7 @@ class SubPagesController extends Controller
         //     unlink($subpages->pdf_file);
         // }
         // $subpages->delete();
-        Helpers::_recentAdd($id, 'menghapus halaman', 'sub_pages');
+        _recentAdd($id, 'menghapus halaman', 'sub_pages');
 
         return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Pages berhasil dihapus!']);
     }

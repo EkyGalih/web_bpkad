@@ -53,7 +53,7 @@
                         </d>
                     </div>
                 </div>
-                <form action="{{ route('post-admin.store') }}" id="form-post" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('post-admin.store') }}" id="form" method="POST" enctype="multipart/form-data">
                     <div class="card-body">
                         @csrf
                         <div class="row">

@@ -1,100 +1,78 @@
 @extends('admin.index')
 @section('title', 'Halaman')
-@section('menu-pages', 'active')
-@section('pages-menu', 'show')
-@section('p-pages', 'active')
-@section('additional-css')
-    <link rel="stylesheet" type="text/css"
-        href="{{ asset('server/vendor/DataTables/DataTables-1.13.1/css/jquery.dataTables.min.css') }}" />
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('server/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
+    <link rel="stylesheet"
+        href="{{ asset('server/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
 @endsection
 @section('content')
-    <main id="main" class="main">
-        <div class="pagetitle">
-            <h1>Halaman</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('pages-admin.index') }}">Halaman</a></li>
-                    <li class="breadcrumb-item active">Data Halaman</li>
-                </ol>
-            </nav>
-        </div>
-        <section class="section">
-            <div class="row">
-                <div class="col-lg-12">
-                    @if (Session::has('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            {{ Session::get('success') }}
-                        </div>
-                    @endif
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-10">
-                                    <h5 class="card-title">Data Halaman</h5>
-                                </div>
-                                <div class="col-lg-2">
-                                    <a href="{{ route('pages-admin.create') }}" class="btn btn-outline-primary btn-md"
-                                        style="margin-top: 10px; margin-left: 30px;">
-                                        <i class="bi bi-journal-plus"></i> Tambah
-                                    </a>
-                                    <button type="button" class="btn btn-danger btn-md" data-bs-toggle="modal"
-                                        data-bs-target="#CachePages" data-bs-tooltip="tooltip" data-bs-placement="top"
-                                        title="Tong Sampah" style="margin-top: 10px;">
-                                        <i class="bi bi-trash2"></i>
-                                    </button>
-                                    @include('admin/pages/page/addons/_cache')
-                                </div>
-                            </div>
-                            <table class="table table-hover page">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Judul</th>
-                                        <th scope="col">Tipe Halaman</th>
-                                        <th scope="col">Dibuat Oleh</th>
-                                        <th scope="col">Buat Pada</th>
-                                        <th scope="col">Ubah Pada</th>
-                                        <th scope="col">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($pages as $page)
-                                        <tr>
-                                            <th scope="row">{{ $loop->iteration }}</th>
-                                            <td>{{ $page->title }}</td>
-                                            <td>{{ Helpers::GetTypePage($page->pages_type_id) }}</td>
-                                            <td>{{ Helpers::GetUser($page->create_by_id) }}</td>
-                                            <td>{{ Helpers::GetDate($page->created_at) }}</td>
-                                            <td>{{ $page->updated_at == null ? 'None' : Helpers::GetDate($page->updated_at) }}
-                                            </td>
-                                            <td>
-                                                <a href="{{ route('pages-admin.edit', $page->id) }}"
-                                                    class="btn btn-secondary btn-md" data-bs-tooltip="tooltip" data-bs-placement="top" title="Ubah Berkas">
-                                                    <i class="bi bi-pencil-square"></i>
-                                                </a>
-                                                <button class="btn btn-warning btn-md" data-bs-tooltip="tooltip" data-bs-placement="top" title="Hapus Berkas" data-bs-toggle="modal"
-                                                    data-bs-target="#DeletePages{{ $loop->iteration }}">
-                                                    <i class="bi bi-recycle"></i>
-                                                </button>
-
-                                                @include('admin/pages/page/addons/_delete')
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="mb-0">Halaman</h4>
+                    <div class="d-flex gap-2">
+                        <a href="{{ route('pages-admin.create') }}" class="btn btn-outline-primary btn-md">
+                            <i class="icon-base ri ri-file-add-line icon-18px me-2"></i> Tambah
+                        </a>
+                        <button data-bs-toggle="modal" data-bs-target="#CachePages" data-bs-tooltip="tooltip"
+                            data-bs-placement="top" title="Tong Sampah" class="btn btn-danger btn-md">
+                            <i class="icon-base ri ri-delete-bin-3-fill icon-18px"></i>
+                        </button>
                     </div>
                 </div>
+                @include('admin.pages.page.addons._cache')
             </div>
-        </section>
-    </main>
+            <div class="card-datatable table-responsive text-nowrap">
+                <table class="table table-bordered table-responsive page">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Judul</th>
+                            <th>Tipe Halaman</th>
+                            <th>Dibuat Oleh</th>
+                            <th>Buat Pada</th>
+                            <th>Ubah Pada</th>
+                            <th class="d-flex align-items-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($pages as $page)
+                            <tr>
+                                <th scope="row">{{ $loop->iteration }}</th>
+                                <td>{{ $page->title }}</td>
+                                <td>{{ GetTypePage($page->pages_type_id) }}</td>
+                                <td>{{ GetUser($page->create_by_id) }}</td>
+                                <td>{{ \Carbon\Carbon::parse($page->created_at)->locale('id')->isoFormat('dddd, D MMMM YYYY') }}
+                                </td>
+                                <td>{{ $page->updated_at == null ? 'None' : \Carbon\Carbon::parse($page->updated_at)->locale('id')->isoFormat('dddd, D MMMM YYYY') }}
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                            data-bs-toggle="dropdown">
+                                            <i class="icon-base ri ri-more-2-line icon-18px"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="{{ route('pages-admin.edit', $page->id) }}"><i
+                                                    class="icon-base ri ri-pencil-line icon-18px me-2"></i> Edit</a>
+                                            <button class="dropdown-item"
+                                                onclick="trashData('{{ route('pages-admin.destroy', $page->id) }}')"><i
+                                                    class="icon-base ri ri-delete-bin-6-line icon-18px me-2"></i>
+                                                Delete</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 @endsection
-@section('additional-js')
-    <script type="text/javascript" src="{{ asset('server/js/jquery-5.3.1.js') }}"></script>
-    <script src="{{ asset('server/vendor/DataTables/DataTables-1.13.1/js/jquery.dataTables.min.js') }}"></script>
+@section('scripts')
+    <script src="{{ asset('server/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('.page').DataTable();

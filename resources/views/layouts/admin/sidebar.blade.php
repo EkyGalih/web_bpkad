@@ -29,7 +29,7 @@
                 <div data-i18n="Berita & Artikel">Berita & Artikel</div>
             </a>
         </li>
-        <li class="menu-item @if (request()->is('admin/web/pages*')) open @endif">
+        <li class="menu-item @if (request()->is('admin/web/pages*') || request()->is('admin/web/sub-pages*')) open @endif">
             <a href="#" class="menu-link menu-toggle">
                 <i class="menu-icon icon-base ri ri-layout-left-line"></i>
                 <div data-i18n="Halaman">Halaman</div>

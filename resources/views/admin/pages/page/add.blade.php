@@ -1,104 +1,89 @@
 @extends('admin.index')
 @section('title', 'Tambah Halaman')
-@section('pages-menu', 'show')
-@section('p-pages', 'active')
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('server/assets/vendor/libs/quill/editor.css') }}">
+    <link rel="stylesheet" href="{{ asset('server/assets/vendor/libs/select2/select2.css') }}">
+@endsection
 @section('content')
-    <main id="main" class="main">
-        <div class="pagetitle">
-            <div class="pagetitle">
-                <h1>Halaman</h1>
-                <nav>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('pages-admin.index') }}">Halaman</a></li>
-                        <li class="breadcrumb-item active">Tambah Halaman</li>
-                    </ol>
-                </nav>
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="mb-0">Tambah Halaman</h4>
+                    <d class="flex gap-2">
+                        <a class="btn btn-secondary" href="{{ route('pages-admin.index') }}">
+                            <i class="icon-base ri ri-skip-back-line"></i> Kembali
+                        </a>
+                    </d>
+                </div>
             </div>
-        </div>
-        <section class="section">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title">Tambah Halaman</div>
-                            <hr />
-                            <form action="{{ route('pages-admin.store') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="row mb-3">
-                                            <label for="inputText" class="col-sm-2 col-form-label">Jenis Pages</label>
-                                            <div class="col-sm-10">
-                                                <select name="jenis_link" class="form-control" id="jenis_link">
-                                                    <option value="non-link">Tanpa Link</option>
-                                                    <option value="link">Link</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3" id="content">
-                                            <label for="inputText" class="col-sm-2 col-form-label">Kontent</label>
-                                            <div class="col-sm-10">
-                                                <textarea name="content" class="form-control" id="kontent"></textarea><!-- End TinyMCE Editor -->
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <label for="inputText" class="col-sm-2 col-form-label" id="label-link"
-                                                hidden>Ekternal Link</label>
-                                            <div class="col-sm-10">
-                                                <input type="hidden" name="link" class="form-control" id="link"
-                                                    placeholder="https://example.com/example or /example">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="row mb-3">
-                                            <label for="inputText" class="col-sm-2 col-form-label">Judul</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" id="title" name="title" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <label for="inputText" class="col-sm-2 col-form-label">Slug</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" id="slug" name="slug" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <label for="inputText" class="col-sm-2 col-form-label">Menu</label>
-                                            <div class="col-sm-10">
-                                                <select name="menu_id" id="menu_id" class="form-control">
-                                                    <option value="">--Tanpa Menu--</option>
-                                                    @foreach ($menus as $menu)
-                                                        <option value="{{ $menu->id }}">{{ $menu->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <div class="col-sm-12">
-                                                <button class="btn btn-outline-warning btn-md" style="float: right;"
-                                                    type="reset">
-                                                    <i class="bi bi-arrow-clockwise"></i> Reset
-                                                </button>
-                                                <button class="btn btn-outline-success btn-md"
-                                                    style="float: right; margin-right: 2px;" type="submit">
-                                                    <i class="bi bi-save"></i> Simpan
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+            <form action="{{ route('pages-admin.store') }}" id="form" method="POST" enctype="multipart/form-data">
+                <div class="card-body">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-floating form-floating-outline mb-6">
+                                <label for="jenis_link" class="form-label">Jenis Pages</label>
+                                <select name="jenis_link" id="jenis_link" class="select2 form-select"
+                                    data-allow-clear="true">
+                                    <option value="">Pilih Jenis Link</option>
+                                    <option value="non-link" {{ old('jenis_link') == 'non-link' ? 'selected' : '' }}>Tanpa Link</option>
+                                    <option value="link" {{ old('jenis_link') == 'link' ? 'selected' : '' }}>Link</option>
+                                </select>
+                            </div>
+                            <div class="form-floating form-floating-outline mb-6">
+                                <input type="{{ old('jenis_link') == 'link' ? 'text' : 'hidden' }}" name="link" class="form-control" id="link"
+                                    placeholder="https://example.com/example or /example" value="{{ old('link') }}">
+                                <label for="link" id="label-link" {{ old('jenis_link') == 'link' ? '' : 'hidden' }}>Ekternal
+                                    Link</label>
+                            </div>
+                            <div class="form-floating form-floating-outline mb-6">
+                                <input type="text" name="title" placeholder="Judul Halaman" id="title"
+                                    class="form-control" value="{{ old('title') }}">
+                                <label for="title">Judul Halaman</label>
+                            </div>
+                            <div class="form-floating form-floating-outline mb-6">
+                                <input type="text" id="slug" placeholder="Slug" name="slug" class="form-control"
+                                    readonly value="{{ old('slug') }}">
+                                <label for="slug">Slug</label>
+                            </div>
+                            <div class="form-floating form-floating-outline mb-6">
+                                <select name="menu_id" id="menu_id" class="form-select select2">
+                                    <option value="">Pilih Menu</option>
+                                    @foreach ($menus as $menu)
+                                        <option value="{{ $menu->id }}" {{ old('menu_id') == $menu->id ? 'selected' : '' }}>{{ $menu->name }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="menu_id" class="form-label">Pilih Menu</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <div id="full-editor">{!! old('content') !!}</div>
+                                <input type="hidden" name="content" id="quill-content" value="{{ old('content') }}">
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="d-flex justify-content-end gap-2">
+                                <button class="btn btn-warning btn-lg" type="reset">
+                                    <i class="icon-base ri ri-refresh-line icon-18px me-2"></i> Reset
+                                </button>
+                                <button class="btn btn-primary btn-lg" type="submit">
+                                    <i class="icon-base ri ri-add-large-line icon-18px me-2"></i> Tambah
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-    </main>
+        </div>
+        </form>
+    </div>
 @endsection
-@section('additional-js')
-    <script src="{{ asset('server/vendor/ckeditor/ckeditor-classic.bundle.js') }}" type="text/javascript"></script>
+@section('scripts')
+    <script src="{{ asset('server/assets/vendor/libs/select2/select2.js') }}"></script>
+    <script src="{{ asset('server/assets/vendor/libs/quill/quill.js') }}"></script>
+    <script src="{{ asset('server/assets/js/forms-selects.js') }}"></script>
+    <script src="{{ asset('server/assets/js/forms-editors.js') }}"></script>
     <script>
         $('#jenis_link').change(function() {
             var jenis_link = $('#jenis_link').val();
@@ -136,18 +121,6 @@
                     }
                 });
             });
-
-            ClassicEditor
-                .create(document.querySelector('#kontent'), {
-                    // Konfigurasi tambahan untuk CKEditor
-                    height: 500 // Atur tinggi editor di sini
-                })
-                .then(editor => {
-                    console.log(editor);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
         });
     </script>
 @endsection
