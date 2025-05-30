@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Webpatser\Uuid\Uuid;
 use Illuminate\Support\Str;
+use ReCaptcha\RequestMethod\Post;
 
 class PostController extends Controller
 {
@@ -42,8 +43,9 @@ class PostController extends Controller
     public function create()
     {
         $PostCategory = PostsCategory::orderBy('category', 'ASC')->get();
+        $tags = get_tags();
 
-        return view('admin.post.add', compact('PostCategory'));
+        return view('admin.post.add', compact('PostCategory', 'tags'));
     }
 
     /**
@@ -74,14 +76,13 @@ class PostController extends Controller
             'users_id' => Auth::user()->id,
             'caption' => $request->caption,
             'posts_category_id' => $request->posts_category_id || 1,
-            'tags' => $request->tags,
-            'agenda_kaban' => $request->agenda_kaban,
-            'created_at' => $request->date . ' ' . $request->time . ':' . now()->format('s')
+            'tags' => json_encode(collect(json_decode($request->tags))->pluck('value')),
+            'agenda_kaban' => $request->agenda_kaban
         ]);
 
         _recentAdd($id, 'membuat Berita/Artikel', 'post');
-        session()->flash('success', 'Berita/Artikel berhasil ditambahkan!');
-        return redirect()->route('post-admin.index');
+        return redirect()->route('post-admin.index')
+            ->with('success', 'Berita/Artikel berhasil ditambahkan!');
     }
 
     /**
@@ -90,12 +91,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Posts $post)
     {
-        $posts = Posts::findOrFail($id);
         $PostCategory = PostsCategory::orderBy('category', 'ASC')->get();
+        $tags = get_tags();
 
-        return view('admin.post.edit', compact('posts', 'PostCategory'));
+        return view('admin.post.edit', compact('post', 'PostCategory', 'tags'));
     }
 
     /**
@@ -135,17 +136,13 @@ class PostController extends Controller
             'foto_berita' => $url,
             'users_id' => Auth::id(),
             'posts_category_id' => $request->posts_category_id ?? 1, // Default kategori jika kosong
-            'tags' => $request->tags,
+            'tags' => json_encode(collect(json_decode($request->tags))->pluck('value')),
             'caption' => $request->caption,
             'agenda_kaban' => $request->agenda_kaban,
-            'created_at' => ($request->date && $request->time)
-                ? $request->date . ' ' . $request->time . ':' . now()->format('s')
-                : now(),
         ]);
 
         _recentAdd($id, 'mengubah posting', 'post');
-        session()->flash('success', 'Berita/Artikel berhasil diubah!');
-        return redirect()->route('post-admin.index');
+        return redirect()->route('post-admin.index')->with('success', 'Berita/Artikel berhasil diperbarui!');
     }
 
     public function restore($id)

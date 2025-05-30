@@ -60,6 +60,19 @@ if (!function_exists('GetUser')) {
     }
 }
 
+if (!function_exists('get_tags')) {
+    function get_tags()
+    {
+        return Posts::whereNotNull('tags')
+            ->pluck('tags')
+            ->flatMap(fn($tag) => explode(',', $tag))
+            ->map(fn($tag) => trim($tag))
+            ->filter()
+            ->unique(fn($tag) => strtolower($tag)) // hilangkan duplikat case-insensitive
+            ->values();
+    }
+}
+
 if (!function_exists('PostCategory')) {
     function PostCategory($id)
     {

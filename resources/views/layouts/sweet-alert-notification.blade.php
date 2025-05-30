@@ -1,36 +1,66 @@
 @if (Session::has('success') || Session::has('info'))
     <script type="text/javascript">
-        toastr.success("{!! Session::pull('success') !!}");
-    </script>
-@endif
-@if (Session::has('warning') || Session::has('error'))
-    <script type="text/javascript">
-        toastr.error("{!! Session::pull('fail') !!}");
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukses',
+            text: "{!! Session::pull('success') ?: Session::pull('info') !!}",
+            timer: 3000,
+            showConfirmButton: false
+        });
     </script>
 @endif
 
+@if (Session::has('warning') || Session::has('error'))
+    <script type="text/javascript">
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: "{!! Session::pull('error') ?: Session::pull('warning') !!}",
+            timer: 3000,
+            showConfirmButton: false
+        });
+    </script>
+@endif
+
+
 <script>
+    function trashData(url) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Data akan di tempatkan di tong sampah!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, Hapus sekarang!',
+            cancelButtonText: 'Batalkan',
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect ke URL hapus
+                window.location.href = url;
+            }
+        });
+    }
     function deleteData(url) {
-        swal({
+        Swal.fire({
             title: 'Apakah Anda yakin?',
             text: "Data yang terhapus tidak dapat dikembalikan lagi!",
             icon: 'warning',
-            buttons: {
-                cancel: {
-                    text: 'Batalkan',
-                    visible: true,
-                    className: 'btn btn-danger'
-                },
-                confirm: {
-                    text: 'Ya, Hapus sekarang!',
-                    className: 'btn btn-success'
-                }
-            }
-        }).then((Delete) => {
-            if (Delete) {
+            showCancelButton: true,
+            confirmButtonText: 'Ya, Hapus sekarang!',
+            cancelButtonText: 'Batalkan',
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect ke URL hapus
                 window.location.href = url;
-            } else {
-                swal.close();
             }
         });
     }

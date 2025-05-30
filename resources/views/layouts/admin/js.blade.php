@@ -14,15 +14,15 @@
 @livewireScripts
 <script>
     $(document).ready(function() {
-         $('.datatables').DataTable();
-     });
-     $(function() {
-         $("[data-bs-tooltip='tooltip']").tooltip();
-     });
-    document.addEventListener("DOMContentLoaded", function () {
+        $('.datatables').DataTable();
+    });
+    $(function() {
+        $("[data-bs-tooltip='tooltip']").tooltip();
+    });
+    document.addEventListener("DOMContentLoaded", function() {
         const layoutPage = document.querySelector('.layout-page');
 
-        window.addEventListener('scroll', function () {
+        window.addEventListener('scroll', function() {
             if (window.scrollY > 0) {
                 layoutPage.classList.add('window-scrolled');
             } else {
@@ -30,6 +30,7 @@
             }
         });
     });
-
 </script>
+<script src="{{ asset('js/sweet-alert.min.js') }}"></script>
+<script src="{{ asset('js/toastr.min.js') }}"></script>
 @include('layouts.sweet-alert-notification')

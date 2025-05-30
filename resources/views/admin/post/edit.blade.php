@@ -1,168 +1,188 @@
 @extends('admin.index')
 @section('title', 'Edit Berita/Artikel')
-@section('additional-css')
-    <link rel="stylesheet" href="{{ asset('server/vendor/tom-select/tom-select.css') }}">
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('server/assets/vendor/libs/quill/editor.css') }}">
+    <link rel="stylesheet" href="{{ asset('server/assets/vendor/libs/select2/select2.css') }}">
+    <link rel="stylesheet" href="{{ asset('server/assets/vendor/libs/tagify/tagify.css') }}">
+    <link rel="stylesheet" href="{{ asset('server/assets/vendor/libs/flatpickr/flatpickr.css') }}">
     <style>
-        .image_upload>input {
-            display: none;
+        #dropzone-box {
+            border: 2px dashed #bbb;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            transition: background-color 0.3s;
         }
 
-        .images {
-            max-width: 100%;
-            max-height: auto;
+        #dropzone-box:hover {
+            background-color: #f1f1f1;
         }
 
-        #content {
-            min-height: 400px; /* Atur tinggi minimum sesuai keinginan Anda */
+        #dropzone-box.dragover {
+            background-color: #e0f7fa;
+            border-color: #00acc1;
+        }
+
+        #preview-img {
+            margin-top: 10px;
+            max-height: 200px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .dragover {
+            border-color: #007bff;
+            background-color: #f0f8ff;
         }
     </style>
+
 @endsection
 @section('content')
-    <main id="main" class="main">
-        <div class="pagetitle">
-            <div class="pagetitle">
-                <h1>Berita/Artikel</h1>
-                <nav>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('post-admin.index') }}">Berita/Artikel</a></li>
-                        <li class="breadcrumb-item active">Edit Berita/Artikel {{ $posts->title }}</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-        <section class="section">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title">Ubah Berita/Artikel</div>
-                            <hr />
-                            <form action="{{ route('post-admin.update', $posts->id) }}" method="POST"
-                                enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
-                                <div class="row">
-                                    <div class="col-lg-7">
-                                        <div class="col-sm-12">
-                                            <label for="title" class="form-label">Judul <sup
-                                                    style="color: red;">*</sup></label>
-                                            <input type="text" id="title" name="title" class="form-control mb-3"
-                                                required value="{{ $posts->title }}">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="slug" class="form-label">Slug <sup
-                                                    style="color: red;">*</sup></label>
-                                            <input type="text" id="slug" name="slug" class="form-control mb-3"
-                                                required readonly value="{{ $posts->slug }}">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="inputText" class="form-label">Konten <sup
-                                                    style="color: red;">*</sup></label>
-                                            <textarea class="form-control" id="content" name="content">{{ $posts->content }}</textarea>
-                                        </div>
-                                        <div class="d-flex" style="float: right;">
-                                            <button class="btn btn-success me-2" type="submit">
-                                                <i class="bi bi-save"></i> Simpan
-                                            </button>
-                                            <button class="btn btn-warning me-2" type="reset">
-                                                <i class="bi bi-arrow-clockwise"></i> Reset
-                                            </button>
-                                            <a class="btn btn-secondary" href="{{ route('post-admin.index') }}">
-                                                <i class="bi bi-skip-backward"></i> Kembali
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5">
-                                        <div class="col-sm-12">
-                                            <label for="inputText" class="col-form-label">Kategori <sup
-                                                    style="color: red;">*</sup></label>
-                                            <select name="posts_category_id" class="form-control mb-3">
-                                                <option value="">Pilih Kategori</option>
-                                                @foreach ($PostCategory as $category)
-                                                    <option value="{{ $category->id }}" {{ $category->id == $posts->posts_category_id ? 'selected' : '' }}>{{ $category->category }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <label for="inputText" class="col-form-label">Agenda Kaban? <sup
-                                                    style="color: red;">*</sup></label>
-                                            <input type="radio" name="agenda_kaban" value="ya" {{ $posts->agenda_kaban == 'ya' ? 'checked' : '' }}> Ya
-                                            <input type="radio" name="agenda_kaban" value="tidak" {{ $posts->agenda_kaban == 'tidak' ? 'checked' : '' }}> Tidak
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <label for="inputText" class="col-form-label">Foto Berita <sup
-                                                    style="color: red;">*</sup></label>
-                                            <p class="image_upload">
-                                                <label for="userImage">
-                                                    <a class="btn btn-primary btn-sm" rel="nofollow"><span
-                                                            class='bi bi-upload'></span> Upload Foto</a>
-                                                </label>
-                                                <input type="file" name="foto_berita" id="userImage" accept="image/*"
-                                                    onchange="loadFile(event)" value="{{ $posts->foto_berita }}">
-                                            </p>
-                                            <img class="images" id="post" src="{{ asset($posts->foto_berita) }}" style="max-height: 250px; max-width: 100%;">
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <label for="inputText" class="col-form-label">Caption <sup
-                                                    style="color: red;">*</sup></label>
-                                            <input type="text" name="caption" class="form-control mb-3" value="{{ $posts->caption }}">
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <label for="inputText" class="col-form-label">Tags</label>
-                                            <input id="input-tags" autocomplete="off" class="mb-3" placeholder="Tags"
-                                                name="tags" value="{{ $posts->tags }}">
-                                        </div>
-                                        <div class="row">
-                                            <label for="inputText" class="col-form-label">Waktu Upload <sup
-                                                    style="color: red;">*</sup></label>
-                                            <div class="col-sm-6">
-                                                <input id="date" type="date" name="date"
-                                                    class="form-control mb-3 @error('date') is-invalid @enderror"
-                                                    value="{{ $posts->created_at->format('Y-m-d') }}">
-                                                @error('date')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <input id="time" type="time" name="time"
-                                                    class="form-control mb-3 @error('time') is-invalid @enderror"
-                                                    value="{{ $posts->created_at->format('H:i') }}">
-                                                @error('time')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="mb-0">Update Berita/Artikel</h4>
+                        <d class="flex gap-2">
+                            <a class="btn btn-secondary" href="{{ route('post-admin.index') }}">
+                                <i class="icon-base ri ri-skip-back-line"></i> Kembali
+                            </a>
+                        </d>
                     </div>
                 </div>
+                <form action="{{ route('post-admin.update', $post->id) }}" id="form-post" method="POST"
+                    enctype="multipart/form-data">
+                    <div class="card-body">
+                        @csrf
+                        @method('PUT')
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="form-floating form-floating-outline mb-6">
+                                    <input type="text" id="title" name="title" value="{{ $post->title }}"
+                                        class="form-control" required placeholder="title" />
+                                    <label for="title">Judul <sup class="text-danger">*</sup></label>
+                                </div>
+                                <div class="form-floating form-floating-outline mb-6">
+                                    <input type="text" id="slug" value="{{ $post->slug }}" name="slug"
+                                        class="form-control" placeholder="slug" required readonly>
+                                    <label for="slug">Slug <sup class="text-danger">*</sup></label>
+                                </div>
+                                <div class="mb-3">
+                                    <div id="full-editor">{!! $post->content !!}</div>
+                                    <input type="hidden" name="content" id="quill-content">
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-floating form-floating-outline mb-6">
+                                    <label class="form-label" for="post_category_id">Kategori <sup
+                                            class="text-danger">*</sup></label>
+                                    <select id="post_category_id" name="posts_category_id" class="select2 form-select"
+                                        data-allow-clear="true">
+                                        <option value="">Pilih Kategori</option>
+                                        @foreach ($PostCategory as $category)
+                                            <option value="{{ $category->id }}"
+                                                {{ $post->posts_category_id == $category->id ? 'selected' : '' }}>
+                                                {{ $category->category }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="small fw-medium mb-3">Foto Headline</div>
+                                <div id="dropzone-box" class="mb-6"
+                                    style="border: 2px dashed #ccc; padding: 20px; text-align: center; cursor: pointer; position: relative;">
+                                    <input type="file" name="foto_berita" id="foto_berita" style="display: none;"
+                                        accept="image/*" />
+
+                                    <div id="dropzone-text"
+                                        style="color: #999; {{ $post->foto_berita ? 'display:none;' : '' }}">
+                                        Drop file di sini atau klik untuk upload
+                                    </div>
+
+                                    <div id="image-preview-wrapper"
+                                        style="position: relative; margin-top: 10px; {{ $post->foto_berita ? 'display:block;' : 'display:none;' }}">
+                                        <img id="preview-img"
+                                            src="{{ $post->foto_berita ?? '' }}"
+                                            style="max-width: 100%; max-height: 300px; display: block; margin: auto; border-radius: 6px;" />
+                                        <button type="button" id="remove-preview"
+                                            style="
+                                                position: absolute;
+                                                top: 5px;
+                                                right: 5px;
+                                                background: rgba(0, 0, 0, 0.6);
+                                                color: white;
+                                                border: none;
+                                                border-radius: 50%;
+                                                width: 28px;
+                                                height: 28px;
+                                                cursor: pointer;
+                                                font-size: 18px;
+                                                line-height: 1;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;
+                                                z-index: 10;
+                                            ">&times;</button>
+                                    </div>
+                                </div>
+                                <div class="form-floating form-floating-outline mb-6">
+                                    <input type="text" name="caption" placeholder="Caption" class="form-control"
+                                        value="{{ $post->caption }}">
+                                    <label for="caption">Caption <sup class="text-danger">*</sup></label>
+                                </div>
+                                <div class="form-floating form-floating-outline mb-6">
+                                    <input id="TagifyCustomInlineSuggestion" name="tags" class="form-control h-auto"
+                                        placeholder="Pilih Tags" value="{{ $post->tags }}" />
+                                    <label for="TagifyCustomInlineSuggestion">Tags</label>
+                                </div>
+                                {{-- <div class="form-floating form-floating-outline">
+                                    <input type="text" name="datetime" class="form-control"
+                                        placeholder="YYYY-MM-DD HH:MM" id="waktu-upload" />
+                                    <label for="waktu-upload">Waktu Upload</label>
+                                </div> --}}
+                                <div class="small fw-medium mb-3">Agenda Kaban?</div>
+
+                                <input type="hidden" name="agenda_kaban" value="tidak" />
+
+                                <label class="switch switch-success switch-square switch-lg mb-6">
+                                    <input type="checkbox" class="switch-input" name="agenda_kaban" value="ya"
+                                        {{ $post->agenda_kaban == 'ya' ? 'checked' : '' }} />
+                                    <span class="switch-toggle-slider">
+                                        <span class="switch-on"><i class="icon-base ri ri-check-line"></i></span>
+                                        <span class="switch-off"><i class="icon-base ri ri-close-line"></i></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer p-3">
+                        <div class="d-flex justify-content-end align-items-center mb-3">
+                            <button class="btn btn-success me-2" type="submit">
+                                <i class="icon-base ri ri-save-3-line me-2"></i> Simpan
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </section>
-    </main>
+        </div>
+    </div>
 @endsection
-@section('additional-js')
-    <script src="{{ asset('server/vendor/tom-select/tom-select.js') }}"></script>
-    <script src="{{ asset('server/vendor/ckeditor/ckeditor-classic.bundle.js') }}" type="text/javascript"></script>
+@section('scripts')
+    <script src="{{ asset('server/assets/vendor/libs/select2/select2.js') }}"></script>
+    <script src="{{ asset('server/assets/vendor/libs/tagify/tagify.js') }}"></script>
+    <script src="{{ asset('server/assets/vendor/libs/quill/quill.js') }}"></script>
+    <script src="{{ asset('server/assets/vendor/libs/flatpickr/flatpickr.js') }}"></script>
+    <script src="{{ asset('server/assets/js/forms-selects.js') }}"></script>
     <script>
-        new TomSelect("#input-tags", {
-            persist: false,
-            createOnBlur: true,
-            create: true
-        });
-
-        // preview image
-        var loadFile = function(event) {
-            var output = document.getElementById('post');
-            output.src = URL.createObjectURL(event.target.files[0]);
-            output.onload = function() {
-                URL.revokeObjectURL(output.src) // free memory
-            }
-        };
-
+        window.availableTags = @json($tags);
+    </script>
+    <script src="{{ asset('server/assets/js/forms-tagify.js') }}"></script>
+    <script src="{{ asset('server/assets/js/forms-editors.js') }}"></script>
+    <script src="{{ asset('server/assets/js/forms-file-upload.js') }}"></script>
+    <script src="{{ asset('server/assets/js/forms-pickers.js') }}"></script>
+    <script>
         $(document).ready(function() {
             $('#title').on('keyup', function() {
                 var slug = $(this).val()
@@ -174,18 +194,6 @@
                     .replace(/-+$/, ''); // Hapus - di akhir teks
                 $('#slug').val(slug);
             });
-
-            ClassicEditor
-                .create(document.querySelector('#content'), {
-                    // Konfigurasi tambahan untuk CKEditor
-                    height: 500 // Atur tinggi editor di sini
-                })
-                .then(editor => {
-                    console.log(editor);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
         });
     </script>
 @endsection

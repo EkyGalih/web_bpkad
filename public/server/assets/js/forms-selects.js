@@ -5,51 +5,21 @@
 'use strict';
 
 $(function () {
-  const selectPicker = $('.selectpicker'),
-    select2 = $('.select2'),
-    select2Icons = $('.select2-icons');
+    const selectPicker = $('.selectpicker'),
+        select2 = $('.select2')
 
-  // Bootstrap Select
-  // --------------------------------------------------------------------
-  if (selectPicker.length) {
-    selectPicker.selectpicker();
-    handleBootstrapSelectEvents();
-  }
+    // Select2
+    // --------------------------------------------------------------------
 
-  // Select2
-  // --------------------------------------------------------------------
-
-  // Default
-  if (select2.length) {
-    select2.each(function () {
-      var $this = $(this);
-      select2Focus($this);
-      $this.select2({
-        placeholder: 'Select value',
-        dropdownParent: $this.parent()
-      });
-    });
-  }
-
-  // Select2 Icons
-  if (select2Icons.length) {
-    // custom template to render icons
-    function renderIcons(option) {
-      if (!option.id) {
-        return option.text;
-      }
-      var $icon = "<i class='" + $(option.element).data('icon') + " me-2'></i>" + option.text;
-
-      return $icon;
+    // Default
+    if (select2.length) {
+        select2.each(function () {
+            var $this = $(this);
+            select2Focus($this);
+            $this.select2({
+                placeholder: 'Select value',
+                dropdownParent: $this.parent()
+            });
+        });
     }
-    select2Focus(select2Icons);
-    select2Icons.select2({
-      dropdownParent: select2Icons.parent(),
-      templateResult: renderIcons,
-      templateSelection: renderIcons,
-      escapeMarkup: function (es) {
-        return es;
-      }
-    });
-  }
 });

@@ -12,6 +12,7 @@
 <script src="{{ asset('server/assets/vendor/js/helpers.js') }}"></script>
 <script src="{{ asset('server/assets/vendor/js/template-customizer.js') }}"></script>
 <script src="{{ asset('server/assets/js/config.js') }}"></script>
+<script src="{{ asset('css/toastr.min.css') }}"></script>
 {{-- Livewire css --}}
 @livewireStyles
 {{-- <style>

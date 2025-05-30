@@ -2,7 +2,7 @@
     <div class="app-brand demo">
         <a href="index.html" class="app-brand-link">
             <span class="app-brand-logo demo">
-               <img src="{{ asset('client/assets/img/logo-light.png') }}" alt="Logo BPKAD">
+                <img src="{{ asset('client/assets/img/logo-light.png') }}" alt="Logo BPKAD">
             </span>
             <span class="app-brand-text demo menu-text fw-semibold ms-2">NTB</span>
         </a>
@@ -12,7 +12,7 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboards -->
-        <li class="menu-item active open">
+        <li class="menu-item @if (request()->is('admin/web')) active @endif">
             <a href="{{ route('admin') }}" class="menu-link">
                 <i class="menu-icon icon-base ri ri-home-smile-line"></i>
                 <div data-i18n="Dashboards">Dashboards</div>
@@ -23,24 +23,24 @@
         <li class="menu-header small mt-5">
             <span class="menu-header-text" data-i18n="MENU">MENU</span>
         </li>
-        <li class="menu-item">
+        <li class="menu-item @if (request()->is('admin/web/post*')) active @endif">
             <a href="{{ route('post-admin.index') }}" class="menu-link">
                 <i class="menu-icon icon-base ri ri-newspaper-fill"></i>
                 <div data-i18n="Berita & Artikel">Berita & Artikel</div>
             </a>
         </li>
-        <li class="menu-item">
+        <li class="menu-item @if (request()->is('admin/web/pages*')) open @endif">
             <a href="#" class="menu-link menu-toggle">
                 <i class="menu-icon icon-base ri ri-layout-left-line"></i>
                 <div data-i18n="Halaman">Halaman</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item">
+                <li class="menu-item @if (request()->is('admin/web/pages*')) active @endif">
                     <a href="{{ route('pages-admin.index') }}" class="menu-link">
                         <div data-i18n="Halaman">Halaman</div>
                     </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item @if (request()->is('admin/web/sub-pages*')) active @endif">
                     <a href="{{ route('subpages-admin.index') }}" class="menu-link">
                         <div data-i18n="Sub Halaman">Sub Halaman</div>
                     </a>

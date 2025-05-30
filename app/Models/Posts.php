@@ -13,7 +13,7 @@ class Posts extends Model
 
     public $incrementing = false;
     protected $table = 'posts';
-    protected $guarded = ['updated_at'];
+    protected $guarded = [];
 
     // public static function boot()
     // {
