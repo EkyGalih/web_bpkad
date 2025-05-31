@@ -10,6 +10,7 @@ use App\Models\SubPages;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Webpatser\Uuid\Uuid;
 use Illuminate\Support\Str;
 
@@ -53,25 +54,30 @@ class SubPagesController extends Controller
      */
     public function store(Request $request)
     {
-
         $id = (string)Uuid::generate(4);
 
         if ($request->jenis_link == 'non-link') {
-            $ext = array('png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG');
+            $ext = array('pdf');
             $pdf = $request->file('pdf_file');
 
             if ($pdf != null) {
-                $filename = md5($pdf->getClientOriginalName()) . '.' . $pdf->getClientOriginalExtension();
-
                 if (in_array($pdf->getClientOriginalExtension(), $ext)) {
                     if ($pdf->getSize() <= 5000000) {
-                        $pdf->move('uploads/pages/subpage/', $filename);
-                        $request->pdf_file = 'uploads/pages/subpage/' . $filename;
+                        $filename = md5($pdf->getClientOriginalName()) . '.' . $pdf->getClientOriginalExtension();
+                        try {
+                            $path = Storage::disk('s3')->putFileAs('uploads/pages/subpages', $pdf, $filename);
+                            if (!$path) {
+                                return back()->withInput()->with('error', 'Gagal mengupload file ke S3.');
+                            }
+                            $url = Storage::disk('s3')->url($path); // Cara resmi untuk dapatkan URL publik
+                        } catch (\Exception $e) {
+                            return back()->withInput()->with('error', 'Gagal upload: ' . $e->getMessage());
+                        }
                     } else {
-                        return redirect()->back()->with(['warning_size' => 'Ukuran file melebihi 5MB!']);
+                        return back()->withInput()->with('error', 'Ukuran file melebihi 5MB!');
                     }
                 } else {
-                    return redirect()->back()->with(['warning_ext' => 'Ektensi File harus format PNG, JPG atau JPEG!']);
+                    return back()->withInput()->with('error', 'Ektensi File harus format PDF!');
                 }
 
                 SubPages::create([
@@ -80,7 +86,7 @@ class SubPagesController extends Controller
                     'slug' => $request->slug,
                     'content' => $request->content,
                     'pages_type_id' => '1',
-                    'pdf_file' => $request->pdf_file,
+                    'pdf_file' => $url,
                     'create_by_id' => Auth::user()->id,
                     'sub_pages_id' => $request->sub_pages_id
                 ]);
@@ -133,23 +139,70 @@ class SubPagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, SubPages $subpage)
     {
-        $subpages = SubPages::findOrFail($id);
+        $maxFileSize = 5 * 1024 * 1024; // 5MB
+        $allowedExt = ['pdf'];
+        // dd($request->all());
+        try {
 
-        $subpages->update([
-            'title' => $request->title,
-            'slug' => $request->slug,
-            'content' => $request->content,
-            'jenis_link' => $request->jenis_link,
-            'link' => $request->link,
-            'pages_type_id' => '1',
-            'create_by_id' => Auth::user()->id,
-            'sub_pages_id' => $request->sub_pages_id
-        ]);
-        _recentAdd($id, 'mengubah halaman', 'sub_pages');
+            if ($request->jenis_link === 'non-link') {
+                $pdf = $request->file('pdf_file');
+                $url = $subpage->pdf_file; // default, biar tetap pakai file lama kalau tidak diupload ulang
 
-        return redirect()->route('subpages-admin.index')->with(['success' => 'Sub Pages berhasil diubah!']);
+                if ($pdf) {
+                    $ext = $pdf->getClientOriginalExtension();
+
+                    if (!in_array($ext, $allowedExt)) {
+                        return back()->withInput()->with('error', 'Ekstensi file harus PDF!');
+                    }
+
+                    if ($pdf->getSize() > $maxFileSize) {
+                        return back()->withInput()->with('error', 'Ukuran file melebihi 5MB!');
+                    }
+
+                    $filename = md5($pdf->getClientOriginalName() . time()) . '.' . $ext;
+                    $path = Storage::disk('s3')->putFileAs('uploads/pages/subpages', $pdf, $filename);
+
+                    if (!$path) {
+                        return back()->withInput()->with('error', 'Gagal mengupload file ke S3.');
+                    }
+
+                    $url = Storage::disk('s3')->url($path);
+                }
+
+                $subpage->update([
+                    'title' => $request->title,
+                    'slug' => $request->slug,
+                    'content' => $request->content,
+                    'pages_type_id' => 1,
+                    'pdf_file' => $url,
+                    'jenis_link' => 'non-link',
+                    'link' => null,
+                    'sub_pages_id' => $request->sub_pages_id,
+                    'update_by_id' => Auth::id()
+                ]);
+            } elseif ($request->jenis_link === 'link') {
+                $subpage->update([
+                    'title' => $request->title,
+                    'slug' => $request->slug,
+                    'pages_type_id' => 1,
+                    'jenis_link' => 'link',
+                    'link' => $request->link,
+                    'pdf_file' => null,
+                    'content' => null,
+                    'sub_pages_id' => $request->sub_pages_id,
+                    'update_by_id' => Auth::id()
+                ]);
+            } else {
+                return back()->withInput()->with('error', 'Jenis link tidak valid.');
+            }
+
+            _recentAdd($subpage->id, 'mengubah sub halaman', 'sub_pages');
+            return redirect()->route('subpages-admin.index')->with('success', 'Sub Pages berhasil diperbarui!');
+        } catch (\Exception $e) {
+            return back()->withInput()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 
     public function restore($id)

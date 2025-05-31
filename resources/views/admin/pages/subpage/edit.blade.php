@@ -1,159 +1,173 @@
 @extends('admin.index')
 @section('title', 'Edit Sub Halaman')
-@section('pages-menu', 'show')
-@section('p-subpages', 'active')
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('server/assets/vendor/libs/quill/editor.css') }}">
+    <link rel="stylesheet" href="{{ asset('server/assets/vendor/libs/select2/select2.css') }}">
+    <style>
+        #pdf-file-group {
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+            transition: all 0.5s ease;
+            display: flex;
+            /* tetap menggunakan flex agar sesuai layout */
+            flex-wrap: wrap;
+        }
+
+        #pdf-file-group.show {
+            max-height: 50vh;
+            /* sesuaikan sesuai tinggi elemen */
+            opacity: 1;
+        }
+
+        #content-editor {
+            overflow: hidden;
+            max-height: 50vh;
+            /* tinggi normal saat tampil */
+            opacity: 1;
+            transition: max-height 0.5s ease, opacity 0.5s ease;
+        }
+
+        #content-editor.hidden {
+            max-height: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+@endsection
 @section('content')
-    <main id="main" class="main">
-        <div class="pagetitle">
-            <div class="pagetitle">
-                <h1>Halaman</h1>
-                <nav>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('post-admin.index') }}">Sub Halaman</a></li>
-                        <li class="breadcrumb-item active">Edit Sub Halaman {{ $subpages->title }}</li>
-                    </ol>
-                </nav>
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card" id="card-subpage">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="mb-0">Update Sub Halaman</h4>
+                </div>
             </div>
-        </div>
-        <section class="section">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title">Ubah Halaman</div>
-                            <hr />
-                            <form action="{{ route('subpages-admin.update', $subpages->id) }}" method="POST"
-                                enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
-                                <div class="row">
-                                    <div class="col-lg-7">
-                                        <div class="row mb-3">
-                                            <label for="inputText" class="col-sm-2 col-form-label">Jenis Link</label>
-                                            <div class="col-sm-10">
-                                                <select name="jenis_link" class="form-control" id="jenis_link">
-                                                    <option value="non-link" {{ $subpages->jenis_link == 'non-link' ? 'selected' : '' }}>Tanpa Link</option>
-                                                    <option value="link" {{ $subpages->jenis_link == 'link' ? 'selected' : '' }}>External Link</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3" id="content" {{ $subpages->link != null ? 'hidden' : ''  }}>
-                                            <label for="inputText" class="col-sm-2 col-form-label">Kontent</label>
-                                            <div class="col-sm-10">
-                                                <textarea name="content" class="form-control" id="kontent">{{ $subpages->content }}</textarea><!-- End TinyMCE Editor -->
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <label for="inputText" class="col-sm-2 col-form-label" id="label-link" {{ $subpages->link == null ? 'hidden' : '' }}>Ekternal Link</label>
-                                            <div class="col-sm-10">
-                                                <input type="{{ $subpages->link == null ? 'hidden' : 'text' }}" name="link" class="form-control" id="link" value="{{ $subpages->link }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5">
-                                        <div class="row mb-3">
-                                            <label for="inputText" class="col-sm-2 col-form-label">Judul</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" name="title" value="{{ $subpages->title }}" id="title" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <label for="inputText" class="col-sm-2 col-form-label">Slug</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" name="slug" value="{{ $subpages->slug }}" id="slug" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <label for="inputText" class="col-sm-2 col-form-label">Menu</label>
-                                            <div class="col-sm-10">
-                                                <select name="sub_pages_id" class="form-control">
-                                                    <option value="">--Tanpa Menu--</option>
-                                                    @foreach ($pages as $item)
-                                                        <option value="{{ $item->id }}" {{ $item->id == $subpages->sub_pages_id ? 'selected' : '' }}>{{ $item->title }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3" id="pdf_file">
-                                            <label for="inputtext" class="col-sm-2 col-form-label">File</label>
-                                            <div class="col-sm-10">
-                                                <input type="file" class="form-control" name="pdf_file">
-                                            </div>
-                                        </div>
-                                    </div>
+            <form action="{{ route('subpages-admin.update', $subpage->id) }}" id="form" method="POST"
+                enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-5" id="form-subpage">
+                            <div class="form-floating form-floating-outline mb-6">
+                                <label for="jenis_link" class="form-label">Jenis Pages</label>
+                                <select name="jenis_link" id="jenis_link" class="select2 form-select"
+                                    data-allow-clear="true">
+                                    <option value="">Pilih Jenis Link</option>
+                                    <option value="non-link" {{ $subpage->jenis_link == 'non-link' ? 'selected' : '' }}>
+                                        Tanpa
+                                        Link</option>
+                                    <option value="link" {{ $subpage->jenis_link == 'link' ? 'selected' : '' }}>Link
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-floating form-floating-outline mb-6">
+                                <input type="{{ $subpage->jenis_link != 'non-link' ? 'text' : 'hidden' }}" name="link"
+                                    class="form-control" id="link"
+                                    placeholder="https://example.com/example or /example" value="{{ $subpage->link }}">
+                                <label for="link" id="label-link"
+                                    {{ $subpage->jenis_link == 'link' ? '' : 'hidden' }}>Ekternal
+                                    Link</label>
+                            </div>
+                            <div class="form-floating form-floating-outline mb-6">
+                                <input type="text" name="title" placeholder="Judul Halaman" id="title"
+                                    class="form-control" value="{{ $subpage->title }}">
+                                <label for="title">Judul Halaman</label>
+                            </div>
+                            <div class="form-floating form-floating-outline mb-6">
+                                <input type="text" id="slug" placeholder="Slug" name="slug" class="form-control"
+                                    readonly value="{{ $subpage->slug }}">
+                                <label for="slug">Slug</label>
+                            </div>
+                            <div class="form-floating form-floating-outline mb-6">
+                                <select id="sub_pages_id" name="sub_pages_id" class="form-select select2">
+                                    <option value="">Tanpa Menu</option>
+                                    @foreach ($pages as $item)
+                                        <option value="{{ $item->id }}"
+                                            {{ $subpage->sub_pages_id == $item->id ? 'selected' : '' }}>
+                                            {{ $item->title }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="inputText" class="col-sm-2 col-form-label">Menu</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="mb-3" {{ $subpage->jenis_link == 'non-link' ? '' : 'hidden' }} id="content-editor">
+                                <div id="full-editor">{!! $subpage->content !!}</div>
+                                <input type="hidden" name="content" id="quill-content" value="{{ $subpage->content }}">
+                            </div>
+                            <!-- Input File -->
+                            <div class="row mb-3 {{ $subpage->jenis_link != 'non-link' ? '' : 'show' }}" id="pdf-file-group">
+                                <div class="small fw-medium mb-3">Upload PDF</div>
+
+                                <div id="pdf-dropzone" class="mb-4"
+                                    style="border: 2px dashed #ccc; padding: 20px; text-align: center; cursor: pointer; border-radius: 6px;">
+                                    <input type="file" id="pdfInput" name="pdf_file" accept="application/pdf"
+                                        style="display: none;" />
+                                    <div id="pdf-drop-text" style="color: #999;">Drop file PDF di sini atau klik untuk
+                                        upload</div>
                                 </div>
-                                <div class="row mb-3">
-                                    <div class="col-sm-12">
-                                        <button class="btn btn-outline-warning btn-md" style="float: right;" type="reset">
-                                            <i class="bi bi-arrow-clockwise"></i> Reset
-                                        </button>
-                                        <button class="btn btn-outline-success btn-md"
-                                            style="float: right; margin-right: 2px;" type="submit">
-                                            <i class="bi bi-save"></i> Simpan
+
+                                <div id="pdf-preview-wrapper" style="display: none; margin-top: 10px;"
+                                    data-old-pdf-url="{{ $subpage->pdf_file }}">
+                                    <div style="margin-top: 25px; text-align: right;">
+                                        <button class="btn btn-circle btn-outline-danger btn-xs" type="button"
+                                            id="remove-pdf" data-bs-tooltip="tooltip" data-bs-placement="left"
+                                            title="Hapus PDF">
+                                            <i class="icon-base ri ri-close-line icon-18px"></i>
                                         </button>
                                     </div>
+                                    <embed id="pdfPreview" type="application/pdf"
+                                        style="width: 100%; height: 90vh; border: 1px solid #ccc; border-radius: 6px;" />
                                 </div>
-                            </form>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-    </main>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-end gap-2">
+                        <a class="btn btn-outline-secondary" href="{{ route('subpages-admin.index') }}">
+                            <i class="icon-base ri ri-skip-back-line"></i> Kembali
+                        </a>
+                        <button class="btn btn-success btn-lg" type="submit">
+                            <i class="icon-base ri ri-save-3-line icon-18px me-2"></i> Simpan
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
-@section('additional-js')
-<script src="{{ asset('server/vendor/ckeditor/ckeditor-classic.bundle.js') }}" type="text/javascript"></script>
-<script>
-    $('#jenis_link').change(function() {
-        var jenis_link = $('#jenis_link').val();
+@section('scripts')
+    <script src="{{ asset('server/assets/vendor/libs/select2/select2.js') }}"></script>
+    <script src="{{ asset('server/assets/vendor/libs/quill/quill.js') }}"></script>
+    <script src="{{ asset('server/assets/js/forms-selects.js') }}"></script>
+    <script src="{{ asset('server/assets/js/forms-editors.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#title').on('keyup', function() {
+                var slug = $(this).val()
+                    .toLowerCase()
+                    .replace(/\s+/g, '-') // Ganti spasi dengan -
+                    .replace(/[^\w\-]+/g, '') // Hapus semua karakter non-word
+                    .replace(/\-\-+/g, '-') // Ganti multiple - dengan single -
+                    .replace(/^-+/, '') // Hapus - di awal teks
+                    .replace(/-+$/, ''); // Hapus - di akhir teks
 
-        if (jenis_link == 'non-link') {
-            $('#label-link').attr('hidden', true);
-            $('#link').prop('type', 'hidden');
-            $('#content').attr('hidden', false);
-            $('#pdf_file').attr('hidden', false);
-        } else {
-            $('#link').prop('type', 'text');
-            $('#content').attr('hidden', true);
-            $('#pdf_file').attr('hidden', true);
-            $('#label-link').removeAttr('hidden');
-        }
-    });
-
-    $(document).ready(function() {
-        $('#title').on('keyup', function() {
-            var slug = $(this).val()
-                .toLowerCase()
-                .replace(/\s+/g, '-') // Ganti spasi dengan -
-                .replace(/[^\w\-]+/g, '') // Hapus semua karakter non-word
-                .replace(/\-\-+/g, '-') // Ganti multiple - dengan single -
-                .replace(/^-+/, '') // Hapus - di awal teks
-                .replace(/-+$/, ''); // Hapus - di akhir teks
-
-            $.ajax({
-                url: '/check-slug-sub',
-                method: 'GET',
-                data: {
-                    slug: slug
-                },
-                success: function(response) {
-                    $('#slug').val(response.slug);
-                }
+                $.ajax({
+                    url: '/check-slug-sub',
+                    method: 'GET',
+                    data: {
+                        slug: slug
+                    },
+                    success: function(response) {
+                        $('#slug').val(response.slug);
+                    }
+                });
             });
         });
-
-        ClassicEditor
-            .create(document.querySelector('#kontent'), {
-                // Konfigurasi tambahan untuk CKEditor
-                height: 500 // Atur tinggi editor di sini
-            })
-            .then(editor => {
-                console.log(editor);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    });
-</script>
+    </script>
 @endsection
