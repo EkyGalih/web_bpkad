@@ -49,7 +49,7 @@
         </li>
         <!-- e-commerce-app menu end -->
         <!-- Academy menu start -->
-        <li class="menu-item">
+        {{-- <li class="menu-item">
             <a href="#" class="menu-link menu-toggle">
                 <i class="menu-icon icon-base ri ri-database-2-fill"></i>
                 <div data-i18n="Data BPKAD">Data BPKAD</div>
@@ -71,21 +71,21 @@
                     </a>
                 </li>
             </ul>
-        </li>
+        </li> --}}
 
         <!-- Components -->
         <li class="menu-header small mt-5">
             <span class="menu-header-text" data-i18n="PPID">PPID</span>
         </li>
         <!-- Cards -->
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <li class="menu-item @if (request()->is('admin/web/ppid-kip*')) open @endif">
+            <a href="#" class="menu-link menu-toggle">
                 <i class="menu-icon icon-base ri ri-book-3-fill"></i>
                 <div data-i18n="PPID">PPID</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="cards-basic.html" class="menu-link">
+                <li class="menu-item @if (request()->is('admin/web/ppid-kip*')) active @endif">
+                    <a href="{{ route('ppid-kip.index') }}" class="menu-link">
                         <div data-i18n="Klasifikasi Informasi">Klasifikasi Informasi</div>
                     </a>
                 </li>

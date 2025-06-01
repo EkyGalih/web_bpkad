@@ -69,7 +69,7 @@
                                     <label for="slug">Slug <sup class="text-danger">*</sup></label>
                                 </div>
                                 <div class="mb-3">
-                                    <div id="full-editor"></div>
+                                    <div id="full-editor">{!! old('content') !!}</div>
                                     <input type="hidden" name="content" id="quill-content">
                                 </div>
                             </div>
@@ -91,7 +91,7 @@
                                 <div class="small fw-medium mb-3">Foto Headline</div>
                                 <div id="dropzone-box" class="mb-6"
                                     style="border: 2px dashed #ccc; padding: 20px; text-align: center; cursor: pointer; position: relative;">
-                                    <input type="file" name="foto_berita" id="foto_berita" style="display: none;" value="{{ $post->foto_berita ?? '' }}"
+                                    <input type="file" name="foto_berita" id="foto_berita" style="display: none;" value="{{ old('foto_berita') ?? '' }}"
                                         accept="image/*" />
 
                                     <div id="dropzone-text" style="color: #999;">Drop file di sini atau klik untuk upload

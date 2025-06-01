@@ -63,26 +63,27 @@ class PostController extends Controller
         $file = $request->file('foto_berita');
         $path = $file->store('uploads/berita', 's3');
         $url = config('filesystems.disks.s3.url') . '/' . $path;
+        // dd($request->posts_category_id);
+        $post = new Posts();
+        $post->id = (string)Uuid::generate(4);
+        $post->title = $request->title;
+        $post->slug = $request->slug;
+        $post->content = $request->content;
+        $post->content_type_id = '1';
+        $post->foto_berita = $url;
+        $post->users_id = Auth::id();
+        $post->caption = $request->caption;
+        $post->posts_category_id = $request->posts_category_id ?? 1;
+        $post->tags = json_encode(collect(json_decode($request->tags))->pluck('value'));
+        $post->agenda_kaban = $request->agenda_kaban;
+        $post->save();
 
-        $id         = (string)Uuid::generate(4);
+        // hanya untuk menyimpan ke history
+        $category = PostsCategory::where('id', $request->posts_category_id)->value('category');
 
-        Posts::create([
-            'id' => $id,
-            'title' => $request->title,
-            'slug'  => $request->slug,
-            'content' => $request->content,
-            'content_type_id' => '1',
-            'foto_berita' => $url,
-            'users_id' => Auth::user()->id,
-            'caption' => $request->caption,
-            'posts_category_id' => $request->posts_category_id || 1,
-            'tags' => json_encode(collect(json_decode($request->tags))->pluck('value')),
-            'agenda_kaban' => $request->agenda_kaban
-        ]);
-
-        _recentAdd($id, 'membuat Berita/Artikel', 'post');
+        _recentAdd($post->id, 'membuat ' . $category, 'post');
         return redirect()->route('post-admin.index')
-            ->with('success', 'Berita/Artikel berhasil ditambahkan!');
+            ->with('success', $category . ' berhasil ditambahkan!');
     }
 
     /**
@@ -106,19 +107,18 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Posts $post)
     {
         $request->validate([
             'foto_berita' => 'nullable|mimes:jpg,png,jpeg|max:2048',
         ]);
 
-        $posts = Posts::findOrFail($id);
-        $url = $posts->foto_berita; // Gunakan foto lama jika tidak ada yang diunggah
+        $url = $post->foto_berita; // Gunakan foto lama jika tidak ada yang diunggah
 
         if ($request->hasFile('foto_berita')) {
             // Hapus file lama dari S3 jika ada
-            if ($posts->foto_berita && Str::contains($posts->foto_berita, env('AWS_URL'))) {
-                $oldPath = str_replace(env('AWS_URL') . '/', '', $posts->foto_berita);
+            if ($post->foto_berita && Str::contains($post->foto_berita, env('AWS_URL'))) {
+                $oldPath = str_replace(env('AWS_URL') . '/', '', $post->foto_berita);
                 Storage::disk('s3')->delete($oldPath);
             }
 
@@ -128,48 +128,52 @@ class PostController extends Controller
             $url = config('filesystems.disks.s3.url') . '/' . $path;
         }
 
-        $posts->update([
-            'title' => $request->title,
-            'slug' => $request->slug,
-            'content' => $request->content,
-            'content_type_id' => '1',
-            'foto_berita' => $url,
-            'users_id' => Auth::id(),
-            'posts_category_id' => $request->posts_category_id ?? 1, // Default kategori jika kosong
-            'tags' => json_encode(collect(json_decode($request->tags))->pluck('value')),
-            'caption' => $request->caption,
-            'agenda_kaban' => $request->agenda_kaban,
-        ]);
+        $post = new Posts();
+        $post->title = $request->title;
+        $post->slug = $request->slug;
+        $post->content = $request->content;
+        $post->content_type_id = '1';
+        $post->foto_berita = $url;
+        $post->users_id = Auth::id();
+        $post->posts_category_id = $request->posts_category_id ?? 1; // Default kategori jika kosong
+        $post->tags = json_encode(collect(json_decode($request->tags))->pluck('value'));
+        $post->caption = $request->caption;
+        $post->agenda_kaban = $request->agenda_kaban;
+        $post->save();
 
-        _recentAdd($id, 'mengubah posting', 'post');
-        return redirect()->route('post-admin.index')->with('success', 'Berita/Artikel berhasil diperbarui!');
+        // hanya untuk menyimpan ke history
+        $category = PostsCategory::where('id', $post->posts_category_id)->value('category');
+
+        _recentAdd($post->id, 'mengubah '.$category, 'post');
+        return redirect()->route('post-admin.index')->with('success', $category.' berhasil diperbarui!');
     }
 
-    public function restore($id)
+    public function restore(Posts $post)
     {
-        $post = Posts::findOrFail($id);
         $post->update([
             'deleted_at' => NULL
         ]);
 
-        _recentAdd($id, 'memulihkan berita/artikel yang dihapus', 'post');
+        _recentAdd($post->id, 'memulihkan berita/artikel yang dihapus', 'post');
 
-        return redirect()->route('post-admin.index')->with(['success' => 'Berita/Artikel berhasil dipulihkan!']);
+        return redirect()->route('post-admin.index')->with('success', 'Berita/Artikel berhasil dipulihkan!');
     }
 
-    public function agenda($id)
+    public function agenda(Posts $post)
     {
-        $agenda = Posts::findOrFail($id);
+        $agenda = Posts::findOrFail($post->id);
         if ($agenda->agenda_kaban == 'ya') {
             $agenda->update([
-                'agenda_kaban'    => 'tidak'
+                'agenda_kaban' => 'tidak'
             ]);
-            return redirect()->route('post-admin.index')->with(['success' => 'Agenda kaban berhasil ditambahkan!']);
+            _recentAdd($post->id, 'menghapus agenda pimpinan', 'post');
+            return redirect()->route('post-admin.index')->with('success', 'Agenda kaban berhasil ditambahkan!');
         } else {
             $agenda->update([
-                'agenda_kaban'    => 'ya'
+                'agenda_kaban' => 'ya'
             ]);
-            return redirect()->route('post-admin.index')->with(['success' => 'Agenda kaban berhasil dihapus!']);
+            _recentAdd($post->id, 'mengubah Berita/Artikel menjadi agenda pimpinan', 'post');
+            return redirect()->route('post-admin.index')->with('success', 'Agenda kaban berhasil dihapus!');
         }
     }
 
@@ -179,13 +183,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Posts $post)
     {
-        $post = Posts::findOrFail($id);
         $post->update([
             'deleted_at' => new DateTime()
         ]);
 
+        _recentAdd($post->id, 'memindahkan ke tong sampah Berita/Artikel', 'post');
         return redirect()->route('post-admin.index')->with(['success' => 'Berita/Artikel dipindahkan ke tong sampah!']);
     }
 
@@ -195,12 +199,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function delete(Posts $post)
     {
-        $post = Posts::findOrFail($id);
 
         // Hapus data Recent terkait
-        Recent::where('uuid_activity', $id)->delete();
+        Recent::where('uuid_activity', $post->id)->delete();
 
         // Hapus foto dari S3 jika ada
         if ($post->foto_berita && Str::contains($post->foto_berita, env('AWS_URL'))) {
@@ -210,7 +213,7 @@ class PostController extends Controller
 
         // Hapus postingan dari database
         $post->delete();
-
+        _recentAdd($post->id, 'menghapus Berita/Artikel', 'post');
         return redirect()->route('post-admin.index')->with(['success' => 'Berita/Artikel dihapus permanen!']);
     }
 
@@ -236,6 +239,7 @@ class PostController extends Controller
             $post->delete();
         }
 
+        _recentAdd($post->id, 'm,embersihkan tong sampah Berita/Artikel', 'post');
         return redirect()->route('post-admin.index')->with(['success' => 'File Sampah berhasil dibersihkan!']);
     }
 }

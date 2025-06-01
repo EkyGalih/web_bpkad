@@ -34,4 +34,14 @@ enum KlasifikasiEnum: string
             self::DIKECUALIKAN => 'Dikecualikan',
         };
     }
+
+    public function getColor(): string
+    {
+        return match ($this) {
+            self::BERKALA => 'info',
+            self::SERTA_MERTA => 'success',
+            self::SETIAP_SAAT => 'warning',
+            self::DIKECUALIKAN => 'danger',
+        };
+    }
 }

@@ -30,7 +30,7 @@
                     <ul class="timeline card-timeline mb-0">
                         @foreach ($recents as $recent)
                         <li class="timeline-item timeline-item-transparent">
-                            <span class="timeline-point timeline-point-primary"></span>
+                            <span class="timeline-point timeline-point-secondary"></span>
                             <div class="timeline-event">
                                 <div class="timeline-header mb-3">
                                     <h6 class="mb-0">{{ GetUser($recent->user_id) }}</h6>

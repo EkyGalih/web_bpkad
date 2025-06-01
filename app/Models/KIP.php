@@ -22,4 +22,5 @@ class KIP extends Model
     //         $model->id = (string)Uuid::generate(4);
     //     });
     // }
+    // Contoh: Informasi.php (model)
 }
