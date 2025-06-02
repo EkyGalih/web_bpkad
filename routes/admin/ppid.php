@@ -16,6 +16,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
             Route::get('destroy/{kip}', [KIPController::class, 'destroy'])->name('ppid-kip.destroy');
             Route::get('delete/{kip}', [KIPController::class, 'delete'])->name('ppid-kip.delete');
             Route::get('clear', [KIPController::class, 'clear'])->name('ppid-kip.clear');
+            Route::get('view-pdf/{kip}', [KIPController::class, 'viewPDF'])->name('ppid-kip-admin.view_pdf');
+            Route::get('download-pdf/{kip}', [KIPController::class, 'downloadPDF'])->name('ppid-kip-admin.download_pdf');
         });
 
         Route::group(['prefix' => 'ppid-struktur'], function () {

@@ -211,4 +211,26 @@ class KIPController extends Controller
 
         return redirect()->route('ppid-kip.index')->with(['success' => 'File Sampah berhasil dibersihkan!']);
     }
+
+    public function viewPDF(KIP $kip)
+    {
+        $files = KIP::select('files')->findOrFail($kip->id);
+        if ($files->files && Str::contains($files->files, env('AWS_URL'))) {
+            return redirect($files->files);
+        } else {
+            return response()->file(public_path('storage/' . $files->files));
+        }
+    }
+
+    public function downloadPDF(KIP $kip)
+    {
+        $files = KIP::select('files')->findOrFail($kip->id);
+        if ($files->files && Str::contains($files->files, env('AWS_URL'))) {
+            // Mengunduh file dari URL eksternal
+            return redirect($files->files);
+        } else {
+            // Mengunduh file dari penyimpanan lokal
+            return response()->download(public_path('storage/' . $files->files));
+        }
+    }
 }
