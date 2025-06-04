@@ -43,4 +43,14 @@ class Posts extends Model
     {
         return $this->hasMany(PostComment::class);
     }
+
+    public function scopeAgendaKaban($query, $val = 'ya')
+    {
+        $query->where('agenda_kaban', $val);
+    }
+
+    public function scopewhereDeleted($query)
+    {
+        $query->where('deleted_at', '!=', null);
+    }
 }

@@ -97,17 +97,6 @@ class KIPController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function agenda()
-    {
-        return view('admin.ppid.agenda.index');
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
