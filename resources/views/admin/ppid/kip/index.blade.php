@@ -39,25 +39,24 @@ use App\Enum\KlasifikasiEnum;
                     </tr>
                 </thead>
                 <tbody>
-                    {{ dd($kip) }}
-                    @foreach ($kip as $item)
+                    @foreach ($kip as $items)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td class="text-wrap">
                             <div
-                                class="d-flex gap-3 border-start border-3 border-{{ KlasifikasiEnum::tryFrom($item->jenis_informasi)?->getColor() ?? 'muted' }} ps-3">
+                                class="d-flex gap-3 border-start border-3 border-{{ KlasifikasiEnum::tryFrom($items->jenis_informasi)?->getColor() ?? 'muted' }} ps-3">
                                 <div>
                                     <a href="#"
-                                        class="mb-1 text-gray-900 text-{{ KlasifikasiEnum::tryFrom($item->jenis_informasi)?->getColor() ?? 'muted' }} fw-bold">
-                                        {{ strtoupper($item->jenis_informasi) }}
+                                        class="mb-1 text-gray-900 text-{{ KlasifikasiEnum::tryFrom($items->jenis_informasi)?->getColor() ?? 'muted' }} fw-bold">
+                                        {{ strtoupper($items->jenis_informasi) }}
                                     </a>
-                                    <div class="fs-7 text-muted fw-bold">{{ $item->nama_informasi }}</div>
+                                    <div class="fs-7 text-muted fw-bold">{{ $items->nama_informasi }}</div>
                                 </div>
                             </div>
                         </td>
                         <td>
-                            @if ($item->jenis_file == 'link')
-                            <a href="{{ $item->files }}" target="_blank" class="btn btn-success btn-sm"><i
+                            @if ($items->jenis_file == 'link')
+                            <a href="{{ $items->files }}" target="_blank" class="btn btn-success btn-sm"><i
                                     class="icon-base ri ri-download-2-line icon-18px me-2"></i>
                                 Download</a>
                             @else
@@ -65,12 +64,12 @@ use App\Enum\KlasifikasiEnum;
                                 data-bs-target="#ShowFile{{ $loop->iteration }}">
                                 <i class="icon-base ri ri-eye-2-line icon-18px me-2"></i>View
                             </button>
-                            @endif
                             @include('admin.ppid.kip.addons.show_pdf')
+                            @endif
                         </td>
-                        <td>{{ GetUser($item->upload_by) }}</td>
-                        <td>{{ $item->created_at == null ? 'None' :
-                            \Carbon\Carbon::parse($item->created_at)->locale('id')->translatedFormat('l, d F Y') }}
+                        <td>{{ GetUser($items->upload_by) }}</td>
+                        <td>{{ $items->created_at == null ? 'None' :
+                            \Carbon\Carbon::parse($items->created_at)->locale('id')->translatedFormat('l, d F Y') }}
                         </td>
                         <td>
                             <div class="dropdown">
@@ -79,10 +78,10 @@ use App\Enum\KlasifikasiEnum;
                                     <i class="icon-base ri ri-more-2-line icon-18px"></i>
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{ route('ppid-kip.edit', $item->id) }}"><i
+                                    <a class="dropdown-item" href="{{ route('ppid-kip.edit', $items->id) }}"><i
                                             class="icon-base ri ri-pencil-line icon-18px me-2"></i> Edit</a>
                                     <button class="dropdown-item"
-                                        onclick="trashData('{{ route('ppid-kip.destroy', $item->id) }}')"><i
+                                        onclick="trashData('{{ route('ppid-kip.destroy', $items->id) }}')"><i
                                             class="icon-base ri ri-delete-bin-6-line icon-18px me-2"></i>
                                         Delete</button>
                                 </div>

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Webpatser\Uuid\Uuid;
 use Illuminate\Support\Str;
+use Intervention\Image\Colors\Rgb\Channels\Red;
 
 class KIPController extends Controller
 {
@@ -80,16 +81,15 @@ class KIPController extends Controller
         }
 
         $id = (string)Uuid::generate(4);
+        $kip = new KIP();
 
-        KIP::create([
-            'id' => $id,
-            'nama_informasi' => $request->nama_informasi,
-            'jenis_informasi' => $request->jenis_informasi,
-            'jenis_file' => $request->jenis_file,
-            'upload_by' => Auth::user()->id,
-            'files' => $url,
-            'tahun' => $request->tahun
-        ]);
+        $kip->id = $id;
+        $kip->nama_informasi = $request->nama_informasi;
+        $kip->jenis_informasi = $request->jenis_informasi;
+        $kip->jenis_file = $request->jenis_file;
+        $kip->upload_by = Auth::user()->id;
+        $kip->files = $url;
+        $kip->save();
 
         _recentAdd($id, 'mengupload file pada PPID informasi ' . $request->jenis_informasi, 'kip');
 
@@ -129,30 +129,34 @@ class KIPController extends Controller
     public function update(Request $request, KIP $kip)
     {
         if ($request->jenis_file === 'upload') {
-            // Hapus file lama dari S3 jika ada
-            if ($kip->files && Str::contains($kip->files, env('AWS_URL'))) {
-                $oldPath = str_replace(env('AWS_URL') . '/', '', $kip->files);
-                Storage::disk('s3')->delete($oldPath);
-            }
+            // Jika ada file baru yang diunggah
+            if ($request->hasFile('files') && $request->file('files')->isValid()) {
+                // Hapus file lama dari S3 jika masih ada dan berbentuk URL S3
+                if (!empty($kip->files) && Str::contains($kip->files, config('filesystems.disks.s3.url'))) {
+                    $oldPath = str_replace(config('filesystems.disks.s3.url') . '/', '', $kip->files);
+                    Storage::disk('s3')->delete($oldPath);
+                }
 
-            // Upload file baru ke S3
-            $file = $request->file('upload_files');
-            $path = $file->store('uploads/files', 's3');
-            $url = config('filesystems.disks.s3.url') . '/' . $path;
+                // Upload file baru ke S3
+                $path = $request->file('files')->store('uploads/files', 's3');
+                $url = Storage::disk('s3')->url($path); // Generate URL otomatis
+            } else {
+                // Jika tidak ada file baru dikirim, gunakan file lama
+                $url = $kip->files;
+            }
         } else {
             // Jika jenis_file adalah "link", simpan link yang diinputkan
-            $url = $request->upload_files;
+            $url = $request->links_file;
+
+            // Hapus file lama dari S3 jika sebelumnya adalah upload
+            if (!empty($kip->files) && Str::contains($kip->files, config('filesystems.disks.s3.url'))) {
+                $oldPath = str_replace(config('filesystems.disks.s3.url') . '/', '', $kip->files);
+                Storage::disk('s3')->delete($oldPath);
+            }
         }
 
-
-        $kip->update([
-            'nama_informasi' => $request->nama_informasi,
-            'jenis_informasi' => $request->jenis_informasi,
-            'jenis_file' => $request->jenis_file,
-            'files' => $url,
-            'tahun' => $request->tahun,
-            'created_at' => $request->date . ' ' . $request->time
-        ]);
+        $kip->files = $url;
+        $kip->save();
 
         _recentAdd($kip->id, 'mengubah file pada PPID informasi ' . $request->jenis_informasi . ' menjadi', 'kip');
 
@@ -174,6 +178,17 @@ class KIPController extends Controller
         _recentAdd($kip->id, 'menghapus file pada PPID informasi ' . $kip->jenis_informasi, 'kip');
 
         return redirect()->back()->with('success', 'Data berhasil dihapus!');
+    }
+
+    public function restore(KIP $kip)
+    {
+        $kip->update([
+            'deleted_at' => NULL
+        ]);
+
+        _recentAdd($kip->id, 'memulihkan informasi ' . $kip->nama_informasi, 'kip');
+
+        return redirect()->back()->with('success', 'Data berhasil dipulihkan');
     }
 
     public function delete(KIP $kip)

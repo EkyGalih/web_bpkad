@@ -13,6 +13,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
             Route::get('edit/{kip}', [KIPController::class, 'edit'])->name('ppid-kip.edit');
             Route::put('update/{kip}', [KIPController::class, 'update'])->name('ppid-kip.update');
             Route::get('agenda', [KIPController::class, 'agenda'])->name('ppid-kip.agenda');
+            Route::get('restore/{kip}', [KIPController::class, 'restore'])->name('ppid-kip.restore');
             Route::get('destroy/{kip}', [KIPController::class, 'destroy'])->name('ppid-kip.destroy');
             Route::get('delete/{kip}', [KIPController::class, 'delete'])->name('ppid-kip.delete');
             Route::get('clear', [KIPController::class, 'clear'])->name('ppid-kip.clear');

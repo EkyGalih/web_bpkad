@@ -1,6 +1,6 @@
 <div class="modal fade" id="CacheKIP" tabindex="-1">
     @php
-        use App\Enum\KlasifikasiEnum;
+    use App\Enum\KlasifikasiEnum;
     @endphp
     <div class="modal-lg modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
@@ -22,61 +22,59 @@
                     </thead>
                     <tbody>
                         @if ($DeletedKIP->isEmpty())
-                            <tr>
-                                <td colspan="8" class="text-center">Tidak ada file sampah.</td>
-                            </tr>
+                        <tr>
+                            <td colspan="8" class="text-center">Tidak ada file sampah.</td>
+                        </tr>
                         @else
-                            @foreach ($DeletedKIP as $del)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td class="text-wrap">
-                                        <div
-                                            class="d-flex gap-3 border-start border-3 border-{{ KlasifikasiEnum::tryFrom($del->jenis_informasi)?->getColor() ?? 'muted' }} ps-3">
-                                            <div>
-                                                <a href="#"
-                                                    class="mb-1 text-gray-900 text-{{ KlasifikasiEnum::tryFrom($del->jenis_informasi)?->getColor() ?? 'muted' }} fw-bold">
-                                                    {{ strtoupper($del->jenis_informasi) }}
-                                                </a>
-                                                <div class="fs-7 text-muted fw-bold">{{ $del->nama_informasi }}</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        @if ($del->jenis_file == 'link')
-                                            <a href="{{ $del->files }}" target="_blank"
-                                                class="btn btn-success btn-sm"><i
-                                                    class="icon-base ri ri-download-2-line icon-18px me-2"></i>
-                                                Download</a>
-                                        @else
-                                            <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal"
-                                                data-bs-target="#ShowFile{{ $loop->iteration }}">
-                                                <i class="icon-base ri ri-eye-2-line icon-18px me-2"></i>View
-                                            </button>
-                                            @include('admin.ppid.kip.addons.show_pdf')
-                                        @endif
-                                    </td>
-                                    <td>{{ GetUser($del->upload_by) }}</td>
-                                    <td>{{ $del->created_at == null ? 'None' : \Carbon\Carbon::parse($del->created_at)->locale('id')->translatedFormat('l, d F Y') }}
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                data-bs-toggle="dropdown">
-                                                <i class="icon-base ri ri-more-2-line icon-18px"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item"
-                                                    href="{{ route('ppid-kip.edit', $del->id) }}"><i
-                                                        class="icon-base ri ri-pencil-line icon-18px me-2"></i> Edit</a>
-                                                <button class="dropdown-item"
-                                                    onclick="trashData('{{ route('ppid-kip.delete', $del->id) }}')"><i
-                                                        class="icon-base ri ri-delete-bin-6-line icon-18px me-2"></i>
-                                                    Delete</button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
+                        @foreach ($DeletedKIP as $del)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td class="text-wrap">
+                                <div
+                                    class="d-flex gap-3 border-start border-3 border-{{ KlasifikasiEnum::tryFrom($del->jenis_informasi)?->getColor() ?? 'muted' }} ps-3">
+                                    <div>
+                                        <a href="#"
+                                            class="mb-1 text-gray-900 text-{{ KlasifikasiEnum::tryFrom($del->jenis_informasi)?->getColor() ?? 'muted' }} fw-bold">
+                                            {{ strtoupper($del->jenis_informasi) }}
+                                        </a>
+                                        <div class="fs-7 text-muted fw-bold">{{ $del->nama_informasi }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                @if ($del->jenis_file == 'link')
+                                <a href="{{ $del->files }}" target="_blank" class="btn btn-success btn-sm"><i
+                                        class="icon-base ri ri-download-2-line icon-18px me-2"></i>
+                                    Download</a>
+                                @else
+                                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#ShowFile{{ $loop->iteration }}">
+                                    <i class="icon-base ri ri-eye-2-line icon-18px me-2"></i>View
+                                </button>
+                                @endif
+                            </td>
+                            <td>{{ GetUser($del->upload_by) }}</td>
+                            <td>{{ $del->created_at == null ? 'None' :
+                                \Carbon\Carbon::parse($del->created_at)->locale('id')->translatedFormat('l, d F Y') }}
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                        data-bs-toggle="dropdown">
+                                        <i class="icon-base ri ri-more-2-line icon-18px"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="{{ route('ppid-kip.restore', $del->id) }}"><i
+                                                class="icon-base ri ri-arrow-left-circle-line icon-18px me-2"></i> Pulihkan</a>
+                                        <a href="{{ route('ppid-kip.delete', $del->id) }}" data-bs-tooltip="tooltip"
+                                            data-bs-placement="top" title="Hapus Permanen" class="dropdown-item">
+                                            <i class="icon-base ri ri-eraser-line icon-18px me-2"></i> Hapus Permanen
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
                         @endif
                     </tbody>
                 </table>
