@@ -29,7 +29,7 @@
                 <h4 class="mb-0">Tambah Data</h4>
             </div>
         </div>
-        <form action="{{ route('ppid-kip.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('kip.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <div class="form-floating form-floating-outline mb-6">
@@ -139,7 +139,7 @@
                 @enderror
                 <div class="card-footer">
                     <div class="d-flex justify-content-end gap-2">
-                        <a href="{{ route('ppid-kip.index') }}" class="btn btn-outline-secondary btn-lg"
+                        <a href="{{ route('kip.index') }}" class="btn btn-outline-secondary btn-lg"
                             style="float: right;" type="reset">
                             <i class="icon-base ri ri-arrow-left-circle-line icon-18px me-2"></i> Kembali
                         </a>

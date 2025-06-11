@@ -6,19 +6,19 @@ use App\Http\Controllers\Admin\PPID\StrukturController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
-    Route::group(['prefix' => 'web'], function () {
-        Route::group(['prefix' => 'ppid-kip'], function () {
-            Route::get('/', [KIPController::class, 'index'])->name('ppid-kip.index');
-            Route::get('create', [KIPController::class, 'create'])->name('ppid-kip.create');
-            Route::post('store', [KIPController::class, 'store'])->name('ppid-kip.store');
-            Route::get('edit/{kip}', [KIPController::class, 'edit'])->name('ppid-kip.edit');
-            Route::put('update/{kip}', [KIPController::class, 'update'])->name('ppid-kip.update');
-            Route::get('restore/{kip}', [KIPController::class, 'restore'])->name('ppid-kip.restore');
-            Route::get('destroy/{kip}', [KIPController::class, 'destroy'])->name('ppid-kip.destroy');
-            Route::get('delete/{kip}', [KIPController::class, 'delete'])->name('ppid-kip.delete');
-            Route::get('clear', [KIPController::class, 'clear'])->name('ppid-kip.clear');
-            Route::get('view-pdf/{kip}', [KIPController::class, 'viewPDF'])->name('ppid-kip-admin.view_pdf');
-            Route::get('download-pdf/{kip}', [KIPController::class, 'downloadPDF'])->name('ppid-kip-admin.download_pdf');
+    Route::group(['prefix' => 'web/ppid'], function () {
+        Route::group(['prefix' => 'kip'], function () {
+            Route::get('/', [KIPController::class, 'index'])->name('kip.index');
+            Route::get('create', [KIPController::class, 'create'])->name('kip.create');
+            Route::post('store', [KIPController::class, 'store'])->name('kip.store');
+            Route::get('edit/{kip}', [KIPController::class, 'edit'])->name('kip.edit');
+            Route::put('update/{kip}', [KIPController::class, 'update'])->name('kip.update');
+            Route::get('restore/{kip}', [KIPController::class, 'restore'])->name('kip.restore');
+            Route::get('destroy/{kip}', [KIPController::class, 'destroy'])->name('kip.destroy');
+            Route::get('delete/{kip}', [KIPController::class, 'delete'])->name('kip.delete');
+            Route::get('clear', [KIPController::class, 'clear'])->name('kip.clear');
+            Route::get('view-pdf/{kip}', [KIPController::class, 'viewPDF'])->name('kip-admin.view_pdf');
+            Route::get('download-pdf/{kip}', [KIPController::class, 'downloadPDF'])->name('kip-admin.download_pdf');
         });
 
         Route::group(['prefix' => 'agenda-pimpinan'], function () {
@@ -28,13 +28,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
             Route::get('destroy/{post}', [AgendaController::class, 'destroy'])->name('agenda-pimpinan.destroy');
         });
 
-        Route::group(['prefix' => 'ppid-struktur'], function () {
-            Route::get('/', [StrukturController::class, 'index'])->name('ppid-struktur.index');
-            Route::get('create', [StrukturController::class, 'create'])->name('ppid-struktur.create');
-            Route::post('store', [StrukturController::class, 'store'])->name('ppid-struktur.store');
-            Route::get('edit/{id}', [StrukturController::class, 'edit'])->name('ppid-struktur.edit');
-            Route::put('update/{id}', [StrukturController::class, 'update'])->name('ppid-struktur.update');
-            Route::get('destroy/{id}', [StrukturController::class, 'destroy'])->name('ppid-struktur.delete');
+        Route::group(['prefix' => 'struktur-organisasi'], function () {
+            Route::get('/', [StrukturController::class, 'index'])->name('struktur-organisasi.index');
+            Route::get('create', [StrukturController::class, 'create'])->name('struktur-organisasi.create');
+            Route::post('store', [StrukturController::class, 'store'])->name('struktur-organisasi.store');
+            Route::get('edit/{ppid}', [StrukturController::class, 'edit'])->name('struktur-organisasi.edit');
+            Route::put('update/{ppid}', [StrukturController::class, 'update'])->name('struktur-organisasi.update');
+            Route::get('destroy/{ppid}', [StrukturController::class, 'destroy'])->name('struktur-organisasi.delete');
         });
     });
 });

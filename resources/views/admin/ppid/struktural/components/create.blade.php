@@ -1,103 +1,67 @@
 @extends('admin.index')
 @section('title', 'PPID | Tambah Struktur Organisasi PPID')
-@section('ppid-menu', 'show')
-@section('ppid-struktur', 'active')
-@section('additional-css')
-    <link rel="stylesheet" href="{{ asset('server/vendor/tom-select/tom-select.css') }}">
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('server/assets/vendor/libs/select2/select2.css') }}">
 @endsection
 @section('content')
-    <main id="main" class="main">
-        <div class="pagetitle">
-            <div class="pagetitle">
-                <h1>Struktur Organisasi PPID</h1>
-                <nav>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('ppid-struktur.index') }}">PPID</a></li>
-                        <li class="breadcrumb-item active">Tambah Data Struktur Organisasi PPID</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-        <section class="section">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title"><i class="bi bi-plus-square"></i> Tambah Data</div>
-                            <hr />
-                            <form action="{{ route('ppid-struktur.store') }}" method="POST">
-                                @csrf
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Nama Pegawai</label>
-                                    <div class="col-sm-10">
-                                        <select name="pegawai_id" id="select-pegawai" autocomplete="off"
-                                            placeholder="--Pilih--">
-                                            <option value="">--Pilih---</option>
-                                            @foreach ($pegawais as $pegawai)
-                                                <option value="{{ $pegawai->id }}">{{ $pegawai->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('nama_informasi')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Jabatan</label>
-                                    <div class="col-sm-10">
-                                        <select name="jabatan" id="select-jabatan" autocomplete="off"
-                                            placeholder="--Pilih--">
-                                            <option value="">--Pilih--</option>
-                                            @foreach ($jabatan as $item)
-                                                <option value="{{ $item['jabatan'] }}">{{ $item['nama_jabatan'] }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Nama Jabatan</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="nama_jabatan" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-sm-12">
-                                        <button class="btn btn-outline-warning btn-md" style="float: right;" type="reset">
-                                            <i class="bi bi-arrow-clockwise"></i> Reset
-                                        </button>
-                                        <button class="btn btn-success btn-md" style="float: right; margin-right: 2px;"
-                                            type="submit">
-                                            <i class="bi bi-save"></i> Simpan
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="mb-0">Tambah Struktur Organisasi PPID</h4>
                     </div>
                 </div>
+                <form action="{{ route('struktur-organisasi.store') }}" method="POST">
+                    @csrf
+                    <div class="card-body">
+                        <div class="form-floating form-floating-outline mb-6">
+                            <label for="select-pegawai" class="form-label">Nama Pegawai</label>
+                            <select name="pegawai_id" id="select-pegawai" class="select2 form-select"
+                                data-allow-clear="true">
+                                <option value="">Pilih</option>
+                                @foreach ($pegawais as $pegawai)
+                                    <option value="{{ $pegawai->id }}">{{ $pegawai->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('nama_informasi')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-floating form-floating-outline mb-6">
+                            <label for="select-jabatan" class="form-label">Jabatan</label>
+                            <select name="jabatan" id="select-jabatan" class="select2 form-select">
+                                <option value="">Pilih</option>
+                                @foreach ($jabatan as $item)
+                                    <option value="{{ $item['jabatan'] }}">{{ $item['nama_jabatan'] }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-floating form-floating-outline mb-6">
+                            <input type="text" id="nama" name="nama_jabatan" placeholder="Nama Jabatan"
+                                class="form-control">
+                            <label for="nama">Nama Jabatan</label>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-end gap-2">
+                            <a class="btn btn-outline-secondary" href="{{ route('post-admin.index') }}">
+                                <i class="icon-base ri ri-skip-back-line"></i> Kembali
+                            </a>
+                            <button class="btn btn-outline-success" type="submit">
+                                <i class="icon-base ri ri-save-line"></i> Simpan
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </section>
-    </main>
+        </div>
+    </div>
 @endsection
-@section('additional-js')
-    <script src="{{ asset('server/vendor/tom-select/tom-select.js') }}"></script>
+@section('scripts')
+    <script src="{{ asset('server/assets/vendor/libs/select2/select2.js') }}"></script>
+    <script src="{{ asset('server/assets/js/forms-selects.js') }}"></script>
     <script>
-        new TomSelect("#select-pegawai", {
-            create: true,
-            sortField: {
-                field: "text",
-                direction: "asc"
-            }
-        });
-        new TomSelect("#select-jabatan", {
-            create: true,
-            sortField: {
-                field: "text",
-                direction: "asc"
-            }
-        });
-
         $('#jenis_file').change(function() {
             var jenis_file = $('#jenis_file').val();
 

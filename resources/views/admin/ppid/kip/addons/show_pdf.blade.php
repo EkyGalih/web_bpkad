@@ -8,11 +8,11 @@
                 <button type="button" class="btn btn-default" data-bs-dismiss="modal" aria-label="Close">X</button>
             </div>
             <div class="modal-body">
-                <iframe src="{{ route('ppid-kip-admin.view_pdf', $items->id) }}" width="100%" height="600px"
+                <iframe src="{{ route('kip-admin.view_pdf', $items->id) }}" width="100%" height="600px"
                     frameborder="0"></iframe>
             </div>
             <div class="modal-footer">
-                <a href="{{ route('ppid-kip-admin.download_pdf', $items->id) }}" class="btn btn-success btn-sm">
+                <a href="{{ route('kip-admin.download_pdf', $items->id) }}" class="btn btn-success btn-sm">
                     <i class="bx bx-download"></i> Download
                 </a>
                 <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>

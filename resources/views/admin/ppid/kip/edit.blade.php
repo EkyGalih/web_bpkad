@@ -29,7 +29,7 @@
                 <h4 class="mb-0">Tambah Data</h4>
             </div>
         </div>
-        <form action="{{ route('ppid-kip.update', $kip->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('kip.update', $kip->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="card-body">
@@ -139,12 +139,12 @@
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
                 <div class="card-footer">
-                    <div class="col-sm-12">
-                        <a href="{{ route('ppid-kip.index') }}" class="btn btn-secondary btn-md" style="float: right;">
-                            <i class="bi bi-backspace"></i> Kembali
+                    <div class="d-flex justify-content-end gap-2">
+                        <a href="{{ route('kip.index') }}" class="btn btn-secondary btn-md">
+                            <i class="icon-base ri ri-arrow-left-line icon-18px me-2"></i> Kembali
                         </a>
-                        <button class="btn btn-success btn-md" style="float: right; margin-right: 2px;" type="submit">
-                            <i class="bi bi-save"></i> Simpan
+                        <button class="btn btn-success btn-md" type="submit">
+                            <i class="icon-base ri ri-save-3-line icon-18px me-2"></i> Simpan
                         </button>
                     </div>
                 </div>

@@ -78,24 +78,24 @@
             <span class="menu-header-text" data-i18n="PPID">PPID</span>
         </li>
         <!-- Cards -->
-        <li class="menu-item @if (request()->is('admin/web/ppid-kip*') || request()->is('admin/web/agenda-pimpinan*')) open @endif">
+        <li class="menu-item @if (request()->is('admin/web/ppid/*')) open @endif">
             <a href="#" class="menu-link menu-toggle">
                 <i class="menu-icon icon-base ri ri-book-3-fill"></i>
                 <div data-i18n="PPID">PPID</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item @if (request()->is('admin/web/ppid-kip*')) active @endif">
-                    <a href="{{ route('ppid-kip.index') }}" class="menu-link">
+                <li class="menu-item @if (request()->is('admin/web/ppid/kip*')) active @endif">
+                    <a href="{{ route('kip.index') }}" class="menu-link">
                         <div data-i18n="Klasifikasi Informasi">Klasifikasi Informasi</div>
                     </a>
                 </li>
-                <li class="menu-item @if (request()->is('admin/web/agenda-pimpinan*')) active @endif">
+                <li class="menu-item @if (request()->is('admin/web/ppid/agenda-pimpinan*')) active @endif">
                     <a href="{{ route('agenda-pimpinan.index') }}" class="menu-link">
                         <div data-i18n="Agenda Pimpinan">Agenda Pimpinan</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="cards-statistics.html" class="menu-link">
+                <li class="menu-item  @if (request()->is('admin/web/ppid/struktur-organisasi*')) active @endif">
+                    <a href="{{ route('struktur-organisasi.index') }}" class="menu-link">
                         <div data-i18n="Struktur Organisasi PPID">Struktur Organisasi PPID</div>
                     </a>
                 </li>

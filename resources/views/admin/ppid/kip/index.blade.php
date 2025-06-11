@@ -15,7 +15,7 @@ use App\Enum\KlasifikasiEnum;
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h4 class="mb-0">Informasi Publik</h4>
                 <div class="d-flex gap-2">
-                    <a href="{{ route('ppid-kip.create') }}" class="btn btn-outline-primary btn-md">
+                    <a href="{{ route('kip.create') }}" class="btn btn-outline-primary btn-md">
                         <i class="icon-base ri ri-file-add-line icon-18px me-2"></i> Tambah
                     </a>
                     <button data-bs-toggle="modal" data-bs-target="#CacheKIP" data-bs-tooltip="tooltip"
@@ -78,10 +78,10 @@ use App\Enum\KlasifikasiEnum;
                                     <i class="icon-base ri ri-more-2-line icon-18px"></i>
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{ route('ppid-kip.edit', $items->id) }}"><i
+                                    <a class="dropdown-item" href="{{ route('kip.edit', $items->id) }}"><i
                                             class="icon-base ri ri-pencil-line icon-18px me-2"></i> Edit</a>
                                     <button class="dropdown-item"
-                                        onclick="trashData('{{ route('ppid-kip.destroy', $items->id) }}')"><i
+                                        onclick="trashData('{{ route('kip.destroy', $items->id) }}')"><i
                                             class="icon-base ri ri-delete-bin-6-line icon-18px me-2"></i>
                                         Delete</button>
                                 </div>

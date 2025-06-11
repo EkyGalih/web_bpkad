@@ -64,9 +64,9 @@
                                         <i class="icon-base ri ri-more-2-line icon-18px"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{ route('ppid-kip.restore', $del->id) }}"><i
+                                        <a class="dropdown-item" href="{{ route('kip.restore', $del->id) }}"><i
                                                 class="icon-base ri ri-arrow-left-circle-line icon-18px me-2"></i> Pulihkan</a>
-                                        <a href="{{ route('ppid-kip.delete', $del->id) }}" data-bs-tooltip="tooltip"
+                                        <a href="{{ route('kip.delete', $del->id) }}" data-bs-tooltip="tooltip"
                                             data-bs-placement="top" title="Hapus Permanen" class="dropdown-item">
                                             <i class="icon-base ri ri-eraser-line icon-18px me-2"></i> Hapus Permanen
                                         </a>
@@ -82,7 +82,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i>
                     Close</button>
-                <a href="{{ route('ppid-kip.clear') }}" class="btn btn-danger">
+                <a href="{{ route('kip.clear') }}" class="btn btn-danger">
                     <i class="bi bi-trash3-fill"></i> Bersihkan
                 </a>
             </div>

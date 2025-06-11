@@ -17,7 +17,7 @@
                 <button type="button" class="btn btn-outline-secondary"
                     data-bs-dismiss="modal"><i class="bi bi-x-circle"></i>
                     Tidak</button>
-                <a href="{{ route('ppid-kip.destroy', $item->id) }}"
+                <a href="{{ route('kip.destroy', $item->id) }}"
                     class="btn btn-outline-danger">
                     <i class="bi bi-check-circle"></i> Ya
                 </a>

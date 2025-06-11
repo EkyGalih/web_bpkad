@@ -182,7 +182,8 @@ if (!function_exists('randomString')) {
 if (!function_exists('_jsonDecode')) {
     function _jsonDecode($param)
     {
-        $files = file_get_contents($param);
+        $path = public_path($param);
+        $files = file_get_contents($path);
         $data = json_decode($files, true);
         return $data;
     }
