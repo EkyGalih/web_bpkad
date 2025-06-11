@@ -107,13 +107,13 @@
             <span class="menu-header-text" data-i18n="ADDON">ADDON/span>
         </li>
         <!-- Forms -->
-        <li class="menu-item">
+        <li class="menu-item @if (request()->is('admin/web/tools/*')) open @endif">
             <a href="#" class="menu-link menu-toggle">
                 <i class="menu-icon icon-base ri ri-tools-fill"></i>
                 <div data-i18n="Tools">Tools</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item">
+                <li class="menu-item @if (request()->is('admin/web/tools/menu*')) active @endif">
                     <a href="{{ route('menu-admin.index') }}" class="menu-link">
                         <div data-i18n="Menu">Menu</div>
                     </a>

@@ -1,228 +1,311 @@
 @extends('admin.index')
 @section('title', 'Menu')
-@section('menu-tools', 'show')
-@section('tools-menu', 'active')
-@section('additional-css')
-    <link rel="stylesheet" type="text/css"
-        href="{{ asset('server/vendor/DataTables/DataTables-1.13.1/css/jquery.dataTables.min.css') }}" />
+@section('styles')
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <style>
+        .sortable-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sortable-item {
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            cursor: move;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ui-state-highlight {
+            height: 50px;
+            background-color: #e9ecef;
+            border: 2px dashed #adb5bd;
+        }
+    </style>
 @endsection
 @section('content')
-    <main id="main" class="main">
-        <div class="pagetitle">
-            <h1>Menu</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('menu-admin.index') }}">Menu</a></li>
-                    <li class="breadcrumb-item active">Data Menu</li>
-                </ol>
-            </nav>
-        </div>
-        <section class="section">
-            <div class="row">
-                <div class="col-lg-12">
-                    @if (Session::has('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            {{ Session::get('success') }}
-                        </div>
-                    @endif
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-10">
-                                    <h5 class="card-title">Data Menu</h5>
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">Menu</h4>
+                <button type="button" class="btn btn-outline-primary add-btn">
+                    <i class="icon-base ri ri-add-large-line icon-18px me-2"></i> Tambah
+                </button>
+                <div class="modal fade" id="addMenuModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <form id="addMenuForm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Tambah Menu</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
-                                <div class="col-lg-2">
-                                    <button class="btn btn-outline-primary btn-md" data-bs-toggle="modal"
-                                        data-bs-target="#AddMenu" style="margin-top: 10px;">
-                                        <i class="bi bi-journal-plus"></i> Tambah Menu
-                                    </button>
-
-                                    <div class="modal fade" id="AddMenu" tabindex="-1">
-                                        <div class="modal-dialog modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title"><i class="bi bi-file-post-fill"></i>
-                                                        Tambah Menu</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form action="{{ route('menu-admin.store') }}" method="POST">
-                                                        @csrf
-                                                        <div class="row mb-4">
-                                                            <label for="inputText" class="col-sm-2 col-form-label">Nama
-                                                                Menu</label>
-                                                            <div class="col-sm-10">
-                                                                <input type="text" name="name" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mb-4">
-                                                            <label for="inputText"
-                                                                class="col-sm-2 col-form-label">Page</label>
-                                                            <div class="col-sm-10">
-                                                                <select name="order_pos" class="form-control">
-                                                                    <option value="">--Page--</option>
-                                                                    @foreach ($pages as $page)
-                                                                        <option value="{{ $page->id }}">
-                                                                            {{ $page->title }}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mb-4">
-                                                            <label for="inputText"
-                                                                class="col-sm-2 col-form-label">Link</label>
-                                                            <div class="col-sm-10">
-                                                                <input type="text" name="url" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
-                                                            class="bi bi-x-circle"></i>
-                                                        Batal</button>
-                                                    <button type="submit" class="btn btn-success">
-                                                        <i class="bi bi-file-plus"></i> Tambah
-                                                    </button>
-                                                </div>
-                                                </form>
-                                            </div>
-                                        </div>
+                                <div class="modal-body">
+                                    <input type="hidden" id="add-menu-id">
+                                    <div class="form-floating form-floating-outline mb-6">
+                                        <input type="text" id="add-menu-name" placeholder="Masukkan nama menu"
+                                            class="form-control" required>
+                                        <label for="add-menu-name">Nama</label>
+                                    </div>
+                                    <div class="form-floating form-floating-outline mb-6">
+                                        <input type="text" id="add-menu-url" placeholder="Masukkan URL menu"
+                                            class="form-control">
+                                        <label for="add-menu-url">URL</label>
                                     </div>
                                 </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                    <button type="button" class="btn btn-outline-secondary"
+                                        data-bs-dismiss="modal">Batal</button>
+                                </div>
                             </div>
-                            <table class="table table-hover" id="example">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Judul</th>
-                                        <th scope="col">Dibuat Oleh</th>
-                                        <th scope="col">Buat Pada</th>
-                                        <th scope="col">Ubah Pada</th>
-                                        <th scope="col">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($menus as $menu)
-                                        <tr>
-                                            <th scope="row">{{ $loop->iteration }}</th>
-                                            <td>{{ $menu->name }}</td>
-                                            <td>{{ Helpers::GetUser($menu->create_by_id) }}</td>
-                                            <td>{{ Helpers::GetDate($menu->created_at) }}</td>
-                                            <td>{{ $menu->updated_at == null ? 'None' : Helpers::GetDate($menu->updated_at) }}
-                                            </td>
-                                            <td>
-                                                <button type="submit" data-bs-toggle="modal" data-bs-target="#EditMenu{{ $loop->iteration }}"
-                                                    class="btn btn-warning btn-md">
-                                                    <i class="bi bi-pencil-square"></i>
-                                                </button>
-
-                                                <div class="modal fade" id="EditMenu{{ $loop->iteration }}" tabindex="-1">
-                                                    <div class="modal-dialog modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title"><i class="bi bi-pencil-square"></i>
-                                                                    Ubah Menu</h5>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                    aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form action="{{ route('menu-admin.update', $menu->id) }}" method="POST">
-                                                                    @csrf
-                                                                    @method('PUT')
-                                                                    <div class="row mb-4">
-                                                                        <label for="inputText" class="col-sm-2 col-form-label">Nama
-                                                                            Menu</label>
-                                                                        <div class="col-sm-10">
-                                                                            <input type="text" name="name" value="{{ $menu->name }}" class="form-control">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row mb-4">
-                                                                        <label for="inputText"
-                                                                            class="col-sm-2 col-form-label">Page</label>
-                                                                        <div class="col-sm-10">
-                                                                            <select name="order_pos" class="form-control">
-                                                                                <option value="">--Page--</option>
-                                                                                @foreach ($pages as $page)
-                                                                                    <option value="{{ $page->id }}" {{ $menu->order_pos == $page->id ? 'selected' : '' }}>
-                                                                                        {{ $page->title }}</option>
-                                                                                @endforeach
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row mb-4">
-                                                                        <label for="inputText"
-                                                                            class="col-sm-2 col-form-label">Link</label>
-                                                                        <div class="col-sm-10">
-                                                                            <input type="text" name="url" value="{{ $menu->url }}" class="form-control">
-                                                                        </div>
-                                                                    </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
-                                                                        class="bi bi-x-circle"></i>
-                                                                    Batal</button>
-                                                                <button type="submit" class="btn btn-success">
-                                                                    <i class="bi bi-save2"></i> Simpan
-                                                                </button>
-                                                            </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <button class="btn btn-danger btn-md" data-bs-toggle="modal"
-                                                    data-bs-target="#DeletePages{{ $loop->iteration }}">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-
-                                                <div class="modal fade" id="DeletePages{{ $loop->iteration }}"
-                                                    tabindex="-1">
-                                                    <div class="modal-dialog modal-dialog-centered">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title"><i
-                                                                        class="bi bi-exclamation-octagon-fill"></i> Hapus
-                                                                    Postingan</h5>
-                                                                <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <p>Halaman <strong><u>{{ $menu->name }}</u></strong>
-                                                                    akan dihapus.<br /> Anda Yakin?</p>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-outline-secondary"
-                                                                    data-bs-dismiss="modal"><i class="bi bi-x-circle"></i>
-                                                                    Tidak</button>
-                                                                <a href="{{ route('menu-admin.destroy', $menu->id) }}"
-                                                                    class="btn btn-outline-danger">
-                                                                    <i class="bi bi-check-circle"></i> Ya
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+            <div class="card-body">
+                <ul id="sortable-menu" class="sortable-list">
+                    @foreach ($menus as $menu)
+                        <li class="sortable-item d-flex justify-content-between align-items-center" data-id="{{ $menu->id }}" data-name="{{ $menu->name }}"
+                            data-url="{{ $menu->url }}" style="cursor:pointer;">
+                            <span class="me-2" style="cursor:move;">
+                                <i class="icon-base ri ri-drag-move-2-line icon-18px"></i>
+                            </span>
+                            <span class="menu-name flex-grow-1 edit-btn" style="flex:1; cursor:pointer;">{{ $menu->name }}</span>
+                            <button type="button" class="btn btn-sm btn-outline-danger ms-2 delete-btn" data-id="{{ $menu->id }}" style="z-index:1;">
+                                <i class="ri ri-delete-bin-6-line"></i>
+                            </button>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    {{-- Modal Edit --}}
+    <div class="modal fade" id="editMenuModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="editMenuForm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Ubah Nama Menu</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="edit-menu-id">
+                        <div class="form-floating form-floating-outline mb-6">
+                            <input type="text" id="edit-menu-name" placeholder="Masukkan nama menu" class="form-control"
+                                required>
+                            <label for="edit-menu-name">Nama</label>
+                        </div>
+                        <div class="form-floating form-floating-outline mb-6">
+                            <input type="text" id="edit-menu-url" placeholder="Masukkan URL menu" class="form-control">
+                            <label for="edit-menu-url">URL</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
-@section('additional-js')
-    <script type="text/javascript" src="{{ asset('server/js/jquery-5.3.1.js') }}"></script>
-    <script src="{{ asset('server/vendor/DataTables/DataTables-1.13.1/js/jquery.dataTables.min.js') }}"></script>
+@section('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#example').DataTable();
+        $(function() {
+            // Urutan
+            $("#sortable-menu").sortable({
+                placeholder: "ui-state-highlight",
+                update: function(event, ui) {
+                    let order = [];
+                    $("#sortable-menu .sortable-item").each(function(index) {
+                        order.push({
+                            id: $(this).data("id"),
+                            position: index + 1
+                        });
+                    });
+
+                    $.ajax({
+                        url: "{{ route('menu-admin.sort') }}",
+                        method: "POST",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            order: order
+                        },
+                        success: function(response) {
+                            Swal.fire({
+                                toast: true,
+                                position: 'bottom-end',
+                                icon: 'success',
+                                title: 'Urutan berhasil disimpan',
+                                showConfirmButton: false,
+                                timer: 1200,
+                                timerProgressBar: true,
+                                customClass: {
+                                    popup: 'p-1',
+                                    title: 'fs-6'
+                                }
+                            });
+                        },
+                        error: function() {
+                            alert("Gagal menyimpan urutan.");
+                        }
+                    });
+                }
+            }).disableSelection();
+
+            // Buka modal
+            $(".add-btn").on("click", function() {
+                $("#add-menu-id").val('');
+                $("#add-menu-name").val('');
+                $("#add-menu-url").val('');
+                $("#addMenuModal").modal("show");
+            });
+
+            // Edit menu hanya jika klik pada .edit-btn (bukan tombol hapus)
+            $(document).on("click", ".edit-btn", function() {
+                let $li = $(this).closest("li");
+                let id = $li.data("id");
+                let name = $li.data("name");
+                let url = $li.data("url");
+                $("#edit-menu-id").val(id);
+                $("#edit-menu-name").val(name);
+                $("#edit-menu-url").val(url);
+                $("#editMenuModal").modal("show");
+            });
+
+            // Hapus menu
+            $(document).on("click", ".delete-btn", function() {
+                let id = $(this).data("id");
+                let $li = $(this).closest("li");
+                Swal.fire({
+                    title: 'Hapus menu?',
+                    text: "Menu akan dihapus secara permanen.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "/admin/web/tools/menu/destroy/" + id,
+                            method: "POST",
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                                _method: "DELETE"
+                            },
+                            success: function() {
+                                Swal.fire({
+                                    toast: true,
+                                    position: 'bottom-end',
+                                    icon: 'success',
+                                    title: 'Menu berhasil dihapus',
+                                    showConfirmButton: false,
+                                    timer: 1200,
+                                    timerProgressBar: true,
+                                    customClass: {
+                                        popup: 'p-1',
+                                        title: 'fs-6'
+                                    }
+                                });
+                                $li.remove();
+                            },
+                            error: function(xhr) {
+                                console.error(xhr.responseText);
+                                alert("Gagal menghapus menu.");
+                            }
+                        });
+                    }
+                });
+            });
+
+            // Submit modal
+            $("#addMenuForm").on("submit", function(e) {
+                e.preventDefault();
+                let name = $("#add-menu-name").val();
+                let url = $("#add-menu-url").val();
+
+                $.ajax({
+                    url: "{{ route('menu-admin.store') }}",
+                    method: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        name: name,
+                        url: url
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            toast: true,
+                            position: 'bottom-end',
+                            icon: 'success',
+                            title: 'Menu berhasil ditambahkan',
+                            showConfirmButton: false,
+                            timer: 1200,
+                            timerProgressBar: true,
+                            customClass: {
+                                popup: 'p-1',
+                                title: 'fs-6'
+                            }
+                        });
+                        $("#sortable-menu").append(`
+                            <li class="sortable-item edit-btn" data-id="${response.id}" data-name="${name}" data-url="${url}" style="cursor:pointer;">
+                                <span class="me-2" style="cursor:move;">
+                                    <i class="icon-base ri ri-drag-move-2-line icon-18px"></i>
+                                </span>
+                                <span class="menu-name" style="flex:1;">${name}</span>
+                            </li>
+                        `);
+                        $("#addMenuModal").modal("hide");
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
+                        alert("Gagal menambahkan menu.");
+                    }
+                });
+            });
+            $("#editMenuForm").on("submit", function(e) {
+                e.preventDefault();
+                let id = $("#edit-menu-id").val();
+                let name = $("#edit-menu-name").val();
+
+                $.ajax({
+                    url: "/admin/web/tools/menu/update/" + id,
+                    method: "POST", // pakai POST karena kita spoofing PUT
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        _method: "PUT", // Laravel akan membaca ini sebagai method PUT
+                        name: name
+                    },
+                    success: function() {
+                        Swal.fire({
+                            toast: true,
+                            position: 'bottom-end',
+                            icon: 'success',
+                            title: 'Perubahan berhasil disimpan',
+                            showConfirmButton: false,
+                            timer: 1200,
+                            timerProgressBar: true,
+                            customClass: {
+                                popup: 'p-1',
+                                title: 'fs-6'
+                            }
+                        });
+                        $(`.sortable-item[data-id="${id}"] .menu-name`).text(name);
+                        $("#editMenuModal").modal("hide");
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
+                        alert("Gagal mengubah nama menu.");
+                    }
+                });
+            });
         });
     </script>
 @endsection
