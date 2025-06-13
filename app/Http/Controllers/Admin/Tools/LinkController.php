@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Links;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Termwind\Components\Li;
 
 class LinkController extends Controller
 {
@@ -14,17 +15,11 @@ class LinkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id = null)
+    public function index()
     {
-        if ($id != null) {
-            $link = Links::findOrFail($id);
-        } else {
-            $link = null;
-        }
+        $links = Links::orderByDesc('created_at')->get();
 
-        $links = Links::orderBy('created_at', 'DESC')->paginate(5);
-
-        return view('admin.Tools.Links.index', compact('links', 'link'));
+        return view('admin.Tools.Links.index', compact('links'));
     }
 
 
@@ -37,16 +32,18 @@ class LinkController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'link' => 'required'
+            'name' => 'required|string|max:255',
+            'link' => 'required|url|max:255',
         ]);
 
-        Links::create([
-            'name' => $request->name,
-            'link' => $request->link
-        ]);
+        $link = new Links();
+        $link->name = $request->name;
+        $link->link = $request->link;
+        $link->save();
 
-        return redirect()->back()->with(['success' => 'Link berhasil disimpan!']);
+        _recentAdd($link->id, ' menambahkan link', 'Link');
+
+        return redirect()->back()->with('success', 'Link berhasil disimpan!');
     }
 
 
@@ -57,16 +54,16 @@ class LinkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Links $link)
     {
-        $link = Links::findOrFail($id);
-
         $link->update([
             'name' => $request->name,
             'link' => $request->link
         ]);
 
-        return redirect()->back()->with(['success' => 'Link berhasil diupdate!']);
+        _recentAdd($link->id, ' mengupdate link', 'Link');
+
+        return redirect()->back()->with('success', 'Link berhasil diupdate!');
     }
 
     /**
@@ -75,11 +72,10 @@ class LinkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Links $link)
     {
-        $link = Links::findOrFail($id);
         $link->delete();
 
-        return redirect()->back()->with(['success' => 'Link berhasil dihapus!']);
+        return redirect()->back()->with('success', 'Link berhasil dihapus!');
     }
 }

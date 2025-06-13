@@ -1,140 +1,92 @@
 @extends('admin.index')
 @section('title', 'Link Terkait')
-@section('menu-tools', 'show')
-@section('tools-link', 'active')
-@section('additional-css')
-    <link rel="stylesheet" type="text/css"
-        href="{{ asset('server/vendor/DataTables/DataTables-1.13.1/css/jquery.dataTables.min.css') }}" />
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('server/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
+    <link rel="stylesheet"
+        href="{{ asset('server/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
 @endsection
 @section('content')
-    <main id="main" class="main">
-        <div class="pagetitle">
-            <h1>Link Terkait</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('pages-admin.index') }}">Tools</a></li>
-                    <li class="breadcrumb-item active">Link Terkait</li>
-                </ol>
-            </nav>
-        </div>
-        <section class="section">
-            <div class="row">
-                @if (Session::has('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        {{ Session::get('success') }}
-                    </div>
-                @endif
-                <div class="col-lg-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-10">
-                                    <h5 class="card-title">{{ $link == null ? 'Tambah' : 'Ubah' }} Link Terkait <br />
-                                        <span>{{ $link == null ? 'Tambah' : 'Ubah' }} data link terkait</span>
-                                    </h5>
-                                </div>
-                                <hr />
-                            </div>
-                            <form
-                                action="{{ $link == null ? route('tools-link.store') : route('tools-link.update', $link->id) }}"
-                                method="POST">
-                                @csrf
-                                @if ($link != null)
-                                    @method('PUT')
-                                @endif
-                                <div class="row">
-                                    <label for="inputtext">Nama</label>
-                                    <div class="col-lg-12">
-                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                            value="{{ $link->name ?? '' }}" name="name">
-                                        @error('name')
-                                            <div class="alert alert-danger" style="padding: 8px;">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <label for="inputText">Link</label>
-                                        <input type="link" class="form-control @error('link') is-invalid @enderror"
-                                            name="link" value="{{ $link->link ?? '' }}">
-                                        @error('link')
-                                            <div class="alert alert-danger" style="padding: 8px;">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div><br />
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <button type="submit" class="btn btn-success btn-md">
-                                            <i class="bi bi-save"></i> Simpan
-                                        </button>
-                                        @if ($link != null)
-                                            <a href="{{ route('tools-link') }}" class="btn btn-primary btn-md">
-                                                <i class="bi bi-plus"></i> Tambah
-                                            </a>
-                                        @endif
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="mb-0">Link Terkait</h4>
+                    <div class="d-flex gap-2">
+                        <button data-bs-toggle="modal" data-bs-target="#TambahModal" data-bs-tooltip="tooltip"
+                            data-bs-placement="top" title="Tambah Link" class="btn btn-primary btn-md">
+                            <i class="icon-base ri ri-add-fill icon-18px"></i> Tambah
+                        </button>
                     </div>
                 </div>
-                <div class="col-lg-8">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-9">
-                                    <h5 class="card-title"><i class="bi bi-link"></i> Semua Link <br /> <span>Data semua
-                                            link terkait</span></h5>
-                                </div>
-                            </div>
-                            <table class="table table-hover" id="table-link">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Nama</th>
-                                        <th>Link</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($links as $link)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $link->name }}</td>
-                                            <td>{{ $link->link }}</td>
-                                            <td>
-                                                <a href="{{ route('tools-link', $link->id) }}"
-                                                    class="btn btn-warning btn-md">
-                                                    <i class="bi bi-pencil-square"></i>
-                                                </a>
-
-                                                <button class="btn btn-danger btn-md" data-bs-toggle="modal"
-                                                    data-bs-target="#DeleteLink{{ $loop->iteration }}">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-
-                                                @include('admin/Tools/Links/addons/_delete')
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            {{ $links->links() }}
-                        </div>
-                    </div>
-                </div>
+                @include('admin.Tools.Links.addons._add')
             </div>
-        </section>
-    </main>
+            <div class="card-datatable table-responsive text-nowrap">
+                <table class="table table-hover table-link">
+                    <thead>
+                        <tr>
+                            <th>Link</th>
+                            <th class="d-flex align-items-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($links as $link)
+                            <tr>
+                                <td>
+                                    <div class="d-flex gap-3 border-start border-3 border-primary ps-3">
+                                        <div>
+                                            <a href="#" class="mb-1 text-gray-900 text-primary fw-bold">
+                                                {{ strtoupper($link->name) }}
+                                            </a>
+                                            <div class="fs-7 text-muted fw-bold">{{ $link->link }}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                            data-bs-toggle="dropdown">
+                                            <i class="icon-base ri ri-more-2-line icon-18px"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <button class="dropdown-item" data-bs-toggle="modal"
+                                                data-bs-target="#EditModal{{ $link->id }}"><i
+                                                    class="icon-base ri ri-pencil-line icon-18px me-2"></i> Edit</button>
+                                            <button class="dropdown-item"
+                                                onclick="trashData('{{ route('link.destroy', $link->id) }}')"><i
+                                                    class="icon-base ri ri-delete-bin-6-line icon-18px me-2"></i>
+                                                Delete</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            @include('admin.Tools.Links.addons._edit')
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 @endsection
-@section('additional-js')
-    <script type="text/javascript" src="{{ asset('server/js/jquery-5.3.1.js') }}"></script>
-    <script src="{{ asset('server/vendor/DataTables/DataTables-1.13.1/js/jquery.dataTables.min.js') }}"></script>
+@section('scripts')
+    <script src="{{ asset('server/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('#table-link').DataTable();
+            $('.table-link').DataTable();
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+            const linkInput = document.getElementById('link');
+            const submitBtn = document.getElementById('submitBtn');
+            const errorText = document.getElementById('linkError');
+
+            linkInput.addEventListener('input', function() {
+                if (linkInput.checkValidity()) {
+                    submitBtn.disabled = false;
+                    errorText.classList.add('d-none');
+                } else {
+                    submitBtn.disabled = true;
+                    errorText.classList.remove('d-none');
+                }
+            });
         });
     </script>
 @endsection

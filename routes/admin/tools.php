@@ -16,10 +16,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         });
 
         Route::group(['prefix' => 'tools/link'], function () {
-            Route::get('/{id?}', [LinkController::class, 'index'])->name('link.index');
+            Route::get('/', [LinkController::class, 'index'])->name('link.index');
             Route::post('store', [LinkController::class, 'store'])->name('link.store');
-            Route::put('update/{id}', [LinkController::class, 'update'])->name('link.update');
-            Route::get('destroy/{id}', [LinkController::class, 'destroy'])->name('link.destroy');
+            Route::put('update/{link}', [LinkController::class, 'update'])->name('link.update');
+            Route::get('destroy/{link}', [LinkController::class, 'destroy'])->name('link.destroy');
         });
 
         Route::group(['prefix' => 'tools/social'], function () {
