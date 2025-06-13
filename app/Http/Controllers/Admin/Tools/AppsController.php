@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Apps;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AppsController extends Controller
 {
@@ -41,25 +42,27 @@ class AppsController extends Controller
     {
         $icon       = $request->file('icon');
         $ext        = array('png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG');
-        $filename   = md5($icon->getClientOriginalName()).'.'.$icon->getClientOriginalExtension();
+        $filename   = md5($icon->getClientOriginalName()) . '.' . $icon->getClientOriginalExtension();
 
         if (in_array($icon->getClientOriginalExtension(), $ext)) {
             if ($icon->getSize() <= 5000000) {
-                $icon->move('uploads/profile/logo_apps/', $filename);
-                $request->icon = 'uploads/profile/logo_apps/'.$filename;
+                $path = $icon->storeAs('uploads/profile/logo_apps', $filename, 's3');
+                $request->icon = $path;
             }
         }
 
-        Apps::create([
-            'name' => $request->name,
-            'versi' => $request->versi,
-            'deskripsi' => $request->deskripsi,
-            'icon' => $request->icon,
-            'create_by_id' => Auth::user()->id,
-            'url' => $request->url
-        ]);
+        $apps = new Apps();
+        $apps->name = $request->name;
+        $apps->versi = $request->versi;
+        $apps->deskripsi = $request->deskripsi;
+        $apps->icon = $request->icon;
+        $apps->create_by_id = Auth::user()->id;
+        $apps->url = $request->url;
+        $apps->save();
 
-        return redirect()->route('apps-admin.index')->with(['success' => 'Apps berhasil ditambahkan!']);
+        _recentAdd($apps->id, ' menambahkan aplikasi', 'apps');
+
+        return redirect()->route('apps.index')->with('success', 'Apps berhasil ditambahkan!');
     }
 
     /**
@@ -68,11 +71,10 @@ class AppsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Apps $apps)
     {
-        $app = Apps::findOrFail($id);
 
-        return view('admin.tools.apps.edit', compact('app'));
+        return view('admin.tools.apps.edit', compact('apps'));
     }
 
     /**
@@ -82,9 +84,8 @@ class AppsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Apps $apps)
     {
-        $apps   = Apps::findOrFail($id);
         $icon   = $request->file('icon');
 
         if ($icon != null) {
@@ -93,32 +94,35 @@ class AppsController extends Controller
 
             if (in_array($icon->getClientOriginalExtension(), $ext)) {
                 if ($icon->getSize() <= 5000000) {
-                    unlink($apps->icon);
-                    $icon->move('uploads/profile/logo_apps/', $filename);
-                    $request->icon = 'uploads/profile/logo_apps/'.$filename;
+                    // Hapus file lama dari S3 jika ada
+                    if ($apps->icon && Storage::disk('s3')->exists($apps->icon)) {
+                        Storage::disk('s3')->delete($apps->icon);
+                    }
+                    // Upload file baru ke S3
+                    $path = $icon->storeAs('uploads/profile/logo_apps', $filename, 's3');
+                    $request->icon = $path;
                 }
             }
 
-            $apps->update([
-                'name' => $request->name,
-                'icon' => $request->icon,
-                'versi' => $request->versi,
-                'deskripsi' => $request->deskripsi,
-                'create_by_id' => Auth::user()->id,
-                'url' => $request->url
-            ]);
+            $apps->name = $request->name;
+            $apps->icon = $request->icon;
+            $apps->versi = $request->versi;
+            $apps->deskripsi = $request->deskripsi;
+            $apps->create_by_id = Auth::user()->id;
+            $apps->url = $request->url;
+            $apps->save();
+            _recentAdd($apps->id, ' mengubah aplikasi', 'apps');
         } elseif ($icon == null) {
-            $apps->update([
-                'name' => $request->name,
-                'icon' => $request->icon,
-                'versi' => $request->versi,
-                'deskripsi' => $request->deskripsi,
-                'create_by_id' => Auth::user()->id,
-                'url' => $request->url
-            ]);
+            $apps->name = $request->name;
+            $apps->versi = $request->versi;
+            $apps->deskripsi = $request->deskripsi;
+            $apps->create_by_id = Auth::user()->id;
+            $apps->url = $request->url;
+            $apps->save();
+            _recentAdd($apps->id, ' mengubah aplikasi', 'apps');
         }
 
-        return redirect()->route('apps-admin.index')->with(['success' => 'Apps berhasil diubah!']);
+        return redirect()->route('apps.index')->with('success', 'Apps berhasil diubah!');
     }
 
     /**
@@ -127,12 +131,13 @@ class AppsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Apps $apps)
     {
-        $app = Apps::findOrFail($id);
-        unlink($app->icon);
-        $app->delete();
+        if ($apps->icon && Storage::disk('s3')->exists($apps->icon)) {
+            Storage::disk('s3')->delete($apps->icon);
+        }
+        $apps->delete();
 
-        return redirect()->route('apps-admin.index')->with(['success' => 'Apps berhasil dihapus!']);
+        return redirect()->route('apps.index')->with('success', 'Apps berhasil dihapus!');
     }
 }

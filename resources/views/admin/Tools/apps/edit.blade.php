@@ -1,89 +1,67 @@
 @extends('admin.index')
-@section('title', 'Update Apps')
-@section('menu-tools', 'show')
-@section('tools-apps', 'active')
+@section('title', 'Edit Apps')
 @section('content')
-    <main id="main" class="main">
-        <div class="pagetitle">
-            <div class="pagetitle">
-                <h1>Update Apps</h1>
-                <nav>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('apps-admin.index') }}">Daftar Apps</a></li>
-                        <li class="breadcrumb-item active">Update Apps</li>
-                    </ol>
-                </nav>
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="mb-0">Edit Aplikasi</h4>
+                </div>
             </div>
-        </div>
-        <section class="section">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title">Update Apps</div>
-                            <hr />
-                            <form action="{{ route('apps-admin.update', $app->id) }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Nama Aplikasi</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="name" value="{{ $app->name }}" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Versi Aplikasi</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="versi" value="{{ $app->versi }}" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Deskripsi</label>
-                                    <div class="col-sm-10">
-                                        <textarea name="deskripsi" class="form-control">{{ $app->deskripsi }}</textarea><!-- End TinyMCE Editor -->
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Url</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="url" value="{{ $app->url }}" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Icon</label>
-                                    <div class="col-sm-10">
-                                        <input type='file' name="icon" onchange="readURL(this);" /><br/><br/>
-                                        <img id="blah" src="{{ asset($app->icon) }}" height="200" width="200" alt="your image" />
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-sm-12">
-                                        <button class="btn btn-outline-warning btn-md" style="float: right;" type="reset">
-                                            <i class="bi bi-arrow-clockwise"></i> Reset
-                                        </button>
-                                        <button class="btn btn-outline-success btn-md"
-                                            style="float: right; margin-right: 2px;" type="submit">
-                                            <i class="bi bi-save"></i> Simpan
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
+            <form action="{{ route('apps.update', $apps->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="card-body">
+                    <div class="row form-floating form-floating-outline mb-6">
+                        <input type="text" id="name" placeholder="Nama Aplikasi" name="name"
+                            class="form-control" value="{{ $apps->name }}">
+                        <label for="name">Nama Aplikasi</label>
+                    </div>
+                    <div class="row form-floating form-floating-outline mb-6">
+                        <input type="text" id="versi" placeholder="Versi Aplikasi (misal: 1.01)" name="versi"
+                            class="form-control" pattern="^\d+(\.\d+)?$" title="Masukkan versi dengan format angka, misal: 1.01" value="{{ $apps->versi }}">
+                        <label for="versi">Versi Aplikasi</label>
+                    </div>
+                    <div class="row form-floating form-floating-outline mb-6">
+                        <textarea id="deskripsi" placeholder="Deskripsi" name="deskripsi" class="form-control">{{ $apps->deskripsi }}</textarea>
+                        <label for="deskripsi">Deskripsi</label>
+                    </div>
+                    <div class="row form-floating form-floating-outline mb-6">
+                        <input type="text" id="url" placeholder="Url" name="url" class="form-control" value="{{ $apps->url }}">
+                        <label for="url">Url</label>
+                    </div>
+                    <div class="row form-floating form-floating-outline mb-6">
+                        <div class="col-md-6">
+                            <input type='file' id="icon" name="icon" class="form-control mb-6"
+                            onchange="readURL(this);" accept="image/*" />
+                        </div>
+                        <div class="col-md-4">
+                            <img id="blah" src="{{ $apps->icon ? asset($apps->icon) : asset('static/images/no_image.png') }}" height="150" width="150" alt="your image" />
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-    </main>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-end gap-2">
+                        <button class="btn btn-outline-secondary" type="reset">
+                            <i class="icon-base ri ri-arrow-left-box-line icon-18px me-2"></i> Kembali
+                        </button>
+                        <button class="btn btn-outline-success" type="submit">
+                            <i class="icon-base ri ri-save-3-line icon-18px me-2"></i> Simpan
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
-@section('additional-js')
-<script src="{{ asset('server/js/jquery-5.3.1.js') }}"></script>
+@section('scripts')
+    <script src="{{ asset('server/js/jquery-5.3.1.js') }}"></script>
     <script>
-         function readURL(input) {
+        function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
 
-                reader.onload = function (e) {
+                reader.onload = function(e) {
                     $('#blah')
                         .attr('src', e.target.result)
                         .width(150)

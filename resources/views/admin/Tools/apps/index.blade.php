@@ -1,101 +1,86 @@
 @extends('admin.index')
 @section('title', 'Daftar Apps')
-@section('menu-tools', 'show')
-@section('tools-apps', 'active')
-@section('additional-css')
-    <link rel="stylesheet" type="text/css"
-        href="{{ asset('server/vendor/DataTables/DataTables-1.13.1/css/jquery.dataTables.min.css') }}" />
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('server/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
+    <link rel="stylesheet"
+        href="{{ asset('server/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
 @endsection
 @section('content')
-    <main id="main" class="main">
-        <div class="pagetitle">
-            <h1>Daftar Apps</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('apps-admin.index') }}">Daftar Apps</a></li>
-                    <li class="breadcrumb-item active">Daftar Apps</li>
-                </ol>
-            </nav>
-        </div>
-        <section class="section">
-            <div class="row">
-                <div class="col-lg-12">
-                    @if (Session::has('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            {{ Session::get('success') }}
-                        </div>
-                    @endif
-                    <a href="{{ route('apps-admin.create') }}" class="btn btn-outline-primary btn-md" style="float: right; margin-bottom: 5px;">
-                        <i class="bi bi-plus"></i> Tambah Apps
-                    </a>
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="mb-0">Daftar Aplikasi</h4>
+                    <div class="d-flex gap-2">
+                        <a href="{{ route('apps.create') }}" class="btn btn-outline-primary btn-md">
+                            <i class="icon-base ri ri-file-add-line icon-18px me-2"></i> Tambah
+                        </a>
+                    </div>
                 </div>
-                <div class="row">
-                    @foreach ($apps as $app)
-                        <div class="col-lg-3">
-                            <div class="card">
-                                <img src="{{ asset($app->icon) }}" class="card-img-top" alt="{{ $app->name }}">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        {{ $app->name }}<br/>
-                                        <small class="badge bg-info"><i class="bi bi-tags"></i>
-                                            {{ $app->versi }}</small>
-                                    </h5>
-                                    <p class="card-text">{{ $app->deskripsi }}</p>
-                                </div>
-                                <div class="card-footer">
-                                    <a href="{{ $app->url }}" class="btn btn-outline-primary btn-md" target="_blank"><i
-                                            class="bi bi-link-45deg"></i> Link</a>
-                                    <a href="{{ route('apps-admin.edit', $app->id) }}" class="btn btn-outline-warning brn-md">
-                                        <i class="bi bi-pencil"></i> Edit
-                                    </a>
-                                    <button type="button" class="btn btn-outline-danger btn-md" data-bs-toggle="modal" data-bs-target="#DeleteApp{{ $loop->iteration }}">
-                                        <i class="bi bi-x-circle"></i> Hapus
-                                    </button>
-
-                                    <div class="modal fade" id="DeleteApp{{ $loop->iteration }}"
-                                        tabindex="-1">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title"><i
-                                                            class="bi bi-exclamation-octagon-fill"></i> Hapus
-                                                        Postingan</h5>
-                                                    <button type="button" class="btn-close"
-                                                        data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Data Aplikasi <strong><u>{{ $app->name }}</u></strong>
-                                                        akan dihapus.<br /> Anda Yakin?</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-outline-secondary"
-                                                        data-bs-dismiss="modal"><i class="bi bi-x-circle"></i>
-                                                        Tidak</button>
-                                                    <a href="{{ route('apps-admin.destroy', $app->id) }}"
-                                                        class="btn btn-outline-danger">
-                                                        <i class="bi bi-check-circle"></i> Ya
-                                                    </a>
-                                                </div>
+            </div>
+            <div class="card-datatable table-responsive text-nowrap">
+                <table class="apps table table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th></th>
+                            <th>Aplikasi</th>
+                            <th>Deskripsi</th>
+                            <th class="d-flex align-items-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($apps as $app)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>
+                                    <img src="{{ asset($app->icon) }}" alt="{{ $app->name }}" class="rounded-circle"
+                                        width="40" height="40">
+                                </td>
+                                <td class="text-wrap">
+                                    <div class="d-flex gap-3 border-start border-3 border-success ps-3">
+                                        <div>
+                                            <a href="#" class="mb-1 text-gray-900 text-success fw-bold">
+                                                {{ strtoupper($app->name) }}
+                                            </a>
+                                            <sup class="text-primary text-hover-primary fw-semibold fs-18">{{ $app->versi }}</sup>
+                                            <div class="fs-7 text-muted fw-bold">
+                                                <a href="{{ $app->url }}" target="_blank" class="text-reset"
+                                                    style="color: inherit; text-decoration: underline;">{{ $app->url }}</a>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
+                                </td>
+                                <td class="text-wrap">{{ $app->deskripsi }}</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                            data-bs-toggle="dropdown">
+                                            <i class="icon-base ri ri-more-2-line icon-18px"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="{{ route('apps.edit', $app->id) }}"><i
+                                                    class="icon-base ri ri-pencil-line icon-18px me-2"></i> Edit</a>
+                                            <button class="dropdown-item"
+                                                onclick="trashData('{{ route('apps.destroy', $app->id) }}')"><i
+                                                    class="icon-base ri ri-delete-bin-6-line icon-18px me-2"></i>
+                                                Delete</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
-        </section>
-    </main>
+        </div>
+    </div>
 @endsection
-@section('additional-js')
-    <script type="text/javascript" src="{{ asset('server/js/jquery-5.3.1.js') }}"></script>
-    <script src="{{ asset('server/vendor/DataTables/DataTables-1.13.1/js/jquery.dataTables.min.js') }}"></script>
+@section('scripts')
+    <script src="{{ asset('server/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('#example').DataTable();
+            $('.apps').DataTable();
         });
     </script>
 @endsection

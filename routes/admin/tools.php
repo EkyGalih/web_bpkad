@@ -32,9 +32,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
             Route::get('/', [AppsController::class, 'index'])->name('apps.index');
             Route::get('create', [AppsController::class, 'create'])->name('apps.create');
             Route::post('store', [AppsController::class, 'store'])->name('apps.store');
-            Route::get('edit/{id}', [AppsController::class, 'edit'])->name('apps.edit');
-            Route::put('update/{id}', [AppsController::class, 'update'])->name('apps.update');
-            Route::get('destroy/{id}', [AppsController::class, 'destroy'])->name('apps.destroy');
+            Route::get('edit/{apps}', [AppsController::class, 'edit'])->name('apps.edit');
+            Route::put('update/{apps}', [AppsController::class, 'update'])->name('apps.update');
+            Route::get('destroy/{apps}', [AppsController::class, 'destroy'])->name('apps.destroy');
         });
 
         Route::group(['prefix' => 'tools/olympic'], function () {
