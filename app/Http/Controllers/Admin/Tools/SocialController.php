@@ -30,79 +30,16 @@ class SocialController extends Controller
     {
         $socials = Social::get()->last();
 
-        if (empty($socials)) {
-            if ($request->social == 'twitter') {
-                Social::create(['twitter' => $request->link]);
-            } elseif ($request->social == 'facebook') {
-                Social::create(['facebook' => $request->link]);
-            } elseif ($request->social == 'youtube') {
-                Social::create(['youtube' => $request->link]);
-            } elseif ($request->social == 'instagram') {
-                Social::create(['instagram' => $request->link]);
-            } elseif ($request->social == 'whatsapp') {
-                Social::create(['whatsapp' => $request->link]);
-            }
-        } else {
-            $social = Social::findOrFail($socials->id);
+        $social = new Social();
+        $social->twitter = $request->input('twitter', $socials->twitter);
+        $social->facebook = $request->input('facebook', $socials->facebook);
+        $social->youtube = $request->input('youtube', $socials->youtube);
+        $social->instagram = $request->input('instagram', $socials->instagram);
+        $social->whatsapp = $request->input('whatsapp', $socials->whatsapp);
+        $social->save();
 
-            if ($request->social == 'twitter') {
-                $social->update(['twitter' => $request->link]);
-            } elseif ($request->social == 'facebook') {
-                $social->update(['facebook' => $request->link]);
-            } elseif ($request->social == 'youtube') {
-                $social->update(['youtube' => $request->link]);
-            } elseif ($request->social == 'instagram') {
-                $social->update(['instagram' => $request->link]);
-            } elseif ($request->social == 'whatsapp') {
-                $social->update(['whatsapp' => $request->link]);
-            }
-        }
+        _recentAdd($social->id, ' mengupdate sosial media.', 'Sosial Media');
 
-        return redirect()->back()->with(['success' => 'Sosial media berhasil ditambah!']);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return redirect()->back()->with(['success' => 'Sosial media berhasil disimpan!']);
     }
 }

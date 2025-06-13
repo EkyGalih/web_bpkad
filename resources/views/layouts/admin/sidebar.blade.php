@@ -104,7 +104,7 @@
 
         <!-- Forms & Tables -->
         <li class="menu-header small mt-5">
-            <span class="menu-header-text" data-i18n="ADDON">ADDON/span>
+            <span class="menu-header-text" data-i18n="ADDON">ADDON</span>
         </li>
         <!-- Forms -->
         <li class="menu-item @if (request()->is('admin/web/tools/*')) open @endif">
@@ -118,27 +118,27 @@
                         <div data-i18n="Menu">Menu</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="{{ route('tools-social') }}" class="menu-link">
+                <li class="menu-item @if (request()->is('admin/web/tools/social*')) active @endif">
+                    <a href="{{ route('social.index') }}" class="menu-link">
                         <div data-i18n="Social Media">Social Media</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="{{ route('tools-link') }}" class="menu-link">
+                <li class="menu-item @if (request()->is('admin/web/tools/link*')) active @endif">
+                    <a href="{{ route('link.index') }}" class="menu-link">
                         <div data-i18n="Link">Link</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="{{ route('tools-address') }}" class="menu-link">
+                <li class="menu-item @if (request()->is('admin/web/tools/address*')) active @endif">
+                    <a href="{{ route('address.index') }}" class="menu-link">
                         <div data-i18n="Alamat Kantor">Alamat Kantor</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="{{ route('apps-admin.index') }}" class="menu-link">
+                <li class="menu-item @if (request()->is('admin/web/tools/apps*')) active @endif">
+                    <a href="{{ route('apps.index') }}" class="menu-link">
                         <div data-i18n="Aplikasi">Aplikasi</div>
                     </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item @if (request()->is('admin/web/tools/olympic*')) active @endif">
                     <a href="{{ route('olympic-admin.index') }}" class="menu-link">
                         <div data-i18n="Olympic">Olympic</div>
                     </a>
