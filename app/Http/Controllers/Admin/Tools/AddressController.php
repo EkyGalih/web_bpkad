@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Admin\Tools;
 
 use App\Http\Controllers\Controller;
 use App\Models\Address;
-use Cornford\Googlmapper\Mapper;
-use GoogleMaps\GoogleMaps;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
@@ -18,34 +16,8 @@ class AddressController extends Controller
     public function index()
     {
         $address = Address::first();
-        // $config['center'] = $address->address;
-        // $config['zoom'] = '14';
-        // $config['map_height'] = '500px';
-        // $config['scrollwheel'] = false;
-
-        \Mapper::map($address->lat, $address->lng);
 
         return view('admin.Tools.Address.index', compact('address'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        Address::create([
-            'address' => $request->address,
-            'lat' => $request->lat,
-            'lng' => $request->lng,
-            'phone' => $request->phone,
-            'fax' => $request->fax,
-            'email' => $request->email
-        ]);
-
-        return redirect()->back()->with(['success' => 'Pengaturan alamat berhasil disimpan!']);
     }
 
     /**
@@ -55,29 +27,18 @@ class AddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Address $address)
     {
-        $address = Address::findOrFail($id);
-        $address->update([
-            'address' => $request->address,
-            'lat' => $request->lat,
-            'lng' => $request->lng,
-            'phone' => $request->phone,
-            'fax' => $request->fax,
-            'email' => $request->email
-        ]);
+        $addrr = new Address();
+        $addrr->address = $request->address;
+        $addrr->lat = $request->lat;
+        $addrr->lng = $request->lng;
+        $addrr->phone = $request->phone;
+        $addrr->email = $request->email;
+        $addrr->save();
 
-        return redirect()->back()->with(['success' => 'Pengaturan alamat berhasil disimpan!']);
-    }
+        _recentAdd($address->id, ' Mengubah alamat: ', 'Alamat');
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return redirect()->back()->with('success', 'Pengaturan alamat berhasil disimpan!');
     }
 }

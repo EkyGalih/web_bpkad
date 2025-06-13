@@ -11,8 +11,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::group(['prefix' => 'web'], function () {
         Route::group(['prefix' => 'tools/address'], function () {
             Route::get('/', [AddressController::class, 'index'])->name('address.index');
-            Route::post('store', [AddressController::class, 'store'])->name('address.store');
-            Route::put('update/{id}', [AddressController::class, 'update'])->name('address.update');
+            Route::put('update/{address}', [AddressController::class, 'update'])->name('address.update');
         });
 
         Route::group(['prefix' => 'tools/link'], function () {
