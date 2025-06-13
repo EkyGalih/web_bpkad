@@ -38,7 +38,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         });
 
         Route::group(['prefix' => 'tools/olympic'], function () {
-            Route::get('/{id?}', [AdminController::class, 'olympic'])->name('olympic-admin.index');
+            Route::get('/', [AdminController::class, 'olympic'])->name('olympic-admin.index');
+            Route::post('create-periode', [AdminController::class, 'create_periode'])->name('olympic-admin.create-periode');
             Route::post('store', [AdminController::class, 'store'])->name('olympic-admin.store');
             Route::put('update/{id}', [AdminController::class, 'update'])->name('olympic-admin.update');
             Route::get('destroy/{id}', [AdminController::class, 'destroy'])->name('olympic-admin.destroy');

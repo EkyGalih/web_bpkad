@@ -34,33 +34,73 @@ class AdminController extends Controller
         return view('admin.beranda.beranda', compact('post', 'laporan', 'permohonan', 'posts', 'lap', 'recents'));
     }
 
-    public function olympic($id = null)
+    public function olympic(Request $request)
     {
         $bidangs = Bidang::get();
-        $olympics = Olympic::join('bidang', 'olympic.bidang_id', '=', 'bidang.uuid')
-            ->orderBy('emas', 'DESC')
+        $year = $request->query('tahun') ?? Olympic::select('tahun')->orderByDesc('tahun')->first()?->tahun;
+
+        $olympics = Olympic::join('bidang', 'olympic.bidang_id', '=', 'bidang.id')
+            ->where('olympic.tahun', $year)
             ->orderBy('total', 'DESC')
             ->select(
                 'bidang.nama_bidang',
                 'olympic.*'
             )
             ->get();
-        if ($id == null) {
-            $olympic = "";
-        } elseif ($id != null) {
-            $olympic = Olympic::join('bidang', 'olympic.bidang_id', '=', 'bidang.uuid')
-                ->orderBy('emas', 'DESC')
-                ->orderBy('total', 'DESC')
-                ->select(
-                    'bidang.uuid',
-                    'bidang.nama_bidang',
-                    'olympic.*'
-                )
-                ->where('olympic.id', '=', $id)
-                ->first();
+
+        $previousYear = now()->year - 1;
+
+        $before_winners = Olympic::where('tahun', $previousYear)
+            ->select('bidang_id')
+            ->selectRaw('(emas + perak + perunggu) as total_medali')
+            ->orderByDesc('total_medali')
+            ->take(3)
+            ->get()
+            ->map(function ($item, $index) {
+                $item->ranking = $index + 1;
+                return $item;
+            });
+
+
+        $years = Olympic::select('tahun')
+            ->groupBy('tahun')
+            ->orderBy('tahun', 'DESC')
+            ->get()
+            ->pluck('tahun');
+
+        return view('admin.Tools.olympic.index', compact('bidangs', 'olympics', 'years', 'year', 'before_winners'));
+    }
+
+    public function create_periode(Request $request)
+    {
+        $tahun = now()->year;
+
+        // Cek apakah sudah ada data Olympic untuk tahun ini
+        $exists = Olympic::where('tahun', $tahun)->exists();
+        if ($exists) {
+            return redirect()->back()->with('error', 'Periode untuk tahun ini sudah ada!');
         }
 
-        return view('admin.Tools.olympic.index', compact('bidangs', 'olympics', 'olympic'));
+        $bidangs = Bidang::selectRaw('MIN(id) as id, nama_bidang')
+            ->whereNotIn('nama_bidang', ['Pimpinan', 'Lainnya'])
+            ->groupBy('nama_bidang')
+            ->get();
+
+        foreach ($bidangs as $bidang) {
+            $olympic = new Olympic();
+            $olympic->bidang_id = $bidang->id;
+            $olympic->emas = 0;
+            $olympic->perak = 0;
+            $olympic->perunggu = 0;
+            $olympic->total = 0;
+            $olympic->tahun = $tahun;
+            $olympic->keterangan = $request->name;
+            $olympic->save();
+        }
+
+        _recentAdd($olympic->id, ' Membuat periode baru untuk Olimpiade', 'olympic');
+
+        return redirect()->back()->with('success', 'Periode berhasil dibuat!');
     }
 
     public function store(Request $request)
@@ -99,7 +139,7 @@ class AdminController extends Controller
 
         $emas = $request->emas;
         $perak = $request->perak;
-        $perunggu =$request->perunggu;
+        $perunggu = $request->perunggu;
         $total = $emas + $perak + $perunggu;
 
         $olympic->update([

@@ -1,155 +1,87 @@
 @extends('admin.index')
 @section('title', 'Olympic')
-@section('menu-tools', 'show')
-@section('tools-olympic', 'active')
-@section('additional-css')
-    <link rel="stylesheet" type="text/css"
-        href="{{ asset('server/vendor/DataTables/DataTables-1.13.1/css/jquery.dataTables.min.css') }}" />
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('server/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
+    <link rel="stylesheet"
+        href="{{ asset('server/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
 @endsection
 @section('content')
-    <main id="main" class="main">
-        <div class="pagetitle">
-            <h1>Olympic</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('olympic-admin.index') }}">Tools</a></li>
-                    <li class="breadcrumb-item active">olympic</li>
-                </ol>
-            </nav>
-        </div>
-        <section class="section">
-            <div class="row">
-                @if (Session::has('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        {{ Session::get('success') }}
-                    </div>
-                @endif
-                <div class="col-lg-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-10">
-                                    <h5 class="card-title">Form Input <br />
-                                        <span>Input Peraihan Medali</span>
-                                    </h5>
-                                </div>
-                                <hr />
-                            </div>
-                            <form
-                                action="{{ $olympic == null ? route('olympic-admin.store') : route('olympic-admin.update', $olympic->id) }}"
-                                method="POST">
-                                @csrf
-                                @if (!empty($olympic))
-                                    @method('PUT')
-                                @endif
-                                <div class="row">
-                                    <label for="inputtext"><i class="bi bi-instagram"></i> Bidang</label>
-                                    <div class="col-lg-12">
-                                        <select name="bidang_id" class="form-control">
-                                            <option value="">--- Pilih Bidang ---</option>
-                                            @foreach ($bidangs as $bidang)
-                                                @if (empty($olympic))
-                                                    <option value="{{ $bidang->uuid }}">{{ $bidang->nama_bidang }}</option>
-                                                @else
-                                                    <option value="{{ $bidang->uuid }}"
-                                                        {{ $olympic->bidang_id == $bidang->uuid ? 'selected' : '' }}>
-                                                        {{ $bidang->nama_bidang }}</option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div><br />
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <label for="inputText"><i class="bi bi-award-fill"></i> Emas</label>
-                                        <input type="link" class="form-control" name="emas"
-                                            value="{{ $olympic->emas ?? '' }}">
-                                    </div>
-                                </div><br />
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <label for="inputText"><i class="bi bi-award-fill"></i> Perak</label>
-                                        <input type="link" class="form-control" name="perak"
-                                            value="{{ $olympic->perak ?? '' }}">
-                                    </div>
-                                </div><br />
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <label for="inputText"><i class="bi bi-award-fill"></i> Perunggu</label>
-                                        <input type="link" class="form-control" name="perunggu"
-                                            value="{{ $olympic->perunggu ?? '' }}">
-                                    </div>
-                                </div><br />
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <button type="submit" class="btn btn-success btn-md">
-                                            <i class="bi bi-save"></i> Simpan
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="mb-0">Olimpiade BPKAD</h4>
+                    <div class="d-flex gap-2">
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#olympicModal"
+                            class="btn btn-outline-primary btn-md">
+                            <i class="icon-base ri ri-file-add-line icon-18px me-2"></i> Tambah Periode
+                        </button>
+                        <form method="GET" action="{{ route('olympic-admin.index') }}" class="d-flex align-items-center">
+                            <select name="tahun" class="form-select form-select-sm me-2" onchange="this.form.submit()">
+                                @foreach ($years as $tahun)
+                                    <option value="{{ $tahun }}" {{ $year == $tahun ? 'selected' : '' }}>
+                                        {{ $tahun }}</option>
+                                @endforeach
+                            </select>
+                            <noscript><button type="submit" class="btn btn-primary btn-sm">Filter</button></noscript>
+                        </form>
                     </div>
                 </div>
-                <div class="col-lg-8">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-9">
-                                    <h5 class="card-title"><i class="bi bi-trophy-fill"></i> Perolehan Medali <br />
-                                        <span>Data semua
-                                            perolehan medali</span>
-                                    </h5>
-                                </div>
-                            </div>
-                            <div style="overflow-x: auto;">
-                            <table class="table table-hover" id="table-link">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Bidang</th>
-                                        <th style="text-align: center;">Emas</th>
-                                        <th style="text-align: center;">Perak</th>
-                                        <th style="text-align: center;">Perunggu</th>
-                                        <th style="text-align: center;">Total</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($olympics as $olympic)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $olympic->nama_bidang }}</td>
-                                            <td style="text-align: center;">{{ $olympic->emas }}</td>
-                                            <td style="text-align: center;">{{ $olympic->perak }}</td>
-                                            <td style="text-align: center;">{{ $olympic->perunggu }}</td>
-                                            <td style="text-align: center;">{{ $olympic->total }}</td>
-                                            <td>
-                                                <a href="{{ route('olympic-admin.index', $olympic->id) }}"
-                                                    class="btn btn-warning btn-sm">
-                                                    <i class="bi bi-edit"></i> Edit
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @include('admin.Tools.olympic.addons._add')
             </div>
-        </section>
-    </main>
+            <div class="card-datatable table-responsive text-nowrap">
+                @php
+                    $rankingMap = $before_winners->pluck('ranking', 'bidang_id'); // [bidang_id => ranking]
+                @endphp
+                <table class="table table-hover table-olympic">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Bidang</th>
+                            <th>Emas</th>
+                            <th>Perak</th>
+                            <th>Perunggu</th>
+                            <th>Total</th>
+                            <th class="d-flex align-items-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($olympics as $olympic)
+                            @php
+                                $ranking = $rankingMap[$olympic->bidang_id] ?? null;
+                                $rowClass = match ($ranking) {
+                                    1 => 'table-warning', // Emas
+                                    2 => 'table-secondary', // Perak
+                                    3 => 'table-danger', // Perunggu (buat sendiri jika tidak ada)
+                                    default => '',
+                                };
+                            @endphp
+                            <tr class="{{ $rowClass }}">
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $olympic->nama_bidang }}</td>
+                                <td>{{ $olympic->emas }}</td>
+                                <td>{{ $olympic->perak }}</td>
+                                <td>{{ $olympic->perunggu }}</td>
+                                <td>{{ $olympic->total }}</td>
+                                <td>
+                                    <a href="{{ route('olympic-admin.index', $olympic->id) }}"
+                                        class="btn btn-outline-success btn-xs">
+                                        <i class="icon-base ri ri-save-2-line me-2"></i> Save
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 @endsection
-@section('additional-js')
-    <script type="text/javascript" src="{{ asset('server/js/jquery-5.3.1.js') }}"></script>
-    <script src="{{ asset('server/vendor/DataTables/DataTables-1.13.1/js/jquery.dataTables.min.js') }}"></script>
+@section('scripts')
+    <script src="{{ asset('server/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('#table-link').DataTable();
+            $('.table-olympic').DataTable();
         });
     </script>
 @endsection
