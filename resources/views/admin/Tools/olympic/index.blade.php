@@ -10,7 +10,10 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="mb-0">Olimpiade BPKAD</h4>
+                    <div>
+                        <h4 class="mb-0">Olimpiade BPKAD - {{ $year }}</h4>
+                        <div class="fs-12 text-muted fst-italic">{{ strtoupper($season) }}</div>
+                    </div>
                     <div class="d-flex gap-2">
                         <button type="button" data-bs-toggle="modal" data-bs-target="#olympicModal"
                             class="btn btn-outline-primary btn-md">
@@ -42,7 +45,6 @@
                             <th>Perak</th>
                             <th>Perunggu</th>
                             <th>Total</th>
-                            <th class="d-flex align-items-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,16 +61,25 @@
                             <tr class="{{ $rowClass }}">
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $olympic->nama_bidang }}</td>
-                                <td>{{ $olympic->emas }}</td>
-                                <td>{{ $olympic->perak }}</td>
-                                <td>{{ $olympic->perunggu }}</td>
-                                <td>{{ $olympic->total }}</td>
                                 <td>
-                                    <a href="{{ route('olympic-admin.index', $olympic->id) }}"
-                                        class="btn btn-outline-success btn-xs">
-                                        <i class="icon-base ri ri-save-2-line me-2"></i> Save
-                                    </a>
+                                    <span class="editable" data-id="{{ $olympic->id }}"
+                                        data-field="emas">{{ $olympic->emas }}</span>
+                                    <input type="number" class="form-control form-control-sm d-none edit-input"
+                                        value="{{ $olympic->emas }}">
                                 </td>
+                                <td>
+                                    <span class="editable" data-id="{{ $olympic->id }}"
+                                        data-field="perak">{{ $olympic->perak }}</span>
+                                    <input type="number" class="form-control form-control-sm d-none edit-input"
+                                        value="{{ $olympic->perak }}">
+                                </td>
+                                <td>
+                                    <span class="editable" data-id="{{ $olympic->id }}"
+                                        data-field="perunggu">{{ $olympic->perunggu }}</span>
+                                    <input type="number" class="form-control form-control-sm d-none edit-input"
+                                        value="{{ $olympic->perunggu }}">
+                                </td>
+                                <td>{{ $olympic->total }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -82,6 +93,46 @@
     <script>
         $(document).ready(function() {
             $('.table-olympic').DataTable();
+        });
+
+        $(document).ready(function() {
+            $('.table-olympic').on('click', '.editable', function() {
+                const $span = $(this);
+                const $input = $span.siblings('input.edit-input');
+
+                $span.addClass('d-none');
+                $input.removeClass('d-none').focus();
+            });
+
+            $('.table-olympic').on('blur', '.edit-input', function() {
+                const $input = $(this);
+                const newValue = $input.val();
+                const $span = $input.siblings('span.editable');
+                const id = $span.data('id');
+                const field = $span.data('field');
+
+                // Kirim AJAX untuk update
+                $.ajax({
+                    url: '{{ route('olympic-admin.store') }}',
+                    method: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: id,
+                        field: field,
+                        value: newValue
+                    },
+                    success: function(response) {
+                        $span.text(newValue);
+                        $input.addClass('d-none');
+                        $span.removeClass('d-none');
+
+                        // Update total jika tersedia
+                        if (response.total !== undefined) {
+                            $input.closest('tr').find('td').eq(5).text(response.total);
+                        }
+                    }
+                });
+            });
         });
     </script>
 @endsection

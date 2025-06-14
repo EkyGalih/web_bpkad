@@ -38,22 +38,25 @@ class AdminController extends Controller
     {
         $bidangs = Bidang::get();
         $year = $request->query('tahun') ?? Olympic::select('tahun')->orderByDesc('tahun')->first()?->tahun;
+        $season = Olympic::select('keterangan')->where('tahun', $year)->first()?->keterangan ?? 'Olimpiade';
 
         $olympics = Olympic::join('bidang', 'olympic.bidang_id', '=', 'bidang.id')
             ->where('olympic.tahun', $year)
-            ->orderBy('total', 'DESC')
+            ->orderByDesc('emas')
+            ->orderByDesc('perak')
+            ->orderByDesc('perunggu')
             ->select(
                 'bidang.nama_bidang',
                 'olympic.*'
             )
             ->get();
 
-        $previousYear = now()->year - 1;
+        $previousYear = $year ?? now()->year - 1;
 
         $before_winners = Olympic::where('tahun', $previousYear)
-            ->select('bidang_id')
-            ->selectRaw('(emas + perak + perunggu) as total_medali')
-            ->orderByDesc('total_medali')
+            ->orderByDesc('emas')   // Jika total sama, lihat emas
+            ->orderByDesc('perak')  // Jika emas sama, lihat perak
+            ->orderByDesc('perunggu') // Jika perak juga sama, lihat perunggu
             ->take(3)
             ->get()
             ->map(function ($item, $index) {
@@ -62,13 +65,14 @@ class AdminController extends Controller
             });
 
 
+
         $years = Olympic::select('tahun')
             ->groupBy('tahun')
             ->orderBy('tahun', 'DESC')
             ->get()
             ->pluck('tahun');
 
-        return view('admin.Tools.olympic.index', compact('bidangs', 'olympics', 'years', 'year', 'before_winners'));
+        return view('admin.Tools.olympic.index', compact('bidangs', 'olympics', 'years', 'year', 'before_winners', 'season'));
     }
 
     public function create_periode(Request $request)
@@ -105,32 +109,20 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
-        $cek_bidang = Olympic::where('bidang_id', '=', $request->bidang_id)->first();
-        // dd($cek_bidang);
-        if ($cek_bidang == NULL) {
-            Olympic::create([
-                'bidang_id' => $request->bidang_id,
-                'emas' => $request->emas,
-                'perak' => $request->perak,
-                'perunggu' => $request->perunggu,
-                'total' => $request->emas + $request->perak + $request->perunggu
-            ]);
-        } else {
-            $emas = $cek_bidang->emas + $request->emas;
-            $perak = $cek_bidang->perak + $request->perak;
-            $perunggu = $cek_bidang->perunggu + $request->perunggu;
-            $total_temp = $request->emas + $request->perak + $request->perunggu;
-            $total = $cek_bidang->total + $total_temp;
+        $olympic = Olympic::findOrFail($request->id);
+        $field = $request->field;
+        $value = (int) $request->value;
 
-            $cek_bidang->update([
-                'emas' => $emas,
-                'perak' => $perak,
-                'perunggu' => $perunggu,
-                'total' => $total
-            ]);
+        // Validasi field yang diizinkan
+        if (!in_array($field, ['emas', 'perak', 'perunggu'])) {
+            return response()->json(['error' => 'Invalid field'], 400);
         }
 
-        return redirect()->back()->with(['success' => 'Data diupdate!']);
+        $olympic->$field = $value;
+        $olympic->total = $olympic->emas + $olympic->perak + $olympic->perunggu;
+        $olympic->save();
+
+        return response()->json(['success' => true, 'total' => $olympic->total]);
     }
 
     public function update(Request $request, $id)
