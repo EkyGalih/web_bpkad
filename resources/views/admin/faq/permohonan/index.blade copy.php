@@ -23,8 +23,10 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Permohonan</th>
-                            <th>Pemohon</th>
+                            <th>Kode Permohonan</th>
+                            <th>Email</th>
+                            <th>No.Hp</th>
+                            <th>Alamat</th>
                             <th>Tgl Pengajuan</th>
                             <th>Status</th>
                             <th class="d-flex align-items-center">Aksi</th>
@@ -37,45 +39,47 @@
                             @endphp
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td class="text-wrap">
-                                    <div class="d-flex gap-3 border-start border-3 border-info ps-3">
-                                        <div>
-                                            <a href="#" data-bs-tooltip="tooltip" data-bs-toggle="modal"
-                                                data-bs-target="#ShowPermohonan{{ $loop->iteration }}" data-bs-placement="top"
-                                                title="Lihat Permohonan" class="mb-1 text-gray-900 text-info fw-bold">
-                                                {{ $item->kode_pemohon }}
-                                            </a>
-                                        </div>
-                                    </div>
+                                <td><button class="btn btn-link" data-bs-tooltip="tooltip" data-bs-toggle="modal"
+                                        data-bs-target="#ShowPermohonan{{ $loop->iteration }}" data-bs-placement="top"
+                                        title="Lihat Permohonan">{{ $item->kode_pemohon }}</button> <sup
+                                        class="{{ NewData($item->created_at) == 'true' ? 'blink' : '' }}">{{ NewData($item->created_at) == 'true' ? 'Baru' : '' }}</sup>
                                 </td>
+                                @include('admin/faq/permohonan/addons/_detail')
                                 <td>
-                                    <a href="#" data-bs-tooltip="tooltip" data-bs-toggle="modal"
-                                        data-bs-target="#ShowPemohon{{ $loop->iteration }}" data-bs-placement="top"
-                                        title="Lihat Pemhon" class="text-decoration-none text-gray-900">
-                                        <i class="icon-base ri ri-user-3-line icon-18px me-2"></i>
-                                        {{ $item->nama }}
+                                    <a href="https://mail.google.com/mail/u/0/#inbox?compose=new" target="_blank"
+                                        data-bs-tooltip="tooltip" data-bs-placement="top" title="Send Data via Email">
+                                        {{ $item->email }}
                                     </a>
+                                    <p id="email" hidden>{{ $item->email }}</p>
+                                    <sup><button class="btn btn-xs" data-bs-tooltip="tooltip" data-bs-placement="top"
+                                            title="copy email address" onclick="copyToClipboard('#email')"><i
+                                                class="bx bx-copy"></i></button></sup>
+                                </td>
+                                <td><a href="https://wa.me/62{{ substr($item->telepon, 1) }}" target="_blank"
+                                        data-bs-tooltip="tooltip" data-bs-placement="top"
+                                        title="Send Data via Whatsapp">{{ $item->telepon }}</a></td>
+                                <td>
+                                    <address>{{ $item->alamat }}</address>
                                 </td>
                                 <td>
-                                    {{ \Carbon\Carbon::parse($item->created_at)->locale('id')->isoFormat('dddd, D MMMM YYYY') }}
+                                    {{ get_date($item->created_at) }}
                                 </td>
                                 <td>
                                     @if ($item->status == 'proses')
                                         <a href="{{ route('permohonan-admin.status', $item->id) }}"
-                                            class="btn btn-warning btn-sm"><i class="icon-base ri ri-time-fill me-2"></i>
+                                            class="btn btn-warning btn-sm"><i class="bi bi-clock"></i>
                                             Proses</a>
                                     @else
-                                        <a href="#" class="btn btn-success btn-sm"><i class="icon-base ri ri-check-double-fill me-2"></i>
+                                        <a href="#" class="btn btn-success btn-sm"><i class="bi bi-check"></i>
                                             selesai</a>
                                     @endif
                                 </td>
                                 <td>
-                                    <button class="btn btn-danger btn-md" data-bs-toggle="modal" data-bs-tooltip="tooltip" data-bs-placement="top" title="Hapus Permohonan"
+                                    <button class="btn btn-danger btn-md" data-bs-toggle="modal"
                                         data-bs-target="#DeletePermohonan{{ $loop->iteration }}">
-                                        <i class="icon-base ri ri-delete-bin-4-fill"></i>
+                                        <i class="bi bi-trash"></i>
                                     </button>
-                                    @include('admin/faq/permohonan/addons/_detail')
-                                    @include('admin.faq.permohonan.addons._pemohon')
+
                                     @include('admin/faq/permohonan/addons/_delete')
                                 </td>
                             </tr>

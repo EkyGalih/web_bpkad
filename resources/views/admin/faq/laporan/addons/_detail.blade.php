@@ -1,7 +1,7 @@
 <div class="modal fade" id="ShowLaporan{{ $loop->iteration }}" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header p-3">
+            <div class="modal-header p-">
                 <h5 class="modal-title"><i class="icon-base ri ri-chat-4-fill me-2"></i>
                     Detail Laporan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
