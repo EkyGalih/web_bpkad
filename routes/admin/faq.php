@@ -6,16 +6,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::group(['prefix' => 'web'], function () {
-        Route::group(['prefix' => 'laporan'], function () {
+        Route::group(['prefix' => 'faq/laporan'], function () {
             Route::get('/', [LaporanMasyarakatController::class, 'index'])->name('laporan-admin.index');
             Route::get('create', [LaporanMasyarakatController::class, 'create'])->name('laporan-admin.create');
             Route::post('store', [LaporanMasyarakatController::class, 'store'])->name('laporan-admin.store');
-            Route::get('edit/{id}', [LaporanMasyarakatController::class, 'edit'])->name('laporan-admin.edit');
-            Route::put('upadte/{id}', [LaporanMasyarakatController::class, 'update'])->name('laporan-admin.update');
-            Route::get('destroy/{id}', [LaporanMasyarakatController::class, 'destroy'])->name('laporan-admin.destroy');
+            Route::get('edit/{laporan}', [LaporanMasyarakatController::class, 'edit'])->name('laporan-admin.edit');
+            Route::put('upadte/{laporan}', [LaporanMasyarakatController::class, 'update'])->name('laporan-admin.update');
+            Route::get('destroy/{laporan}', [LaporanMasyarakatController::class, 'destroy'])->name('laporan-admin.destroy');
         });
 
-        Route::group(['prefix' => 'permohonan'], function () {
+        Route::group(['prefix' => 'faq/permohonan'], function () {
             Route::get('/', [PermohonanController::class, 'index'])->name('permohonan-admin.index');
             Route::get('create', [PermohonanController::class, 'create'])->name('permohonan-admin.create');
             Route::post('store', [PermohonanController::class, 'store'])->name('permohonan-admin.store');

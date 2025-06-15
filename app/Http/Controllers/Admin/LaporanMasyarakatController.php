@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Laporan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class LaporanMasyarakatController extends Controller
 {
@@ -70,9 +71,44 @@ class LaporanMasyarakatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Laporan $laporan)
     {
-        //
+        $berkas     = $request->file('berkas_jawaban');
+
+        if ($berkas != null) {
+            $ext        = array('png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG', 'pdf', 'xls', 'xlsx');
+            $filename   = md5($berkas->getClientOriginalName()) . '.' . $berkas->getClientOriginalExtension();
+
+            if (in_array($berkas->getClientOriginalExtension(), $ext)) {
+                if ($berkas->getSize() <= 5000000) {
+                    $path = $berkas->storeAs('uploads/laporan/jawaban', $filename, 's3');
+                    if ($laporan->berkas_jawaban != null) {
+                        // Hapus file lama dari S3 jika ada
+                        Storage::disk('s3')->delete($laporan->berkas_jawaban);
+                    }
+                    $laporan->update([
+                        'jawaban' => $request->jawaban,
+                        'berkas_jawaban' => $path,
+                        'jawaban_dari' => 'langsung'
+                    ]);
+
+                    return redirect()->back()->with(['success' => 'Jawaban sudah dikirim!']);
+                } else {
+                    return redirect()->back()->with(['warning_size' => 'Ukuran file melebihi 5MB']);
+                }
+            } else {
+                return redirect()->back()->with(['warning_ext' => 'Ektensi File harus format JPG, JPEG, PNG, PDF, XLS, atau XLSX']);
+            }
+        } else {
+
+            $laporan->update([
+                'jawaban' => $request->jawaban,
+                'berkas_jawaban' => $request->berkas_jawaban,
+                'jawaban_dari' => 'langsung'
+            ]);
+
+            return redirect()->back()->with(['success' => 'Jawaban sudah dikirim!']);
+        }
     }
 
     /**

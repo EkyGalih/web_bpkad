@@ -145,18 +145,18 @@
                 </li>
             </ul>
         </li>
-        <li class="menu-item">
+        <li class="menu-item @if (request()->is('admin/web/faq/*')) open @endif">
             <a href="#" class="menu-link menu-toggle">
                 <i class="menu-icon icon-base ri ri-question-fill"></i>
                 <div data-i18n="F.A.Q">F.A.Q</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item">
+                <li class="menu-item @if (request()->is('admin/web/faq/laporan*')) active @endif">
                     <a href="{{ route('laporan-admin.index') }}" class="menu-link">
                         <div data-i18n="Laporan">Laporan</div>
                     </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item @if (request()->is('admin/web/faq/permohonan*')) active @endif">
                     <a href="{{ route('permohonan-admin.index') }}" class="menu-link">
                         <div data-i18n="Permohonan">Permohonan</div>
                     </a>
