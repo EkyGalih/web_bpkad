@@ -31,7 +31,7 @@ class GaleryController extends Controller
      */
     public function create()
     {
-        return view('admin.galery.foto.add');
+        return view('admin.galery.create');
     }
 
     /**

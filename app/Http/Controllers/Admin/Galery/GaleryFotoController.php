@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Galery;
 
 use App\Http\Controllers\Controller;
+use App\Models\Galery;
+use App\Models\GaleryFoto;
 use Illuminate\Http\Request;
 
 class GaleryFotoController extends Controller
@@ -14,7 +16,9 @@ class GaleryFotoController extends Controller
      */
     public function index()
     {
-        //
+        $gallery = Galery::where('galery_type_id', '1')->get();
+
+        return view('admin.galery.foto.index', compact('gallery'));
     }
 
     /**
@@ -47,9 +51,11 @@ class GaleryFotoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Galery $foto)
     {
-        //
+        $fotos = GaleryFoto::where('galery_id', $foto->id)->paginate(9);
+
+        return view('admin.galery.foto.detail', compact('fotos', 'foto'));
     }
 
     /**

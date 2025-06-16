@@ -47,31 +47,46 @@
                 </li>
             </ul>
         </li>
-        <!-- e-commerce-app menu end -->
-        <!-- Academy menu start -->
-        {{-- <li class="menu-item">
+        <li class="menu-item @if (request()->is('admin/web/data-informasi*')) open @endif">
             <a href="#" class="menu-link menu-toggle">
                 <i class="menu-icon icon-base ri ri-database-2-fill"></i>
-                <div data-i18n="Data BPKAD">Data BPKAD</div>
+                <div data-i18n="Data Informasi">Data Informasi</div>
             </a>
             <ul class="menu-sub">
+                <li class="menu-item @if (request()->is('admin/web/data-informasi/galery*')) open @endif">
+                    <a href="#" class="menu-link menu-toggle">
+                        <div data-i18n="Galery">Galery</div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item @if (request()->is('admin/web/data-informasi/galery/foto*')) active @endif">
+                            <a href="{{ route('galery-foto.index') }}" class="menu-link">
+                                <div data-i18n="Foto">Foto</div>
+                            </a>
+                        </li>
+                        <li class="menu-item @if (request()->is('admin/web/data-informasi/galery/video*')) active @endif">
+                            <a href="{{ route('galery-video.index') }}" class="menu-link">
+                                <div data-i18n="Video">Video</div>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{ route('banner-video.index') }}" class="menu-link">
+                                <div data-i18n="Video Banner">Video Banner</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="menu-item">
                     <a href="#" class="menu-link">
-                        <div data-i18n="Data Aset">Data Aset</div>
+                        <div data-i18n="Sliders">Sliders</div>
                     </a>
                 </li>
                 <li class="menu-item">
                     <a href="#" class="menu-link">
-                        <div data-i18n="Data Pegawai">Data Pegawai</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Data Transparansi">Data Transparansi</div>
+                        <div data-i18n="Banner Informasi">Banner Informasi</div>
                     </a>
                 </li>
             </ul>
-        </li> --}}
+        </li>
 
         <!-- Components -->
         <li class="menu-header small mt-5">
