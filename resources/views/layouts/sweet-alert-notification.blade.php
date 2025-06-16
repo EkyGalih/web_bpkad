@@ -1,11 +1,17 @@
 @if (Session::has('success') || Session::has('info'))
     <script type="text/javascript">
         Swal.fire({
+            toast: true,
+            position: 'bottom-end',
             icon: 'success',
-            title: 'Sukses',
-            text: "{!! Session::pull('success') ?: Session::pull('info') !!}",
+            title: "{!! Session::pull('success') ?: Session::pull('info') !!}",
+            showConfirmButton: false,
             timer: 3000,
-            showConfirmButton: false
+            timerProgressBar: true,
+            customClass: {
+                popup: 'p-1',
+                title: 'fs-6'
+            }
         });
     </script>
 @endif
@@ -44,6 +50,7 @@
             }
         });
     }
+
     function deleteData(url) {
         Swal.fire({
             title: 'Apakah Anda yakin?',

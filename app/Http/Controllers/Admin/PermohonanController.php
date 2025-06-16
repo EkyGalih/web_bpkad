@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Permohonan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PermohonanController extends Controller
 {
@@ -53,7 +54,7 @@ class PermohonanController extends Controller
     public function destroy($id)
     {
         $permohonan = Permohonan::findOrFail($id);
-        unlink($permohonan->ktp);
+        Storage::disk('s3')->delete($permohonan->ktp);
         $permohonan->delete();
 
         return redirect()->back()->with(['success' => 'Permohonan dihapus!']);

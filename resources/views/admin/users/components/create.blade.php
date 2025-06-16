@@ -1,118 +1,157 @@
 @extends('admin.index')
 @section('title', 'Tambah User')
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('server/assets/vendor/libs/select2/select2.css') }}">
+@endsection
 @section('content')
-    <main id="main" class="main">
-        <div class="pagetitle">
-            <div class="pagetitle">
-                <h1>Users</h1>
-                <nav>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('users') }}">Users</a></li>
-                        <li class="breadcrumb-item active">Tambah User</li>
-                    </ol>
-                </nav>
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="mb-0">Tambah User</h4>
+                </div>
             </div>
-        </div>
-        <section class="section">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title">Tambah User</div>
-                            <hr />
-                            <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Nama User</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="nama"
-                                            class="form-control @error('nama') is-invalid @enderror">
-                                        @error('nama')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Username</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="username"
-                                            class="form-control @error('username') is-invalid @enderror">
-                                        @error('username')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Email</label>
-                                    <div class="col-sm-10">
-                                        <input type="email" name="email"
-                                            class="form-control @error('email') is-invalid @enderror" placeholder="@">
-                                        @error('email')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Role User</label>
-                                    <div class="col-sm-10">
-                                        <select name="role" class="form-control @error('role') is-invalid @enderror">
-                                            <option value="">---Pilih---</option>
-                                            <option value="admin">Admin</option>
-                                            <option value="operator">Operator</option>
-                                        </select>
-                                        @error('role')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Password</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control @error('password') is-invalid @enderror"
-                                            name="password" id="password">
-                                        <button type="button" onclick="pass()" class="btn btn-link btn-sm"><i
-                                                class="bi bi-qr-code"></i> Generate Password</button>
-                                        @error('password')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-sm-12">
-                                        <button class="btn btn-outline-warning btn-md" style="float: right;" type="reset">
-                                            <i class="bi bi-arrow-clockwise"></i> Reset
-                                        </button>
-                                        <button class="btn btn-outline-success btn-md"
-                                            style="float: right; margin-right: 2px;" type="submit">
-                                            <i class="bi bi-save"></i> Simpan
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
+            <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="card-body">
+                    <div class="form-floating form-floating-outline mb-6">
+                        <input type="text" name="nama" value="{{ old('nama') }}" class="form-control @error('nama') is-invalid @enderror"
+                            placeholder="Nama Pengguna">
+                        <label for="nama">Nama Pengguna</label>
+                        @error('nama')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-floating form-floating-outline mb-6">
+                        <input type="text" placeholder="Username" value="{{ old('username') }}" name="username"
+                            class="form-control @error('username') is-invalid @enderror">
+                        <label for="username">Username</label>
+                        @error('username')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-floating form-floating-outline mb-6">
+                        <input type="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror"
+                            placeholder="Email">
+                        <label for="email">Email</label>
+                        @error('email')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-floating form-floating-outline mb-6">
+                        <label for="role" class="form-label">Role User</label>
+                        <select name="role" id="role"
+                            class="select2 form-select @error('role') is-invalid @enderror" data-allow-clear="true">
+                            <option value="">Pilih</option>
+                            <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                            <option value="operator" {{ old('role') == 'operator' ? 'selected' : '' }}>Operator</option>
+                        </select>
+                        @error('role')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-floating form-floating-outline mb-6">
+                        <input type="text" value="{{ old('password') }}" placeholder="Password" class="form-control" name="password" id="password">
+                        <label for="password">Password</label>
+                        <button type="button" onclick="pass()" class="btn btn-link btn-sm">
+                            <i class="bi bi-qr-code"></i> Generate Password
+                        </button>
+
+                        <!-- Bar Progress -->
+                        <div class="progress mt-2" style="height: 6px;">
+                            <div class="progress-bar" id="passwordStrengthBar" style="width: 0%;"></div>
+                        </div>
+
+                        <!-- Status Text -->
+                        <small id="passwordStrengthText" class="form-text text-muted"></small>
+
+                        <!-- Error Message -->
+                        <div id="passwordError" class="text-danger small mt-1">Password belum memenuhi aturan.</div>
+
+                        <!-- Aturan Password -->
+                        <div id="passwordRules" class="text-danger small mt-1">
+                            Password minimal 8 karakter, huruf besar, huruf kecil, angka & simbol.
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-    </main>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-end gap-2">
+                        <a href="{{ route('users') }}" class="btn btn-outline-secondary">
+                            <i class="icon-base ri ri-arrow-left-double-fill me-2"></i> Kembali
+                        </a>
+                        <button class="btn btn-outline-primary" type="submit" id="submitBtn">
+                            <i class="icon-base ri ri-add-fill me-2"></i> Tambah
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
-@section('additional-js')
+@section('scripts')
+    <script src="{{ asset('server/assets/vendor/libs/select2/select2.js') }}"></script>
+    <script src="{{ asset('server/assets/js/forms-selects.js') }}"></script>
     <script>
-        function makeid(length) {
-            var result = '';
-            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&';
-            var charactersLength = characters.length;
-            for (var i = 0; i < length; i++) {
-                result += characters.charAt(Math.floor(Math.random() * charactersLength));
-            }
-            return result;
+        function makeid(length = 15) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&';
+            return Array.from({
+                length
+            }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
         }
 
-        $('#password').val(makeid(15));
+        function checkPasswordStrength(pwd) {
+            return [
+                /[a-z]/, /[A-Z]/, /[0-9]/, /[^A-Za-z0-9]/
+            ].reduce((acc, r) => acc + r.test(pwd), 0) + (pwd.length >= 8 ? 1 : 0);
+        }
+
+        function updatePasswordUI(strength) {
+            const bar = document.getElementById("passwordStrengthBar");
+            const text = document.getElementById("passwordStrengthText");
+            const error = document.getElementById("passwordError");
+            const rules = document.getElementById("passwordRules");
+            const input = document.getElementById("password");
+            const btn = document.getElementById("submitBtn");
+
+            bar.className = "progress-bar";
+            input.classList.remove("is-invalid");
+
+            if (strength < 5) {
+                const weak = strength < 3;
+                bar.classList.add(weak ? "bg-danger" : "bg-warning");
+                bar.style.width = weak ? "20%" : "60%";
+                text.innerText = weak ? "Password Lemah" : "Password Sedang";
+                error.style.display = 'block';
+                rules.style.display = 'block';
+                input.classList.add('is-invalid');
+                btn.disabled = true; // disable tombol
+            } else {
+                bar.classList.add("bg-success");
+                bar.style.width = "100%";
+                text.innerText = "Password Kuat";
+                error.style.display = 'none';
+                rules.style.display = 'none';
+                btn.disabled = false; // enable tombol
+            }
+        }
 
         function pass() {
-            $('#password').val(makeid(15));
+            const input = document.getElementById('password');
+            let generated = '';
+            do {
+                generated = makeid();
+            } while (checkPasswordStrength(generated) < 5);
+
+            input.value = generated;
+            input.dispatchEvent(new Event('input'));
         }
+
+        document.getElementById('password').addEventListener('input', (e) => {
+            updatePasswordUI(checkPasswordStrength(e.target.value));
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            pass(); // Auto generate saat load
+        });
     </script>
 @endsection

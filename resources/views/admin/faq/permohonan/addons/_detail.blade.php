@@ -30,9 +30,9 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                    <i class="bi bi-x-circle me-2"></i> Close
-                </button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
+                        class="icon-base ri ri-close-line me-2"></i>
+                    Tutup</button>
             </div>
         </div>
     </div>

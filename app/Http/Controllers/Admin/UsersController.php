@@ -19,7 +19,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::where('deleted_at', '=', NULL)->get();
+        $users = User::where('deleted_at', '=', NULL)->orderByDesc('created_at')->get();
 
         return view('admin.users.index', compact('users'));
     }
@@ -43,29 +43,40 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
-            'username' => 'required',
-            'email' => 'required',
-            'role' => 'required',
-            'password' => 'required'
+            'nama' => 'required|string|max:255',
+            'username' => 'required|string|max:50|unique:users,username',
+            'email' => 'required|email|unique:users,email',
+            'role' => 'required|string',
+        ], [
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.string' => 'Nama harus berupa teks.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
+            'username.required' => 'Username wajib diisi.',
+            'username.string' => 'Username harus berupa teks.',
+            'username.max' => 'Username maksimal 50 karakter.',
+            'username.unique' => 'Username sudah digunakan.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Email sudah digunakan.',
+            'role.required' => 'Role wajib dipilih.',
+            'role.string' => 'Role harus berupa teks.',
         ]);
 
-        $id = (string)Uuid::generate(4);
+        $user = new User();
 
-        User::create([
-            'id' => $id,
-            'nama' => $request->nama,
-            'email' => $request->email,
-            'username' => $request->username,
-            'active' => '0',
-            'avatar' => '/static/uploads/profile/favicon.png',
-            'role' => $request->role,
-            'password' => Hash::make($request->paassword)
-        ]);
+        $user->id = (string)Uuid::generate(4);
+        $user->nama = $request->nama;
+        $user->email = $request->email;
+        $user->username = $request->username;
+        $user->active = '0';
+        $user->avatar = '/server/assets/img/avatars/13.png';
+        $user->role = $request->role;
+        $user->password = Hash::make($request->password);
+        $user->save();
 
-        Helpers::_recentAdd($id, 'menambahkan user', 'users');
+        _recentAdd($user->id, 'menambahkan user', 'users');
 
-        return redirect()->route('users')->with(['success' => 'User Berhasil Ditambahkan']);
+        return redirect()->route('users')->with('success', 'User Berhasil Ditambahkan');
     }
 
     /**
@@ -74,9 +85,8 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::findOrFail($id);
 
         return view('admin.users.components.edit', compact('user'));
     }
@@ -88,9 +98,8 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        $user = User::findOrFail($id);
         $user->update([
             'nama' => $request->nama,
             'email' => $request->email,
@@ -98,36 +107,34 @@ class UsersController extends Controller
             'role' => $request->role,
         ]);
 
-        Helpers::_recentAdd($id, 'mengubah user', 'users');
+        _recentAdd($user->id, ' mengubah user', 'users');
 
-        return redirect()->route('users')->with(['success' => 'Perubahan User Berhasil Disimpan']);
+        return redirect()->route('users')->with('success', 'Perubahan User Berhasil Disimpan');
     }
 
-    public function password(Request $request, $id)
+    public function password(Request $request, User $user)
     {
-        $user = User::findOrFail($id);
         $user->update([
             'password' => Hash::make($request->password)
         ]);
 
-        Helpers::_recentAdd($id, 'mengubah password', 'users');
+        _recentAdd($user->id, ' mengubah password', 'users');
 
-        return redirect()->route('users')->with(['success' => 'Password berhasil diubah!']);
+        return redirect()->route('users')->with('success', 'Password berhasil diubah!');
     }
 
-    public function activated(Request $request, $id)
+    public function activated(User $user)
     {
-        $users = User::findOrFail($id);
-        if ($users->active == "0") {
-            $users->update([
+        if ($user->active == "0") {
+            $user->update([
                 'active' => "1"
             ]);
-            return redirect()->route('users')->with(['success' => 'User di aktifkan!']);
+            return redirect()->route('users')->with('success', 'User di aktifkan!');
         } else {
-            $users->update([
+            $user->update([
                 'active' => "0"
             ]);
-            return redirect()->route('users')->with(['success' => 'User di nonaktifkan!']);
+            return redirect()->route('users')->with('success', 'User di nonaktifkan!');
         }
     }
 
@@ -137,14 +144,13 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = User::findOrFail($id);
         $user->update([
             'deleted_at' => new DateTime()
         ]);
-        Helpers::_recentAdd($id, 'menghapus user', 'users');
+        _recentAdd($user->id, ' menghapus user', 'users');
 
-        return redirect()->back()->with(['success' => 'User berhasil dihapus!']);
+        return redirect()->back()->with('success', 'User berhasil dihapus!');
     }
 }

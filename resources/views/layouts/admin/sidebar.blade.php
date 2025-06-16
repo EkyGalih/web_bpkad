@@ -163,7 +163,7 @@
                 </li>
             </ul>
         </li>
-        <li class="menu-item">
+        <li class="menu-item @if (request()->is('admin/web/Users*')) active @endif">
             <a href="{{ route('users') }}" class="menu-link">
                 <i class="menu-icon icon-base ri ri-group-3-fill"></i>
                 <div data-i18n="Pengguna">Pengguna</div>
