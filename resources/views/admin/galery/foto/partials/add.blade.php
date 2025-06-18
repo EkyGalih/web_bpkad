@@ -1,68 +1,87 @@
 @extends('admin.index')
-@section('title', 'Tambah Galery Foto')
-@section('di-menu', 'show')
-@section('di-galery', 'active')
+@section('title', 'Tambah Galery')
+@section('styles')
+    <link href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" rel="stylesheet">
+    <style>
+        .dropzone {
+            border: 2px dashed #0d6efd;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+    </style>
+@endsection
 @section('content')
-    <main id="main" class="main">
-        <div class="pagetitle">
-            <div class="pagetitle">
-                <h1>Tambah Galery Foto</h1>
-                <nav>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('galery-admin.index') }}">Galery</a></li>
-                        <li class="breadcrumb-item active">Tambah Galery Foto</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-        <section class="section">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title">Tambah Galery Foto</div>
-                            <hr />
-                            <form action="{{ route('galery-admin.store') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Nama Galery</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="name" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Tanggal</label>
-                                    <div class="col-sm-10">
-                                        <input type="date" name="tanggal" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Keterangan</label>
-                                    <div class="col-sm-10">
-                                        <textarea name="keterangan" class="form-control"></textarea>
-                                        <input type="hidden" name="galery_type_id" value="1">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-sm-12">
-                                        <button class="btn btn-outline-warning btn-md" style="float: right;" type="reset">
-                                            <i class="bi bi-arrow-clockwise"></i> Reset
-                                        </button>
-                                        <button class="btn btn-outline-success btn-md"
-                                            style="float: right; margin-right: 2px;" type="submit">
-                                            <i class="bi bi-plus"></i> Tambah
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="mb-0">Tambah Foto Galery {{ $galery->name }}</h4>
+                    <a href="{{ route('galery-foto.show', $galery->id) }}" class="btn btn-outline-primary ms-3">
+                        <i class="icon-base ri ri-eye-fill me-2"></i> Lihat Galery
+                    </a>
                 </div>
             </div>
-        </section>
-    </main>
+            <div class="card-body">
+                <form action="{{ route('galery-foto.store') }}" class="dropzone" id="my-dropzone" method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="galery_id" value="{{ $galery->id }}">
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
-@section('additional-js')
-    <script src="{{ asset('server/js/jquery-5.3.1.js') }}"></script>
+@section('scripts')
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <script>
+        Dropzone.options.myDropzone = {
+            paramName: 'file',
+            method: 'post',
+            maxFilesize: 2,
+            acceptedFiles: ".jpeg,.jpg,.png",
+            dictInvalidFileType: "Format file tidak didukung. Hanya JPG, JPEG, atau PNG.",
+            dictFileTooBig: "Maksimal: @{{ maxFilesize }} MB.",
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            },
+            sending: function(file, xhr, formData) {
+                formData.append('galery_id', '{{ $galery->id }}');
+            },
+            success: function(file, response) {
+                Swal.fire({
+                    toast: true,
+                    position: 'bottom-end',
+                    icon: 'success',
+                    title: 'Foto ditambahkan ke galery',
+                    showConfirmButton: false,
+                    timer: 1200,
+                    timerProgressBar: true,
+                    customClass: {
+                        popup: 'p-1',
+                        title: 'fs-6'
+                    }
+                });
+            },
+            error: function(file, response) {
+                let message = "";
+
+                if (typeof response === "object" && response.errors) {
+                    if (response.errors.file) {
+                        message = response.errors.file.join('<br>');
+                    } else {
+                        message = Object.values(response.errors).flat().join('<br>');
+                    }
+                } else if (typeof response === "string") {
+                    message = response;
+                }
+
+                Swal.fire({
+                    icon: 'warning',
+                    title: message,
+                    showConfirmButton: true,
+                });
+                this.removeFile(file);
+            }
+        };
+    </script>
 @endsection

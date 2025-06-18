@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin\Galery;
 
-use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Galery;
+use App\Models\GaleryFoto;
+use Illuminate\Support\Str;
 use App\Models\GaleryVideo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Webpatser\Uuid\Uuid;
 
 class GaleryController extends Controller
@@ -42,54 +44,31 @@ class GaleryController extends Controller
      */
     public function store(Request $request)
     {
-        $id = (string)Uuid::generate(4);
-        if ($request->jenis_video == 'non-upload') {
-            Galery::create([
-                'id' => $id,
-                'name' => $request->name,
-                'tanggal' => $request->tanggal,
-                'keterangan' => $request->keterangan,
-                'galery_type_id' => $request->galery_type_id
-            ]);
+        $galery = new Galery();
+        if ($request->galery_type_id == 1) {
+            $galery->id = (string) Uuid::generate(4);
+            $galery->name = $request->nama;
+            $galery->keterangan = $request->keterangan;
+            $galery->galery_type_id = $request->galery_type_id;
+            $galery->tanggal =  now()->toDateString();
+            $galery->save();
 
-            GaleryVideo::create([
-                'id' => (string)Uuid::generate(4),
-                'jenis_video' => $request->jenis_video,
-                'path' => $request->path,
-                'galery_id' => $id
-            ]);
+            _recentAdd($galery->id, ' menambah galery foto baru', 'galery foto');
 
-            Helpers::_recentAdd($id, 'membuat galery', 'galery');
-            return redirect()->route('banner-video.index')->with(['success' => 'Galery berhasil ditambahkan!']);
-        } elseif ($request->jenis_video == 'upload') {
-            Galery::create([
-                'id' => $id,
-                'name' => $request->name,
-                'tanggal' => $request->tanggal,
-                'keterangan' => $request->keterangan,
-                'galery_type_id' => $request->galery_type_id
-            ]);
+            return redirect()->route('galery-foto.create', $galery->id)->with('success', 'Galery ' . $galery->name . ' berhasil dibuat');
+        } elseif ($request->galery_type_id == 2) {
+            $galery->id = (string) Uuid::generate(4);
+            $galery->name = $request->nama;
+            $galery->keterangan = $request->keterangan;
+            $galery->galery_type_id = $request->galery_type_id;
+            $galery->tanggal =  now()->toDateString();
+            $galery->save();
 
-            GaleryVideo::create([
-                'id' => (string)Uuid::generate(4),
-                'jenis_video' => $request->jenis_video,
-                'path' => $request->path,
-                'galery_id' => $id
-            ]);
+            _recentAdd($galery->id, ' menambah galery vide baru', 'galery video');
 
-            Helpers::_recentAdd($id, 'membuat galery', 'galery');
-            return redirect()->route('banner-video.index')->with(['success' => 'Galery berhasil ditambahkan!']);
+            return redirect()->route('galery-video.create', $galery->id)->with('success', 'Galery ' . $galery->name . ' berhasil dibuat');
         } else {
-            Galery::create([
-                'id' => $id,
-                'name' => $request->name,
-                'tanggal' => $request->tanggal,
-                'keterangan' => $request->keterangan,
-                'galery_type_id' => $request->galery_type_id
-            ]);
-
-            Helpers::_recentAdd($id, 'membuat galery', 'galery');
-            return redirect()->route('Gfoto-admin.create', $id)->with(['success' => 'Galery berhasil ditambahkan!']);
+            return redirect()->back()->withErrors(['fail' => 'Tipe galeri tidak valid.']);
         }
     }
 
@@ -104,16 +83,6 @@ class GaleryController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -122,9 +91,44 @@ class GaleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Galery $galery)
     {
-        //
+        $oldName = $galery->name;
+        $newName = $request->nama;
+
+        // Update galery data
+        $galery->update([
+            'name' => $newName,
+            'keterangan' => $request->keterangan
+        ]);
+
+        // Rename folder in S3 if galery name changed
+        if ($oldName !== $newName) {
+            $fotos = GaleryFoto::where('galery_id', $galery->id)->get();
+
+            foreach ($fotos as $foto) {
+                $oldUrl = $foto->path;
+
+                // Dapatkan path relatif dari URL S3
+                $relativePath = Str::after($oldUrl, Storage::disk('s3')->url('/'));
+
+                // Hitung path baru
+                $newRelativePath = str_replace("uploads/galery/foto/{$oldName}", "uploads/galery/foto/{$newName}", $relativePath);
+
+                // Pindahkan file di S3
+                if (Storage::disk('s3')->exists($relativePath)) {
+                    Storage::disk('s3')->move($relativePath, $newRelativePath);
+
+                    // Simpan URL baru ke DB
+                    $foto->path = Storage::disk('s3')->url($newRelativePath);
+                    $foto->save();
+                }
+            }
+        }
+
+        _recentAdd($galery->id, 'Mengubah galery foto', 'galery foto');
+
+        return redirect()->back()->with('success', 'Galery foto berhasil diupdate!');
     }
 
     /**
@@ -133,8 +137,27 @@ class GaleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Galery $galery)
     {
-        //
+        $fotos = GaleryFoto::where('galery_id', $galery->id)->get();
+
+        foreach ($fotos as $f) {
+            if ($f->path) {
+                // Ambil path relatif dari URL
+                $relativePath = Str::after($f->path, Storage::disk('s3')->url('/'));
+
+                // Hapus file dari S3
+                Storage::disk('s3')->delete($relativePath);
+            }
+
+            // Hapus record dari DB
+            $f->delete();
+        }
+
+        $galery->delete();
+
+        _recentAdd($galery->id, 'Menghapus galery foto', 'galery foto');
+
+        return redirect()->back()->with('success', 'Galery foto berhasil dihapus!');
     }
 }

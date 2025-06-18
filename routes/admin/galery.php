@@ -10,10 +10,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::group(['prefix' => 'web'], function () {
         Route::group(['prefix' => 'data-informasi'], function () {
             Route::group(['prefix' => 'galery'], function () {
-                Route::resource('galery', GaleryController::class);
+                Route::resource('galery', GaleryController::class)->except(['destroy']);
+                Route::get('destroy/{galery}', [GaleryController::class, 'destroy'])->name('galery.destroy');
                 Route::group(['prefix' => 'foto'], function () {
                     Route::get('/', [GaleryFotoController::class, 'index'])->name('galery-foto.index');
-                    Route::get('create/{foto}', [GaleryFotoController::class, 'create'])->name('galery-foto.create');
+                    Route::get('create/{galery}', [GaleryFotoController::class, 'create'])->name('galery-foto.create');
                     Route::post('store', [GaleryFotoController::class, 'store'])->name('galery-foto.store');
                     Route::get('edit/{foto}', [GaleryFotoController::class, 'edit'])->name('galery-foto.edit');
                     Route::get('list-foto/{foto}', [GaleryFotoController::class, 'show'])->name('galery-foto.show');
