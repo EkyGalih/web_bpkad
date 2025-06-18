@@ -24,11 +24,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
 
                 Route::group(['prefix' => 'video'], function () {
                     Route::get('/', [GaleryVideoController::class, 'index'])->name('galery-video.index');
-                    Route::get('create/{id}', [GaleryVideoController::class, 'create'])->name('galery-video.create');
+                    Route::get('create/{galery}', [GaleryVideoController::class, 'create'])->name('galery-video.create');
                     Route::post('store', [GaleryVideoController::class, 'store'])->name('galery-video.store');
-                    Route::get('edit/{id}', [GaleryVideoController::class, 'edit'])->name('galery-video.edit');
-                    Route::put('update/{id}', [GaleryVideoController::class, 'update'])->name('galery-video.update');
-                    Route::get('destroy/{id}', [GaleryVideoController::class, 'destroy'])->name('galery-video.destroy');
+                    Route::get('list-video/{video}', [GaleryVideoController::class, 'show'])->name('galery-video.show');
+                    Route::get('edit/{video}', [GaleryVideoController::class, 'edit'])->name('galery-video.edit');
+                    Route::put('update/{video}', [GaleryVideoController::class, 'update'])->name('galery-video.update');
+                    Route::get('destroy/{video}', [GaleryVideoController::class, 'destroy'])->name('galery-video.destroy');
                 });
 
                 Route::group(['prefix' => 'video-banner'], function () {

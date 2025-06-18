@@ -95,7 +95,13 @@ class GaleryController extends Controller
     {
         $oldName = $galery->name;
         $newName = $request->nama;
-
+        if ($request->galery_type_id == 1) {
+            $folder = 'foto';
+        } elseif ($request->galery_type_id == 2) {
+            $folder = 'video';
+        } else {
+            $folder = 'galery';
+        }
         // Update galery data
         $galery->update([
             'name' => $newName,
@@ -104,31 +110,35 @@ class GaleryController extends Controller
 
         // Rename folder in S3 if galery name changed
         if ($oldName !== $newName) {
-            $fotos = GaleryFoto::where('galery_id', $galery->id)->get();
+            if ($request->galery_type_id == 1) {
+                $data = GaleryFoto::where('galery_id', $galery->id)->get();
+            } elseif ($request->galery_type_id == 2) {
+                $data = GaleryVideo::where('galery_id', $galery->id)->get();
+            }
 
-            foreach ($fotos as $foto) {
-                $oldUrl = $foto->path;
+            foreach ($data as $item) {
+                $oldUrl = $item->path;
 
                 // Dapatkan path relatif dari URL S3
                 $relativePath = Str::after($oldUrl, Storage::disk('s3')->url('/'));
 
                 // Hitung path baru
-                $newRelativePath = str_replace("uploads/galery/foto/{$oldName}", "uploads/galery/foto/{$newName}", $relativePath);
+                $newRelativePath = str_replace("uploads/galery/$folder/{$oldName}", "uploads/galery/$folder/{$newName}", $relativePath);
 
                 // Pindahkan file di S3
                 if (Storage::disk('s3')->exists($relativePath)) {
                     Storage::disk('s3')->move($relativePath, $newRelativePath);
 
                     // Simpan URL baru ke DB
-                    $foto->path = Storage::disk('s3')->url($newRelativePath);
-                    $foto->save();
+                    $item->path = Storage::disk('s3')->url($newRelativePath);
+                    $item->save();
                 }
             }
         }
 
-        _recentAdd($galery->id, 'Mengubah galery foto', 'galery foto');
+        _recentAdd($galery->id, ' mengubah galery ' . $folder, 'galery ' . $folder);
 
-        return redirect()->back()->with('success', 'Galery foto berhasil diupdate!');
+        return redirect()->back()->with('success', 'Galery ' . $folder . ' berhasil diupdate!');
     }
 
     /**
@@ -139,25 +149,31 @@ class GaleryController extends Controller
      */
     public function destroy(Galery $galery)
     {
-        $fotos = GaleryFoto::where('galery_id', $galery->id)->get();
+        if ($galery->galery_type_id == 1) {
+            $data = GaleryFoto::where('galery_id', $galery->id)->get();
+            $folder = 'foto';
+        } elseif ($galery->galery_type_id == 2) {
+            $data = GaleryVideo::where('galery_id', $galery->id)->get();
+            $folder = 'video';
+        }
 
-        foreach ($fotos as $f) {
-            if ($f->path) {
+        foreach ($data as $item) {
+            if ($item->path) {
                 // Ambil path relatif dari URL
-                $relativePath = Str::after($f->path, Storage::disk('s3')->url('/'));
+                $relativePath = Str::after($item->path, Storage::disk('s3')->url('/'));
 
                 // Hapus file dari S3
                 Storage::disk('s3')->delete($relativePath);
             }
 
             // Hapus record dari DB
-            $f->delete();
+            $item->delete();
         }
 
         $galery->delete();
 
-        _recentAdd($galery->id, 'Menghapus galery foto', 'galery foto');
+        _recentAdd($galery->id, 'Menghapus galery ' . $folder, 'galery ' . $folder);
 
-        return redirect()->back()->with('success', 'Galery foto berhasil dihapus!');
+        return redirect()->back()->with('success', 'Galery ' . $folder . ' berhasil dihapus!');
     }
 }

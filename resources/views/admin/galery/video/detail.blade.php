@@ -1,5 +1,5 @@
 @extends('admin.index')
-@section('title', 'Galery Foto')
+@section('title', 'Galery Video')
 @section('styles')
     <style>
         .gallery {
@@ -31,7 +31,7 @@
         /* Info (tanggal dan tombol) */
         .gallery-item .info {
             position: absolute;
-            bottom: 0;
+            top: 0;
             left: 0;
             right: 0;
             background: rgba(0, 0, 0, 0.5);
@@ -41,6 +41,7 @@
             justify-content: space-between;
             align-items: center;
             font-size: 14px;
+            z-index: 1;
         }
 
         .delete-btn {
@@ -96,48 +97,51 @@
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="d-flex justify-content-between align-items-center mb-1">
-            <h4 class="mb-0">Galery Foto</h4>
+            <h4 class="mb-0">Galery Video</h4>
             <div class="d-flex gap-2">
-                <a href="{{ route('galery-foto.index') }}" class="btn btn-outline-secondary">
+                <a href="{{ route('galery-video.index') }}" class="btn btn-outline-secondary">
                     <i class="icon-base ri ri-arrow-left-box-fill me-2"></i> Kembali
                 </a>
-                <a href="{{ route('galery-foto.create', $foto->id) }}" class="btn btn-outline-success">
+                <a href="{{ route('galery-video.create', $video->id) }}" class="btn btn-outline-success">
                     <i class="icon-base ri ri-upload-2-fill me-2"></i> Upload
                 </a>
             </div>
         </div>
         <p class="mb-6">
-            {{ $foto->name }}
+            {{ $video->name }}
         </p>
         <!-- Role cards -->
         <div class="row g-6">
             <div class="gallery">
-            @if ($fotos->isEmpty())
-                <div class="w-100 d-flex justify-content-center align-items-center" style="grid-column: 1/-1; min-height: 200px;">
-                    <span class="text-muted fs-5">Belum ada foto di galeri ini.</span>
-                </div>
-            @endif
-                @foreach ($fotos as $item)
+                @if ($videos->isEmpty())
+                    <div class="w-100 d-flex justify-content-center align-items-center"
+                        style="grid-column: 1/-1; min-height: 200px;">
+                        <span class="text-muted fs-5">Belum ada video di galeri ini.</span>
+                    </div>
+                @endif
+                @foreach ($videos as $item)
                     <div class="gallery-item">
-                        <img src="{{ asset($item->path) }}" alt="{{ $item->galery->name }}" />
+                        <video src="{{ asset($item->path) }}" muted preload="metadata"
+                            style="width: 100%; height: 250px; object-fit: cover; cursor: pointer;"
+                            controlslist="nodownload nofullscreen noremoteplayback" onmouseover="this.controls=true"
+                            onmouseout="this.controls=false"></video>
                         <div class="info">
                             <span class="date">
                                 {{ \Carbon\Carbon::parse($item->created_at)->locale('id')->translatedFormat('l, d M Y') }}
                             </span>
-                            <button class="delete-btn" onclick="deleteData('{{ route('galery-foto.destroy', $item->id) }}')"
-                                data-bs-tooltip="tooltip" data-bs-placement="top" title="Hapus Foto">
+                            <button class="delete-btn" onclick="deleteData('{{ route('galery-video.destroy', $item->id) }}')"
+                                data-bs-tooltip="tooltip" data-bs-placement="top" title="Hapus Video">
                                 <i class="icon-base ri ri-delete-bin-fill"></i>
                             </button>
                         </div>
                     </div>
-                    <!-- Tambahkan gambar sesuai kebutuhan -->
                 @endforeach
                 <!-- Modal Zoom -->
             </div>
-            {{ $fotos->links() }}
+            {{ $videos->links() }}
             <div id="lightbox" class="lightbox">
                 <span class="close">&times;</span>
-                <img class="lightbox-content" id="lightbox-img">
+                <video id="lightbox-video" class="lightbox-content" controls autoplay></video>
             </div>
         </div>
     </div>
@@ -146,23 +150,29 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const lightbox = document.getElementById("lightbox");
-            const lightboxImg = document.getElementById("lightbox-img");
+            const lightboxVideo = document.getElementById("lightbox-video");
             const closeBtn = document.querySelector(".lightbox .close");
 
-            document.querySelectorAll(".gallery-item img").forEach(img => {
-                img.addEventListener("click", () => {
-                    lightbox.style.display = "flex"; // pakai flex, bukan block
-                    lightboxImg.src = img.src;
+            // Klik pada video thumbnail untuk zoom
+            document.querySelectorAll(".gallery-item video").forEach(video => {
+                video.addEventListener("click", () => {
+                    lightbox.style.display = "flex";
+                    lightboxVideo.src = video.src;
+                    lightboxVideo.play();
                 });
             });
 
             closeBtn.addEventListener("click", () => {
                 lightbox.style.display = "none";
+                lightboxVideo.pause();
+                lightboxVideo.src = ""; // Clear src untuk mencegah suara tetap play
             });
 
             lightbox.addEventListener("click", (e) => {
                 if (e.target === lightbox) {
                     lightbox.style.display = "none";
+                    lightboxVideo.pause();
+                    lightboxVideo.src = "";
                 }
             });
         });
