@@ -1,17 +1,19 @@
 <?php
 
-use App\Http\Controllers\Admin\BannerInformasiController;
+use App\Http\Controllers\Admin\PengumumanController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::group(['prefix' => 'web'], function () {
-        Route::group(['prefix' => 'banner-informasi'], function () {
-            Route::get('/', [BannerInformasiController::class, 'index'])->name('banner.index');
-            Route::get('create', [BannerInformasiController::class, 'create'])->name('banner.create');
-            Route::post('store', [BannerInformasiController::class, 'store'])->name('banner.store');
-            Route::get('edit/{id}', [BannerInformasiController::class, 'edit'])->name('banner.edit');
-            Route::put('update/{id}', [BannerInformasiController::class, 'update'])->name('banner.update');
-            Route::get('destroy/{id}', [BannerInformasiController::class, 'destroy'])->name('banner.destroy');
+        Route::group(['prefix' => 'data-informasi'], function () {
+            Route::group(['prefix' => 'pengumuman'], function () {
+                Route::get('/', [PengumumanController::class, 'index'])->name('pengumuman.index');
+                Route::get('create', [PengumumanController::class, 'create'])->name('pengumuman.create');
+                Route::post('store', [PengumumanController::class, 'store'])->name('pengumuman.store');
+                Route::get('edit/{pengumuman}', [PengumumanController::class, 'edit'])->name('pengumuman.edit');
+                Route::put('update/{pengumuman}', [PengumumanController::class, 'update'])->name('pengumuman.update');
+                Route::get('destroy/{pengumuman}', [PengumumanController::class, 'destroy'])->name('pengumuman.destroy');
+            });
         });
     });
 });

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Webpatser\Uuid\Uuid;
 
 class Slide extends Model
@@ -23,8 +24,8 @@ class Slide extends Model
         });
     }
 
-    public function SlideItem()
+    public function slide_item(): HasMany
     {
-        return $this->hasOne(Slideitem::class);
+        return $this->hasMany(Slideitem::class, 'slide_id');
     }
 }

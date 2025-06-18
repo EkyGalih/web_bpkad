@@ -64,7 +64,7 @@
                                             <td>{{ $item->title }}</td>
                                             <td style="width: 50%;">{{ $item->keterangan }}</td>
                                             <td>{{ $item->Slide->nama_slide }}</td>
-                                            <td>{{ Helpers::GetDate($item->created_at) ?? '-' }}</td>
+                                            <td>{{ get_date($item->created_at) ?? '-' }}</td>
                                             <td>
                                                 <a href="{{ route('slider.edit', $item->id) }}"
                                                     class="btn btn-warning btn-md">

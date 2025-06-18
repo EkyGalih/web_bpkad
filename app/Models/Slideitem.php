@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Webpatser\Uuid\Uuid;
 
 class Slideitem extends Model
@@ -14,8 +15,17 @@ class Slideitem extends Model
     protected $table = 'slide_item';
     protected $guarded = ['created_at', 'updated_at'];
 
-    public function Slide()
+    public static function boot()
     {
-        return $this->belongsTo(Slide::class);
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->id = (string)Uuid::generate(4);
+        });
+    }
+
+    public function slide(): BelongsTo
+    {
+        return $this->belongsTo(Slide::class, 'slide_id');
     }
 }

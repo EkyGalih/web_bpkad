@@ -24,7 +24,7 @@
                                 <td>{{ $del->title }}</td>
                                 <td style="width: 35%;">{{ $del->keterangan }}</td>
                                 <td>{{ $del->Slide->nama_slide }}</td>
-                                <td>{{ Helpers::GetDate($del->deleted_at) ?? '-' }}</td>
+                                <td>{{ get_date($del->deleted_at) ?? '-' }}</td>
                                 <td>
                                     <a href="{{ route('slider.restore', $del->id) }}" class="btn btn-info btn-sm"
                                         data-bs-tooltip="tooltip" data-bs-placement="top" title="Pulihkan Slide">

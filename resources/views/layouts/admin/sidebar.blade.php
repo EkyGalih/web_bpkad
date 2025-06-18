@@ -68,21 +68,16 @@
                                 <div data-i18n="Video">Video</div>
                             </a>
                         </li>
-                        <li class="menu-item">
-                            <a href="{{ route('banner-video.index') }}" class="menu-link">
-                                <div data-i18n="Video Banner">Video Banner</div>
-                            </a>
-                        </li>
                     </ul>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item @if (request()->is('admin/web/data-informasi/slider*')) active @endif">
                     <a href="#" class="menu-link">
                         <div data-i18n="Sliders">Sliders</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Banner Informasi">Banner Informasi</div>
+                <li class="menu-item @if (request()->is('admin/web/data-informasi/pengumuman*')) active @endif">
+                    <a href="{{ route('pengumuman.index') }}" class="menu-link">
+                        <div data-i18n="Pengumuman">Pengumuman</div>
                     </a>
                 </li>
             </ul>
