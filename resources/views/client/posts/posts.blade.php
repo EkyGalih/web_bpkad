@@ -3,10 +3,10 @@
 @section('menu-berita', 'active')
 @section('content_home')
 <section class="section-frame overflow-hidden">
-    <div class="wrapper bg-info">
-        <div class="container py-12 py-md-16 text-center">
+    <div class="wrapper image-wrapper bg-image bg-overlay bg-overlay-300" data-image-src="{{ asset($settings->header_image) }}">
+        <div class="container pt-17 pb-19 pt-md-18 pb-md-17 text-center">
             <div class="row">
-                <div class="col-md-7 col-lg-6 col-xl-5 mx-auto">
+                <div class="col-lg-8 col-xl-7 col-xxl-6 mx-auto">
                     <h1 class="display-1 mb-3 text-white">Semua Berita</h1>
                     <p class="lead px-lg-5 px-xxl-8 mb-1 text-white">Semua berita terkait agenda & kegiatan BPKAD Provinsi NTB.</p>
                 </div>
@@ -32,7 +32,7 @@
                             : asset($post->foto_berita);
                             @endphp
                             <figure class="card-img-top overlay overlay-1 hover-scale"><a
-                                    href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}"><img
+                                    href="{{ route('post.show', [PostCategory($post->posts_category_id), $post->slug]) }}"><img
                                         src="{{ $imageUrl ?: $defaultImage }}"
                                         alt="{{ substr($post->slug, 0, 50) }}" /></a>
                                 <figcaption>
@@ -43,10 +43,10 @@
                                 <div class="post-header">
                                     <div class="post-category text-line">
                                         <a href="#" class="hover" rel="category">{{
-                                            Helpers::PostCategory($post->posts_category_id) }}</a>
+                                            PostCategory($post->posts_category_id) }}</a>
                                     </div>
                                     <h2 class="post-title mt-1 mb-0"><a class="link-dark"
-                                            href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">{{
+                                            href="{{ route('post.show', [PostCategory($post->posts_category_id), $post->slug]) }}">{{
                                             $post->title }}</a></h2>
                                 </div>
                                 <div class="post-content">
@@ -56,7 +56,7 @@
                             <div class="card-footer">
                                 <ul class="post-meta d-flex mb-0">
                                     <li class="post-date"><i class="uil uil-calendar-alt"></i><span>{{
-                                            Helpers::getDate($post->created_at) }}</span>
+                                            get_date($post->created_at) }}</span>
                                     </li>
                                     <li class="post-author"><a href="#"><i class="uil uil-user"></i><span>By
                                                 {{ $post->users->nama }}</span></a></li>
@@ -81,7 +81,7 @@
                                 : asset($post->foto_berita);
                                 @endphp
                                 <figure class="card-img-top overlay overlay-1 hover-scale"><a
-                                        href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">
+                                        href="{{ route('post.show', [PostCategory($post->posts_category_id), $post->slug]) }}">
                                         <img src="{{ $imageUrl ?: $defaultImage }}"
                                             alt="{{ substr($post->slug, 0, 50) }}" /></a>
                                     <figcaption>
@@ -91,12 +91,12 @@
                                 <div class="card-body">
                                     <div class="post-header">
                                         <div class="post-category text-line">
-                                            <a href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}"
+                                            <a href="{{ route('post.show', [PostCategory($post->posts_category_id), $post->slug]) }}"
                                                 class="hover" rel="category">{{
-                                                Helpers::PostCategory($post->posts_category_id) }}</a>
+                                                PostCategory($post->posts_category_id) }}</a>
                                         </div>
                                         <h2 class="post-title h3 mt-1 mb-3"><a class="link-dark"
-                                                href="{{ route('post.show', [Helpers::PostCategory($post->posts_category_id), $post->slug]) }}">{{
+                                                href="{{ route('post.show', [PostCategory($post->posts_category_id), $post->slug]) }}">{{
                                                 substr($post->title, 0, 50) }}</a></h2>
                                     </div>
                                     <div class="post-content">
@@ -106,7 +106,7 @@
                                 <div class="card-footer">
                                     <ul class="post-meta d-flex mb-0">
                                         <li class="post-date"><i class="uil uil-calendar-alt"></i><span>{{
-                                                Helpers::getDate($post->created_at) }}</span>
+                                                get_date($post->created_at) }}</span>
                                         </li>
                                         <li class="post-author"><a href="#"><i class="uil uil-user"></i><span>By
                                                     {{ $post->users->nama }}</span></a></li>
@@ -133,8 +133,8 @@
                 <div class="widget">
                     <h4 class="widget-title mb-3">Categories</h4>
                     <ul class="unordered-list bullet-primary text-reset">
-                        <li><a href="{{ route('post.index') }}">Berita ({{ Helpers::countCategoryPost('1') }})</a></li>
-                        <li><a href="{{ route('artikel.index') }}">Artikel ({{ Helpers::countCategoryPost('2') }})</a>
+                        <li><a href="{{ route('post.index') }}">Berita ({{ countCategoryPost('1') }})</a></li>
+                        <li><a href="{{ route('artikel.index') }}">Artikel ({{ countCategoryPost('2') }})</a>
                         </li>
                     </ul>
                 </div>
@@ -142,7 +142,7 @@
                 <div class="widget">
                     <h4 class="widget-title mb-3">Tags</h4>
                     @php
-                    $tags = array_unique(Helpers::countTag());
+                    $tags = array_unique(countTag());
                     @endphp
                     <ul class="list-unstyled tag-list">
                         @foreach ($tags as $key => $tag)

@@ -1,11 +1,11 @@
 @extends('client.index')
 @section('title', $subPages->title . ' |')
 @section('content_home')
-    <section class="wrapper image-wrapper bg-image bg-overlay text-white"
-        data-image-src="{{ asset('client/assets/img/photos/bg3.jpg') }}">
-        <div class="container pt-18 pb-15 pt-md-20 pb-md-19 text-center">
+<section class="section-frame overflow-hidden">
+    <div class="wrapper image-wrapper bg-image bg-overlay bg-overlay-300" data-image-src="{{ asset($settings->header_image) }}">
+        <div class="container pt-17 pb-19 pt-md-18 pb-md-17 text-center">
             <div class="row">
-                <div class="col-md-10 col-xl-8 mx-auto">
+                <div class="col-lg-8 col-xl-7 col-xxl-6 mx-auto">
                     <div class="post-header">
                         <div class="post-category text-line text-white">
                             <a href="#" class="text-reset" rel="category">Halaman</a>

@@ -274,6 +274,7 @@
                 e.preventDefault();
                 let id = $("#edit-menu-id").val();
                 let name = $("#edit-menu-name").val();
+                let url = $("#edit-menu-url").val();
 
                 $.ajax({
                     url: "/admin/web/tools/menu/update/" + id,
@@ -281,7 +282,8 @@
                     data: {
                         _token: "{{ csrf_token() }}",
                         _method: "PUT", // Laravel akan membaca ini sebagai method PUT
-                        name: name
+                        name: name,
+                        url: url,
                     },
                     success: function() {
                         Swal.fire({

@@ -8,10 +8,11 @@
 </style>
 @endsection
 @section('content_home')
-<section class="wrapper bg-dark text-white">
-    <div class="container pt-18 pt-md-20 pb-21 pb-md-21 text-center">
-        <div class="row">
-            <div class="col-sm-10 col-md-8 col-lg-6 col-xl-6 col-xxl-5 mx-auto">
+<section class="section-frame overflow-hidden">
+    <div class="wrapper image-wrapper bg-image bg-overlay bg-overlay-300" data-image-src="{{ asset($settings->header_image) }}">
+        <div class="container pt-17 pb-19 pt-md-18 pb-md-17 text-center">
+            <div class="row">
+                <div class="col-lg-8 col-xl-7 col-xxl-6 mx-auto">
                 <h1 class="display-1 text-white mb-3">Pengaduan dan Permohonan</h1>
             </div>
             <!-- /column -->
@@ -21,7 +22,7 @@
     <!-- /.container -->
 </section>
 <section class="wrapper bg-light">
-    <div class="container pb-14 pb-md-16">
+    <div class="container mt-14 pb-14 pb-md-16">
         <div class="row">
             <div class="col mt-n19 mb-16">
                 <div class="card shadow-lg">

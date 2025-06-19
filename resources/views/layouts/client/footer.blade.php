@@ -29,11 +29,19 @@
                             document.write(new Date().getUTCFullYear());
                         </script> {{ ENV('APP_NAME') }}. <br class="d-none d-lg-block" /></p>
                     <nav class="nav social ">
-                        <a href="https://twitter.com/BpkadNtb" target="_blank"><i class="uil uil-twitter"></i></a>
-                        <a href="https://www.facebook.com/bpkadntbprov" target="_blank"><i class="uil uil-facebook-f"></i></a>
-                        <a href="https://wa.me/message/47I56AXXZMGWB1" target="_blank"><i class="uil uil-whatsapp"></i></a>
-                        <a href="https://www.instagram.com/ntbbpkad/" target="_blank"><i class="uil uil-instagram"></i></a>
-                        <a href="https://www.youtube.com/channel/UCZ-UDCXEyRvOJfdWtD2jv5g" target="_blank"><i class="uil uil-youtube"></i></a>
+                        @if(isset($settings->sosmed) && is_array($settings->sosmed))
+                            @foreach($settings->sosmed as $sosmed)
+                                <a href="{{ $sosmed['url'] ?? '#' }}" target="_blank">
+                                    <i class="{{ $sosmed['icon'] ?? 'uil uil-link' }}"></i>
+                                </a>
+                            @endforeach
+                        @else
+                            <a href="https://twitter.com/BpkadNtb" target="_blank"><i class="uil uil-twitter"></i></a>
+                            <a href="https://www.facebook.com/bpkadntbprov" target="_blank"><i class="uil uil-facebook-f"></i></a>
+                            <a href="https://wa.me/message/47I56AXXZMGWB1" target="_blank"><i class="uil uil-whatsapp"></i></a>
+                            <a href="https://www.instagram.com/ntbbpkad/" target="_blank"><i class="uil uil-instagram"></i></a>
+                            <a href="https://www.youtube.com/channel/UCZ-UDCXEyRvOJfdWtD2jv5g" target="_blank"><i class="uil uil-youtube"></i></a>
+                        @endif
                     </nav>
                     <!-- /.social -->
                 </div>
@@ -43,9 +51,8 @@
             <div class="col-md-4 col-lg-3">
                 <div class="widget">
                     <h4 class="widget-title text-white mb-3">Kontak & Alamat</h4>
-                    @php $address = __address() @endphp
-                    <address class="pe-xl-15 pe-xxl-17">{{ $address->address }}</address>
-                    <a href="mailto:#" class="link-body">{{ $address->email }}</a><br /> {{ __phone($address->phone) }}
+                    <address class="pe-xl-15 pe-xxl-17">{{ __address()->address }}</address>
+                    <a href="mailto:#" class="link-body">{{ $settings->email }}</a><br /> {{ __phone($settings->contact_number) }}
                 </div>
                 <!-- /.widget -->
             </div>

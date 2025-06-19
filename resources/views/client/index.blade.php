@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <title>@yield('title') BPKAD Prov. NTB</title>
+    <title>@yield('title') {{ $settings->title }}</title>
     @include('layouts.client.css')
 </head>
 
@@ -14,10 +14,10 @@
                     <div class="container justify-content-between align-items-center">
                         <div class="d-flex flex-row w-100 justify-content-between align-items-center d-lg-none">
                             <div class="navbar-brand"><a href="{{ url('/') }}">
-                                    <img class="logo-dark" src="{{ asset('client/assets/img/logo-dark.png') }}"
-                                        srcset="{{ asset('client/assets/img/logo-dark@2x.png 2x') }}" alt="" />
-                                    <img class="logo-light" src="{{ asset('client/assets/img/logo-light.png') }}"
-                                        srcset="{{ asset('client/assets/img/logo-light@2x.png 2x') }}" alt="" />
+                                    <img class="logo-dark" src="{{ asset($settings->logo_image) }}"
+                                        srcset="{{ asset($settings->logo_image) }}" alt="" />
+                                    <img class="logo-light" src="{{ asset($settings->logo_image) }}"
+                                        srcset="{{ asset($settings->logo_image) }}" alt="" />
                                 </a></div>
                             <div class="navbar-other ms-auto">
                                 <ul class="navbar-nav flex-row align-items-center">

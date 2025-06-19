@@ -1,20 +1,21 @@
 @extends('client.index')
 @section('menu-berita', 'active')
 @section('content_home')
-<section class="wrapper image-wrapper bg-image bg-overlay text-white" data-image-src="{{  asset('client/assets/img/photos/bg3.jpg') }}">
-    <div class="container pt-18 pb-15 pt-md-20 pb-md-19 text-center">
-        <div class="row">
-            <div class="col-md-10 col-xl-8 mx-auto">
+<section class="section-frame overflow-hidden">
+    <div class="wrapper image-wrapper bg-image bg-overlay bg-overlay-300" data-image-src="{{ asset($posts->foto_berita) }}">
+        <div class="container pt-17 pb-19 pt-md-18 pb-md-17 text-center">
+            <div class="row">
+                <div class="col-lg-8 col-xl-7 col-xxl-6 mx-auto">
                 <div class="post-header">
                     <div class="post-category text-line text-white">
                         <a href="#" class="text-reset" rel="category">{{
-                            Helpers::PostCategory($posts->posts_category_id) }}</a>
+                            PostCategory($posts->posts_category_id) }}</a>
                     </div>
                     <!-- /.post-category -->
                     <h1 class="display-1 mb-4 text-white">{{ $posts->title }}</h1>
                     <ul class="post-meta text-white">
                         <li class="post-date"><i class="uil uil-calendar-alt"></i><span>{{
-                                Helpers::getDate($posts->created_at) }}</span>
+                                get_date($posts->created_at) }}</span>
                         </li>
                         <li class="post-author"><a href="#"><i class="uil uil-user"></i><span>By
                                     {{ $posts->users->nama }}</span></a></li>
@@ -80,7 +81,7 @@
                                         class="post-footer d-md-flex flex-md-row justify-content-md-between align-items-center mt-8">
                                         <div>
                                             <ul class="list-unstyled tag-list mb-0">
-                                                @foreach (Helpers::Tags($posts->tags) as $tags)
+                                                @foreach (Tags($posts->tags) as $tags)
                                                 <li><a href="#" class="btn btn-soft-ash btn-sm rounded-pill mb-0">{{
                                                         $tags }}</a></li>
                                                 @endforeach
@@ -111,7 +112,7 @@
                             <div class="swiper-container blog grid-view mb-16" data-margin="30" data-dots="true"
                                 data-items-md="2" data-items-xs="1">
                                 @php
-                                $posting = Helpers::getPostTag($posts->tags, '1');
+                                $posting = getPostTag($posts->tags, '1');
                                 @endphp
                                 <div class="swiper">
                                     <div class="swiper-wrapper">
@@ -128,7 +129,7 @@
                                                 : asset($post->foto_berita);
                                                 @endphp
                                                 <figure class="overlay overlay-1 hover-scale rounded mb-5"><a
-                                                        href="{{ route('post.show', [Helpers::GetCategoryContent($post->posts_category_id), $post->slug]) }}">
+                                                        href="{{ route('post.show', [GetCategoryContent($post->posts_category_id), $post->slug]) }}">
                                                         <img src="{{ $imageUrl ?: $defaultImage }}"
                                                             alt="{{ $post->title }}" /></a>
                                                     <figcaption>
@@ -137,13 +138,13 @@
                                                 </figure>
                                                 <div class="post-header">
                                                     <div class="post-category text-line">
-                                                        <a href="{{ route('post.show', [Helpers::GetCategoryContent($post->posts_category_id), $post->slug]) }}"
+                                                        <a href="{{ route('post.show', [GetCategoryContent($post->posts_category_id), $post->slug]) }}"
                                                             class="hover" rel="category">{{
-                                                            Helpers::PostCategory($post->posts_category_id) }}</a>
+                                                            PostCategory($post->posts_category_id) }}</a>
                                                     </div>
                                                     <!-- /.post-category -->
                                                     <h2 class="post-title h3 mt-1 mb-3"><a class="link-dark"
-                                                            href="{{ route('post.show', [Helpers::GetCategoryContent($post->posts_category_id), $post->slug]) }}">{{
+                                                            href="{{ route('post.show', [GetCategoryContent($post->posts_category_id), $post->slug]) }}">{{
                                                             substr($post->title, 0, 50) }}...</a></h2>
                                                 </div>
                                                 <!-- /.post-header -->
@@ -151,7 +152,7 @@
                                                     <ul class="post-meta mb-0">
                                                         <li class="post-date"><i
                                                                 class="uil uil-calendar-alt"></i><span>{{
-                                                                Helpers::getDate($post->created_at) }}</span>
+                                                                get_date($post->created_at) }}</span>
                                                         </li>
                                                         <li class="post-author"><a href="#"><i
                                                                     class="uil uil-user"></i><span>By
@@ -189,8 +190,8 @@
                 <div class="widget">
                     <h4 class="widget-title mb-3">Categories</h4>
                     <ul class="unordered-list bullet-primary text-reset">
-                        <li><a href="{{ route('post.index') }}">Berita ({{ Helpers::countCategoryPost('1') }})</a></li>
-                        <li><a href="{{ route('artikel.index') }}">Artikel ({{ Helpers::countCategoryPost('2') }})</a>
+                        <li><a href="{{ route('post.index') }}">Berita ({{ countCategoryPost('1') }})</a></li>
+                        <li><a href="{{ route('artikel.index') }}">Artikel ({{ countCategoryPost('2') }})</a>
                         </li>
                     </ul>
                 </div>
@@ -198,7 +199,7 @@
                 <div class="widget">
                     <h4 class="widget-title mb-3">Tags</h4>
                     @php
-                    $tags = array_unique(Helpers::countTag());
+                    $tags = array_unique(countTag());
                     @endphp
                     <ul class="list-unstyled tag-list">
                         @foreach ($tags as $key => $tag)
