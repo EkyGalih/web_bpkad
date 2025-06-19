@@ -120,7 +120,7 @@ return [
     */
 
     'key' => env('APP_KEY'),
-	'encryption_key' => env('ENCRYPTION_KEY'),
+    'encryption_key' => env('ENCRYPTION_KEY'),
 
     'cipher' => 'AES-256-CBC',
 
@@ -233,7 +233,6 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Avatar' => Laravolt\Avatar\Facade::class,
-        'Helpers' => App\Helpers\Helpers::class,
         'GoogleMaps' => GoogleMaps\Facade\GoogleMapsFacade::class,
         // 'Mapper'         => Cornford\Googlmapper\Facades\MapperFacade::class,
         'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,

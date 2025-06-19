@@ -4,7 +4,6 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Tools\AddressController;
 use App\Http\Controllers\Admin\Tools\AppsController;
 use App\Http\Controllers\Admin\Tools\LinkController;
-use App\Http\Controllers\Admin\Tools\SocialController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
@@ -19,13 +18,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
             Route::post('store', [LinkController::class, 'store'])->name('link.store');
             Route::put('update/{link}', [LinkController::class, 'update'])->name('link.update');
             Route::get('destroy/{link}', [LinkController::class, 'destroy'])->name('link.destroy');
-        });
-
-        Route::group(['prefix' => 'tools/social'], function () {
-            Route::get('/', [SocialController::class, 'index'])->name('social.index');
-            Route::post('store', [SocialController::class, 'store'])->name('social.store');
-            Route::put('update/{id}', [SocialController::class, 'update'])->name('social.update');
-            Route::get('destroy/{id}', [SocialController::class, 'destroy'])->name('social.destroy');
         });
 
         Route::group(['prefix' => 'tools/apps'], function () {

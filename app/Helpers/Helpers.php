@@ -30,6 +30,13 @@ use App\Models\PostsCategory;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Spatie\LaravelSettings\SettingsContainer;
+
+if (! function_exists('settings')) {
+    function settings(): SettingsContainer {
+        return app(SettingsContainer::class);
+    }
+}
 
 ### post function ###
 

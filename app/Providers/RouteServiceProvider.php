@@ -81,6 +81,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapFormulasi();
         $this->mapProgramAnggaranIku();
 
+        $this->mapWebsiteSettings();
+
         // ROUTE API LKPD
         $this->mapApiKodeRekening();
     }
@@ -314,6 +316,13 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('api')
             // ->namespace($this->namespace)
             ->group(base_path('routes/lkpd/api/KodeRekening.php'));
+    }
+
+    public function mapWebsiteSettings()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/admin/settings.php'));
     }
 
     public function mapApiRoutes()

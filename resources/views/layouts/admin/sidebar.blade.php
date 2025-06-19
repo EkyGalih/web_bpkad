@@ -128,11 +128,6 @@
                         <div data-i18n="Menu">Menu</div>
                     </a>
                 </li>
-                <li class="menu-item @if (request()->is('admin/web/tools/social*')) active @endif">
-                    <a href="{{ route('social.index') }}" class="menu-link">
-                        <div data-i18n="Social Media">Social Media</div>
-                    </a>
-                </li>
                 <li class="menu-item @if (request()->is('admin/web/tools/link*')) active @endif">
                     <a href="{{ route('link.index') }}" class="menu-link">
                         <div data-i18n="Link">Link</div>
@@ -177,6 +172,12 @@
             <a href="{{ route('users') }}" class="menu-link">
                 <i class="menu-icon icon-base ri ri-group-3-fill"></i>
                 <div data-i18n="Pengguna">Pengguna</div>
+            </a>
+        </li>
+        <li class="menu-item @if (request()->is('admin/web/website-settings*')) active @endif">
+            <a href="{{ route('settings') }}" class="menu-link">
+                <i class="menu-icon icon-base ri ri-settings-4-fill"></i>
+                <div data-i18n="Website Settings">Website Settings</div>
             </a>
         </li>
     </ul>
