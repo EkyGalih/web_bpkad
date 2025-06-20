@@ -14,26 +14,10 @@
     </style>
 @endsection
 @section('content_home')
-<section class="section-frame overflow-hidden">
-    <div class="wrapper image-wrapper bg-image bg-overlay bg-overlay-300" data-image-src="{{ asset($settings->header_image) }}">
-        <div class="container pt-17 pb-19 pt-md-18 pb-md-17 text-center">
-            <div class="row">
-                <div class="col-lg-8 col-xl-7 col-xxl-6 mx-auto">
-                    <div class="post-header">
-                        <div class="post-category text-line text-white">
-                            <a href="#" class="text-reset" rel="category">Agenda</a>
-                        </div>
-                        <!-- /.post-category -->
-                        <h1 class="display-1 mb-4 text-white">Agenda Pimpinan</h1>
-                    </div>
-                    <!-- /.post-header -->
-                </div>
-                <!-- /column -->
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container -->
-    </section>
+    @include('layouts.client._header', [
+        'title' => 'Agenda',
+        'keterangan' => 'Pimpinan',
+    ])
     <section class="wrapper bg-light">
         <div class="container py-14 py-md-16">
             <div class="row gx-lg-12 gx-xl-12">
@@ -76,10 +60,10 @@
                                             <div class="project-details d-flex justify-content-center flex-column">
                                                 <div class="post-header">
                                                     <h2 class="post-title h3"><a
-                                                            href="{{ route('post.show', [Helpers::PostCategory($item->posts_category_id), $item->slug]) }}"
+                                                            href="{{ route('post.show', [PostCategory($item->posts_category_id), $item->slug]) }}"
                                                             class="link-dark">{{ substr($item->title, 0, 50) }}</a></h2>
                                                     <div class="post-category text-ash">
-                                                        {{ Helpers::PostCategory($item->posts_category_id) }}
+                                                        {{ PostCategory($item->posts_category_id) }}
                                                     </div>
                                                 </div>
                                             </div>

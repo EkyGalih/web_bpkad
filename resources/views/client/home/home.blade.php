@@ -34,7 +34,7 @@
     </style>
 @endsection
 @section('content_home')
-    <section class="wrapper image-wrapper bg-image bg-overlay bg-overlay-300"
+        <section class="wrapper image-wrapper bg-image bg-overlay bg-overlay-300"
         data-image-src="{{ asset($settings->header_image) }}">
         {{-- client/assets/img/photos/bg3.jpg --}}
         <div class="container pt-17 pb-19 pt-md-18 pb-md-17 text-center">
@@ -166,7 +166,7 @@
                         <div class="col-lg-10 col-xl-9 col-xxl-8 mx-auto text-center">
                             <h3 class="display-3 mb-10"><span class="underline-3 style-2 yellow">Agenda Pimpinan</span>
                             </h3>
-                            <h2 class="fs-16 text-uppercase text-muted mb-3"><a href="#">Lihat Semua</a></h2>
+                            <h2 class="fs-16 text-uppercase text-muted mb-3"><a href="{{ route('ppid.agenda') }}">Lihat Semua</a></h2>
                         </div>
                         <!-- /column -->
                     </div>

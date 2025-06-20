@@ -1,28 +1,10 @@
 @extends('client.index')
 @section('title', 'Galery - ')
 @section('content_home')
-    <section class="wrapper image-wrapper bg-image bg-overlay bg-overlay-300"
-        data-image-src="{{ asset($settings->header_image) }}">
-        {{-- client/assets/img/photos/bg3.jpg --}}
-        <div class="container pt-17 pb-19 pt-md-18 pb-md-17 text-center">
-            <div class="row">
-                <div class="col-lg-8 col-xl-7 col-xxl-6 mx-auto" data-cues="slideInDown" data-group="page-title">
-                    <h1 class="display-1 text-white fs-60 mb-4 px-md-15 px-lg-0">Daftar Galery <span
-                            class="underline-3 style-2 blue">{{ $settings->title }}</span></h1>
-                </div>
-                <!-- /column -->
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container -->
-        <div class="overflow-hidden">
-            <div class="divider text-light mx-n2">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60">
-                    <path fill="currentColor" d="M0,0V60H1440V0A5771,5771,0,0,1,0,0Z" />
-                </svg>
-            </div>
-        </div>
-    </section>
+    @include('layouts.client._header', [
+        'title' => 'Daftar Galery',
+        'keterangan' => 'Foto',
+    ])
     <section class="container py-10">
         @include('client.galery.partials._header')
         <div>
