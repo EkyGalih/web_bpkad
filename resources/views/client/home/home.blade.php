@@ -1,25 +1,34 @@
 @extends('client.index')
-@section('menu-home', 'active')
 @section('additional-css')
-    <!-- Basic stylesheet -->
-    <link rel="stylesheet" href="{{ asset('client/plugins/owl-carousel/owl.carousel.css') }}">
-
-    <!-- Default Theme -->
-    <link rel="stylesheet" href="{{ asset('client/plugins/owl-carousel/owl.theme.css') }}">
     <style>
-        #owl-video .item {
-            margin: 3px;
-        }
-
-        #owl-video .item img {
-            display: block;
+        .marquee-fixed {
+            position: fixed;
+            bottom: 0;
+            left: 0;
             width: 100%;
-            height: auto;
+            z-index: 1050;
+            /* cukup tinggi agar tidak tertimpa */
+            overflow: hidden;
         }
 
-        @media screen and (max-width: 50px) {
-            .list-group {
-                width: 50%;
+        .marquee-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: scroll-left 55s linear infinite;
+            padding-left: 100%;
+        }
+
+        .marquee-content:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-100%);
             }
         }
     </style>
@@ -47,65 +56,38 @@
             </div>
         </div>
     </section>
-    <section class="wrapper bg-light-dark">
+    <section class="wrapper bg-light">
         <div class="container pb-15 pb-md-17">
-            <div class="row gx-md-5 gy-5 mt-n19 mb-14 mb-md-17">
-                <div class="col-md-6 col-xl-3">
-                    <div class="card shadow-lg">
-                        <div class="card-body">
-                            <img src="{{ asset('client/assets/img/icons/solid/clipboard.svg') }}"
-                                class="svg-inject icon-svg icon-svg-sm solid-mono text-fuchsia mb-3" alt="" />
-                            <h4>Informasi Berkala</h4>
-                            <p class="mb-2">Informasi yang diperbarui secara reguler atau periodik.</p>
-                            <a href="{{ route('ppid-kip', strtolower(App\Enum\KlasifikasiEnum::BERKALA->name)) }}" class="more hover link-fuchsia">Lihat Daftar</a>
+            <div class="row gx-md-5 gy-5 mt-n12 mb-8 mb-md-12">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6 mb-4 mb-xl-0">
+                            <div class="card shadow-lg h-100">
+                                <div class="card-body">
+                                    <img src="{{ asset('client/assets/img/icons/solid/calendar.svg') }}"
+                                        class="svg-inject icon-svg icon-svg-sm solid-mono text-fuchsia mb-3"
+                                        alt="" />
+                                    <h4>Events</h4>
+                                    <p class="mb-2">Daftar event {{ $settings->title }}.</p>
+                                    <a href="{{ route('ppid-kip', strtolower(App\Enum\KlasifikasiEnum::BERKALA->name)) }}"
+                                        class="more hover link-fuchsia">Lihat</a>
+                                </div>
+                            </div>
                         </div>
-                        <!--/.card-body -->
-                    </div>
-                    <!--/.card -->
-                </div>
-                <!--/column -->
-                <div class="col-md-6 col-xl-3">
-                    <div class="card shadow-lg">
-                        <div class="card-body">
-                            <img src="{{ asset('client/assets/img/icons/solid/clipboard.svg') }}"
-                                class="svg-inject icon-svg icon-svg-sm solid-mono text-violet mb-3" alt="" />
-                            <h4>Informasi Serta Merta</h4>
-                            <p class="mb-2">Informasi yang diperbarui atau disajikan secara instan.</p>
-                            <a href="{{ route('ppid-kip', strtolower(App\Enum\KlasifikasiEnum::SERTA_MERTA->name)) }}" class="more hover link-violet">Lihat Daftar</a>
+                        <div class="col-md-6">
+                            <div class="card shadow-lg h-100">
+                                <div class="card-body">
+                                    <img src="{{ asset('client/assets/img/icons/solid/images.svg') }}"
+                                        class="svg-inject icon-svg icon-svg-sm solid-mono text-violet mb-3"
+                                        alt="" />
+                                    <h4>Galery</h4>
+                                    <p class="mb-2">Daftar galery foto & video {{ $settings->title }}.</p>
+                                    <a href="{{ route('foto') }}" class="more hover link-violet">Lihat</a>
+                                </div>
+                            </div>
                         </div>
-                        <!--/.card-body -->
                     </div>
-                    <!--/.card -->
                 </div>
-                <!--/column -->
-                <div class="col-md-6 col-xl-3">
-                    <div class="card shadow-lg">
-                        <div class="card-body">
-                            <img src="{{ asset('client/assets/img/icons/solid/clipboard.svg') }}"
-                                class="svg-inject icon-svg icon-svg-sm solid-mono text-orange mb-3" alt="" />
-                            <h4>Informasi Setiap Saat</h4>
-                            <p class="mb-2">Informasi yang diperbarui atau disajikan setiap saat.</p>
-                            <a href="{{ route('ppid-kip', strtolower(App\Enum\KlasifikasiEnum::SETIAP_SAAT->name)) }}" class="more hover link-orange">Lihat Daftar</a>
-                        </div>
-                        <!--/.card-body -->
-                    </div>
-                    <!--/.card -->
-                </div>
-                <!--/column -->
-                <div class="col-md-6 col-xl-3">
-                    <div class="card shadow-lg">
-                        <div class="card-body">
-                            <img src="{{ asset('client/assets/img/icons/solid/clipboard.svg') }}"
-                                class="svg-inject icon-svg icon-svg-sm solid-mono text-green mb-3" alt="" />
-                            <h4>Informasi Dikecualikan</h4>
-                            <p class="mb-2">Informasi yang dikecualikan untuk disediakan ke publik.</p>
-                            <a href="{{ route('ppid-kip', strtolower(App\Enum\KlasifikasiEnum::DIKECUALIKAN->name)) }}" class="more hover link-green">Lihat Daftar</a>
-                        </div>
-                        <!--/.card-body -->
-                    </div>
-                    <!--/.card -->
-                </div>
-                <!--/column -->
             </div>
             <!--/.row -->
             <div class="row">
@@ -268,7 +250,7 @@
                                                                 <ul class="post-meta d-flex mb-0">
                                                                     <li class="post-date"><i
                                                                             class="uil uil-calendar-alt"></i><span>{{ \Carbon\Carbon::parse($item->publishdate)->locale('id')->translatedFormat('l,
-                                                                                                                                                d F Y') }}</span>
+                                                                                                                                                                                                                                                                                                        d F Y') }}</span>
                                                                     </li>
                                                                     <li class="post-comments"><a href="#"><i
                                                                                 class="uil uil-file-alt fs-15"></i>{{ $item->author->name }}</a>
@@ -291,6 +273,72 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+    <section class="wrapper bg-gray">
+        <div class="container pb-10 pb-md-10">
+            <div class="row gx-md-4 gy-5 mt-5 mb-md-5">
+                <div class="col-md-6 col-xl-3">
+                    <div class="card shadow-lg">
+                        <div class="card-body">
+                            <img src="{{ asset('client/assets/img/icons/solid/clipboard.svg') }}"
+                                class="svg-inject icon-svg icon-svg-sm solid-mono text-fuchsia mb-3" alt="" />
+                            <h4>Informasi Berkala</h4>
+                            <p class="mb-2">Informasi yang diperbarui secara reguler atau periodik.</p>
+                            <a href="{{ route('ppid-kip', strtolower(App\Enum\KlasifikasiEnum::BERKALA->name)) }}"
+                                class="more hover link-fuchsia">Lihat Daftar</a>
+                        </div>
+                        <!--/.card-body -->
+                    </div>
+                    <!--/.card -->
+                </div>
+                <!--/column -->
+                <div class="col-md-6 col-xl-3">
+                    <div class="card shadow-lg">
+                        <div class="card-body">
+                            <img src="{{ asset('client/assets/img/icons/solid/clipboard.svg') }}"
+                                class="svg-inject icon-svg icon-svg-sm solid-mono text-violet mb-3" alt="" />
+                            <h4>Informasi Serta Merta</h4>
+                            <p class="mb-2">Informasi yang diperbarui atau disajikan secara instan.</p>
+                            <a href="{{ route('ppid-kip', strtolower(App\Enum\KlasifikasiEnum::SERTA_MERTA->name)) }}"
+                                class="more hover link-violet">Lihat Daftar</a>
+                        </div>
+                        <!--/.card-body -->
+                    </div>
+                    <!--/.card -->
+                </div>
+                <!--/column -->
+                <div class="col-md-6 col-xl-3">
+                    <div class="card shadow-lg">
+                        <div class="card-body">
+                            <img src="{{ asset('client/assets/img/icons/solid/clipboard.svg') }}"
+                                class="svg-inject icon-svg icon-svg-sm solid-mono text-orange mb-3" alt="" />
+                            <h4>Informasi Setiap Saat</h4>
+                            <p class="mb-2">Informasi yang diperbarui atau disajikan setiap saat.</p>
+                            <a href="{{ route('ppid-kip', strtolower(App\Enum\KlasifikasiEnum::SETIAP_SAAT->name)) }}"
+                                class="more hover link-orange">Lihat Daftar</a>
+                        </div>
+                        <!--/.card-body -->
+                    </div>
+                    <!--/.card -->
+                </div>
+                <!--/column -->
+                <div class="col-md-6 col-xl-3">
+                    <div class="card shadow-lg">
+                        <div class="card-body">
+                            <img src="{{ asset('client/assets/img/icons/solid/clipboard.svg') }}"
+                                class="svg-inject icon-svg icon-svg-sm solid-mono text-green mb-3" alt="" />
+                            <h4>Informasi Dikecualikan</h4>
+                            <p class="mb-2">Informasi yang dikecualikan untuk disediakan ke publik.</p>
+                            <a href="{{ route('ppid-kip', strtolower(App\Enum\KlasifikasiEnum::DIKECUALIKAN->name)) }}"
+                                class="more hover link-green">Lihat Daftar</a>
+                        </div>
+                        <!--/.card-body -->
+                    </div>
+                    <!--/.card -->
+                </div>
+                <!--/column -->
             </div>
         </div>
     </section>
@@ -462,56 +510,13 @@
             </div>
         </div>
     </section>
+    <div class="marquee-fixed bg-info text-white py-2 px-3">
+        <div class="marquee-content d-inline-block">
+            @foreach ($information as $info)
+                <span class="me-5">📢 {{ $info->title }}: {{ $info->keterangan }}</span>
+            @endforeach
+        </div>
+    </div>
 @endsection
-@section('additional-js')
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var swiperAgenda = new Swiper('[data-items-xl="3"]:nth-of-type(1) .swiper', {
-                slidesPerView: 3,
-                spaceBetween: 30,
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                breakpoints: {
-                    992: {
-                        slidesPerView: 3
-                    },
-                    768: {
-                        slidesPerView: 2
-                    },
-                    0: {
-                        slidesPerView: 1
-                    }
-                }
-            });
-
-            var swiperBeritaNTB = new Swiper('[data-items-xl="3"]:nth-of-type(2) .swiper', {
-                slidesPerView: 3,
-                spaceBetween: 30,
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                breakpoints: {
-                    992: {
-                        slidesPerView: 3
-                    },
-                    768: {
-                        slidesPerView: 2
-                    },
-                    0: {
-                        slidesPerView: 1
-                    }
-                }
-            });
-
-            document.querySelectorAll('a[data-bs-toggle="tab"]').forEach(function(tab) {
-                tab.addEventListener('shown.bs.tab', function(event) {
-                    swiperAgenda.update();
-                    swiperBeritaNTB.update();
-                });
-            });
-        });
-    </script>
+@section('scripts')
 @endsection

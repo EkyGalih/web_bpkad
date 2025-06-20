@@ -17,12 +17,7 @@ class LaporanPermohonanMasyarakatController extends Controller
      */
     public function index()
     {
-        $Pshow   = 'show';
-        $Lshow   = '';
-        $Pactive = 'active';
-        $Lactive = '';
-
-        return view('client.faq.index', compact('Pshow', 'Pactive', 'Lshow', 'Lactive'));
+        return view('client.faq.index');
     }
 
     /**
@@ -33,9 +28,8 @@ class LaporanPermohonanMasyarakatController extends Controller
      */
     public function show(Request $token)
     {
-        // $explode = explode("-", $token->code);
-        // if ($explode[0] == 'req') {
         $status = Permohonan::where('kode_pemohon', '=', $token->code)
+        ->orWhere('email', '=', $token->code)
             ->select('status')
             ->first();
 
@@ -44,17 +38,6 @@ class LaporanPermohonanMasyarakatController extends Controller
         } else {
             return redirect()->back()->with(['success_req' => 'status permohonan anda sudah selesai']);
         }
-        // } elseif ($explode[0] == 'lap') {
-        //     $status = Laporan::where('kode_laporan', '=', $token->code)
-        //     ->select('status')
-        //     ->first();
-
-        //     if ($status->status == 'proses') {
-        //         return redirect()->back()->with(['warning_ext' => 'status permohonan anda sedang dalam proses, hubungi admin jika permohonan anda belum selesai']);
-        //     } else {
-        //         return redirect()->back()->with(['success' => 'status permohonan anda sudah selesai']);
-        //     }
-        // }
     }
 
     /**
@@ -112,14 +95,14 @@ class LaporanPermohonanMasyarakatController extends Controller
 
             $telegram   = new Api(env('TELEGRAM_BOT_TOKEN'));
             $chatID     = env('TELEGRAM_CHAT_ID');
-            $text       = 'Peromohonan Masuk dari '.$request->nama.' dengan nomor permohonan '.$code . ', memohonkan informasi ' . $request->informasi_diminta . ' untuk kebutuhan ' . $request->tujuan_informasi;
+            $text       = 'Peromohonan Masuk dari ' . $request->nama . ' dengan nomor permohonan ' . $code . ', memohonkan informasi ' . $request->informasi_diminta . ' untuk kebutuhan ' . $request->tujuan_informasi;
 
             $telegram->sendMessage([
                 'chat_id' => $chatID,
                 'text' => $text
             ]);
 
-            return redirect()->back()->with(['success_req' => 'Permohonan sudah masuk kode "' . $code . '" harap catat kode permohonan untuk pengecekkan status permohonan'], 'Pshow', 'Pactive', 'Lshow', 'Lactive');
+            return redirect()->back()->with(['success_req' => 'Permohonan dengan kode "' . $code . '" terkirim harap catat kode permohonan untuk pengecekkan status permohonan'], 'Pshow', 'Pactive', 'Lshow', 'Lactive');
         } elseif ($request->jenis == 'pelaporan') {
             $code       = 'lap-' . uniqid();
 
@@ -162,7 +145,7 @@ class LaporanPermohonanMasyarakatController extends Controller
 
             $telegram   = new Api(env('TELEGRAM_BOT_TOKEN'));
             $chatID     = env('TELEGRAM_CHAT_ID');
-            $text       = 'Pengaduan Masuk dari '.$request->nama_pelapor.' dengan nomor laporan '.$code . ', melaporkan ' . $request->judul_laporan . ', berlokasi ' . $request->lokasi_kejadian;
+            $text       = 'Pengaduan Masuk dari ' . $request->nama_pelapor . ' dengan nomor laporan ' . $code . ', melaporkan ' . $request->judul_laporan . ', berlokasi ' . $request->lokasi_kejadian;
 
             $telegram->sendMessage([
                 'chat_id' => $chatID,

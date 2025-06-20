@@ -21,13 +21,18 @@ class Galery extends Model
     //     });
     // }
 
-    public function GaleryFoto()
+    public function galeryFoto()
     {
-        return $this->hasMany(GaleryFoto::class);
+        return $this->hasMany(GaleryFoto::class, 'galery_id', 'id');
     }
 
-    public function GaleryVideo()
+    public function galeryVideo()
     {
-        return $this->hasMany(GaleryVideo::class);
+        return $this->hasMany(GaleryVideo::class, 'galery_id', 'id');
+    }
+
+    public function galeryType()
+    {
+        return $this->belongsTo(GaleryType::class, 'galery_type_id', 'id');
     }
 }

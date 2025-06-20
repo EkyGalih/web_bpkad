@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\PPID\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Client\ArtikelController;
+use App\Http\Controllers\Client\GaleryController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\LaporanPermohonanMasyarakatController;
 use App\Http\Controllers\Client\PegawaiController;
@@ -104,6 +105,17 @@ Route::group(['prefix' => 'PPID'], function () {
     });
 });
 
+Route::prefix('galery')->group(function () {
+    Route::prefix('foto')->group(function () {
+        Route::get('/', [GaleryController::class, 'foto'])->name('foto');
+        Route::get('list-foto/{galery}', [GaleryController::class, 'show_foto'])->name('foto.show');
+    });
+
+    Route::prefix('video')->group(function () {
+        Route::get('/', [GaleryController::class, 'video'])->name('video');
+        Route::get('list-video/{galery}', [GaleryController::class, 'show_video'])->name('video.show');
+    });
+});
 
 // google analytycs
 Route::group(['prefix' => 'admin'], function () {

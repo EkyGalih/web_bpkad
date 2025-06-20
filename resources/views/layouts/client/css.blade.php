@@ -1,6 +1,6 @@
-<link href="{{ asset('client/assets/img/favicon.png') }}" type="image/png" rel="shortcut icon">
-<link href="{{ asset('client/assets/img/favicon.png') }}" type="image/png" rel="icon">
-<link href="{{ asset('client/assets/img/favicon.png') }}" type="image/png" rel="apple-touch-icon">
+<link href="{{ asset('static/images/ntb.png') }}" type="image/png" rel="shortcut icon">
+<link href="{{ asset('static/images/ntb.png') }}" type="image/png" rel="icon">
+<link href="{{ asset('static/images/ntb.png') }}" type="image/png" rel="apple-touch-icon">
 <link rel="stylesheet" href="{{ asset('client/assets/css/plugins.css') }}">
 <link rel="stylesheet" href="{{ asset('client/assets/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('client/assets/css/colors/violet.css') }}">

@@ -22,4 +22,9 @@ class GaleryType extends Model
             $model->id = (string)Uuid::generate(4);
         });
     }
+
+    public function galeries()
+    {
+        return $this->hasMany(Galery::class, 'galery_type_id', 'id');
+    }
 }

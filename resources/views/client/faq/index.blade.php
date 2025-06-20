@@ -50,50 +50,39 @@
                     </ul>
                     <div class="tab-content mt-1">
                         <div class="tab-pane fade show active" id="tab2-1">
-                            <div class="row p-5">
-                                <div class="col-lg-8">
-                                    <div>Perhatikan cara menyampaikan pengaduan yang
-                                        baik
-                                        dan
-                                        benar
+                            <div class="row p-5 align-items-center">
+                                <div class="col-lg-8 d-flex align-items-center">
+                                    <div>
+                                        Perhatikan cara menyampaikan pengaduan yang baik dan benar
                                         <i class="bx bx-question-mark"></i>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
-                                    <form action="{{ route('faq.show') }}" method="POST"
-                                        onsubmit="return validateForm()">
+                                    <form action="{{ route('faq.show') }}" method="POST" onsubmit="return validateForm()">
                                         @csrf
-                                        <div class="col-auto">
-                                            <label class="sr-only" for="inlineFormInputGroup"></label>
-                                            <div class="input-group mb-2">
-                                                <input type="text" name="code" class="form-control"
-                                                    id="inlineFormInputGroup" placeholder="cek status permohonan anda"
-                                                    required>
-                                            </div>
+                                        <div class="input-group mb-2">
+                                            <input type="text" name="code" class="form-control" id="inlineFormInputGroup" placeholder="Masukkan kode atau email anda untuk cek status" required>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                             @if (session('success_req'))
-                            <div class="alert alert-success" role="alert">
-                                <button class="close" data-dismiss="alert" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span></button>
-                                {{ session('success_req') }}
-                            </div>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {{ session('success_req') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
                             @endif
                             @if (session('warning_size_req'))
-                            <div class="alert alert-warning" role="alert">
-                                <button class="close" data-dismiss="alert" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span></button>
-                                {{ session('warning_size_req') }}
-                            </div>
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    {{ session('warning_size_req') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
                             @endif
                             @if (session('warning_ext_req'))
-                            <div class="alert alert-warning" role="alert">
-                                <button class="close" data-dismiss="alert" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span></button>
-                                {{ session('warning_ext_req') }}
-                            </div>
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    {{ session('warning_ext_req') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
                             @endif
                             <form action="{{ route('faq.store') }}" class="p-5" method="POST"
                                 enctype="multipart/form-data">

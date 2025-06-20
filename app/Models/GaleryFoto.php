@@ -23,8 +23,8 @@ class GaleryFoto extends Model
         });
     }
 
-    public function Galery()
+    public function galery()
     {
-        return $this->belongsTo(Galery::class);
+        return $this->belongsTo(Galery::class, 'galery_id', 'id');
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Olympic;
 use App\Models\Pages;
 use App\Models\Posts;
+use App\Models\Slideitem;
 use App\Models\SubPages;
 use Illuminate\Http\Request;
 
@@ -31,13 +32,15 @@ class HomeController extends Controller
             ->limit(8)
             ->get();
 
+        $information = Slideitem::where('slide_id', '2')->where('is_active', '1')->get();
+
         // berita ntb
         $client = new \GuzzleHttp\Client();
         $res = $client->request('GET', 'https://ntbprov.go.id/api/news');
         $response = json_decode($res->getBody()->getContents());
         $data = $response->data;
 
-        return view('client.home.home', compact('new_posts', 'agendas', 'data'));
+        return view('client.home.home', compact('new_posts', 'agendas', 'data', 'information'));
     }
 
     /**
