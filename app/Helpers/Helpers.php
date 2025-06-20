@@ -789,13 +789,13 @@ if (!function_exists('getKasubag')) {
         if ($cat == 'select') {
             return Pegawai::where('nama_jabatan', '=', $param)
                 ->where('initial_jabatan', 'LIKE', $param2 . '%')
-                ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+                ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto', 'jabatan')
                 ->where('status_pegawai', '=', 'aktif')
                 ->get();
         } elseif ($cat == 'count') {
             return Pegawai::where('nama_jabatan', '=', $param)
                 ->where('initial_jabatan', 'LIKE', $param2 . '%')
-                ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+                ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto', 'jabatan')
                 ->where('status_pegawai', '=', 'aktif')
                 ->count();
         }

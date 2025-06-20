@@ -68,9 +68,7 @@
                                         class="svg-inject icon-svg icon-svg-sm solid-mono text-fuchsia mb-3"
                                         alt="" />
                                     <h4>Events</h4>
-                                    <p class="mb-2">Daftar event {{ $settings->title }}.</p>
-                                    <a href="{{ route('ppid-kip', strtolower(App\Enum\KlasifikasiEnum::BERKALA->name)) }}"
-                                        class="more hover link-fuchsia">Lihat</a>
+                                    <a href="#" class="more hover link-fuchsia">Lihat</a>
                                 </div>
                             </div>
                         </div>
@@ -81,8 +79,7 @@
                                         class="svg-inject icon-svg icon-svg-sm solid-mono text-violet mb-3"
                                         alt="" />
                                     <h4>Galery</h4>
-                                    <p class="mb-2">Daftar galery foto & video {{ $settings->title }}.</p>
-                                    <a href="{{ route('foto') }}" class="more hover link-violet">Lihat</a>
+                                    <a href="{{ route('foto') }}" class="more hover link-primary">Lihat</a>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +106,7 @@
                     </a> </li>
                 <li class="nav-item"> <a class="nav-link d-flex flex-row" data-bs-toggle="tab" href="#tab2-2">
                         <div><img src="{{ asset('client/assets/img/icons/lineal/user.svg') }}"
-                                class="svg-inject icon-svg icon-svg-sm solid-mono text-violet me-4" alt="" /></div>
+                                class="svg-inject icon-svg icon-svg-sm solid-mono text-info me-4" alt="" /></div>
                         <div>
                             <h4>Agenda Pimpinan</h4>
                             <p>Berita agenda pimpinan BPKAD NTB.</p>
@@ -134,9 +131,10 @@
                                     <div
                                         class="project-details d-flex justify-content-center align-self-end flex-column ps-0 pb-0">
                                         <div class="post-header">
-                                            <h2 class="display-4 mb-4 pe-xxl-15">Berita Terkini.</h2>
-                                            <a href="{{ route('post.index') }}" class="lead fs-lg mb-0">Lihat Semua Berita
-                                                Terkini</a>
+                                            <h3 class="display-3 mb-2"><span class="underline-3 style-2 blue">Berita</span>
+                                            </h3>
+                                            <h2 class="fs-16 text-uppercase text-muted mb-3"><a
+                                                    href="{{ route('post.index') }}">Lihat Semua</a></h2>
                                         </div>
                                         <!-- /.post-header -->
                                     </div>
@@ -150,7 +148,7 @@
                                                 <img src="{{ asset($post->foto_berita) }}"
                                                     srcset="{{ asset($post->foto_berita) }}"
                                                     alt="{{ substr($post->title, 0, 50) }}" /></a></figure>
-                                        <div class="post-category text-line mb-2 text-violet">
+                                        <div class="post-category text-line mb-2 text-info">
                                             {{ PostCategory($post->posts_category_id) }}</div>
                                         <h2 class="post-title h3">{{ substr($post->title, 0, 50) }}...</h2>
                                     </div>
@@ -187,9 +185,10 @@
                                         </figure>
                                         <div class="project-details d-flex justify-content-center flex-column">
                                             <div class="post-header">
-                                                <h2 class="post-title h3"><a
-                                                        href="{{ route('post.show', [PostCategory($agenda->posts_category_id), $agenda->slug]) }}"
-                                                        class="link-dark">{{ $agenda->title }}</a></h2>
+                                                <h2 class="post-title h3">
+                                                    <a href="{{ route('post.show', [PostCategory($agenda->posts_category_id), $agenda->slug]) }}"
+                                                        class="link-dark">{{ \Illuminate\Support\Str::limit($agenda->title, 60) }}</a>
+                                                </h2>
                                                 <div class="post-category text-ash">
                                                     {{ PostCategory($agenda->posts_category_id) }}
                                                 </div>
@@ -204,11 +203,12 @@
                 <!--/.tab-pane -->
                 <div class="tab-pane fade" id="tab2-3">
                     <div class="row gx-lg-8 gx-xl-12 gy-10 align-items-center">
-                        <div class="row mb-5">
-                            <div class="col-md-10 col-xl-8 col-xxl-7 mx-auto text-center">
-                                <img src="{{ asset('client/assets/img/icons/lineal/list.svg') }}"
-                                    class="svg-inject icon-svg icon-svg-md mb-4" alt="" />
-                                <h2 class="display-4 mb-4 px-lg-14">Berita NTB</h2>
+                        <div class="row">
+                            <div class="col-lg-10 col-xl-9 col-xxl-8 mx-auto text-center">
+                                <h3 class="display-3 mb-10"><span class="underline-3 style-2 primary">Berita NTB</span>
+                                </h3>
+                                <h2 class="fs-16 text-uppercase text-muted mb-3"><a href="https://ntbprov.go.id">Lihat
+                                        Semua</a></h2>
                             </div>
                             <!-- /column -->
                         </div>
@@ -224,20 +224,26 @@
                                                 <div class="item-inner">
                                                     <article>
                                                         <div class="card">
-                                                            <figure class="card-img-top overlay overlay-1 hover-scale"><a
+                                                            <figure class="card-img-top overlay overlay-1 hover-scale"
+                                                                style="height: 250px; overflow: hidden;">
+                                                                <a
                                                                     href="https://ntbprov.go.id/post/{{ $item->seotitle }}">
                                                                     <img src="{{ $item->thumbnail }}"
-                                                                        alt="{{ $item->desc == null ? $item->seotitle : $item->desc->title }}" /></a>
+                                                                        alt="{{ $item->desc == null ? $item->seotitle : $item->desc->title }}"
+                                                                        style="height: 100%; width: 100%; object-fit: cover;" />
+                                                                </a>
                                                                 <figcaption>
                                                                     <h5 class="from-top mb-0">Read More</h5>
                                                                 </figcaption>
                                                             </figure>
                                                             <div class="card-body">
                                                                 <div class="post-header">
-                                                                    <h2 class="post-title h3 mt-1 mb-3"><a
-                                                                            class="link-dark"
+                                                                    <h2 class="post-title h3 mt-1 mb-3">
+                                                                        <a class="link-dark"
                                                                             href="https://ntbprov.go.id/post/{{ $item->seotitle }}">
-                                                                            {{ $item->desc->title }}</a></h2>
+                                                                            {{ \Illuminate\Support\Str::limit($item->desc->title, 60) }}
+                                                                        </a>
+                                                                    </h2>
                                                                 </div>
                                                                 <!-- /.post-header -->
                                                                 <div class="post-content">
@@ -248,23 +254,19 @@
                                                             <!--/.card-body -->
                                                             <div class="card-footer">
                                                                 <ul class="post-meta d-flex mb-0">
-                                                                    <li class="post-date"><i
-                                                                            class="uil uil-calendar-alt"></i><span>{{ \Carbon\Carbon::parse($item->publishdate)->locale('id')->translatedFormat('l,
-                                                                                                                                                                                                                                                                                                        d F Y') }}</span>
+                                                                    <li class="post-date">
+                                                                        <i class="uil uil-calendar-alt"></i>
+                                                                        <span>{{ \Carbon\Carbon::parse($item->publishdate)->locale('id')->translatedFormat('l, d F Y') }}</span>
                                                                     </li>
-                                                                    <li class="post-comments"><a href="#"><i
+                                                                    <li class="post-comments">
+                                                                        <a href="#"><i
                                                                                 class="uil uil-file-alt fs-15"></i>{{ $item->author->name }}</a>
                                                                     </li>
                                                                 </ul>
-                                                                <!-- /.post-meta -->
                                                             </div>
-                                                            <!-- /.card-footer -->
                                                         </div>
-                                                        <!-- /.card -->
                                                     </article>
-                                                    <!-- /article -->
                                                 </div>
-                                                <!-- /.item-inner -->
                                             </div>
                                         @endforeach
                                     </div>
@@ -347,46 +349,50 @@
             <div class="row">
                 <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2 mt-5 mx-auto text-center">
                     <h3 class="display-3 mb-10 px-xl-10 px-xxl-15"><span class="underline-3 style-2 blue">Struktur
-                            PPID</span></h3>
+                            Organisasi BPKAD</span></h3>
                 </div>
                 <!-- /column -->
             </div>
             @php
-                $atasan = getPejabatPPID('atasan');
-                $ketua = getPejabatPPID('ketua');
-
-                $kepala_pengelola = getPejabatPPID('kepala_pengelola');
-                $kepala_pengaduan = getPejabatPPID('kepala_pengaduan');
-                $kepala_pelayanan = getPejabatPPID('kepala_pelayanan');
+                $kaban = get_pimpinan('select', strtolower(App\Enum\JabatanEnum::KABAN->name));
+                $sekban = get_pimpinan('select', strtolower(App\Enum\JabatanEnum::SEKBAN->name));
+                $kabag = getKabag(
+                    'select',
+                    strtolower(App\Enum\JabatanEnum::KABID->name),
+                    strtolower(App\Enum\JabatanEnum::KEPALA->name),
+                );
+                $kasubag = getKasubag('select', strtolower(App\Enum\JabatanEnum::KASUBID->name), 'Kepala Sub Bidang');
             @endphp
-            <div class="card bg-soft-primary rounded-4 mb-14 mb-md-18">
-                <div class="card-body p-md-10 mt-8 py-xxl-16 position-relative">
-                    <div class="position-absolute d-none d-lg-block" style="bottom:30%; left:10%; width: 28%; z-index:2">
-                        <figure class="card-img-top overflow-hidden" style="width: 300px; height: 300px; margin: auto;">
-                            <img class="w-100 h-100 object-fit-cover"
-                                src="{{ asset($atasan->foto ?? ($atasan->jenis_kelamin == 'pria' ? 'static/images/male.jpg' : 'static/images/female.jpg')) }}"
-                                alt="{{ $atasan->name }}" />
-                        </figure>
-                    </div>
-                    <div class="row gx-md-0 gx-xl-12 text-center">
-                        <div class="col-lg-7 offset-lg-5 col-xl-6">
-                            <blockquote class="border-0 fs-lg mb-0">
-                                <p>“Keterbukaan informasi publik merupakan wujud nyata dari tata kelola pemerintahan yang
-                                    transparan, partisipatif, dan akuntabel. Kami berkomitmen untuk memberikan akses
-                                    informasi yang cepat, tepat, dan mudah bagi seluruh masyarakat”</p>
-                                <div class="blockquote-details justify-content-center text-center">
-                                    <div class="info p-0">
-                                        <h5 class="mb-1">{{ $atasan->name }}</h5>
-                                        <div class="meta mb-0">{{ strtoupper($atasan->nama_jabatan) }}</div>
+            <div class="card bg-gray rounded-4 mb-5 mb-md-18">
+                <div class="container pt-16 pb-14 pb-md-0">
+                    <div class="row gx-lg-8 gx-xl-0 align-items-center">
+                        <div
+                            class="col-md-5 col-lg-5 col-xl-4 offset-xl-1 d-none d-md-flex position-relative align-self-end">
+                            <div class="shape rounded-circle bg-pale-primary rellax w-21 h-21 d-md-none d-lg-block"
+                                data-rellax-speed="1" style="top: 7rem; left: 1rem"></div>
+                            <figure><img src="{{ asset($kaban->foto) }}" srcset="{{ asset($kaban->foto) }}"
+                                    alt="{{ $kaban->name }}">
+                            </figure>
+                        </div>
+                        <div class="col-md-7 col-lg-6 col-xl-6 col-xxl-5 offset-xl-1">
+                            <div class="swiper-container dots-start dots-closer mt-md-10 mb-md-15" data-margin="30"
+                                data-dots="true">
+                                <div class="swiper">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <div class="blockquote-details">
+                                                <div class="info ps-0">
+                                                    <h5 class="mb-1">{{ $kaban->name }}</h5>
+                                                    <p class="mb-0">{{ strtoupper($kaban->initial_jabatan) }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </blockquote>
+                            </div>
                         </div>
-                        <!-- /column -->
                     </div>
-                    <!-- /.row -->
                 </div>
-                <!--/.card-body -->
             </div>
             <!--/.card -->
             <div class="row gx-lg-8 gx-xl-12 gy-10 gy-lg-0 mb-11">
@@ -426,86 +432,74 @@
                 <!-- /column -->
             </div>
             <div class="row grid-view gx-md-8 gx-xl-10 gy-8 gy-lg-0 mb-16 mb-md-19">
-                <div class="col-md-6 col-lg-3 mt-5">
-                    <div class="position-relative">
-                        <div class="shape rounded bg-soft-primary rellax d-md-block" data-rellax-speed="0"
-                            style="bottom: -0.75rem; right: -0.75rem; width: 98%; height: 98%; z-index:0"></div>
-                        <div class="card shadow-lg">
-                            <figure class="card-img-top overflow-hidden" style="width: auto; height: auto; margin: auto;">
-                                <img class="w-100 h-100 object-fit-cover"
-                                    src="{{ asset($ketua->foto ?? ($ketua->jenis_kelamin == 'pria' ? 'static/images/male.jpg' : 'static/images/female.jpg')) }}"
-                                    alt="{{ $ketua->name }}" />
-                            </figure>
-                            <div class="card-body px-6 py-5">
-                                <p class="mb-1 fw-bold">{{ $ketua->name }}</p>
-                                <p class="mb-0 fs-12">{{ strtoupper($ketua->nama_jabatan) }}</p>
-                            </div>
-                            <!--/.card-body -->
+                <div class="container py-14 py-md-16">
+                    <div class="row mb-3">
+                        <div class="col-md-10 col-xl-9 col-xxl-7 mx-auto text-center">
+                            <img src="{{ asset('client/assets/img/icons/lineal/team.svg') }}"
+                                class="svg-inject icon-svg icon-svg-md mb-4" alt="" />
+                            <h2 class="display-4 mb-3 px-lg-14">Jajaran Pimpinan & Pejabat BPKAD NTB</h2>
                         </div>
-                        <!-- /.card -->
                     </div>
-                    <!-- /div -->
-                </div>
-                <div class="col-md-6 col-lg-3 mt-5">
                     <div class="position-relative">
-                        <div class="shape rounded bg-soft-primary rellax d-md-block" data-rellax-speed="0"
-                            style="bottom: -0.75rem; right: -0.75rem; width: 98%; height: 98%; z-index:0"></div>
-                        <div class="card shadow-lg">
-                            <figure class="card-img-top overflow-hidden" style="width: auto; height: auto; margin: auto;">
-                                <img class="w-100 h-100 object-fit-cover"
-                                    src="{{ asset($kepala_pengelola->foto ?? ($kepala_pengelola->jenis_kelamin == 'pria' ? 'static/images/male.jpg' : 'static/images/female.jpg')) }}"
-                                    alt="{{ $kepala_pengelola->name }}" />
-
-                            </figure>
-                            <div class="card-body px-6 py-5">
-                                <p class="mb-1 fw-bold">{{ $kepala_pengelola->name }}</p>
-                                <p class="mb-0 fs-12">{{ strtoupper($kepala_pengelola->nama_jabatan) }}</p>
+                        <div class="shape rounded-circle bg-soft-yellow rellax w-16 h-16" data-rellax-speed="1"
+                            style="bottom: 0.5rem; right: -1.7rem;"></div>
+                        <div class="shape rounded-circle bg-line red rellax w-16 h-16" data-rellax-speed="1"
+                            style="top: 0.5rem; left: -1.7rem;"></div>
+                        <div class="swiper-container dots-closer mb-6" data-margin="0" data-dots="true"
+                            data-items-xxl="4" data-items-lg="3" data-items-md="2" data-items-xs="1">
+                            <div class="swiper">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <div class="item-inner">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <img class="img-thumbnail w-35 mb-4" src="{{ asset($sekban->foto) }}"
+                                                        srcset="{{ asset($sekban->foto) }}" alt="{{ $sekban->name }}" />
+                                                    <p class="fw-bold text-black fs-16 mb-1">{{ $sekban->name }}</p>
+                                                    <div class="meta fs-14 mb-2">{{ $sekban->nama_jabatan }}</div>
+                                                    <p class="fs-14 mb-2">{{ $sekban->initial_jabatan }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @foreach ($kabag as $item)
+                                        <div class="swiper-slide">
+                                            <div class="item-inner">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <img class="img-thumbnail w-35 mb-4"
+                                                            src="{{ asset($item->foto) }}"
+                                                            srcset="{{ asset($item->foto) }}"
+                                                            alt="{{ $item->name }}" />
+                                                        <p class="fw-bold text-black fs-16 mb-1">{{ $item->name }}</p>
+                                                        <div class="meta fs-14 mb-2">{{ $item->nama_jabatan }}</div>
+                                                        <p class="fs-14 mb-2">{{ $item->jabatan }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    @foreach ($kasubag as $item)
+                                        <div class="swiper-slide">
+                                            <div class="item-inner">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <img class="img-thumbnail w-35 mb-4"
+                                                            src="{{ asset($item->foto) }}"
+                                                            srcset="{{ asset($item->foto) }}"
+                                                            alt="{{ $item->name }}" />
+                                                        <p class="fw-bold text-black fs-16 mb-1">{{ $item->name }}</p>
+                                                        <div class="meta fs-14 mb-2">{{ $item->nama_jabatan }}</div>
+                                                        <p class="fs-14 mb-2">{{ $item->jabatan }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
-                            <!--/.card-body -->
                         </div>
-                        <!-- /.card -->
                     </div>
-                    <!-- /div -->
-                </div>
-                <div class="col-md-6 col-lg-3 mt-5">
-                    <div class="position-relative">
-                        <div class="shape rounded bg-soft-primary rellax d-md-block" data-rellax-speed="0"
-                            style="bottom: -0.75rem; right: -0.75rem; width: 98%; height: 98%; z-index:0"></div>
-                        <div class="card shadow-lg">
-                            <figure class="card-img-top overflow-hidden" style="width: auto; height: auto; margin: auto;">
-                                <img class="w-100 h-100 object-fit-cover"
-                                    src="{{ asset($kepala_pengaduan->foto ?? ($kepala_pengaduan->jenis_kelamin == 'pria' ? 'static/images/male.jpg' : 'static/images/female.jpg')) }}"
-                                    alt="{{ $kepala_pengaduan->name }}" />
-                            </figure>
-                            <div class="card-body px-6 py-5">
-                                <p class="mb-1 fw-bold">{{ $kepala_pengaduan->name }}</p>
-                                <p class="mb-0 fs-12">{{ strtoupper($kepala_pengaduan->nama_jabatan) }}</p>
-                            </div>
-                            <!--/.card-body -->
-                        </div>
-                        <!-- /.card -->
-                    </div>
-                    <!-- /div -->
-                </div>
-                <div class="col-md-6 col-lg-3 mt-5">
-                    <div class="position-relative">
-                        <div class="shape rounded bg-soft-primary rellax d-md-block" data-rellax-speed="0"
-                            style="bottom: -0.75rem; right: -0.75rem; width: 98%; height: 98%; z-index:0"></div>
-                        <div class="card shadow-lg">
-                            <figure class="card-img-top overflow-hidden" style="width: auto; height: auto; margin: auto;">
-                                <img class="w-100 h-100 object-fit-cover"
-                                    src="{{ asset($kepala_pelayanan->foto ?? ($kepala_pelayanan->jenis_kelamin == 'pria' ? 'static/images/male.jpg' : 'static/images/female.jpg')) }}"
-                                    alt="{{ $kepala_pelayanan->name }}" />
-                            </figure>
-                            <div class="card-body px-6 py-5">
-                                <p class="mb-1 fw-bold">{{ $kepala_pelayanan->name }}</p>
-                                <p class="mb-0 fs-12">{{ strtoupper($kepala_pelayanan->nama_jabatan) }}</p>
-                            </div>
-                            <!--/.card-body -->
-                        </div>
-                        <!-- /.card -->
-                    </div>
-                    <!-- /div -->
                 </div>
             </div>
         </div>
@@ -518,5 +512,56 @@
         </div>
     </div>
 @endsection
-@section('scripts')
+@section('additional-js')
+    More actions
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var swiperAgenda = new Swiper('[data-items-xl="3"]:nth-of-type(1) .swiper', {
+                slidesPerView: 3,
+                spaceBetween: 30,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                breakpoints: {
+                    992: {
+                        slidesPerView: 3
+                    },
+                    768: {
+                        slidesPerView: 2
+                    },
+                    0: {
+                        slidesPerView: 1
+                    }
+                }
+            });
+
+            var swiperBeritaNTB = new Swiper('[data-items-xl="3"]:nth-of-type(2) .swiper', {
+                slidesPerView: 3,
+                spaceBetween: 30,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                breakpoints: {
+                    992: {
+                        slidesPerView: 3
+                    },
+                    768: {
+                        slidesPerView: 2
+                    },
+                    0: {
+                        slidesPerView: 1
+                    }
+                }
+            });
+
+            document.querySelectorAll('a[data-bs-toggle="tab"]').forEach(function(tab) {
+                tab.addEventListener('shown.bs.tab', function(event) {
+                    swiperAgenda.update();
+                    swiperBeritaNTB.update();
+                });
+            });
+        });
+    </script>
 @endsection

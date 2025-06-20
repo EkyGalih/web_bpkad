@@ -17,8 +17,13 @@
         <div class="w-100 order-3 order-lg-2 d-lg-flex offcanvas-body">
             <ul class="navbar-nav me-lg-auto">
                 <li class="nav-item">
-                    <a class="nav-link @if (request()->routeIs('post.index')) underline-3 style-3 blue @endif"
-                        href="{{ route('post.index') }}">Berita</a>
+                    <a class="nav-link" href="{{ route('post.index') }}">
+                        @if (request()->routeIs('post.index'))
+                            <span class="underline-3 style-2 blue">Berita</span>
+                        @else
+                            Berita
+                        @endif
+                    </a>
                 </li>
                 @php
                     $menus = Menu();
@@ -54,10 +59,14 @@
                             $isSubMenu = $submenuUrls->contains($currentUrl);
                         @endphp
                         @if (count($sub_menu) > 0)
-                            <li class="nav-item dropdown {{ $isSubMenu ? 'underline-3 style-3 blue' : '' }}">
-                                <a class="nav-link dropdown-toggle {{ $isSubMenu ? 'underline-3 style-3 blue' : '' }}"
-                                    href="{{ route('client.pages', $menu->slug) }}" data-bs-toggle="dropdown">
-                                    {{ $menu->name }}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="{{ route('client.pages', $menu->slug) }}"
+                                    data-bs-toggle="dropdown">
+                                    @if ($isSubMenu)
+                                        <span class="underline-3 style-2 blue">{{ $menu->name }}</span>
+                                    @else
+                                        {{ $menu->name }}
+                                    @endif
                                 </a>
                                 <ul class="dropdown-menu">
                                     @foreach ($sub_menu as $item)
@@ -68,7 +77,7 @@
                                             <li class="dropdown-submenu dropend">
                                                 <a class="dropdown-item dropdown-toggle" href="#"
                                                     data-bs-toggle="dropdown">
-                                                    {{ $item->slug }}
+                                                    {{ $item->title }}
                                                 </a>
                                                 <ul class="dropdown-menu">
                                                     @foreach ($sub_item as $item2)
@@ -93,9 +102,14 @@
                                 </ul>
                             </li>
                         @else
-                            <li class="nav-item {{ '/'.request()->path() == $menu->url ? 'underline-3 style-3 blue' : '' }}">
-                                <a class="nav-link {{ '/'.request()->path() == $menu->url ? 'underline-3 style-3 blue' : '' }}"
-                                    href="{{ $menu->url }}">{{ $menu->name }}</a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ $menu->url }}">
+                                    @if ('/' . request()->path() == $menu->url)
+                                        <span class="underline-3 style-2 blue">{{ $menu->name }}</span>
+                                    @else
+                                        {{ $menu->name }}
+                                    @endif
+                                </a>
                             </li>
                         @endif
                     @endforeach

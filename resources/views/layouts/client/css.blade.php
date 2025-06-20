@@ -3,7 +3,7 @@
 <link href="{{ asset('static/images/ntb.png') }}" type="image/png" rel="apple-touch-icon">
 <link rel="stylesheet" href="{{ asset('client/assets/css/plugins.css') }}">
 <link rel="stylesheet" href="{{ asset('client/assets/css/style.css') }}">
-<link rel="stylesheet" href="{{ asset('client/assets/css/colors/violet.css') }}">
+{{-- <link rel="stylesheet" href="{{ asset('client/assets/css/colors/violet.css') }}"> --}}
 <link rel="preload" href="{{ asset('client/assets/css/fonts/urbanist.css') }}" as="style" onload="this.rel='stylesheet'">
 
 <!-- Meta and SEO -->
