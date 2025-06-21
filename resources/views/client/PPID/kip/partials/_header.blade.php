@@ -28,11 +28,6 @@
     <form action="{{ route('ppid-kip', ['klasifikasi' => request()->route('klasifikasi')]) }}"
         class="d-flex align-items-center" role="search" id="searchForm" style="position: relative; width: 300px;">
         <div class="input-group" style="width: 100%;">
-            <span class="input-group-text">
-                <img src="{{ asset('client/assets/img/icons/solid/search.svg') }}"
-                    class="svg-inject icon-svg icon-svg-sm solid-mono text-info" alt="Search Icon"
-                    style="width: 28px; height: 28px;">
-            </span>
             <input type="text" name="search" class="form-control" placeholder="Cari Data .."
                 value="{{ old('search') ?? $query }}" id="searchInput" autocomplete="off"
                 style="padding-right: 2.5rem;">

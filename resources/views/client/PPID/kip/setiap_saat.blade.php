@@ -19,7 +19,7 @@
 @section('content_home')
     @include('layouts.client._header', [
         'title' => 'Informasi Publik',
-        'keterangan' => 'Daftar Informasi ' .strtoupper(App\Enum\KlasifikasiEnum::SETIAP_SAAT->value),
+        'keterangan' => 'Daftar Informasi ' . strtoupper(App\Enum\KlasifikasiEnum::SETIAP_SAAT->value),
     ])
     <section class="wrapper bg-active-primary">
         <div class="container py-3 py-md-3">
@@ -46,21 +46,36 @@
                                         <tbody>
                                             @foreach ($items['kip'] as $key => $berkala2)
                                                 <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $berkala2['nama_informasi'] }}</td>
-                                                    <td>{{ get_date($berkala2['created_at']) . ' ' . GetTime($berkala2['created_at']) }}
-                                                    </td>
+                                                    <td class="align-middle">{{ $loop->iteration }}</td>
+                                                    <td class="align-middle">{{ $berkala2['nama_informasi'] }}</td>
                                                     <td>
+                                                        <span class="fw-bold">
+                                                            {{ \Carbon\Carbon::parse($berkala2['created_at'])->locale('id')->translatedFormat('l, d F Y') }}
+                                                        </span>
+                                                        <br>
+                                                        <span class="text-muted">
+                                                            {{ \Carbon\Carbon::parse($berkala2['created_at'])->locale('id')->translatedFormat('h:i A') }}
+                                                        </span>
+                                                    </td>
+                                                    <td class="align-middle text-center">
                                                         @if ($berkala2['jenis_file'] == 'link')
                                                             <a href="{{ $berkala2['files'] }}"
-                                                                class="btn btn-success btn-sm" target="_blank">
-                                                                <i class="bx bx-download"></i> Download
+                                                                class="btn btn-success btn-sm" target="_blank"
+                                                                data-bs-tooltip="tooltip" data-bs-placement="left"
+                                                                title="Download File">
+                                                                <img src="{{ asset('client/assets/img/icons/solid/cloud-download.svg') }}"
+                                                                    class="svg-inject icon-svg icon-svg-sm solid-mono text-info"
+                                                                    alt="Search Icon" style="width: 18px; height: 18px;">
                                                             </a>
                                                         @else
                                                             <button type="button" data-toggle="modal"
+                                                                data-bs-tooltip="tooltip" data-bs-placement="left"
+                                                                title="Lihat Dokumen"
                                                                 data-target="#pdfModal{{ $loop->iteration }}"
                                                                 class="btn btn-info btn-sm" target="_blank">
-                                                                <i class="bx bx-show"></i> View
+                                                                <img src="{{ asset('client/assets/img/icons/solid/dot.svg') }}"
+                                                                    class="svg-inject icon-svg icon-svg-sm solid-mono text-info"
+                                                                    alt="Search Icon" style="width: 18px; height: 18px;">
                                                             </button>
                                                             <div class="modal fade" id="pdfModal{{ $loop->iteration }}"
                                                                 tabindex="-1" aria-labelledby="pdfModalLabel"
