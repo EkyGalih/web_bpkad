@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Api;
+namespace App\Http\Controllers\LKPD\Admin\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\LaporanRealisasiAnggaran;
