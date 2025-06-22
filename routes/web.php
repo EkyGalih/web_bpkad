@@ -23,6 +23,10 @@ Route::post('login', [LoginController::class, 'login'])->name('login.store');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('404', [HomeController::class, '_NotFound'])->name('not_found.client');
 Route::get('bpkad-olympic', [HomeController::class, 'olympic'])->name('bpkad-olympic');
+Route::get('/maintenance', function () {
+    return view('errors.maintenance');
+})->name('maintenance.page');
+
 
 Route::get('/auth/redirect', 'Auth\LoginController@redirectToProvider')->name('login.google');
 Route::get('/auth/callback', 'Auth\LoginController@handleProviderCallback');

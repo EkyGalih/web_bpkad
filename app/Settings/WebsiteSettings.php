@@ -6,6 +6,7 @@ use Spatie\LaravelSettings\Settings;
 
 class WebsiteSettings extends Settings
 {
+    public bool $maintenance_mode = false;
     public string $logo_image = '';
     public string $email = '';
     public string $contact_number = '';

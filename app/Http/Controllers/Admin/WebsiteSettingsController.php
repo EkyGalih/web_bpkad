@@ -41,6 +41,7 @@ class WebsiteSettingsController extends Controller
                 'subtitle' => 'nullable|string|max:255',
                 'simaskot_link' => 'nullable|url',
                 'simaskot_opd' => 'nullable|string|max:255',
+                'maintenance_mode' => 'nullable|boolean',
 
                 // File upload
                 'logo_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
@@ -101,6 +102,7 @@ class WebsiteSettingsController extends Controller
         $settings->subtitle = $validated['subtitle'] ?? '';
         $settings->simaskot_link = $validated['simaskot_link'] ?? '';
         $settings->simaskot_opd = $validated['simaskot_opd'] ?? '';
+        $settings->maintenance_mode = $validated['maintenance_mode'];
 
         $settings->save();
 
