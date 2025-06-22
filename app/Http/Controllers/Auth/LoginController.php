@@ -33,19 +33,19 @@ class LoginController extends Controller
     {
         $validation = $request->validated();
 
-        if (filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
+        if (filter_var($validation['email'], FILTER_VALIDATE_EMAIL)) {
             $credentials = [
-                'email' => $request->email,
-                'password' => $request->password,
+                'email' => $validation['email'],
+                'password' => $validation['password'],
             ];
         } else {
             $credentials = [
-                'username' => $request->email,
-                'password' => $request->password,
+                'username' => $validation['email'],
+                'password' => $validation['password'],
             ];
         }
 
-        $user = User::where('username', '=', $request->email)->orWhere('email', '=', $request->email)->first();
+        $user = User::where('username', '=', $validation['email'])->orWhere('email', '=', $validation['email'])->first();
 
         if ($user) {
             if ($user->active == '0') {
@@ -55,7 +55,7 @@ class LoginController extends Controller
             }
         }
 
-        if (Auth::attempt($credentials, $request->remember_me)) {
+        if (Auth::attempt($credentials, $request->filled('remember'))) {
             return redirect()->route('sso.dashboard');
         }
 
