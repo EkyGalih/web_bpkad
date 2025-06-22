@@ -31,9 +31,9 @@
             <div class="d-flex flex-center w-lg-50 pt-15 pt-lg-0 px-10">
                 <div class="d-flex flex-center flex-lg-start flex-column">
                     <a href="{{ route('login.index') }}" class="d-flex align-items-center mb-7">
-                        <img alt="Logo" src="{{ asset('client/assets/img/favicon.png') }}"
+                        <img alt="Logo" src="https://storage.ntbprov.go.id/bpkad/uploads/defaults/ntb.png"
                             style="width: 50px; height: 80px;" />
-                        <span class="text-white fw-bold fs-2 ms-5">BPKAD NTB</span>
+                        <img src="{{ $settings->logo_image }}" class="text-white fw-bold fs-2 ms-5">
                     </a>
                     <h2 class="text-white fw-normal m-0">Badan Pengelolaan Keuangan dan Aset Daerah Provinsi Nusa Tenggara Barat</h2>
                 </div>

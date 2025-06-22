@@ -34,7 +34,7 @@
     </style>
 @endsection
 @section('content_home')
-        <section class="wrapper image-wrapper bg-image bg-overlay bg-overlay-300"
+    <section class="wrapper image-wrapper bg-image bg-overlay bg-overlay-300"
         data-image-src="{{ asset($settings->header_image) }}">
         {{-- client/assets/img/photos/bg3.jpg --}}
         <div class="container pt-17 pb-19 pt-md-18 pb-md-17 text-center">
@@ -166,7 +166,8 @@
                         <div class="col-lg-10 col-xl-9 col-xxl-8 mx-auto text-center">
                             <h3 class="display-3 mb-10"><span class="underline-3 style-2 yellow">Agenda Pimpinan</span>
                             </h3>
-                            <h2 class="fs-16 text-uppercase text-muted mb-3"><a href="{{ route('ppid.agenda') }}">Lihat Semua</a></h2>
+                            <h2 class="fs-16 text-uppercase text-muted mb-3"><a href="{{ route('ppid.agenda') }}">Lihat
+                                    Semua</a></h2>
                         </div>
                         <!-- /column -->
                     </div>
@@ -431,7 +432,7 @@
                 </div>
                 <!-- /column -->
             </div>
-            <div class="row grid-view gx-md-8 gx-xl-10 gy-8 gy-lg-0 mb-16 mb-md-19">
+            <div class="row grid-view gx-md-8 gx-xl-10 gy-8 gy-lg-0">
                 <div class="container py-14 py-md-16">
                     <div class="row mb-3">
                         <div class="col-md-10 col-xl-9 col-xxl-7 mx-auto text-center">
@@ -504,13 +505,41 @@
             </div>
         </div>
     </section>
-    <div class="marquee-fixed bg-info text-white py-2 px-3">
+    <section class="wrapper bg-gray">
+        <div class="container py-5 pb-md-5">
+            <div class="card image-wrapper bg-full bg-image bg-overlay bg-overlay-300 mb-4"
+                data-image-src="{{ asset('client/assets/img/photo/bg18.png') }}"
+                style="background-image: url('{{ asset('client/assets/img/photo/bg18.png') }}');">
+                <div class="card-body p-10 p-xl-12">
+                    <div class="row text-center">
+                        <div class="d-flex flex-column flex-md-row align-items-center justify-content-center">
+                            <div class="mb-4 mb-md-0 me-md-5">
+                                <img class="img-thumbnail" style="width: 220px; height: 220px; object-fit: contain;" src="{{ $settings->simaskot_qrcode_image }}" alt="{{ $settings->simaskot_link }}">
+                            </div>
+                            <div class="col-xl-11 col-xxl-9 mx-auto">
+                                <h3 class="display-3 mb-8 px-lg-8 text-white">Scan Qrcode atau klik <span
+                                        class="underline-3 style-2 yellow">simaskot</span> untuk mengisi Survei Kepuasan
+                                    Masyarakat</h3>
+                            </div>
+                        </div>
+                        <!-- /column -->
+                    </div>
+                    <!-- /.row -->
+                    <div class="d-flex justify-content-center">
+                        <span><a href="{{ $settings->simaskot_link }}" class="btn btn-outline-warning rounded">SIMASKOT</a></span>
+                    </div>
+                </div>
+                <!--/.card-body -->
+            </div>
+        </div>
+    </section>
+    {{-- <div class="marquee-fixed bg-info text-white py-2 px-3">
         <div class="marquee-content d-inline-block">
             @foreach ($information as $info)
                 <span class="me-5">📢 {{ $info->title }}: {{ $info->keterangan }}</span>
             @endforeach
         </div>
-    </div>
+    </div> --}}
 @endsection
 @section('additional-js')
     More actions
