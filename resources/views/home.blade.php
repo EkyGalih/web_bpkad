@@ -1,121 +1,170 @@
-@extends('layouts.app')
-@section('title', 'Home')
-@section('menu-beranda', 'active')
-@section('additional-css')
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="https://storage.ntbprov.go.id/bpkad/uploads/defaults/logo_bpkad.png" />
     <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: sans-serif;
+            overflow: hidden;
+        }
+
+        .video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -2;
+            object-fit: cover;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+
         .radial-menu {
             position: fixed;
-            bottom: 40px;
-            right: 40px;
-            width: 70px;
-            height: 70px;
-            z-index: 999;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 240px;
+            height: 240px;
         }
 
         .center-btn {
-            width: 70px;
-            height: 70px;
+            width: 240px;
+            height: 240px;
             border-radius: 50%;
-            background-color: #0d6efd;
+            background-image: url('{{ asset('server/img/apps.png') }}');
+            background-size: cover;
+            background-position: center;
             color: white;
             border: none;
             cursor: pointer;
-            position: relative;
-            z-index: 2;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
         }
 
         .item {
             position: absolute;
-            width: 50px;
-            height: 50px;
-            background: #0d6efd;
-            color: white;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
-            top: 10px;
-            left: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             transform: scale(0);
             transition: all 0.4s ease;
+            background-size: cover;
+            background-position: center;
             text-decoration: none;
-            font-size: 20px;
+            font-size: 32px;
+            color: white;
         }
 
-        /* Show when active */
-        .radial-menu.active .item {
+        .item.web {
+            background-image: url('https://storage.ntbprov.go.id/bpkad/uploads/defaults/logo_bpkad.png');
+        }
+
+        .item.simpeg {
+            background-image: url('{{ asset('server/img/simpeg.jpg') }}');
+        }
+
+        .item.lkpd {
+            background-image: url('{{ asset('server/img/lkpd-logo.png') }}');
+        }
+
+        .radial-menu:hover .item {
             opacity: 1;
             transform: scale(1);
         }
 
-        /* Positioning each item circularly (4 items, 360/4 = 90 deg spacing) */
+        /* Penempatan melingkar */
         .item:nth-child(2) {
-            transform: rotate(0deg) translate(100px) rotate(0deg);
+            top: -180px;
+            left: 45px;
         }
 
         .item:nth-child(3) {
-            transform: rotate(90deg) translate(100px) rotate(-90deg);
+            top: 45px;
+            left: 270px;
         }
 
         .item:nth-child(4) {
-            transform: rotate(180deg) translate(100px) rotate(-180deg);
+            top: 270px;
+            left: 45px;
         }
 
         .item:nth-child(5) {
-            transform: rotate(270deg) translate(100px) rotate(-270deg);
-        }
-
-        .radial-menu.active .item:nth-child(2) {
-            transform: rotate(0deg) translate(100px) rotate(0deg);
-        }
-
-        .radial-menu.active .item:nth-child(3) {
-            transform: rotate(90deg) translate(100px) rotate(-90deg);
-        }
-
-        .radial-menu.active .item:nth-child(4) {
-            transform: rotate(180deg) translate(100px) rotate(-180deg);
-        }
-
-        .radial-menu.active .item:nth-child(5) {
-            transform: rotate(270deg) translate(100px) rotate(-270deg);
+            top: 45px;
+            left: -180px;
         }
 
         .item:hover {
-            background: #6610f2;
+            filter: brightness(1.2);
+        }
+
+        .center-btn img {
+            width: 80px;
+            height: 80px;
         }
     </style>
-@endsection
-@section('content')
+</head>
+
+<body>
+    <!-- Video Background -->
+    <video class="video-bg" autoplay muted loop playsinline>
+        <source src="{{ asset('video/background.mp4') }}" type="video/mp4">
+        Browser Anda tidak mendukung video.
+    </video>
+
+    <!-- Overlay (optional) -->
+    <div class="overlay"></div>
     <div class="radial-menu">
-        <button class="center-btn" id="menuToggle">
-            <img src="{{ asset('server/assets/img/logo-bkn.png') }}" alt="BKN" width="50">
-        </button>
+        <button class="center-btn" id="menuToggle"></button>
 
         <!-- Menu Items -->
-        <a href="{{ env('WEB_BPKAD_ADMIN') }}" class="item" title="BPKAD">
-            <i class="ri-home-2-line"></i>
+        <a href="{{ env('WEB_BPKAD_ADMIN') }}" class="item web" title="BPKAD">
+            <img src="https://storage.ntbprov.go.id/bpkad/uploads/defaults/logo_bpkad.png" alt="{{ $settings->title }}"
+                width="50">
         </a>
-        <a href="{{ env('SIMPEG_ADMIN') }}" class="item" title="SimPeg">
+        <a href="{{ env('SIMPEG_ADMIN') }}" class="item simpeg" title="SimPeg">
             <i class="ri-user-3-line"></i>
         </a>
-        <a href="{{ env('APBD_ADMIN') }}" class="item" title="APBD">
+        <a href="{{ env('APBD_ADMIN') }}" class="item lkpd" title="APBD">
             <i class="ri-folder-3-line"></i>
         </a>
-        <a href="{{ env('WEB_BPKAD_ADMIN') }}" class="item" title="Aset TIK">
+        {{-- <a href="#" class="item web" title="Aset TIK">
             <i class="ri-computer-line"></i>
-        </a>
+        </a> --}}
     </div>
-@endsection
-@section('additional-js')
     <script>
         document.getElementById("menuToggle").addEventListener("click", function() {
             document.querySelector(".radial-menu").classList.toggle("active");
         });
     </script>
-@endsection
+</body>
+
+</html>
