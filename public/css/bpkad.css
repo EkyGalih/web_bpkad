@@ -282,10 +282,18 @@ body {
     animation-delay: 0.5s;
 }
 
-.radial-menu:hover .item {
-    opacity: 1;
-    transform: scale(1);
+.radial-menu .item {
+    opacity: 0;
+    transform: scale(0) rotate(-180deg);
+    animation-play-state: paused;
 }
+
+.radial-menu.active .item {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    animation-play-state: running;
+}
+
 
 /* Penempatan melingkar */
 .item:nth-child(2) {
@@ -315,4 +323,107 @@ body {
 .center-btn img {
     width: 80px;
     height: 80px;
+}
+
+
+/* RESPONSIVE DESIGN */
+
+/* Untuk tablet dan layar kecil */
+@media (max-width: 768px) {
+    .radial-menu {
+        width: 180px;
+        height: 180px;
+    }
+
+    .center-btn {
+        width: 180px;
+        height: 180px;
+    }
+
+    .btn-title {
+        font-size: 22px;
+        padding: 10px 20px;
+    }
+
+    .item {
+        width: 100px;
+        height: 100px;
+        font-size: 24px;
+    }
+
+    .item:nth-child(2) { /* Atas */
+        top: -140px;
+        left: 35px;
+    }
+
+    .item:nth-child(3) { /* Kanan */
+        top: 25px;
+        left: 220px;
+    }
+
+    .item:nth-child(4) { /* Bawah */
+        top: 220px;
+        left: 35px;
+    }
+
+    .item:nth-child(5) { /* Kiri */
+        top: 25px;
+        left: -140px;
+    }
+
+    .title {
+        font-size: 24px;
+        top: 20px;
+        padding: 8px;
+    }
+}
+
+/* Untuk handphone */
+@media (max-width: 480px) {
+    .radial-menu {
+        width: 140px;
+        height: 140px;
+    }
+
+    .center-btn {
+        width: 140px;
+        height: 140px;
+    }
+
+    .btn-title {
+        font-size: 18px;
+        padding: 8px 16px;
+    }
+
+    .item {
+        width: 80px;
+        height: 80px;
+        font-size: 18px;
+    }
+
+    .item:nth-child(2) { /* Atas */
+        top: -100px;
+        left: 30px;
+    }
+
+    .item:nth-child(3) { /* Kanan */
+        top: 20px;
+        left: 160px;
+    }
+
+    .item:nth-child(4) { /* Bawah */
+        top: 160px;
+        left: 30px;
+    }
+
+    .item:nth-child(5) { /* Kiri */
+        top: 20px;
+        left: -100px;
+    }
+
+    .title {
+        font-size: 18px;
+        top: 16px;
+        padding: 6px;
+    }
 }
