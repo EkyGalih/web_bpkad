@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="icon" type="image/x-icon" href="https://storage.ntbprov.go.id/bpkad/uploads/defaults/logo_bpkad.png" />
+    <title>{{ $settings->title }}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('server/img/apps.png') }}" />
     <style>
         html,
         body {
@@ -89,7 +89,7 @@
         }
 
         .item.simpeg {
-            background-image: url('{{ asset('server/img/simpeg.jpg') }}');
+            background-image: url('{{ asset('server/img/simpeg.png') }}');
         }
 
         .item.lkpd {
