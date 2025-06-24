@@ -1,15 +1,56 @@
 <aside id="layout-menu" class="layout-menu menu-vertical" data-bs-theme="dark">
     <div class="app-brand demo">
-        <a href="index.html" class="app-brand-link">
-            <span class="app-brand-logo demo">
-                <img src="{{ asset('client/assets/img/logo-light.png') }}" alt="Logo BPKAD">
+        <a href="{{ route('admin') }}" class="app-brand-link">
+            <span class="app-brand-text demo menu-text fw-semibold ms-2 me-3">
+                <img src="{{ asset('static/images/ntb.png') }}" alt="Logo NTB" style="height:32px;">
             </span>
-            <span class="app-brand-text demo menu-text fw-semibold ms-2">NTB</span>
+            <span class="app-brand-logo demo">
+                <img src="{{ $settings->logo_image }}" alt="Logo BPKAD">
+            </span>
         </a>
     </div>
 
     <div class="menu-inner-shadow"></div>
-
+    <div class="px-3 py-2">
+        <div class="dropdown w-100">
+            <button type="button"
+                class="btn btn-light btn-sm d-flex align-items-center w-100 px-3 py-2 border rounded"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="flex-grow-1 text-start">
+                    <span class="fw-semibold">Aplikasi</span>
+                    @if (request()->path() == 'admin/web')
+                        <span class="text-primary small ms-1">Web</span>
+                    @elseif (request()->path() == 'admin/simpeg')
+                        <span class="text-success small ms-1">SimPeg</span>
+                    @endif
+                </span>
+                <span class="ms-auto d-flex align-items-center">
+                    <i class="ri-arrow-down-s-line text-muted"></i>
+                </span>
+            </button>
+            <ul class="dropdown-menu w-100 mt-1 shadow-sm small">
+                <li>
+                    <a class="dropdown-item d-flex align-items-center py-2" href="{{ route('admin') }}">
+                        <i class="ri-global-line me-2 text-primary"></i>
+                        Web Informasi
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item d-flex align-items-center py-2" href="{{ route('admin.simpeg') }}">
+                        <i class="ri-user-settings-line me-2 text-success"></i>
+                        SimPeg
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item d-flex align-items-center py-2" href="{{ ENV('APP_URL') }}/bpkad/home">
+                        <i class="ri-home-4-line me-2 text-info"></i>
+                        Landing Page
+                    </a>
+                </li>
+                <!-- Tambahkan aplikasi lain di sini -->
+            </ul>
+        </div>
+    </div>
     <ul class="menu-inner py-1">
         <!-- Dashboards -->
         <li class="menu-item @if (request()->is('admin/web')) active @endif">

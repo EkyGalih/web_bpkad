@@ -1,6 +1,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&ampdisplay=swap" rel="stylesheet" />
+<link rel="icon" type="image/png" href="{{ asset('static/images/favicon.png') }}">
 <link rel="stylesheet" href="{{ asset('server/assets/vendor/fonts/iconify-icons.css') }}" />
 <link rel="stylesheet" href="{{ asset('server/assets/vendor/libs/node-waves/node-waves.css') }}" />
 <link rel="stylesheet" href="{{ asset('server/assets/vendor/libs/pickr/pickr-themes.css') }}" />

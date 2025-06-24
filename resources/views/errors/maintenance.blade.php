@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="{{ asset('static/images/favicon.png') }}">
     <title>Maintenance</title>
     <style>
         body {
@@ -30,8 +31,10 @@
             <div class="row">
                 <div class="col-lg-9 col-xl-8 mx-auto">
                     <figure class="mb-10">
-                        <img class="img-fluid" style="max-width: 300px; height: auto;" src="{{ asset('client/assets/img/illustrations/maintenance.png') }}"
-                            srcset="{{ asset('client/assets/img/illustrations/maintenance@2x.png 2x') }}" alt="maintenance">
+                        <img class="img-fluid" style="max-width: 300px; height: auto;"
+                            src="{{ asset('client/assets/img/illustrations/maintenance.png') }}"
+                            srcset="{{ asset('client/assets/img/illustrations/maintenance@2x.png 2x') }}"
+                            alt="maintenance">
                     </figure>
                 </div>
                 <!-- /column -->

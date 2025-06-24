@@ -24,7 +24,7 @@
                 data-kt-menu="true">
                 <div class="hover-scroll-y mh-200px my-3 pe-3 me-n1">
                     <div class="menu-item my-0 py-1">
-                        <a href="{{ ENV('APP_URL') }}admin/web" class="menu-link px-3 py-2" data-kt-element="project">
+                        <a href="{{ ENV('APP_URL') }}/admin/web" class="menu-link px-3 py-2" data-kt-element="project">
                             <span class="d-flex flex-column align-items-start">
                                 <span class="fs-7 fw-semibold text-primary" data-kt-element="title">Web
                                     <span class="text-gray-500">sistem informasi</span></span>
@@ -32,7 +32,7 @@
                         </a>
                     </div>
                     <div class="menu-item my-0 py-1">
-                        <a href="{{ ENV('APP_URL') }}admin/simpeg" class="menu-link px-3 py-2"
+                        <a href="{{ ENV('APP_URL') }}/admin/simpeg" class="menu-link px-3 py-2"
                             data-kt-element="project">
                             <span class="d-flex flex-column align-items-start">
                                 <span class="fs-7 fw-semibold text-primary" data-kt-element="title">Simpeg
@@ -41,7 +41,7 @@
                         </a>
                     </div>
                     <div class="menu-item my-0 py-1">
-                        <a href="{{ ENV('APP_URL') }}bpkad/home" class="menu-link px-3 py-2" data-kt-element="project">
+                        <a href="{{ ENV('APP_URL') }}/bpkad/home" class="menu-link px-3 py-2" data-kt-element="project">
                             <span class="d-flex flex-column align-items-start">
                                 <span class="fs-7 fw-semibold text-primary" data-kt-element="title">Landing Page
                                     <span class="text-gray-500">Landing Page</span>
@@ -131,7 +131,8 @@
                                     class="d-flex align-items-center p-3 gap-2 border border-transparent bg-hover-light-primary border-hover-primary-clarity rounded">
                                     <img src="{{ $item->foto }}" class="h-40px rounded" />
                                     <div class="d-flex flex-column">
-                                        <div class="text-gray-900 fs-6 fw-semibold">{{ Str::limit($item->name, 17) }}</div>
+                                        <div class="text-gray-900 fs-6 fw-semibold">{{ Str::limit($item->name, 17) }}
+                                        </div>
                                         <div class="text-gray-600 fs-7">{{ $item->nip ?? '-' }}</div>
                                         <div class="fw-bold text-primary">
                                             {{ strtoupper($item->nama_jabatan . ' ' . $item->jabatan) }}
