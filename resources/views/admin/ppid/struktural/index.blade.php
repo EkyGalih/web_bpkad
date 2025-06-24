@@ -42,7 +42,7 @@
                                         </button>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item"
-                                                href="{{ route('struktur-organisasi.edit', $item->ppid_id) }}"><i
+                                                href="{{ route('struktur-organisasi.edit', $item->id) }}"><i
                                                     class="icon-base ri ri-pencil-line icon-18px me-2"></i> Edit</a>
                                             <button class="dropdown-item"
                                                 onclick="trashData('{{ route('struktur-organisasi.delete', $item->id) }}')"><i

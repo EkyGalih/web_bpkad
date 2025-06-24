@@ -18,10 +18,7 @@ class StrukturController extends Controller
      */
     public function index()
     {
-        $struktural = PPIDStruktur::join('pegawai', 'ppid_struktur.pegawai_id', '=', 'pegawai.id')
-            ->select('pegawai.id as uuid', 'pegawai.*', 'ppid_struktur.id as ppid_id', 'ppid_struktur.*')
-            ->where('ppid_struktur.deleted_at', '=', NULL)
-            ->get();
+        $struktural = PPIDStruktur::with('pegawai')->whereNull('deleted_at')->get();
 
         return view('admin.ppid.struktural.index', compact('struktural'));
     }
@@ -47,21 +44,28 @@ class StrukturController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'pegawai_id' => 'required',
             'jabatan' => 'required',
             'nama_jabatan' => 'required'
         ]);
 
-        $ppid = new PPIDStruktur();
-        $ppid->id = (string)Uuid::generate(4);;
-        $ppid->pegawai_id = $request->pegawai_id;
-        $ppid->jabatan = $request->jabatan;
-        $ppid->nama_jabatan = $request->nama_jabatan;
-        $ppid->save();
+        $exists = PPIDStruktur::where('jabatan', $request->jabatan)->first();
 
-        _recentAdd($ppid->id, 'menambahkan pejabat ppid', 'ppid_struktur');
+        if ($exists) {
+            $exists->update([
+                'pegawai_id' => $request->pegawai_id
+            ]);
+            _recentAdd($exists->id, 'menambahkan pejabat ppid baru', 'ppid_struktur');
+        } else {
+            $ppid = new PPIDStruktur();
+            $ppid->id = (string) Uuid::generate(4);
+            $ppid->pegawai_id = $request->pegawai_id;
+            $ppid->jabatan = $request->jabatan;
+            $ppid->nama_jabatan = $request->nama_jabatan;
+            $ppid->save();
+            _recentAdd($ppid->id, 'menambahkan pejabat ppid', 'ppid_struktur');
+        }
 
         return redirect()->route('struktur-organisasi.index')->with(['success' => 'Pejabat berhasil ditambah!']);
     }
