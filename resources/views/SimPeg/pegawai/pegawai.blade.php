@@ -112,7 +112,7 @@
                 <div class="d-flex flex-wrap flex-sm-nowrap">
                     <div class="me-7 mb-4">
                         <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                            <img src="{{ Storage::url($item->foto) }}" alt="{{ $item->name }}" />
+                            <img src="{{ $item->foto }}" alt="{{ $item->name }}" />
                             @if ($item->status_pegawai == 'pensiun')
                                 <div class="watermark">PENSIUN</div>
                             @elseif($item->status_pegawai == 'pindah')
@@ -146,7 +146,7 @@
                                     <a href="#"
                                         class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
                                         <i
-                                            class="ki-outline ki-barcode fs-4 me-1"></i>{{ Helpers::NIP($item->nip) ?? '-' }}</a>
+                                            class="ki-outline ki-barcode fs-4 me-1"></i>{{ NIP($item->nip) ?? '-' }}</a>
                                     <a href="{{ route('bidang.getPegawai', $item->bidang->id) }}"
                                         class="d-flex align-items-center text-gray-500 text-hover-primary mb-2">
                                         <i class="ki-duotone ki-office-bag fs-4 me-1">
@@ -264,12 +264,12 @@
                                     <div class="d-flex justify-content-between w-100 mt-auto mb-2">
                                         <span class="fw-semibold fs-6 text-gray-500">Kenaikan Pangkat</span>
                                         <span
-                                            class="fw-bold fs-6">{{ Helpers::progressBarPangkat($item->kenaikan_pangkat) }}%</span>
+                                            class="fw-bold fs-6">{{ progressBarPangkat($item->kenaikan_pangkat) }}%</span>
                                     </div>
                                     <div class="h-5px mx-3 w-100 bg-light mb-3">
                                         <div class="bg-success rounded h-5px" role="progressbar"
-                                            style="width: {{ Helpers::progressBarPangkat($item->kenaikan_pangkat) }}%;"
-                                            aria-valuenow="{{ Helpers::progressBarPangkat($item->kenaikan_pangkat) }}"
+                                            style="width: {{ progressBarPangkat($item->kenaikan_pangkat) }}%;"
+                                            aria-valuenow="{{ progressBarPangkat($item->kenaikan_pangkat) }}"
                                             aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
@@ -308,7 +308,7 @@
                                 data.forEach(item => {
                                     $('#results').append(`
                                         <li class="dropdown-item" data-url="{{ route('pegawai.show', '') }}/${item.id}">
-                                            <img src="{{ Storage::url('${item.foto}') }}" alt="${item.name}">
+                                            <img src="${item.foto}" alt="${item.name}">
                                             <div class="details">
                                                 <span class="name">${item.name}</span>
                                                 <span class="nip">NIP: ${item.nip}</span>

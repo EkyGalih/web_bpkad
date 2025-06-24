@@ -704,7 +704,7 @@ if (!function_exists('get_pimpinan')) {
     {
         if ($cat == 'select') {
             return Pegawai::where('nama_jabatan', '=', $param)
-                ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto')
+                ->select('id', 'nip', 'name', 'initial_jabatan', 'nama_jabatan', 'foto')
                 ->where('status_pegawai', '=', 'aktif')
                 ->first();
         } elseif ($cat == 'count') {
@@ -770,13 +770,13 @@ if (!function_exists('getKabag')) {
         if ($cat == 'select') {
             return Pegawai::where('nama_jabatan', '=', $param)
                 ->orWhere('nama_jabatan', '=', $param2)
-                ->select('name', 'jabatan', 'nama_jabatan', 'foto')
+                ->select('id', 'nip', 'name', 'jabatan', 'nama_jabatan', 'foto')
                 ->where('status_pegawai', '=', 'aktif')
                 ->get();
         } elseif ($cat == 'count') {
             return Pegawai::where('nama_jabatan', '=', $param)
                 ->orWhere('nama_jabatan', '=', $param2)
-                ->select('name', 'jabatan', 'nama_jabatan', 'foto')
+                ->select('id', 'nip', 'name', 'jabatan', 'nama_jabatan', 'foto')
                 ->where('status_pegawai', '=', 'aktif')
                 ->count();
         }
@@ -789,13 +789,13 @@ if (!function_exists('getKasubag')) {
         if ($cat == 'select') {
             return Pegawai::where('nama_jabatan', '=', $param)
                 ->where('initial_jabatan', 'LIKE', $param2 . '%')
-                ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto', 'jabatan')
+                ->select('id', 'nip', 'name', 'initial_jabatan', 'nama_jabatan', 'foto', 'jabatan')
                 ->where('status_pegawai', '=', 'aktif')
                 ->get();
         } elseif ($cat == 'count') {
             return Pegawai::where('nama_jabatan', '=', $param)
                 ->where('initial_jabatan', 'LIKE', $param2 . '%')
-                ->select('name', 'initial_jabatan', 'nama_jabatan', 'foto', 'jabatan')
+                ->select('id', 'name', 'initial_jabatan', 'nama_jabatan', 'foto', 'jabatan')
                 ->where('status_pegawai', '=', 'aktif')
                 ->count();
         }

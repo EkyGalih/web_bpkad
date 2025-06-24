@@ -14,25 +14,35 @@
             <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
+                    <input type="hidden" name="nama" id="nama" value="{{ old('nama') }}"
+                        class="form-control @error('nama') is-invalid @enderror" placeholder="Nama Pengguna">
                     <div class="form-floating form-floating-outline mb-6">
-                        <input type="text" name="nama" value="{{ old('nama') }}" class="form-control @error('nama') is-invalid @enderror"
-                            placeholder="Nama Pengguna">
-                        <label for="nama">Nama Pengguna</label>
-                        @error('nama')
+                        <label class="form-label" for="pegawai_id">Pegawai <sup class="text-danger">*</sup></label>
+                        <select id="pegawai_id" name="pegawai_id" class="select2 form-select" data-allow-clear="true">
+                            <option value="">Pilih Pegawai</option>
+                            @foreach ($pegawais as $pegawai)
+                                <option value="{{ $pegawai->id }}"
+                                    {{ old('pegawai_id') == $pegawai->id ? 'selected' : '' }}>
+                                    {{ $pegawai->name }} -
+                                    {{ $pegawai->nip == 0 ? $pegawai->jenis_pegawai : $pegawai->nip }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('pegawai_id')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-floating form-floating-outline mb-6">
-                        <input type="text" placeholder="Username" value="{{ old('username') }}" name="username"
-                            class="form-control @error('username') is-invalid @enderror">
+                        <input type="text" id="username" placeholder="Username" value="{{ old('username') }}"
+                            name="username" class="form-control @error('username') is-invalid @enderror">
                         <label for="username">Username</label>
                         @error('username')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-floating form-floating-outline mb-6">
-                        <input type="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror"
-                            placeholder="Email">
+                        <input type="email" id="email" name="email" value="{{ old('email') }}"
+                            class="form-control @error('email') is-invalid @enderror" placeholder="Email">
                         <label for="email">Email</label>
                         @error('email')
                             <div class="text-danger">{{ $message }}</div>
@@ -51,7 +61,8 @@
                         @enderror
                     </div>
                     <div class="form-floating form-floating-outline mb-6">
-                        <input type="text" value="{{ old('password') }}" placeholder="Password" class="form-control" name="password" id="password">
+                        <input type="text" value="{{ old('password') }}" placeholder="Password" class="form-control"
+                            name="password" id="password">
                         <label for="password">Password</label>
                         <button type="button" onclick="pass()" class="btn btn-link btn-sm">
                             <i class="bi bi-qr-code"></i> Generate Password
@@ -92,6 +103,25 @@
     <script src="{{ asset('server/assets/vendor/libs/select2/select2.js') }}"></script>
     <script src="{{ asset('server/assets/js/forms-selects.js') }}"></script>
     <script>
+        $('#pegawai_id').on('change', function() {
+            const id = $(this).val();
+            if (!id) return;
+
+            $.ajax({
+                url: `/admin/web/Users/get-pegawai/${id}`,
+                type: 'GET',
+                success: function(data) {
+                    $('#nama').val(data.nama);
+                    $('#username').val(data.username);
+                    $('#email').val(data.email);
+
+                },
+                error: function() {
+                    alert('Gagal mengambil data pegawai.');
+                }
+            });
+        });
+
         function makeid(length = 15) {
             const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&';
             return Array.from({

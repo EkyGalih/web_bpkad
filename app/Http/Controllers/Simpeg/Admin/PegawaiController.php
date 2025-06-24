@@ -60,8 +60,8 @@ class PegawaiController extends Controller
         $bidang = Bidang::get();
         $pangkat = Pangkat::get();
         $golongan = Golongan::get();
-        $NamaJabatan = Helpers::_jsonDecode(asset('server/data/umum/NamaJabatan.json'));
-        $InitialJabatan = Helpers::_jsonDecode(asset('server/data/umum/InitialJabatan.json'));
+        $NamaJabatan = _jsonDecode(asset('server/data/umum/NamaJabatan.json'));
+        $InitialJabatan = _jsonDecode(asset('server/data/umum/InitialJabatan.json'));
 
         return view('SimPeg.pegawai.components.add', compact('bidang', 'pangkat', 'golongan', 'NamaJabatan', 'InitialJabatan'));
     }
@@ -101,9 +101,9 @@ class PegawaiController extends Controller
             'bidang_id' => $validatedData['bidang_id']
         ]);
 
-        if ($request->hasFile('foto')) {
-            $path = $request->file('foto')->store('public/pegawai');
-            $pegawai->foto = str_replace('public/', 'storage/', $path);
+        if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
+            $path = $request->file('foto')->store('uploads/pegawai', 's3');
+            $pegawai->foto = Storage::disk('s3')->url($path);
         }
 
         // Menyimpan data ke dalam database
@@ -121,8 +121,8 @@ class PegawaiController extends Controller
     public function show($id)
     {
         $pegawai = Pegawai::findOrFail($id);
-        $umur = Helpers::USIA($pegawai->tanggal_lahir)->umur;
-        $mkg = Helpers::hitungMasaKerja($pegawai->tanggal_sk);
+        $umur = USIA($pegawai->tanggal_lahir)->umur;
+        $mkg = hitungMasaKerja($pegawai->tanggal_sk);
 
         if ($pegawai->umur != $umur) {
             $pegawai->update(['umur' => $umur]);
@@ -146,8 +146,8 @@ class PegawaiController extends Controller
         $bidang = Bidang::get();
         $pangkat = Pangkat::get();
         $golongan = Golongan::get();
-        $NamaJabatan = Helpers::_jsonDecode(asset('server/data/umum/NamaJabatan.json'));
-        $InitialJabatan = Helpers::_jsonDecode(asset('server/data/umum/InitialJabatan.json'));
+        $NamaJabatan = _jsonDecode(asset('server/data/umum/NamaJabatan.json'));
+        $InitialJabatan = _jsonDecode(asset('server/data/umum/InitialJabatan.json'));
 
         return view('SimPeg.pegawai.components.edit', compact('pegawai', 'golongan', 'pangkat', 'bidang', 'NamaJabatan', 'InitialJabatan'));
     }
@@ -191,17 +191,18 @@ class PegawaiController extends Controller
         $pegawai->bidang_id = $request->bidang_id;
 
         // Jika ada file foto baru yang diunggah
-        if ($request->hasFile('foto')) {
+        if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
             // Hapus file foto lama dari storage jika ada
-            if ($pegawai->foto && Storage::exists(str_replace('storage/', 'public/', $pegawai->foto))) {
-                Storage::delete(str_replace('storage/', 'public/', $pegawai->foto));
+            if ($pegawai->foto) {
+                $oldPath = str_replace(Storage::disk('s3')->url(''), '', $pegawai->foto);
+                Storage::disk('s3')->delete($oldPath);
             }
 
             // Simpan file foto baru ke dalam folder 'storage/app/public/pegawai'
-            $path = $request->file('foto')->store('public/pegawai');
+            $path = $request->file('foto')->store('uploads/pegawai', 's3');
 
             // Update path foto di database
-            $pegawai->foto = str_replace('public/', 'storage/', $path);
+            $pegawai->foto = Storage::disk('s3')->url($path);
         }
 
         // Menyimpan perubahan ke dalam database
@@ -224,7 +225,7 @@ class PegawaiController extends Controller
             'deleted_at' => new DateTime()
         ]);
 
-        Helpers::_recentAdd($id, 'menghapus pegawai', 'pegawai');
+        _recentAdd($id, 'menghapus pegawai', 'pegawai');
 
         return redirect()->route('pegawai.index')->with(['success' => 'Pegawai Berhasil dihapus!']);
     }

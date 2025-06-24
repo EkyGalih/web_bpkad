@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
+use App\Models\Pegawai;
 use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
@@ -31,7 +32,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('admin.users.components.create');
+        $pegawais = Pegawai::orderBy('name', 'asc')->get();
+        return view('admin.users.components.create', compact('pegawais'));
     }
 
     /**
@@ -43,14 +45,12 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|string|max:255',
+            'pegawai_id' => 'required',
             'username' => 'required|string|max:50|unique:users,username',
             'email' => 'required|email|unique:users,email',
             'role' => 'required|string',
         ], [
-            'nama.required' => 'Nama wajib diisi.',
-            'nama.string' => 'Nama harus berupa teks.',
-            'nama.max' => 'Nama maksimal 255 karakter.',
+            'pegawai_id.required' => 'Nama wajib diisi.',
             'username.required' => 'Username wajib diisi.',
             'username.string' => 'Username harus berupa teks.',
             'username.max' => 'Username maksimal 50 karakter.',
@@ -69,7 +69,7 @@ class UsersController extends Controller
         $user->email = $request->email;
         $user->username = $request->username;
         $user->active = '0';
-        $user->avatar = '/server/assets/img/avatars/13.png';
+        $user->pegawai_id = $request->pegawai_id;
         $user->role = $request->role;
         $user->password = Hash::make($request->password);
         $user->save();
@@ -87,8 +87,8 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-
-        return view('admin.users.components.edit', compact('user'));
+        $pegawais = Pegawai::orderBy('name', 'asc')->get();
+        return view('admin.users.components.edit', compact('user', 'pegawais'));
     }
 
     /**
@@ -102,6 +102,7 @@ class UsersController extends Controller
     {
         $user->update([
             'nama' => $request->nama,
+            'pegawai_id' => $request->pegawai_id,
             'email' => $request->email,
             'username' => $request->username,
             'role' => $request->role,
@@ -152,5 +153,26 @@ class UsersController extends Controller
         _recentAdd($user->id, ' menghapus user', 'users');
 
         return redirect()->back()->with('success', 'User berhasil dihapus!');
+    }
+
+    public function getPegawai($id)
+    {
+        $pegawai = Pegawai::find($id);
+
+        if (!$pegawai) {
+            return response()->json(['error' => 'Pegawai tidak ditemukan'], 404);
+        }
+
+        if ($pegawai->nip != 0) {
+            $username = $pegawai->nip;
+        } else {
+            $username = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 10);
+        }
+
+        return response()->json([
+            'nama' => $pegawai->name,
+            'username' => $username,
+            'email' => $pegawai->email ?? '',
+        ]);
     }
 }

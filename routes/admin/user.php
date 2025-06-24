@@ -25,6 +25,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
             Route::put('password/{user}', [UsersController::class, 'password'])->name('users.password');
             Route::put('activated/{user}', [UsersController::class, 'activated'])->name('users.activated');
             Route::get('destroy/{user}', [UsersController::class, 'destroy'])->name('users.destroy');
+            Route::get('get-pegawai/{id}', [UsersController::class, 'getPegawai'])->name('get.pegawai'); // ajax/api untuk mengambil pegawai berdasarkan id
         });
     });
 });

@@ -150,11 +150,11 @@
                         class="position-absolute top-0 start-50 translate-middle-y badge badge-dot bg-danger mt-2 border"></span>
                 </a>
                 @php
-                $laporan = _getLaporan();
-                $permohonan = _getPermohonan();
-                $countLaporan = count($laporan);
-                $countPermohonan = count($permohonan);
-                $totalCount = $countLaporan + $countPermohonan;
+                    $laporan = _getLaporan();
+                    $permohonan = _getPermohonan();
+                    $countLaporan = count($laporan);
+                    $countPermohonan = count($permohonan);
+                    $totalCount = $countLaporan + $countPermohonan;
                 @endphp
                 <ul class="dropdown-menu dropdown-menu-end py-0">
                     <li class="dropdown-menu-header border-bottom py-50">
@@ -172,56 +172,62 @@
                     <li class="dropdown-notifications-list scrollable-container">
                         <ul class="list-group list-group-flush">
                             @foreach ($permohonan as $item)
-                            <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0 me-3">
-                                        <div class="avatar">
-                                            <img src="{{ asset($item->ktp) }}" alt="{{ $item->nama }}"
-                                                class="rounded-circle" />
+                                <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0 me-3">
+                                            <div class="avatar">
+                                                <img src="{{ asset($item->ktp) }}" alt="{{ $item->nama }}"
+                                                    class="rounded-circle" />
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="small mb-1">{{ $item->nama }}</h6>
+                                            <small
+                                                class="mb-1 d-block text-body">{{ $item->informasi_diminta }}</small>
+                                            <small
+                                                class="text-body-secondary">{{ RangeTime($item->created_at) }}</small>
+                                        </div>
+                                        <div class="flex-shrink-0 dropdown-notifications-actions">
+                                            <a href="javascript:void(0)" class="dropdown-notifications-read"><span
+                                                    class="badge badge-dot"></span></a>
+                                            <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
+                                                    class="icon-base ri ri-close-line"></span></a>
                                         </div>
                                     </div>
-                                    <div class="flex-grow-1">
-                                        <h6 class="small mb-1">{{ $item->nama }}</h6>
-                                        <small class="mb-1 d-block text-body">{{ $item->informasi_diminta }}</small>
-                                        <small class="text-body-secondary">{{ RangeTime($item->created_at) }}</small>
-                                    </div>
-                                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span
-                                                class="badge badge-dot"></span></a>
-                                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
-                                                class="icon-base ri ri-close-line"></span></a>
-                                    </div>
-                                </div>
-                            </li>
+                                </li>
                             @endforeach
                             @foreach ($laporan as $lap)
-                            <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0 me-3">
-                                        <div class="avatar">
-                                            <span class="avatar-initial rounded-circle bg-label-danger">{{ $lap->judul_laporan }}</span>
+                                <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0 me-3">
+                                            <div class="avatar">
+                                                <span
+                                                    class="avatar-initial rounded-circle bg-label-danger">{{ $lap->judul_laporan }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="small mb-1">{{ $lap->kode_laporan }}</h6>
+                                            <small class="mb-1 d-block text-body">{{ $lap->judul_laporan }}</small>
+                                            <small
+                                                class="text-body-secondary">{{ RangeTime($lap->created_at) }}</small>
+                                        </div>
+                                        <div class="flex-shrink-0 dropdown-notifications-actions">
+                                            <a href="javascript:void(0)" class="dropdown-notifications-read"><span
+                                                    class="badge badge-dot"></span></a>
+                                            <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
+                                                    class="icon-base ri ri-close-line"></span></a>
                                         </div>
                                     </div>
-                                    <div class="flex-grow-1">
-                                        <h6 class="small mb-1">{{ $lap->kode_laporan }}</h6>
-                                        <small class="mb-1 d-block text-body">{{ $lap->judul_laporan }}</small>
-                                        <small class="text-body-secondary">{{ RangeTime($lap->created_at) }}</small>
-                                    </div>
-                                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span
-                                                class="badge badge-dot"></span></a>
-                                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
-                                                class="icon-base ri ri-close-line"></span></a>
-                                    </div>
-                                </div>
-                            </li>
+                                </li>
                             @endforeach
                         </ul>
                     </li>
                     <li class="border-top">
                         <div class="d-grid p-4">
-                            <a class="btn btn-primary btn-sm d-flex" href="{{ route('laporan-admin.index') }}>
-                                <small class="align-middle">View all notifications</small>
+                            <a class="btn btn-primary btn-sm d-flex"
+                                href="{{ route('laporan-admin.index') }}>
+                                <small class="align-middle">View
+                                all notifications</small>
                             </a>
                         </div>
                     </li>
@@ -233,7 +239,13 @@
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                        <img src="{{ asset('server/assets/img/avatars/1.png') }}" alt="avatar" class="rounded-circle" />
+                        @if (Auth::user()->pegawai)
+                            <img src="{{ Auth::user()->pegawai->jenis_kelamin == 'pria' ? asset('server/assets/img/avatars/1.png') : asset('server/assets/img/avatars/2.png') }}"
+                                alt="avatar" class="rounded-circle" />
+                        @else
+                            <img src="{{ asset('server/assets/img/avatars/blank.png') }}" alt="avatar"
+                                class="rounded-circle" />
+                        @endif
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end mt-3 py-2">
@@ -242,8 +254,13 @@
                             <div class="d-flex align-items-center">
                                 <div class="flex-shrink-0 me-2">
                                     <div class="avatar avatar-online">
-                                        <img src="{{ asset('server/assets/img/avatars/1.png') }}" alt="alt"
-                                            class="w-px-40 h-auto rounded-circle" />
+                                        @if (Auth::user()->pegawai)
+                                            <img src="{{ Auth::user()->pegawai->jenis_kelamin == 'pria' ? asset('server/assets/img/avatars/1.png') : asset('server/assets/img/avatars/2.png') }}"
+                                                alt="alt" class="w-px-40 h-auto rounded-circle" />
+                                        @else
+                                            <img src="{{ asset('server/assets/img/avatars/blank.png') }}" alt="alt"
+                                                class="w-px-40 h-auto rounded-circle" />
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">

@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Webpatser\Uuid\Uuid;
 
 class Pegawai extends Model
@@ -27,6 +28,11 @@ class Pegawai extends Model
                 $model->id = (string) Uuid::generate(4);
             }
         });
+    }
+
+    public function user(): HasOne
+    {
+        return $this->hasOne(User::class, 'pegawai_id', 'id');
     }
 
     public function PPIDStruktur()

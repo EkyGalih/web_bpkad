@@ -1,11 +1,16 @@
 <div class="app-sidebar-primary">
     <div class="app-sidebar-logo d-none d-md-flex flex-center pt-10 pb-10" id="kt_app_sidebar_logo">
         <a href="{{ route('admin.simpeg') }}">
-            <img alt="Logo" src="{{ asset('client/assets/img/pegawai.png') }}" class="h-30px" />
+            <img alt="Logo" src="{{ asset('server/img/simpeg.png') }}" class="h-60px rounded-circle" />
         </a>
     </div>
-    <div class="app-sidebar-menu flex-grow-1 hover-scroll-y scroll-ms my-5" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer" data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px">
-        <div id="kt_aside_menu" class="menu menu-column menu-title-gray-600 menu-state-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-semibold fs-6" data-kt-menu="true">
+    <div class="app-sidebar-menu flex-grow-1 hover-scroll-y scroll-ms my-5" id="kt_aside_menu_wrapper"
+        data-kt-scroll="true" data-kt-scroll-height="auto"
+        data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer"
+        data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px">
+        <div id="kt_aside_menu"
+            class="menu menu-column menu-title-gray-600 menu-state-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-semibold fs-6"
+            data-kt-menu="true">
             <div class="menu-item @yield('home') py-2">
                 <a href="{{ route('admin.simpeg') }}" class="menu-link menu-center">
                     <span class="menu-icon me-0">
@@ -51,19 +56,37 @@
         </div>
     </div>
     <div class="d-flex flex-column flex-center pb-4 pb-lg-8" id="kt_app_sidebar_footer">
-        <div class="cursor-pointer symbol symbol-40px symbol-circle mb-9" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-attach="parent" data-kt-menu-placement="right-end">
-            <img src="{{ asset('assets/media/avatars/blank.png') }}" alt="user" />
+        <div class="cursor-pointer symbol symbol-40px symbol-circle mb-9"
+            data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-attach="parent"
+            data-kt-menu-placement="right-end">
+            @if (Auth::user()->pegawai)
+                <img src="{{ Auth::user()->pegawai->jenis_kelamin == 'pria' ? asset('server/assets/img/avatars/1.png') : asset('server/assets/img/avatars/2.png') }}"
+                    alt="{{ Auth::user()->nama }}" />
+            @else
+                <img src="{{ asset('server/assets/img/avatars/blank.png') }}" alt="{{ Auth::user()->nama }}" />
+            @endif
         </div>
-        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px" data-kt-menu="true">
+        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px"
+            data-kt-menu="true">
             <div class="menu-item px-3">
                 <div class="menu-content d-flex align-items-center px-3">
                     <div class="symbol symbol-50px me-5">
-                        <img alt="Logo" src="{{ asset('client/assets/img/pegawai.png') }}" />
+                        @if (Auth::user()->pegawai)
+                            <img src="{{ Auth::user()->pegawai->jenis_kelamin == 'pria' ? asset('server/assets/img/avatars/1.png') : asset('server/assets/img/avatars/2.png') }}"
+                                alt="{{ Auth::user()->nama }}" />
+                        @else
+                            <img src="{{ asset('server/assets/img/avatars/blank.png') }}"
+                                alt="{{ Auth::user()->nama }}" />
+                        @endif
                     </div>
                     <div class="d-flex flex-column">
-                        <div class="fw-bold d-flex align-items-center fs-5">{{ Str::limit(Auth::user()->nama, 20, '...') }}
-                        <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">{{ Auth::user()->role }}</span></div>
-                        <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{ Str::limit(Auth::user()->email, 20, '...') }}</a>
+                        <div class="fw-bold d-flex align-items-center fs-5">
+                            {{ Str::limit(Auth::user()->nama, 20, '...') }}
+                            <span
+                                class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">{{ Auth::user()->role }}</span>
+                        </div>
+                        <a href="#"
+                            class="fw-semibold text-muted text-hover-primary fs-7">{{ Str::limit(Auth::user()->email, 20, '...') }}</a>
                     </div>
                 </div>
             </div>

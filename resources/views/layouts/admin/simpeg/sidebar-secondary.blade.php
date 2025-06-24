@@ -61,32 +61,26 @@
         </div>
         <div>
             @php
-                $asn = App\Models\Pegawai::where('jenis_pegawai', 'asn')
-                    ->where('status_pegawai', 'aktif')
-                    ->whereNull('deleted_at')
-                    ->inRandomOrder()
-                    ->limit(8)
-                    ->get();
-                $nonasn = App\Models\Pegawai::where('jenis_pegawai', 'non asn')
-                    ->where('status_pegawai', 'aktif')
-                    ->whereNull('deleted_at')
-                    ->inRandomOrder()
-                    ->limit(8)
-                    ->get();
+                $kaban = get_pimpinan('select', strtolower(App\Enum\JabatanEnum::KABAN->name));
+                $sekban = get_pimpinan('select', strtolower(App\Enum\JabatanEnum::SEKBAN->name));
+                $kabid = getKabag(
+                    'select',
+                    strtolower(App\Enum\JabatanEnum::KABID->name),
+                    strtolower(App\Enum\JabatanEnum::KEPALA->name),
+                );
+                $kasubid = getKasubag('select', strtolower(App\Enum\JabatanEnum::KASUBID->name), 'Kepala Sub Bidang');
             @endphp
             <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x d-flex mb-5 fs-6 fw-semibold"
                 id="kt_sidebar_secondary_tabs">
                 <li class="nav-item flex-fill">
                     <a class="nav-link text-center text-gray-600 text-active-gray-800 py-2 px-2 mx-0 active"
-                        data-bs-toggle="tab" href="#kt_projects_active">ASN
-                        <span
-                            class="text-gray-500">({{ App\Models\Pegawai::where('jenis_pegawai', 'asn')->whereNull('deleted_at')->where('status_pegawai', 'aktif')->count() }})</span></a>
+                        data-bs-toggle="tab" href="#kt_projects_active">Eselon II & III
+                        <span class="text-gray-500">({{ 1 + 1 + count($kabid) }})</span></a>
                 </li>
                 <li class="nav-item flex-fill">
                     <a class="nav-link text-center text-gray-600 text-active-gray-800 py-2 px-2 mx-0"
-                        data-bs-toggle="tab" href="#kt_projects_completed">NON ASN
-                        <span
-                            class="text-gray-500">({{ App\Models\Pegawai::where('jenis_pegawai', 'non asn')->whereNull('deleted_at')->where('status_pegawai', 'aktif')->count() }})</span></a>
+                        data-bs-toggle="tab" href="#kt_projects_completed">Eselon IV
+                        <span class="text-gray-500">({{ count($kasubid) }})</span></a>
                 </li>
             </ul>
             <div class="hover-scroll-y" data-kt-scroll="true" data-kt-scroll-height="auto"
@@ -95,36 +89,56 @@
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="kt_projects_active" role="tabpanel">
                         <div class="d-flex flex-column flex-grow-1 gap-1">
-                            @foreach ($asn as $items)
+                            <a href="{{ route('pegawai.show', $kaban->id) }}"
+                                class="d-flex align-items-center p-3 gap-2 border border-transparent bg-hover-light-primary border-hover-primary-clarity rounded">
+                                <img src="{{ $kaban->foto }}" class="h-40px rounded" />
+                                <div class="d-flex flex-column">
+                                    <div class="text-gray-900 fs-6 fw-semibold">{{ Str::limit($kaban->name, 17) }}</div>
+                                    <div class="text-gray-600 fs-7">{{ $kaban->nip ?? '-' }}</div>
+                                    <div class="fw-bold text-primary">{{ strtoupper($kaban->initial_jabatan) }}</div>
+                                </div>
+                            </a>
+                            <a href="{{ route('pegawai.show', $sekban->id) }}"
+                                class="d-flex align-items-center p-3 gap-2 border border-transparent bg-hover-light-primary border-hover-primary-clarity rounded">
+                                <img src="{{ $sekban->foto }}" class="h-40px rounded" />
+                                <div class="d-flex flex-column">
+                                    <div class="text-gray-900 fs-6 fw-semibold">{{ Str::limit($sekban->name, 17) }}
+                                    </div>
+                                    <div class="text-gray-600 fs-7">{{ $sekban->nip ?? '-' }}</div>
+                                    <div class="fw-bold text-primary">{{ strtoupper($sekban->initial_jabatan) }}</div>
+                                </div>
+                            </a>
+                            @foreach ($kabid as $items)
                                 <a href="{{ route('pegawai.show', $items->id) }}"
                                     class="d-flex align-items-center p-3 gap-2 border border-transparent bg-hover-light-primary border-hover-primary-clarity rounded">
-                                    <img src="{{ Storage::url($items->foto) }}" class="h-40px rounded" />
+                                    <img src="{{ $items->foto }}" class="h-40px rounded" />
                                     <div class="d-flex flex-column">
-                                        <div class="text-gray-900 fs-6 fw-semibold">{{ $items->name }}</div>
+                                        <div class="text-gray-900 fs-6 fw-semibold">{{ Str::limit($items->name, 17) }}
+                                        </div>
                                         <div class="text-gray-600 fs-7">{{ $items->nip ?? '-' }}</div>
+                                        <div class="fw-bold text-primary">
+                                            {{ strtoupper($items->nama_jabatan . ' ' . $items->jabatan) }}
+                                        </div>
                                     </div>
                                 </a>
                             @endforeach
-                            <a href="{{ route('pegawai.index') }}" class="text-primary w-100 d-block text-center">
-                                Lihat Semua Pegawai
-                            </a>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="kt_projects_completed" role="tabpanel">
                         <div class="d-flex flex-column flex-grow-1 gap-1">
-                            @foreach ($nonasn as $item)
+                            @foreach ($kasubid as $item)
                                 <a href="{{ route('pegawai.show', $item->id) }}"
                                     class="d-flex align-items-center p-3 gap-2 border border-transparent bg-hover-light-primary border-hover-primary-clarity rounded">
-                                    <img src="{{ Storage::url($item->foto) }}" class="h-40px rounded" />
+                                    <img src="{{ $item->foto }}" class="h-40px rounded" />
                                     <div class="d-flex flex-column">
-                                        <div class="text-gray-900 fs-6 fw-semibold">{{ $item->name }}</div>
+                                        <div class="text-gray-900 fs-6 fw-semibold">{{ Str::limit($item->name, 17) }}</div>
                                         <div class="text-gray-600 fs-7">{{ $item->nip ?? '-' }}</div>
+                                        <div class="fw-bold text-primary">
+                                            {{ strtoupper($item->nama_jabatan . ' ' . $item->jabatan) }}
+                                        </div>
                                     </div>
                                 </a>
                             @endforeach
-                            <a href="{{ route('pegawai.index') }}" class="text-primary w-100 d-block text-center">
-                                Lihat Semua Pegawai
-                            </a>
                         </div>
                     </div>
                 </div>
