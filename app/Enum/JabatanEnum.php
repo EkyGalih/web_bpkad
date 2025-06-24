@@ -10,6 +10,7 @@ enum JabatanEnum: string
     case KASUBID = "Kepala Sub Bidang";
     case PEGAWAI = "Pegawai";
     case KEPALA = "Kepala UPT";
+    case FUNGSIONAL = "Fungsional";
 
     public function is(string $value): bool
     {

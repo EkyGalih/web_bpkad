@@ -16,7 +16,6 @@ use App\Models\Pages;
 use App\Models\PagesType;
 use App\Models\Pegawai;
 use App\Models\Permohonan;
-use App\Models\PostComment;
 use App\Models\Posts;
 use App\Models\PowerPoint;
 use App\Models\PPIDStruktur;
@@ -27,13 +26,14 @@ use App\Models\SubPages;
 use App\Models\User;
 use App\Models\LokasiAset;
 use App\Models\PostsCategory;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Spatie\LaravelSettings\SettingsContainer;
 
 if (! function_exists('settings')) {
-    function settings(): SettingsContainer {
+    function settings(): SettingsContainer
+    {
         return app(SettingsContainer::class);
     }
 }
@@ -189,10 +189,25 @@ if (!function_exists('randomString')) {
 if (!function_exists('_jsonDecode')) {
     function _jsonDecode($param)
     {
-        $path = public_path($param);
-        $files = file_get_contents($path);
-        $data = json_decode($files, true);
-        return $data;
+        if (filter_var($param, FILTER_VALIDATE_URL)) {
+            $contextOptions = [
+                "ssl" => [
+                    "verify_peer" => false,
+                    "verify_peer_name" => false,
+                ]
+            ];
+
+            $context = stream_context_create($contextOptions);
+            $files = file_get_contents($param, false, $context);
+        } else {
+            $path = public_path($param);
+            if (!file_exists($path)) {
+                throw new \Exception("File not found: {$path}");
+            }
+            $files = file_get_contents($path);
+        }
+
+        return json_decode($files, true);
     }
 }
 
@@ -490,15 +505,16 @@ if (!function_exists('NIP')) {
 if (!function_exists('hitungMasaKerja')) {
     function hitungMasaKerja($param)
     {
-        $tanggalSk = Carbon::parse($param);
-        $sekarang = Carbon::now();
+        try {
+            $tanggalSk = Carbon::parse($param)->startOfDay();
+            $sekarang = Carbon::now()->startOfDay();
 
-        $tahun = $sekarang->diffInYears($tanggalSk);
-        $bulan = $sekarang->diffInMonths($tanggalSk) % 12;
-        $hari = $sekarang->diffInDays($tanggalSk->addYears($tahun)->addMonths($bulan));
+            $diff = $tanggalSk->diff($sekarang);
 
-        $mkg = $tahun . ' Tahun ' . $bulan . ' Bulan ' . $hari . ' Hari';
-        return $mkg;
+            return "{$diff->y} Tahun {$diff->m} Bulan {$diff->d} Hari";
+        } catch (\Exception $e) {
+            return 'Tanggal tidak valid';
+        }
     }
 }
 
@@ -524,20 +540,28 @@ if (!function_exists('progressBarPangkat')) {
 if (!function_exists('USIA')) {
     function USIA($param)
     {
-        $tanggalLahir = \Carbon\Carbon::createFromFormat('Y-m-d', $param);
+        try {
+            $tanggalLahir = Carbon::createFromFormat('Y-m-d', $param);
+            $sekarang = Carbon::now();
 
-        $sekarang = \Carbon\Carbon::now();
+            $umurTahun = $tanggalLahir->diffInYears($sekarang);
 
-        $umurTahun = $tanggalLahir->diffInYears($sekarang);
+            // Gunakan copy untuk menghindari error modifikasi langsung
+            $tanggalUlangTahunTerakhir = $tanggalLahir->copy()->addYears($umurTahun);
+            $hariBerlalu = $tanggalUlangTahunTerakhir->diffInDays($sekarang);
 
-        $tanggalUlangTahunTerakhir = $tanggalLahir->addYears($umurTahun);
-        $hariBerlalu = $tanggalUlangTahunTerakhir->diffInDays($sekarang);
+            $result = new stdClass();
+            $result->umur = $umurTahun;
+            $result->hari = $hariBerlalu;
 
-        $result = new stdClass();
-        $result->umur = $umurTahun;
-        $result->hari = $hariBerlalu;
-
-        return $result;
+            return $result;
+        } catch (\Exception $e) {
+            // Jika gagal parsing tanggal, kembalikan null
+            $result = new stdClass();
+            $result->umur = null;
+            $result->hari = null;
+            return $result;
+        }
     }
 }
 

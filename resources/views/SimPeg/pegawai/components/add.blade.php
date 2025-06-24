@@ -96,15 +96,16 @@
                         <div class="row mb-3">
                             <label for="inputText" class="col-sm-3 col-form-label">Usia</label>
                             <div class="col-sm-2">
-                                <input type="text" id="umur" name="umur" class="form-control @error('umur') is-invalid @enderror" readonly
+                                <input type="text" id="umur" name="umur"
+                                    class="form-control @error('umur') is-invalid @enderror" readonly
                                     value="{{ old('umur') }}" style="background-color: rgb(238, 236, 236)">
-                                    @error('umur')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-sm-4">
-                                    <label for="inputText" class="form-label mt-3">Tahun</label>
-                                </div>
+                                @error('umur')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="inputText" class="form-label mt-3">Tahun</label>
+                            </div>
                         </div>
                         <div class="row mb-3">
                             <label for="inputText" class="col-sm-3 col-form-label">Jenis Kelamin</label>
@@ -238,9 +239,9 @@
                                 placeholder="Cari.." class="form-control @error('initial_jabatan') is-invalid @enderror">
                                 <option value="#">Cari..</option>
                                 @foreach ($InitialJabatan as $ij)
-                                    <option value="{{ $ij['initial_jabatan'] }}"
-                                        {{ old('initial_jabatan') == $ij['initial_jabatan'] ? 'selected' : '' }}>
-                                        {{ $ij['initial_jabatan'] }}</option>
+                                    <option value="{{ $ij->name }}"
+                                        {{ old('initial_jabatan') == $ij->name ? 'selected' : '' }}>
+                                        {{ $ij->name }}</option>
                                 @endforeach
                             </select>
                             @error('initial_jabatan')
@@ -301,12 +302,8 @@
                                     title="Tahun Kenaikan pangkat hanya perkiraan berdasarkan tahun pengangkatan, tahun promosi bisa berubah tergantung jabatan yang diduduki"><i
                                         class="bi bi-info-circle"></i></sup></label>
                             <div class="col-sm-9">
-                                <input type="text" name="kenaikan_pangkat" class="form-control"
-                                    value="{{ old('kenaikan_pangkat') }}"
-                                    class="form-control @error('kenaikan_pangkat') is-invalid @enderror">
-                                @error('kenaikan_pangkat')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                <input type="date" name="kenaikan_pangkat" class="form-control"
+                                    value="{{ old('kenaikan_pangkat') }}">
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -332,7 +329,7 @@
                                     <option value="">Cari..</option>
                                     @foreach ($bidang as $bid)
                                         <option value="{{ $bid->id }}"
-                                            {{ old('bidang_id') == $bid->id ? 'selected' : '' }}>{{ $bid->nama_bidang }}
+                                            {{ old('bidang_id') == $bid->id ? 'selected' : '' }}>{{ $bid->nama_bidang }} {{ $bid->sub_bagian != null ? ' - '.$bid->sub_bagian : '' }}
                                         </option>
                                     @endforeach
                                 </select>

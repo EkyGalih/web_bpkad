@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Simpeg\Admin;
 
-use App\Helpers\Helpers;
+use App\Enum\JabatanEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PegawaiRequest;
 use App\Models\Bidang;
@@ -61,7 +61,7 @@ class PegawaiController extends Controller
         $pangkat = Pangkat::get();
         $golongan = Golongan::get();
         $NamaJabatan = _jsonDecode(asset('server/data/umum/NamaJabatan.json'));
-        $InitialJabatan = _jsonDecode(asset('server/data/umum/InitialJabatan.json'));
+        $InitialJabatan = JabatanEnum::cases();
 
         return view('SimPeg.pegawai.components.add', compact('bidang', 'pangkat', 'golongan', 'NamaJabatan', 'InitialJabatan'));
     }
@@ -104,6 +104,14 @@ class PegawaiController extends Controller
         if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
             $path = $request->file('foto')->store('uploads/pegawai', 's3');
             $pegawai->foto = Storage::disk('s3')->url($path);
+        } else {
+            if ($validatedData['jenis_kelamin'] == 'pria') {
+                $pegawai->foto = 'https://storage.ntbprov.go.id/bpkad/uploads/defaults/male.jpg';
+            } elseif ($validatedData['jenis_kelamin'] == 'wanita') {
+                $pegawai->foto = 'https://storage.ntbprov.go.id/bpkad/uploads/defaults/female.jpg';
+            } else {
+                $pegawai->foto = null;
+            }
         }
 
         // Menyimpan data ke dalam database
@@ -147,7 +155,7 @@ class PegawaiController extends Controller
         $pangkat = Pangkat::get();
         $golongan = Golongan::get();
         $NamaJabatan = _jsonDecode(asset('server/data/umum/NamaJabatan.json'));
-        $InitialJabatan = _jsonDecode(asset('server/data/umum/InitialJabatan.json'));
+        $InitialJabatan = JabatanEnum::cases();
 
         return view('SimPeg.pegawai.components.edit', compact('pegawai', 'golongan', 'pangkat', 'bidang', 'NamaJabatan', 'InitialJabatan'));
     }

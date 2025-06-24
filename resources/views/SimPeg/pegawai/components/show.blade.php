@@ -34,27 +34,23 @@
             </div>
         </div>
     </div>
-    <div class="float-end p-7">
-        <a href="{{ route('pegawai.index') }}" class="btn btn-secondary btn-sm">
-            <i class="ki-duotone ki-double-left-arrow fs-4">
-                <span class="path1"></span>
-                <span class="path2"></span>
-            </i> Kembali
-        </a>
-    </div>
 @endsection
 @endsection
 @section('content')
+@php
+    $tanggalLahir = $pegawai->tanggal_lahir;
+    $usia = $tanggalLahir ? USIA($tanggalLahir) : null;
+@endphp
 <div class="card mb-6">
     <div class="card-body pt-9 pb-0">
         <div class="d-flex flex-wrap flex-sm-nowrap">
             <div class="me-7 mb-4">
                 <div class="symbol symbol-150px symbol-lg-200px symbol-fixed position-relative">
-                    <img src="{{ Storage::url($pegawai->foto) }}" alt="{{ $pegawai->name }}" />
+                    <img src="{{ $pegawai->foto }}" alt="{{ $pegawai->name }}" />
                     @if ($pegawai->status_pegawai == 'pensiun')
                         <div class="watermark">PENSIUN</div>
                     @elseif($pegawai->status_pegawai == 'pindah')
-                        <div class="watermark">PINDAH</div>
+                        <div class="watermark">MUTASI</div>
                     @endif
                 </div>
             </div>
@@ -118,7 +114,7 @@
                                         <span class="path4"></span>
                                         <span class="path5"></span>
                                     </i>
-                                    <div class="fs-2 fw-bold">{{ $pegawai->umur }}</div>
+                                    <div class="fs-2 fw-bold">{{ number_format($pegawai->umur, 0) }}</div>
                                 </div>
                                 <div class="fw-semibold fs-6 text-gray-500">Tahun</div>
                             </div>
@@ -135,13 +131,12 @@
                         <div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3">
                             <div class="d-flex justify-content-between w-100 mt-auto mb-2">
                                 <span class="fw-semibold fs-6 text-gray-500">Kenaikan Pangkat</span>
-                                <span
-                                    class="fw-bold fs-6">{{ Helpers::progressBarPangkat($pegawai->kenaikan_pangkat) }}%</span>
+                                <span class="fw-bold fs-6">{{ progressBarPangkat($pegawai->kenaikan_pangkat) }}%</span>
                             </div>
                             <div class="h-5px mx-3 w-100 bg-light mb-3">
                                 <div class="bg-success rounded h-5px" role="progressbar"
-                                    style="width: {{ Helpers::progressBarPangkat($pegawai->kenaikan_pangkat) }}%;"
-                                    aria-valuenow="{{ Helpers::progressBarPangkat($pegawai->kenaikan_pangkat) }}"
+                                    style="width: {{ progressBarPangkat($pegawai->kenaikan_pangkat) }}%;"
+                                    aria-valuenow="{{ progressBarPangkat($pegawai->kenaikan_pangkat) }}"
                                     aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
@@ -156,8 +151,21 @@
         <div class="card-title m-0">
             <h3 class="fw-bold m-0">Rincian Profile Pegawai</h3>
         </div>
-        <a href="{{ route('pegawai.edit', $pegawai->id) }}" class="btn btn-sm btn-primary align-self-center">Edit
-            Profile</a>
+        <div class="d-flex gap-2 align-items-center">
+            <a href="{{ route('pegawai.edit', $pegawai->id) }}" class="btn btn-sm btn-primary align-self-center">
+                <i class="ki-duotone ki-pencil fs-4">
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                    <span class="path3"></span>
+                </i> Edit Profile
+            </a>
+            <a href="{{ route('pegawai.index') }}" class="btn btn-secondary btn-sm align-self-center">
+                <i class="ki-duotone ki-double-left-arrow fs-4">
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                </i> Kembali
+            </a>
+        </div>
     </div>
     <div class="card-body p-9">
         <div class="row mb-7">
@@ -169,10 +177,15 @@
         <div class="row mb-7">
             <label class="col-lg-2 fw-semibold text-muted">Tempat/Tanggal Lahir</label>
             <div class="col-lg-8 fv-row">
-                <span
-                    class="fw-semibold text-gray-800 fs-6">{{ \Carbon\Carbon::parse($pegawai->tanggal_lahir)->locale('id_ID')->translatedFormat('l, d F Y') }}</span>
-                ({{ Helpers::USIA($pegawai->tanggal_lahir)->umur . ' Tahun' }},
-                {{ Helpers::USIA($pegawai->tanggal_lahir)->hari . ' Hari' }})</span>
+                @if ($tanggalLahir && $usia)
+                    <span class="fw-semibold text-gray-800 fs-6">
+                        {{ \Carbon\Carbon::parse($tanggalLahir)->locale('id_ID')->translatedFormat('l, d F Y') }}
+                    </span>
+                    ({{ number_format($usia->umur, 0) }} Tahun,
+                    {{ number_format($usia->hari, 0) }} Hari)
+                @else
+                    <span class="text-muted">Tanggal lahir tidak tersedia</span>
+                @endif
             </div>
         </div>
         <div class="row mb-7">

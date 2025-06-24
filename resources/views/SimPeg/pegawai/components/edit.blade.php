@@ -118,7 +118,7 @@
                                 </p>
                             </div>
                             <div class="col-sm-8">
-                                <img src="{{ Storage::url($pegawai->foto) ?? asset('uploads/profile/male.jpg') }}"
+                                <img src="{{ $pegawai->foto ?? asset('uploads/profile/male.jpg') }}"
                                     alt="Profile" id="foto" style="max-width: 100%; height: 120px;">
                             </div>
                         </div>
@@ -200,9 +200,9 @@
                                 placeholder="Cari..">
                                 <option value="#">Cari..</option>
                                 @foreach ($InitialJabatan as $ij)
-                                    <option value="{{ $ij['initial_jabatan'] }}"
-                                        {{ $pegawai->initial_jabatan == $ij['initial_jabatan'] ? 'selected' : '' }}>
-                                        {{ $ij['initial_jabatan'] }}</option>
+                                    <option value="{{ $ij->name }}"
+                                        {{ $pegawai->initial_jabatan == $ij->name ? 'selected' : '' }}>
+                                        {{ $ij->name }}</option>
                                 @endforeach
                             </select>
                         </div>

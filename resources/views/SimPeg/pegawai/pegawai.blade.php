@@ -3,88 +3,7 @@
 @section('title_page', 'Pegawai')
 @section('pegawai', 'here show')
 @section('styles')
-    <style>
-        .watermark {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-30deg);
-            font-size: 2.5rem;
-            /* Increase font size */
-            font-weight: bold;
-            color: rgba(255, 0, 0, 0.7);
-            /* Make color less transparent */
-            text-transform: uppercase;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-            /* Add shadow for more visibility */
-            pointer-events: none;
-            /* Prevents watermark from being clicked */
-            z-index: 1;
-        }
-
-        #search {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-
-        .dropdown {
-            position: relative;
-            width: 100%;
-        }
-
-        .dropdown-menu {
-            position: absolute;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            width: 100%;
-            max-height: 300px;
-            overflow-y: auto;
-            z-index: 1000;
-            display: none;
-        }
-
-        .dropdown-item {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            border-bottom: 1px solid #f1f1f1;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .dropdown-item:last-child {
-            border-bottom: none;
-        }
-
-        .dropdown-item:hover {
-            background-color: #f9f9f9;
-        }
-
-        .dropdown-item img {
-            width: 50px;
-            height: 50px;
-            border-radius: 10%;
-            margin-right: 15px;
-        }
-
-        .dropdown-item .details {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .dropdown-item .details .name {
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .dropdown-item .details .nip {
-            font-size: 14px;
-            color: #888;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/simpeg.css') }}">
 @endsection
 @section('header')
     <div class="d-flex flex-stack justify-content-end flex-row-fluid" id="kt_app_navbar_wrapper">
@@ -116,7 +35,7 @@
                             @if ($item->status_pegawai == 'pensiun')
                                 <div class="watermark">PENSIUN</div>
                             @elseif($item->status_pegawai == 'pindah')
-                                <div class="watermark">PINDAH</div>
+                                <div class="watermark">MUTASI</div>
                             @endif
                         </div>
                     </div>
@@ -145,8 +64,7 @@
                                         </i>{{ strtoupper($item->jenis_kelamin) ?? '-' }}</a>
                                     <a href="#"
                                         class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
-                                        <i
-                                            class="ki-outline ki-barcode fs-4 me-1"></i>{{ NIP($item->nip) ?? '-' }}</a>
+                                        <i class="ki-outline ki-barcode fs-4 me-1"></i>{{ NIP($item->nip) ?? '-' }}</a>
                                     <a href="{{ route('bidang.getPegawai', $item->bidang->id) }}"
                                         class="d-flex align-items-center text-gray-500 text-hover-primary mb-2">
                                         <i class="ki-duotone ki-office-bag fs-4 me-1">
@@ -162,14 +80,25 @@
                             <!--begin::Actions-->
                             <div class="d-flex my-4">
                                 <a href="{{ route('pegawai.edit', $item->id) }}" class="btn btn-sm btn-warning me-2"
+                                    data-bs-tooltip="tooltip" data-bs-placement="top" title="Edit"
                                     id="kt_user_follow_button">
-                                    <i class="ki-outline ki-check fs-3 d-none"></i>
-                                    <!--begin::Indicator label-->
-                                    <span class="indicator-label">Edit</span>
+                                    <i class="ki-duotone ki-pencil fs-3">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                        <span class="path3"></span>
+                                    </i>
                                     <!--end::Indicator label-->
                                 </a>
-                                <button type="button" class="btn btn-sm btn-danger me-3" data-bs-toggle="modal"
-                                    data-bs-target="#HapusPegawai{{ $loop->iteration }}">Hapus</button>
+                                <button type="button" class="btn btn-sm btn-danger me-3" data-bs-toggle="modal" data-bs-tooltip="tooltip" data-bs-placement="top" title="Hapus"
+                                    data-bs-target="#HapusPegawai{{ $loop->iteration }}">
+                                    <i class="ki-duotone ki-trash fs-4">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                        <span class="path3"></span>
+                                        <span class="path4"></span>
+                                        <span class="path5"></span>
+                                    </i>
+                                </button>
                             </div>
                             <!--end::Actions-->
                         </div>
@@ -288,56 +217,9 @@
     {{-- {{ $pegawai->links() }} --}}
 @endsection
 @section('scripts')
-    <script>
-        $(document).ready(function() {
-            $('#search').on('input', function() {
-                let query = $(this).val();
-
-                if (query.length > 2) {
-                    $.ajax({
-                        url: '{{ route('pegawai.search') }}',
-                        type: 'GET',
-                        data: {
-                            query: query
-                        },
-                        success: function(data) {
-                            console.log(data);
-
-                            $('#results').empty().show();
-                            if (data.length > 0) {
-                                data.forEach(item => {
-                                    $('#results').append(`
-                                        <li class="dropdown-item" data-url="{{ route('pegawai.show', '') }}/${item.id}">
-                                            <img src="${item.foto}" alt="${item.name}">
-                                            <div class="details">
-                                                <span class="name">${item.name}</span>
-                                                <span class="nip">NIP: ${item.nip}</span>
-                                            </div>
-                                        </li>
-                                    `);
-                                });
-
-                                $('.dropdown-item').on('click', function() {
-                                    let url = $(this).data('url');
-                                    window.location.href = url;
-                                    $('#results').hide();
-                                });
-                            } else {
-                                $('#results').append(
-                                    '<li class="dropdown-item">No results found</li>');
-                            }
-                        }
-                    });
-                } else {
-                    $('#results').hide();
-                }
-            });
-
-            $(document).on('click', function(e) {
-                if (!$(e.target).closest('#search, .dropdown-menu').length) {
-                    $('#results').hide();
-                }
-            });
-        });
-    </script>
+<script>
+    window.route_pegawai_search = '{{ route('pegawai.search') }}';
+    window.route_pegawai_show_base = '{{ route('pegawai.show', '') }}';
+</script>
+    <script src="{{ asset('js/simpeg-search.js') }}"></script>
 @endsection

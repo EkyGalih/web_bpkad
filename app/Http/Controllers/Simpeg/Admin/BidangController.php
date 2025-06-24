@@ -16,7 +16,8 @@ class BidangController extends Controller
      */
     public function index()
     {
-        $bidang = Bidang::orderBy('updated_at', 'desc')->get();
+        $bidang = Bidang::orderByDesc('updated_at')->get()->unique('nama_bidang')->values();
+
         return view('SimPeg.bidang.bidang', compact('bidang'));
     }
 
@@ -53,8 +54,16 @@ class BidangController extends Controller
 
     public function getPegawai($id)
     {
-        $pegawai = Pegawai::where('bidang_id', $id)->where('status_pegawai', 'aktif')->where('deleted_at', null)->paginate(6);
         $nama_bidang = Bidang::where('id', $id)->value('nama_bidang');
+
+        // Ambil semua ID dari bidang yang punya nama_bidang sama
+        $bidang_ids = Bidang::where('nama_bidang', $nama_bidang)->pluck('id');
+
+        // Ambil semua pegawai yang bidang_id-nya termasuk salah satu dari ID di atas
+        $pegawai = Pegawai::whereIn('bidang_id', $bidang_ids)
+            ->where('status_pegawai', 'aktif')
+            ->whereNull('deleted_at')
+            ->paginate(6);
 
         return view('SimPeg.bidang.getPegawai', compact('pegawai', 'nama_bidang'));
     }
@@ -90,4 +99,3 @@ class BidangController extends Controller
         return redirect()->route('simpeg.admin.bidang.index')->with(['success' => 'Data Bidang Berhasil Dihapus']);
     }
 }
-

@@ -2,25 +2,7 @@
 @section('title', 'Pegawai Bidang')
 @section('bidang', 'here show')
 @section('styles')
-    <style>
-        .watermark {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-30deg);
-            font-size: 2.5rem;
-            /* Increase font size */
-            font-weight: bold;
-            color: rgba(255, 0, 0, 0.7);
-            /* Make color less transparent */
-            text-transform: uppercase;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-            /* Add shadow for more visibility */
-            pointer-events: none;
-            /* Prevents watermark from being clicked */
-            z-index: 1;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/simpeg.css') }}">
 @endsection
 @section('header')
     <div class="d-flex flex-stack justify-content-end flex-row-fluid" id="kt_app_navbar_wrapper">
@@ -46,13 +28,17 @@
             <h2 class="fw-bold fs-3hx text-gray-800">Tidak Ada Data Pegawai</h2>
         </div>
     @else
+        <div class="dropdown">
+            <input type="text" id="search" placeholder="Cari pegawai..." autocomplete="off">
+            <ul class="dropdown-menu" id="results"></ul>
+        </div>
         @foreach ($pegawai as $item)
             <div class="card mb-6">
                 <div class="card-body pt-9 pb-0">
                     <div class="d-flex flex-wrap flex-sm-nowrap">
                         <div class="me-7 mb-4">
                             <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                                <img src="{{ Storage::url($item->foto) }}" alt="{{ $item->name }}" />
+                                <img src="{{ $item->foto }}" alt="{{ $item->name }}" />
                                 @if ($item->status_pegawai == 'pensiun')
                                     <div class="watermark">PENSIUN</div>
                                 @elseif($item->status_pegawai == 'pindah')
@@ -183,12 +169,12 @@
                                         <div class="d-flex justify-content-between w-100 mt-auto mb-2">
                                             <span class="fw-semibold fs-6 text-gray-500">Kenaikan Pangkat</span>
                                             <span
-                                                class="fw-bold fs-6">{{ Helpers::progressBarPangkat($item->kenaikan_pangkat) }}%</span>
+                                                class="fw-bold fs-6">{{ progressBarPangkat($item->kenaikan_pangkat) }}%</span>
                                         </div>
                                         <div class="h-5px mx-3 w-100 bg-light mb-3">
                                             <div class="bg-success rounded h-5px" role="progressbar"
-                                                style="width: {{ Helpers::progressBarPangkat($item->kenaikan_pangkat) }}%;"
-                                                aria-valuenow="{{ Helpers::progressBarPangkat($item->kenaikan_pangkat) }}"
+                                                style="width: {{ progressBarPangkat($item->kenaikan_pangkat) }}%;"
+                                                aria-valuenow="{{ progressBarPangkat($item->kenaikan_pangkat) }}"
                                                 aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
@@ -205,4 +191,11 @@
         @endforeach
         {{ $pegawai->links() }}
     @endif
+@endsection
+@section('scripts')
+    <script>
+        window.route_pegawai_search = '{{ route('pegawai.search') }}';
+        window.route_pegawai_show_base = '{{ route('pegawai.show', '') }}';
+    </script>
+    <script src="{{ asset('js/simpeg-search.js') }}"></script>
 @endsection
