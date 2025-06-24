@@ -19,8 +19,8 @@
                 <div class="col-md-5 col-lg-5 col-xl-4 offset-xl-1 d-none d-md-flex position-relative align-self-end">
                     <div class="shape rounded-circle bg-pale-primary rellax w-21 h-21 d-md-none d-lg-block"
                         data-rellax-speed="1" style="top: 7rem; left: 1rem"></div>
-                    <figure><img src="{{ asset($atasan->foto) }}" srcset="{{ asset($atasan->foto) }}"
-                            alt="{{ $atasan->name }}">
+                    <figure><img src="{{ fotoOrDefaultUrl($atasan->pegawai->foto) }}" srcset="{{ fotoOrDefaultUrl($atasan->pegawai->foto) }}"
+                            alt="{{ $atasan->pegawai->name }}">
                     </figure>
                 </div>
                 <div class="col-md-7 col-lg-6 col-xl-6 col-xxl-5 offset-xl-1">
@@ -30,7 +30,7 @@
                             informasi yang cepat, tepat, dan mudah bagi seluruh masyarakat”</p>
                         <div class="blockquote-details justify-content-center text-center">
                             <div class="info p-0">
-                                <h5 class="mb-1">{{ $atasan->name }}</h5>
+                                <h5 class="mb-1">{{ $atasan->pegawai->name }}</h5>
                                 <div class="meta mb-0">{{ strtoupper($atasan->nama_jabatan) }}</div>
                             </div>
                         </div>
@@ -61,9 +61,10 @@
                                 <div class="item-inner">
                                     <div class="card">
                                         <div class="card-body">
-                                            <img class="img-thumbnail w-35 mb-4" src="{{ asset($ketua->foto) }}"
-                                                srcset="{{ asset($ketua->foto) }}" alt="{{ $ketua->name }}" />
-                                            <p class="fw-bold text-black fs-16 mb-1">{{ $ketua->name }}</p>
+                                            <img class="img-thumbnail w-35 mb-4" src="{{ fotoOrDefaultUrl($ketua->pegawai->foto) }}"
+                                                srcset="{{ fotoOrDefaultUrl($ketua->pegawai->foto) }}"
+                                                alt="{{ $ketua->pegawai->name }}" />
+                                            <p class="fw-bold text-black fs-16 mb-1">{{ $ketua->pegawai->name }}</p>
                                             <div class="meta fs-14 mb-2">{{ $ketua->jabatan }}</div>
                                             <p class="fs-14 mb-2">{{ $ketua->nama_jabatan }}</p>
                                         </div>
@@ -74,10 +75,12 @@
                                 <div class="item-inner">
                                     <div class="card">
                                         <div class="card-body">
-                                            <img class="img-thumbnail w-35 mb-4" src="{{ asset($kepala_pengelola->foto) }}"
-                                                srcset="{{ asset($kepala_pengelola->foto) }}"
-                                                alt="{{ $kepala_pengelola->name }}" />
-                                            <p class="fw-bold text-black fs-16 mb-1">{{ $kepala_pengelola->name }}</p>
+                                            <img class="img-thumbnail w-35 mb-4"
+                                                src="{{ fotoOrDefaultUrl($kepala_pengelola->pegawai->foto) }}"
+                                                srcset="{{ fotoOrDefaultUrl($kepala_pengelola->pegawai->foto) }}"
+                                                alt="{{ $kepala_pengelola->pegawai->name }}" />
+                                            <p class="fw-bold text-black fs-16 mb-1">{{ $kepala_pengelola->pegawai->name }}
+                                            </p>
                                             <div class="meta fs-14 mb-2">KEPALA</div>
                                             <p class="fs-14 mb-2">{{ $kepala_pengelola->nama_jabatan }}</p>
                                         </div>
@@ -88,10 +91,12 @@
                                 <div class="item-inner">
                                     <div class="card">
                                         <div class="card-body">
-                                            <img class="img-thumbnail w-35 mb-4" src="{{ asset($kepala_pengaduan->foto) }}"
-                                                srcset="{{ asset($kepala_pengaduan->foto) }}"
-                                                alt="{{ $kepala_pengaduan->name }}" />
-                                            <p class="fw-bold text-black fs-16 mb-1">{{ $kepala_pengaduan->name }}</p>
+                                            <img class="img-thumbnail w-35 mb-4"
+                                                src="{{ fotoOrDefaultUrl($kepala_pengaduan->pegawai->foto) }}"
+                                                srcset="{{ fotoOrDefaultUrl($kepala_pengaduan->pegawai->foto) }}"
+                                                alt="{{ $kepala_pengaduan->pegawai->name }}" />
+                                            <p class="fw-bold text-black fs-16 mb-1">{{ $kepala_pengaduan->pegawai->name }}
+                                            </p>
                                             <div class="meta fs-14 mb-2">KEPALA</div>
                                             <p class="fs-14 mb-2">{{ $kepala_pengaduan->nama_jabatan }}</p>
                                         </div>
@@ -102,10 +107,12 @@
                                 <div class="item-inner">
                                     <div class="card">
                                         <div class="card-body">
-                                            <img class="img-thumbnail w-35 mb-4" src="{{ asset($kepala_pelayanan->foto) }}"
-                                                srcset="{{ asset($kepala_pelayanan->foto) }}"
-                                                alt="{{ $kepala_pelayanan->name }}" />
-                                            <p class="fw-bold text-black fs-16 mb-1">{{ $kepala_pelayanan->name }}</p>
+                                            <img class="img-thumbnail w-35 mb-4"
+                                                src="{{ fotoOrDefaultUrl($kepala_pelayanan->pegawai->foto) }}"
+                                                srcset="{{ fotoOrDefaultUrl($kepala_pelayanan->pegawai->foto) }}"
+                                                alt="{{ $kepala_pelayanan->pegawai->name }}" />
+                                            <p class="fw-bold text-black fs-16 mb-1">{{ $kepala_pelayanan->pegawai->name }}
+                                            </p>
                                             <div class="meta fs-14 mb-2">KEPALA</div>
                                             <p class="fs-14 mb-2">{{ $kepala_pelayanan->nama_jabatan }}</p>
                                         </div>

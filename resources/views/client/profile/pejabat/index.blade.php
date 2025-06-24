@@ -16,7 +16,7 @@ $kabag = getKabag('select', 'kabid', 'kepala');
             <div class="col-md-5 col-lg-5 col-xl-4 offset-xl-1 d-none d-md-flex position-relative align-self-end">
                 <div class="shape rounded-circle bg-pale-primary rellax w-21 h-21 d-md-none d-lg-block"
                     data-rellax-speed="1" style="top: 7rem; left: 1rem"></div>
-                <figure><img src="{{ asset($kaban->foto) }}" srcset="{{ asset($kaban->foto) }}"
+                <figure><img src="{{ fotoOrDefaultUrl($kaban->foto) }}" srcset="{{ fotoOrDefaultUrl($kaban->foto) }}"
                         alt="{{ $kaban->name }}">
                 </figure>
             </div>
@@ -62,8 +62,8 @@ $kabag = getKabag('select', 'kabid', 'kepala');
                             <div class="item-inner">
                                 <div class="card">
                                     <div class="card-body">
-                                        <img class="img-thumbnail w-35 mb-4" src="{{ asset($sekban->foto) }}"
-                                            srcset="{{ asset($sekban->foto) }}" alt="{{ $sekban->name }}" />
+                                        <img class="img-thumbnail w-35 mb-4" src="{{ fotoOrDefaultUrl($sekban->foto) }}"
+                                            srcset="{{ fotoOrDefaultUrl($sekban->foto) }}" alt="{{ $sekban->name }}" />
                                         <p class="fw-bold text-black fs-16 mb-1">{{ $sekban->name }}</p>
                                         <div class="meta fs-14 mb-2">{{ $sekban->nama_jabatan }}</div>
                                         <p class="fs-14 mb-2">{{ $sekban->initial_jabatan }}</p>
@@ -76,8 +76,8 @@ $kabag = getKabag('select', 'kabid', 'kepala');
                             <div class="item-inner">
                                 <div class="card">
                                     <div class="card-body">
-                                        <img class="img-thumbnail w-35 mb-4" src="{{ asset($item->foto) }}"
-                                            srcset="{{ asset($item->foto) }}" alt="{{ $item->name }}" />
+                                        <img class="img-thumbnail w-35 mb-4" src="{{ fotoOrDefaultUrl($item->foto) }}"
+                                            srcset="{{ fotoOrDefaultUrl($item->foto) }}" alt="{{ $item->name }}" />
                                         <p class="fw-bold text-black fs-16 mb-1">{{ $item->name }}</p>
                                         <div class="meta fs-14 mb-2">{{ $item->nama_jabatan }}</div>
                                         <p class="fs-14 mb-2">{{ $item->jabatan }}</p>

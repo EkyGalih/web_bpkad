@@ -38,6 +38,41 @@ if (! function_exists('settings')) {
     }
 }
 
+if (!function_exists('fotoOrDefaultUrl')) {
+    /**
+     * Cek apakah foto URL valid, jika tidak kembalikan foto default sesuai jenis kelamin.
+     *
+     * @param string|null $url
+     * @param string $jenisKelamin
+     * @return string
+     */
+    function fotoOrDefaultUrl(?string $url, string $jenisKelamin = 'pria'): string
+    {
+        if ($url && urlExists($url)) {
+            return $url;
+        }
+
+        $default = $jenisKelamin === 'wanita' ? 'female.jpg' : 'male.jpg';
+        return 'https://storage.ntbprov.go.id/bpkad/uploads/defaults/' . $default;
+    }
+
+    /**
+     * Cek apakah URL bisa diakses (HTTP status 200).
+     *
+     * @param string $url
+     * @return bool
+     */
+    function urlExists(string $url): bool
+    {
+        try {
+            $headers = get_headers($url, 1);
+            return isset($headers[0]) && str_contains($headers[0], '200');
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+}
+
 ### post function ###
 
 if (!function_exists('GetCategoryContent')) {
@@ -829,10 +864,10 @@ if (!function_exists('getKasubag')) {
 if (!function_exists('getPejabatPPID')) {
     function getPejabatPPID($jabatan)
     {
-        return PPIDStruktur::join('pegawai', 'ppid_struktur.pegawai_id', '=', 'pegawai.id')
-            ->where('ppid_struktur.jabatan', '=', $jabatan)
-            ->where('ppid_struktur.deleted_at', '=', NULL)
-            ->select('ppid_struktur.jabatan', 'ppid_struktur.nama_jabatan', 'pegawai.name', 'pegawai.foto', 'pegawai.jenis_kelamin')
+        return PPIDStruktur::with(['pegawai:id,name,foto,jenis_kelamin']) // batasi kolom pegawai
+            ->where('jabatan', $jabatan)
+            ->whereNull('deleted_at')
+            ->select('jabatan', 'nama_jabatan', 'pegawai_id') // perlu select pegawai_id agar relasi jalan
             ->first();
     }
 }
