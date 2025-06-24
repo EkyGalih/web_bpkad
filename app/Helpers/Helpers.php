@@ -804,11 +804,16 @@ if (!function_exists('get_pegawai')) {
 if (!function_exists('get_pegawais')) {
     function get_pegawais($param, $act)
     {
-        if ($act == 'pendidikan') {
-            return Pegawai::where('pendidikan', 'LIKE', '%' . $param . '%')->count();
-        } elseif ($act == 'golongan') {
+        if ($act === 'pendidikan') {
+            return Pegawai::where('pendidikan', 'LIKE', '%' . $param . '%')
+                ->where('status_pegawai', 'aktif')
+                ->count();
+        }
+
+        if ($act === 'golongan') {
             return Pegawai::join('pangkat', 'pegawai.pangkat_id', '=', 'pangkat.id')
                 ->where('nama_pangkat', 'LIKE', $param . '%')
+                ->where('status_pegawai', 'aktif')
                 ->count();
         }
     }
@@ -827,16 +832,19 @@ if (!function_exists('getKabag')) {
     function getKabag($cat, $param, $param2)
     {
         if ($cat == 'select') {
-            return Pegawai::where('nama_jabatan', '=', $param)
-                ->orWhere('nama_jabatan', '=', $param2)
-                ->select('id', 'nip', 'name', 'jabatan', 'nama_jabatan', 'foto')
-                ->where('status_pegawai', '=', 'aktif')
+            return Pegawai::where(function ($q) use ($param, $param2) {
+                $q->where('nama_jabatan', $param)
+                    ->orWhere('nama_jabatan', $param2);
+            })
+                ->where('status_pegawai', 'aktif')
+                ->select('id', 'nip', 'name', 'jabatan', 'nama_jabatan', 'foto', 'status_pegawai')
                 ->get();
         } elseif ($cat == 'count') {
-            return Pegawai::where('nama_jabatan', '=', $param)
-                ->orWhere('nama_jabatan', '=', $param2)
-                ->select('id', 'nip', 'name', 'jabatan', 'nama_jabatan', 'foto')
-                ->where('status_pegawai', '=', 'aktif')
+            return Pegawai::where(function ($q) use ($param, $param2) {
+                $q->where('nama_jabatan', $param)
+                    ->orWhere('nama_jabatan', $param2);
+            })
+                ->where('status_pegawai', 'aktif')
                 ->count();
         }
     }
@@ -846,16 +854,19 @@ if (!function_exists('getKasubag')) {
     function getKasubag($cat, $param, $param2)
     {
         if ($cat == 'select') {
-            return Pegawai::where('nama_jabatan', '=', $param)
-                ->where('initial_jabatan', 'LIKE', $param2 . '%')
+            return Pegawai::where(function ($query) use ($param, $param2) {
+                $query->where('nama_jabatan', $param)
+                    ->where('initial_jabatan', 'LIKE', $param2 . '%');
+            })
+                ->where('status_pegawai', 'aktif')
                 ->select('id', 'nip', 'name', 'initial_jabatan', 'nama_jabatan', 'foto', 'jabatan')
-                ->where('status_pegawai', '=', 'aktif')
                 ->get();
         } elseif ($cat == 'count') {
-            return Pegawai::where('nama_jabatan', '=', $param)
-                ->where('initial_jabatan', 'LIKE', $param2 . '%')
-                ->select('id', 'name', 'initial_jabatan', 'nama_jabatan', 'foto', 'jabatan')
-                ->where('status_pegawai', '=', 'aktif')
+            return Pegawai::where(function ($query) use ($param, $param2) {
+                $query->where('nama_jabatan', $param)
+                    ->where('initial_jabatan', 'LIKE', $param2 . '%');
+            })
+                ->where('status_pegawai', 'aktif')
                 ->count();
         }
     }

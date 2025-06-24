@@ -150,7 +150,21 @@
                                                     alt="{{ substr($post->title, 0, 50) }}" /></a></figure>
                                         <div class="post-category text-line mb-2 text-info">
                                             {{ PostCategory($post->posts_category_id) }}</div>
-                                        <h2 class="post-title h3">{{ substr($post->title, 0, 50) }}...</h2>
+                                        @if (strlen($post->title) <= 100)
+                                            <h2 class="post-title h3">
+                                                <a class="text-decoration-none text-dark"
+                                                    href="{{ route('post.show', [PostCategory($post->posts_category_id), $post->slug]) }}">{{ $post->title }}</a>
+                                            </h2>
+                                        @else
+                                            <h2 class="post-title h3"><a class="text-decoration-none text-dark"
+                                                    href="{{ route('post.show', [PostCategory($post->posts_category_id), $post->slug]) }}">
+                                                    {{ substr($post->title, 0, 100) . '...' }}
+                                                </a>
+                                            </h2>
+                                        @endif
+                                        <span
+                                            class="fw-semibold">{{ \Carbon\Carbon::parse($post->created_at)->locale('id')->translatedFormat('l, d F Y') }}
+                                            - <span class="badge bg-primary">{{ $post->users->nama }}</span></span>
                                     </div>
                                 @endforeach
                             </div>
@@ -514,7 +528,8 @@
                     <div class="row text-center">
                         <div class="d-flex flex-column flex-md-row align-items-center justify-content-center">
                             <div class="mb-4 mb-md-0 me-md-5">
-                                <img class="img-thumbnail" style="width: 220px; height: 220px; object-fit: contain;" src="{{ $settings->simaskot_qrcode_image }}" alt="{{ $settings->simaskot_link }}">
+                                <img class="img-thumbnail" style="width: 220px; height: 220px; object-fit: contain;"
+                                    src="{{ $settings->simaskot_qrcode_image }}" alt="{{ $settings->simaskot_link }}">
                             </div>
                             <div class="col-xl-11 col-xxl-9 mx-auto">
                                 <h3 class="display-3 mb-8 px-lg-8 text-white">Scan Qrcode atau klik <span
@@ -526,7 +541,8 @@
                     </div>
                     <!-- /.row -->
                     <div class="d-flex justify-content-center">
-                        <span><a href="{{ $settings->simaskot_link }}" class="btn btn-outline-warning rounded">SIMASKOT</a></span>
+                        <span><a href="{{ $settings->simaskot_link }}"
+                                class="btn btn-outline-warning rounded">SIMASKOT</a></span>
                     </div>
                 </div>
                 <!--/.card-body -->

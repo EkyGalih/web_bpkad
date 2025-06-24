@@ -52,13 +52,6 @@
                 </div>
             </div>
         </div>
-        <div class="position-relative" id="kt_sidebar_secondary_search">
-            <div class="d-flex align-items-center position-absolute translate-middle-y top-50 start-0 ms-3">
-                <i class="ki-outline ki-magnifier text-gray-600 fs-3"></i>
-            </div>
-            <input type="text" class="form-control form-control-solid border ps-10" minlength="3" maxlength="4"
-                placeholder="Search Projects..." name="project" />
-        </div>
         <div>
             @php
                 $kaban = get_pimpinan('select', strtolower(App\Enum\JabatanEnum::KABAN->name));
