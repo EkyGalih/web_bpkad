@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bidang;
+use App\Models\KIP;
 use App\Models\Laporan;
 use App\Models\Olympic;
 use App\Models\Pages;
@@ -24,6 +25,7 @@ class AdminController extends Controller
         $permohonan = Permohonan::where('created_at', 'LIKE', date('Y-m') . '%')->count();
         $posts = Posts::where('deleted_at', '=', NULL)->orderBy('created_at', 'DESC')->limit(5)->get();
         $lap = Laporan::where('jawaban', '!=', NULL)->where('created_at', 'LIKE' . date('Y-m') . '%')->limit(5)->get();
+        $kips = KIP::orderByDesc('click')->limit(5)->get();
         $recents = DB::table('recent_activity')
             ->where('recent_activity.created_at', 'LIKE', date('Y-m-d') . '%')
             ->where('recent_activity.user_id', '=', Auth::user()->id)
@@ -31,7 +33,7 @@ class AdminController extends Controller
             ->limit(7)
             ->get();
 
-        return view('admin.beranda.beranda', compact('post', 'laporan', 'permohonan', 'posts', 'lap', 'recents'));
+        return view('admin.beranda.beranda', compact('post', 'laporan', 'permohonan', 'posts', 'lap', 'recents', 'kips'));
     }
 
     public function olympic(Request $request)
