@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendEmail;
 use App\Models\Laporan;
 use App\Models\Permohonan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Telegram\Bot\Api;
 
 class LaporanPermohonanMasyarakatController extends Controller
@@ -29,7 +31,7 @@ class LaporanPermohonanMasyarakatController extends Controller
     public function show(Request $token)
     {
         $status = Permohonan::where('kode_pemohon', '=', $token->code)
-        ->orWhere('email', '=', $token->code)
+            ->orWhere('email', '=', $token->code)
             ->select('status')
             ->first();
 
@@ -66,13 +68,13 @@ class LaporanPermohonanMasyarakatController extends Controller
                 'asal_instansi' => 'required'
             ]);
 
-            $ktp        = $request->file('ktp');
-            $filename   = md5($ktp->getClientOriginalName()) . '.' . $ktp->getClientOriginalExtension();
+            $ktp = $request->file('ktp');
+            $filename = md5($ktp->getClientOriginalName()) . '.' . $ktp->getClientOriginalExtension();
 
             if (in_array($ktp->getClientOriginalExtension(), $ext)) {
                 if ($ktp->getSize() <= 5000000) {
-                    $ktp->move('uploads/permohonan/', $filename);
-                    $request->ktp = 'uploads/permohonan/' . $filename;
+                    $path = $ktp->storeAs('uploads/permohonan', $filename, 's3');
+                    $request->ktp = $path;
                 } else {
                     return redirect()->back()->with(['warning_size' => 'Ukuran file KTP melebihi 5MB!']);
                 }
@@ -93,6 +95,7 @@ class LaporanPermohonanMasyarakatController extends Controller
                 'asal_instansi' => $request->asal_instansi
             ]);
 
+            $title = 'Permohonan!'; // ini untuk title email
             $telegram   = new Api(env('TELEGRAM_BOT_TOKEN'));
             $chatID     = env('TELEGRAM_CHAT_ID');
             $text       = 'Peromohonan Masuk dari ' . $request->nama . ' dengan nomor permohonan ' . $code . ', memohonkan informasi ' . $request->informasi_diminta . ' untuk kebutuhan ' . $request->tujuan_informasi;
@@ -101,6 +104,8 @@ class LaporanPermohonanMasyarakatController extends Controller
                 'chat_id' => $chatID,
                 'text' => $text
             ]);
+
+            Mail::to('prog.bpkad.ntb@gmail.com')->send(new SendEmail($title, $text));
 
             return redirect()->back()->with(['success_req' => 'Permohonan dengan kode "' . $code . '" terkirim harap catat kode permohonan untuk pengecekkan status permohonan'], 'Pshow', 'Pactive', 'Lshow', 'Lactive');
         } elseif ($request->jenis == 'pelaporan') {
@@ -122,8 +127,8 @@ class LaporanPermohonanMasyarakatController extends Controller
 
             if (in_array($file->getClientOriginalExtension(), $ext)) {
                 if ($file->getSize() <= 5000000) {
-                    $file->move('uploads/laporan/', $filename);
-                    $request->berkas = 'uploads/laporan/' . $filename;
+                    $path = $file->storeAs('uploads/laporan', $filename, 's3');
+                    $request->berkas = $path;
                 } else {
                     return redirect()->back()->with(['warning_lap_size' => 'Ukuran file melebihi 5MB'], 'Pshow', 'Pactive', 'Lshow', 'Lactive');
                 }
@@ -143,6 +148,7 @@ class LaporanPermohonanMasyarakatController extends Controller
                 'berkas' => $request->berkas
             ]);
 
+            $title = 'Pengaduan!'; // ini untuk title email
             $telegram   = new Api(env('TELEGRAM_BOT_TOKEN'));
             $chatID     = env('TELEGRAM_CHAT_ID');
             $text       = 'Pengaduan Masuk dari ' . $request->nama_pelapor . ' dengan nomor laporan ' . $code . ', melaporkan ' . $request->judul_laporan . ', berlokasi ' . $request->lokasi_kejadian;
@@ -151,6 +157,8 @@ class LaporanPermohonanMasyarakatController extends Controller
                 'chat_id' => $chatID,
                 'text' => $text
             ]);
+
+            Mail::to('prog.bpkad.ntb@gmail.com')->send(new SendEmail($title, $text));
 
             return redirect()->back()->with(['lap_success' => 'Laporan sudah diterima!'], 'Pshow', 'Pactive', 'Lshow', 'Lactive');
         }

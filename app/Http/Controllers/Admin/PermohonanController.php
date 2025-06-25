@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendEmail;
 use App\Models\Permohonan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class PermohonanController extends Controller
@@ -36,11 +38,16 @@ class PermohonanController extends Controller
     public function status($id)
     {
         $permohonan = Permohonan::findOrFail($id);
-
+        
         if ($permohonan->status == 'proses')
         {
             $permohonan->update(['status' => 'selesai']);
         }
+
+        $title = 'Permohonan sudah diselesaikan';
+        $pesan = 'Permohonan anda dengan kode ' .$permohonan->kode_pemohon. ' dengan informasi yang di minta adalah ' . $permohonan->informasi_diminta .' dengan tujuan '. $permohonan->tujuan_informasi .' SELESAI';
+
+        Mail::to($permohonan->email)->send(new SendEmail($title, $pesan));
 
         return redirect()->back()->with(['success' => 'Status Permohonan diubah!']);
     }
