@@ -2,8 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Models\KIP;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
 class SendDataBpkadToS3 extends Command
@@ -106,39 +108,39 @@ class SendDataBpkadToS3 extends Command
         // $defaultUrl = 'https://storage.ntbprov.go.id/bpkad/uploads/defaults/no-image-post.png';
 
         // $posts = DB::table('posts')
-            // ->where('foto_berita', 'like', '/storage/uploads/berita/%')
-            // ->get();
+        // ->where('foto_berita', 'like', '/storage/uploads/berita/%')
+        // ->get();
         // $posts = DB::table('posts')->whereNotNull('foto_berita')->get();
-        $posts = DB::table('posts')
-            ->whereNotNull('content')
-            ->where('content', 'like', '%<img%src=%')
-            ->get();
-        $bar = $this->output->createProgressBar(count($posts));
+        // $posts = DB::table('posts')
+        //     ->whereNotNull('content')
+        //     ->where('content', 'like', '%<img%src=%')
+        //     ->get();
+        // $bar = $this->output->createProgressBar(count($posts));
 
-        foreach ($posts as $post) {
-            if (empty($post->foto_berita)) {
-                $this->warn("Post ID {$post->id} tidak punya foto_berita");
-                continue;
-            }
+        // foreach ($posts as $post) {
+        //     if (empty($post->foto_berita)) {
+        //         $this->warn("Post ID {$post->id} tidak punya foto_berita");
+        //         continue;
+        //     }
 
-            $content = $post->content;
+        //     $content = $post->content;
 
-            // Regex untuk ganti semua src dalam <img>
-            $newContent = preg_replace(
-                '/<img[^>]*src=["\'](.*?)["\']/i',
-                '<img src="' . $post->foto_berita . '"',
-                $content
-            );
+        //     // Regex untuk ganti semua src dalam <img>
+        //     $newContent = preg_replace(
+        //         '/<img[^>]*src=["\'](.*?)["\']/i',
+        //         '<img src="' . $post->foto_berita . '"',
+        //         $content
+        //     );
 
-            if ($newContent !== $content) {
-                DB::table('posts')->where('id', $post->id)->update(['content' => $newContent]);
-                $this->info("Updated post ID {$post->id}");
-            } else {
-                $this->line("No change for post ID {$post->id}");
-            }
+        //     if ($newContent !== $content) {
+        //         DB::table('posts')->where('id', $post->id)->update(['content' => $newContent]);
+        //         $this->info("Updated post ID {$post->id}");
+        //     } else {
+        //         $this->line("No change for post ID {$post->id}");
+        //     }
 
-            $bar->advance();
-        }
+        //     $bar->advance();
+        // }
         // foreach ($posts as $post) {
         //     $foto = ltrim($post->foto_berita, '/'); // buang slash di depan jika ada
 
@@ -223,8 +225,102 @@ class SendDataBpkadToS3 extends Command
         //     $bar->advance();
         // }
 
+        // $bar->finish();
+        // echo " ";
+        // $this->info("<fg=green>Data copied successfully</>");
+
+        $kips = KIP::all();
+        $bar = $this->output->createProgressBar(count($kips));
+        $bar->start();
+
+        foreach ($kips as $kip) {
+            $fileUrl = $kip->files;
+            $jenisFile = $kip->jenis_file;
+
+            // Cek apakah ini URL Google Drive / Firebase
+            if ($this->isExternalUrl($fileUrl)) {
+                $this->info("⏳ Memproses: {$fileUrl}");
+
+                try {
+                    $response = Http::timeout(20)->get($this->convertToDirectDownload($fileUrl));
+
+                    if ($response->successful()) {
+                        $extension = $this->getExtensionFromResponse($response, $fileUrl);
+                        $filename = $kip->nama_informasi . '-' . Str::random(10) . '.' . $extension;
+                        $path = "uploads/kip/{$kip->jenis_informasi}/{$filename}";
+
+                        Storage::disk('s3')->put($path, $response->body());
+                        $kip->files = Storage::disk('s3')->url($path);
+                        $kip->jenis_file = 'upload';
+                        $kip->save();
+
+                        $this->info("✅ File berhasil disimpan ke: {$path}");
+                    } else {
+                        $this->warn("⚠️ Gagal mengunduh file: {$fileUrl}");
+                    }
+                } catch (\Exception $e) {
+                    $this->error("❌ Error saat memproses {$fileUrl}: " . $e->getMessage());
+                }
+            } else {
+                // Bukan URL: ubah jenis_file ke upload
+                if ($jenisFile !== 'upload') {
+                    $kip->jenis_file = 'upload';
+                    $kip->save();
+                    $this->info("📄 File lokal, jenis_file diubah jadi 'upload' untuk ID {$kip->id}");
+                }
+            }
+
+            $bar->advance();
+        }
+
         $bar->finish();
-        echo " ";
-        $this->info("<fg=green>Data copied successfully</>");
+        $this->info("🎉 Selesai memproses semua data.");
+    }
+
+    private function isExternalUrl($url)
+    {
+        return Str::startsWith($url, [
+            'http://',
+            'https://drive.google.com',
+            'https://firebasestorage.googleapis.com'
+        ]);
+    }
+
+    private function convertToDirectDownload($url)
+    {
+        if (Str::contains($url, 'drive.google.com')) {
+            preg_match('/\/d\/([a-zA-Z0-9_-]+)/', $url, $matches);
+            if (isset($matches[1])) {
+                return "https://drive.google.com/uc?export=download&id={$matches[1]}";
+            }
+        }
+
+        // Firebase URL sudah langsung bisa diunduh
+        return $url;
+    }
+
+    private function getExtensionFromResponse($response, $url)
+    {
+        // 1. Coba ambil dari nama file di URL
+        $filename = basename(parse_url($url, PHP_URL_PATH));
+        $extFromName = pathinfo($filename, PATHINFO_EXTENSION);
+        if (!empty($extFromName)) {
+            return strtolower($extFromName);
+        }
+
+        // 2. Coba dari MIME Type
+        $contentType = $response->header('Content-Type');
+        $mimeToExt = [
+            'application/pdf' => 'pdf',
+            'image/jpeg' => 'jpg',
+            'image/png' => 'png',
+            'application/msword' => 'doc',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'docx',
+            'application/vnd.ms-excel' => 'xls',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'xlsx',
+            // tambahkan sesuai kebutuhan
+        ];
+
+        return $mimeToExt[$contentType] ?? 'pdf';
     }
 }

@@ -145,4 +145,19 @@ class PpidKipController extends Controller
             return response()->download(public_path('storage/' . $files->files));
         }
     }
+
+    public function add_click(KIP $kip)
+    {
+        try {
+            $kip->click = ($kip->click ?? 0) + 1;
+            $kip->save();
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }

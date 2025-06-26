@@ -59,8 +59,11 @@
                                                     </td>
                                                     <td class="align-middle text-center">
                                                         @if ($berkala2['jenis_file'] == 'link')
-                                                            <a href="{{ $berkala2['files'] }}"
-                                                                class="btn btn-success btn-sm" target="_blank"
+                                                            <a href="javascript:void(0);"
+                                                                class="btn btn-success btn-sm btn-download-link"
+                                                                data-id="{{ $berkala2['id'] }}"
+                                                                data-url="{{ route('ppid-kip.click', $berkala2['id']) }}"
+                                                                data-file="{{ $berkala2['files'] }}"
                                                                 data-bs-tooltip="tooltip" data-bs-placement="left"
                                                                 title="Download File">
                                                                 <img src="{{ asset('client/assets/img/icons/solid/cloud-download.svg') }}"
@@ -68,45 +71,20 @@
                                                                     alt="Search Icon" style="width: 18px; height: 18px;">
                                                             </a>
                                                         @else
-                                                            <button type="button" data-toggle="modal"
+                                                            <button type="button"
+                                                                class="btn btn-info btn-sm btn-open-modal"
                                                                 data-bs-tooltip="tooltip" data-bs-placement="left"
-                                                                title="Lihat Dokumen"
-                                                                data-target="#pdfModal{{ $loop->iteration }}"
-                                                                class="btn btn-info btn-sm" target="_blank">
+                                                                data-id="{{ $berkala2['id'] }}"
+                                                                data-nama="{{ $berkala2['nama_informasi'] }}"
+                                                                data-url="{{ route('ppid-kip.click', $berkala2['id']) }}"
+                                                                data-view="{{ route('ppid-kip.view_pdf', $berkala2['id']) }}"
+                                                                data-download="{{ route('ppid-kip.download_pdf', $berkala2['id']) }}"
+                                                                data-bs-toggle="modal" data-bs-target="#pdfModal"
+                                                                title="Lihat Dokumen">
                                                                 <img src="{{ asset('client/assets/img/icons/solid/dot.svg') }}"
                                                                     class="svg-inject icon-svg icon-svg-sm solid-mono text-info"
                                                                     alt="Search Icon" style="width: 18px; height: 18px;">
                                                             </button>
-                                                            <div class="modal fade" id="pdfModal{{ $loop->iteration }}"
-                                                                tabindex="-1" aria-labelledby="pdfModalLabel"
-                                                                aria-hidden="true">
-                                                                <div class="modal-dialog modal-xl">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title" id="pdfModalLabel">
-                                                                                {{ $berkala2['nama_informasi'] }}</h5>
-                                                                            <button type="button" class="btn btn-default"
-                                                                                data-dismiss="modal"
-                                                                                aria-label="Close">X</button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <iframe
-                                                                                src="{{ route('ppid-kip.view_pdf', $berkala2['id']) }}"
-                                                                                width="100%" height="600px"
-                                                                                frameborder="0"></iframe>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <a href="{{ route('ppid-kip.download_pdf', $berkala2['id']) }}"
-                                                                                class="btn btn-success btn-sm">
-                                                                                <i class="bx bx-download"></i> Download
-                                                                            </a>
-                                                                            <button type="button"
-                                                                                class="btn btn-secondary btn-sm"
-                                                                                data-dismiss="modal">Close</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
                                                         @endif
                                                     </td>
                                                 </tr>
@@ -115,6 +93,7 @@
                                     @endforeach
                                 @endif
                             </table>
+                            @include('client.PPID.kip.partials._modal_view')
                         </div>
                     </div>
                 </div>
@@ -124,22 +103,74 @@
 @endsection
 @section('additional-js')
     <script>
-        const searchInput = document.getElementById('searchInput');
-        const clearBtn = document.getElementById('clearSearch');
-        const form = document.getElementById('searchForm');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Search Form
+            const searchInput = document.getElementById('searchInput');
+            const clearBtn = document.getElementById('clearSearch');
+            const form = document.getElementById('searchForm');
 
-        function toggleClearBtn() {
-            clearBtn.style.display = searchInput.value.trim() ? 'inline' : 'none';
-        }
+            function toggleClearBtn() {
+                clearBtn.style.display = searchInput?.value.trim() ? 'inline' : 'none';
+            }
 
-        searchInput.addEventListener('input', toggleClearBtn);
+            if (searchInput && clearBtn && form) {
+                searchInput.addEventListener('input', toggleClearBtn);
+                clearBtn.addEventListener('click', () => {
+                    searchInput.value = '';
+                    toggleClearBtn();
+                    form.submit();
+                });
+                toggleClearBtn();
+            }
 
-        clearBtn.addEventListener('click', () => {
-            searchInput.value = '';
-            toggleClearBtn();
-            form.submit();
+            // Tombol download langsung (link)
+            document.querySelectorAll('.btn-download-link').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const clickUrl = this.dataset.url;
+                    const fileUrl = this.dataset.file;
+
+                    fetch(clickUrl)
+                        .then(res => res.ok ? res.json() : Promise.reject(res))
+                        .then(() => window.open(fileUrl, '_blank'))
+                        .catch(err => {
+                            console.error('Gagal menambahkan klik:', err);
+                            window.open(fileUrl, '_blank');
+                        });
+                });
+            });
+
+            // Tombol open modal
+            document.querySelectorAll('.btn-open-modal').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const clickUrl = this.dataset.url;
+                    const viewUrl = this.dataset.view;
+                    const downloadUrl = this.dataset.download;
+                    const namaInformasi = this.dataset.nama;
+
+                    // Tambah klik
+                    fetch(clickUrl).catch(err => console.warn('Click gagal:', err));
+
+                    // Set iframe dan link download
+                    const iframe = document.getElementById('pdfFrame');
+                    const downloadBtn = document.getElementById('pdfDownloadBtn');
+                    const modalTitle = document.getElementById('pdfModalLabel');
+
+                    if (iframe && downloadBtn && modalTitle) {
+                        iframe.src = viewUrl;
+                        downloadBtn.href = downloadUrl;
+                        modalTitle.innerText = namaInformasi;
+                    }
+                });
+            });
+
+            // Fix aksesibilitas: setelah modal ditutup, hapus fokus
+            const pdfModal = document.getElementById('pdfModal');
+            if (pdfModal) {
+                pdfModal.addEventListener('hidden.bs.modal', function() {
+                    document.activeElement.blur(); // hilangkan fokus dari modal
+                    document.getElementById('pdfFrame').src = ""; // kosongkan iframe
+                });
+            }
         });
-
-        toggleClearBtn();
     </script>
 @endsection

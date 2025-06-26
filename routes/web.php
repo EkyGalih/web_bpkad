@@ -93,9 +93,10 @@ Route::group(['prefix' => 'Profile/Data-Pegawai-Bpkad'], function () {
 
 Route::group(['prefix' => 'PPID'], function () {
     Route::group(['prefix' => 'Klasifikasi-Informasi-Publik'], function () {
-        Route::get('/{klasifikasi}/{query?}', [PpidKipController::class, 'index'])->name('ppid-kip');
+        Route::get('/add-click/{kip}', [PpidKipController::class, 'add_click'])->name('ppid-kip.click');
         Route::get('/generate-pdf/{id}', [PPidKipController::class, 'viewPDF'])->name('ppid-kip.view_pdf');
         Route::get('/download-pdf/{id}', [PPidKipController::class, 'downloadPDF'])->name('ppid-kip.download_pdf');
+        Route::get('/{klasifikasi}/{query?}', [PpidKipController::class, 'index'])->name('ppid-kip');
     });
 
     Route::group(['prefix' => 'Profile-PPID'], function () {
