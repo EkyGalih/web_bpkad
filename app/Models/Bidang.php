@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Webpatser\Uuid\Uuid;
 
 class Bidang extends Model
@@ -21,7 +22,7 @@ class Bidang extends Model
 
         static::creating(function ($model) {
             if (empty($model->id)) {
-                $model->id = (string) Uuid::generate(4); 
+                $model->id = (string) Uuid::generate(4);
             }
         });
     }
@@ -34,5 +35,10 @@ class Bidang extends Model
     public static function countPegawai($id)
     {
         return Pegawai::where('bidang_id', $id)->count();
+    }
+
+    public function olympic(): HasMany
+    {
+        return $this->hasMany(Olympic::class, 'bidang_id', 'id');
     }
 }

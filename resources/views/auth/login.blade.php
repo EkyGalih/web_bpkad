@@ -13,7 +13,8 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="https://storage.ntbprov.go.id/bpkad/uploads/defaults/logo_bpkad.png" />
+    <link rel="icon" type="image/x-icon"
+        href="https://storage.ntbprov.go.id/bpkad/uploads/defaults/favicon.ico" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -58,14 +59,14 @@
                 <div class="card p-md-7 p-1">
                     <!-- Logo -->
                     <div class="app-brand justify-content-center mt-5">
-                        <a href="index.html" class="app-brand-link gap-2">
+                        <a href="/" class="app-brand-link gap-2">
                             <span class="app-brand-logo demo">
                                 <img src="https://storage.ntbprov.go.id/bpkad/uploads/defaults/ntb.png"
                                     alt="{{ $settings->title }}"
                                     style="max-width:120px; height:40px; object-fit:contain;">
                             </span>
                             <span class="app-brand-text demo text-heading fw-semibold">
-                                <img src="{{ $settings->logo_image }}" alt="{{ $settings->title }}">
+                                <img style="max-width: 150px; height: 50px; object-fit: contain;" src="{{ $settings->logo_image }}" alt="{{ $settings->title }}">
                             </span>
                         </a>
                     </div>
@@ -125,8 +126,7 @@
                     </div>
                 </div>
                 <!-- /Login -->
-                <img alt="mask"
-                    src="{{ asset('assets/media/auth/bg4.jpg') }}"
+                <img alt="mask" src="{{ asset('assets/media/auth/bg4.jpg') }}"
                     class="authentication-image d-none d-lg-block"
                     data-app-light-img="{{ asset('assets/media/auth/bg4.jpg') }}"
                     data-app-dark-img="{{ asset('assets/media/auth/bg4-dark.jpg') }}" />

@@ -34,7 +34,12 @@
             </div>
             <div class="card-datatable table-responsive text-nowrap">
                 @php
-                    $rankingMap = $before_winners->pluck('ranking', 'bidang_id'); // [bidang_id => ranking]
+                    // Buat rankingMap berdasarkan urutan emas, perak, perunggu (tahun aktif)
+                    $sortedOlympics = $olympics->sortByDesc(fn($o) => [$o->emas, $o->perak, $o->perunggu])->values();
+                    $rankingMap = collect();
+                    foreach ($sortedOlympics as $index => $item) {
+                        $rankingMap[$item->id] = $index + 1;
+                    }
                 @endphp
                 <table class="table table-hover table-olympic">
                     <thead>
@@ -50,32 +55,35 @@
                     <tbody>
                         @foreach ($olympics as $olympic)
                             @php
-                                $ranking = $rankingMap[$olympic->bidang_id] ?? null;
+                                $ranking = $rankingMap[$olympic->id] ?? null;
                                 $rowClass = match ($ranking) {
-                                    1 => 'table-warning', // Emas
-                                    2 => 'table-secondary', // Perak
-                                    3 => 'table-danger', // Perunggu (buat sendiri jika tidak ada)
+                                    1 => 'table-warning', // Juara 1
+                                    2 => 'table-secondary', // Juara 2
+                                    3 => 'table-danger', // Juara 3
                                     default => '',
                                 };
                             @endphp
                             <tr class="{{ $rowClass }}">
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $ranking }}</td>
                                 <td>{{ $olympic->nama_bidang }}</td>
                                 <td>
-                                    <span class="editable" data-id="{{ $olympic->id }}"
-                                        data-field="emas">{{ $olympic->emas }}</span>
+                                    <span class="editable" data-id="{{ $olympic->id }}" data-field="emas">
+                                        {{ $olympic->emas }}
+                                    </span>
                                     <input type="number" class="form-control form-control-sm d-none edit-input"
                                         value="{{ $olympic->emas }}">
                                 </td>
                                 <td>
-                                    <span class="editable" data-id="{{ $olympic->id }}"
-                                        data-field="perak">{{ $olympic->perak }}</span>
+                                    <span class="editable" data-id="{{ $olympic->id }}" data-field="perak">
+                                        {{ $olympic->perak }}
+                                    </span>
                                     <input type="number" class="form-control form-control-sm d-none edit-input"
                                         value="{{ $olympic->perak }}">
                                 </td>
                                 <td>
-                                    <span class="editable" data-id="{{ $olympic->id }}"
-                                        data-field="perunggu">{{ $olympic->perunggu }}</span>
+                                    <span class="editable" data-id="{{ $olympic->id }}" data-field="perunggu">
+                                        {{ $olympic->perunggu }}
+                                    </span>
                                     <input type="number" class="form-control form-control-sm d-none edit-input"
                                         value="{{ $olympic->perunggu }}">
                                 </td>

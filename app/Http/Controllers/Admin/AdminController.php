@@ -38,27 +38,37 @@ class AdminController extends Controller
 
     public function olympic(Request $request)
     {
-        $bidangs = Bidang::get();
-        $year = $request->query('tahun') ?? Olympic::select('tahun')->orderByDesc('tahun')->first()?->tahun;
-        $season = Olympic::select('keterangan')->where('tahun', $year)->first()?->keterangan ?? 'Olimpiade';
+        // Ambil semua bidang dari koneksi SIMPEG
+        $bidangs = Bidang::on('simpeg')->get();
 
-        $olympics = Olympic::join('bidang', 'olympic.bidang_id', '=', 'bidang.id')
+        // Tahun yang aktif (terbaru atau dari query string)
+        $year = $request->query('tahun') ?? Olympic::orderByDesc('tahun')->first()?->tahun;
+
+        // Keterangan season (misalnya "Olimpiade")
+        $season = Olympic::where('tahun', $year)->first()?->keterangan ?? 'Olimpiade';
+
+        // Ambil nama database dari koneksi SIMPEG
+        $dbSimpeg = DB::connection('simpeg')->getDatabaseName();
+
+        // Ambil data olympic untuk tahun tertentu, join dengan tabel `bidang` di koneksi simpeg
+        $olympics = Olympic::join("$dbSimpeg.bidang", 'olympic.bidang_id', '=', "$dbSimpeg.bidang.id")
             ->where('olympic.tahun', $year)
+            ->orderByDesc('emas')       // Urutan 1: Emas terbanyak
+            ->orderByDesc('perak')      // Urutan 2: Perak
+            ->orderByDesc('perunggu')   // Urutan 3: Perunggu
+            ->orderByDesc('total')      // Opsional: jika ingin bandingkan jumlah total juga
+            ->select("$dbSimpeg.bidang.nama_bidang", 'olympic.*')
+            ->get();
+
+        // Ambil tahun sebelumnya untuk perbandingan
+        $previousYear = $year ? $year - 1 : now()->year - 1;
+
+        // Ambil 3 besar pemenang tahun sebelumnya
+        $before_winners = Olympic::where('tahun', $previousYear)
             ->orderByDesc('emas')
             ->orderByDesc('perak')
             ->orderByDesc('perunggu')
-            ->select(
-                'bidang.nama_bidang',
-                'olympic.*'
-            )
-            ->get();
-
-        $previousYear = $year ?? now()->year - 1;
-
-        $before_winners = Olympic::where('tahun', $previousYear)
-            ->orderByDesc('emas')   // Jika total sama, lihat emas
-            ->orderByDesc('perak')  // Jika emas sama, lihat perak
-            ->orderByDesc('perunggu') // Jika perak juga sama, lihat perunggu
+            ->orderByDesc('total')
             ->take(3)
             ->get()
             ->map(function ($item, $index) {
@@ -66,15 +76,20 @@ class AdminController extends Controller
                 return $item;
             });
 
-
-
+        // Daftar tahun yang tersedia
         $years = Olympic::select('tahun')
             ->groupBy('tahun')
-            ->orderBy('tahun', 'DESC')
-            ->get()
+            ->orderByDesc('tahun')
             ->pluck('tahun');
 
-        return view('admin.Tools.olympic.index', compact('bidangs', 'olympics', 'years', 'year', 'before_winners', 'season'));
+        return view('admin.Tools.olympic.index', compact(
+            'bidangs',
+            'olympics',
+            'years',
+            'year',
+            'before_winners',
+            'season'
+        ));
     }
 
     public function create_periode(Request $request)

@@ -10,6 +10,7 @@ use App\Models\Posts;
 use App\Models\Slideitem;
 use App\Models\SubPages;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -216,61 +217,54 @@ class HomeController extends Controller
 
     public function olympic()
     {
-        $olympics = Olympic::join('bidang', 'olympic.bidang_id', '=', 'bidang.uuid')
-            ->orderBy('emas', 'DESC')
-            ->orderBy('perak', 'DESC')
-            ->orderBy('perunggu', 'DESC')
-            ->orderBy('total', 'DESC')
-            ->select(
-                'bidang.nama_bidang',
-                'olympic.*'
-            )
+        $dbSimpeg = DB::connection('simpeg')->getDatabaseName();
+        // Ambil semua data olympic + nama bidang dengan urutan emas, perak, perunggu, total
+        $olympics = Olympic::join("$dbSimpeg.bidang", 'olympic.bidang_id', '=', "$dbSimpeg.bidang.id")
+            ->orderByDesc('emas')
+            ->orderByDesc('perak')
+            ->orderByDesc('perunggu')
+            ->orderByDesc('total')
+            ->select("$dbSimpeg.bidang.nama_bidang", 'olympic.*')
             ->get();
-        $champions = Olympic::join('bidang', 'olympic.bidang_id', '=', 'bidang.uuid')
-            ->orderBy('emas', 'DESC')
-            ->orderBy('perak', 'DESC')
-            ->orderBy('perunggu', 'DESC')
-            ->orderBy('total', 'DESC')
-            ->select(
-                'bidang.nama_bidang',
-                'olympic.*'
-            )
-            ->first();
-        $rank = Olympic::join('bidang', 'olympic.bidang_id', '=', 'bidang.uuid')
-            ->orderBy('emas', 'DESC')
-            ->orderBy('perak', 'DESC')
-            ->orderBy('perunggu', 'DESC')
-            ->orderBy('total', 'DESC')
-            ->select(
-                'olympic.emas',
-                'olympic.perak',
-                'olympic.perunggu',
-                'olympic.total',
-            )
-            ->get()->toArray();
 
-        $ranks = [];
+        // Juara 1
+        $champions = $olympics->first();
 
-        foreach ($rank as $item) {
-            array_push($ranks, $item);
-        }
+        // Ambil 3 besar untuk ranking
+        $topThree = $olympics->take(3);
 
-        $emas1 = $ranks[0]['emas'];
-        $emas2 = $ranks[1]['emas'];
-        $emas3 = $ranks[2]['emas'];
+        // Gunakan null coalescing untuk mencegah error jika datanya kurang dari 3
+        $emas1 = $topThree[0]->emas ?? 0;
+        $emas2 = $topThree[1]->emas ?? 0;
+        $emas3 = $topThree[2]->emas ?? 0;
 
-        $perak1 = $ranks[0]['perak'];
-        $perak2 = $ranks[1]['perak'];
-        $perak3 = $ranks[2]['perak'];
+        $perak1 = $topThree[0]->perak ?? 0;
+        $perak2 = $topThree[1]->perak ?? 0;
+        $perak3 = $topThree[2]->perak ?? 0;
 
-        $perunggu1 = $ranks[0]['perunggu'];
-        $perunggu2 = $ranks[1]['perunggu'];
-        $perunggu3 = $ranks[2]['perunggu'];
+        $perunggu1 = $topThree[0]->perunggu ?? 0;
+        $perunggu2 = $topThree[1]->perunggu ?? 0;
+        $perunggu3 = $topThree[2]->perunggu ?? 0;
 
-        $max1 = $ranks[0]['total'];
-        $max2 = $ranks[1]['total'];
-        $max3 = $ranks[2]['total'];
+        $max1 = $topThree[0]->total ?? 0;
+        $max2 = $topThree[1]->total ?? 0;
+        $max3 = $topThree[2]->total ?? 0;
 
-        return view('client.olympic.olympic', compact('olympics', 'champions', 'max1', 'max2', 'max3', 'emas1', 'emas2', 'emas3', 'perak1', 'perak2', 'perak3', 'perunggu1', 'perunggu2', 'perunggu3'));
+        return view('client.olympic.olympic', compact(
+            'olympics',
+            'champions',
+            'max1',
+            'max2',
+            'max3',
+            'emas1',
+            'emas2',
+            'emas3',
+            'perak1',
+            'perak2',
+            'perak3',
+            'perunggu1',
+            'perunggu2',
+            'perunggu3'
+        ));
     }
 }

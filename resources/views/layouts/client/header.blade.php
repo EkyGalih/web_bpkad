@@ -2,7 +2,7 @@
     <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
         <div class="offcanvas-header mx-lg-auto order-0 order-lg-1 d-lg-flex px-lg-10">
             <a href="/" class="transition-none d-none d-lg-flex">
-                <img style="height: 50px" class="logo-dark" src="{{ asset('static/images/ntb.png') }}"
+                <img style="height: 50px" class="logo-dark me-2" src="{{ asset('static/images/ntb.png') }}"
                     srcset="{{ asset('static/images/ntb.png') }}" alt="{{ $settings->title }}" />
                 <img style="height: 40px; width: 100px;" class="logo-dark" src="{{ asset($settings->logo_image) }}"
                     srcset="{{ asset($settings->logo_image) }}" alt="{{ $settings->title }}" />

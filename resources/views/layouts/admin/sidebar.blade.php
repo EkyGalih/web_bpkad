@@ -1,11 +1,12 @@
 <aside id="layout-menu" class="layout-menu menu-vertical" data-bs-theme="dark">
     <div class="app-brand demo">
-        <a href="{{ route('admin') }}" class="app-brand-link">
+        <a href="{{ route('admin') }}" style="background: #ffffff8e; border-radius: 6px; padding: 4px;"
+            class="app-brand-link">
             <span class="app-brand-text demo menu-text fw-semibold ms-2 me-3">
                 <img src="{{ asset('static/images/ntb.png') }}" alt="Logo NTB" style="height:32px;">
             </span>
             <span class="app-brand-logo demo">
-                <img src="{{ $settings->logo_image }}" alt="Logo BPKAD">
+                <img style="max-width: 150px; height: 45px;" src="{{ $settings->logo_image }}" alt="Logo BPKAD">
             </span>
         </a>
     </div>
@@ -13,8 +14,7 @@
     <div class="menu-inner-shadow"></div>
     <div class="px-3 py-2">
         <div class="dropdown w-100">
-            <button type="button"
-                class="btn btn-light btn-sm d-flex align-items-center w-100 px-3 py-2 border rounded"
+            <button type="button" class="btn btn-light btn-sm d-flex align-items-center w-100 px-3 py-2 border rounded"
                 data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="flex-grow-1 text-start">
                     <span class="fw-semibold">Aplikasi</span>

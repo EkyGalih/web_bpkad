@@ -22,22 +22,22 @@
                     @csrf
                     <div class="tab-content">
                         {{-- Tab general --}}
-                        <div class="mb-4">
-                            <label class="form-label d-block mb-2">Maintenance Mode</label>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="maintenance_mode" id="maintenance_on"
-                                    value="1"
-                                    {{ (bool) old('maintenance_mode', $settings->maintenance_mode) === true ? 'checked' : '' }}>
-                                <label class="form-check-label" for="maintenance_on">On</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="maintenance_mode" id="maintenance_off"
-                                    value="0"
-                                    {{ (bool) old('maintenance_mode', $settings->maintenance_mode) === false ? 'checked' : '' }}>
-                                <label class="form-check-label" for="maintenance_off">Off</label>
-                            </div>
-                        </div>
                         <div class="tab-pane fade show active" id="general" role="tabpanel">
+                            <div class="mb-4">
+                                <label class="form-label d-block mb-2">Maintenance Mode</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="maintenance_mode"
+                                        id="maintenance_on" value="1"
+                                        {{ (bool) old('maintenance_mode', $settings->maintenance_mode) === true ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="maintenance_on">On</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="maintenance_mode"
+                                        id="maintenance_off" value="0"
+                                        {{ (bool) old('maintenance_mode', $settings->maintenance_mode) === false ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="maintenance_off">Off</label>
+                                </div>
+                            </div>
                             @foreach (['title', 'subtitle', 'email', 'contact_number'] as $field)
                                 <div class="form-floating form-floating-outline mb-4">
                                     <input type="text" class="form-control" id="{{ $field }}"
