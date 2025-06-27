@@ -84,7 +84,7 @@
 
 @section('content_home')
     @include('layouts.client._header', [
-        'title' => 'Galery Video : '. $galery->name,
+        'title' => 'Galery Video : ' . $galery->name,
         'keterangan' => '',
     ])
     <!-- Video Gallery Section -->
@@ -92,7 +92,9 @@
         <div class="container py-10">
             <div class="d-flex justify-content-end mb-4">
                 <a href="{{ route('video') }}" class="btn btn-outline-secondary btn-sm">
-                    <i class="ri ri-arrow-left-box-fill me-2"></i> Kembali
+                    <img src="{{ asset('client/assets/img/icons/lineal/logout.svg') }}"
+                        class="me-1 svg-inject icon-svg icon-svg-sm solid-mono text-secondary"
+                        style="height: 15px; width: 15px;" alt="Kembali"> Kembali
                 </a>
             </div>
 
@@ -110,12 +112,9 @@
                                         {{ \Carbon\Carbon::parse($item->created_at)->locale('id')->translatedFormat('d M Y') }}
                                     </span>
                                 </div>
-                                <video src="{{ asset($item->path) }}"
-                                    muted preload="metadata"
-                                    controlslist="nodownload nofullscreen noremoteplayback"
-                                    onmouseover="this.controls=true"
-                                    onmouseout="this.controls=false"
-                                    onclick="openLightbox(this.src)">
+                                <video src="{{ asset($item->path) }}" muted preload="metadata"
+                                    controlslist="nodownload nofullscreen noremoteplayback" onmouseover="this.controls=true"
+                                    onmouseout="this.controls=false" onclick="openLightbox(this.src)">
                                 </video>
                             </div>
                         </div>

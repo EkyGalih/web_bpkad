@@ -94,7 +94,7 @@
 
 @section('content_home')
     @include('layouts.client._header', [
-        'title' => 'Galery Foto : '. $galery->name,
+        'title' => 'Galery Foto : ' . $galery->name,
         'keterangan' => '',
     ])
     <!-- Gallery Section -->
@@ -103,7 +103,9 @@
             <div class="d-flex justify-content-end align-items-center mb-1">
                 <div class="d-flex gap-2">
                     <a href="{{ route('foto') }}" class="btn btn-outline-secondary btn-sm">
-                        Kembali
+                        <img src="{{ asset('client/assets/img/icons/lineal/logout.svg') }}"
+                            class="me-1 svg-inject icon-svg icon-svg-sm solid-mono text-secondary"
+                            style="height: 15px; width: 15px;" alt="Kembali"> Kembali
                     </a>
                 </div>
             </div>
