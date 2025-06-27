@@ -14,10 +14,13 @@
                     <div class="container justify-content-between align-items-center">
                         <div class="d-flex flex-row w-100 justify-content-between align-items-center d-lg-none">
                             <div class="navbar-brand"><a href="{{ url('/') }}">
-                                    <div style="background: rgba(255,255,255,0.8); border-radius: 6px; padding: 4px 8px; display: inline-block;">
-                                        <img style="height: 40px; width: 100px;" class="logo-dark" src="{{ asset($settings->logo_image) }}"
+                                    <div
+                                        style="background: rgba(255,255,255,0.8); border-radius: 6px; padding: 4px 8px; display: inline-block;">
+                                        <img style="height: 40px; width: 100px;" class="logo-dark"
+                                            src="{{ asset($settings->logo_image) }}"
                                             srcset="{{ asset($settings->logo_image) }}" alt="" />
-                                        <img style="height: 40px; width: 100px;" class="logo-light" src="{{ asset($settings->logo_image) }}"
+                                        <img style="height: 40px; width: 100px;" class="logo-light"
+                                            src="{{ asset($settings->logo_image) }}"
                                             srcset="{{ asset($settings->logo_image) }}" alt="" />
                                     </div>
                                 </a></div>

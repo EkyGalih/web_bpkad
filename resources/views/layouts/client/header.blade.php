@@ -74,14 +74,14 @@
                                             $sub_item = SubPages($item->sub_menu_id);
                                         @endphp
                                         @if (count($sub_item) > 0)
-                                            <li class="dropdown-submenu dropend">
+                                            <li class="dropdown dropdown-submenu dropend">
                                                 <a class="dropdown-item dropdown-toggle" href="#"
                                                     data-bs-toggle="dropdown">
                                                     {{ $item->title }}
                                                 </a>
                                                 <ul class="dropdown-menu">
                                                     @foreach ($sub_item as $item2)
-                                                        <li>
+                                                        <li class="nav-item">
                                                             <a class="dropdown-item"
                                                                 href="{{ $item2->jenis_link == 'non-link' ? route('client.sub_pages', $item2->slug) : $item2->link }}">
                                                                 {{ $item2->title }}
