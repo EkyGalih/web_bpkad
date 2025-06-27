@@ -116,8 +116,12 @@
                                                         <label for="ktp">Upload KTP</label>
                                                         <p class="image_upload">
                                                             <label for="berkasKtp">
-                                                                <a rel="nofollow" class="btn btn-info btn-sm"><i
-                                                                        class="bx bx-upload"></i> Pilih File</a>
+                                                                <a rel="nofollow" class="btn btn-info btn-sm">
+                                                                    <img src="{{ asset('client/assets/img/icons/lineal/upload.svg') }}"
+                                                                        class="me-2 svg-inject icon-svg icon-svg-sm solid-mono text-info"
+                                                                        style="height: 20px; width: 20px;" alt="Kirim">
+                                                                    Pilih File
+                                                                </a>
                                                             </label>
                                                             <input type="file" style="margin-bottom: 15px;"
                                                                 name="ktp" id="berkasKtp" accept="image/*"
@@ -164,7 +168,9 @@
                                                 </div>
                                             @enderror
                                             <button type="submit" class="btn btn-success btn-md">
-                                                Kirim
+                                                <img src="{{ asset('client/assets/img/icons/lineal/paper-plane.svg') }}"
+                                                    class="me-1 svg-inject icon-svg icon-svg-sm solid-mono text-success"
+                                                    style="height: 20px; width: 20px;" alt="Kirim"> Kirim
                                             </button>
                                         </div>
                                     </div>
@@ -269,7 +275,9 @@
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn btn-success btn-md">
-                                                <i class="fas fa-send"></i> Kirim
+                                                <img src="{{ asset('client/assets/img/icons/lineal/paper-plane.svg') }}"
+                                                    class="me-1 svg-inject icon-svg icon-svg-sm solid-mono text-success"
+                                                    style="height: 20px; width: 20px;" alt="Kirim"> Kirim
                                             </button>
                                         </div>
                                 </form>
