@@ -549,13 +549,6 @@
             </div>
         </div>
     </section>
-    {{-- <div class="marquee-fixed bg-info text-white py-2 px-3">
-        <div class="marquee-content d-inline-block">
-            @foreach ($information as $info)
-                <span class="me-5">📢 {{ $info->title }}: {{ $info->keterangan }}</span>
-            @endforeach
-        </div>
-    </div> --}}
 @endsection
 @section('additional-js')
     More actions

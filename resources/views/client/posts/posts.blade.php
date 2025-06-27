@@ -4,7 +4,7 @@
     @include('layouts.client._header', [
         'title' => 'Semua Berita',
         'keterangan' => 'Semua berita terkait agenda & kegiatan BPKAD Provinsi
-                            NTB.',
+                                    NTB.',
     ])
     <section class="wrapper bg-active-primary">
         <div class="container py-14 py-md-16">
@@ -52,6 +52,9 @@
                                             </li>
                                             <li class="post-author"><a href="#"><i class="uil uil-user"></i><span>By
                                                         {{ $post->users->nama }}</span></a></li>
+                                            <li class="post-likes ms-auto">
+                                                <i class="uil uil-eye"></i> {{ $post->click }}
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -103,6 +106,9 @@
                                                 <li class="post-author"><a href="#"><i
                                                             class="uil uil-user"></i><span>By
                                                             {{ $post->users->nama }}</span></a></li>
+                                                <li class="post-likes ms-auto">
+                                                    <i class="uil uil-eye"></i> {{ $post->click }}
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>

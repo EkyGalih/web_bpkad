@@ -7,14 +7,25 @@
     @endphp
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row g-6">
-            <div class="col-md-12 col-xxl-12">
-                <div class="card">
+            <div class="col-md-8 col-xxl-8">
+                <div class="card h-100" style="height: 250px;">
                     <div class="d-flex align-items-end row">
                         <div class="col-md-6 order-2 order-md-1">
                             <div class="card-body">
                                 <h4 class="card-title mb-4">Selamat Datang <span
                                         class="fw-bold">{{ Auth::user()->nama }}</span></h4>
-                                <p class="mb-0">Apa yang akan kamu lakukan hari ini? 😎 </p>
+                                <p class="mb-0">{{ $randomAction }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-center text-md-end order-1 order-md-2">
+                            <div class="card-body pb-0 px-0 pt-2">
+                                @if (Auth::user()->pegawai->jenis_kelamin == 'pria')
+                                    <img src="{{ asset('server/assets/img/illustrations/john.png') }}" height="186"
+                                        class="scaleX-n1-rtl" alt="View Profile" />
+                                @else
+                                    <img src="{{ asset('server/assets/img/illustrations/daisy.png') }}" height="186"
+                                        class="scaleX-n1-rtl" alt="View Profile" />
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -23,14 +34,15 @@
 
             <!-- Activity Timeline -->
             <div class="col-6 col-xxl-4">
-                <div class="card h-100">
+                <div class="card h-100" style="min-height: 150px; max-height: 250px;"> {{-- tinggi tetap --}}
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
                             <h5 class="mb-0">Activity Today</h5>
                         </div>
                     </div>
-                    <div class="card-body pt-4">
-                        <ul class="timeline card-timeline mb-0">
+                    <div class="card-body pt-5" style="padding-right: 0.5rem; overflow-y: hidden;">
+                        <ul class="timeline card-timeline mb-0"
+                            style="max-height: 300px; overflow-y: auto; padding-right: 0.5rem;">
                             @foreach ($recents as $recent)
                                 <li class="timeline-item timeline-item-transparent">
                                     <span class="timeline-point timeline-point-secondary"></span>
@@ -129,7 +141,7 @@
             <!--/ Project Statistics -->
 
             <!-- Multiple widgets -->
-            <div class="col-md-6 col-xxl-4">
+            {{-- <div class="col-md-6 col-xxl-4">
                 <div class="row g-4">
                     <!-- Total Revenue chart -->
                     <div class="col-md-6 col-sm-6">
@@ -205,11 +217,11 @@
                     </div>
                     <!--/ overview Radial chart -->
                 </div>
-            </div>
+            </div> --}}
             <!--/ Multiple widgets -->
 
             <!-- Sales Country Chart -->
-            <div class="col-12 col-xxl-4 col-md-6">
+            {{-- <div class="col-12 col-xxl-4 col-md-6">
                 <div class="card h-100">
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
@@ -233,7 +245,7 @@
                         <div id="salesCountryChart"></div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!--/ Sales Country Chart -->
 
             <!-- Top Referral Source  -->

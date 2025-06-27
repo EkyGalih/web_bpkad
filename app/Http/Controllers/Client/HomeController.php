@@ -121,6 +121,10 @@ class HomeController extends Controller
                     ->telegram()
                     ->whatsapp()
                     ->reddit();
+                    
+                    $posts->click = ($posts->click ?? 0) + 1;
+                    $posts->save();
+
                 return view('client.posts.detail_posts', compact('posts', 'share'));
                 break;
             case CategoryEnum::ARTIKEL->value:

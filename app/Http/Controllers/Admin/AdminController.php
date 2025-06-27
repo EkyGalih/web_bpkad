@@ -33,7 +33,54 @@ class AdminController extends Controller
             ->limit(7)
             ->get();
 
-        return view('admin.beranda.beranda', compact('post', 'laporan', 'permohonan', 'posts', 'lap', 'recents', 'kips'));
+        $actions = [
+            'Memberi pelayanan terbaik untuk masyarakat dengan hati yang tulus ❤️',
+            'Menjaga integritas meskipun tidak ada yang melihat 🛡️',
+            'Satu senyum hari ini bisa meredakan amarah warga 😊',
+            'Menyelesaikan pekerjaan hari ini dengan tuntas dan tanggung jawab ✔️',
+            'Datang ke kantor bukan hanya menggugurkan kewajiban, tapi menjalankan amanah 📜',
+            'Membantu rekan kerja agar pekerjaan lebih ringan 🤝',
+            'Hari ini bisa menjadi momen perubahan — mulai dari dirimu sendiri 🔁',
+            'Menjadi teladan etika dan disiplin, bukan hanya karena peraturan, tapi karena prinsip ✊',
+            'Menghadapi birokrasi dengan kesabaran dan solusi, bukan keluhan ⚙️',
+            'Bekerja bukan hanya untuk gaji, tapi untuk memberi arti 💼',
+            'Berdoa sebelum bekerja agar semua dimudahkan 🙏',
+            'Setiap dokumen yang ditandatangani adalah bentuk tanggung jawab dunia dan akhirat 📄',
+            'Menjaga kesehatan agar bisa terus melayani masyarakat dengan maksimal 🏃‍♂️',
+            'Meluangkan waktu untuk mengecek kembali — detail kecil bisa berdampak besar 🔍',
+            'Menjaga tutur kata, karena setiap kata ASN mencerminkan negara 🗣️',
+            'Satu keputusanmu hari ini, bisa memengaruhi hidup banyak orang 🎯',
+            'ASN sejati melayani bukan karena disuruh, tapi karena peduli 🤲',
+            'Jadilah ASN yang dikenang karena kebaikan dan ketegasannya, bukan karena jabatannya 🏛️',
+            'Menyempatkan waktu untuk keluarga meskipun sedang sibuk 👨‍👩‍👧‍👦',
+            'Ingatlah, kerja kerasmu hari ini adalah investasi untuk masa depanmu dan orang lain ⏳',
+            'Pekerjaan boleh padat, tapi jangan lupa makan dan minum 💧🍽️',
+            'Hidup ini bukan hanya tentang bekerja, tapi juga mencintai dan dicintai ❤️',
+            'Tersenyum kepada orang lain bisa menjadi ladang pahala dan energi positif 😄',
+            'Jangan biarkan masalah kantor merusak ketenangan rumah tangga 🏠',
+            'Satu waktu tenang dengan anak lebih berharga dari 100 rapat 🧒👨‍👩‍👦',
+            'Tidak semua harus sempurna — tapi niat baik dan proses yang jujur akan selalu dihargai 🙌',
+            'Luangkan waktu 10 menit untuk refleksi: sudahkah aku melayani dengan benar hari ini? 🕊️',
+            'Rezeki bukan hanya uang, tapi juga waktu luang, kesehatan, dan keikhlasan 🍃',
+            'Jangan hanya bangga dengan jabatan — banggalah ketika masyarakat merasa terbantu ✨',
+            'Hari ini adalah kesempatan untuk memperbaiki kesalahan kemarin 🔄',
+            'Fokus pada solusi, bukan menyalahkan 🌟',
+            'Ambil keputusan dengan hati-hati — karena ASN adalah bagian dari wajah negara 🪪',
+            'Tidak semua hal bisa diubah hari ini, tapi niat yang benar bisa dimulai sekarang 🛤️',
+            'Jangan korbankan nilai-nilai hanya untuk kenyamanan sementara 🧭',
+            'Berbuat baik hari ini, meski kecil, tetap lebih baik daripada tidak sama sekali 🌱',
+            'ASN bukan hanya status — tapi dedikasi untuk melayani bangsa 🇮🇩',
+            'Luangkan waktu untuk berolahraga ringan agar tetap fokus 💪',
+            'Tugas negara jangan membuat lupa waktu untuk beribadah 🕌',
+            'Kesuksesan ASN bukan hanya naik pangkat, tapi juga naik kualitas hidup 📈',
+            'Jangan menunda pekerjaan yang bisa diselesaikan hari ini 🗂️',
+            'Hidup akan lebih ringan jika bekerja dengan ikhlas dan berprasangka baik 🤍',
+            'Kadang yang dibutuhkan masyarakat bukan birokrasi, tapi empati 🙋‍♂️',
+        ];
+
+        $randomAction = $actions[array_rand($actions)];
+
+        return view('admin.beranda.beranda', compact('post', 'laporan', 'permohonan', 'posts', 'lap', 'recents', 'kips', 'randomAction'));
     }
 
     public function olympic(Request $request)

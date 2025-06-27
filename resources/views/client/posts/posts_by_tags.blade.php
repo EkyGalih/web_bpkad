@@ -52,6 +52,9 @@
                                             </li>
                                             <li class="post-author"><a href="#"><i class="uil uil-user"></i><span>By
                                                         {{ $post->users->nama }}</span></a></li>
+                                                        <li class="post-likes ms-auto">
+                                                                <i class="uil uil-heart-alt"></i> {{ $post->click }}
+                                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -103,6 +106,9 @@
                                                 <li class="post-author"><a href="#"><i
                                                             class="uil uil-user"></i><span>By
                                                             {{ $post->users->nama }}</span></a></li>
+                                                            <li class="post-likes ms-auto">
+                                                                <i class="uil uil-heart-alt"></i> {{ $post->click }}
+                                                            </li>
                                             </ul>
                                         </div>
                                     </div>

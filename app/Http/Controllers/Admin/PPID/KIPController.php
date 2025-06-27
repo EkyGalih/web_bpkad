@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin\PPID;
 
-use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\KIP;
 use App\Models\Recent;
@@ -12,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Webpatser\Uuid\Uuid;
 use Illuminate\Support\Str;
-use Intervention\Image\Colors\Rgb\Channels\Red;
 
 class KIPController extends Controller
 {
@@ -93,7 +91,7 @@ class KIPController extends Controller
 
         _recentAdd($id, 'mengupload file pada PPID informasi ' . $request->jenis_informasi, 'kip');
 
-        return redirect()->route('ppid-kip.index')->with(['success' => 'Data informasi berhasil disimpan!']);
+        return redirect()->route('kip.index')->with(['success' => 'Data informasi berhasil disimpan!']);
     }
 
     /**
@@ -149,7 +147,7 @@ class KIPController extends Controller
 
         _recentAdd($kip->id, 'mengubah file pada PPID informasi ' . $request->jenis_informasi . ' menjadi', 'kip');
 
-        return redirect()->route('ppid-kip.index')->with('success', 'Data informasi berhasil diubah!');
+        return redirect()->route('kip.index')->with('success', 'Data informasi berhasil diubah!');
     }
 
     /**
