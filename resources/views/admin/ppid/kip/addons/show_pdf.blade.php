@@ -1,21 +1,21 @@
-<div class="modal fade" id="ShowFile{{ $loop->iteration }}" tabindex="-1" aria-labelledby="ShowFileLabel"
-    aria-hidden="true">
+<div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="ShowFileLabel">
-                    {{ $items->nama_informasi }}</h5>
-                <button type="button" class="btn btn-default" data-bs-dismiss="modal" aria-label="Close">X</button>
+                <h5 class="modal-title" id="pdfModalLabel">Lihat Dokumen</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <iframe src="{{ route('kip-admin.view_pdf', $items->id) }}" width="100%" height="600px"
-                    frameborder="0"></iframe>
+                <iframe id="pdfFrame" src="" width="100%" height="600px" frameborder="0"
+                    allowfullscreen></iframe>
             </div>
             <div class="modal-footer">
-                <a href="{{ route('kip-admin.download_pdf', $items->id) }}" class="btn btn-success btn-sm">
-                    <i class="bx bx-download"></i> Download
+                <a href="#" id="pdfDownloadBtn" class="btn btn-success btn-sm" target="_blank">
+                    <i class="icon-base ri ri-download-2-fill me-2"></i> Download
                 </a>
-                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
+                    <i class="icon-base ri ri-close-large-fill me-2"></i> Tutup
+                </button>
             </div>
         </div>
     </div>
