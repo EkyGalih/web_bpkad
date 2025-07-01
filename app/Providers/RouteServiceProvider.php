@@ -49,6 +49,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapPpidKipAdmin();
         $this->mapSliderAdmin();
         $this->mapBannerAdmin();
+        $this->mapAnalyticsAdmin();
 
         // ROUTE OPERATOR
         $this->mapPostOperator();
@@ -190,6 +191,13 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/admin/slider.php'));
+    }
+
+    public function mapAnalyticsAdmin()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/admin/analytics.php'));
     }
 
     public function mapSliderOperator()

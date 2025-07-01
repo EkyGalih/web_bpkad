@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="{{ asset('server/assets/vendor/css/core.css') }}" />
 <link rel="stylesheet" href="{{ asset('server/assets/css/demo.css') }}" />
 <link rel="stylesheet" href="{{ asset('server/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
-{{-- PAGE --}}
-@yield('styles')
 <script src="{{ asset('server/assets/vendor/js/helpers.js') }}"></script>
 <script src="{{ asset('server/assets/vendor/js/template-customizer.js') }}"></script>
+{{-- PAGE --}}
+@yield('styles')
 <script src="{{ asset('server/assets/js/config.js') }}"></script>
 <script src="{{ asset('css/toastr.min.css') }}"></script>
 {{-- Livewire css --}}

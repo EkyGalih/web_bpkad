@@ -122,9 +122,3 @@ Route::prefix('galery')->group(function () {
     });
 });
 
-// google analytycs
-Route::group(['prefix' => 'admin'], function () {
-    Route::group(['prefix' => 'analytycs'], function () {
-        Route::get('/statistik-pengunjung', [AnalyticsController::class, 'index'])->name('admin.analytics');
-    });
-});

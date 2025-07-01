@@ -1,6 +1,11 @@
 @extends('admin.index')
 @section('title', 'Beranda')
-@section('menu-dashboard', 'active')
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('server/assets/vendor/libs/apex-charts/apex-charts.css') }}" />
+
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="{{ asset('server/assets/vendor/css/pages/cards-statistics.css') }}" />
+@endsection
 @section('content')
     @php
         use App\Enum\KlasifikasiEnum;
@@ -70,10 +75,52 @@
                 </div>
             </div>
             <!-- Activity Timeline -->
-            @php
-                $labels = $analyticsData->pluck('date')->map(fn($d) => $d->format('Y-m-d'));
-                $views = $analyticsData->pluck('screenPageViews');
-            @endphp
+
+            <!-- Performance Chart -->
+            <div class="col-12 col-xxl-12 col-md-12">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="mb-1">Pengunjung Harian</h5>
+                            <div class="dropdown">
+                                <button class="btn btn-text-secondary rounded-pill text-body-secondary border-0 p-1"
+                                    type="button" id="visitsByDayDropdown" data-bs-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="icon-base ri ri-more-2-line"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="visitsByDayDropdown">
+                                    <a class="dropdown-item range-selector" data-range="7days" href="javascript:void(0);">7
+                                        Hari Terakhir</a>
+                                    <a class="dropdown-item range-selector" data-range="28days"
+                                        href="javascript:void(0);">28 Hari Terakhir</a>
+                                    <a class="dropdown-item range-selector" data-range="lastmonth"
+                                        href="javascript:void(0);">Bulan Lalu</a>
+                                    <a class="dropdown-item range-selector" data-range="lastyear"
+                                        href="javascript:void(0);">Tahun Lalu</a>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mb-0 card-subtitle total-visit-value">Loading...</p>
+
+                    </div>
+                    <div class="card-body pt-xl-5">
+                        <div id="visitsByDayChart"></div>
+                        <div class="d-flex justify-content-between mt-6">
+                            <div>
+                                <h6 class="mb-0">Pengunjung Terbanyak dalam 1 hari</h6>
+                                <p class="mb-0 small most-visited-day">Loading...</p>
+                            </div>
+                            <div class="avatar">
+                                <a href="{{ route('admin.analytics') }}" data-bs-tooltip="tooltip" data-bs-placement="top"
+                                    title="Lihat Semua Data" class="avatar-initial bg-label-warning rounded">
+                                    <i class="icon-base ri ri-arrow-right-s-line icon-24px scaleX-n1-rtl"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/ Performance Chart -->
 
             <!-- Project Statistics -->
             <div class="col-md-6 col-xxl-4">
@@ -431,82 +478,111 @@
             </div>
             <!--/ Top Referral Source  -->
 
-            <!-- Performance Chart -->
-            <div class="col-12 col-xxl-12 col-md-12">
-                <div class="card h-100">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between">
-                            <h5 class="mb-1">Trafic Pengunjung</h5>
-                            <div class="dropdown">
-                                <button class="btn btn-text-secondary rounded-pill text-body-secondary border-0 p-1"
-                                    type="button" id="performanceDropdown" data-bs-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <i class="icon-base ri ri-more-2-line"></i>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="performanceDropdown">
-                                    <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
-                                    <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
-                                    <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="performanceChart" height="200"></canvas>
-                    </div>
-                </div>
-            </div>
-            <!--/ Performance Chart -->
-
         </div>
     </div>
     <!-- / Content -->
 
     <div class="content-backdrop fade"></div>
 @endsection
-@php
-    $labels = $analyticsData->pluck('date')->map(fn($d) => $d->format('Y-m-d'));
-    $views = $analyticsData->pluck('totalUsers');
-@endphp
-
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const ctx = document.getElementById('performanceChart').getContext('2d');
+    <script src="{{ asset('server/assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
+    <script src="{{ asset('server/assets/js/google-analytics.js') }}"></script>
+    {{-- <script>
+        const visitsByDayChartEl = document.querySelector('#visitsByDayChart');
 
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: {!! json_encode($labels) !!},
-                datasets: [{
-                    label: 'Page Views',
-                    data: {!! json_encode($views) !!},
-                    fill: true,
-                    tension: 0.4,
-                    backgroundColor: 'rgba(0, 123, 255, 0.1)',
-                    borderColor: '#007bff',
-                    borderWidth: 2,
-                    pointRadius: 3,
-                    pointBackgroundColor: '#007bff'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            precision: 0
+        fetch('/admin/web/analytics/28days') // Ganti ke 7days/lastmonth/lastyear sesuai kebutuhan
+            .then(res => res.json())
+            .then(data => {
+                const viewsData = data.views;
+                const labelsData = data.labels.map(date => new Date(date).toLocaleDateString('id-ID', {
+                    weekday: 'short'
+                }));
+
+                const visitsByDayChartConfig = {
+                    chart: {
+                        height: 240,
+                        type: 'bar',
+                        parentHeightOffset: 0,
+                        toolbar: {
+                            show: false
                         }
-                    }
-                },
-                plugins: {
+                    },
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 8,
+                            distributed: true,
+                            columnWidth: '55%',
+                            endingShape: 'rounded',
+                            startingShape: 'rounded'
+                        }
+                    },
+                    series: [{
+                        data: viewsData
+                    }],
+                    tooltip: {
+                        enabled: true
+                    },
                     legend: {
-                        display: false
-                    }
+                        show: false
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+                    colors: viewsData.map((_, i) =>
+                        i === viewsData.indexOf(Math.max(...viewsData)) ? config.colors.warning : config
+                        .colors_label.warning
+                    ),
+                    grid: {
+                        show: false,
+                        padding: {
+                            top: -15,
+                            left: -7,
+                            right: -4
+                        }
+                    },
+                    xaxis: {
+                        axisTicks: {
+                            show: false
+                        },
+                        axisBorder: {
+                            show: false
+                        },
+                        categories: labelsData,
+                        labels: {
+                            style: {
+                                colors: labelColor,
+                                fontSize: '13px',
+                                fontFamily: 'Inter'
+                            }
+                        }
+                    },
+                    yaxis: {
+                        show: false
+                    },
+                    responsive: [{
+                        breakpoint: 1025,
+                        options: {
+                            chart: {
+                                height: 210
+                            }
+                        }
+                    }]
+                };
+
+                if (typeof visitsByDayChartEl !== 'undefined' && visitsByDayChartEl !== null) {
+                    const visitsByDayChart = new ApexCharts(visitsByDayChartEl, visitsByDayChartConfig);
+                    visitsByDayChart.render();
                 }
-            }
-        });
-    </script>
+
+                // Tampilkan Most Visited Day
+                const maxViews = Math.max(...viewsData);
+                const index = viewsData.indexOf(maxViews);
+                const mostDay = labelsData[index];
+                document.querySelector('.most-visited-day').innerText = `Total ${maxViews} Views on ${mostDay}`;
+            })
+            .catch(err => {
+                console.error("Gagal mengambil data analytics:", err);
+            });
+    </script> --}}
 @endsection

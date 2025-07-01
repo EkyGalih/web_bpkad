@@ -8,8 +8,8 @@
 <script src="{{ asset('server/assets/vendor/libs/hammer/hammer.js') }}"></script>
 <script src="{{ asset('server/assets/vendor/libs/i18n/i18n.js') }}"></script>
 <script src="{{ asset('server/assets/vendor/js/menu.js') }}"></script>
-@yield('scripts')
 <script src="{{ asset('server/assets/js/main.js') }}"></script>
+@yield('scripts')
 {{-- Livewire js --}}
 @livewireScripts
 <script>
