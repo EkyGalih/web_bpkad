@@ -73,6 +73,13 @@
     const form = document.getElementById('form');
     const quillContentInput = document.getElementById('quill-content');
 
+    // Sinkronkan konten saat Quill berubah
+    fullEditor.on('text-change', function () {
+        const htmlContent = fullEditor.root.innerHTML.trim();
+        // Cegah hanya <p><br></p> sebagai konten kosong
+        quillContentInput.value = htmlContent === '<p><br></p>' ? '' : htmlContent;
+    });
+
     form.addEventListener('submit', function (e) {
         // Ambil konten HTML dari editor Quill
         const htmlContent = fullEditor.root.innerHTML;

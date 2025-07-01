@@ -2,7 +2,7 @@
     <script type="text/javascript">
         Swal.fire({
             toast: true,
-            position: 'bottom-end',
+            position: 'top-end',
             icon: 'success',
             title: "{!! Session::pull('success') ?: Session::pull('info') !!}",
             showConfirmButton: false,
@@ -14,6 +14,15 @@
             }
         });
     </script>
+    <style>
+        .swal2-container {
+            z-index: 1200 !important;
+        }
+
+        .swal2-toast {
+            margin-top: 80px !important;
+        }
+    </style>
 @endif
 
 @if (Session::has('warning') || Session::has('error'))

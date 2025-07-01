@@ -128,7 +128,6 @@ class PostController extends Controller
             $url = config('filesystems.disks.s3.url') . '/' . $path;
         }
 
-        $post = new Posts();
         $post->title = $request->title;
         $post->slug = $request->slug;
         $post->content = $request->content;
@@ -190,7 +189,7 @@ class PostController extends Controller
         ]);
 
         _recentAdd($post->id, 'memindahkan ke tong sampah Berita/Artikel', 'post');
-        return redirect()->route('post-admin.index')->with(['success' => 'Berita/Artikel dipindahkan ke tong sampah!']);
+        return redirect()->route('post-admin.index')->with('success','Berita/Artikel dipindahkan ke tong sampah!');
     }
 
     /**
@@ -214,7 +213,7 @@ class PostController extends Controller
         // Hapus postingan dari database
         $post->delete();
         _recentAdd($post->id, 'menghapus Berita/Artikel', 'post');
-        return redirect()->route('post-admin.index')->with(['success' => 'Berita/Artikel dihapus permanen!']);
+        return redirect()->route('post-admin.index')->with('success', 'Berita/Artikel dihapus permanen!');
     }
 
     /**
