@@ -14,6 +14,66 @@ class AnalyticsController extends Controller
         return view('admin.analytics.index');
     }
 
+    public function getTopPages()
+    {
+        $period = Period::days(28); // atau gunakan dynamic range jika diperlukan
+
+        $pages = Analytics::fetchMostVisitedPages($period)->take(6);
+
+        $labels = $pages->pluck('fullPageUrl');
+        $titles = $pages->pluck('pageTitle');
+        $views = $pages->pluck('screenPageViews');
+
+        return response()->json([
+            'labels' => $labels,
+            'titles' => $titles,
+            'views' => $views,
+        ]);
+    }
+
+    public function getVisitorsByCountry()
+    {
+        $period = Period::days(28); // atau sesuaikan
+
+        $data = Analytics::get(
+            $period,
+            ['activeUsers'], // Atau ['newUsers'], tergantung metrik yang diinginkan
+            ['region', 'city']
+        );
+        $region = $data->pluck('region');
+        $city = $data->pluck('city');
+        $total = $data->pluck('activeUsers');
+
+        return response()->json([
+            'region' => $region,
+            'city' => $city,
+            'total' => $total
+        ]);
+    }
+
+    public function getBrowserAndDevice()
+    {
+        $period = Period::days(28);
+
+        $browsers = Analytics::fetchTopBrowsers($period);
+
+        $devicesRaw = Analytics::get($period, ['activeUsers'], ['deviceCategory']);
+        $devices = $devicesRaw->map(fn($item) => [
+            'device' => $item['deviceCategory'],
+            'users' => (int) $item['activeUsers'],
+        ]);
+
+        $totalBrowser = collect($browsers)->sum('screenPageViews');
+        $totalDevice = $devices->sum('users');
+
+        return response()->json([
+            'browsers' => $browsers,
+            'devices' => $devices,
+            'total_browser' => $totalBrowser,
+            'total_device' => $totalDevice,
+        ]);
+    }
+
     public function getAnalyticsData($range)
     {
         switch ($range) {
