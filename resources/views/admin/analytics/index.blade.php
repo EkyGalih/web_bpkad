@@ -9,7 +9,6 @@
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row gy-6">
-            <h4 class="mb-0">Statistik Website</h4>
             <!-- visits By Day Chart-->
             <div class="col-12 col-xl-4 col-md-6">
                 <div class="card h-100">

@@ -1038,7 +1038,7 @@
                 <div class="d-flex align-items-center mb-3">
                     <div class="avatar">
                         <div class="avatar-initial bg-label-${color} rounded">
-                            <i class="icon-base ${icon} icon-24px"></i>
+                            <i class="icon-base ri ${icon} icon-24px"></i>
                         </div>
                     </div>
                     <div class="ms-3 d-flex flex-column">
