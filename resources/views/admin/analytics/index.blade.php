@@ -50,8 +50,42 @@
             </div>
             <!--/ visits By Day Chart-->
 
+            <!-- Asal Pengunjung -->
+            <div class="col-12 col-xl-8 col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="mb-1">Asal Pengunjung</h5>
+                        </div>
+                        <p class="mb-0 card-subtitle total-visitor">Total 0 Visitor</p>
+                    </div>
+                    <div class="card-body pb-1 px-0">
+                        <div id="salesCountryChart"></div>
+                    </div>
+                </div>
+            </div>
+            <!--/ Asal Pengunjung -->
+
+            <!-- Top Page View -->
+            <div class="col-12 col-lg-8 col-xl-8">
+                <div class="card h-100">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                        <h5 class="card-title m-0 me-2">Halaman Paling Banyak Dikunjungi</h5>
+                    </div>
+                    <div class="card-body row g-3">
+                        <div class="col-md-6">
+                            <div id="horizontalBarChart"></div>
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-around align-items-center">
+                            {{-- di isi di javascripts --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--  Top Page View  End-->
+
             <!-- Top Browser & Devices-->
-            <div class="col-12 col-xl-8">
+            <div class="col-12 col-xl-4">
                 <div class="card h-100">
                     <div class="row">
                         <div class="col-md-6 col-12 border-start">
@@ -80,40 +114,6 @@
                 </div>
             </div>
             <!--/ Top Browser & Devices-->
-
-            <!-- Top Page View -->
-            <div class="col-12 col-lg-8 col-xl-8">
-                <div class="card h-100">
-                    <div class="card-header d-flex align-items-center justify-content-between">
-                        <h5 class="card-title m-0 me-2">Halaman Paling Banyak Dikunjungi</h5>
-                    </div>
-                    <div class="card-body row g-3">
-                        <div class="col-md-6">
-                            <div id="horizontalBarChart"></div>
-                        </div>
-                        <div class="col-md-6 d-flex justify-content-around align-items-center">
-                            {{-- di isi di javascripts --}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--  Top Page View  End-->
-
-            <!-- Asal Pengunjung -->
-            <div class="col-12 col-xl-4 col-lg-6">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between">
-                            <h5 class="mb-1">Asal Pengunjung</h5>
-                        </div>
-                        <p class="mb-0 card-subtitle total-visitor">Total 0 Visitor</p>
-                    </div>
-                    <div class="card-body pb-1 px-0">
-                        <div id="salesCountryChart"></div>
-                    </div>
-                </div>
-            </div>
-            <!--/ Asal Pengunjung -->
         </div>
     </div>
 @endsection
