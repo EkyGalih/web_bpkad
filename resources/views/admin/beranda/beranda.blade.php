@@ -466,7 +466,7 @@
 @endsection
 @php
     $labels = $analyticsData->pluck('date')->map(fn($d) => $d->format('Y-m-d'));
-    $views = $analyticsData->pluck('screenPageViews');
+    $views = $analyticsData->pluck('totalUsers');
 @endphp
 
 @section('scripts')
