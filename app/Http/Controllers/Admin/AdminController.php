@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Spatie\Analytics\Facades\Analytics;
+use Spatie\Analytics\Period;
 
 class AdminController extends Controller
 {
@@ -32,6 +34,11 @@ class AdminController extends Controller
             ->orderBy('recent_activity.created_at', 'DESC')
             ->limit(7)
             ->get();
+        $analyticsData = Analytics::get(
+            Period::days(7),
+            ['totalUsers'],
+            ['date']
+        );
 
         $actions = [
             'Memberi pelayanan terbaik untuk masyarakat dengan hati yang tulus ❤️',
@@ -80,7 +87,7 @@ class AdminController extends Controller
 
         $randomAction = $actions[array_rand($actions)];
 
-        return view('admin.beranda.beranda', compact('post', 'laporan', 'permohonan', 'posts', 'lap', 'recents', 'kips', 'randomAction'));
+        return view('admin.beranda.beranda', compact('post', 'laporan', 'permohonan', 'posts', 'lap', 'recents', 'kips', 'randomAction', 'analyticsData'));
     }
 
     public function olympic(Request $request)

@@ -19,13 +19,20 @@
                         </div>
                         <div class="col-md-6 text-center text-md-end order-1 order-md-2">
                             <div class="card-body pb-0 px-0 pt-2">
-                                @if (Auth::user()->pegawai->jenis_kelamin == 'pria')
-                                    <img src="{{ asset('server/assets/img/illustrations/john.png') }}" height="186"
-                                        class="scaleX-n1-rtl" alt="View Profile" />
-                                @else
-                                    <img src="{{ asset('server/assets/img/illustrations/daisy.png') }}" height="186"
-                                        class="scaleX-n1-rtl" alt="View Profile" />
-                                @endif
+                                @php
+                                    $pegawai = Auth::user()->pegawai;
+                                    $gender = $pegawai->jenis_kelamin ?? null;
+
+                                    if ($gender === 'pria') {
+                                        $img = 'john.png';
+                                    } elseif ($gender === 'wanita') {
+                                        $img = 'daisy.png';
+                                    } else {
+                                        $img = 'default.png';
+                                    }
+                                @endphp
+                                <img src="{{ asset('server/assets/img/illustrations/' . $img) }}" height="186"
+                                    class="scaleX-n1-rtl" alt="Profile Image" />
                             </div>
                         </div>
                     </div>
@@ -63,33 +70,10 @@
                 </div>
             </div>
             <!-- Activity Timeline -->
-
-            <!-- Performance Chart -->
-            {{-- <div class="col-12 col-xxl-4 col-md-6">
-            <div class="card h-100">
-                <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h5 class="mb-1">Performance</h5>
-                        <div class="dropdown">
-                            <button class="btn btn-text-secondary rounded-pill text-body-secondary border-0 p-1"
-                                type="button" id="performanceDropdown" data-bs-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                <i class="icon-base ri ri-more-2-line"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="performanceDropdown">
-                                <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div id="performanceChart"></div>
-                </div>
-            </div>
-        </div> --}}
-            <!--/ Performance Chart -->
+            @php
+                $labels = $analyticsData->pluck('date')->map(fn($d) => $d->format('Y-m-d'));
+                $views = $analyticsData->pluck('screenPageViews');
+            @endphp
 
             <!-- Project Statistics -->
             <div class="col-md-6 col-xxl-4">
@@ -447,9 +431,82 @@
             </div>
             <!--/ Top Referral Source  -->
 
+            <!-- Performance Chart -->
+            <div class="col-12 col-xxl-12 col-md-12">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="mb-1">Trafic Pengunjung</h5>
+                            <div class="dropdown">
+                                <button class="btn btn-text-secondary rounded-pill text-body-secondary border-0 p-1"
+                                    type="button" id="performanceDropdown" data-bs-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <i class="icon-base ri ri-more-2-line"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="performanceDropdown">
+                                    <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
+                                    <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
+                                    <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="performanceChart" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+            <!--/ Performance Chart -->
+
         </div>
     </div>
     <!-- / Content -->
 
     <div class="content-backdrop fade"></div>
+@endsection
+@php
+    $labels = $analyticsData->pluck('date')->map(fn($d) => $d->format('Y-m-d'));
+    $views = $analyticsData->pluck('screenPageViews');
+@endphp
+
+@section('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {!! json_encode($labels) !!},
+                datasets: [{
+                    label: 'Page Views',
+                    data: {!! json_encode($views) !!},
+                    fill: true,
+                    tension: 0.4,
+                    backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                    borderColor: '#007bff',
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    pointBackgroundColor: '#007bff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    </script>
 @endsection
