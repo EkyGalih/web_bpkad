@@ -33,7 +33,7 @@
         filter: blur(0px);
     }
 </style>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NV9MEZT0B3"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
 
