@@ -64,13 +64,13 @@
         bounds: '#full-editor',
         placeholder: 'Tulis sesuatu disini...',
         modules: {
-            syntax: true,
+            syntax: false,
             toolbar: fullToolbar
         },
         theme: 'snow'
     });
 
-    const form = document.getElementById('form');
+    const form = document.getElementById('form-post');
     const quillContentInput = document.getElementById('quill-content');
 
     // Sinkronkan konten saat Quill berubah
