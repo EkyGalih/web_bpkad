@@ -64,7 +64,6 @@
         bounds: '#full-editor',
         placeholder: 'Tulis sesuatu disini...',
         modules: {
-            syntax: false,
             toolbar: fullToolbar
         },
         theme: 'snow'
