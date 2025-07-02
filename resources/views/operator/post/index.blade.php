@@ -11,7 +11,7 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('operator') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('post-op.index') }}">Post</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('post-'.Auth::user()->rule->rule.'.index') }}">Post</a></li>
                     <li class="breadcrumb-item active">Data Post</li>
                 </ol>
             </nav>
@@ -32,7 +32,7 @@
                                     <h5 class="card-title">Data Post</h5>
                                 </div>
                                 <div class="col-lg-2">
-                                    <a href="{{ route('post-op.create') }}" class="btn btn-outline-primary btn-md"
+                                    <a href="{{ route('post-'.Auth::user()->rule->rule.'.create') }}" class="btn btn-outline-primary btn-md"
                                         style="margin-top: 10px;">
                                         <i class="bi bi-journal-plus"></i> Tambah Post
                                     </a>

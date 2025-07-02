@@ -38,11 +38,11 @@
                                         <i class="icon-base ri ri-more-2-line icon-18px"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a href="{{ route('post-admin.restore', $del->id) }}" data-bs-tooltip="tooltip"
+                                        <a href="{{ route('post-'.Auth::user()->rule->rule.'.restore', $del->id) }}" data-bs-tooltip="tooltip"
                                             data-bs-placement="top" title="Pulihkan" class="dropdown-item">
                                             <i class="icon-base ri ri-arrow-left-circle-line icon-18px me-2"></i> Pulihkan
                                         </a>
-                                        <a href="{{ route('post-admin.delete', $del->id) }}" data-bs-tooltip="tooltip"
+                                        <a href="{{ route('post-'.Auth::user()->rule->rule.'.delete', $del->id) }}" data-bs-tooltip="tooltip"
                                             data-bs-placement="top" title="Hapus Permanen"
                                             class="dropdown-item">
                                             <i class="icon-base ri ri-eraser-line icon-18px me-2"></i> Hapus Permanen

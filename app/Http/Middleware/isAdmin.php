@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Helpers\Helpers;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,10 +16,8 @@ class isAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check()) {
-            if (getRole() == 'admin') {
-                return $next($request);
-            }
+        if (Auth::check() && Auth::user()->rule && Auth::user()->rule->rule === 'admin') {
+            return $next($request);
         }
         return redirect()->route('not_found.client');
     }

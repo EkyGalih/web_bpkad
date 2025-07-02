@@ -2,12 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use App\Helpers\Helpers;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class isSuperadmin
+class isAuthor
 {
     /**
      * Handle an incoming request.
@@ -18,11 +17,9 @@ class isSuperadmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()) {
-            if (getRole() == 'admin') {
-                return $next($request);
-            }
+        if (Auth::check() && Auth::user()->rule && Auth::user()->rule->rule === 'author') {
+            return $next($request);
         }
-        return redirect()->route('not_found.server');
+        return redirect()->route('not_found.client');
     }
 }

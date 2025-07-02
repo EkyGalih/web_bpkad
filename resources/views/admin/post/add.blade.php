@@ -47,13 +47,13 @@
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="mb-0">Tambah Berita/Artikel</h4>
                         <d class="flex gap-2">
-                            <a class="btn btn-secondary" href="{{ route('post-admin.index') }}">
+                            <a class="btn btn-secondary" href="{{ route('post-'.Auth::user()->rule->rule.'.index') }}">
                                 <i class="icon-base ri ri-skip-back-line"></i> Kembali
                             </a>
                         </d>
                     </div>
                 </div>
-                <form action="{{ route('post-admin.store') }}" id="form" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('post-'.Auth::user()->rule->rule.'.store') }}" id="form" method="POST" enctype="multipart/form-data">
                     <div class="card-body">
                         @csrf
                         <div class="row">

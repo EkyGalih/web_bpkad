@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Helpers\Helpers;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,12 +17,10 @@ class isOperator
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()) {
-            if (getRole() == 'operator') {
-                return $next($request);
-            }
+        if (Auth::check() && Auth::user()->rule && Auth::user()->rule->rule === 'operator') {
+            return $next($request);
         }
 
-        return redirect()->route('not_found.operator');
+        return redirect()->route('not_found.client');
     }
 }

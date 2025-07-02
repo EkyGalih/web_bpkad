@@ -55,6 +55,7 @@
                             <option value="">Pilih</option>
                             <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
                             <option value="operator" {{ old('role') == 'operator' ? 'selected' : '' }}>Operator</option>
+                            <option value="author" {{ old('role') == 'author' ? 'selected' : '' }}>Author</option>
                         </select>
                         @error('role')
                             <div class="text-danger">{{ $message }}</div>

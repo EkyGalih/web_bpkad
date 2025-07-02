@@ -50,7 +50,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
 });
 
 Route::group(['prefix' => 'operator', 'middleware' => ['auth', 'operator']], function () {
-    Route::get('/', [OperatorController::class, 'index'])->name('operator');
+    Route::group(['prefix' => 'web'], function () {
+        Route::get('/', [AdminController::class, 'index'])->name('operator');
+    });
+});
+Route::group(['prefix' => 'author', 'middleware' => ['auth', 'author']], function () {
+    Route::group(['prefix' => 'web'], function () {
+        Route::get('/', [AdminController::class, 'index'])->name('author');
+    });
 });
 
 Route::group(['prefix' => 'berita'], function () {
@@ -121,4 +128,3 @@ Route::prefix('galery')->group(function () {
         Route::get('list-video/{galery}', [GaleryController::class, 'show_video'])->name('video.show');
     });
 });
-

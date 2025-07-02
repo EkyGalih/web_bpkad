@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Pegawai;
+use App\Models\Rule;
 use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use PhpOffice\PhpSpreadsheet\RichText\Run;
 use Webpatser\Uuid\Uuid;
 
 class UsersController extends Controller
@@ -63,6 +65,7 @@ class UsersController extends Controller
         ]);
 
         $user = new User();
+        $role = new Rule();
 
         $user->id = (string)Uuid::generate(4);
         $user->nama = $request->nama;
@@ -73,6 +76,11 @@ class UsersController extends Controller
         $user->role = $request->role;
         $user->password = Hash::make($request->password);
         $user->save();
+
+        $role->user_id = $user->id;
+        $role->apps_id = '22100703-cc14-4177-8bed-305664c5e698';
+        $role->rule = $user->role;
+        $role->save();
 
         _recentAdd($user->id, 'menambahkan user', 'users');
 
@@ -106,6 +114,11 @@ class UsersController extends Controller
             'email' => $request->email,
             'username' => $request->username,
             'role' => $request->role,
+        ]);
+
+        $role = Rule::where('user_id', $user->id)->first();
+        $role->update([
+            'rule' => $request->role
         ]);
 
         _recentAdd($user->id, ' mengubah user', 'users');

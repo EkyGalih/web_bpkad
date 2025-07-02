@@ -35,7 +35,7 @@ class User extends Authenticatable
 
     public function rule()
     {
-        return $this->hasMany(Rule::class);
+        return $this->hasOne(Rule::class);
     }
 
     public function Apps()

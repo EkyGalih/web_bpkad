@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Posts;
 use App\Models\PostsCategory;
@@ -13,7 +12,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Webpatser\Uuid\Uuid;
 use Illuminate\Support\Str;
-use ReCaptcha\RequestMethod\Post;
 
 class PostController extends Controller
 {
@@ -82,7 +80,7 @@ class PostController extends Controller
         $category = PostsCategory::where('id', $request->posts_category_id)->value('category');
 
         _recentAdd($post->id, 'membuat ' . $category, 'post');
-        return redirect()->route('post-admin.index')
+        return redirect()->route('post-'.Auth::user()->rule->rule.'.index')
             ->with('success', $category . ' berhasil ditambahkan!');
     }
 
@@ -144,7 +142,7 @@ class PostController extends Controller
         $category = PostsCategory::where('id', $post->posts_category_id)->value('category');
 
         _recentAdd($post->id, 'mengubah '.$category, 'post');
-        return redirect()->route('post-admin.index')->with('success', $category.' berhasil diperbarui!');
+        return redirect()->route('post-'.Auth::user()->rule->rule.'.index')->with('success', $category.' berhasil diperbarui!');
     }
 
     public function restore(Posts $post)
@@ -155,7 +153,7 @@ class PostController extends Controller
 
         _recentAdd($post->id, 'memulihkan berita/artikel yang dihapus', 'post');
 
-        return redirect()->route('post-admin.index')->with('success', 'Berita/Artikel berhasil dipulihkan!');
+        return redirect()->route('post-'.Auth::user()->rule->rule.'.index')->with('success', 'Berita/Artikel berhasil dipulihkan!');
     }
 
     public function agenda(Posts $post)
@@ -166,13 +164,13 @@ class PostController extends Controller
                 'agenda_kaban' => 'tidak'
             ]);
             _recentAdd($post->id, 'menghapus agenda pimpinan', 'post');
-            return redirect()->route('post-admin.index')->with('success', 'Agenda kaban berhasil ditambahkan!');
+            return redirect()->route('post-'.Auth::user()->rule->rule.'.index')->with('success', 'Agenda kaban berhasil ditambahkan!');
         } else {
             $agenda->update([
                 'agenda_kaban' => 'ya'
             ]);
             _recentAdd($post->id, 'mengubah Berita/Artikel menjadi agenda pimpinan', 'post');
-            return redirect()->route('post-admin.index')->with('success', 'Agenda kaban berhasil dihapus!');
+            return redirect()->route('post-'.Auth::user()->rule->rule.'.index')->with('success', 'Agenda kaban berhasil dihapus!');
         }
     }
 
@@ -189,7 +187,7 @@ class PostController extends Controller
         ]);
 
         _recentAdd($post->id, 'memindahkan ke tong sampah Berita/Artikel', 'post');
-        return redirect()->route('post-admin.index')->with('success','Berita/Artikel dipindahkan ke tong sampah!');
+        return redirect()->route('post-'.Auth::user()->rule->rule.'.index')->with('success','Berita/Artikel dipindahkan ke tong sampah!');
     }
 
     /**
@@ -213,7 +211,7 @@ class PostController extends Controller
         // Hapus postingan dari database
         $post->delete();
         _recentAdd($post->id, 'menghapus Berita/Artikel', 'post');
-        return redirect()->route('post-admin.index')->with('success', 'Berita/Artikel dihapus permanen!');
+        return redirect()->route('post-'.Auth::user()->rule->rule.'.index')->with('success', 'Berita/Artikel dihapus permanen!');
     }
 
     /**
@@ -239,6 +237,6 @@ class PostController extends Controller
         }
 
         _recentAdd($post->id, 'm,embersihkan tong sampah Berita/Artikel', 'post');
-        return redirect()->route('post-admin.index')->with(['success' => 'File Sampah berhasil dibersihkan!']);
+        return redirect()->route('post-'.Auth::user()->rule->rule.'.index')->with(['success' => 'File Sampah berhasil dibersihkan!']);
     }
 }

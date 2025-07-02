@@ -449,16 +449,6 @@ if (!function_exists('roleConverter')) {
     }
 }
 
-if (!function_exists('getRole')) {
-    function getRole()
-    {
-        $rule = User::where('id', '=', Auth::user()->id)
-            ->first();
-        if ($rule)
-            return $rule->role;
-    }
-}
-
 if (!function_exists('_getLaporan')) {
     function _getLaporan()
     {

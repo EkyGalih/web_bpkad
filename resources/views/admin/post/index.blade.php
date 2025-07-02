@@ -12,7 +12,8 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="mb-0">Berita/Artikel</h4>
                     <div class="d-flex gap-2">
-                        <a href="{{ route('post-admin.create') }}" class="btn btn-outline-primary btn-md">
+                        <a href="{{ route('post-' . Auth::user()->rule->rule . '.create') }}"
+                            class="btn btn-outline-primary btn-md">
                             <i class="icon-base ri ri-file-add-line icon-18px me-2"></i> Tambah
                         </a>
                         <button data-bs-toggle="modal" data-bs-target="#CachePost" data-bs-tooltip="tooltip"
@@ -67,16 +68,18 @@
                                             <i class="icon-base ri ri-more-2-line icon-18px"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{ route('post-admin.edit', $post->id) }}"><i
+                                            <a class="dropdown-item"
+                                                href="{{ route('post-' . Auth::user()->rule->rule . '.edit', $post->id) }}"><i
                                                     class="icon-base ri ri-pencil-line icon-18px me-2"></i> Edit</a>
-                                            <a href="{{ route('post-admin.agenda', $post->id) }}" class="dropdown-item"
-                                                data-bs-tooltip="tooltip" data-bs-placement="top"
+                                            <a href="{{ route('post-' . Auth::user()->rule->rule . '.agenda', $post->id) }}"
+                                                class="dropdown-item" data-bs-tooltip="tooltip" data-bs-placement="top"
                                                 title="Jadikan Agenda Kaban">
                                                 <i
                                                     class="icon-base ri ri-{{ $post->agenda_kaban != 'ya' ? 'calendar-2-fill' : 'delete-bin-3-line' }} icon-18px me-2"></i>
                                                 {{ $post->agenda_kaban != 'ya' ? 'Agenda' : 'Hapus Agenda' }}
                                             </a>
-                                            <button class="dropdown-item" onclick="trashData('{{ route('post-admin.destroy', $post->id) }}')"><i
+                                            <button class="dropdown-item"
+                                                onclick="trashData('{{ route('post-' . Auth::user()->rule->rule . '.destroy', $post->id) }}')"><i
                                                     class="icon-base ri ri-delete-bin-6-line icon-18px me-2"></i>
                                                 Delete</button>
                                         </div>

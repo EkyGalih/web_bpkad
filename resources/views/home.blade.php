@@ -27,7 +27,13 @@
         </button>
 
         <!-- Menu Items -->
+        @if (Auth::user()->rule->rule == 'admin')
         <a href="{{ env('WEB_BPKAD_ADMIN') }}" class="item web" data-tooltip="Website BPKAD" data-placement="top"></a>
+        @elseif (Auth::user()->rule->rule == 'operator')
+        <a href="{{ env('WEB_BPKAD_OPERATOR') }}" class="item web" data-tooltip="Website BPKAD" data-placement="top"></a>
+        @elseif (Auth::user()->rule->rule == 'author')
+        <a href="{{ env('WEB_BPKAD_AUTHOR') }}" class="item web" data-tooltip="Website BPKAD" data-placement="top"></a>
+        @endif
         <a href="{{ env('SIMPEG_ADMIN') }}" class="item simpeg" data-tooltip="SIMPEG"
             data-placement="right"></a>
         <a href="{{ env('APBD_ADMIN') }}" class="item lkpd" data-tooltip="APBD" data-placement="bottom"></a>

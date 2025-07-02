@@ -10,7 +10,9 @@
             </span>
         </a>
     </div>
-
+    @php
+        $rule = Auth::user()->rule->rule;
+    @endphp
     <div class="menu-inner-shadow"></div>
     <div class="px-3 py-2">
         <div class="dropdown w-100">
@@ -53,8 +55,8 @@
     </div>
     <ul class="menu-inner py-1">
         <!-- Dashboards -->
-        <li class="menu-item @if (request()->is('admin/web')) active @endif">
-            <a href="{{ route('admin') }}" class="menu-link">
+        <li class="menu-item @if (request()->is("$rule/web")) active @endif">
+            <a href="{{ route($rule) }}" class="menu-link">
                 <i class="menu-icon icon-base ri ri-home-smile-line"></i>
                 <div data-i18n="Dashboards">Dashboards</div>
             </a>
@@ -65,7 +67,7 @@
             <span class="menu-header-text" data-i18n="MENU">MENU</span>
         </li>
         <li class="menu-item @if (request()->is('admin/web/post*')) active @endif">
-            <a href="{{ route('post-admin.index') }}" class="menu-link">
+            <a href="{{ route('post-' . $rule . '.index') }}" class="menu-link">
                 <i class="menu-icon icon-base ri ri-newspaper-fill"></i>
                 <div data-i18n="Berita & Artikel">Berita & Artikel</div>
             </a>
@@ -164,11 +166,13 @@
                 <div data-i18n="Tools">Tools</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item @if (request()->is('admin/web/tools/menu*')) active @endif">
-                    <a href="{{ route('menu-admin.index') }}" class="menu-link">
-                        <div data-i18n="Menu">Menu</div>
-                    </a>
-                </li>
+                @if (Auth::user()->rule->rule == 'admin')
+                    <li class="menu-item @if (request()->is('admin/web/tools/menu*')) active @endif">
+                        <a href="{{ route('menu-admin.index') }}" class="menu-link">
+                            <div data-i18n="Menu">Menu</div>
+                        </a>
+                    </li>
+                @endif
                 <li class="menu-item @if (request()->is('admin/web/tools/link*')) active @endif">
                     <a href="{{ route('link.index') }}" class="menu-link">
                         <div data-i18n="Link">Link</div>
@@ -209,18 +213,20 @@
                 </li>
             </ul>
         </li>
-        <li class="menu-item @if (request()->is('admin/web/Users*')) active @endif">
-            <a href="{{ route('users') }}" class="menu-link">
-                <i class="menu-icon icon-base ri ri-group-3-fill"></i>
-                <div data-i18n="Pengguna">Pengguna</div>
-            </a>
-        </li>
-        <li class="menu-item @if (request()->is('admin/web/website-settings*')) active @endif">
-            <a href="{{ route('settings') }}" class="menu-link">
-                <i class="menu-icon icon-base ri ri-settings-4-fill"></i>
-                <div data-i18n="Website Settings">Website Settings</div>
-            </a>
-        </li>
+        @if (Auth::user()->rule->rule == 'admin')
+            <li class="menu-item @if (request()->is('admin/web/Users*')) active @endif">
+                <a href="{{ route('users') }}" class="menu-link">
+                    <i class="menu-icon icon-base ri ri-group-3-fill"></i>
+                    <div data-i18n="Pengguna">Pengguna</div>
+                </a>
+            </li>
+            <li class="menu-item @if (request()->is('admin/web/website-settings*')) active @endif">
+                <a href="{{ route('settings') }}" class="menu-link">
+                    <i class="menu-icon icon-base ri ri-settings-4-fill"></i>
+                    <div data-i18n="Website Settings">Website Settings</div>
+                </a>
+            </li>
+        @endif
     </ul>
 </aside>
 
