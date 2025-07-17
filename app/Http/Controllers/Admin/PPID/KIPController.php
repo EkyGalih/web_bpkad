@@ -88,6 +88,7 @@ class KIPController extends Controller
         $kip->upload_by = Auth::user()->id;
         $kip->tahun = $request->tahun;
         $kip->files = $url;
+        $kip->created_at = $request->created_at;
         $kip->save();
 
         _recentAdd($id, 'mengupload file pada PPID informasi ' . $request->jenis_informasi, 'kip');
@@ -149,6 +150,7 @@ class KIPController extends Controller
         $kip->upload_by = Auth::user()->id;
         $kip->tahun = $request->tahun;
         $kip->files = $url;
+        $kip->created_at = $request->created_at;
         $kip->save();
 
         _recentAdd($kip->id, 'mengubah file pada PPID informasi ' . $request->jenis_informasi . ' menjadi', 'kip');
