@@ -86,6 +86,7 @@ class KIPController extends Controller
         $kip->jenis_informasi = $request->jenis_informasi;
         $kip->jenis_file = $request->jenis_file;
         $kip->upload_by = Auth::user()->id;
+        $kip->tahun = $request->tahun;
         $kip->files = $url;
         $kip->save();
 
@@ -142,6 +143,11 @@ class KIPController extends Controller
             }
         }
 
+        $kip->nama_informasi = $request->nama_informasi;
+        $kip->jenis_informasi = $request->jenis_informasi;
+        $kip->jenis_file = $request->jenis_file;
+        $kip->upload_by = Auth::user()->id;
+        $kip->tahun = $request->tahun;
         $kip->files = $url;
         $kip->save();
 
