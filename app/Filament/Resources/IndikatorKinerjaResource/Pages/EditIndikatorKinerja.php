@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Filament\Resources\IndikatorKinerjaResource\Pages;
+
+use App\Filament\Resources\IndikatorKinerjaResource;
+use Filament\Actions;
+use Filament\Resources\Pages\EditRecord;
+
+class EditIndikatorKinerja extends EditRecord
+{
+    protected static string $resource = IndikatorKinerjaResource::class;
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\DeleteAction::make(),
+        ];
+    }
+}

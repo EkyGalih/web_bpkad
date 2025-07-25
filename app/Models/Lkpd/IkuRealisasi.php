@@ -29,12 +29,12 @@ class IkuRealisasi extends Model
         return $this->belongsTo(SasaranStrategis::class, 'sasaran_strategis_id');
     }
 
-    public function Bidang()
+    public function bidang()
     {
         return $this->belongsTo(Bidang::class);
     }
 
-    public function IK()
+    public function ik()
     {
         return $this->belongsTo(IndikatorKinerja::class, 'indikator_kinerja_id');
     }

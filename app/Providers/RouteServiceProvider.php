@@ -72,7 +72,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapPegawaiAdmin();
 
         // ROUTE LKPD
-        $this->mapKodeRekening();
         $this->mapApbd();
         $this->mapRealisasiAnggaran();
         $this->mapIkuRealisasi();
@@ -254,13 +253,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/simpeg/pegawai.php'));
-    }
-
-    public function mapKodeRekening()
-    {
-        Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/lkpd/KodeRekening.php'));
     }
 
     public function mapApbd()

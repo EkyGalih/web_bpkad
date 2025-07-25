@@ -23,8 +23,8 @@ class Apbd extends Model
         });
     }
 
-    public function Realisasi()
+    public function realisasi()
     {
-        return $this->hasOne(LaporanRealisasiAnggaran::class, 'kode_rekening');
+        return $this->hasOne(LaporanRealisasiAnggaran::class, 'kode_rekening', 'kode_rekening');
     }
 }

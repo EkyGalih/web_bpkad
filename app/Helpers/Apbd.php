@@ -82,7 +82,7 @@ class Apbd
 
     public static function SumSubLRA($kode_rekening)
     {
-        return LaporanRealisasiAnggaran::where('kode_rekening', 'Like', $kode_rekening . '%')
+        return (int) LaporanRealisasiAnggaran::where('kode_rekening', 'Like', $kode_rekening . '%')
             ->select('anggaran_terealisasi')
             ->sum('anggaran_terealisasi');
     }

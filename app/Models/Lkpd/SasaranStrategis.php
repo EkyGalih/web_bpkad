@@ -24,6 +24,6 @@ class SasaranStrategis extends Model
 
     public function iku()
     {
-        return $this->hasMany(IkuRealisasi::class, 'id');
+        return $this->hasMany(IkuRealisasi::class, 'sasaran_strategis_id');
     }
 }

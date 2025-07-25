@@ -11,19 +11,21 @@ class LaporanRealisasiAnggaran extends Model
     use HasFactory;
     protected $connection = 'apbd';
     protected $table = 'realisasi_anggaran';
+    public $incrementing = false;
+    protected $keyType = 'string';
     protected $guarded = ['created_at', 'updated_at'];
 
     public static function boot()
     {
         parent::boot();
 
-        static::creating(function ($model){
+        static::creating(function ($model) {
             $model->id = (string)Uuid::generate(4);
         });
     }
 
     public function apbd()
     {
-        return $this->belongsTo(Apbd::class, 'kode_rekening');
+        return $this->belongsTo(Apbd::class, 'kode_rekening', 'kode_rekening');
     }
 }
