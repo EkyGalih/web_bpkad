@@ -8,6 +8,7 @@ use App\Models\Lkpd\Apbd;
 use App\Models\Lkpd\LaporanRealisasiAnggaran;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\FontWeight;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -40,10 +41,12 @@ class RealisasiAnggaranResource extends Resource
                 LaporanRealisasiAnggaran::query()->with('apbd')->orderBy('kode_rekening')
             )
             ->columns([
-                TextColumn::make('kode_rekening')->label('Kode'),
+                TextColumn::make('kode_rekening')->label('Kode')
+                    ->weight(fn($state, $record) => substr_count($record->kode_rekening, '.') != 2 ? FontWeight::Bold : null),
                 TextColumn::make('apbd.nama_rekening')
                     ->label('Uraian')
                     ->limit(50)
+                    ->weight(fn($state, $record) => substr_count($record->kode_rekening, '.') != 2 ? FontWeight::Bold : null)
                     ->html()
                     ->formatStateUsing(function ($state, $record) {
                         $kode = $record->kode_rekening;
@@ -61,31 +64,83 @@ class RealisasiAnggaranResource extends Resource
                     }),
                 TextColumn::make('apbd.jml_anggaran_setelah')
                     ->label('Anggaran')
+                    ->color(fn($state, $record) => substr_count($record->kode_rekening, '.') != 2 ? 'success' : null)
+                    ->weight(fn($state, $record) => substr_count($record->kode_rekening, '.') != 2 ? FontWeight::Bold : null)
                     ->formatStateUsing(function ($state, $record) {
                         $kode = $record->kode_rekening;
                         $level = substr_count($kode, '.');
 
+                        $prefix = $kode . '.';
+                        $nilaiArray = [];
+
                         if ($level === 0) {
-                            return '';
+                            // Hitung total dari level 1
+                            $items = Apbd::where('kode_rekening', 'LIKE', $prefix . '%')
+                                ->whereRaw("(LENGTH(kode_rekening) - LENGTH(REPLACE(kode_rekening, '.', ''))) = 1")
+                                ->where('tahun_anggaran', $record->tahun_anggaran)
+                                ->get();
+
+                            foreach ($items as $item) {
+                                $nilaiArray[] = $item->jml_anggaran_setelah ?? 0;
+                            }
+
+                            $total = array_sum($nilaiArray);
+                            return 'Rp ' . number_format($total, 0, ',', '.');
                         }
 
+                        if ($level === 1) {
+                            // Hitung total dari level 2
+                            $items = Apbd::where('kode_rekening', 'LIKE', $prefix . '%')
+                                ->whereRaw("(LENGTH(kode_rekening) - LENGTH(REPLACE(kode_rekening, '.', ''))) = 2")
+                                ->where('tahun_anggaran', $record->tahun_anggaran)
+                                ->get();
+
+                            foreach ($items as $item) {
+                                $nilaiArray[] = $item->jml_anggaran_setelah ?? 0;
+                            }
+
+                            $total = array_sum($nilaiArray);
+                            return 'Rp ' . number_format($total, 0, ',', '.');
+                        }
+
+                        // Untuk level 2 atau lebih dalam, tampilkan nilai langsung
                         $nilai = $record->apbd?->jml_anggaran_setelah ?? 0;
                         return 'Rp ' . number_format($nilai, 0, ',', '.');
                     }),
                 TextColumn::make('anggaran_terealisasi')
                     ->label('Realisasi')
+                    ->color(fn($state, $record) => substr_count($record->kode_rekening, '.') != 2 ? 'success' : null)
+                    ->weight(fn($state, $record) => substr_count($record->kode_rekening, '.') != 2 ? FontWeight::Bold : null)
                     ->formatStateUsing(function ($state, $record) {
                         $kode = $record->kode_rekening;
                         $level = substr_count($kode, '.');
 
                         if ($level === 0) {
-                            return '';
-                        } elseif ($level === 1) {
-                            $nilai = HelpersApbd::SumSubLRA($kode);
-                            return 'Rp ' . number_format($nilai, 0, ',', '.');
-                        } else {
-                            return 'Rp ' . number_format($record->anggaran_terealisasi, 0, ',', '.');
+                            $prefix = $kode . '.';
+
+                            // Ambil semua record level 1 yang cocok
+                            $items = Apbd::with('realisasi')
+                                ->where('kode_rekening', 'LIKE', $prefix . '%')
+                                ->whereRaw("(LENGTH(kode_rekening) - LENGTH(REPLACE(kode_rekening, '.', ''))) = 1")
+                                ->whereHas('realisasi', function ($query) use ($record) {
+                                    $query->where('tahun_anggaran', $record->tahun_anggaran);
+                                })
+                                ->get();
+
+                            $nilaiArray = [];
+
+                            foreach ($items as $item) {
+                                $nilaiArray[] = $item->realisasi->anggaran_terealisasi ?? 0;
+                            }
+
+                            $total = array_sum($nilaiArray);
+
+                            return 'Rp ' . number_format($total, 0, ',', '.');
                         }
+
+                        // Untuk level 1 dan 2
+                        $nilai = $record->anggaran_terealisasi ?? 0;
+                        return 'Rp ' . number_format($nilai, 0, ',', '.');
                     }),
                 TextColumn::make('apbd.persen')
                     ->label('5 = (4 / 3) * 100')
@@ -101,17 +156,29 @@ class RealisasiAnggaranResource extends Resource
                         return '0.00%';
                     }),
             ])
+            ->paginated(false)
             ->filters([
-                Tables\Filters\SelectFilter::make('tahun')
+                SelectFilter::make('tahun')
                     ->label('Tahun')
                     ->options(function () {
-                        return Apbd::select('tahun_anggaran')
+                        return LaporanRealisasiAnggaran::with('apbd')
+                            ->select('tahun_anggaran')
                             ->distinct()
                             ->orderBy('tahun_anggaran', 'desc')
                             ->pluck('tahun_anggaran', 'tahun_anggaran')
                             ->toArray();
                     })
-                    ->default(date('Y'))
+                    ->default(function () {
+                        $default = date('Y');
+
+                        $exists = LaporanRealisasiAnggaran::with('apbd')
+                        ->where('tahun_anggaran', $default)
+                        ->exists();
+
+                        if ($exists) return $default;
+
+                        return LaporanRealisasiAnggaran::max('tahun_anggaran');
+                    })
                     ->query(function ($query, $state) {
                         return $query->where('tahun_anggaran', $state);
                     }),
